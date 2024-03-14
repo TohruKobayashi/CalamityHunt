@@ -94,7 +94,7 @@ public class CursorSystem : ModSystem
                     DrawData drawData = new DrawData(screen, Vector2.Zero, screen.Frame(), Color.White, 0, Vector2.Zero, 2f, 0, 0);
                     GameShaders.Armor.Apply(dye, null, drawData);
                     drawData.Draw(Main.spriteBatch);
-                    Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+                    
 
                     Main.spriteBatch.End();
                     Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.SamplerStateForCursor, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.UIScaleMatrix);
