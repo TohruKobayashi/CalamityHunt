@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CalamityHunt.Common.Players;
+using CalamityHunt.Common.Systems;
 using CalamityHunt.Content.Items.Weapons.Magic;
 using CalamityHunt.Content.Items.Weapons.Melee;
 using Microsoft.Xna.Framework;
@@ -37,7 +38,15 @@ public class WeaponBar : ModSystem
             style = 0;
             baseColor = Color.DimGray;
             fillColor = Color.White;
-        }    
+        }
+
+        //decide which bar
+        if (Main.LocalPlayer.HeldItem.type == ModContent.ItemType<Parasanguine>()) {
+            //anyBar = true;
+            baseColor = Color.DarkRed;
+            fillColor = Color.Lerp(Color.DarkRed * 0.5f, Color.Red, Utils.GetLerpValue(0.5f, 1f, Main.LocalPlayer.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent, true));
+            fillPercent = Main.LocalPlayer.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent;
+        }
     }
 
     public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)

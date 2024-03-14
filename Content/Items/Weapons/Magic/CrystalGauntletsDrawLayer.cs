@@ -1,4 +1,5 @@
 ﻿using CalamityHunt.Common.Players;
+using CalamityHunt.Common.Systems;
 using CalamityHunt.Common.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,9 +17,9 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {
             Texture2D texture = ModContent.Request<Texture2D>($"{nameof(CalamityHunt)}/Content/Items/Weapons/Magic/CrystalGauntlets_HandsOn").Value;
-            //if (drawInfo.drawPlayer.GetModPlayer<GoozmaWeaponsPlayer>().crystalGauntletsUseFingers) {
-            //    texture = ModContent.Request<Texture2D>($"{nameof(CalamityHunt)}/Content/Items/Weapons/Magic/CrystalGauntlets_HandsOnPoint").Value;
-            //}
+            if (drawInfo.drawPlayer.GetModPlayer<GoozmaWeaponsPlayer>().crystalGauntletsUseFingers) {
+                texture = ModContent.Request<Texture2D>($"{nameof(CalamityHunt)}/Content/Items/Weapons/Magic/CrystalGauntlets_HandsOnPoint").Value;
+            }
 
             Vector2 position = drawInfo.BodyPosition() + drawInfo.frontShoulderOffset + VanityUtilities.GetCompositeOffset_FrontArm(ref drawInfo);
             position.ApplyVerticalOffset(drawInfo);
@@ -41,9 +42,9 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {
             Texture2D texture = ModContent.Request<Texture2D>($"{nameof(CalamityHunt)}/Content/Items/Weapons/Magic/CrystalGauntlets_HandsOff").Value;
-            //if (drawInfo.drawPlayer.GetModPlayer<GoozmaWeaponsPlayer>().crystalGauntletsUseFingers) {
-            //    texture = ModContent.Request<Texture2D>($"{nameof(CalamityHunt)}/Content/Items/Weapons/Magic/CrystalGauntlets_HandsOffPoint").Value;
-            //}
+            if (drawInfo.drawPlayer.GetModPlayer<GoozmaWeaponsPlayer>().crystalGauntletsUseFingers) {
+                texture = ModContent.Request<Texture2D>($"{nameof(CalamityHunt)}/Content/Items/Weapons/Magic/CrystalGauntlets_HandsOffPoint").Value;
+            }
 
             Vector2 position = drawInfo.BodyPosition() + drawInfo.backShoulderOffset + VanityUtilities.GetCompositeOffset_BackArm(ref drawInfo);
             position.ApplyVerticalOffset(drawInfo);

@@ -1,4 +1,5 @@
 ﻿using CalamityHunt.Common.Players;
+using CalamityHunt.Common.Systems;
 using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Items.Rarities;
 using CalamityHunt.Content.Projectiles.Weapons.Magic;
@@ -34,6 +35,7 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.value = Item.sellPrice(gold: 20);
+            Item.shoot = ModContent.ProjectileType<CrystalGauntletBall>();
             Item.shootSpeed = 4f;
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 ModRarity r;
@@ -43,7 +45,29 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
             }
         }
 
-        public override bool CanUseItem(Player player) => false;
+        public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+        {
+            if (Main.LocalPlayer.HeldItem == Item || Main.mouseItem == Item) {
+                Texture2D bar = AssetDirectory.Textures.Bars.Bar[1].Value;
+                Texture2D barCharge = AssetDirectory.Textures.Bars.BarFill[1].Value;
+
+                Rectangle chargeFrame = new Rectangle(0, 0, (int)(barCharge.Width * Main.LocalPlayer.GetModPlayer<GoozmaWeaponsPlayer>().CrystalGauntletsCharge), barCharge.Height);
+
+                Color barColor = Color.Lerp(Color.MediumOrchid, Color.Turquoise, Utils.GetLerpValue(0.3f, 0.8f, Main.LocalPlayer.GetModPlayer<GoozmaWeaponsPlayer>().CrystalGauntletsCharge, true));
+                barColor.A = 128;
+                spriteBatch.Draw(bar, position + new Vector2(0, 35) * scale, bar.Frame(), Color.DarkSlateBlue, 0, bar.Size() * 0.5f, scale * 1.2f, 0, 0);
+                spriteBatch.Draw(barCharge, position + new Vector2(0, 35) * scale, chargeFrame, barColor, 0, barCharge.Size() * 0.5f, scale * 1.2f, 0, 0);
+            }
+        }
+
+        public override void ModifyManaCost(Player player, ref float reduce, ref float mult)
+        {
+            if (player.altFunctionUse > 0) {
+                reduce *= 0.25f;
+            }
+        }
+
+        public override bool CanUseItem(Player player) => player.ownedProjectileCounts[ModContent.ProjectileType<CrystalGauntletBall>()] <= 0;
 
         public override bool AltFunctionUse(Player player) => true;
 
@@ -58,6 +82,20 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             player.manaCost = 0f;
+
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<CrystalGauntletBall>()] <= 0) {
+                if (player.altFunctionUse == 0) {
+                    Projectile.NewProjectileDirect(source, position, velocity, type, damage, 0, player.whoAmI);
+                }
+            }
+
+            if (player.altFunctionUse > 0) {
+                player.GetModPlayer<GoozmaWeaponsPlayer>().crystalGauntletsClapTime = 30;
+                player.GetModPlayer<GoozmaWeaponsPlayer>().crystalGauntletsClapDir = player.DirectionTo(Main.MouseWorld);
+
+                //Projectile piercer = Projectile.NewProjectileDirect(source, position, velocity.SafeNormalize(Vector2.Zero).RotatedByRandom(0.05f) * 18f, ModContent.ProjectileType<CrystalPiercer>(), damage, 0, player.whoAmI);
+                //piercer.localAI[0] = Main.GlobalTimeWrappedHourly * 7f;
+            }
 
             return false;
         }
@@ -81,6 +119,7 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
         {
             Color glowColor = new GradientColor(SpectralColor, 0.1f, 0.1f).ValueAt(Main.GlobalTimeWrappedHourly * 7f);
             Lighting.AddLight(player.MountedCenter, glowColor.ToVector3() * 0.4f);
+            player.GetModPlayer<GoozmaWeaponsPlayer>().crystalGauntletsHeld = true;
         }
     }
 }
