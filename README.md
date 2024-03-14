@@ -1,3 +1,3 @@
-# Hunt of the Old Gods: Director's Cut
+# Hunt of the Old God: Director's Cut
 
 The Goozma Mod + Big Toss Mode
