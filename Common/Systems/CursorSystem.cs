@@ -46,7 +46,7 @@ public class CursorSystem : ModSystem
 
                 for (int i = 1; i < ropeCount; i++) {
 
-                    ropes[i] ??= new Rope(mouseCenter, (int)(60 + Main.rand.NextFloat(20f)), 1.5f, Vector2.UnitY * 0.1f, 0.03f, 30);
+                    ropes[i] ??= new Rope(mouseCenter, (int)(25 + Main.rand.NextFloat(20f)), 1.5f, Vector2.UnitY * 0.1f, 0.05f, 10);
                     ropes[i].StartPos = mouseCenter;
                     float spread = ropeCount - i * 2;
                     ropes[i].gravity = Vector2.UnitY.RotatedBy(spread * 0.1f + MathF.Sin((Main.GlobalTimeWrappedHourly * 3f + i) % MathHelper.TwoPi) * 0.4f) * 0.15f + (Main.MouseScreen - OldMouseScreen).RotatedBy(spread * 0.1f) * 0.01f;

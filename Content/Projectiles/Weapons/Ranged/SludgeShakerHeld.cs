@@ -85,19 +85,19 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
 
             if (Time % shootSpeed == 0) {
 
-                for (int i = 0; i < 5; i++) {
-                    CalamityHunt.particles.Add(Particle.Create<FlameParticle>(particle => {
-                        particle.position = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero) * 80;
-                        particle.scale = Main.rand.NextFloat(1f, 3f);
-                        particle.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * Main.rand.NextFloat(3f, 20f);
-                        particle.maxTime = Main.rand.Next(35, 40);
-                        particle.color = Color.Orange with { A = 20 };
-                        particle.fadeColor = Color.Red with { A = 30 };
-                        particle.emitLight = true;
-                    }));
-                }
+                //for (int i = 0; i < 5; i++) {
+                //    CalamityHunt.particles.Add(Particle.Create<FlameParticle>(particle => {
+                //        particle.position = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero) * 80;
+                //        particle.scale = Main.rand.NextFloat(1f, 3f);
+                //        particle.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * Main.rand.NextFloat(3f, 20f);
+                //        particle.maxTime = Main.rand.Next(35, 40);
+                //        particle.color = Color.Orange with { A = 20 };
+                //        particle.fadeColor = Color.Red with { A = 30 };
+                //        particle.emitLight = true;
+                //    }));
+                //}
 
-                // Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.05f) * Main.rand.Next(15, 20), ModContent.ProjectileType<ShakerSludge>(), Owner.HeldItem.damage, 1f, Owner.whoAmI);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.05f) * Main.rand.Next(15, 20), ModContent.ProjectileType<ShakerSludge>(), Owner.HeldItem.damage, 1f, Owner.whoAmI);
             }
 
             if (!Owner.channel) {

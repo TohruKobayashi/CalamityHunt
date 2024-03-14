@@ -156,6 +156,6 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             return false;
         }
 
-        public override bool PreDraw(ref Color lightColor) => false;
+        //public override bool PreDraw(ref Color lightColor) => false;
     }
 }
