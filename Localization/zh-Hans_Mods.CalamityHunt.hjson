@@ -522,7 +522,7 @@ Items: {
 	}
 
 	FissionFlayer: {
-		// DisplayName: Fission Flayer
+		// DisplayName: to be determined
 		// Tooltip: ""
 	}
 }
@@ -632,9 +632,9 @@ Projectiles: {
 	// ShakerSludge.DisplayName: Shaker Sludge
 	// GoozmaBoulderProjectile.DisplayName: Motley Marble
 	// StellarBlackHole.DisplayName: Stellar Black Hole
-	// FissionFlyerProjectile.DisplayName: Fission Flyer Projectile
-	// CometKunaiSuperProjectile.DisplayName: Comet Kunai Super Projectile
-	// FissionFlayerProjectile.DisplayName: Fission Flayer Projectile
+	// FissionFlyerProjectile.DisplayName: Fission Flyer
+	// CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
+	// FissionFlayerProjectile.DisplayName: to be determined
 }
 
 Chat: {

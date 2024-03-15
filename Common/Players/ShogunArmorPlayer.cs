@@ -219,21 +219,39 @@ namespace CalamityHunt.Common.Players
                         ModLoader.GetMod(HUtils.CalamityMod).Call("ToggleInfiniteFlight", Player, true);
                     }
 
-                    if (Player.controlJump && Player.wingTime > 0f && !Player.GetJumpState(ExtraJump.CloudInABottle).Available && Player.jump == 0) {
-                        bool hovering = Player.TryingToHoverDown && !Player.merman;
-                        if (hovering) {
-                            Player.runAcceleration += 5;
-                            Player.maxRunSpeed += 5;
+                    //blockaroz what the fuck did you mean by this
+                    //if (Player.controlJump && Player.wingTime > 0f && !Player.GetJumpState(ExtraJump.CloudInABottle).Available && Player.jump == 0) {
+                    //    bool hovering = Player.TryingToHoverDown && !Player.merman;
+                    //    if (hovering) {
+                    //        Player.runAcceleration += 5;
+                    //        Player.maxRunSpeed += 5;
 
-                            Player.velocity.Y *= 0.7f;
-                            if (Player.velocity.Y > -2f && Player.velocity.Y < 1f) {
-                                Player.velocity.Y = 1E-05f;
-                            }
+                    //        Player.velocity.Y *= 0.7f;
+                    //        if (Player.velocity.Y > -2f && Player.velocity.Y < 1f) {
+                    //            Player.velocity.Y = 1E-05f;
+                    //        }
+                    //    }
+                    //}
+
+                    //WHAT DID YOU INTEND THIS TO DO??????? 
+                    //FOR CONTEXT: THIS LINE OF CODE MAKES IT SO IF YOU HOLD UP (W) YOU GO UPWARDS
+                    //VERY FAST
+                    //UNCAPPED
+                    //EVEN IF YOU ARENT HOVERING
+                    //??????????????????????????????????????????????????????????????????????????????????????????????????
+                    //COMMENT YOUR DAMN CODE
+                    //if (Player.TryingToHoverUp && !Player.mount.Active) {
+                    //    Player.velocity.Y -= 1f;
+                    //}
+
+                    //thank you fargos souls flight mastery soul hover code writer for making logic that works
+                    //this requires some bullshit to be done in shogunchestplace but other than that it actually works!!!!!!
+                    if (Player.controlDown && Player.controlJump && !Player.mount.Active && Player.wingTime > 0f) {
+                        if (Player.velocity.Y > 0.01f || Player.velocity.Y < -0.01f)
+                            Player.velocity.Y *= 0.005f;
+                        else {
+                            Player.position.Y -= Player.velocity.Y;
                         }
-                    }
-
-                    if (Player.TryingToHoverUp && !Player.mount.Active) {
-                        Player.velocity.Y -= 1f;
                     }
                 }
 

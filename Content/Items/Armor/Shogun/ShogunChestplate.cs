@@ -62,11 +62,21 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
 
         public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
         {
-            ascentWhenFalling = 0.95f;
+            //this is so the hover code in shogunarmorplayer actually works. if theres a way to make it all work in shogunarmorplayer, PLEASE!!!
+            if (player.controlDown && player.controlJump && !player.mount.Active && player.wingTime > 0f) {
+                ascentWhenFalling = 0f;
+                maxAscentMultiplier = 0f;
+                constantAscend = 0f;
+                player.canRocket = false;
+            }
+            else {
+
+                ascentWhenFalling = 0.95f;
+                maxAscentMultiplier = 4f;
+                constantAscend = 0.2f;
+            }
             ascentWhenRising = 0.1f;
             maxCanAscendMultiplier = 1f;
-            maxAscentMultiplier = 4f;
-            constantAscend = 0.2f;
         }
 
         public override void HorizontalWingSpeeds(Player player, ref float speed, ref float acceleration)

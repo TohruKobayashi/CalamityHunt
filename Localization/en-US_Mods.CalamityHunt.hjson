@@ -186,7 +186,7 @@ Items: {
 			'''
 			<right> to disable
 			Allows you to slide on every surface
-			Warning: May result in exceedingly high speeds
+			Warning: May result in extraordinarily high speeds
 			'Yharim would hate you for this'
 			'''
 	}
@@ -197,7 +197,7 @@ Items: {
 			'''
 			<right> to enable
 			Allows you to slide on every surface
-			Warning: May result in exceedingly high speeds
+			Warning: May result in extraordinarily high speeds
 			'Yharim would hate you for this'
 			'''
 	}
@@ -523,7 +523,7 @@ Items: {
 	}
 
 	FissionFlayer: {
-		DisplayName: Fission Flayer
+		DisplayName: to be determined
 		Tooltip: ""
 	}
 }
@@ -633,9 +633,9 @@ Projectiles: {
 	ShakerSludge.DisplayName: Shaker Sludge
 	GoozmaBoulderProjectile.DisplayName: Motley Marble
 	StellarBlackHole.DisplayName: Stellar Black Hole
-	FissionFlyerProjectile.DisplayName: Fission Flyer Projectile
-	CometKunaiSuperProjectile.DisplayName: Comet Kunai Super Projectile
-	FissionFlayerProjectile.DisplayName: Fission Flayer Projectile
+	FissionFlyerProjectile.DisplayName: Fission Flyer
+	CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
+	FissionFlayerProjectile.DisplayName: to be determined
 }
 
 Chat: {
