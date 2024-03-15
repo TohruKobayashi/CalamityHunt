@@ -12,7 +12,7 @@ namespace CalamityHunt.Content.Items.Lore
 {
     public class GoozmaLore : ModItem
     {
-        public override bool IsLoadingEnabled(Mod mod) => false;
+        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(HUtils.CalamityMod);
 
         public override void SetStaticDefaults()
         {
