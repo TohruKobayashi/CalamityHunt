@@ -38,12 +38,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
             Projectile.ownerHitCheck = true;
             Projectile.timeLeft = 5;
 
-            if (ModLoader.HasMod(HUtils.CalamityMod)) {
-                DamageClass d;
-                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
-                calamity.TryFind("RogueDamageClass", out d);
-                Projectile.DamageType = d;
-            }
+            //if (ModLoader.HasMod(HUtils.CalamityMod)) {
+            //    DamageClass d;
+            //    Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
+            //    calamity.TryFind("RogueDamageClass", out d);
+            //    Projectile.DamageType = d;
+            //}
         }
 
         public ref float Time => ref Projectile.ai[0];

@@ -1,7 +1,7 @@
 ﻿using System;
 using CalamityHunt.Content.Items.Materials;
 using CalamityHunt.Content.Items.Rarities;
-using CalamityHunt.Content.Projectiles.Weapons.Melee;
+using CalamityHunt.Content.Projectiles.Weapons.Rogue;
 using CalamityHunt.Content.Tiles;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -9,14 +9,10 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace CalamityHunt.Content.Items.Weapons.Melee
+namespace CalamityHunt.Content.Items.Weapons.Rogue
 {
-    public class FissionFlayer : ModItem
+    public class FissionFlyer : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            ItemID.Sets.SkipsInitialUseSound[Type] = true;
-        }
         public override void SetDefaults()
         {
             Item.width = 50;
@@ -30,44 +26,45 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
             Item.useLimitPerAnimation = 3;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 5f;
+            Item.UseSound = SoundID.DD2_SkyDragonsFuryShot;
             Item.autoReuse = true;
-            Item.shootSpeed = 2f;
+            Item.shootSpeed = 15f;
             Item.rare = ModContent.RarityType<VioletRarity>();
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.Throwing;
             Item.value = Item.sellPrice(gold: 20);
-            //if (ModLoader.HasMod(HUtils.CalamityMod)) {
-            //    DamageClass d;
-            //    ModRarity r;
-            //    Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
-            //    calamity.TryFind("RogueDamageClass", out d);
-            //    calamity.TryFind("Violet", out r);
-            //    Item.DamageType = d;
-            //    Item.rare = r.Type;
-            //}
-            Item.shoot = ModContent.ProjectileType<FissionFlayerProjectile>();
+            if (ModLoader.HasMod(HUtils.CalamityMod)) {
+                DamageClass d;
+                ModRarity r;
+                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
+                calamity.TryFind<DamageClass>("RogueDamageClass", out d);
+                calamity.TryFind<ModRarity>("Violet", out r);
+                Item.DamageType = d;
+                Item.rare = r.Type;
+            }
+            Item.shoot = ModContent.ProjectileType<FissionFlyerProj>();
         }
-
-        public override bool MeleePrefix() => ModLoader.HasMod(HUtils.CalamityMod);
-
-        public override bool CanUseItem(Player player) => player.ownedProjectileCounts[ModContent.ProjectileType<FissionFlayerProjectile>()] <= 0;
-
-        public override bool AltFunctionUse(Player player) => true;
-
-        public int swingStyle;
-        public float spin;
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<FissionFlayerProjectile>()] <= 0) {
-                int nextSwingStyle = swingStyle;
-                if (player.altFunctionUse == 2) {
-                    nextSwingStyle = -1;
-                }
-                else {
-                    swingStyle = (swingStyle + 1) %2;
+            bool stealth = false;
+            if (ModLoader.HasMod(HUtils.CalamityMod)) {
+                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
+
+                if ((bool)calamity.Call("CanStealthStrike", player)) //setting the stealth strike
+                    stealth = true;
+            }
+            else if (player.vortexStealthActive || player.shroomiteStealth)
+                stealth = true;
+
+            if (Main.myPlayer == player.whoAmI) {
+                Vector2 mouseWorld = Main.MouseWorld;
+                player.LimitPointToPlayerReachableArea(ref mouseWorld);
+                velocity = velocity.SafeNormalize(Vector2.Zero).RotatedByRandom(0.3f) * Main.rand.NextFloat(0.8f, 1.3f) * Math.Max(170, player.Distance(mouseWorld)) * MathF.E * 0.009f;
+                int p = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, 0, 0, stealth ? 1 : 0);
+                if (ModLoader.HasMod(HUtils.CalamityMod) && stealth) {
+                    ModLoader.GetMod(HUtils.CalamityMod).Call("SetStealthProjectile", Main.projectile[p], true);
                 }
 
-                Projectile.NewProjectileDirect(source, position, velocity, type, damage, 0, player.whoAmI, ai1: nextSwingStyle);
             }
 
             return false;
@@ -88,8 +85,7 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
             }
             else {
                 CreateRecipe()
-                    .AddIngredient(ItemID.StaffofEarth)
-                    .AddIngredient(ItemID.Trimarang)
+                    .AddIngredient(ItemID.WoodenBoomerang)
                     .AddIngredient<ChromaticMass>(15)
                     .AddTile<SlimeNinjaStatueTile>()
                     .Register();
