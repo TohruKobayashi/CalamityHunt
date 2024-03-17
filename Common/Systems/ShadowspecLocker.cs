@@ -25,7 +25,17 @@ public class ShadowspecLocker : GlobalItem
         bool usable = !ShadowspecItemFinder.ShadowspecItem(item.type);
 
         //remove if needed elsewhere
-        unlockItems = BossDownedSystem.Instance.GoozmaDowned || Config.Instance.shadowspecCurse;
+        unlockItems = BossDownedSystem.Instance.GoozmaDowned || !Config.Instance.shadowspecCurse;
+
+        return unlockItems || usable;
+    }
+
+    public override bool CanEquipAccessory(Item item, Player player, int slot, bool modded)
+    {
+        bool usable = !ShadowspecItemFinder.ShadowspecItem(item.type);
+
+        //remove if needed elsewhere
+        unlockItems = BossDownedSystem.Instance.GoozmaDowned || !Config.Instance.shadowspecCurse;
 
         return unlockItems || usable;
     }
@@ -54,10 +64,10 @@ public class ShadowspecLocker : GlobalItem
             Texture2D glow = AssetDirectory.Textures.Glow[0].Value;
             Texture2D qmark = AssetDirectory.Textures.QuestionMark.Value;
 
-            spriteBatch.Draw(glow, position, glow.Frame(), Color.Black * 0.5f, 0, glow.Size() * 0.5f, scale * 5f, 0, 0);
+            spriteBatch.Draw(glow, position, glow.Frame(), Color.Black * 0.5f, 0, glow.Size() * 0.5f, 0.5f * 5f, 0, 0);
 
-            spriteBatch.Draw(qmark, position, qmark.Frame(), Color.White, 0, qmark.Size() * 0.5f, scale * 3f, 0, 0);
-            spriteBatch.Draw(qmark, position, qmark.Frame(), new Color(100, 90, 130, 0), 0, qmark.Size() * 0.5f, scale * 3.6f + MathF.Sin(Main.GlobalTimeWrappedHourly * 2.5f) * 0.1f, 0, 0);
+            spriteBatch.Draw(qmark, position, qmark.Frame(), Color.White, 0, qmark.Size() * 0.5f, 0.5f * 3f, 0, 0);
+            //spriteBatch.Draw(qmark, position, qmark.Frame(), new Color(100, 90, 130, 0), 0, qmark.Size() * 0.5f, scale * 3.6f + MathF.Sin(Main.GlobalTimeWrappedHourly * 2.5f) * 0.1f, 0, 0);
         }
     }
 }

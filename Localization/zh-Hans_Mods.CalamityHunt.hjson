@@ -802,8 +802,8 @@ Configs: {
 		}
 
 		shadowspecCurse: {
-			// Label: shadowspec Curse
-			// Tooltip: ""
+			// Label: Shadowspec Curse
+			// Tooltip: Curses all Shadowspec-tier items until Goozma is defeated, making them unusable.
 		}
 
 		oldsky: {

@@ -747,7 +747,7 @@ Config: {
 	}
 
 	LightningToggle: {
-		Label: Monsoon Thunder Toggle
+		Label: Monsoon Thunder
 		Tooltip: Enables or disables the Slime Monsoon's thunder visuals
 	}
 }
@@ -803,8 +803,8 @@ Configs: {
 		}
 
 		shadowspecCurse: {
-			Label: shadowspec Curse
-			Tooltip: ""
+			Label: Shadowspec Curse
+			Tooltip: Curses all Shadowspec-tier items until Goozma is defeated, making them unusable.
 		}
 
 		oldsky: {
@@ -829,8 +829,8 @@ SetBonuses.Shogun:
 	'''
 	17% increased damage and +5 max minions
 	{$CommonItemTooltip.FlightAndSlowfall}
-	{$CommonItemTooltip.PressDownToHover}
 	Wearing any wings overrides this flight
+	{$CommonItemTooltip.PressDownToHover}
 	Allows the ability to dash and enhances other dashes
 	Hold DOWN to fastfall
 	Increases jump speed 
@@ -843,7 +843,7 @@ StickyHandStats:
 	Reelback Velocity: 10
 	Pull Velocity: 17
 	'''
-GoozmaShadowspecCurse: Mods.CalamityHunt.GoozmaShadowspecCurse
+GoozmaShadowspecCurse: "[c/5C95A1:insertwhateverthefuck]"
 AnyEvilBlock: Any Evil Block
 SludgeWarning: Cannot be used to summon the Slime God
 
