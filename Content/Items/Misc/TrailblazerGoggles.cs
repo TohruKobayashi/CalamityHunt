@@ -18,8 +18,8 @@ public class TrailblazerGoggles : ModItem
 
     public override void SetDefaults()
     {
-        Item.width = 32; //update
-        Item.height = 32; //update
+        Item.width = 30;
+        Item.height = 14; 
         Item.rare = ModContent.RarityType<VioletRarity>();
         Item.accessory = true;
         Item.vanity = true;

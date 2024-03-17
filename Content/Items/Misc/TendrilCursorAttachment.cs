@@ -14,7 +14,7 @@ public class TendrilCursorAttachment : ModItem
 {
     public override void SetDefaults()
     {
-        Item.width = 32;
+        Item.width = 36;
         Item.height = 32;
         Item.rare = ModContent.RarityType<VioletRarity>();
         Item.accessory = true;

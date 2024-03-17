@@ -24,8 +24,8 @@ public class TrailblazerBackpack : ModItem
 
     public override void SetDefaults()
     {
-        Item.width = 32; //update
-        Item.height = 32; //update
+        Item.width = 44; 
+        Item.height = 50; 
         Item.rare = ModContent.RarityType<VioletRarity>();
         Item.accessory = true;
         Item.vanity = true;
