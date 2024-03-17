@@ -16,8 +16,6 @@ namespace CalamityHunt.Content.Items.Misc
     {
         public Color rainbowGlow => new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(Main.GlobalTimeWrappedHourly * 100f);
 
-        public override bool IsLoadingEnabled(Mod mod) => false;
-
         public override void SetStaticDefaults()
         {
             Item.ResearchUnlockCount = 99;

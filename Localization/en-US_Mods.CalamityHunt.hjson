@@ -526,6 +526,16 @@ Items: {
 		DisplayName: to be determined
 		Tooltip: ""
 	}
+
+	TrailblazerGoggles: {
+		DisplayName: Trailblazer Goggles
+		Tooltip: ""
+	}
+
+	TrailblazerBackpack: {
+		DisplayName: Trailblazer Backpack
+		Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -841,3 +851,5 @@ CalamityModName: {
 	Display: Calamity Mod
 	Internal: CalamityMod
 }
+
+Emotes.GoozmaEmote.Command: goozma
