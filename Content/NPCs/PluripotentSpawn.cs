@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.Chat;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Events;
 using Terraria.Graphics.CameraModifiers;
@@ -81,6 +82,7 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
                 else {
                     Main.NewText(NetworkText.FromKey(slimeMonsoonText.Value), new Color(50, 255, 130));
                 }
+                Main.StopSlimeRain(true);
             }
 
             if (Time > 250 && Main.netMode != NetmodeID.MultiplayerClient) {
@@ -147,10 +149,11 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
 
                     slimes.Remove(slime);
                 }
-            }
+            }  
 
             if (Time == 200) {
                 SoundEngine.PlaySound(AssetDirectory.Sounds.Goozma.Intro.WithVolumeScale(2f).WithPitchOffset(-0.95f), NPC.Center);
+                Main.StopSlimeRain(true);
             }
 
             for (int i = 0; i < 60; i++) {

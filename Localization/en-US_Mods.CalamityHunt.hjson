@@ -804,7 +804,7 @@ Configs: {
 
 		shadowspecCurse: {
 			Label: Shadowspec Curse
-			Tooltip: Curses all Shadowspec-tier items until Goozma is defeated, making them unusable.
+			Tooltip: Curses all Shadowspec-tier items until Goozma is defeated, making them unusable
 		}
 
 		oldsky: {

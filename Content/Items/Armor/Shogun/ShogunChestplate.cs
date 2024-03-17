@@ -71,18 +71,18 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
             }
             else {
 
-                ascentWhenFalling = 0.95f;
+                ascentWhenFalling = 1f;
                 maxAscentMultiplier = 4f;
                 constantAscend = 0.2f;
             }
-            ascentWhenRising = 0.1f;
-            maxCanAscendMultiplier = 1f;
+            ascentWhenRising = 0.2f;
+            maxCanAscendMultiplier = 1.4f;
         }
 
         public override void HorizontalWingSpeeds(Player player, ref float speed, ref float acceleration)
         {
             speed = 12f;
-            acceleration = 2f;
+            //acceleration = 2f; //dont even TRY to give these things accel, it just fucks it all up entirely
         }
 
         public override void EquipFrameEffects(Player player, EquipType type)

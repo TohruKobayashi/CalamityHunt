@@ -69,7 +69,7 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
 
                 Projectile.NewProjectileDirect(source, position, velocity, type, damage, 0, player.whoAmI, ai1: nextSwingStyle);
             }
-
+            //Main.StartSlimeRain(true); 
             return false;
         }
 

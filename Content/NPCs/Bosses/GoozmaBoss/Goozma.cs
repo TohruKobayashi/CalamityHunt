@@ -236,11 +236,11 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
     private void ChangeWeather()
     {
-        if (!Main.slimeRain) {
-            Main.StartSlimeRain(false);
-        }
+        //if (!Main.slimeRain) {
+        //    Main.StartSlimeRain(false);
+        //}
 
-        Main.slimeRainTime += 1.0;
+        //Main.slimeRainTime += 1.0;
 
         if (Phase >= 2) {
             SlimeMonsoonSky.additionalLightningChance = -53;
@@ -326,7 +326,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             NPC.ai[3] = -1;
             currentSlime = -1;
 
-            headScale = 0.9f;
+            headScale = 1f;
 
             SoundEngine.PlaySound(AssetDirectory.Sounds.Goozma.Hurt, NPC.Center);
         }
@@ -413,7 +413,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 //NPC.velocity.X = Utils.GetLerpValue(spawnDelay + 3, spawnDelay - 5, Time, true) * (MathF.Cos(Time * MathHelper.Pi / spawnDelay * 2f + 0.33f)) * -20f;
                 //NPC.velocity.Y = Utils.GetLerpValue(spawnDelay + 3, spawnDelay / 2f, Time, true) * (MathF.Cos(Time * MathHelper.Pi / spawnDelay * 4f + 0.1f) - Utils.GetLerpValue(spawnDelay / 2.2f, spawnDelay / 1.8f, Time, true)) * 17f;
                 eyePower = new Vector2(1.3f * Utils.GetLerpValue(spawnDelay - 1, spawnDelay + 10, Time, true) * (1f + Utils.GetLerpValue(spawnDelay + 80, spawnDelay + 50, Time, true) * MathF.Sin(Time) * 0.3f));
-                NPC.scale = 0.6f + MathF.Sqrt(Utils.GetLerpValue(spawnDelay * 0.2f, spawnDelay, Time, true)) * 0.4f;
+                //NPC.scale = 0.6f + MathF.Sqrt(Utils.GetLerpValue(spawnDelay * 0.2f, spawnDelay, Time, true)) * 0.4f;
 
                 if (Time < spawnDelay) {
 
@@ -461,7 +461,6 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 if (Time > spawnDelay + 70) {
                     SetPhase(0);
                     NPC.dontTakeDamage = false;
-                    headScale = 1f;
                 }
 
                 Dust.NewDustPerfect(NPC.Center + Main.rand.NextVector2Circular(10, 10), DustID.TintableDust, Main.rand.NextVector2CircularEdge(10, 10), 200, Color.Black, Main.rand.NextFloat(2f, 4f)).noGravity = true;
@@ -1481,7 +1480,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
         }
         BossDownedSystem.Instance.GoozmaDowned = true;
 
-        Main.StopSlimeRain();
+        //Main.StopSlimeRain();
 
         Main.windSpeedTarget = 0f;
         Main.windSpeedCurrent = MathHelper.Lerp(Main.windSpeedCurrent, 0, 0.7f);
@@ -2035,7 +2034,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
         }
 
         extraTilt = MathHelper.Lerp(extraTilt, Math.Clamp(-drawVelocity.X * 0.025f, -1f, 1f) - 0.01f * NPC.direction, 0.15f);
-        headScale = MathHelper.Lerp(headScale, 1f, 0.05f);
+        //headScale = MathHelper.Lerp(headScale, 1f, 0.05f);
 
         tentacleVelocity *= 0.93f;
         tentacleAcceleration = (NPC.velocity - oldVel[(int)(oldVel.Length / 3f)]) * 0.1f;
