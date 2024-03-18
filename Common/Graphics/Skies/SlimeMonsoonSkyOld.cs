@@ -245,12 +245,11 @@ public class SlimeMonsoonSkyOld : CustomSky
             strip.PrepareStrip(points.ToArray(), rots.ToArray(), ColorFunction, WidthFunction, -Main.screenPosition * 0.5f / (1 + layer) + Main.ScreenSize.ToVector2() * 0.25f, points.Count, true);
 
             Effect lightningEffect = AssetDirectory.Effects.GooLightning.Value;
-            lightningEffect.Parameters["uTransformMatrix"].SetValue(Main.BackgroundViewMatrix.NormalizedTransformationmatrix);
-            lightningEffect.Parameters["uTexture"].SetValue(AssetDirectory.Textures.SlimeMonsoon.Lightning.Value);
-            lightningEffect.Parameters["uGlow"].SetValue(AssetDirectory.Textures.SlimeMonsoon.Lightning.Value);
-            lightningEffect.Parameters["uColor"].SetValue(Vector3.One);
+            lightningEffect.Parameters["uTransformMatrix"].SetValue(Main.GameViewMatrix.NormalizedTransformationmatrix);
+            lightningEffect.Parameters["uTexture0"].SetValue(AssetDirectory.Textures.SlimeMonsoon.Lightning.Value);
+            lightningEffect.Parameters["uTexture1"].SetValue(AssetDirectory.Textures.SlimeMonsoon.LightningGlow.Value);
+            lightningEffect.Parameters["uNoiseTexture"].SetValue(AssetDirectory.Textures.Noise[7].Value);
             lightningEffect.Parameters["uTime"].SetValue(-(float)Math.Cbrt(maxTime - time) * 0.3f);
-            lightningEffect.Parameters["uBackPower"].SetValue(0f);
             lightningEffect.CurrentTechnique.Passes[0].Apply();
 
             strip.DrawTrail();

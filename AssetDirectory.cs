@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using CalamityHunt.Common.Utilities;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -91,8 +92,8 @@ public static class AssetDirectory
         public static class SlimeMonsoon
         {
             public static readonly Asset<Texture2D> MapBG = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/SlimeMonsoonBG");
-            public static readonly Asset<Texture2D> Lightning = AssetUtilities.RequestImmediate<Texture2D>($"{nameof(CalamityHunt)}/Common/Graphics/SlimeMonsoon/Lightning");
-            public static readonly Asset<Texture2D> LightningGlow = AssetUtilities.RequestImmediate<Texture2D>($"{nameof(CalamityHunt)}/Common/Graphics/SlimeMonsoon/LightningGlow");
+            public static readonly Asset<Texture2D> Lightning = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Graphics/SlimeMonsoon/Lightning");
+            public static readonly Asset<Texture2D> LightningGlow = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Graphics/SlimeMonsoon/LightningGlow");
         }
     }
 

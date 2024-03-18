@@ -120,20 +120,48 @@ public class SlimeMonsoonSky : CustomSky
 
         if (maxDepth >= float.MaxValue && minDepth < float.MaxValue) {
             spriteBatch.Draw(TextureAssets.BlackTile.Value, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), Color.Black * (float)Math.Sqrt(_strength));
+            spriteBatch.Draw(AssetDirectory.Textures.Noise[4].Value, new Rectangle(0, -yOffset - 100, Main.screenWidth, Main.screenHeight * 3), darkColor * 0.1f * _strength);
         }
 
-        spriteBatch.End();
-        spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.BackgroundViewMatrix.TransformationMatrix);
-
-        Effect cloudRingEffect = AssetDirectory.Effects.SlimeMonsoonSkyLayer.Value;
-        cloudRingEffect.CurrentTechnique.Passes[0].Apply();
+        Effect skyEffect = AssetDirectory.Effects.SlimeMonsoonSkyLayer.Value;
+        skyEffect.Parameters["uMap"].SetValue(AssetDirectory.Textures.ColorMap[4].Value);
 
         if (maxDepth >= 4 && minDepth < 5) {
 
+            skyEffect.Parameters["uWorldPos"].SetValue((Main.screenPosition + Main.ScreenSize.ToVector2() / 2f) * 0.0001f);
+            skyEffect.Parameters["uTime"].SetValue(_windSpeed * 3f);
+            skyEffect.Parameters["uStrength"].SetValue(_strength);
+            skyEffect.Parameters["uTexture0"].SetValue(AssetDirectory.Textures.Noise[5].Value);
+            skyEffect.Parameters["uTexture1"].SetValue(AssetDirectory.Textures.Noise[0].Value);
+            skyEffect.Parameters["uHeight"].SetValue(0f);
+            skyEffect.Parameters["uBrightness"].SetValue(0.5f);
+
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, skyEffect, Main.BackgroundViewMatrix.TransformationMatrix);
+
+            spriteBatch.Draw(TextureAssets.BlackTile.Value, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), darkColor * (float)Math.Sqrt(_strength));
+
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.BackgroundViewMatrix.TransformationMatrix);
         }
 
         if (maxDepth >= 2 && minDepth < 3) {
 
+            skyEffect.Parameters["uWorldPos"].SetValue((Main.screenPosition + Main.ScreenSize.ToVector2() / 2f) * 0.0001f);
+            skyEffect.Parameters["uTime"].SetValue(_windSpeed * 3f);
+            skyEffect.Parameters["uStrength"].SetValue(_strength);
+            skyEffect.Parameters["uTexture0"].SetValue(AssetDirectory.Textures.Noise[5].Value);
+            skyEffect.Parameters["uTexture1"].SetValue(AssetDirectory.Textures.Noise[0].Value);
+            skyEffect.Parameters["uHeight"].SetValue(0f);
+            skyEffect.Parameters["uBrightness"].SetValue(0.5f);
+
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, skyEffect, Main.BackgroundViewMatrix.TransformationMatrix);
+
+            spriteBatch.Draw(TextureAssets.BlackTile.Value, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), darkColor * (float)Math.Sqrt(_strength));
+
+            spriteBatch.End();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.BackgroundViewMatrix.TransformationMatrix);
         }
 
         if (maxDepth >= 1 && minDepth < 2) {
