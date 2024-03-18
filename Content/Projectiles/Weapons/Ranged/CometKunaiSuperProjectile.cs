@@ -64,8 +64,9 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.scale = MathHelper.Lerp(Projectile.scale, 1.1f, 0.1f);
 
             Player player = Main.player[Projectile.owner];
+            bool button = ModLoader.HasMod(HUtils.CalamityMod) ? player.channel : PlayerInput.MouseInfo.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed;
             if (Main.myPlayer == Projectile.owner) {
-                if (PlayerInput.MouseInfo.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && Mode == 0) {
+                if (button && Mode == 0) {
                     Projectile.scale = 0.16f + MathF.Sqrt(Utils.GetLerpValue(0, 60, MiscTime, true)) * 0.5f;
                     player.ChangeDir(Projectile.velocity.X > 0 ? 1 : -1);
                     Projectile.Center = Vector2.Lerp(Projectile.Center, player.MountedCenter + new Vector2(10 * player.direction, -30), 0.5f);
