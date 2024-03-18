@@ -20,6 +20,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 1;
             Projectile.manualDirectionChange = true;
+            if (ModLoader.HasMod(HUtils.CalamityMod)) {
+                DamageClass d;
+                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
+                calamity.TryFind("RogueDamageClass", out d);
+                Projectile.DamageType = d;
+            }
         }
 
         private Vector2 oldVelocity;
