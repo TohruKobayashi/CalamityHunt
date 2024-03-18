@@ -173,7 +173,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 lightningEffect.Parameters["uNoiseTexture"].SetValue(AssetDirectory.Textures.Noise[7].Value);
                 lightningEffect.Parameters["uTime"].SetValue(Projectile.localAI[1] * 0.05f);
                 lightningEffect.CurrentTechnique.Passes[0].Apply();
-
+                //blahblah i just need to make a push with a funny name
                 vertexStrip.DrawTrail();
 
                 Main.pixelShader.CurrentTechnique.Passes[0].Apply();
