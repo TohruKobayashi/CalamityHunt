@@ -109,8 +109,8 @@ Items: {
 	}
 
 	GoozmaSoul: {
-		DisplayName: Goozma Soul
-		Tooltip: ""
+		DisplayName: Chromatic Auric Soul
+		Tooltip: Absorb to gain immense, slimy powers
 	}
 
 	YharonSoulMusicBox: {
@@ -119,8 +119,8 @@ Items: {
 	}
 
 	YharonSoul: {
-		DisplayName: Yharon Soul
-		Tooltip: ""
+		DisplayName: Draconic Auric Soul
+		Tooltip: Absorb to gain immense, draconic powers
 	}
 
 	SlimeMonsoonMonolith: {
@@ -385,11 +385,6 @@ Items: {
 			'''
 	}
 
-	GoozmaAuricSoul: {
-		DisplayName: Chromatic Auric Soul
-		Tooltip: Absorb to gain immense, slimy powers
-	}
-
 	ScytheOfTheOldGod: {
 		DisplayName: Scythe of the Old God
 		Tooltip:
@@ -398,11 +393,6 @@ Items: {
 			'Not to be confused with the Scythe of the Old Duke...
 			...And nothing else.'
 			'''
-	}
-
-	FieryAuricSoul: {
-		DisplayName: Draconic Auric Soul
-		Tooltip: Absorb to gain immense, draconic powers
 	}
 
 	Goomoire: {
@@ -515,7 +505,7 @@ Items: {
 
 	IOUASoul: {
 		DisplayName: I O U A Soul
-		Tooltip: ""
+		Tooltip: REMOVED content LOOOOOOL
 	}
 
 	StrangeManPortrait: {
@@ -524,11 +514,12 @@ Items: {
 	}
 
 	TendrilCursorAttachment: {
-		DisplayName: Tendril Cursor Attachment
+		DisplayName: Cursor Mutagen
 		Tooltip:
 			'''
 			Attaches hanging chromatic tendrils to your mouse cursor
 			The amount of tendrils depends on the slot this item is placed in
+			'They somehow know how to untangle themselves'
 			'''
 	}
 
@@ -538,13 +529,18 @@ Items: {
 	}
 
 	TrailblazerGoggles: {
-		DisplayName: Trailblazer Goggles
-		Tooltip: ""
+		DisplayName: Trailblazed Goggles
+		Tooltip: "'To lead the way, you must see it first. These do not let you see.'"
 	}
 
 	TrailblazerBackpack: {
-		DisplayName: Trailblazer Backpack
-		Tooltip: ""
+		DisplayName: Trailblazed Tactical Backpack
+		Tooltip: "'To be a forerunner is to be prepared. Thankfully, this backpack is filled with nothing but fuel.'"
+	}
+
+	ShogunWings: {
+		Tooltip: "'They are best used to cool you off'"
+		DisplayName: Thousand-Fold Paper Fans
 	}
 }
 

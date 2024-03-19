@@ -67,7 +67,7 @@ namespace CalamityHunt.Content.Items.Misc.AuricSouls
             player.GetModPlayer<AuricSoulPlayer>().goozmaSoul = true;
 
             //SoundStyle jingle = new SoundStyle($"{nameof(CalamityHunt)}/Assets/Sounds/AuricSoulJingle");
-            //SoundEngine.PlaySound(jingle, player.Center); //fix? if implement at all? 
+            //SoundEngine.PlaySound(jingle, player.Center);  
 
             return false;
         }

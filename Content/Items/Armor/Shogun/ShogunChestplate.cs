@@ -14,7 +14,7 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
         public override void Load()
         {
             EquipLoader.AddEquipTexture(Mod, Texture + "_Waist", EquipType.Waist, this);
-            EquipLoader.AddEquipTexture(Mod, Texture.Replace("Chestplate", "Wings"), EquipType.Wings, this);
+            EquipLoader.AddEquipTexture(Mod, "CalamityHunt/Assets/Textures/Items/Misc/ShogunWings_Wings", EquipType.Wings, this);
         }
 
         public override void SetStaticDefaults()

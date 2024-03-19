@@ -47,9 +47,6 @@ namespace CalamityHunt
             Filters.Scene["HuntOfTheOldGods:StellarBlackHole"] = new Filter(new ScreenShaderData(stellarblackhole, "BlackHolePass"), EffectPriority.VeryHigh);
             Filters.Scene["HuntOfTheOldGods:StellarBlackHole"].Load();
 
-            SkyManager.Instance["HuntOfTheOldGods:SlimeMonsoonOld"] = new SlimeMonsoonSkyOld();
-            SkyManager.Instance["HuntOfTheOldGods:SlimeMonsoonOld"].Load();
-
             Ref<Effect> pluripotentSpawnDistort = new Ref<Effect>(AssetDirectory.Effects.PluripotentDistortion.Value);
             Filters.Scene["HuntOfTheOldGods:PluripotentSpawn"] = new Filter(new ScreenShaderData(pluripotentSpawnDistort, "DistortionPass"), EffectPriority.Medium);
             Filters.Scene["HuntOfTheOldGods:PluripotentSpawn"].Load();
