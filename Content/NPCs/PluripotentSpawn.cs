@@ -48,7 +48,7 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
         NPC.ShowNameOnHover = false;
         NPC.lifeMax = 2028;
         NPC.BossBar = Main.BigBossProgressBar.NeverValid;
-        Music = AssetDirectory.Music.ChromaticSoul;
+        Music = AssetDirectory.Music.GoozmaSoul;
 
         slimeMonsoonText = Language.GetOrRegister(Mod.GetLocalizationKey("Chat.SlimeMonsoon"));
     }

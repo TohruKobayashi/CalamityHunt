@@ -10,7 +10,7 @@ namespace CalamityHunt.Content.Items.Placeable
         {
             ItemID.Sets.CanGetPrefixes[Type] = false;
             ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.MusicBox;
-            MusicLoader.AddMusicBox(Mod, AssetDirectory.Music.DraconicSoul, ModContent.ItemType<YharonSoulMusicBox>(), ModContent.TileType<YharonSoulMusicBoxTile>());
+            MusicLoader.AddMusicBox(Mod, AssetDirectory.Music.YharonSoul, ModContent.ItemType<YharonSoulMusicBox>(), ModContent.TileType<YharonSoulMusicBoxTile>());
         }
 
         public override void SetDefaults()

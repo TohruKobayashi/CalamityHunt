@@ -108,9 +108,19 @@ Items: {
 		Tooltip: ""
 	}
 
+	GoozmaSoul: {
+		// DisplayName: Goozma Soul
+		// Tooltip: ""
+	}
+
 	YharonSoulMusicBox: {
 		DisplayName: Boîte à musique (Âme Draconique)
 		Tooltip: ""
+	}
+
+	YharonSoul: {
+		// DisplayName: Yharon Soul
+		// Tooltip: ""
 	}
 
 	SlimeMonsoonMonolith: {

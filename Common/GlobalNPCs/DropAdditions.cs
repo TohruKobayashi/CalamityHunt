@@ -2,6 +2,7 @@
 using CalamityHunt.Common.Systems;
 using CalamityHunt.Content.Items.Dyes;
 using CalamityHunt.Content.Items.Misc;
+using CalamityHunt.Content.Items.Misc.AuricSouls;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -31,7 +32,7 @@ namespace CalamityHunt.Common.GlobalNPCs
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 Mod cal = ModLoader.GetMod(HUtils.CalamityMod);
                 if (npc.type == cal.Find<ModNPC>("Yharon").Type) {
-                    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<IOUASoul>()));
+                    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<YharonSoul>()));
                 }
             }
         }

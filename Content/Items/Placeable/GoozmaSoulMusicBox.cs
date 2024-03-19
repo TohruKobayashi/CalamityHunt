@@ -11,7 +11,7 @@ namespace CalamityHunt.Content.Items.Placeable
         {
             ItemID.Sets.CanGetPrefixes[Type] = false;
             ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.MusicBox;
-            MusicLoader.AddMusicBox(Mod, AssetDirectory.Music.ChromaticSoul, ModContent.ItemType<GoozmaSoulMusicBox>(), ModContent.TileType<GoozmaSoulMusicBoxTile>());
+            MusicLoader.AddMusicBox(Mod, AssetDirectory.Music.GoozmaSoul, ModContent.ItemType<GoozmaSoulMusicBox>(), ModContent.TileType<GoozmaSoulMusicBoxTile>());
         }
 
         public override void SetDefaults()

@@ -34,9 +34,11 @@ public static class AssetDirectory
         public static Dictionary<int, Asset<Texture2D>> Relic = new Dictionary<int, Asset<Texture2D>>();
         public static Dictionary<int, Asset<Texture2D>> FlyingSlime = new Dictionary<int, Asset<Texture2D>>();
 
-        //Jokes and Seasons
+        // unknown
         internal static readonly Asset<Texture2D> FrogParticle = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/FrogParticle");
         internal static readonly Asset<Texture2D> WideMoto = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/WideMoto");
+        
+        // seasonal
         internal static readonly Asset<Texture2D> SantaHat = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/SantaHat");
         internal static readonly Asset<Texture2D> ElfHat = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/ElfHat");
 
@@ -95,22 +97,33 @@ public static class AssetDirectory
             public static readonly Asset<Texture2D> Lightning = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Graphics/SlimeMonsoon/Lightning");
             public static readonly Asset<Texture2D> LightningGlow = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Graphics/SlimeMonsoon/LightningGlow");
         }
+
+        public static class AuricSouls
+        {
+            // goozma soul
+            public static readonly Asset<Texture2D> GoozmaSoulTrail = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/AuricSouls/GoozmaSoulTrail");
+
+            // yharon soul
+            public static readonly Asset<Texture2D> YharonSoulChain = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/AuricSouls/YharonSoulChain");
+        }
     }
 
     public static class Music
     {
+        // goozma
         public static readonly int GoozmaPhase1 = MusicLoader.GetMusicSlot(AssetPath + "Music/GlutinousArbitration");
         public static readonly int GoozmaPhase2 = MusicLoader.GetMusicSlot(AssetPath + "Music/ViscousDesperation");
 
-        //auric soul shorts
-        public static readonly int ChromaticSoul = MusicLoader.GetMusicSlot(AssetPath + "Music/Souls/Iridescence");
-        public static readonly int DraconicSoul = MusicLoader.GetMusicSlot(AssetPath + "Music/Souls/YharonAuricSoulMusic");
+        // auric souls
+        public static readonly int GoozmaSoul = MusicLoader.GetMusicSlot(AssetPath + "Music/Souls/GoozmaSoul");
+        public static readonly int YharonSoul = MusicLoader.GetMusicSlot(AssetPath + "Music/Souls/YharonSoul");
     }
 
     public static class Sounds
     {
         public static class Goozma
         {
+            // goozma sounds
             public static readonly SoundStyle SlimeAbsorb = new(AssetPath + "Sounds/Goozma/GoozmaSlimeAbsorb", 8) { MaxInstances = 0, Volume = 0.1f, PitchVariance = 0.2f };
             public static readonly SoundStyle Intro = new(AssetPath + "Sounds/Goozma/GoozmaIntro") { MaxInstances = 0, PlayOnlyIfFocused = true };
             public static readonly SoundStyle Awaken = new(AssetPath + "Sounds/Goozma/GoozmaAwaken") { MaxInstances = 0 };
@@ -121,6 +134,7 @@ public static class AssetDirectory
             public static readonly SoundStyle Reawaken = new(AssetPath + "Sounds/Goozma/GoozmaReawaken") { MaxInstances = 0 };
             public static readonly SoundStyle Dash = new(AssetPath + "Sounds/Goozma/GoozmaDash", 1, 2) { MaxInstances = 0, PitchVariance = 0.15f };
 
+            // goozma projectile sounds
             public static readonly SoundStyle SlimeShoot = new(AssetPath + "Sounds/Goozma/GoozmaSlimeShoot", 1, 3) { MaxInstances = 0, PitchVariance = 0.1f, Volume = 0.66f };
             public static readonly SoundStyle Dart = new(AssetPath + "Sounds/Goozma/GoozmaDartShoot", 1, 2) { MaxInstances = 0, PitchVariance = 0.2f };
             public static readonly SoundStyle Shot = new(AssetPath + "Sounds/Goozma/GoozmaShot", 1, 2) { MaxInstances = 0 };
@@ -155,10 +169,13 @@ public static class AssetDirectory
 
         public static class GoozmaMinions
         {
+            // generic
             public static readonly SoundStyle SlimeSlam = new(AssetPath + "Sounds/Goozma/Slimes/GoozmaSlimeSlam", 1, 3) { MaxInstances = 0 };
 
+            // crimson (LAUGH AT HIM HE ONLY HAS ONE SOUND) 
             public static readonly SoundStyle CrimslimeTelegraph = new(AssetPath + "Sounds/Goozma/Slimes/CrimslimeTelegraph") { MaxInstances = 0 };
 
+            // hallow
             public static readonly SoundStyle PrismDestroyerTelegraph = new(AssetPath + "Sounds/Goozma/Slimes/PrismDestroyerTelegraph") { MaxInstances = 0, PitchVariance = 0.1f };
             public static readonly SoundStyle PrismDestroyerExpand = new(AssetPath + "Sounds/Goozma/Slimes/PrismDestroyerExpand") { MaxInstances = 0, PitchVariance = 0.1f };
             public static readonly SoundStyle PixiePrismDestroyed = new(AssetPath + "Sounds/Goozma/Slimes/PixiePrismDestroyed") { MaxInstances = 0 };
@@ -167,11 +184,13 @@ public static class AssetDirectory
             public static readonly SoundStyle PixieBallLoop = new(AssetPath + "Sounds/Goozma/Slimes/PixieBallLoop") { MaxInstances = 0, IsLooped = true };
             public static readonly SoundStyle Warning = new(AssetPath + "Sounds/Alarm") { MaxInstances = 0 };
 
+            // corruption
             public static readonly SoundStyle EbonstoneRaise = new(AssetPath + "Sounds/Goozma/Slimes/EbonstoneRaise") { MaxInstances = 0 };
             public static readonly SoundStyle EbonstoneToothTelegraph = new(AssetPath + "Sounds/Goozma/Slimes/EbonstoneToothTelegraph") { MaxInstances = 0, PitchVariance = 0.2f };
             public static readonly SoundStyle EbonstoneToothEmerge = new(AssetPath + "Sounds/Goozma/Slimes/EbonstoneToothEmerge", 1, 2) { MaxInstances = 0, PitchVariance = 0.3f };
             public static readonly SoundStyle EbonstoneCrumble = new(AssetPath + "Sounds/Goozma/Slimes/EbonstoneCrumble") { MaxInstances = 0 };
 
+            // stellar
             public static readonly SoundStyle StellarSlimeStarfallTelegraph = new(AssetPath + "Sounds/Goozma/Slimes/StellarSlimeStarfallTelegraph") { MaxInstances = 0 };
             public static readonly SoundStyle StellarSlimeImpact = new(AssetPath + "Sounds/Goozma/Slimes/StellarSlimeImpact") { MaxInstances = 0 };
             public static readonly SoundStyle StellarReform = new(AssetPath + "Sounds/Goozma/Slimes/StellarSlimeReform") { MaxInstances = 0 };
@@ -184,18 +203,31 @@ public static class AssetDirectory
 
         public static class Weapons
         {
+            // crystal gauntlets
             public static readonly SoundStyle CrystalGauntletClap = new(AssetPath + "Sounds/Weapons/CrystalGauntletClap") { MaxInstances = 2, PitchVariance = 0.1f };
 
+            // scythe of the old god
             public static readonly SoundStyle ScytheOfTheOldGodSwing = new(AssetPath + "Sounds/Weapons/OldGodScytheSwing_" + 0) { MaxInstances = 0, PitchVariance = 0.1f };
             public static readonly SoundStyle ScytheOfTheOldGodSwingStrong = new(AssetPath + "Sounds/Weapons/OldGodScytheSwing_" + 1) { MaxInstances = 0, PitchVariance = 0.1f };
 
+            // goomoire
             public static readonly SoundStyle GoomoireWindLoop = new(AssetPath + "Sounds/Weapons/GoomoireWindLoop") { MaxInstances = 0, IsLooped = true };
+            
+            // sludge shaker
             public static readonly SoundStyle SludgeShakerFiringLoop = new(AssetPath + "Sounds/Weapons/SludgeShakerFiringLoop") { MaxInstances = 0, IsLooped = true };
+           
+            // trailblazer
             public static readonly SoundStyle TrailBlazerFireStart = new(AssetPath + "Sounds/Weapons/TrailBlazerFireStart") { MaxInstances = 0, PitchVariance = 0.1f };
             public static readonly SoundStyle TrailblazerFireLoop = new(AssetPath + "Sounds/Weapons/TrailBlazerFireLoop") { MaxInstances = 0, IsLooped = true };
+            
+            // fission flyer
             public static readonly SoundStyle FissionFlyerExplode = new(AssetPath + "Sounds/Weapons/FissionFlyerExplode") { MaxInstances = 0 };
+            
+            // slime cane 
             public static readonly SoundStyle GoozmoemRay = new(AssetPath + "Sounds/Weapons/GoozmoemFusionRayShoot") { MaxInstances = 0, Volume = 0.8f };
 
+
+            // anti-mass collider
             public static readonly SoundStyle AntiMassColliderLaserBlast = new(AssetPath + "Sounds/Weapons/AntiMassColliderLaserBlast") { MaxInstances = 0, Volume = 0.8f, PitchVariance = 0.15f };
             public static readonly SoundStyle AntiMassColliderFire = new(AssetPath + "Sounds/Weapons/AntiMassColliderFire") { MaxInstances = 0, Volume = 0.66f, PitchVariance = 0.05f };
             public static readonly SoundStyle ElectricLoop = new(AssetPath + "Sounds/Weapons/ElectricLoop") { MaxInstances = 0, IsLooped = true };
@@ -203,13 +235,20 @@ public static class AssetDirectory
 
         public static class Souls
         {
-            public static readonly SoundStyle ChromaticSoulHeartbeat = new(AssetPath + "Sounds/GoozmaAuricSoulHeartbeat") { MaxInstances = 0, IsLooped = true };
-            public static readonly SoundStyle ChromaticSoulDrone = new(AssetPath + "Sounds/GoozmaAuricSoulDrone") { MaxInstances = 0, IsLooped = true };
-            public static readonly SoundStyle ChromaticSoulBreathe = new(AssetPath + "Sounds/GoozmaAuricSoulBreathe") { MaxInstances = 0, PitchVariance = 0.4f };
+            // goozma
+            public static readonly SoundStyle GoozmaSoulHeartbeat = new(AssetPath + "Sounds/Souls/GoozmaSoulHeartbeat") { MaxInstances = 0, IsLooped = true };
+            public static readonly SoundStyle GoozmaSoulDrone = new(AssetPath + "Sounds/Souls/GoozmaSoulDrone") { MaxInstances = 0, IsLooped = true };
+            public static readonly SoundStyle GoozmaSoulBreathe = new(AssetPath + "Sounds/Souls/GoozmaSoulBreathe") { MaxInstances = 0, PitchVariance = 0.4f };
 
-            public static readonly SoundStyle DragonSoulHeartbeat = new(AssetPath + "Sounds/YharonAuricSoulHeartbeat") { MaxInstances = 0, IsLooped = true };
-            public static readonly SoundStyle DragonSoulDrone = new(AssetPath + "Sounds/YharonAuricSoulDrone") { MaxInstances = 0, Volume = 0.5f, IsLooped = true };
-            public static readonly SoundStyle DragonSoulBreathe = new(AssetPath + "Sounds/YharonAuricSoulBreathe") { MaxInstances = 0, PitchVariance = 0.2f };
+            // yharon
+            public static readonly SoundStyle YharonSoulHeartbeat = new(AssetPath + "Sounds/Souls/YharonSoulHeartbeat") { MaxInstances = 0, IsLooped = true };
+            public static readonly SoundStyle YharonSoulDrone = new(AssetPath + "Sounds/Souls/YharonSoulDrone") { MaxInstances = 0, Volume = 0.5f, IsLooped = true };
+            public static readonly SoundStyle YharonSoulBreathe = new(AssetPath + "Sounds/Souls/YharonSoulBreathe") { MaxInstances = 0, PitchVariance = 0.2f };
+
+            // old dule
+            
+
+
         }
 
         public static readonly SoundStyle TestLoop = new(AssetPath + "Sounds/TestLoop") { MaxInstances = 0, IsLooped = true };
@@ -229,17 +268,18 @@ public static class AssetDirectory
 
     public static class Effects
     {
-        //Basic
+        // basic
         public static readonly Asset<Effect> BasicTrail = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/BasicTrail");
         public static readonly Asset<Effect> LightningBeam = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/LightningBeam");
         public static readonly Asset<Effect> FlameDissolve = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/FlameDissolve");
 
-        //Goozma related
+        // goozma adjacent
         public static readonly Asset<Effect> SlimeMonsoonOldCloudLayer = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/SlimeMonsoonOldCloudLayer");
         public static readonly Asset<Effect> SlimeMonsoonSkyLayer = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/SlimeMonsoonSkyLayer");
         public static readonly Asset<Effect> SlimeMonsoonDistortion = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/SlimeMonsoonDistortion");
         public static readonly Asset<Effect> PluripotentDistortion = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/PluripotentDistortion");
 
+        // goozma
         public static readonly Asset<Effect> GoozmaCordMap = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/GoozmaCordMap");
         public static readonly Asset<Effect> GooLightning = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/GooLightningEffect");
         public static readonly Asset<Effect> Cosmos = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/CosmosEffect");
@@ -248,6 +288,7 @@ public static class AssetDirectory
         public static readonly Asset<Effect> HolographicGel = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/HolographEffect");
         public static readonly Asset<Effect> BlackHole = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/SpaceHole");
 
+        // goozma weapons
         public static readonly Asset<Effect> CometKunaiTrail = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/CometKunaiTrail");
         public static readonly Asset<Effect> ShakerSludge = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/ShakerSludge");
         public static readonly Asset<Effect> CrystalLightning = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/CrystalLightningEffect");

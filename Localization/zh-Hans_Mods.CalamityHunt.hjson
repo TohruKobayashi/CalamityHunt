@@ -108,9 +108,19 @@ Items: {
 		Tooltip: ""
 	}
 
+	GoozmaSoul: {
+		// DisplayName: Goozma Soul
+		// Tooltip: ""
+	}
+
 	YharonSoulMusicBox: {
 		DisplayName: 音乐盒（巨龙之魂）
 		Tooltip: ""
+	}
+
+	YharonSoul: {
+		// DisplayName: Yharon Soul
+		// Tooltip: ""
 	}
 
 	SlimeMonsoonMonolith: {

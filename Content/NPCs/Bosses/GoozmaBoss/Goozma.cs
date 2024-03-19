@@ -14,9 +14,11 @@ using CalamityHunt.Content.Items.Accessories;
 using CalamityHunt.Content.Items.Armor.Shogun;
 using CalamityHunt.Content.Items.BossBags;
 using CalamityHunt.Content.Items.Consumable;
+using CalamityHunt.Content.Items.Lore;
 using CalamityHunt.Content.Items.Masks;
 using CalamityHunt.Content.Items.Materials;
 using CalamityHunt.Content.Items.Misc;
+using CalamityHunt.Content.Items.Misc.AuricSouls;
 using CalamityHunt.Content.Items.Mounts;
 using CalamityHunt.Content.Items.Placeable;
 using CalamityHunt.Content.Items.Weapons.Magic;
@@ -99,7 +101,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
         NPC.dontTakeDamage = true;
 
         if (!Main.dedServ) {
-            Music = AssetDirectory.Music.ChromaticSoul;
+            Music = AssetDirectory.Music.GoozmaSoul;
             Music1 = AssetDirectory.Music.GoozmaPhase1;
             Music2 = AssetDirectory.Music.GoozmaPhase2;
         }
@@ -148,8 +150,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
-        //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<IOUASoul>()));
-        //npcLoot.Add(ItemDropRule.ByCondition(new GoozmaDownedDropRule(), ModContent.ItemType<GoozmaLore>()));
+        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GoozmaSoul>()));
+        npcLoot.Add(ItemDropRule.ByCondition(new GoozmaDownedDropRule(), ModContent.ItemType<GoozmaLore>()));
         npcLoot.Add(ItemDropRule.ByCondition(new ZenithWorldDropRule(), ModContent.ItemType<Goozmaga>()));
 
         if (Main.rand.NextBool(20)) {
