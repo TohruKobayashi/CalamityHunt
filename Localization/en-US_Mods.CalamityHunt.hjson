@@ -756,6 +756,8 @@ Config: {
 		Label: Monsoon Thunder
 		Tooltip: Enables or disables the Slime Monsoon's thunder visuals
 	}
+
+	ContentHeader: Content
 }
 
 LoreGeneric:
@@ -824,8 +826,8 @@ Configs: {
 		}
 
 		photosensitiveToggle: {
-			Label: photosensitive Toggle
-			Tooltip: ""
+			Label: Toggle Photosensitive Effects
+			Tooltip: Disables certain effects which may trigger photosensitivity
 		}
 	}
 }

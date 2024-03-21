@@ -8,6 +8,10 @@ public class Config : ModConfig
     public static Config Instance;
     public override ConfigScope Mode => ConfigScope.ClientSide;
 
+    [Header("$Mods.CalamityHunt.Config.ContentHeader")]
+    [DefaultValue(true)]
+    public bool shadowspecCurse;
+
     [Header("$Mods.CalamityHunt.Config.VisualHeader")]
     [DefaultValue(true)]
     public bool photosensitiveToggle { get; set; }
@@ -30,10 +34,4 @@ public class Config : ModConfig
     [Range(0f, 4f)]
     [DefaultValue(2f)]
     public float stressShake { get; set; }
-
-    [DefaultValue(true)]
-    public bool shadowspecCurse;
-
-    [DefaultValue(false)]
-    public bool overrideVanillaBalance;
 }
