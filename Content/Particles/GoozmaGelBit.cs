@@ -28,10 +28,10 @@ public class GoozmaGelBit : Particle
         holdTime = Math.Max(20, holdTime);
 
         scale *= Main.rand.NextFloat(1f, 1.1f);
-        style = Main.rand.Next(5);
+        style = Main.rand.Next(6); // first 5 gooballs
 
         if (Main.rand.NextBool(1000)) {
-            style = Main.rand.Next(5, 8);
+            style = Main.rand.Next(6, 9); // gooballs 6-8
         }
 
         direction = Main.rand.NextBool().ToDirectionInt();
