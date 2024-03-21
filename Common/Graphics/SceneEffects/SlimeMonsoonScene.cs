@@ -11,7 +11,7 @@ namespace CalamityHunt.Common.Graphics.SceneEffects
 
         public override string MapBackground => AssetDirectory.AssetPath + "Textures/SlimeMonsoonBG";
 
-        public override bool IsSceneEffectActive(Player player) => GoozmaSystem.GoozmaActive || player.GetModPlayer<SceneEffectPlayer>().effectActive[(ushort)SceneEffectPlayer.EffectorType.SlimeMonsoon] > 0;
+        public override bool IsSceneEffectActive(Player player) => player.GetModPlayer<SceneEffectPlayer>().effectActive[(ushort)SceneEffectPlayer.EffectorType.SlimeMonsoon] > 0;
 
         public override void SpecialVisuals(Player player, bool isActive)
         {
@@ -22,9 +22,9 @@ namespace CalamityHunt.Common.Graphics.SceneEffects
                 SkyManager.Instance["HuntOfTheOldGods:SlimeMonsoon"].Deactivate();
             }
 
-            if (!Filters.Scene["HuntOfTheOldGods:SlimeMonsoon"].IsActive() && isActive) {
-                Filters.Scene.Activate("HuntOfTheOldGods:SlimeMonsoon", player.Center);
-            }
+            //if (!Filters.Scene["HuntOfTheOldGods:SlimeMonsoon"].IsActive() && isActive) {
+            //    Filters.Scene.Activate("HuntOfTheOldGods:SlimeMonsoon", player.Center);
+            //}
         }
     }
 }

@@ -111,19 +111,19 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             calamity.Call("SetDebuffVulnerabilities", "heat", true);
             calamity.Call("SetDefenseDamageNPC", NPC, true);
 
-            NPC.lifeMax = 2750000;
+            NPC.lifeMax = 1787500;
             if (Main.expertMode) {
-                NPC.lifeMax = 4500000;
+                NPC.lifeMax = 2925000;
             }
 
             if ((bool)calamity.Call("GetDifficultyActive", "revengeance")) {
-                NPC.lifeMax = 6500000;
+                NPC.lifeMax = 4225000;
             }
         }
         else {
-            NPC.lifeMax = 2750000;
+            NPC.lifeMax = 1787500;
             if (Main.expertMode) {
-                NPC.lifeMax = 4500000;
+                NPC.lifeMax = 2925000;
             }
         }
 
@@ -244,6 +244,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
         //Main.slimeRainTime += 1.0;
 
+        Main.LocalPlayer.GetModPlayer<SceneEffectPlayer>().effectActive[(ushort)SceneEffectPlayer.EffectorType.SlimeMonsoon] = 30;
+
         if (Phase >= 2) {
             SlimeMonsoonSky.additionalLightningChance = -53;
         }
@@ -262,7 +264,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                     SetPhase(1);
                     NPC.life = 1;
-                    NPC.lifeMax = (int)(NPC.lifeMax * 0.3f);
+                    NPC.lifeMax = (int)(NPC.lifeMax * 0.5f);
                     NPC.dontTakeDamage = true;
                     if (!Main.expertMode && !Main.masterMode) {
                         SetPhase(3);
@@ -742,13 +744,13 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     }
                 }
 
-                if (Main.expertMode || Main.masterMode) {
-                    if (NPC.life <= NPC.lifeMax * 0.33f) {
-                        SetPhase((int)Phase + 1);
-                        NPC.dontTakeDamage = true;
-                        NPC.life = (int)(NPC.lifeMax * 0.33f);
-                    }
-                }
+                //if (Main.expertMode || Main.masterMode) {
+                //    if (NPC.life <= NPC.lifeMax * 0.33f) {
+                //        SetPhase((int)Phase + 1);
+                //        NPC.dontTakeDamage = true;
+                //        NPC.life = (int)(NPC.lifeMax * 0.33f);
+                //    }
+                //}
 
                 eyePower = Vector2.One * 1.2f;
 
@@ -765,10 +767,10 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 }
 
                 NPC.dontTakeDamage = true;
-                if (NPC.life < NPC.lifeMax * 0.33f) {
-                    NPC.life = (int)(NPC.lifeMax * 0.33f);
-                }
-                //NPC.life = 1 + (int)((float)Math.Pow(Utils.GetLerpValue(300, 530, Time, true), 3) * (NPC.lifeMax - 1));
+                //if (NPC.life < NPC.lifeMax * 0.33f) {
+                //    NPC.life = (int)(NPC.lifeMax * 0.33f);
+                //}
+                NPC.life = 1 + (int)((float)Math.Pow(Utils.GetLerpValue(300, 530, Time, true), 3) * (NPC.lifeMax - 1));
                 eyePower = Vector2.SmoothStep(Vector2.One * 1.2f, new Vector2(1.5f, 1.45f), Utils.GetLerpValue(300, 500, Time, true));
 
                 if (Time < 15) {

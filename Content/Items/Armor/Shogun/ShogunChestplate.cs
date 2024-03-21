@@ -1,10 +1,12 @@
-﻿using CalamityHunt.Content.Items.Rarities;
+﻿using CalamityHunt.Content.Items.Misc;
+using CalamityHunt.Content.Items.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static CalamityHunt.AssetDirectory;
 
 namespace CalamityHunt.Content.Items.Armor.Shogun
 {
@@ -14,7 +16,8 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
         public override void Load()
         {
             EquipLoader.AddEquipTexture(Mod, Texture + "_Waist", EquipType.Waist, this);
-            EquipLoader.AddEquipTexture(Mod, "CalamityHunt/Assets/Textures/Items/Misc/ShogunWings_Wings", EquipType.Wings, this);
+            EquipLoader.AddEquipTexture(Mod, AssetPath + "Textures/Items/Misc/ShogunWings_Wings", EquipType.Wings, this);
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<ShogunWings>();
         }
 
         public override void SetStaticDefaults()

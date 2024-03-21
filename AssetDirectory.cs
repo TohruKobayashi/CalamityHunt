@@ -274,9 +274,10 @@ public static class AssetDirectory
         public static readonly Asset<Effect> FlameDissolve = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/FlameDissolve");
 
         // goozma adjacent
-        public static readonly Asset<Effect> SlimeMonsoonOldCloudLayer = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/SlimeMonsoonOldCloudLayer");
+        public static readonly Asset<Effect> SlimeMonsoonCloudLayer = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/SlimeMonsoonOldCloudLayer");
         public static readonly Asset<Effect> SlimeMonsoonSkyLayer = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/SlimeMonsoonSkyLayer");
         public static readonly Asset<Effect> SlimeMonsoonDistortion = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/SlimeMonsoonDistortion");
+        public static readonly Asset<Effect> MonsoonLightning = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/MonsoonLightningEffect");
         public static readonly Asset<Effect> PluripotentDistortion = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/PluripotentDistortion");
 
         // goozma

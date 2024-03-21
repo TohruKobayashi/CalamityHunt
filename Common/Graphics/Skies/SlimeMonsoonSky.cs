@@ -139,7 +139,7 @@ public class SlimeMonsoonSky : CustomSky
             spriteBatch.Draw(AssetDirectory.Textures.Noise[4].Value, new Rectangle(0, -yOffset, Main.screenWidth, Main.screenHeight * 2), darkColor * _strength * 0.66f);
         }
 
-        Effect skyClouds = AssetDirectory.Effects.SlimeMonsoonOldCloudLayer.Value;
+        Effect skyClouds = AssetDirectory.Effects.SlimeMonsoonCloudLayer.Value;
         skyClouds.Parameters["uTex0"].SetValue(AssetDirectory.Textures.Noise[4].Value);
         skyClouds.Parameters["uTex1"].SetValue(AssetDirectory.Textures.Noise[5].Value);
         skyClouds.Parameters["uMap"].SetValue(AssetDirectory.Textures.ColorMap[1].Value);
@@ -244,12 +244,13 @@ public class SlimeMonsoonSky : CustomSky
             VertexStrip strip = new VertexStrip();
             strip.PrepareStrip(points.ToArray(), rots.ToArray(), ColorFunction, WidthFunction, -Main.screenPosition * 0.5f / (1 + layer) + Main.ScreenSize.ToVector2() * 0.25f, points.Count, true);
 
-            Effect lightningEffect = AssetDirectory.Effects.GooLightning.Value;
-            lightningEffect.Parameters["uTransformMatrix"].SetValue(Main.GameViewMatrix.NormalizedTransformationmatrix);
-            lightningEffect.Parameters["uTexture0"].SetValue(AssetDirectory.Textures.SlimeMonsoon.Lightning.Value);
-            lightningEffect.Parameters["uTexture1"].SetValue(AssetDirectory.Textures.SlimeMonsoon.LightningGlow.Value);
-            lightningEffect.Parameters["uNoiseTexture"].SetValue(AssetDirectory.Textures.Noise[7].Value);
-            lightningEffect.Parameters["uTime"].SetValue(-(float)Math.Cbrt(maxTime - time) * 0.3f);
+            Effect lightningEffect = AssetDirectory.Effects.MonsoonLightning.Value;
+            lightningEffect.Parameters["uTransformMatrix"].SetValue(Main.BackgroundViewMatrix.NormalizedTransformationmatrix);
+            lightningEffect.Parameters["uTexture"].SetValue(AssetDirectory.Textures.SlimeMonsoon.Lightning.Value);
+            lightningEffect.Parameters["uGlow"].SetValue(AssetDirectory.Textures.SlimeMonsoon.LightningGlow.Value);
+            lightningEffect.Parameters["uColor"].SetValue(Vector3.One);
+            lightningEffect.Parameters["uTime"].SetValue(-(float)Math.Cbrt(maxTime - time) * 0.2f);
+            lightningEffect.Parameters["uBackPower"].SetValue(0f);
             lightningEffect.CurrentTechnique.Passes[0].Apply();
 
             strip.DrawTrail();

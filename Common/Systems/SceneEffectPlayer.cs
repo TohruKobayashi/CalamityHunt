@@ -9,13 +9,11 @@ namespace CalamityHunt.Common.Systems
         public enum EffectorType : ushort
         {
             SlimeMonsoon,
-            SlimeMonsoonOld
         }
 
         public Dictionary<ushort, int> effectActive = new Dictionary<ushort, int>()
         {
             { (ushort)EffectorType.SlimeMonsoon, 0 },
-            { (ushort)EffectorType.SlimeMonsoonOld, 0 }
         };
 
         public override void ResetEffects()

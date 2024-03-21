@@ -12,7 +12,7 @@ namespace CalamityHunt.Content.Items.Placeable
     {
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<AncientSlimeMonsoonMonolith>();
+            ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.MusicBox;
         }
 
         public override void SetDefaults()
