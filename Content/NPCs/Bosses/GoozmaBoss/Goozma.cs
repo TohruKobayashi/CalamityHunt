@@ -81,6 +81,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
         });
     }
 
+    private int P2LifeMax = 1787500 / 2;
+
     public override void SetDefaults()
     {
         NPC.width = 150;
@@ -126,6 +128,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 NPC.lifeMax = 2925000;
             }
         }
+
+        P2LifeMax = NPC.lifeMax / 2;
 
         SlimeUtils.GoozmaColorType = Main.rand.Next(54);
 
@@ -281,7 +285,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             switch (Phase) {
                 case 0:
                     SetPhase(1);
-                    NPC.lifeMax = (int)(NPC.lifeMax * 0.5f);
+                    NPC.lifeMax = P2LifeMax;
                     if (!Main.expertMode && !Main.masterMode) {
                         SetPhase(3);
                     }
@@ -293,6 +297,11 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
 
                     break;
+            }
+        }
+        else {
+            if (Phase == 0) { // fix display
+                NPC.lifeMax = P2LifeMax;
             }
         }
 
@@ -596,7 +605,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         //    }
                         //}
 
-                        if (Main.getGoodWorld) {
+                        if (Main.getGoodWorld && Main.netMode != NetmodeID.MultiplayerClient) {
                             NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X - 100, (int)NPC.Center.Y, ModContent.NPCType<Goozmite>());
                             NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X + 100, (int)NPC.Center.Y, ModContent.NPCType<Goozmite>());
                         }
@@ -937,15 +946,16 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     Main.newMusic = Music1;
                     Main.musicFade[Main.curMusic] = 0f;
                     Main.musicFade[Main.newMusic] = 1f;
-                    NPC.dontTakeDamage = false;
-                    NPC.defense += 20;
-                    NPC.netUpdate = true;
 
                     initializedLocalP2Roar = true;
                 }
 
                 if (Time > 571) {
-
+                    if (Main.netMode != NetmodeID.MultiplayerClient) {
+                        NPC.dontTakeDamage = false;
+                        NPC.defense += 20;
+                        NPC.netUpdate = true;
+                    }
 
                     Music = Music2;
 
@@ -1176,14 +1186,17 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     SoundStyle spawn = AssetDirectory.Sounds.Goozma.SpawnSlime;
                     SoundEngine.PlaySound(spawn, NPC.Center);
 
-                    int killTime = 180;
-                    Vector2 velocity = NPC.DirectionFrom(Target.Center).SafeNormalize(Vector2.Zero).RotatedByRandom(0.1f * NPC.direction);
-                    NPC goozmite = NPC.NewNPCDirect(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y + 40, ModContent.NPCType<Goozmite>(), ai1: killTime, ai2: NPC.whoAmI);
-                    goozmite.velocity = velocity * Main.rand.Next(20, 70);
-                    goozmite.ai[1] = killTime;
-                    goozmite.localAI[0] = NPC.localAI[0] + 20f;
-                    goozmite.lifeMax = (int)(goozmite.lifeMax * 0.33f);
-                    goozmite.life = goozmite.lifeMax;
+                    if (Main.netMode != NetmodeID.MultiplayerClient) {
+                        int killTime = 180;
+                        Vector2 velocity = NPC.DirectionFrom(Target.Center).SafeNormalize(Vector2.Zero).RotatedByRandom(0.1f * NPC.direction);
+                        NPC goozmite = NPC.NewNPCDirect(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y + 40, ModContent.NPCType<Goozmite>(), ai1: killTime, ai2: NPC.whoAmI);
+                        goozmite.velocity = velocity * Main.rand.Next(20, 70);
+                        goozmite.ai[1] = killTime;
+                        goozmite.localAI[0] = NPC.localAI[0] + 20f;
+                        goozmite.lifeMax = (int)(goozmite.lifeMax * 0.33f);
+                        goozmite.life = goozmite.lifeMax;
+                    }
+                    
                 }
 
                 SortedProjectileAttack(Target.Center, SortedProjectileAttackTypes.FusionRay);
