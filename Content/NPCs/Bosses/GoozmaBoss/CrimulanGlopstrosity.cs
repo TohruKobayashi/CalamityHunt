@@ -38,7 +38,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 NPCID.Sets.SpecificDebuffImmunity[Type][Common.ModCompatibility.Calamity.Mod.Find<ModBuff>("MiracleBlight").Type] = true;
             }
 
-            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new()
             {
                 PortraitScale = 0.75f,
                 PortraitPositionYOverride = -10,

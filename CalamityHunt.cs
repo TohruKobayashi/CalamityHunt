@@ -11,6 +11,7 @@ using CalamityHunt.Content.Items.Misc;
 using CalamityHunt.Content.Items.Weapons.Summoner;
 using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
 using CalamityHunt.Content.Projectiles.Weapons.Summoner;
+using CalamityHunt.Content.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content.Sources;
@@ -214,12 +215,18 @@ namespace CalamityHunt
                     player.statLife = 0;
                     player.KillMe(PlayerDeathReason.ByProjectile(playerNum, projNum), 1, 0);
                     break;
+                case PacketType.SummonPluripotentSpawn: // client → server
+                    short center = reader.ReadInt16();
+                    short top = reader.ReadInt16();
+                    SlimeNinjaStatueTile.SummonPluripotentSpawn(center, top);
+                    break;
             }
         }
 
         public enum PacketType : byte
         {
-            TrollPlayer
+            TrollPlayer,
+            SummonPluripotentSpawn
         }
     }
 }

@@ -207,6 +207,10 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             Attack = (int)AttackList.Interrupt;
             squishFactor = Vector2.One;
 
+            initializedPixieBall = false;
+            initializedShatterShield = false;
+            initializedHolyExplosion = false;
+
             for (int i = 0; i < 10; i++) {
                 Dust.NewDustPerfect(NPC.Center + Main.rand.NextVector2Circular(40, 20), DustID.TintableDust, Main.rand.NextVector2Circular(15, 8), 200, Color.Pink, 1.5f);
             }
@@ -442,12 +446,14 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             SoundEngine.PlaySound(shatter, NPC.Center);
         }
 
+        private bool initializedPixieBall = false;
+
         private void PixieBall()
         {
             NPC.rotation = NPC.velocity.X * 0.022f;
 
             if (Time < 60) {
-                if (Time == 50) {
+                if (Time >= 50 && !initializedPixieBall && Main.netMode != NetmodeID.MultiplayerClient) {
                     NPC.velocity = Vector2.UnitY * 5f;
                     int damage = Main.zenithWorld ? 5 : 0;
                     Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), Target.Center - new Vector2(0, 80), Target.Velocity, ModContent.ProjectileType<PixieBall>(), damage, 0, ai1: 15, ai2: -1);
@@ -508,6 +514,9 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             }
         }
 
+        private bool initializedShatterShield = false;
+        private bool initializedHolyExplosion = false;
+
         private void BlowUp()
         {
             NPC.velocity *= 0.7f;
@@ -524,12 +533,14 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 }));
             }
 
-            if (Time == 1) {
+            if (Time >= 1 && !initializedShatterShield) {
                 ShatterShield();
+                initializedShatterShield =true;
             }
 
-            if (Time == 20) {
+            if (Time >= 20 && !initializedHolyExplosion) {
                 Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<HolyExplosion>(), 0, 0);
+                initializedHolyExplosion = true;
             }
 
             if (Time < 35) {
