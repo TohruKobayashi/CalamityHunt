@@ -362,7 +362,9 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
     private bool initializedLocal = false;
     private bool initializedLocal2 = false;
 
-    private bool initializedLocalP2Reform = false;
+    private bool initializedLocalP2Camera = false;
+    private bool initializedLocalP2Sparkle = false;
+    //private bool initializedLocalP2Reform = false;
     private bool initializedLocalP2Roar = false;
 
     private bool initializedDeathRoar = false;
@@ -902,16 +904,20 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     FocusConditional.focusTarget = NPC.Center;
                 }
 
-                if (Time == 1) {
+                if (Time >= 1 && !initializedLocalP2Camera) {
 
-                    int panOut = Main.masterMode && Main.getGoodWorld ? 600 : 30;
-                    Main.instance.CameraModifiers.Add(new FocusConditional(30, panOut, () => Time < 500, "Goozma"));
+                    if (Main.netMode != NetmodeID.Server) {
+                        int panOut = Main.masterMode && Main.getGoodWorld ? 600 : 30;
+                        Main.instance.CameraModifiers.Add(new FocusConditional(30, panOut, () => Time < 500, "Goozma"));
 
-                    SoundStyle boomSound = AssetDirectory.Sounds.Goozma.Explode;
-                    SoundEngine.PlaySound(boomSound, NPC.Center);
+                        SoundStyle boomSound = AssetDirectory.Sounds.Goozma.Explode;
+                        SoundEngine.PlaySound(boomSound, NPC.Center);
+                    }
+
+                    initializedLocalP2Camera = true;
                 }
 
-                if (Time == 290) {
+                if (Time >= 290 && !initializedLocalP2Sparkle) {
                     if (Main.netMode != NetmodeID.Server) {
                         CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
                             particle.velocity = MathHelper.PiOver4.ToRotationVector2();
@@ -927,16 +933,19 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         }));
 
                         SoundEngine.PlaySound(AssetDirectory.Sounds.Goozma.EyeAppear, NPC.Center);
+
+                        SoundStyle reform = AssetDirectory.Sounds.Goozma.Reform;
+                        SoundEngine.PlaySound(reform, NPC.Center);
                     }
-
+                    initializedLocalP2Sparkle = true;
                 }
 
-                if (Time >= 290 && !initializedLocalP2Reform) {
-                    SoundStyle reform = AssetDirectory.Sounds.Goozma.Reform;
-                    SoundEngine.PlaySound(reform, NPC.Center);
+                //if (Time >= 290 && !initializedLocalP2Reform) {
+                //    SoundStyle reform = AssetDirectory.Sounds.Goozma.Reform;
+                //    SoundEngine.PlaySound(reform, NPC.Center);
 
-                    initializedLocalP2Reform = true;
-                }
+                //    initializedLocalP2Reform = true;
+                //}
 
                 if (Time >= 570 && !initializedLocalP2Roar) {
                     SoundStyle roar = AssetDirectory.Sounds.Goozma.Reawaken;
