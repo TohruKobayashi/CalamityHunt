@@ -73,6 +73,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 calamity.Call("SetDebuffVulnerabilities", "poison", false);
                 calamity.Call("SetDebuffVulnerabilities", "heat", true);
             }
+            initializedPixieBall = false;
         }
 
         private enum AttackList
@@ -457,6 +458,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     NPC.velocity = Vector2.UnitY * 5f;
                     int damage = Main.zenithWorld ? 5 : 0;
                     Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), Target.Center - new Vector2(0, 80), Target.Velocity, ModContent.ProjectileType<PixieBall>(), damage, 0, ai1: 15, ai2: -1);
+                    initializedPixieBall = true; // remove this line if you want gfb ball swarm
                 }
 
                 NPC.velocity *= 0.9f;
