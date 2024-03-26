@@ -58,7 +58,7 @@ public class ChromaticEnergyDust : Particle
 
         if (!Collision.SolidTiles(position, 2, 2)) {
             scale *= 1.0005f;
-            Lighting.AddLight(position, color.ToVector3() * 0.2f * scale);
+            //Lighting.AddLight(position, color.ToVector3() * 0.2f * scale);
         }
 
         if (Main.rand.NextBool(250) && scale > 0.25f) {
