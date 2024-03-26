@@ -845,7 +845,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
                         particle.velocity = MathHelper.PiOver4.ToRotationVector2();
                         particle.position = NPC.Center;
-                        particle.scale = 4f;
+                        particle.scale = 2f;
                         particle.color = Color.White;
                     }));
                     CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
@@ -1343,7 +1343,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 dust.noGravity = true;
             }
 
-            if (Main.rand.NextBool(6) || (Phase == 2 && Main.rand.NextBool()) || (Phase == -22 && Main.rand.NextBool())) {
+            if (Phase == 2 && Main.rand.NextBool()) {
                 CalamityHunt.particles.Add(Particle.Create<LightningParticle>(particle => {
                     particle.position = NPC.Center + Main.rand.NextVector2Circular(80, 130).RotatedBy(NPC.rotation) * NPC.scale;
                     particle.velocity = particle.position.DirectionFrom(NPC.Center) * Main.rand.NextFloat(0.5f, 2f);

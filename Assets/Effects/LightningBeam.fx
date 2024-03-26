@@ -59,7 +59,7 @@ float4 PixelShaderFunction(in VertexShaderOutput input) : COLOR0
     
     float innerLine = smoothstep(0.75, 0.85, beam);
     float bloom = smoothstep(0.05, 0.6, beam);
-    return (innerLine * uColor + (bloom * 5) * uBloomColor) * (0.6f + noise * 0.4f) * input.Color;
+    return (innerLine * uColor + bloom * uBloomColor) * (0.6f + noise * 0.4f) * input.Color;
 }
 
 technique Technique1

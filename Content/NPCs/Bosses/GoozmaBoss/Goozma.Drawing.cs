@@ -113,8 +113,9 @@ public partial class Goozma : ModNPC
 
             RestartSpriteBatch(spriteBatch, null, true);
 
-            Main.pixelShader.CurrentTechnique.Passes["ColorOnly"].Apply();
+            //Main.pixelShader.CurrentTechnique.Passes["ColorOnly"].Apply();
 
+            // Afterimages
             if (!NPC.IsABestiaryIconDummy) {
                 for (int i = 0; i < NPCID.Sets.TrailCacheLength[Type]; i++) {
                     Vector2 oldPos = NPC.oldPos[i] + NPC.Size * 0.5f;
@@ -124,11 +125,22 @@ public partial class Goozma : ModNPC
                 }
             }
 
+            // My solid color blast
+            Main.pixelShader.CurrentTechnique.Passes["ColorOnly"].Apply();
+
+            // Outline 
+            for (int i = 0; i < NPCID.Sets.TrailCacheLength[Type]; i++) {
+                Color outlineColor = (new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(NPC.localAI[0] * 5f)) with { A = 170 };
+                outlineColor = Color.Lerp(outlineColor, Color.Transparent, MathF.Pow((float)i / NPCID.Sets.TrailCacheLength[Type], 0.3f)) * 0.5f;
+                spriteBatch.Draw(goozmaTexture, (NPC.position + NPC.Size * 0.5f) + drawOffset - screenPos, goozmaTexture.Frame(), outlineColor, NPC.rotation, goozmaTexture.Size() * 0.5f, NPC.scale, direction, 0);
+            }
+
             for (int i = 0; i < 4; i++) {
                 Vector2 off = new Vector2(2, 0).RotatedBy(MathHelper.TwoPi / 4f * i + NPC.rotation);
                 spriteBatch.Draw(goozmaTexture, NPC.Center + drawOffset + off - screenPos, goozmaTexture.Frame(), glowColor with { A = 170 }, NPC.rotation, goozmaTexture.Size() * 0.5f, NPC.scale, direction, 0);
             }
 
+            // No more solid color blast
             Main.pixelShader.CurrentTechnique.Passes[0].Apply();
 
             DrawSoulStuff();
@@ -227,9 +239,8 @@ public partial class Goozma : ModNPC
             Vector2 tentacleVel = new Vector2(-tentacleVelocity.X * NPC.direction, tentacleVelocity.Y);
             float tilt = -extraTilt * NPC.direction + 0.2f;
 
-            Vector2 hitDir = new Vector2(Math.Abs(hitDirection.X), hitDirection.Y);
-            Vector2 crownPos = position + hitDir * 0.5f - new Vector2(6, 44).RotatedBy(tilt * 0.8f) * headScale;
-            Vector2 dressPos = position + hitDir * 0.5f + new Vector2(4, 16).RotatedBy(-tilt * 0.4f) * headScale;
+            Vector2 crownPos = position - new Vector2(6, 44).RotatedBy(tilt * 0.8f) * headScale;
+            Vector2 dressPos = position + new Vector2(4, 16).RotatedBy(-tilt * 0.4f) * headScale;
 
             Vector2 basePos = position + new Vector2(0, 10).RotatedBy(-tilt * 0.4f);
 
@@ -309,10 +320,10 @@ public partial class Goozma : ModNPC
 
             if (cordContent.IsTargetReady(identifier)) {
                 Texture2D cordTexture = cordContent.GetTarget(identifier);
-                spriteBatch.Draw(cordTexture, position + hitDir * 0.5f, null, color, 0, cordTexture.Size() * 0.5f, 2f, 0, 0);
+                spriteBatch.Draw(cordTexture, position, null, color, 0, cordTexture.Size() * 0.5f, 2f, 0, 0);
             }
 
-            spriteBatch.Draw(texture, position + hitDir, null, color, tilt * 0.9f, texture.Size() * 0.5f, headScale, 0, 0);
+            spriteBatch.Draw(texture, position, null, color, tilt * 0.9f, texture.Size() * 0.5f, headScale, 0, 0);
 
             if (!Main.xMas) {
                 spriteBatch.Draw(crownTexture, crownPos, null, color, tilt, crownTexture.Size() * new Vector2(0.5f, 1f), 1f, 0, 0);

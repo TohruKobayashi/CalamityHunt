@@ -757,7 +757,7 @@ Config: {
 		Tooltip: Active ou désactive les visuels du tonnere de la Mousson gélatineuse
 	}
 
-	// ContentHeader: shadowspec Curse Header
+	// ContentHeader: Content
 }
 
 LoreGeneric:
@@ -827,7 +827,7 @@ Configs: {
 
 		photosensitiveToggle: {
 			// Label: Toggle Photosensitive Effects
-			// Tooltip: Disables certain effects which may trigger Photosensitivity
+			// Tooltip: Disables certain effects which may trigger photosensitivity
 		}
 	}
 }

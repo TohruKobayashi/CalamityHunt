@@ -756,7 +756,7 @@ Config: {
 		Tooltip: 启用或禁用史莱姆季风的雷暴视觉效果
 	}
 
-	// ContentHeader: shadowspec Curse Header
+	// ContentHeader: Content
 }
 
 LoreGeneric:
@@ -826,7 +826,7 @@ Configs: {
 
 		photosensitiveToggle: {
 			// Label: Toggle Photosensitive Effects
-			// Tooltip: Disables certain effects which may trigger Photosensitivity
+			// Tooltip: Disables certain effects which may trigger photosensitivity
 		}
 	}
 }
