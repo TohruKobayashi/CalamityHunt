@@ -136,6 +136,12 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
         if (Main.drunkWorld) {
             SlimeUtils.GoozmaColorType = Main.rand.Next(10);
         }
+
+        initializedLocal = false;
+        initializedLocal2 = false;
+        initializedLocalP2Camera = false;
+        initializedLocalP2Roar = false;
+        initializedLocalP2Sparkle = false;
     }
 
     public override void BossHeadRotation(ref float rotation) => rotation = NPC.velocity.X * 0.01f;
@@ -308,7 +314,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
         NPC.life = 1;
         NPC.active = true;
         NPC.dontTakeDamage = true;
-        
+
         //return false;
         //}
 
@@ -351,6 +357,12 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
     public override void OnSpawn(IEntitySource source)
     {
+        initializedLocal = false;
+        initializedLocal2 = false;
+        initializedLocalP2Camera = false;
+        initializedLocalP2Roar = false;
+        initializedLocalP2Sparkle = false;
+
         eyeOpen = false;
         SetPhase(-1);
         for (int i = 0; i < NPC.oldPos.Length; i++) {
@@ -480,8 +492,14 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         Main.musicFade[i] = 0f;
                     }
 
-                    Main.musicFade[Main.curMusic] = 0f;
-                    Main.musicFade[Main.newMusic] = 0f;
+                    try {
+                        Main.musicFade[Main.curMusic] = 0f;
+                        Main.musicFade[Main.newMusic] = 0f;
+                    }
+                    catch (IndexOutOfRangeException) {
+
+                    }
+                    
                 }
 
                 if (Time > spawnDelay - 5) {
@@ -508,8 +526,10 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     Music = Music1;
                     if (Main.netMode != NetmodeID.Server) {
                         Main.newMusic = Music1;
-                        Main.musicFade[Main.curMusic] = 0f;
-                        Main.musicFade[Main.newMusic] = 1f;
+                        try {
+                            Main.musicFade[Main.curMusic] = 0f;
+                            Main.musicFade[Main.newMusic] = 1f;
+                        }catch(IndexOutOfRangeException) { }
                     }
 
                     SoundEngine.PlaySound(AssetDirectory.Sounds.Goozma.Awaken.WithVolumeScale(1.8f), NPC.Center);
@@ -953,13 +973,21 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                     Music = Music2;
                     Main.newMusic = Music1;
+
+                    try { 
                     Main.musicFade[Main.curMusic] = 0f;
                     Main.musicFade[Main.newMusic] = 1f;
+                    }
+                    catch (IndexOutOfRangeException) {
+
+                    }
+
+                    NPC.dontTakeDamage = false;
 
                     initializedLocalP2Roar = true;
                 }
 
-                if (Time > 571) {
+                if (Time > 570) {
                     if (Main.netMode != NetmodeID.MultiplayerClient) {
                         NPC.dontTakeDamage = false;
                         NPC.defense += 20;
@@ -1011,56 +1039,87 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                                     SoundEngine.PlaySound(roar, NPC.Center);
                                 }
 
-                                if (Main.netMode != NetmodeID.MultiplayerClient) {
-                                    if (Time % dashTime <= 13) {
+
+                                if (Time % dashTime <= 13) {
+                                    if (Main.netMode != NetmodeID.MultiplayerClient) {
                                         NPC.Center = Vector2.Lerp(NPC.Center, NPC.Center + NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * (NPC.Distance(Target.Center) - 300) * 0.2f, 0.6f);
                                         NPC.velocity = NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero);
 
                                         if (Time % dashTime == 13) {
                                             NPC.velocity -= NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * 20f;
                                         }
-                                    }
-
-                                    if (Time % dashTime > 25 && Time % dashTime < 74) {
-                                        rotate = true;
-                                        NPC.rotation = NPC.rotation.AngleLerp(NPC.velocity.ToRotation() + MathHelper.PiOver2, 0.33f * Utils.GetLerpValue(20, 70, Time % dashTime, true));
-
-                                        if (Main.netMode != NetmodeID.Server) {
-                                            for (int i = 0; i < 8; i++) {
-                                                Vector2 position = Vector2.Lerp(NPC.position, NPC.oldPos[0], i / 24f) + NPC.Size * 0.5f;
-
-                                                //top
-                                                CalamityHunt.particlesBehindEntities.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                                                    particle.position = position + Main.rand.NextVector2Circular(8, 8) + NPC.velocity;
-                                                    particle.velocity = -NPC.velocity.RotatedBy((float)Math.Sin((Time - (i / 8f)) * 0.23f) * 0.8f);
-                                                    particle.scale = 1.5f;
-                                                    particle.color = Color.White;
-                                                    particle.colorData = new ColorOffsetData(true, NPC.localAI[0]);
-                                                }));
-
-                                                //bottom
-                                                CalamityHunt.particlesBehindEntities.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                                                    particle.position = position + Main.rand.NextVector2Circular(8, 8) + NPC.velocity;
-                                                    particle.velocity = -NPC.velocity.RotatedBy(-(float)Math.Sin((Time - (i / 8f)) * 0.23f) * 0.8f);
-                                                    particle.scale = 1.5f;
-                                                    particle.color = Color.White;
-                                                    particle.colorData = new ColorOffsetData(true, NPC.localAI[0]);
-                                                }));
-                                            }
-                                        }
-                                        NPC.velocity += NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * 0.2f;
-                                        NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * 60f, 0.02f);
-
                                         NPC.netUpdate = true;
-                                    }
-                                    else {
-                                        NPC.velocity *= 0.7f;
                                     }
                                 }
 
-                                SortedProjectileAttack(Target.Center, SortedProjectileAttackTypes.DrillDash);
+                                if (Time % dashTime <= 13) {
+                                    if (Main.netMode != NetmodeID.MultiplayerClient) {
+                                        NPC.Center = Vector2.Lerp(NPC.Center, NPC.Center + NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * (NPC.Distance(Target.Center) - 300) * 0.2f, 0.6f);
+                                        NPC.velocity = NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero);
+
+                                        if (Time % dashTime == 13) {
+                                            NPC.velocity -= NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * 20f;
+                                        }
+                                        NPC.netUpdate = true;
+                                    }
+
+                                }
+
+                                if (Time % dashTime > 25 && Time % dashTime < 74) {
+
+
+                                    //if (Main.netMode != NetmodeID.MultiplayerClient) {
+                                        rotate = true;
+                                        NPC.rotation = NPC.rotation.AngleLerp(NPC.velocity.ToRotation() + MathHelper.PiOver2, 0.33f * Utils.GetLerpValue(20, 70, Time % dashTime, true));
+                                        //NPC.netUpdate = true;
+                                    //}
+                                    if (Main.netMode != NetmodeID.Server) {
+                                        
+                                        for (int i = 0; i < 8; i++) {
+                                            Vector2 position = Vector2.Lerp(NPC.position, NPC.oldPos[0], i / 24f) + NPC.Size * 0.5f;
+
+                                            //top
+                                            CalamityHunt.particlesBehindEntities.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                                                particle.position = position + Main.rand.NextVector2Circular(8, 8) + NPC.velocity;
+                                                particle.velocity = -NPC.velocity.RotatedBy((float)Math.Sin((Time - (i / 8f)) * 0.23f) * 0.8f);
+                                                particle.scale = 1.5f;
+                                                particle.color = Color.White;
+                                                particle.colorData = new ColorOffsetData(true, NPC.localAI[0]);
+                                            }));
+
+                                            //bottom
+                                            CalamityHunt.particlesBehindEntities.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                                                particle.position = position + Main.rand.NextVector2Circular(8, 8) + NPC.velocity;
+                                                particle.velocity = -NPC.velocity.RotatedBy(-(float)Math.Sin((Time - (i / 8f)) * 0.23f) * 0.8f);
+                                                particle.scale = 1.5f;
+                                                particle.color = Color.White;
+                                                particle.colorData = new ColorOffsetData(true, NPC.localAI[0]);
+                                            }));
+                                        }
+                                    }
+                                }
+                                else {
+                                    //if (Main.netMode != NetmodeID.MultiplayerClient) {
+                                        NPC.velocity += NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * 0.2f;
+                                        NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * 60f, 0.02f);
+
+                                        //NPC.netUpdate = true;
+                                    //}
+
+                                }
+
                             }
+                            else {
+                                if (Main.netMode != NetmodeID.MultiplayerClient) {
+                                    NPC.velocity *= 0.7f;
+                                }
+                            }
+
+
+
+                            SortedProjectileAttack(Target.Center, SortedProjectileAttackTypes.DrillDash);
                         }
+
                         else {
                             Fly();
                         }
@@ -1205,7 +1264,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         goozmite.lifeMax = (int)(goozmite.lifeMax * 0.33f);
                         goozmite.life = goozmite.lifeMax;
                     }
-                    
+
                 }
 
                 SortedProjectileAttack(Target.Center, SortedProjectileAttackTypes.FusionRay);
@@ -1286,8 +1345,11 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 }
 
                 if (Time > 300) {
-
-                    Main.musicFade[Main.curMusic] = 0f;
+                    try {
+                        Main.musicFade[Main.curMusic] = 0f;
+                    }
+                    catch (IndexOutOfRangeException) { }
+                    
                     Main.curMusic = -1;
 
                     NPC.life = 0;
@@ -1417,6 +1479,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 if (NPC.velocity.Length() > 41) {
                     rotate = true;
                     NPC.rotation = NPC.rotation.AngleLerp(NPC.velocity.ToRotation() + MathHelper.PiOver2, 0.4f);
+                    NPC.netUpdate = true;
                 }
 
                 if (Time % 120 == 0) {
