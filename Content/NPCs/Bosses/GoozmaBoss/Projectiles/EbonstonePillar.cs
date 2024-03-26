@@ -28,6 +28,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Projectile.penetrate = -1;
             Projectile.aiStyle = -1;
             Projectile.hide = true;
+
+            initializedLocal = false;
         }
 
         public ref float Time => ref Projectile.ai[0];
@@ -42,11 +44,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
         public override void OnSpawn(IEntitySource source)
         {
-            position = new List<Vector2>();
-            variant = new List<int>();
-            scale = new List<float>();
-            rotation = new List<float>();
-            time = new List<int>();
+            // ffffggggg
         }
 
         private int maxHeight;
@@ -54,8 +52,20 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         private float speed = 2;
         private int stoneCount;
 
+        private bool initializedLocal = false;
+
         public override void AI()
         {
+            if (!initializedLocal) {
+                position = new List<Vector2>();
+                variant = new List<int>();
+                scale = new List<float>();
+                rotation = new List<float>();
+                time = new List<int>();
+
+                initializedLocal = true;
+            }
+
             Projectile.velocity *= 0.1f;
             if (Time == 0) {
                 maxHeight = (int)Height;

@@ -315,14 +315,19 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                         if (localTime == 100) {
                             int extension = (int)DifficultyBasedValue(10, 12, 16, 18, 20);
 
-                            Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Bottom, Vector2.Zero, ModContent.ProjectileType<CrimulanShockwave>(), 0, 0, ai1: 2500);
+                            if (Main.netMode != NetmodeID.MultiplayerClient) {
+                                Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Bottom, Vector2.Zero, ModContent.ProjectileType<CrimulanShockwave>(), 0, 0, ai1: 2500);
 
-                            for (int i = 0; i < extension; i++) {
-                                Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2((Target.Center.X - NPC.Center.X) * 0.02f + i * Main.rand.NextFloat(-10f, 10f), 0), ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0);
-                                proj.ai[0] = -40 - i;
-                                proj.ai[1] = -1;
-                                proj.ai[2] = 1;
-                                proj.localAI[0] = 1;
+                                for (int i = 0; i < extension; i++) {
+                                    Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2((Target.Center.X - NPC.Center.X) * 0.02f + i * Main.rand.NextFloat(-10f, 10f), 0), ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
+                                        ai0: -40 - i,
+                                        ai1: -1,
+                                        ai2: 1);
+                                    //proj.ai[0] = -40 - i;
+                                    //proj.ai[1] = -1;
+                                    //proj.ai[2] = 1;
+                                    proj.localAI[0] = 1;
+                                }
                             }
 
                             foreach (Player player in Main.player.Where(n => n.active && !n.dead && n.Distance(NPC.Center) < 600)) {

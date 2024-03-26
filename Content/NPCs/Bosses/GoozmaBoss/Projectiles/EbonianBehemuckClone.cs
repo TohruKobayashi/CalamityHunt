@@ -33,6 +33,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Projectile.penetrate = -1;
             Projectile.aiStyle = -1;
             Projectile.timeLeft = 700;
+            initializedLocal = false;
         }
 
         public ref float Time => ref Projectile.ai[0];
@@ -45,23 +46,30 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
         public override void OnSpawn(IEntitySource source)
         {
-            Projectile.scale = 0.01f;
-            List<int> eyeTypes = new List<int>();
-            int eyeCount = 8;
-            for (int i = 0; i < eyeCount; i++) {
-                eyeTypes.Add(i);
-            }
-
-            eyeType = new List<int>();
-            for (int i = 0; i < eyeCount; i++) {
-                int rand = Main.rand.Next(eyeTypes.Count);
-                eyeType.Add(rand);
-                eyeTypes.RemoveAt(rand);
-            }
+            
         }
+
+        public bool initializedLocal = false;
 
         public override void AI()
         {
+            if (!initializedLocal) {
+                Projectile.scale = 0.01f;
+                List<int> eyeTypes = new List<int>();
+                int eyeCount = 8;
+                for (int i = 0; i < eyeCount; i++) {
+                    eyeTypes.Add(i);
+                }
+
+                eyeType = new List<int>();
+                for (int i = 0; i < eyeCount; i++) {
+                    int rand = Main.rand.Next(eyeTypes.Count);
+                    eyeType.Add(rand);
+                    eyeTypes.RemoveAt(rand);
+                }
+
+                initializedLocal = true;
+            }
             int owner = -1;
             if (!Main.npc.Any(n => n.type == ModContent.NPCType<EbonianBehemuck>() && n.active)) {
                 Projectile.active = false;

@@ -1016,6 +1016,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 switch (Attack) {
                     case (int)AttackList.BurstLightning:
 
+                        NPC.dontTakeDamage = false;
+
                         Orbit((int)(600 + ((float)NPC.life / NPC.lifeMax * 100)), new Vector2(0, -450));
                         SortedProjectileAttack(Target.Center + Target.Velocity * 1.5f, SortedProjectileAttackTypes.BurstLightning);
 
@@ -1037,6 +1039,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         break;
 
                     case (int)AttackList.DrillDash:
+
+                        NPC.dontTakeDamage = false;
 
                         int dashCount = (int)DifficultyBasedValue(4, 5, 6, 7);
                         int dashTime = (int)DifficultyBasedValue(110, 100, 90, 80);
@@ -1210,6 +1214,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         break;
 
                     case (int)AttackList.FusionRay:
+
+                        NPC.dontTakeDamage = false;
 
                         SortedProjectileAttack(Target.Center, SortedProjectileAttackTypes.FusionRay);
 

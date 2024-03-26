@@ -232,14 +232,23 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
             if (Time < danceCount * 150) {
                 if (Time % 150 == 2) {
-                    float randSpin = Main.rand.NextFloat(-3f, 3f);
-                    for (int i = 0; i < prismCount; i++) {
-                        Projectile prism = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<PrismDestroyer>(), GetDamage(1), 0);
-                        prism.direction = Main.rand.Next(5) > 2 ? 1 : -1;
-                        prism.rotation = Main.rand.NextFloat(-2f, 2f);
-                        prism.ai[0] = -66 + i;
-                        prism.ai[1] = i;
-                        prism.ai[2] = randSpin;
+                    if (Main.netMode != NetmodeID.MultiplayerClient) {
+
+
+                        float randSpin = Main.rand.NextFloat(-3f, 3f);
+                        for (int i = 0; i < prismCount; i++) {
+                            Projectile prism = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<PrismDestroyer>(), GetDamage(1), 0, 
+                                ai0: -66 + i,
+                                ai1: i,
+                                ai2: randSpin);
+
+                            prism.direction = Main.rand.Next(5) > 2 ? 1 : -1;
+                            prism.rotation = Main.rand.NextFloat(-2f, 2f);
+                            //prism.ai[0] = -66 + i;
+                            //prism.ai[1] = i;
+                            //prism.ai[2] = randSpin;
+                            prism.netUpdate = true;
+                        }
                     }
 
                     SoundEngine.PlaySound(SoundID.QueenSlime, NPC.Center);
@@ -537,7 +546,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
             if (Time >= 1 && !initializedShatterShield) {
                 ShatterShield();
-                initializedShatterShield =true;
+                initializedShatterShield = true;
             }
 
             if (Time >= 20 && !initializedHolyExplosion) {
