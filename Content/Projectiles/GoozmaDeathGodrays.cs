@@ -36,24 +36,31 @@ namespace CalamityHunt.Content.Projectiles
         public List<float> waits;
         public List<float> lengths;
 
+        private bool initializedLocal = false;
+
         public override void OnSpawn(IEntitySource source)
         {
-            rotations = new List<float>();
-            accelerations = new List<float>();
-            waits = new List<float>();
-            lengths = new List<float>();
-
-            int count = Main.rand.Next(20, 30);
-            for (int i = 0; i < count; i++) {
-                rotations.Add(MathHelper.TwoPi / (float)count * i + Main.rand.NextFloat(-0.5f, 0.5f));
-                accelerations.Add(Main.rand.NextFloat(-3.1415f, 3.1415f));
-                waits.Add(Main.rand.Next(200));
-                lengths.Add(Main.rand.NextFloat(0.7f, 2f));
-            }
+            // this breaks in multiplayer so moved to ai
         }
 
         public override void AI()
         {
+            if (!initializedLocal) {
+                rotations = new List<float>();
+                accelerations = new List<float>();
+                waits = new List<float>();
+                lengths = new List<float>();
+
+                int count = Main.rand.Next(20, 30);
+                for (int i = 0; i < count; i++) {
+                    rotations.Add(MathHelper.TwoPi / (float)count * i + Main.rand.NextFloat(-0.5f, 0.5f));
+                    accelerations.Add(Main.rand.NextFloat(-3.1415f, 3.1415f));
+                    waits.Add(Main.rand.Next(200));
+                    lengths.Add(Main.rand.NextFloat(0.7f, 2f));
+                }
+                initializedLocal = true;
+            }
+
             if (!Main.npc.Any(n => n.type == ModContent.NPCType<Goozma>() && n.active)) {
                 Projectile.active = false;
             }
