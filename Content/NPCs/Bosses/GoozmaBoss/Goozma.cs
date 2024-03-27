@@ -1995,8 +1995,10 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     if (Time % 80 == 75) {
                         int count = Main.rand.Next(10, 18);
                         for (int i = 0; i < count; i++) {
-                            Projectile dart = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.Next(10, 20), 0).RotatedBy(MathHelper.TwoPi / count * i), ModContent.ProjectileType<BloatedBlast>(), GetDamage(1), 0);
-                            dart.ai[1] = 1;
+                            Projectile dart = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.Next(10, 20), 0).RotatedBy(MathHelper.TwoPi / count * i), ModContent.ProjectileType<BloatedBlast>(), GetDamage(1), 0,
+                                ai1: 1
+                                );
+                            //dart.ai[1] = 1;
                             dart.localAI[0] = NPC.localAI[0] + i / (float)count * 90f;
                         }
                         SoundEngine.PlaySound(dartSound, NPC.Center);
