@@ -31,8 +31,7 @@ public class SlimeBomb : ModProjectile
 
     public override void OnSpawn(IEntitySource source)
     {
-        Projectile.localAI[1] = Main.rand.NextFloat(30f);
-        Projectile.rotation = Main.rand.NextFloat(-1f, 1f);
+        
     }
 
     private bool initializedLocal = false;
@@ -42,6 +41,9 @@ public class SlimeBomb : ModProjectile
     public override void AI()
     {
         if (!initializedLocal) {
+            Projectile.localAI[1] = Main.rand.NextFloat(30f);
+            Projectile.rotation = Main.rand.NextFloat(-1f, 1f);
+
             SoundStyle shootSound = AssetDirectory.Sounds.Goozma.Shot with { Pitch = -0.3f };
             SoundEngine.PlaySound(shootSound, Projectile.Center);
 

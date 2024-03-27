@@ -77,6 +77,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 calamity.Call("SetDebuffVulnerabilities", "heat", true);
                 calamity.Call("SetDefenseDamageNPC", NPC, true);
             }
+
+            initializedLocal = false;
         }
 
         private enum AttackList
@@ -100,22 +102,29 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         public override void OnSpawn(IEntitySource source)
         {
-            List<int> eyeTypes = new List<int>();
-            int eyeCount = 8;
-            for (int i = 0; i < eyeCount; i++) {
-                eyeTypes.Add(i);
-            }
-
-            eyeType = new List<int>();
-            for (int i = 0; i < eyeCount; i++) {
-                int rand = Main.rand.Next(eyeTypes.Count);
-                eyeType.Add(rand);
-                eyeTypes.RemoveAt(rand);
-            }
+            
         }
+
+        private bool initializedLocal = false;
 
         public override void AI()
         {
+            if (!initializedLocal) {
+                List<int> eyeTypes = new List<int>();
+                int eyeCount = 8;
+                for (int i = 0; i < eyeCount; i++) {
+                    eyeTypes.Add(i);
+                }
+
+                eyeType = new List<int>();
+                for (int i = 0; i < eyeCount; i++) {
+                    int rand = Main.rand.Next(eyeTypes.Count);
+                    eyeType.Add(rand);
+                    eyeTypes.RemoveAt(rand);
+                }
+
+                initializedLocal = true;
+            }
             if (Main.rand.NextBool(30)) {
                 ParticleOrchestrator.RequestParticleSpawn(true, ParticleOrchestraType.PooFly, new ParticleOrchestraSettings
                 {
