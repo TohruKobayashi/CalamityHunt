@@ -417,15 +417,21 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                         int count = (int)DifficultyBasedValue(12, death: 16);
                         int time = (int)DifficultyBasedValue(6, 5, 4, 3);
 
-                        for (int i = 0; i < count; i++) {
-                            Projectile leftProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * 130 - 130 * count - 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0);
-                            leftProj.ai[0] = -30 - time * i;
-                            leftProj.ai[1] = -1;
-                            leftProj.localAI[0] = 1;
-                            Projectile rightProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * -130 + 130 * count + 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0);
-                            rightProj.ai[0] = -30 - time * i;
-                            rightProj.ai[1] = -1;
-                            rightProj.localAI[0] = 1;
+                        if (Main.netMode != NetmodeID.MultiplayerClient) {
+                            for (int i = 0; i < count; i++) {
+                                Projectile leftProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * 130 - 130 * count - 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
+                                    ai0: -30 - time * i,
+                                    ai1: -1);
+                                //leftProj.ai[0] = -30 - time * i;
+                                //leftProj.ai[1] = -1;
+                                leftProj.localAI[0] = 1;
+                                Projectile rightProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * -130 + 130 * count + 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
+                                    ai0: -30 - time * i,
+                                    ai1: -1);
+                                //rightProj.ai[0] = -30 - time * i;
+                                //rightProj.ai[1] = -1;
+                                rightProj.localAI[0] = 1;
+                            }
                         }
 
                         //Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Bottom, Vector2.Zero, ModContent.ProjectileType<CrimulanShockwave>(), 0, 0, ai1: 2000);
@@ -494,7 +500,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             if (Time == doubleWaitTime + 180) {
                 NPC.rotation = 0;
 
-                Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Bottom, Vector2.Zero, ModContent.ProjectileType<CrimulanShockwave>(), 0, 0, ai1: 2500);
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                    Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Bottom, Vector2.Zero, ModContent.ProjectileType<CrimulanShockwave>(), 0, 0, ai1: 2500);
 
                 SoundStyle slam = AssetDirectory.Sounds.GoozmaMinions.SlimeSlam;
                 SoundEngine.PlaySound(slam, NPC.Center);
@@ -514,16 +521,21 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                 int count = (int)DifficultyBasedValue(12, death: 16);
                 int time = (int)DifficultyBasedValue(6, 5, 4, 3);
-
-                for (int i = 0; i < count; i++) {
-                    Projectile leftProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * 130 - 130 * count - 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0);
-                    leftProj.ai[0] = -30 - time * i;
-                    leftProj.ai[1] = -1;
-                    leftProj.localAI[0] = 1;
-                    Projectile rightProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * -130 + 130 * count + 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0);
-                    rightProj.ai[0] = -30 - time * i;
-                    rightProj.ai[1] = -1;
-                    rightProj.localAI[0] = 1;
+                if (Main.netMode != NetmodeID.MultiplayerClient) {
+                    for (int i = 0; i < count; i++) {
+                        Projectile leftProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * 130 - 130 * count - 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
+                            ai0: -30 - time * i,
+                            ai1: 1);
+                        //leftProj.ai[0] = -30 - time * i;
+                        //leftProj.ai[1] = -1;
+                        leftProj.localAI[0] = 1;
+                        Projectile rightProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * -130 + 130 * count + 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
+                            ai0: -30 - time * i,
+                            ai1: 1);
+                        //rightProj.ai[0] = -30 - time * i;
+                        //rightProj.ai[1] = -1;
+                        rightProj.localAI[0] = 1;
+                    }
                 }
             }
 
