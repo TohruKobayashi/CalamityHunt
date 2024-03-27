@@ -54,6 +54,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 return;
             }
             else if (!Main.npc[(int)Owner].active || Main.npc[(int)Owner].type != ModContent.NPCType<Goozma>()) {
+                Mod.Logger.Info($"aaa, {Owner}");
                 Projectile.active = false;
                 return;
             }

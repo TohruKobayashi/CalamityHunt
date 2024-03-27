@@ -1179,13 +1179,16 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                                     SoundEngine.PlaySound(spawn, NPC.Center);
 
                                     float radius = 100;
-                                    NPC goozmite = NPC.NewNPCDirect(NPC.GetSource_FromAI(), (int)(NPC.Center.X + velocity.X * radius), (int)(NPC.Center.Y + velocity.Y * radius) + 40, ModContent.NPCType<Goozmite>(), ai1: killTime, ai2: NPC.whoAmI);
+                                    NPC goozmite = NPC.NewNPCDirect(NPC.GetSource_FromAI(), (int)(NPC.Center.X + velocity.X * radius), (int)(NPC.Center.Y + velocity.Y * radius) + 40, ModContent.NPCType<Goozmite>(),
+                                        ai1: killTime - Main.npc.Count(n => n.active && n.type == ModContent.NPCType<Goozmite>()) * waitTimeMultiplier,
+                                        ai2: NPC.whoAmI);
                                     goozmite.velocity = velocity * 60f;
-                                    goozmite.ai[1] = killTime - Main.npc.Count(n => n.active && n.type == ModContent.NPCType<Goozmite>()) * waitTimeMultiplier;
+                                    //goozmite.ai[1] = killTime - Main.npc.Count(n => n.active && n.type == ModContent.NPCType<Goozmite>()) * waitTimeMultiplier;
                                     goozmite.localAI[0] = NPC.localAI[0] + 60f * Utils.GetLerpValue(0, goozmiteCount * 5f, Time, true);
+
                                 }
                                 else if (Main.netMode == NetmodeID.MultiplayerClient) {
-                                    NPC.netUpdate = true;
+                                    
                                 }
                             }
                         }
@@ -2151,10 +2154,14 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                 if (Phase == -2) {
                     if (Time == 2) {
-                        Projectile fusionRay = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero), ModContent.ProjectileType<FusionRay>(), GetDamage(7), 0);
-                        fusionRay.ai[0] = 200;
-                        fusionRay.ai[1] = 1;
-                        fusionRay.ai[2] = NPC.whoAmI;
+                        Projectile fusionRay = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero), ModContent.ProjectileType<FusionRay>(), GetDamage(7), 0,
+                            ai0: 200,
+                            ai1: 1,
+                            ai2: NPC.whoAmI
+                            ) ;
+                        //fusionRay.ai[0] = 200;
+                        //fusionRay.ai[1] = 1;
+                        //fusionRay.ai[2] = NPC.whoAmI;
                     }
                 }
                 else {
@@ -2186,8 +2193,10 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     }
 
                     if (Time == 250) {
-                        Projectile fusionRay = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero), ModContent.ProjectileType<FusionRay>(), GetDamage(7), 0);
-                        fusionRay.ai[2] = NPC.whoAmI;
+                        Projectile fusionRay = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero), ModContent.ProjectileType<FusionRay>(), GetDamage(7), 0,
+                            ai2: NPC.whoAmI
+                            );
+                        //fusionRay.ai[2] = NPC.whoAmI;
                     }
 
                     if (Time > 500) {
