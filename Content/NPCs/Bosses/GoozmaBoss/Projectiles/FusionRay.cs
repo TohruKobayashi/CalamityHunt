@@ -54,7 +54,6 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 return;
             }
             else if (!Main.npc[(int)Owner].active || Main.npc[(int)Owner].type != ModContent.NPCType<Goozma>()) {
-                Mod.Logger.Info($"aaa, {Owner}");
                 Projectile.active = false;
                 return;
             }
@@ -68,7 +67,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             switch (Mode) {
                 default:
 
-                    if (Time % 4 == 0 && Time > ChargeTime && Time < ChargeTime + LaserDuration) {
+                    if (!Main.dedServ && Time % 4 == 0 && Time > ChargeTime && Time < ChargeTime + LaserDuration) {
                         float shakeStrength = Utils.GetLerpValue(ChargeTime - LaserDuration * 0.5f, ChargeTime + LaserDuration, Time, true);
                         Main.instance.CameraModifiers.Add(new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2CircularEdge(1, 1), shakeStrength * 8f, 12, 20, 5000));
                     }
