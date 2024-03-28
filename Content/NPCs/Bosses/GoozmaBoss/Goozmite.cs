@@ -213,14 +213,14 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 }));
 
                 if (NPC.Distance(Host.Center) < 80) {
+                    NPC.life = 0;
+                    NPC.HitEffect();
+                    NPC.NPCLoot();
+                    NPC.active = false;
                     if (Main.netMode != NetmodeID.MultiplayerClient) {
-                        NPC.life = 0;
+                        
                         Host.life -= 700;
-                        NPC.HitEffect();
-                        NPC.NPCLoot();
-                        NPC.active = false;
-                        NPC.netUpdate = true;
-                        NPC.justHit = true;
+                        
                         NPC.netUpdate = true;
                         Host.netUpdate = true;
                     }
