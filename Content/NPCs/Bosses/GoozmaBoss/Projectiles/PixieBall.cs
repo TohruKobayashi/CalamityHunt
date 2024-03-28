@@ -31,6 +31,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Projectile.friendly = false;
             Projectile.penetrate = -1;
             Projectile.aiStyle = -1;
+            Projectile.netImportant = true;
         }
 
         public ref float Time => ref Projectile.ai[0];

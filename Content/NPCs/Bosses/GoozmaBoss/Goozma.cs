@@ -142,6 +142,10 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
         initializedLocalP2Camera = false;
         initializedLocalP2Roar = false;
         initializedLocalP2Sparkle = false;
+        initializedDeathRoar = false;
+
+        drillDashCounter13 = 0;
+        fusionRayFlag = false;
     }
 
     public override void BossHeadRotation(ref float rotation) => rotation = NPC.velocity.X * 0.01f;
@@ -344,7 +348,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 nextAttack[currentSlime] = new byte[] { 0, 1, 2 };
             }
 
-            
+
 
             WeightedRandom<int> weightedRandom = new WeightedRandom<int>(Main.rand);
             foreach (int j in nextAttack[currentSlime]) {
@@ -388,6 +392,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
     private bool initializedDeathRoar = false;
 
     private int drillDashCounter13 = 0;
+    private bool fusionRayFlag = false;
 
     public override void AI()
     {
@@ -1074,7 +1079,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                                         NPC.netUpdate = true;
                                     }
                                 }
-                                
+
 
                                 if (Time % dashTime > 25 && Time % dashTime < 74) {
 
@@ -1125,7 +1130,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                                 SortedProjectileAttack(Target.Center, SortedProjectileAttackTypes.DrillDash);
                             }
-                        } else {
+                        }
+                        else {
                             Fly();
                         }
 
@@ -1916,7 +1922,6 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
     private void SortedProjectileAttack(Vector2 targetPos, SortedProjectileAttackTypes type)
     {
-
         SoundStyle fizzSound = AssetDirectory.Sounds.Goozma.SlimeShoot;
         SoundStyle bloatSound = AssetDirectory.Sounds.Goozma.BloatedBlastShoot with { PitchVariance = 0.15f };
         SoundStyle dartSound = AssetDirectory.Sounds.Goozma.Dart with { Volume = 0.66f };
@@ -1938,14 +1943,17 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                     float angle = MathHelper.SmoothStep(1.5f, 0.9f, Time / 350f);
                     if (Time % 6 == 0) {
+                         
                         if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(angle).RotatedByRandom(0.3f) * Main.rand.Next(4, 7), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                         if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(-angle).RotatedByRandom(0.3f) * Main.rand.Next(4, 7), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                     }
                     if ((Time + 6) % 6 == 0) {
+                         
                         if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(angle + 0.3f).RotatedByRandom(0.3f) * Main.rand.Next(2, 4), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                         if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(-angle - 0.3f).RotatedByRandom(0.3f) * Main.rand.Next(2, 4), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                     }
                     if (Target.Center.Y < NPC.Top.Y - 300) {
+                         
                         if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * Main.rand.Next(2, 8), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                     }
                 }
@@ -1991,8 +1999,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 break;
 
             case SortedProjectileAttackTypes.PixieBallDisruption:
-                if (Main.netMode != NetmodeID.MultiplayerClient) {
-                    if (Time % 80 == 75) {
+                if (Time % 80 == 75) {
+                    if (Main.netMode != NetmodeID.MultiplayerClient) {
                         int count = Main.rand.Next(10, 18);
                         for (int i = 0; i < count; i++) {
                             Projectile dart = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.Next(10, 20), 0).RotatedBy(MathHelper.TwoPi / count * i), ModContent.ProjectileType<BloatedBlast>(), GetDamage(1), 0,
@@ -2051,8 +2059,9 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 //    }
                 //    Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(targetPos).SafeNormalize(Vector2.Zero).RotatedByRandom(0.3f) * 8f, ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                 //}
-                if (Main.netMode != NetmodeID.MultiplayerClient) {
-                    if ((Time - 75) % 160 > 80 && (Time - 75) % 15 == 10) {
+
+                if ((Time - 75) % 160 > 80 && (Time - 75) % 15 == 10) {
+                    if (Main.netMode != NetmodeID.MultiplayerClient) {
                         Projectile pure = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(targetPos).SafeNormalize(Vector2.Zero).RotatedByRandom(1.3f) * (NPC.Distance(targetPos) + 220) * 0.02f * Main.rand.NextFloat(0.9f, 1.2f), ModContent.ProjectileType<SlimeBomb>(), GetDamage(2), 0,
                             ai0: (int)((Time - 70) % 160 / 1.5f) - 30
                             );
@@ -2166,7 +2175,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             case SortedProjectileAttackTypes.FusionRay:
 
                 if (Phase == -2) {
-                    if (Time == 2) {
+                    if (Time >= 2 && !fusionRayFlag) {
+                         
                         if (Main.netMode != NetmodeID.MultiplayerClient) {
                             Projectile fusionRay = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero), ModContent.ProjectileType<FusionRay>(), GetDamage(7), 0,
                                                                          ai0: 200,
@@ -2174,6 +2184,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                                                                          ai2: NPC.whoAmI
                                                                          );
                         }
+
+                        fusionRayFlag = true;
                         //fusionRay.ai[0] = 200;
                         //fusionRay.ai[1] = 1;
                         //fusionRay.ai[2] = NPC.whoAmI;
@@ -2209,19 +2221,20 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero).RotatedByRandom(1f), ModContent.ProjectileType<GooLightning>(), GetDamage(4), 0, -1, -50, 1500, 1);
                     }
 
-                    if (Time == 250) {
+                    if (Time >= 250 && !fusionRayFlag) {
                         if (Main.netMode != NetmodeID.MultiplayerClient) {
                             Projectile fusionRay = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero), ModContent.ProjectileType<FusionRay>(), GetDamage(7), 0,
                             ai2: NPC.whoAmI
                             );
                         }
+                        fusionRayFlag = true;
                         //fusionRay.ai[2] = NPC.whoAmI;
                     }
 
                     if (Time > 500) {
                         if (Time % 70 == 0) {
                             SoundEngine.PlaySound(bloatSound, NPC.Center);
-
+                             
                             if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(targetPos).SafeNormalize(Vector2.Zero) * 5, ModContent.ProjectileType<BloatedBlast>(), GetDamage(5), 0);
                         }
 
@@ -2358,6 +2371,9 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
         if ((AttackList)attack == AttackList.DrillDash) {
             drillDashCounter13 = 0; // reset the quantum counter
         }
+        if ((AttackList)attack == AttackList.FusionRay) {
+            fusionRayFlag = false; // reset the quantum counter
+        }
         if (Main.netMode != NetmodeID.MultiplayerClient) {
             Attack = attack;
             if (zeroTime) {
@@ -2370,6 +2386,9 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
     public void SetPhase(int phase, bool zeroTime = true)
     {
+        if (phase == -2) {
+            fusionRayFlag = false;
+        }
         if (Main.netMode != NetmodeID.MultiplayerClient) {
             Phase = phase;
             if (zeroTime) {
