@@ -79,7 +79,7 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
                 if (Main.dedServ) {
                     ChatHelper.BroadcastChatMessage(NetworkText.FromKey(slimeMonsoonText.Value), new Color(50, 255, 130));
                 }
-                else {
+                else if (Main.netMode == NetmodeID.SinglePlayer){
                     Main.NewText(NetworkText.FromKey(slimeMonsoonText.Value), new Color(50, 255, 130));
                 }
                 Main.StopSlimeRain(true);
@@ -112,7 +112,7 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
             foreach (FlyingSlime slime in slimes.ToHashSet()) {
                 slime.Update(MathF.Sin(Time * 0.12f) * 0.3f + 4f);
 
-                if (Main.rand.NextBool(8)) {
+                if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(8)) {
                     CalamityHunt.particles.Add(Particle.Create<SmokeSplatterParticle>(particle => {
                         particle.position = slime.currentPosition + Main.rand.NextVector2Circular(20, 20);
                         particle.velocity = slime.currentPosition.DirectionTo(slime.targetPosition);
@@ -126,7 +126,7 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
 
                 if (slime.ShouldRemove) {
 
-                    if (Main.rand.NextBool(1 + (int)(Time * 0.005f))) {
+                    if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(1 + (int)(Time * 0.005f))) {
                         CalamityHunt.particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
                             particle.position = slime.currentPosition;
                             particle.velocity = (slime.rotation + MathHelper.PiOver2).ToRotationVector2();
@@ -135,7 +135,7 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
                         }));
                     }
 
-                    if (Main.rand.NextBool(10 + (int)(Time * 0.001f))) {
+                    if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(10 + (int)(Time * 0.001f))) {
                         CalamityHunt.particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
                             particle.position = slime.currentPosition;
                             particle.velocity = (slime.rotation + MathHelper.PiOver2).ToRotationVector2().RotatedByRandom(0.2f);
@@ -172,19 +172,22 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
         }
 
         int boss = -1;
-        if (Main.netMode != NetmodeID.MultiplayerClient && spawnBoss) {
+        if (spawnBoss) {
+            if (Main.netMode != NetmodeID.MultiplayerClient) {
+                boss = NPC.NewNPC(NPC.GetBossSpawnSource(0), (int)NPC.Center.X, (int)NPC.Bottom.Y, ModContent.NPCType<Goozma>(), 0, ai1: -1);
+                NPC.active = false;
+            }
 
-            boss = NPC.NewNPC(NPC.GetBossSpawnSource(0), (int)NPC.Center.X, (int)NPC.Bottom.Y, ModContent.NPCType<Goozma>(), 0, ai1: -1);
-            NPC.active = false;
-
-            for (int i = 0; i < 50; i++) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
-                    particle.position = NPC.Center + Main.rand.NextVector2Circular(50, 50);
-                    particle.velocity = particle.position.DirectionFrom(NPC.Center).RotatedByRandom(0.4f) * Main.rand.Next(2, 10) - Vector2.UnitY * 2f;
-                    particle.scale = Main.rand.NextFloat(0.8f, 1.5f);
-                    particle.color = Color.White;
-                    particle.colorData = new ColorOffsetData(true, NPC.localAI[0] * 0.33f);
-                }));
+            if (Main.netMode != NetmodeID.Server) {
+                for (int i = 0; i < 50; i++) {
+                    CalamityHunt.particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
+                        particle.position = NPC.Center + Main.rand.NextVector2Circular(50, 50);
+                        particle.velocity = particle.position.DirectionFrom(NPC.Center).RotatedByRandom(0.4f) * Main.rand.Next(2, 10) - Vector2.UnitY * 2f;
+                        particle.scale = Main.rand.NextFloat(0.8f, 1.5f);
+                        particle.color = Color.White;
+                        particle.colorData = new ColorOffsetData(true, NPC.localAI[0] * 0.33f);
+                    }));
+                }
             }
         }
 
@@ -195,7 +198,7 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
         Time++;
         shake *= 0.7f;
 
-        if (Main.rand.NextBool(4)) {
+        if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(4)) {
             CalamityHunt.particles.Add(Particle.Create<LightningParticle>(particle => {
                 particle.position = NPC.Center + Main.rand.NextVector2Circular(30, 30) * NPC.scale;
                 particle.velocity = particle.position.DirectionFrom(NPC.Center) * Main.rand.NextFloat(0.5f, 3f);

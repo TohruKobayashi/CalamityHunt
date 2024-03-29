@@ -61,34 +61,37 @@ public class GoozmaGelBit : Particle
         else {
             velocity *= 0.98f;
         }
+        if (Main.netMode != NetmodeID.Server) {
+            if (Main.rand.NextBool(50)) {
+                CalamityHunt.particlesBehindEntities.Add(Create<ChromaticEnergyDust>(particle => {
+                    particle.position = position + Main.rand.NextVector2Circular(30, 30);
+                    particle.velocity = Main.rand.NextVector2Circular(2, 2) - Vector2.UnitY * 2f;
+                    particle.scale = Main.rand.NextFloat(0.1f, 1.6f);
+                    particle.color = Color.White;
+                    particle.colorData = new ColorOffsetData(true, time * 2f + colorData.offset);
+                }));
+            }
 
-        if (Main.rand.NextBool(50)) {
-            CalamityHunt.particlesBehindEntities.Add(Create<ChromaticEnergyDust>(particle => {
-                particle.position = position + Main.rand.NextVector2Circular(30, 30);
-                particle.velocity = Main.rand.NextVector2Circular(2, 2) - Vector2.UnitY * 2f;
-                particle.scale = Main.rand.NextFloat(0.1f, 1.6f);
-                particle.color = Color.White;
-                particle.colorData = new ColorOffsetData(true, time * 2f + colorData.offset);
-            }));
-        }
+            if (Main.rand.NextBool(120)) {
+                CalamityHunt.particlesBehindEntities.Add(Create<ChromaticGooBurst>(particle => {
+                    particle.position = position + Main.rand.NextVector2Circular(30, 30);
+                    particle.velocity = -velocity.SafeNormalize(Vector2.Zero).RotatedByRandom(0.2f) - Vector2.UnitY * Main.rand.NextFloat();
+                    particle.scale = Main.rand.NextFloat(0.1f, 1.6f);
+                    particle.color = Color.White;
+                    particle.colorData = new ColorOffsetData(true, time * 2f + colorData.offset);
+                }));
+            }
 
-        if (Main.rand.NextBool(120)) {
-            CalamityHunt.particlesBehindEntities.Add(Create<ChromaticGooBurst>(particle => {
-                particle.position = position + Main.rand.NextVector2Circular(30, 30);
-                particle.velocity = -velocity.SafeNormalize(Vector2.Zero).RotatedByRandom(0.2f) - Vector2.UnitY * Main.rand.NextFloat();
-                particle.scale = Main.rand.NextFloat(0.1f, 1.6f);
-                particle.color = Color.White;
-                particle.colorData = new ColorOffsetData(true, time * 2f + colorData.offset);
-            }));
+            if (Main.rand.NextBool(70)) {
+                Dust.NewDustPerfect(position + Main.rand.NextVector2Circular(10, 10), DustID.TintableDust, Main.rand.NextVector2CircularEdge(3, 3), 100, Color.Black, Main.rand.NextFloat(2, 4)).noGravity = true;
+            }
         }
 
         if (scale < 0.5f) {
             ShouldRemove = true;
         }
 
-        if (Main.rand.NextBool(70)) {
-            Dust.NewDustPerfect(position + Main.rand.NextVector2Circular(10, 10), DustID.TintableDust, Main.rand.NextVector2CircularEdge(3, 3), 100, Color.Black, Main.rand.NextFloat(2, 4)).noGravity = true;
-        }
+        
     }
 
 

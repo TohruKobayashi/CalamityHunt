@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using CalamityHunt.Common.Systems.Particles;
 using CalamityHunt.Common.Utilities;
@@ -34,6 +35,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Projectile.penetrate = -1;
             Projectile.aiStyle = -1;
             Projectile.manualDirectionChange = true;
+            Projectile.netImportant = true;
         }
 
         public ref float Time => ref Projectile.ai[0];
@@ -46,6 +48,18 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         public float targetRotation;
         public float targetSize;
         public float realSize;
+
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write(Projectile.direction == 1 ? true : false);
+            base.SendExtraAI(writer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            Projectile.direction = reader.ReadBoolean() ? 1 : -1;
+            base.ReceiveExtraAI(reader);
+        }
 
         public override void AI()
         {
@@ -67,7 +81,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             switch (Mode) {
                 default:
 
-                    if (Time % 4 == 0 && Time > ChargeTime && Time < ChargeTime + LaserDuration) {
+                    if (!Main.dedServ && Time % 4 == 0 && Time > ChargeTime && Time < ChargeTime + LaserDuration) {
                         float shakeStrength = Utils.GetLerpValue(ChargeTime - LaserDuration * 0.5f, ChargeTime + LaserDuration, Time, true);
                         Main.instance.CameraModifiers.Add(new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2CircularEdge(1, 1), shakeStrength * 8f, 12, 20, 5000));
                     }
@@ -79,7 +93,11 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                     //float totalOffRot = (firstWave + secondWave) * thirdWave * Projectile.direction + (float)Math.Sin(Time * 0.1f) * 0.03f * Utils.GetLerpValue(ChargeTime - 10, ChargeTime + 10, Time, true);
                     float totalOffRot = (float)Math.Cos((Time - ChargeTime) / LaserDuration * MathHelper.TwoPi) * 2.5f * Utils.GetLerpValue(ChargeTime * 0.8f, ChargeTime + LaserDuration * 0.1f, Time, true) * Utils.GetLerpValue(ChargeTime + LaserDuration, ChargeTime + LaserDuration * 0.9f, Time, true);
                     if (Time < 3) {
-                        Projectile.direction = Main.rand.NextBool() ? -1 : 1;
+                        if (Main.netMode != NetmodeID.MultiplayerClient) {
+                            Projectile.direction = Main.rand.NextBool() ? -1 : 1;
+                            Projectile.netUpdate = true;
+                        }
+
                     }
 
                     targetRotation = targetRotation.AngleTowards(Projectile.AngleTo(Main.npc[(int)Owner].GetTargetData().Center), Utils.GetLerpValue(ChargeTime + LaserDuration * 0.1f, ChargeTime, Time, true) * 0.04f + Utils.GetLerpValue(ChargeTime + LaserDuration * 0.3f, ChargeTime + LaserDuration * 0.6f, Time, true) * 0.01f);
@@ -98,7 +116,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
                 case 1:
 
-                    if (Time % 4 == 0 && Time > ChargeTime && Time < ChargeTime + LaserDuration) {
+                    if (!Main.dedServ && Time % 4 == 0 && Time > ChargeTime && Time < ChargeTime + LaserDuration) {
                         float shakeStrength = Utils.GetLerpValue(ChargeTime - LaserDuration * 0.5f, ChargeTime + LaserDuration, Time, true);
                         Main.instance.CameraModifiers.Add(new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2CircularEdge(1, 1), shakeStrength * 8f, 12, 20, 5000));
                     }
@@ -186,14 +204,28 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 Projectile.Kill();
             }
 
-            foreach (Player player in Main.player.Where(n => n.active && !n.dead)) {
+            if (Main.netMode == NetmodeID.Server) {
+                foreach (Player player in Main.player.Where(n => n.active && !n.dead)) {
+                    if (ModLoader.HasMod(HUtils.CalamityMod)) {
+                        ModLoader.GetMod(HUtils.CalamityMod).Call("ToggleInfiniteFlight", player, true);
+                    }
+                    else {
+                        player.wingTime = player.wingTimeMax;
+                    }
+                }
+
+
+            }
+            else {
                 if (ModLoader.HasMod(HUtils.CalamityMod)) {
-                    ModLoader.GetMod(HUtils.CalamityMod).Call("ToggleInfiniteFlight", player, true);
+                    ModLoader.GetMod(HUtils.CalamityMod).Call("ToggleInfiniteFlight", Main.LocalPlayer, true);
                 }
                 else {
-                    player.wingTime = player.wingTimeMax;
+                    Main.LocalPlayer.wingTime = Main.LocalPlayer.wingTimeMax;
                 }
+                
             }
+
         }
 
         public LoopingSound raySound;

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace CalamityHunt.Common.Systems.Particles;
@@ -43,6 +45,7 @@ public abstract class Particle : ModTexturedType
 
     public static T Create<T>(Action<T> initializer) where T : Particle
     {
+        if (Main.dedServ) return null;
         T newParticle = (T)ParticleLoader.Instance[typeof(T)].MemberwiseClone();
         initializer(newParticle);
         newParticle.OnSpawn();

@@ -29,6 +29,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Projectile.penetrate = -1;
             Projectile.aiStyle = -1;
             Projectile.timeLeft = 700;
+            initializedSound = false;
         }
 
         public ref float Time => ref Projectile.ai[0];
@@ -36,6 +37,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         public ref Player Target => ref Main.player[(int)Projectile.ai[1]];
 
         private Vector2 saveTarget;
+
+        private bool initializedSound = false;
 
         public override void AI()
         {
@@ -65,10 +68,12 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
             if (Time > 0) {
                 Projectile.Center = Vector2.Lerp(Projectile.Center, saveTarget, 0.001f + Utils.GetLerpValue(0, 10, Time, true));
+                Projectile.netUpdate = true;
             }
 
-            if (Time == 8) {
+            if (Time == 8 && !initializedSound) {
                 SoundEngine.PlaySound(SoundID.Item167.WithPitchOffset(0.2f), Projectile.Center);
+                initializedSound = true;
             }
 
             if (Time > 20) {

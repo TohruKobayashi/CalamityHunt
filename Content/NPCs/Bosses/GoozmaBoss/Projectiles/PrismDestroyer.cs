@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using CalamityHunt.Common.Systems.Particles;
 using CalamityHunt.Content.Particles;
@@ -27,6 +28,18 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         public ref float WhoAmI => ref Projectile.ai[1];
         public ref float Spin => ref Projectile.ai[2];
         public static readonly float Rays = 5;
+
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write(Projectile.rotation);
+            writer.Write(Projectile.direction == 1? true : false);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            Projectile.rotation = (float)reader.ReadSingle();
+            Projectile.direction = reader.ReadBoolean() ? 1 : -1;
+        }
 
         public override void AI()
         {

@@ -36,24 +36,31 @@ namespace CalamityHunt.Content.Projectiles
         public List<float> waits;
         public List<float> lengths;
 
+        private bool initializedLocal = false;
+
         public override void OnSpawn(IEntitySource source)
         {
-            rotations = new List<float>();
-            accelerations = new List<float>();
-            waits = new List<float>();
-            lengths = new List<float>();
-
-            int count = Main.rand.Next(20, 30);
-            for (int i = 0; i < count; i++) {
-                rotations.Add(MathHelper.TwoPi / (float)count * i + Main.rand.NextFloat(-0.5f, 0.5f));
-                accelerations.Add(Main.rand.NextFloat(-3.1415f, 3.1415f));
-                waits.Add(Main.rand.Next(200));
-                lengths.Add(Main.rand.NextFloat(0.7f, 2f));
-            }
+            // this breaks in multiplayer so moved to ai
         }
 
         public override void AI()
         {
+            if (!initializedLocal) {
+                rotations = new List<float>();
+                accelerations = new List<float>();
+                waits = new List<float>();
+                lengths = new List<float>();
+
+                int count = Main.rand.Next(20, 30);
+                for (int i = 0; i < count; i++) {
+                    rotations.Add(MathHelper.TwoPi / (float)count * i + Main.rand.NextFloat(-0.5f, 0.5f));
+                    accelerations.Add(Main.rand.NextFloat(-3.1415f, 3.1415f));
+                    waits.Add(Main.rand.Next(200));
+                    lengths.Add(Main.rand.NextFloat(0.7f, 2f));
+                }
+                initializedLocal = true;
+            }
+
             if (!Main.npc.Any(n => n.type == ModContent.NPCType<Goozma>() && n.active)) {
                 Projectile.active = false;
             }
@@ -63,8 +70,10 @@ namespace CalamityHunt.Content.Projectiles
 
             Projectile.Center = Host.Center;
 
+            if (rotations !=  null) { 
             for (int i = 0; i < rotations.Count; i++) {
                 rotations[i] += (float)Math.Sin(Time * 0.9f + accelerations[i]) * 0.02f;
+            }
             }
 
             Time++;
@@ -78,12 +87,16 @@ namespace CalamityHunt.Content.Projectiles
         {
             Asset<Texture2D> texture = ModContent.Request<Texture2D>(Texture);
 
+            if (rotations != null) {
+
+            
             for (int i = 0; i < rotations.Count; i++) {
                 Color glowColor = new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(Host.localAI[0] + rotations[i] * 0.5f);
                 glowColor.A = 0;
                 float power = Utils.GetLerpValue(waits[i], waits[i] + 70, Time, true) * Utils.GetLerpValue(300, 290, Time, true);
                 Main.EntitySpriteDraw(texture.Value, Projectile.Center - Main.screenPosition, null, glowColor * power * 0.5f * (0.5f + lengths[i] * 0.5f), rotations[i] + Time * (1f + i * 0.001f) * 0.005f, texture.Size() * new Vector2(0.5f, 1f), new Vector2(1f, 2f * lengths[i]) * (0.2f + power * 0.8f), 0, 0);
                 Main.EntitySpriteDraw(texture.Value, Projectile.Center - Main.screenPosition, null, glowColor * power * 0.8f * (0.5f + lengths[i] * 0.5f), rotations[i] + Time * (1f + i * 0.001f) * 0.005f, texture.Size() * new Vector2(0.5f, 1f), new Vector2(0.555f, 1f * lengths[i]) * (0.2f + power * 0.8f), 0, 0);
+            }
             }
 
             return false;

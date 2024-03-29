@@ -25,36 +25,49 @@ public class SlimeBomb : ModProjectile
         Projectile.friendly = false;
         Projectile.penetrate = -1;
         Projectile.aiStyle = -1;
+
+        initializedLocal = false;
     }
 
     public override void OnSpawn(IEntitySource source)
     {
-        Projectile.localAI[1] = Main.rand.NextFloat(30f);
-        Projectile.rotation = Main.rand.NextFloat(-1f, 1f);
-
-        SoundStyle shootSound = AssetDirectory.Sounds.Goozma.Shot with { Pitch = -0.3f };
-        SoundEngine.PlaySound(shootSound, Projectile.Center);
-
-        if (!Main.dedServ) {
-            for (int i = 0; i < 5; i++) {
-                Color glowColor = new GradientColor(SlimeUtils.GoozColors, 0.4f, 0.5f).ValueAt(Projectile.localAI[1]);
-                glowColor.A /= 2;
-                Dust.NewDustPerfect(Projectile.Center, DustID.RainbowMk2, Projectile.velocity + Main.rand.NextVector2Circular(5, 5), 0, glowColor, 1.5f).noGravity = true;
-            }
-        }
+        
     }
+
+    private bool initializedLocal = false;
 
     public ref float Time => ref Projectile.ai[0];
 
     public override void AI()
     {
+        if (!initializedLocal) {
+            Projectile.localAI[1] = Main.rand.NextFloat(30f);
+            Projectile.rotation = Main.rand.NextFloat(-1f, 1f);
+
+            SoundStyle shootSound = AssetDirectory.Sounds.Goozma.Shot with { Pitch = -0.3f };
+            SoundEngine.PlaySound(shootSound, Projectile.Center);
+
+            if (!Main.dedServ) {
+                for (int i = 0; i < 5; i++) {
+                    Color glowColor = new GradientColor(SlimeUtils.GoozColors, 0.4f, 0.5f).ValueAt(Projectile.localAI[1]);
+                    glowColor.A /= 2;
+                    Dust.NewDustPerfect(Projectile.Center, DustID.RainbowMk2, Projectile.velocity + Main.rand.NextVector2Circular(5, 5), 0, glowColor, 1.5f).noGravity = true;
+                }
+            }
+
+            initializedLocal = true;
+        }
+
         if (Projectile.ai[1] == 0) {
             if (Time > 8) {
                 Projectile.velocity *= 0.955f;
             }
-
-            Projectile.rotation = (float)Math.Sin(Projectile.localAI[1] * 0.03f) * Projectile.direction * 0.1f + Projectile.velocity.X * 0.1f;
-            Projectile.scale = (float)Math.Sqrt(Utils.GetLerpValue(0, 17, Projectile.localAI[0], true)) + (float)Math.Pow(Utils.GetLerpValue(97, 100, Time, true), 2f) * 0.5f;
+            if (Main.netMode != NetmodeID.MultiplayerClient) {
+                Projectile.rotation = (float)Math.Sin(Projectile.localAI[1] * 0.03f) * Projectile.direction * 0.1f + Projectile.velocity.X * 0.1f;
+                Projectile.scale = (float)Math.Sqrt(Utils.GetLerpValue(0, 17, Projectile.localAI[0], true)) + (float)Math.Pow(Utils.GetLerpValue(97, 100, Time, true), 2f) * 0.5f;
+                Projectile.netUpdate = true;
+            }
+            
 
             int target = -1;
             if (Main.player.Any(n => n.active && !n.dead)) {

@@ -17,7 +17,7 @@ public class ParticleSystem
 
     public void Add(Particle particle)
     {
-        particles.Add(particle);
+        if (particles != null) particles.Add(particle);
     }
 
     public void Clear() => particles.Clear();

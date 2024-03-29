@@ -1,6 +1,7 @@
 ﻿using CalamityHunt.Common.Systems;
 using CalamityHunt.Content.Items.Misc;
 using CalamityHunt.Content.NPCs;
+using Humanizer;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -94,10 +95,22 @@ namespace CalamityHunt.Content.Tiles
 
             Player player = Main.LocalPlayer;
 
-            if (!GoozmaSystem.GoozmaActive && Main.netMode != NetmodeID.MultiplayerClient) {
+            if (!GoozmaSystem.GoozmaActive) {
+                
                 if (GoozmaSystem.FindSlimeStatues(center, top, 40, 30)) {
 
-                    NPC.NewNPCDirect(Entity.GetSource_NaturalSpawn(), new Vector2(center * 16 - 8, top * 16), ModContent.NPCType<PluripotentSpawn>());
+
+                    if (Main.netMode != NetmodeID.MultiplayerClient) {
+                        SummonPluripotentSpawn(center, top);
+                    }
+                    else {
+                        ModPacket packet = Mod.GetPacket();
+                        packet.Write((byte)CalamityHunt.PacketType.SummonPluripotentSpawn);
+                        packet.Write((short)center);
+                        packet.Write((short)top);
+                        packet.Send();
+                    }
+                    
 
                     //if (player.HasItem(ModContent.ItemType<SludgeFocus>())) {
                     //    if (Main.netMode != NetmodeID.MultiplayerClient) {
@@ -135,6 +148,11 @@ namespace CalamityHunt.Content.Tiles
             }
 
             return true;
+        }
+
+        public static void SummonPluripotentSpawn(int center, int top)
+        {
+            NPC.NewNPCDirect(Entity.GetSource_NaturalSpawn(), new Vector2(center * 16 - 8, top * 16), ModContent.NPCType<PluripotentSpawn>());
         }
     }
 }

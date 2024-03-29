@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using CalamityHunt.Common;
 using CalamityHunt.Common.Graphics;
@@ -96,19 +97,35 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 TimeUntilDeath = 400;
             }
 
+            if (NPC.ai[2] < 0 || NPC.ai[2] > Main.npc.Length - 1) {
+                NPC.active = false;
+                return;
+            }
+
             if (NPC.ai[3] != -1) {
-                if (!Main.npc.Any(n => n.type == ModContent.NPCType<Goozma>() && n.active && n.ai[2] != 3)) {
+                if (Main.netMode != NetmodeID.MultiplayerClient && (Host.ai[2] != 0 && Host.ai[2] != 2 && Host.ai[2] != -2)) {
+
                     NPC.ai[3] = -1;
                     Time = 0;
+                    NPC.netUpdate = true;
                     return;
                 }
-                else {
-                    NPC.ai[2] = Main.npc.First(n => n.type == ModContent.NPCType<Goozma>() && n.active && n.ai[2] != 3).whoAmI;
-                }
+                //if (!Main.npc.Any(n => n.type == ModContent.NPCType<Goozma>() && n.active && n.ai[2] != 3)) {
+                //    NPC.ai[3] = -1;
+                //    Time = 0;
+                //    return;
+                //}
+                //else {
+                //    NPC.ai[2] = Main.npc.First(n => n.type == ModContent.NPCType<Goozma>() && n.active && n.ai[2] != 3).whoAmI;
+                //}
             }
             if (NPC.ai[3] == 0) {
                 NPC.direction = Math.Sign(NPC.Center.X - Host.GetTargetData().Center.X);
-                NPC.Center += (Host.position - Host.oldPos[3]) * 0.07f;
+                if (Main.netMode == NetmodeID.SinglePlayer) {
+
+                    NPC.Center += (Host.position - Host.oldPos[3]) * 0.07f;
+                }
+
 
                 if (NPC.velocity.Length() > 0.5f) {
                     NPC.velocity *= 0.9f;
@@ -130,17 +147,27 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                 if (Time > 100 && Time < TimeUntilDeath) {
                     if (Time % 100 == 5) {
-                        NPC.velocity += Main.rand.NextVector2Circular(9, 9);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) {
+                            NPC.velocity += Main.rand.NextVector2Circular(9, 9);
+                            NPC.netUpdate = true;
+                        }
+
                     }
 
-                    if (Host.Distance(NPC.GetTargetData().Center) > 800 && Time % 40 == 5) {
-                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.DirectionTo(NPC.GetTargetData().Center).SafeNormalize(Vector2.Zero).RotatedByRandom(0.3f), ModContent.ProjectileType<RainbowLaser>(), GetDamage(1), 0, ai0: -10, ai1: NPC.whoAmI);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) {
+                        if (Host.Distance(NPC.GetTargetData().Center) > 800 && Time % 40 == 5) {
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.DirectionTo(NPC.GetTargetData().Center).SafeNormalize(Vector2.Zero).RotatedByRandom(0.3f), ModContent.ProjectileType<RainbowLaser>(), GetDamage(1), 0, ai0: -10, ai1: NPC.whoAmI);
+                        }
+
+                        int rateOfFiring = 30 + Main.npc.Count(n => n.active && n.type == ModContent.NPCType<Goozmite>()) * 5;
+                        if (Time % rateOfFiring == 10 && Main.rand.NextBool(3)) {
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.DirectionTo(NPC.GetTargetData().Center).SafeNormalize(Vector2.Zero).RotatedByRandom(0.3f), ModContent.ProjectileType<RainbowLaser>(), GetDamage(1), 0, ai0: -Main.rand.Next(20, 30), ai1: NPC.whoAmI);
+                        }
+                    }
+                    else {
+                        NPC.netUpdate = true;
                     }
 
-                    int rateOfFiring = 30 + Main.npc.Count(n => n.active && n.type == ModContent.NPCType<Goozmite>()) * 5;
-                    if (Time % rateOfFiring == 10 && Main.rand.NextBool(3)) {
-                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.DirectionTo(NPC.GetTargetData().Center).SafeNormalize(Vector2.Zero).RotatedByRandom(0.3f), ModContent.ProjectileType<RainbowLaser>(), GetDamage(1), 0, ai0: -Main.rand.Next(20, 30), ai1: NPC.whoAmI);
-                    }
                 }
 
                 if (Time > TimeUntilDeath - 10) {
@@ -148,9 +175,15 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 }
 
                 if (Time > TimeUntilDeath) {
-                    Host.life += (int)(NPC.life * 8f);
-                    if (Host.life > Host.lifeMax) {
-                        Host.life = Host.lifeMax;
+                    if (Main.netMode != NetmodeID.MultiplayerClient) {
+                        Host.life += (int)(NPC.life * 8f);
+                        if (Host.life > Host.lifeMax) {
+                            Host.life = Host.lifeMax;
+                        }
+                        Host.netUpdate = true;
+
+                        NPC.active = false;
+                        NPC.netUpdate = true;
                     }
 
                     for (int i = 0; i < 50; i++) {
@@ -162,7 +195,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                             particle.colorData = new ColorOffsetData(true, NPC.localAI[0]);
                         }));
                     }
-                    NPC.active = false;
+
                 }
             }
             else if (NPC.ai[3] == 1) {
@@ -181,8 +214,17 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                 if (NPC.Distance(Host.Center) < 80) {
                     NPC.life = 0;
-                    Host.life -= 700;
-                    NPC.checkDead();
+                    NPC.HitEffect();
+                    NPC.NPCLoot();
+                    NPC.active = false;
+                    if (Main.netMode != NetmodeID.MultiplayerClient) {
+                        
+                        Host.life -= 700;
+                        
+                        NPC.netUpdate = true;
+                        Host.netUpdate = true;
+                    }
+
                     for (int i = 0; i < 30; i++) {
                         CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                             particle.position = NPC.Center + Main.rand.NextVector2Circular(10, 10);
@@ -251,39 +293,54 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             NPC.localAI[0]++;
             NPC.localAI[1]++;
 
-            int randCounter = Main.rand.Next(45, 60);
-            if ((Time - 40) % randCounter < Main.rand.Next(3)) {
-                zapRope = new Rope(NPC.Center, Host.Center, 45, NPC.Distance(Host.Center) * 0.021f, Main.rand.NextVector2Circular(1, 1), 0, 50);
+            if (!Main.dedServ) {
+                int randCounter = Main.rand.Next(45, 60);
+                if ((Time - 40) % randCounter < Main.rand.Next(3)) {
+                    zapRope = new Rope(NPC.Center, Host.Center, 45, NPC.Distance(Host.Center) * 0.021f, Main.rand.NextVector2Circular(1, 1), 0, 50);
+                }
+
+                if (Time > 40) {
+                    zapRope.StartPos = NPC.Center;
+                    zapRope.EndPos = Host.Center;
+                    zapRope.damping += 0.003f;
+                    zapRope.gravity *= 0.9f;
+                    zapRope.gravity += NPC.velocity * 0.005f;
+                    zapRope.segmentLength = NPC.Distance(Host.Center) * 0.021f;
+                    zapRope.Update();
+                }
             }
 
-            if (Time > 40) {
-                zapRope.StartPos = NPC.Center;
-                zapRope.EndPos = Host.Center;
-                zapRope.damping += 0.003f;
-                zapRope.gravity *= 0.9f;
-                zapRope.gravity += NPC.velocity * 0.005f;
-                zapRope.segmentLength = NPC.Distance(Host.Center) * 0.021f;
-                zapRope.Update();
+        }
+
+        public override void HitEffect(NPC.HitInfo hit)
+        {
+            if (NPC.ai[3] == 1) {
+                SoundStyle impactNoise = AssetDirectory.Sounds.Goozmite.Impact;
+                SoundEngine.PlaySound(impactNoise, NPC.Center);
             }
+            base.HitEffect(hit);
         }
 
         public override bool CheckDead()
         {
-            if (NPC.life <= 0 && NPC.ai[3] == 0) {
+            if (NPC.life > 1) return false;
+            if (NPC.ai[3] == 0) {
                 Time = 0;
                 NPC.direction = Main.rand.NextBool() ? -1 : 1;
                 NPC.life = 1;
                 NPC.dontTakeDamage = true;
                 NPC.ai[3] = 1;
+                NPC.netUpdate = true;
+
 
                 SoundStyle deathNoise = AssetDirectory.Sounds.Goozmite.Death;
                 SoundEngine.PlaySound(deathNoise, NPC.Center);
             }
-            else if (NPC.ai[3] == 1) {
-                SoundStyle impactNoise = AssetDirectory.Sounds.Goozmite.Impact;
-                SoundEngine.PlaySound(impactNoise, NPC.Center);
-            }
-            return NPC.ai[3] == 0 && Time > TimeUntilDeath || NPC.ai[3] == 1 && Time > 10;
+
+            NPC.life = 1;
+            NPC.active = true;
+            NPC.dontTakeDamage = true;
+            return (NPC.ai[3] == 0 && Time > TimeUntilDeath || NPC.ai[3] == 1 && Time > 10);
         }
 
         private int GetDamage(int attack, float modifier = 1f)
