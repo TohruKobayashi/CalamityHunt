@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CalamityHunt.Common.Graphics.Skies;
+using CalamityHunt.Common.Players;
 using CalamityHunt.Common.Systems;
 using CalamityHunt.Common.Systems.Particles;
 using CalamityHunt.Common.Utilities;
@@ -21,6 +22,7 @@ using Terraria.Chat;
 using Terraria.DataStructures;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -220,13 +222,24 @@ namespace CalamityHunt
                     short top = reader.ReadInt16();
                     SlimeNinjaStatueTile.SummonPluripotentSpawn(center, top);
                     break;
+                case PacketType.SyncPlayer:
+                    byte playerNumber = reader.ReadByte();
+                    AuricSoulPlayer auricSoulPlayer = Main.player[playerNumber].GetModPlayer<AuricSoulPlayer>();
+                    auricSoulPlayer.ReceivePlayerSync(reader);
+
+                    if (Main.netMode == NetmodeID.Server) {
+                        // Forward the changes to the other clients
+                        auricSoulPlayer.SyncPlayer(-1, whoAmI, false);
+                    }
+                    break;
             }
         }
 
         public enum PacketType : byte
         {
             TrollPlayer,
-            SummonPluripotentSpawn
+            SummonPluripotentSpawn,
+            SyncPlayer
         }
     }
 }

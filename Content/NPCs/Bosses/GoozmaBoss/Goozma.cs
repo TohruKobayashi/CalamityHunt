@@ -164,7 +164,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
-        npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GoozmaSoul>()));
+        npcLoot.Add(ItemDropRule.ByCondition(new GoozmaSoulDropRule(), ModContent.ItemType<GoozmaSoul>()));
         npcLoot.Add(ItemDropRule.ByCondition(new GoozmaDownedDropRule(), ModContent.ItemType<GoozmaLore>()));
         npcLoot.Add(ItemDropRule.ByCondition(new ZenithWorldDropRule(), ModContent.ItemType<Goozmaga>()));
 
@@ -1377,11 +1377,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     NPC.netUpdate = true;
                     NPC.justHit = true;
 
-                    if (Main.netMode != NetmodeID.MultiplayerClient) {
-
-                        //NPC.checkDead();
-                    }
-                    else OnKillClientSide();
+                    if (Main.netMode != NetmodeID.Server) OnKillClientSide();
 
 
                 }
