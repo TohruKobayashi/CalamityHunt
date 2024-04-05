@@ -23,18 +23,26 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Projectile.penetrate = -1;
             Projectile.aiStyle = -1;
             Projectile.timeLeft = 140;
+            initializedLocal = false;
         }
 
         public override void OnSpawn(IEntitySource source)
         {
-            Projectile.localAI[0] = Main.rand.Next(40);
-            Projectile.frame = Main.rand.Next(3);
+            
         }
 
         public ref float Time => ref Projectile.ai[0];
 
+        private bool initializedLocal = false;
+
         public override void AI()
         {
+            if (!initializedLocal) {
+                Projectile.localAI[0] = Main.rand.Next(40);
+                Projectile.frame = Main.rand.Next(3);
+
+                initializedLocal = true;
+            }
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
             Projectile.scale = (float)Math.Sqrt(Utils.GetLerpValue(0, 15, Time, true) * Utils.GetLerpValue(0, 20, Projectile.timeLeft, true));
             Projectile.velocity = Vector2.Lerp(Projectile.velocity, Vector2.Zero, 0.001f + Utils.GetLerpValue(50, 165, Time, true) * 0.05f) * (1f + 0.115f * Utils.GetLerpValue(50, 0, Time, true));

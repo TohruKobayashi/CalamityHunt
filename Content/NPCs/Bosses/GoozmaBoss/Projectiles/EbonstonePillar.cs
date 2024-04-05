@@ -28,6 +28,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Projectile.penetrate = -1;
             Projectile.aiStyle = -1;
             Projectile.hide = true;
+
+            initializedLocal = false;
         }
 
         public ref float Time => ref Projectile.ai[0];
@@ -42,11 +44,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
         public override void OnSpawn(IEntitySource source)
         {
-            position = new List<Vector2>();
-            variant = new List<int>();
-            scale = new List<float>();
-            rotation = new List<float>();
-            time = new List<int>();
+            // ffffggggg
         }
 
         private int maxHeight;
@@ -54,8 +52,20 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         private float speed = 2;
         private int stoneCount;
 
+        private bool initializedLocal = false;
+
         public override void AI()
         {
+            if (!initializedLocal) {
+                position = new List<Vector2>();
+                variant = new List<int>();
+                scale = new List<float>();
+                rotation = new List<float>();
+                time = new List<int>();
+
+                initializedLocal = true;
+            }
+
             Projectile.velocity *= 0.1f;
             if (Time == 0) {
                 maxHeight = (int)Height;
@@ -85,7 +95,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 Time = Math.Max(Time, maxHeight * speed + MaxTime - 2);
             }
 
-            if (position.Count > 0) {
+            if (position != null && position.Count > 0) {
                 if (Height <= 0 && Time > maxHeight * speed + MaxTime) {
                     for (int i = 0; i < 6; i++) {
                         Dust.NewDustPerfect(position[position.Count - 1] + Main.rand.NextVector2Circular(12, 18) + Vector2.UnitY * 16, DustID.Stone, Main.rand.NextVector2Circular(2, 2) - Vector2.UnitY * 3, 0, new Color(215, 200, 255), 1.5f);
@@ -122,7 +132,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
         public override void ModifyDamageHitbox(ref Rectangle hitbox)
         {
-            if (position.Count > 2) {
+            if (position != null && position.Count > 2) {
                 if (Height > 0 && Time < maxHeight * speed + MaxTime) {
                     hitbox.Y = (int)(Projectile.Bottom.Y - 35 * (maxHeight - Height));
                     hitbox.Height = (int)(35 * (maxHeight - Height));
@@ -151,7 +161,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
             }
 
-            if (position.Count > 2) {
+            if (position != null && position.Count > 2) {
                 for (int i = position.Count - 1; i > 0; i--) {
                     Rectangle frame = texture.Frame(4, 1, variant[i], 0);
                     float rockScale = scale[i] + (float)Math.Sin((time[i] * 0.1f + i * 0.1f) % MathHelper.TwoPi) * 0.1f;
