@@ -13,7 +13,7 @@ public class ParticleSystem
         particles = new HashSet<Particle>();
     }
 
-    private HashSet<Particle> particles;
+    public HashSet<Particle> particles;
 
     public void Add(Particle particle)
     {
