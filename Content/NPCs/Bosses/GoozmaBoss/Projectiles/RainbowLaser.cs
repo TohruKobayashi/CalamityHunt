@@ -60,7 +60,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             }
 
             for (int i = 0; i < 3; i++) {
-                if (Main.rand.NextBool(5)) {
+                if (Main.rand.NextBool(15)) {
                     CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                         particle.position = Projectile.Center - Projectile.velocity * i / 3f;
                         particle.velocity = Projectile.velocity * 0.5f;

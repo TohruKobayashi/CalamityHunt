@@ -81,7 +81,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
                 Projectile.velocity.Y *= 1.007f;
 
-                if (Main.rand.NextBool(5)) {
+                if (Main.rand.NextBool(10)) {
                     CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                         particle.position = Projectile.Center + Projectile.velocity;
                         particle.velocity = Main.rand.NextVector2Circular(2, 2);
@@ -135,7 +135,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                     float size = Main.rand.NextFloat(4f, 5f) + i * 2f;
                     float rotation = Main.rand.NextFloat(-2f, 2f);
 
-                    for (int j = 0; j < 30; j++) {
+                    for (int j = 0; j < 15; j++) {
                         Color glowColor = new GradientColor(SlimeUtils.GoozColors, 2f, 2f).ValueAt(j * 30f + i);
                         glowColor.A /= 2;
                         Vector2 outward = new Vector2(size + Main.rand.NextFloat(), 0).RotatedBy(MathHelper.TwoPi / 30f * j);
@@ -166,7 +166,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 SoundEngine.PlaySound(dartSound.WithVolumeScale(0.8f));
             }
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 8; i++) {
                 CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = Main.rand.NextVector2Circular(10, 10);
@@ -175,7 +175,9 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                     particle.colorData = new ColorOffsetData(true, Projectile.localAI[0]);
                 }));
 
-                Dust.NewDustPerfect(Projectile.Center, DustID.TintableDust, Main.rand.NextVector2Circular(4, 4), 100, Color.Black, 1.5f).noGravity = true;
+                if (!Main.rand.NextBool(2)) {
+                    Dust.NewDustPerfect(Projectile.Center, 4, Main.rand.NextVector2Circular(3, 3), 100, Color.Black, 1.5f).noGravity = true;
+                }
             }
         }
 

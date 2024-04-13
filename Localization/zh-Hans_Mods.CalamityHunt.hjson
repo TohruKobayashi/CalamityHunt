@@ -828,6 +828,15 @@ Configs: {
 			// Label: Toggle Photosensitive Effects
 			// Tooltip: Disables certain effects which may trigger photosensitivity
 		}
+
+		debugMode: {
+			// Label: Debug Mode
+			/* Tooltip:
+				'''
+				Enables features optimized for testing game mechanics
+				Not recommended for usage by players
+				''' */
+		}
 	}
 }
 

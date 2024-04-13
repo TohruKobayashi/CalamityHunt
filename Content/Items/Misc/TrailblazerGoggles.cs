@@ -1,5 +1,6 @@
 ﻿using CalamityHunt.Common.Graphics.RenderTargets;
 using CalamityHunt.Common.Players;
+using CalamityHunt.Common.Systems;
 using CalamityHunt.Common.Systems.Particles;
 using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Items.Rarities;
@@ -33,20 +34,22 @@ public class TrailblazerGoggles : ModItem
         }
     }
 
-    public override void HoldItem(Player player)
+    public override void UpdateEquip(Player player)
     {
-        Main.NewText("Current particles: " + CalamityHunt.particles.particles.Count);
-        Main.NewText("Current bg particles: " + CalamityHunt.particlesBehindEntities.particles.Count);
-        Main.NewText("Current metaballs: " + CosmosMetaball.particles.particles.Count);
-        int dustc = 0;
-        foreach (Dust d in Main.dust) {
-            if (d.active)
-                dustc++;
-        }
-        Main.NewText("Current dust: " + dustc);
-    }
+        UpdateVanity(player);
 
-    public override void UpdateEquip(Player player) => UpdateVanity(player);
+        if (Config.Instance.debugMode) {
+            Main.NewText("Current particles: " + CalamityHunt.particles.particles.Count);
+            Main.NewText("Current bg particles: " + CalamityHunt.particlesBehindEntities.particles.Count);
+            Main.NewText("Current metaballs: " + CosmosMetaball.particles.particles.Count);
+            int dustc = 0;
+            foreach (Dust d in Main.dust) {
+                if (d.active)
+                    dustc++;
+            }
+            Main.NewText("Current dust: " + dustc);
+        }
+    }
 
     public override void UpdateVanity(Player player) => player.GetModPlayer<VanityPlayer>().trailblazerGoggles = true;
 }

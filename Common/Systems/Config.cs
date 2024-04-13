@@ -12,6 +12,13 @@ public class Config : ModConfig
     [DefaultValue(true)]
     public bool shadowspecCurse;
 
+    /* DEBUG MODE DOCUMENTATION 
+     * -trailblazer goggles provide debug info about particles, dust, and metaballs when worn
+     * -bad apple gains the ability to do things while held! use this to test whatever you want!
+     */
+    [DefaultValue(false)]
+    public bool debugMode;
+
     [Header("$Mods.CalamityHunt.Config.VisualHeader")]
     [DefaultValue(true)]
     public bool photosensitiveToggle { get; set; }

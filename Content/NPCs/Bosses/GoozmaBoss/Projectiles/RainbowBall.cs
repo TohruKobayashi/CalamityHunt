@@ -61,13 +61,15 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * 13 * (1f + Utils.GetLerpValue(0, 600, Projectile.Distance(Main.player[target].MountedCenter), true) * 0.5f);
             }
 
-            CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                particle.position = Projectile.Center + Main.rand.NextVector2Circular(30, 30) + Projectile.velocity;
-                particle.velocity = -Projectile.velocity * 0.5f;
-                particle.scale = 2f * Projectile.scale;
-                particle.color = Color.White;
-                particle.colorData = new ColorOffsetData(true, Projectile.localAI[0]);
-            }));
+            if (Main.rand.NextBool(2)) {
+                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                    particle.position = Projectile.Center + Main.rand.NextVector2Circular(30, 30) + Projectile.velocity;
+                    particle.velocity = -Projectile.velocity * 0.5f;
+                    particle.scale = 2f * Projectile.scale;
+                    particle.color = Color.White;
+                    particle.colorData = new ColorOffsetData(true, Projectile.localAI[0]);
+                }));
+            }
 
             for (int i = ProjectileID.Sets.TrailCacheLength[Type] - 1; i > 0; i--) {
                 Projectile.oldPos[i] = Vector2.Lerp(Projectile.oldPos[i], Projectile.oldPos[i - 1], 0.66f);
@@ -88,7 +90,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
         public override void OnKill(int timeLeft)
         {
-            for (int i = 0; i < 40; i++) {
+            for (int i = 0; i < 20; i++) {
                 CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = -Projectile.velocity * 0.2f + Main.rand.NextVector2Circular(3, 3);
