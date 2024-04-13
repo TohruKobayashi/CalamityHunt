@@ -341,7 +341,6 @@ public class FlyingSlimeLoader : ILoadable
             new FlyingSlimeData("MireSlime", 5000f, Conditions.IsGFBWorld, NPCID.None, Color.White, dustMethod: DustMethods.Default, speed: 1f, load: true),
             new FlyingSlimeData("InfernoSlime", 5000f, Conditions.IsGFBWorld, NPCID.None, Color.White, dustMethod: DustMethods.Default, speed: 1f, load: true),
             new FlyingSlimeData("OilSlime", 5000f, Conditions.IsGFBWorld, NPCID.None, Color.White, dustMethod: DustMethods.Default, speed: 1f, load: true),
-            new FlyingSlimeData("WhiteSlime", 5000f, Conditions.IsGFBWorld, NPCID.None, Color.White, dustMethod: DustMethods.Default, speed: 1f, load: true)
         };
         /*
         if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
