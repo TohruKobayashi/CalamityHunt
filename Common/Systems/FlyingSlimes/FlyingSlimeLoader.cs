@@ -342,45 +342,52 @@ public class FlyingSlimeLoader : ILoadable
             new FlyingSlimeData("InfernoSlime", 5000f, Conditions.IsGFBWorld, NPCID.None, Color.White, dustMethod: DustMethods.Default, speed: 1f, load: true),
             new FlyingSlimeData("OilSlime", 5000f, Conditions.IsGFBWorld, NPCID.None, Color.White, dustMethod: DustMethods.Default, speed: 1f, load: true),
         };
-        /*
-        if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
-            flyingSlimeDataInstances.AddRange(new List<FlyingSlimeData>()
-            {
-                new FlyingSlimeData("AeroSlime", 800f, Conditions.CalamityEvil, calamity.Find<ModNPC>("AeroSlime").Type, Color.White, load: true),
-                new FlyingSlimeData("EbonianBlightSlime", 1500f, Conditions.None, calamity.Find<ModNPC>("EbonianBlightSlime").Type, Color.White, load: true),
-                new FlyingSlimeData("CrimulanBlightSlime", 1500f, Conditions.None, calamity.Find<ModNPC>("CrimulanBlightSlime").Type, Color.White, load: true),
-                new FlyingSlimeData("CorruptSlimeSpawn", 700f, Conditions.None, calamity.Find<ModNPC>("CorruptSlimeSpawn2").Type, Color.White, load: true),
-                new FlyingSlimeData("CorruptSlimeSpawnWinged", 700f, Conditions.None, calamity.Find<ModNPC>("CorruptSlimeSpawn").Type, Color.White, load: true),
-                new FlyingSlimeData("CrimsonSlimeSpawn", 700f, Conditions.None, calamity.Find<ModNPC>("CrimsonSlimeSpawn").Type, Color.White, load: true),
-                new FlyingSlimeData("CrimsonSlimeSpawnSpiked", 700f, Conditions.None, calamity.Find<ModNPC>("CrimsonSlimeSpawn2").Type, Color.White, load: true),
-                new FlyingSlimeData("AstralSlime", 1000f, Conditions.IsHardmode, calamity.Find<ModNPC>("AstralSlime").Type, Color.White, load: true),
-                new FlyingSlimeData("CryoSlime", 1000f, Conditions.Cryonic, calamity.Find<ModNPC>("CryoSlime").Type, Color.White, load: true),
-                new FlyingSlimeData("IrradiatedSlime", 800f, Conditions.IsAquaticScourgeDead, calamity.Find<ModNPC>("IrradiatedSlime").Type, Color.White, load: true),
-                new FlyingSlimeData("CharredSlime", 1000f, Conditions.IsHardmode, calamity.Find<ModNPC>("InfernalCongealment").Type, Color.White, load: true),
-                new FlyingSlimeData("PerennialSlime", 1000f, Conditions.IsPlanteraDead, calamity.Find<ModNPC>("PerennialSlime").Type, Color.White, load: true),
-                new FlyingSlimeData("AureusSpawnSlime", 3000f, Conditions.IsHardmode, calamity.Find<ModNPC>("AureusSpawn").Type, Color.White, load: true, specialDraw: DrawMethods.DrawAureusSpawn, extraData: () => Main.rand.Next(4)),
-                new FlyingSlimeData("PestilentSlime", 800f, Conditions.IsGolemDead, calamity.Find<ModNPC>("PestilentSlime").Type, Color.White, load: true),
-                new FlyingSlimeData("BloomSlime", 1000f, Conditions.IsProvidenceDead, calamity.Find<ModNPC>("BloomSlime").Type, Color.White, load: true),
-                new FlyingSlimeData("GammaSlime", 800f, Conditions.IsPolterghastDead, calamity.Find<ModNPC>("GammaSlime").Type, Color.White, load: true),
-                new FlyingSlimeData("CragmawMire", 5000f, Conditions.IsPolterghastDead, calamity.Find<ModNPC>("CragmawMire").Type, Color.White, load: true)
-            });
-        }
-
-        if (ModLoader.TryGetMod(HUtils.CatalystMod, out Mod catalyst)) {
-            flyingSlimeDataInstances.AddRange(new List<FlyingSlimeData>() {
-                new FlyingSlimeData("WulfrumSlime", 800f, Conditions.None, catalyst.Find<ModNPC>("WulfrumSlime").Type, Color.White, load: true),
-                new FlyingSlimeData("AscendedAstralSlime", 1500f, Conditions.None, catalyst.Find<ModNPC>("AscendedAstralSlime").Type, Color.White, load: true),
-                new FlyingSlimeData("NovaSlime", 700f, Conditions.IsAstrageldonDead, catalyst.Find<ModNPC>("NovaSlime").Type, Color.White, load: true),
-                new FlyingSlimeData("NovaSlimer", 700f, Conditions.IsAstrageldonDead, catalyst.Find<ModNPC>("NovaSlimer").Type, Color.White, load: true),
-                new FlyingSlimeData("MetanovaSlime", 1000f, Conditions.IsAstrageldonDead, catalyst.Find<ModNPC>("MetanovaSlime").Type, Color.White, load: true)
-            });
-        }
-        */
+        
         flyingSlimeDataInstances.OrderBy(n => n.Type);
     }
 
     public void Unload()
     {
         flyingSlimeDataInstances.Clear();
+    }
+
+    // Load crossmod slimes after everything else has loaded
+    public class LoadCalamitySlimes : ModSystem
+    {
+        public override void PostSetupContent()
+        {
+            if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
+                flyingSlimeDataInstances.AddRange(new List<FlyingSlimeData>()
+            {
+                new FlyingSlimeData("AeroSlime", 800f, Conditions.CalamityEvil, calamity.Find<ModNPC>("AeroSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("EbonianBlightSlime", 1500f, Conditions.None, calamity.Find<ModNPC>("EbonianBlightSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("CrimulanBlightSlime", 1500f, Conditions.None, calamity.Find<ModNPC>("CrimulanBlightSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("CorruptSlimeSpawn", 700f, Conditions.None, calamity.Find<ModNPC>("CorruptSlimeSpawn2").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("CorruptSlimeSpawnWinged", 700f, Conditions.None, calamity.Find<ModNPC>("CorruptSlimeSpawn").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("CrimsonSlimeSpawn", 700f, Conditions.None, calamity.Find<ModNPC>("CrimsonSlimeSpawn").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("CrimsonSlimeSpawnSpiked", 700f, Conditions.None, calamity.Find<ModNPC>("CrimsonSlimeSpawn2").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("AstralSlime", 1000f, Conditions.IsHardmode, calamity.Find<ModNPC>("AstralSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("CryoSlime", 1000f, Conditions.Cryonic, calamity.Find<ModNPC>("CryoSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("IrradiatedSlime", 800f, Conditions.IsAquaticScourgeDead, calamity.Find<ModNPC>("IrradiatedSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("CharredSlime", 1000f, Conditions.IsHardmode, calamity.Find<ModNPC>("InfernalCongealment").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("PerennialSlime", 1000f, Conditions.IsPlanteraDead, calamity.Find<ModNPC>("PerennialSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("AureusSpawnSlime", 3000f, Conditions.IsHardmode, calamity.Find<ModNPC>("AureusSpawn").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod), specialDraw: DrawMethods.DrawAureusSpawn, extraData: () => Main.rand.Next(4)),
+                new FlyingSlimeData("PestilentSlime", 800f, Conditions.IsGolemDead, calamity.Find<ModNPC>("PestilentSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("BloomSlime", 1000f, Conditions.IsProvidenceDead, calamity.Find<ModNPC>("BloomSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("GammaSlime", 800f, Conditions.IsPolterghastDead, calamity.Find<ModNPC>("GammaSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
+                new FlyingSlimeData("CragmawMire", 5000f, Conditions.IsPolterghastDead, calamity.Find<ModNPC>("CragmawMire").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod))
+            });
+            }
+
+            if (ModLoader.TryGetMod(HUtils.CatalystMod, out Mod catalyst)) {
+                flyingSlimeDataInstances.AddRange(new List<FlyingSlimeData>() {
+                new FlyingSlimeData("WulfrumSlime", 800f, Conditions.None, catalyst.Find<ModNPC>("WulfrumSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CatalystMod)),
+                new FlyingSlimeData("AscendedAstralSlime", 1500f, Conditions.None, catalyst.Find<ModNPC>("AscendedAstralSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CatalystMod)),
+                new FlyingSlimeData("NovaSlime", 700f, Conditions.IsAstrageldonDead, catalyst.Find<ModNPC>("NovaSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CatalystMod)),
+                new FlyingSlimeData("NovaSlimer", 700f, Conditions.IsAstrageldonDead, catalyst.Find<ModNPC>("NovaSlimer").Type, Color.White, load: ModLoader.HasMod(HUtils.CatalystMod)),
+                new FlyingSlimeData("MetanovaSlime", 1000f, Conditions.IsAstrageldonDead, catalyst.Find<ModNPC>("MetanovaSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CatalystMod))
+            });
+            }
+        }
     }
 }
