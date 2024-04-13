@@ -190,16 +190,6 @@ public class FlyingSlimeLoader : ILoadable
             drawData.Draw(spriteBatch);
             Main.pixelShader.CurrentTechnique.Passes[0].Apply();
         }
-
-        public static void DrawAureusSpawn(FlyingSlimeData data, SpriteBatch spriteBatch, Vector2 position, float rotation, float scale, float progress, Color color)
-        {
-            Texture2D texture = AssetDirectory.Textures.FlyingSlime[data.Type].Value;
-
-            if (data.ExtraData is int value) {
-                Rectangle aureusFrame = texture.Frame(1, value, 0, 0);
-                spriteBatch.Draw(texture, position, aureusFrame, color, rotation, aureusFrame.Size() / 2, scale, 0, 0);
-            }
-        }
     }
 
     private static class DustMethods
@@ -371,7 +361,7 @@ public class FlyingSlimeLoader : ILoadable
                 new FlyingSlimeData("IrradiatedSlime", 800f, Conditions.IsAquaticScourgeDead, calamity.Find<ModNPC>("IrradiatedSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
                 new FlyingSlimeData("CharredSlime", 1000f, Conditions.IsHardmode, calamity.Find<ModNPC>("InfernalCongealment").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
                 new FlyingSlimeData("PerennialSlime", 1000f, Conditions.IsPlanteraDead, calamity.Find<ModNPC>("PerennialSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
-                new FlyingSlimeData("AureusSpawnSlime", 3000f, Conditions.IsHardmode, calamity.Find<ModNPC>("AureusSpawn").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod), specialDraw: DrawMethods.DrawAureusSpawn, extraData: () => Main.rand.Next(4)),
+                new FlyingSlimeData("AureusSpawnSlime", 3000f, Conditions.IsHardmode, calamity.Find<ModNPC>("AureusSpawn").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
                 new FlyingSlimeData("PestilentSlime", 800f, Conditions.IsGolemDead, calamity.Find<ModNPC>("PestilentSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
                 new FlyingSlimeData("BloomSlime", 1000f, Conditions.IsProvidenceDead, calamity.Find<ModNPC>("BloomSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),
                 new FlyingSlimeData("GammaSlime", 800f, Conditions.IsPolterghastDead, calamity.Find<ModNPC>("GammaSlime").Type, Color.White, load: ModLoader.HasMod(HUtils.CalamityMod)),

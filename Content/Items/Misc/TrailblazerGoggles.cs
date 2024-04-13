@@ -1,4 +1,5 @@
 ﻿using CalamityHunt.Common.Players;
+using CalamityHunt.Common.Systems.Particles;
 using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Items.Rarities;
 using Microsoft.Xna.Framework.Graphics;
@@ -29,6 +30,11 @@ public class TrailblazerGoggles : ModItem
             calamity.TryFind("Violet", out r);
             Item.rare = r.Type;
         }
+    }
+
+    public override void HoldItem(Player player)
+    {
+        Main.NewText("Current particles: " + CalamityHunt.particles.particles.Count);
     }
 
     public override void UpdateEquip(Player player) => UpdateVanity(player);
