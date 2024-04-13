@@ -110,32 +110,32 @@ namespace CalamityHunt.Content.Tiles
                         packet.Write((short)top);
                         packet.Send();
                     }
-                    
 
-                    //if (player.HasItem(ModContent.ItemType<SludgeFocus>())) {
-                    //    if (Main.netMode != NetmodeID.MultiplayerClient) {
-                    //        NPC.NewNPCDirect(Entity.GetSource_NaturalSpawn(), new Vector2(center * 16 - 8, top * 16), ModContent.NPCType<PluripotentSpawn>());
+
+                    //if (player.hasitem(modcontent.itemtype<sludgefocus>())) {
+                    //    if (main.netmode != netmodeid.multiplayerclient) {
+                    //        npc.newnpcdirect(entity.getsource_naturalspawn(), new vector2(center * 16 - 8, top * 16), modcontent.npctype<pluripotentspawn>());
                     //    }
                     //}
-                    //else if (!Main.slimeRain) {
-                    //    if (player.ConsumeItem(ModContent.ItemType<GelatinousCatalyst>())) {
-                    //        foreach (Vector2 position in GoozmaSystem.slimeStatuePoints) {
+                    //else if (!main.slimerain) {
+                    //    if (player.consumeitem(modcontent.itemtype<gelatinouscatalyst>())) {
+                    //        foreach (vector2 position in goozmasystem.slimestatuepoints) {
                     //            for (int r = 0; r < 5; r++) {
-                    //                Dust d = Dust.NewDustDirect(position - new Vector2(16, 0), 32, 38, DustID.TintableDust, 0, -Main.rand.NextFloat(2f, 5f), 160, new Color(200, 200, 255), 1f + Main.rand.NextFloat());
-                    //                d.noGravity = true;
+                    //                dust d = dust.newdustdirect(position - new vector2(16, 0), 32, 38, dustid.tintabledust, 0, -main.rand.nextfloat(2f, 5f), 160, new color(200, 200, 255), 1f + main.rand.nextfloat());
+                    //                d.nogravity = true;
                     //            }
                     //        }
 
                     //        for (int r = 0; r < 15; r++) {
-                    //            Dust d = Dust.NewDustDirect(GoozmaSystem.ninjaStatuePoint - new Vector2(32, 4), 64, 92, DustID.TintableDust, 0, -Main.rand.NextFloat(2f, 5f), 160, new Color(200, 200, 255), 1f + Main.rand.NextFloat());
-                    //            d.noGravity = true;
+                    //            dust d = dust.newdustdirect(goozmasystem.ninjastatuepoint - new vector2(32, 4), 64, 92, dustid.tintabledust, 0, -main.rand.nextfloat(2f, 5f), 160, new color(200, 200, 255), 1f + main.rand.nextfloat());
+                    //            d.nogravity = true;
                     //        }
 
-                    //        Main.StartSlimeRain(true);
-                    //        NetMessage.SendData(MessageID.SetMiscEventValues);
+                    //        main.startslimerain(true);
+                    //        netmessage.senddata(messageid.setmisceventvalues);
 
-                    //        SoundStyle spawnSound = AssetDirectory.Sounds.SlimeRainActivate;
-                    //        SoundEngine.PlaySound(AssetDirectory.Sounds.SlimeRainActivate, new Vector2(center * 16, (top - 1) * 16));
+                    //        soundstyle spawnsound = assetdirectory.sounds.slimerainactivate;
+                    //        soundengine.playsound(assetdirectory.sounds.slimerainactivate, new vector2(center * 16, (top - 1) * 16));
                     //    }
                     //}
                 }

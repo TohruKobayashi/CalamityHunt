@@ -31,7 +31,7 @@ namespace CalamityHunt.Content.Items.Misc
         {
             
             if (time == 0) {
-                for (int i = 0; i < 10000; i++) {
+                for (int i = 0; i < 2500; i++) {
                     CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                         particle.position = player.position;
                         particle.velocity = new Vector2(0, 0);
