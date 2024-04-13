@@ -39,6 +39,12 @@ public class TrailblazerGoggles : ModItem
         UpdateVanity(player);
 
         if (Config.Instance.debugMode) {
+            Main.NewText("");
+            Main.NewText("");
+            Main.NewText("");
+            Main.NewText("");
+            Main.NewText("");
+            Main.NewText("");
             Main.NewText("Current particles: " + CalamityHunt.particles.particles.Count);
             Main.NewText("Current bg particles: " + CalamityHunt.particlesBehindEntities.particles.Count);
             Main.NewText("Current metaballs: " + CosmosMetaball.particles.particles.Count);

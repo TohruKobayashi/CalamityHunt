@@ -165,7 +165,10 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.ByCondition(new GoozmaSoulDropRule(), ModContent.ItemType<GoozmaSoul>()));
-        npcLoot.Add(ItemDropRule.ByCondition(new GoozmaDownedDropRule(), ModContent.ItemType<GoozmaLore>()));
+        
+        if (ModLoader.HasMod(HUtils.CalamityMod)) {
+            npcLoot.Add(ItemDropRule.ByCondition(new GoozmaDownedDropRule(), ModContent.ItemType<GoozmaLore>()));
+        }
         npcLoot.Add(ItemDropRule.ByCondition(new ZenithWorldDropRule(), ModContent.ItemType<Goozmaga>()));
 
         if (Main.rand.NextBool(20)) {
