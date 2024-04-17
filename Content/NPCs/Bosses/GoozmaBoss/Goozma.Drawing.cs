@@ -156,8 +156,8 @@ public partial class Goozma : ModNPC
 
             spriteBatch.Draw(sparkle, NPC.Center - screenPos + realEyeOffset, sparkle.Frame(), glowColor * 0.15f, eyeRot + MathHelper.PiOver2, sparkle.Size() * 0.5f, eyeScale * new Vector2(0.33f, 3f) + new Vector2(0, eyePower.Y), 0, 0);
             spriteBatch.Draw(sparkle, NPC.Center - screenPos + realEyeOffset, sparkle.Frame(), glowColor * 0.15f, eyeRot, sparkle.Size() * 0.5f, eyeScale * new Vector2(0.33f, 4f) + new Vector2(0, eyePower.X), 0, 0);
-            spriteBatch.Draw(sparkle, NPC.Center - screenPos + realEyeOffset, sparkle.Frame(), glowColor * 0.15f, eyeRot + MathHelper.PiOver4, sparkle.Size() * 0.5f, eyeScale * new Vector2(0.33f, 3f) + new Vector2(0, eyePower.X), 0, 0);
-            spriteBatch.Draw(sparkle, NPC.Center - screenPos + realEyeOffset, sparkle.Frame(), glowColor * 0.15f, eyeRot - MathHelper.PiOver4, sparkle.Size() * 0.5f, eyeScale * new Vector2(0.33f, 3f) + new Vector2(0, eyePower.Y), 0, 0);
+            //spriteBatch.Draw(sparkle, NPC.Center - screenPos + realEyeOffset, sparkle.Frame(), glowColor * 0.15f, eyeRot + MathHelper.PiOver4, sparkle.Size() * 0.5f, eyeScale * new Vector2(0.33f, 3f) + new Vector2(0, eyePower.X), 0, 0);
+            //spriteBatch.Draw(sparkle, NPC.Center - screenPos + realEyeOffset, sparkle.Frame(), glowColor * 0.15f, eyeRot - MathHelper.PiOver4, sparkle.Size() * 0.5f, eyeScale * new Vector2(0.33f, 3f) + new Vector2(0, eyePower.Y), 0, 0);
 
             spriteBatch.Draw(glow, NPC.Center - screenPos + realEyeOffset, null, glowColor * 0.3f, extraTilt + NPC.rotation, glow.Size() * 0.5f, 2f * eyeScale, 0, 0);
         }
@@ -201,7 +201,7 @@ public partial class Goozma : ModNPC
     public static RenderTargetDrawContent cordContent;
     public VertexStrip soulStrip;
     public VertexStrip cordStrip;
-
+    //move all this to asset dir 
     private void LoadAssets()
     {
         dressTexture = AssetUtilities.RequestImmediate<Texture2D>(Texture + "Dress").Value;
@@ -237,9 +237,9 @@ public partial class Goozma : ModNPC
             Color color = Color.White;
             Vector2 velocity = new Vector2(NPC.velocity.X * NPC.direction, -NPC.velocity.Y);
             Vector2 tentacleVel = new Vector2(-tentacleVelocity.X * NPC.direction, tentacleVelocity.Y);
-            float tilt = -extraTilt * NPC.direction + 0.2f;
+            float tilt = -extraTilt * NPC.direction;
 
-            Vector2 crownPos = position - new Vector2(6, 44).RotatedBy(tilt * 0.8f) * headScale;
+            Vector2 crownPos = position - new Vector2(-4, 44).RotatedBy(tilt * 0.8f) * headScale;
             Vector2 dressPos = position + new Vector2(4, 16).RotatedBy(-tilt * 0.4f) * headScale;
 
             Vector2 basePos = position + new Vector2(0, 10).RotatedBy(-tilt * 0.4f);

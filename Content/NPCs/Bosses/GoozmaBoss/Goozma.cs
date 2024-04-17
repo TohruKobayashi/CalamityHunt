@@ -494,7 +494,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 NPC.direction = -1;
                 //NPC.velocity.X = Utils.GetLerpValue(spawnDelay + 3, spawnDelay - 5, Time, true) * (MathF.Cos(Time * MathHelper.Pi / spawnDelay * 2f + 0.33f)) * -20f;
                 //NPC.velocity.Y = Utils.GetLerpValue(spawnDelay + 3, spawnDelay / 2f, Time, true) * (MathF.Cos(Time * MathHelper.Pi / spawnDelay * 4f + 0.1f) - Utils.GetLerpValue(spawnDelay / 2.2f, spawnDelay / 1.8f, Time, true)) * 17f;
-                eyePower = new Vector2(1.3f * Utils.GetLerpValue(spawnDelay - 1, spawnDelay + 10, Time, true) * (1f + Utils.GetLerpValue(spawnDelay + 80, spawnDelay + 50, Time, true) * MathF.Sin(Time) * 0.3f));
+                eyePower = Vector2.One * 0.8f;
                 //NPC.scale = 0.6f + MathF.Sqrt(Utils.GetLerpValue(spawnDelay * 0.2f, spawnDelay, Time, true)) * 0.4f;
 
                 if (Time < spawnDelay) {
@@ -852,7 +852,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 //    }
                 //}
 
-                eyePower = Vector2.One * 1.2f;
+                //eyePower = Vector2.One * 1.2f;
 
                 break;
 
@@ -1499,9 +1499,9 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     NPC.netUpdate = true;
                 }
 
-                if (Time % 120 == 0) {
-                    Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero), ModContent.ProjectileType<GooLightning>(), GetDamage(3), 0, -1, -50, 1500, 0);
-                }
+                //if (Time % 120 == 0) {
+                //    Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero), ModContent.ProjectileType<GooLightning>(), GetDamage(3), 0, -1, -50, 1500, 0);
+                //}
 
                 break;
 
@@ -1582,9 +1582,9 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             hitDirection = Vector2.Zero;
         }
 
-        //if (Phase != -1) {
-        //    Phase = -22;
-        //}
+        if (Phase != -1) {
+            Phase = -22;
+        }
     }
 
     private void KillSlime(int index)
