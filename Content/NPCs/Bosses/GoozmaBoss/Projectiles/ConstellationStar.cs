@@ -79,7 +79,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 }));
             }
 
-            CosmosMetaball.particles.Add(Particle.Create<SmokeSplatterParticle>(particle => {
+            CosmosMetaball.particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
                 particle.position = Projectile.Center;
                 particle.velocity = Main.rand.NextVector2Circular(4, 4);
                 particle.scale = Main.rand.NextFloat(1f, 2f) * Projectile.scale;

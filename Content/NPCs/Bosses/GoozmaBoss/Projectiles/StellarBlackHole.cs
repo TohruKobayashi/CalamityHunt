@@ -90,7 +90,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Projectile.rotation += 0.1f * Projectile.direction;
 
             for (int i = 0; i < 11; i++) {
-                CosmosMetaball.particles.Add(Particle.Create<SmokeSplatterParticle>(particle => {
+                CosmosMetaball.particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = Main.rand.NextVector2Circular(90, 90) * Utils.GetLerpValue(0, 50, Time, true);
                     particle.scale = Main.rand.NextFloat(20f, 30f) * Utils.GetLerpValue(-30, 50, Time, true);

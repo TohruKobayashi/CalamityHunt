@@ -1582,9 +1582,9 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             hitDirection = Vector2.Zero;
         }
 
-        if (Phase != -1) {
-            Phase = -22;
-        }
+        //if (Phase != -1) {
+        //    Phase = -22;
+        //}
     }
 
     private void KillSlime(int index)

@@ -33,7 +33,7 @@ namespace CalamityHunt.Content.Items.Misc
             if (Config.Instance.debugMode) {
                 if (time == 0) {
                     for (int i = 0; i < 15; i++) {
-                        CosmosMetaball.particles.Add(Particle.Create<SmokeSplatterParticle>(particle => {
+                        CosmosMetaball.particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
                             particle.position = player.Center;
                             particle.velocity = Main.rand.NextVector2Circular(90, 90) * Utils.GetLerpValue(0, 50, 1, true);
                             particle.scale = Main.rand.NextFloat(20f, 30f) * Utils.GetLerpValue(-30, 50, 1, true);

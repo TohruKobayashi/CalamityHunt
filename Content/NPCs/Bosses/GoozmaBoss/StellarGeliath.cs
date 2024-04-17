@@ -112,7 +112,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
         {
             if (NPC.scale > 0.1f) {
                 for (int i = 0; i < 2; i++) {
-                    CosmosMetaball.particles.Add(Particle.Create<SmokeSplatterParticle>(particle => {
+                    CosmosMetaball.particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
                         particle.position = NPC.Center + Main.rand.NextVector2Circular(90, 60) * NPC.scale + NPC.velocity * (i / 6f) * 0.3f;
                         particle.velocity = Main.rand.NextVector2Circular(2, 2) + NPC.velocity * (i / 6f) * 0.5f;
                         particle.scale = Main.rand.NextFloat(2f, 6f) * (0.5f + NPC.scale * 0.5f);

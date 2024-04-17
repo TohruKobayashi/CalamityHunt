@@ -13,10 +13,12 @@ namespace CalamityHunt.Common.Graphics.RenderTargets;
 public class CosmosMetaball : MetaballDrawer
 {
     public static ParticleSystem particles;
+    public static Effect MetaballShader;
 
     public override void Initialize()
     {
         particles = new ParticleSystem();
+        MetaballShader = AssetDirectory.Effects.FlameDissolve.Value;
 
         content.width = Main.screenWidth;
         content.height = Main.screenHeight;
@@ -31,7 +33,9 @@ public class CosmosMetaball : MetaballDrawer
             }
             spriteBatch.End();
 
-            particles.Draw(spriteBatch);
+            MetaballShader.Parameters["uTexture0"].SetValue(AssetDirectory.Textures.Noise[9].Value);
+            MetaballShader.Parameters["uFrameCount"].SetValue(5);
+            particles.Draw(spriteBatch, effect : MetaballShader);
         };
 
         On_Main.UpdateParticleSystems += UpdateCosmosParticleSystem;
