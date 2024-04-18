@@ -52,7 +52,7 @@ public class ParticleSystem
             spriteBatch.End();
         }
 
-        spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, effect, Main.Transform);
+        spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, effect, Main.Transform);
 
         Rectangle checkRect = new Rectangle((int)Main.screenPosition.X, (int)Main.screenPosition.Y, Main.ScreenSize.X, Main.ScreenSize.Y);
         Rectangle particleRect = new Rectangle(0, 0, 400, 400);

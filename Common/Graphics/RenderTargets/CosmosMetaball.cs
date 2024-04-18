@@ -18,7 +18,7 @@ public class CosmosMetaball : MetaballDrawer
     public override void Initialize()
     {
         particles = new ParticleSystem();
-        MetaballShader = AssetDirectory.Effects.FlameDissolve.Value;
+        MetaballShader = AssetDirectory.Effects.FlameDissolveMetaball.Value;
 
         content.width = Main.screenWidth;
         content.height = Main.screenHeight;

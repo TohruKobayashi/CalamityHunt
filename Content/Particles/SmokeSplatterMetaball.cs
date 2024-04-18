@@ -60,17 +60,10 @@ public class SmokeSplatterMetaball : Particle
         Texture2D texture = AssetDirectory.Textures.Particle[Type].Value;
         Rectangle frame = texture.Frame(1, 5, 0, style);
         SpriteEffects flip = direction > 0 ? SpriteEffects.None : SpriteEffects.FlipVertically;
-        Color drawColor = Color.Lerp(color, fadeColor, Utils.GetLerpValue(0f, 0.5f, progress, true));
+        Color scaleProgress = new Color(scale, progress, 0, 1);
         float drawScale = scale * MathF.Sqrt(Utils.GetLerpValue(0f, 6f, time, true)) * (0.4f + progress * 0.5f);
 
-        CosmosMetaball.MetaballShader.Parameters["uTextureScale"].SetValue(new Vector2(2f + scale * 0.07f));
-        CosmosMetaball.MetaballShader.Parameters["uProgress"].SetValue(MathF.Pow(progress, 1.3f));
-        CosmosMetaball.MetaballShader.Parameters["uPower"].SetValue(2f + Utils.GetLerpValue(0.15f, 0.8f, progress, true) * 50f);
-        CosmosMetaball.MetaballShader.Parameters["uNoiseStrength"].SetValue(progress);
-
         Vector2 squish = new Vector2(1f - progress * 0.1f, 1f + progress * 0.1f);
-        spriteBatch.Draw(texture, position - Main.screenPosition, frame, drawColor, rotation, frame.Size() * 0.5f, squish * drawScale * 0.5f, flip, 0);
-
-        Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+        spriteBatch.Draw(texture, position - Main.screenPosition, frame, scaleProgress, rotation, frame.Size() * 0.5f, squish * drawScale * 0.5f, flip, 0);
     }
 }

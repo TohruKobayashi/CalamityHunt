@@ -274,6 +274,7 @@ public static class AssetDirectory
         public static readonly Asset<Effect> BasicTrail = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/BasicTrail");
         public static readonly Asset<Effect> LightningBeam = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/LightningBeam");
         public static readonly Asset<Effect> FlameDissolve = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/FlameDissolve");
+        public static readonly Asset<Effect> FlameDissolveMetaball = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/FlameDissolveMetaball");
 
         // goozma adjacent
         public static readonly Asset<Effect> SlimeMonsoonCloudLayer = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/SlimeMonsoonOldCloudLayer");
