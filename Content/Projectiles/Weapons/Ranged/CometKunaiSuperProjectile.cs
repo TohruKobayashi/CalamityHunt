@@ -61,7 +61,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 }
             }
 
-            Projectile.scale = MathHelper.Lerp(Projectile.scale, 1.1f, 0.1f);
+            //Projectile.scale = MathHelper.Lerp(Projectile.scale, 1.1f, 0.1f);
 
             Player player = Main.player[Projectile.owner];
             bool button = ModLoader.HasMod(HUtils.CalamityMod) ? player.channel : PlayerInput.MouseInfo.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed;
@@ -75,6 +75,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                     }
 
                     player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.ThreeQuarters, MathHelper.Pi - MathHelper.PiOver2 * player.direction * 0.3f + MathF.Sin(Projectile.localAI[0] * 0.22f) * 0.2f);
+                    player.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.ThreeQuarters, MathHelper.Pi - MathHelper.PiOver2 * player.direction * 0.3f + MathF.Sin(Projectile.localAI[0] * 0.22f) * 0.2f);
                     player.SetDummyItemTime(2);
                     player.itemTime = 2;
                     player.itemAnimation = 2;
@@ -87,14 +88,14 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                             particle.velocity = MathHelper.PiOver4.ToRotationVector2();
                             particle.scale = 3f;
                             particle.color = new Color(50, 180, 255, 0);
-                            particle.anchor = () => Projectile.velocity * 10f;
+                            particle.anchor = () => Projectile.velocity * 0.2f;
                         }));
                         CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
                             particle.position = Projectile.Center;
                             particle.velocity = Vector2.Zero;
                             particle.scale = 2f;
                             particle.color = new Color(50, 180, 255, 0);
-                            particle.anchor = () => Projectile.velocity * 10f;
+                            particle.anchor = () => Projectile.velocity * 0.2f;
                         }));
 
                         //sound
@@ -114,7 +115,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 else if (Mode == 2) {
                     Projectile.extraUpdates = 4;
                     Projectile.velocity *= 1.12f;
-                    Projectile.Center = Vector2.Lerp(Projectile.Center, player.MountedCenter + new Vector2(-1 * player.direction, -50), 0.5f);
+                    //Projectile.Center = Vector2.Lerp(Projectile.Center, player.MountedCenter + new Vector2(-1 * player.direction, -50), 0.5f);
 
                     player.ChangeDir(Projectile.velocity.X > 0 ? 1 : -1);
 
@@ -266,6 +267,13 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Texture2D glow = AssetDirectory.Textures.Glow[0].Value;
             Rectangle fireFrame = fireTexture.Frame(1, 3, 0, Projectile.frame);
 
+            if (Mode == 0) {
+                Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, texture.Frame(), Color.RoyalBlue, Projectile.rotation, texture.Size() * new Vector2(0.5f, 0.55f), Projectile.scale * Utils.GetLerpValue(0, 60, MiscTime, true) * 2, 0, 0);
+            }
+            else {
+                Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, texture.Frame(), Color.RoyalBlue, Projectile.rotation, texture.Size() * new Vector2(0.5f, 0.55f), Projectile.scale * 2, 0, 0);
+            }
+
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, texture.Frame(), new Color(0, 70, 100, 0), Projectile.rotation, texture.Size() * new Vector2(0.5f, 0.55f), Projectile.scale * 1.3f, 0, 0);
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, texture.Frame(), Color.White, Projectile.rotation, texture.Size() * new Vector2(0.5f, 0.55f), Projectile.scale, 0, 0);
 
@@ -274,8 +282,9 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
 
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, texture.Frame(), new Color(0, 20, 200, 20), Projectile.rotation * -0.3f, texture.Size() * new Vector2(0.5f, 0.55f), Projectile.scale * 1.5f, 0, 0);
 
-            if (Mode != -1) {
+            if (Mode == 2) {
                 float progress = Utils.GetLerpValue(5, 30, Projectile.localAI[0], true);
+                double transparency = Utils.Lerp(0, 20, 1);
                 Main.EntitySpriteDraw(fireTexture, Projectile.Center - Main.screenPosition, fireFrame, Color.Black * progress * 0.1f, Projectile.velocity.ToRotation() - MathHelper.PiOver2, fireFrame.Size() * new Vector2(0.5f, 0.75f), Projectile.scale * 1.2f, 0, 0);
                 Main.EntitySpriteDraw(fireTexture, Projectile.Center - Main.screenPosition, fireFrame, new Color(0, 20, 200, 20) * progress, Projectile.velocity.ToRotation() - MathHelper.PiOver2, fireFrame.Size() * new Vector2(0.5f, 0.75f), Projectile.scale * 1.3f, 0, 0);
             }

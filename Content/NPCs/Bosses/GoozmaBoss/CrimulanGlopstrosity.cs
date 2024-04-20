@@ -93,6 +93,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             SlamDown = -1
         }
 
+        // time is updated every frame. 60 frames = 1 sec, scuuuuuuuuule!
         public ref float Time => ref NPC.ai[0];
         public ref float Attack => ref NPC.ai[1];
         public ref NPC Host => ref Main.npc[(int)NPC.ai[2]];
@@ -362,14 +363,18 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             }
         }
 
+        // crimson 2
         private void CollidingCrush()
         {
             int waitTime = 70;
+
+            // produce telegraph 
             if (Time == waitTime + 5) {
                 SoundStyle createSound = AssetDirectory.Sounds.GoozmaMinions.CrimslimeTelegraph;
                 SoundEngine.PlaySound(createSound.WithVolumeScale(1.5f), NPC.Center);
             }
 
+            // big jump
             if (Time < 62) {
                 NPC.velocity *= 0.1f;
                 squishFactor = new Vector2(1f + (float)Math.Cbrt(Utils.GetLerpValue(15, 56, Time, true)) * 0.4f, 1f - (float)Math.Sqrt(Utils.GetLerpValue(15, 56, Time, true)) * 0.5f);
@@ -380,11 +385,13 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 }
             }
 
+            // slow down jump and prepare to slam down
             else if (Time < 65) {
                 NPC.velocity.Y = -14;
                 squishFactor = new Vector2(0.5f, 1.4f);
             }
 
+            // SLAM !!
             else if (Time < waitTime + 80) {
                 useNinjaSlamFrame = true;
 
@@ -439,6 +446,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                         SoundStyle slam = AssetDirectory.Sounds.GoozmaMinions.SlimeSlam;
                         SoundEngine.PlaySound(slam, NPC.Center);
 
+                        // summon his minions from the side one-by-one
                         for (int i = 0; i < Main.rand.Next(30, 40); i++) {
                             Vector2 velocity = Main.rand.NextVector2Circular(8, 1) - Vector2.UnitY * Main.rand.NextFloat(7f, 15f);
                             Vector2 position = NPC.Center + Main.rand.NextVector2Circular(1, 50) + new Vector2(velocity.X * 15f, 32f);
@@ -457,6 +465,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 }
             }
 
+            // and now its copy pasted and going thru it again but with mysteriou subtle edits. why not like restart the timer??????????
             int doubleWaitTime = waitTime + 20;
             if (Time > doubleWaitTime + 80 && Time < doubleWaitTime + 150) {
                 if (Time < doubleWaitTime + 100) {
@@ -521,17 +530,18 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                 int count = (int)DifficultyBasedValue(12, death: 16);
                 int time = (int)DifficultyBasedValue(6, 5, 4, 3);
+
                 if (Main.netMode != NetmodeID.MultiplayerClient) {
                     for (int i = 0; i < count; i++) {
                         Projectile leftProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * 130 - 130 * count - 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
                             ai0: -30 - time * i,
-                            ai1: 1);
+                            ai1: -1);
                         //leftProj.ai[0] = -30 - time * i;
                         //leftProj.ai[1] = -1;
                         leftProj.localAI[0] = 1;
                         Projectile rightProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * -130 + 130 * count + 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
                             ai0: -30 - time * i,
-                            ai1: 1);
+                            ai1: -1);
                         //rightProj.ai[0] = -30 - time * i;
                         //rightProj.ai[1] = -1;
                         rightProj.localAI[0] = 1;

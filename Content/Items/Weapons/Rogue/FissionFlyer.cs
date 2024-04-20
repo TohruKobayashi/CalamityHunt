@@ -30,7 +30,7 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
             Item.autoReuse = true;
             Item.shootSpeed = 15f;
             Item.rare = ModContent.RarityType<VioletRarity>();
-            Item.DamageType = DamageClass.Throwing;
+            Item.DamageType = DamageClass.Melee;
             Item.value = Item.sellPrice(gold: 20);
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 DamageClass d;

@@ -30,7 +30,7 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
             Item.autoReuse = true;
             Item.shootSpeed = 5f;
             Item.rare = ModContent.RarityType<VioletRarity>();
-            Item.DamageType = DamageClass.Throwing;
+            Item.DamageType = DamageClass.Ranged;
             Item.value = Item.sellPrice(gold: 20);
 
             if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
@@ -53,13 +53,19 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
         {
             if (player.whoAmI == Main.myPlayer) {
 
-                bool CalamityStealth = (bool)ModLoader.GetMod(HUtils.CalamityMod).Call("CanStealthStrike", player);
+                bool CalamityStealth = false;
+                if (ModLoader.HasMod(HUtils.CalamityMod)) {
+                    CalamityStealth = (bool)ModLoader.GetMod(HUtils.CalamityMod).Call("CanStealthStrike", player);
+                }
+                // if calamity is on, then do when stealthed up. if not, do when rclick
                 if (ModLoader.HasMod(HUtils.CalamityMod) ? CalamityStealth : player.altFunctionUse == 2) {
                     if (player.itemAnimation == player.itemAnimationMax) {
                         Projectile stealthProj = Projectile.NewProjectileDirect(source, position, velocity * 3, ModContent.ProjectileType<CometKunaiSuperProjectile>(), damage * 2, knockback, player.whoAmI);
                         stealthProj.ai[1] = -1;
                         stealthProj.rotation += Main.rand.NextFloat(-1f, 1f);
-                        ModLoader.GetMod(HUtils.CalamityMod).Call("SetStealthProjectile", stealthProj, true);
+                        if (ModLoader.HasMod(HUtils.CalamityMod)) {
+                            ModLoader.GetMod(HUtils.CalamityMod).Call("SetStealthProjectile", stealthProj, true);
+                        }
                     }
                     return false;
                 }

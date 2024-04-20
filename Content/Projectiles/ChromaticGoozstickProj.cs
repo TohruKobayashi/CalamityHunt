@@ -1,4 +1,5 @@
-﻿using CalamityHunt.Common.Systems.Particles;
+﻿using System.Threading;
+using CalamityHunt.Common.Systems.Particles;
 using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
 using CalamityHunt.Content.Particles;
@@ -22,10 +23,12 @@ namespace CalamityHunt.Content.Projectiles
             Projectile.penetrate = -1;
             Projectile.timeLeft = 3600;
         }
+        public override bool? CanCutTiles() => false;
 
         public override void AI()
         {
             Projectile.rotation += Projectile.velocity.Length() * 0.09f * Projectile.direction;
+            Lighting.AddLight(Projectile.position, rainbowGlow.ToVector3());
 
             if (Main.rand.NextBool(5)) {
                 CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
