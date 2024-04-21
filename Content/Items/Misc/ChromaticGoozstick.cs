@@ -35,7 +35,6 @@ namespace CalamityHunt.Content.Items.Misc
             Item.height = 16;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
-            Item.noUseGraphic = true;
             Item.UseSound = SoundID.Item1;
             Item.rare = ModContent.RarityType<VioletRarity>();
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
