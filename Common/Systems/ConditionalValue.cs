@@ -6,6 +6,7 @@ namespace CalamityHunt.Common.Systems
     public class ConditionalValue : ModSystem
     {
         public static bool ExpertMode = false;
+        public static bool MasterMode = false;
         public static bool RevengeanceMode = false;
         public static bool DeathMode = false;
         public static bool BossRush = false;
@@ -18,6 +19,7 @@ namespace CalamityHunt.Common.Systems
                 DeathMode = ((bool)Calamity.Call("GetDifficultyActive", "death") || (bool)Calamity.Call("GetDifficultyActive", "bossrush")) ? true : false;
                 RevengeanceMode = ((bool)Calamity.Call("GetDifficultyActive", "revengeance") || (bool)Calamity.Call("GetDifficultyActive", "bossrush")) ? true : false;
                 ExpertMode = (Main.expertMode || (bool)Calamity.Call("GetDifficultyActive", "bossrush")) ? true : false;
+                MasterMode = (Main.masterMode || (bool)Calamity.Call("GetDifficultyActive", "bossrush")) ? true : false;
             }
             else {
                 RevengeanceMode = Main.expertMode;
@@ -41,10 +43,10 @@ namespace CalamityHunt.Common.Systems
             else if (BossRush && bossrush != null) {
                 return (float)bossrush;
             }
-            else if (DeathMode && Main.masterMode && masterdeath != null) {
+            else if (DeathMode && MasterMode && masterdeath != null) {
                 return (float)masterdeath;
             }
-            else if (RevengeanceMode && Main.masterMode && masterrev != null) {
+            else if (RevengeanceMode && MasterMode && masterrev != null) {
                 return (float)masterrev;
             }
             else if (DeathMode && death != null) {
@@ -53,7 +55,7 @@ namespace CalamityHunt.Common.Systems
             else if (RevengeanceMode && revengeance != null) {
                 return (float)revengeance;
             }
-            else if (Main.masterMode && master != null) {
+            else if (MasterMode && master != null) {
                 return (float)master;
             }
             else if (ExpertMode && expert != null) {
