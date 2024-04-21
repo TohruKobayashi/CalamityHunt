@@ -27,7 +27,7 @@ namespace CalamityHunt.Common.Systems
 
         public static int BalanceToggleValue(int vanilla, int? nonVanilla) => (int)BalanceToggleValue(vanilla, nonVanilla);
 
-        public static float DifficultyBasedValue(float? normal = null, float? expert = null, float? revengeance = null, float? death = null, float? bossrush = null, float? ftw = null, float? gfb = null, float? legendary = null)
+        public static float DifficultyBasedValue(float? normal = null, float? expert = null, float? revengeance = null, float? death = null, float? bossrush = null, float? ftw = null, float? gfb = null, float? legendary = null, float? master = null, float? masterrev = null, float? masterdeath = null)
         {
             if (Main.getGoodWorld && Main.masterMode && RevengeanceMode && legendary != null) {
                 return (float)legendary;
@@ -41,11 +41,20 @@ namespace CalamityHunt.Common.Systems
             else if (BossRush && bossrush != null) {
                 return (float)bossrush;
             }
+            else if (DeathMode && Main.masterMode && masterdeath != null) {
+                return (float)masterdeath;
+            }
+            else if (RevengeanceMode && Main.masterMode && masterrev != null) {
+                return (float)masterrev;
+            }
             else if (DeathMode && death != null) {
                 return (float)death;
             }
             else if (RevengeanceMode && revengeance != null) {
                 return (float)revengeance;
+            }
+            else if (Main.masterMode && master != null) {
+                return (float)master;
             }
             else if (ExpertMode && expert != null) {
                 return (float)expert;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CalamityHunt.Common.Systems;
 using CalamityHunt.Common.Systems.Particles;
 using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Buffs;
@@ -102,6 +103,9 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
                     targetRotation = targetRotation.AngleTowards(Projectile.AngleTo(Main.npc[(int)Owner].GetTargetData().Center), Utils.GetLerpValue(ChargeTime + LaserDuration * 0.1f, ChargeTime, Time, true) * 0.04f + Utils.GetLerpValue(ChargeTime + LaserDuration * 0.3f, ChargeTime + LaserDuration * 0.6f, Time, true) * 0.01f);
                     targetSize = (float)Math.Pow(Utils.GetLerpValue(ChargeTime - 20, ChargeTime + 60, Time, true) * Utils.GetLerpValue(ChargeTime + LaserDuration + 60, ChargeTime + LaserDuration, Time, true), 3f);
+                    if (Main.masterMode && ConditionalValue.RevengeanceMode) {
+                        targetSize *= 2;
+                    }
 
                     float waveChange = MathHelper.SmoothStep(0f, 1f, Utils.GetLerpValue(ChargeTime * 0.8f, ChargeTime + 20, Time, true) * Utils.GetLerpValue(ChargeTime + LaserDuration * 0.9f, ChargeTime + LaserDuration * 0.5f, Time, true));
                     Projectile.rotation = targetRotation + totalOffRot * Projectile.direction * waveChange;
@@ -123,6 +127,9 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
                     Projectile.rotation = Projectile.rotation.AngleLerp(Projectile.AngleTo(Main.npc[(int)Owner].GetTargetData().Center), 0.02f);
                     targetSize = (float)Math.Pow(Utils.GetLerpValue(ChargeTime - 20, ChargeTime + 60, Time, true) * Utils.GetLerpValue(ChargeTime + LaserDuration + 60, ChargeTime + LaserDuration, Time, true), 3f);
+                    if (Main.masterMode && ConditionalValue.RevengeanceMode) {
+                        targetSize *= 2;
+                    }
 
                     if (Time > ChargeTime + LaserDuration - 4 && Time < ChargeTime + LaserDuration - 2) {
                         Time = ChargeTime + LaserDuration - 10;

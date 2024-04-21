@@ -52,7 +52,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             }
 
             if (owner > -1) {
-                int count = (int)Common.Systems.ConditionalValue.DifficultyBasedValue(3, 4, 5);
+                int count = (int)Common.Systems.ConditionalValue.DifficultyBasedValue(3, 4, 5, master: 5, masterrev: 6, masterdeath: 8);
 
                 Vector2 myHome = Main.npc[owner].Center + new Vector2(400 * (float)Math.Sqrt(Utils.GetLerpValue(-65, -40, Time, true)), 0).RotatedBy(Spin + MathHelper.TwoPi / count * WhoAmI);
                 Projectile.Center = Vector2.Lerp(Projectile.Center, myHome, 0.2f);

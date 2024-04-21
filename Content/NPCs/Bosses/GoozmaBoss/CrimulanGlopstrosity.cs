@@ -261,7 +261,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         private void SlamRain()
         {
-            int ceilingCount = (int)DifficultyBasedValue(2, 2, 3, 4);
+            int ceilingCount = (int)DifficultyBasedValue(2, 2, 3, 4, master: 3, masterrev: 4, masterdeath: 6);
 
             if (Time <= ceilingCount * 170) {
                 float localTime = Time % 170;
@@ -314,7 +314,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                         }
 
                         if (localTime == 100) {
-                            int extension = (int)DifficultyBasedValue(10, 12, 16, 18, 20);
+                            int extension = (int)DifficultyBasedValue(10, 12, 16, 18, 20, master: 16, masterrev: 18, masterdeath: 20);
 
                             if (Main.netMode != NetmodeID.MultiplayerClient) {
                                 Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Bottom, Vector2.Zero, ModContent.ProjectileType<CrimulanShockwave>(), 0, 0, ai1: 2500);
@@ -421,8 +421,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     }
 
                     if (Time == waitTime + 60) {
-                        int count = (int)DifficultyBasedValue(12, death: 16);
-                        int time = (int)DifficultyBasedValue(6, 5, 4, 3);
+                        int count = (int)DifficultyBasedValue(12, death: 16, master: 16, masterrev: 18, masterdeath: 20);
+                        int time = (int)DifficultyBasedValue(6, 5, 4, 3, master:4, masterrev: 3, masterdeath: 2);
 
                         if (Main.netMode != NetmodeID.MultiplayerClient) {
                             for (int i = 0; i < count; i++) {
@@ -528,8 +528,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                 squishFactor = new Vector2(1.5f, 0.5f);
 
-                int count = (int)DifficultyBasedValue(12, death: 16);
-                int time = (int)DifficultyBasedValue(6, 5, 4, 3);
+                int count = (int)DifficultyBasedValue(12, death: 16, master: 16, masterrev: 18, masterdeath: 20);
+                int time = (int)DifficultyBasedValue(6, 5, 4, 3, master: 4, masterrev: 3, masterdeath: 2);
 
                 if (Main.netMode != NetmodeID.MultiplayerClient) {
                     for (int i = 0; i < count; i++) {
@@ -560,8 +560,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         private void EndlessChase()
         {
-            int jumpCount = (int)DifficultyBasedValue(8, 9, 10, 11, 12);
-            int jumpTime = (int)DifficultyBasedValue(70, 65, 60, 55);
+            int jumpCount = (int)DifficultyBasedValue(8, 9, 10, 11, 12, master: 10, masterrev: 11, masterdeath: 12);
+            int jumpTime = (int)DifficultyBasedValue(70, 65, 60, 55, master: 60, masterrev: 55, masterdeath: 50);
             float jumpHeight = NPC.height * 6f;
 
             if (Time < 35) {

@@ -109,8 +109,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
         }
 
         if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
-            calamity.Call("SetDebuffVulnerabilities", "poison", false);
-            calamity.Call("SetDebuffVulnerabilities", "heat", true);
+            calamity.Call("SetDebuffVulnerability", "poison", false);
+            calamity.Call("SetDebuffVulnerability", "heat", true);
             calamity.Call("SetDefenseDamageNPC", NPC, true);
 
             NPC.lifeMax = 1787500;
@@ -1050,8 +1050,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                         NPC.dontTakeDamage = false;
 
-                        int dashCount = (int)DifficultyBasedValue(4, 5, 6, 7);
-                        int dashTime = (int)DifficultyBasedValue(110, 100, 90, 80);
+                        int dashCount = (int)DifficultyBasedValue(4, 5, 6, 7, master: 7, masterrev: 8, masterdeath: 9);
+                        int dashTime = (int)DifficultyBasedValue(110, 100, 90, 80, master: 90, masterrev: 80, masterdeath: 70);
 
                         if (Time >= 0) {
                             if (Time <= dashTime * dashCount) {
@@ -1157,8 +1157,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         int waitTimeMultiplier = 7;
                         int waitTime = goozmiteCount * waitTimeMultiplier;
 
-                        goozmiteCount += (int)DifficultyBasedValue(0, 3, 6, 9);
-                        killTime -= (int)DifficultyBasedValue(0, 50, 100, 150);
+                        goozmiteCount += (int)DifficultyBasedValue(0, 3, 6, 9, master: 6, masterrev: 9, masterdeath: 12);
+                        killTime -= (int)DifficultyBasedValue(0, 50, 100, 150, master: 100, masterrev: 150, masterdeath: 180);
 
                         if (Time < 10) {
                             NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(NPC.GetTargetData().Center) * Math.Max(NPC.Distance(NPC.GetTargetData().Center) - 150, 0) * 0.12f, 0.1f);
@@ -2090,7 +2090,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             case SortedProjectileAttackTypes.BurstLightning:
 
                 if (Time % 170 > 130) {
-                    int freq = (int)DifficultyBasedValue(10, 9, 7, 6);
+                    int freq = (int)DifficultyBasedValue(10, 9, 7, 6, master: 7, masterrev: 6, masterdeath: 5);
                     if ((Time % 170) % freq == 0) {
                         SoundEngine.PlaySound(fireballSound, NPC.Center);
 
@@ -2126,7 +2126,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
             case SortedProjectileAttackTypes.DrillDash:
 
-                int dashTime = (int)DifficultyBasedValue(110, 100, 90, 80);
+                int dashTime = (int)DifficultyBasedValue(110, 100, 90, 80, master: 90, masterrev: 80, masterdeath: 70);
 
                 if (Time % dashTime > 24) {
                     if (Time % dashTime == 25) {

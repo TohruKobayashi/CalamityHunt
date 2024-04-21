@@ -234,8 +234,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         private void ToxicBubbles()
         {
-            int jumpCount = (int)DifficultyBasedValue(3, 4, 5, 6);
-            int jumpTime = (int)DifficultyBasedValue(120, 100, 70, 60);
+            int jumpCount = (int)DifficultyBasedValue(3, 4, 5, 6, master: 5, masterrev: 6, masterdeath: 8);
+            int jumpTime = (int)DifficultyBasedValue(120, 100, 70, 60, master: 70, masterrev: 60, masterdeath: 55);
 
             NPC.dontTakeDamage = false;
 
@@ -389,8 +389,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         private void RockPillar()
         {
-            int spikeCount = (int)DifficultyBasedValue(2, 3, 3, 4);
-            int spikeTime = (int)DifficultyBasedValue(140, 130, 120, 120);
+            int spikeCount = (int)DifficultyBasedValue(2, 3, 3, 4, master: 3, masterrev: 4, masterdeath: 6);
+            int spikeTime = (int)DifficultyBasedValue(140, 130, 120, 120, master: 120, masterrev: 110, masterdeath: 100);
 
             NPC.dontTakeDamage = true;
 

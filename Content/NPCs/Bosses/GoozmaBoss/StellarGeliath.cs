@@ -307,7 +307,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             if (Time > 58 && Time < 70) {
                 NPC.scale = MathHelper.SmoothStep(0, 1, Utils.GetLerpValue(70, 62, Time, true));
                 int debrisCount = Main.rand.Next(1, 3);
-                debrisCount += (int)DifficultyBasedValue(0, 1, 1, 2, 3);
+                debrisCount += (int)DifficultyBasedValue(0, 1, 1, 2, 3, master: 1, masterrev: 2, masterdeath: 4);
                 for (int i = 0; i < debrisCount; i++) {
                     Projectile debris = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), NPC.Center + Main.rand.NextVector2Circular(70, 60), NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) + Main.rand.NextVector2Circular(30, 30), ModContent.ProjectileType<StellarDebris>(), GetDamage(3), 0);
                     debris.ai[2] = NPC.whoAmI;
@@ -494,7 +494,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         public void CosmicStomp()
         {
-            int waitTime = (int)DifficultyBasedValue(110, 90, 70, 60);
+            int waitTime = (int)DifficultyBasedValue(110, 90, 70, 60, master: 80, masterrev: 60, masterdeath: 50);
             if (Time < 40) {
                 squishFactor = Vector2.SmoothStep(Vector2.One, new Vector2(1.5f, 0.6f), Time / 40f);
                 if (Time > 38) {
@@ -546,7 +546,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     NPC.localAI[0] = 0;
                     Main.instance.CameraModifiers.Add(new PunchCameraModifier(NPC.Center, Main.rand.NextVector2CircularEdge(3, 3), 8f, 10, 12));
 
-                    int count = (int)DifficultyBasedValue(2, 2, 3, 3, 4);
+                    int count = (int)DifficultyBasedValue(2, 2, 3, 3, 4, master: 3, masterrev: 4, masterdeath: 6);
                     for (int i = 0; i < count; i++) {
                         Vector2 starPosition = new Vector2(Main.rand.Next(-50, 50), Main.rand.Next(-10, 10));
                         Vector2 starVelocity = new Vector2(starPosition.X * 0.2f, -Main.rand.Next(5, 25)) + NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * Main.rand.Next(5);
@@ -829,7 +829,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             float starnessThick = 2f;
             float starnessSize = 0f;
 
-            int cosStompWaitTime = (int)DifficultyBasedValue(100, 90, 80, 60);
+            int cosStompWaitTime = (int)DifficultyBasedValue(100, 90, 80, 60, master: 80, masterrev: 70, masterdeath: 40);
 
             RasterizerState priorRasterizerState = spriteBatch.GraphicsDevice.RasterizerState;
             Rectangle priorScissorRectangle = spriteBatch.GraphicsDevice.ScissorRectangle;

@@ -225,8 +225,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         private void PrismDestroyer()
         {
-            int prismCount = (int)DifficultyBasedValue(3, 4, 5);
-            int danceCount = (int)DifficultyBasedValue(3, death: 4);
+            int prismCount = (int)DifficultyBasedValue(3, 4, 5, master: 5, masterrev: 6, masterdeath: 8);
+            int danceCount = (int)DifficultyBasedValue(3, death: 4, master: 3, masterrev: 4, masterdeath: 5);
 
             NPC.rotation = NPC.velocity.X * 0.02f;
 
@@ -301,8 +301,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         private void CrystalStorm()
         {
-            int crystalFrequency = (int)DifficultyBasedValue(1, 2, 3);
-            int lengthOfAttack = (int)DifficultyBasedValue(240, 300, 360, 420);
+            int crystalFrequency = (int)DifficultyBasedValue(1, 2, 3, master: 3, masterrev: 4, masterdeath: 5);
+            int lengthOfAttack = (int)DifficultyBasedValue(240, 300, 360, 420, master: 370, masterrev: 410, masterdeath: 460);
 
             if (Time < 40) {
                 NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(Target.Center + new Vector2(0, -260)).SafeNormalize(Vector2.Zero) * NPC.Distance(Target.Center + new Vector2(0, -170)) * 0.2f, 0.1f);
@@ -466,7 +466,11 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 if (Time >= 50 && !initializedPixieBall && Main.netMode != NetmodeID.MultiplayerClient) {
                     NPC.velocity = Vector2.UnitY * 5f;
                     int damage = Main.zenithWorld ? 5 : 0;
-                    Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), Target.Center - new Vector2(0, 80), Target.Velocity, ModContent.ProjectileType<PixieBall>(), damage, 0, ai1: 15, ai2: -1);
+                    int ballCount = (int)DifficultyBasedValue(1, masterrev: 2);
+
+                    for (int i = 0; i < ballCount; i++) {
+                        Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), Target.Center - new Vector2(0, i == 0 ? 80 : - 80), Target.Velocity, ModContent.ProjectileType<PixieBall>(), damage, 0, ai1: 15, ai2: -1);
+                    }
                     initializedPixieBall = true; // remove this line if you want gfb ball swarm
                 }
 
