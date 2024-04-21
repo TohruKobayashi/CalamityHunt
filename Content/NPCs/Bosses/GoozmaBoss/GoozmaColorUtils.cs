@@ -746,6 +746,19 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             new Color(0, 0, 0).ToVector3()
         };
 
+        public static Vector3[] CrabSecret => new Vector3[] //baroclaw color palette; YuH
+        {
+            new Color(0, 0, 0).ToVector3(),
+            new Color(111, 113, 159).ToVector3(),
+            new Color(79, 81, 134).ToVector3(),
+            new Color(52, 55, 136).ToVector3(),
+            new Color(42, 45, 109).ToVector3(),
+            new Color(31, 33, 86).ToVector3(),
+            new Color(12, 30, 63).ToVector3(),
+            new Color(7, 20, 43).ToVector3(),
+            new Color(0, 0, 0).ToVector3()
+        };
+
         public static Vector3[] Test => new Vector3[]
         {
             new Color(0, 0, 0).ToVector3(),
