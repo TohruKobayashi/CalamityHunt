@@ -196,6 +196,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     return GoozmaColorUtils.Subworld;
                 case 56:
                     return GoozmaColorUtils.CrabSecret;
+                case 57:
+                    return GoozmaColorUtils.Garroth;
             }
         }
 

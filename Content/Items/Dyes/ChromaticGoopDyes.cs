@@ -104,7 +104,9 @@ namespace CalamityHunt.Content.Items.Dyes
             Kindergarten,
             Daniel,
             Autumnal,
-            Subworld
+            Subworld,
+            CrabSecret,
+            Garroth
         };
     }
 

@@ -759,6 +759,19 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             new Color(0, 0, 0).ToVector3()
         };
 
+        public static Vector3[] Garroth => new Vector3[] //garroth from hit sitcom Aph Mau; split
+{
+            new Color(0, 0, 0).ToVector3(),
+            new Color(30, 60, 71).ToVector3(),
+            new Color(51, 124, 131).ToVector3(),
+            new Color(176, 124, 84).ToVector3(),
+            new Color(140, 135, 97).ToVector3(),
+            new Color(174, 166, 117).ToVector3(),
+            new Color(11, 124, 194).ToVector3(),
+            new Color(107, 156, 188).ToVector3(),
+            new Color(0, 0, 0).ToVector3()
+};
+
         public static Vector3[] Test => new Vector3[]
         {
             new Color(0, 0, 0).ToVector3(),

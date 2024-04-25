@@ -131,7 +131,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
         P2LifeMax = NPC.lifeMax / 2;
 
-        SlimeUtils.GoozmaColorType = Main.rand.Next(55);
+        SlimeUtils.GoozmaColorType = Main.rand.Next(56);
 
         if (Main.drunkWorld) {
             SlimeUtils.GoozmaColorType = Main.rand.Next(10);
