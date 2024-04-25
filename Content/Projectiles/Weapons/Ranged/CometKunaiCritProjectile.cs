@@ -1,7 +1,10 @@
 ﻿using System;
+using CalamityHunt.Common.Systems.Particles;
+using CalamityHunt.Content.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -18,7 +21,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.tileCollide = true;
             Projectile.timeLeft = 100;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 1;
+            Projectile.penetrate = -1;
+            Projectile.localNPCHitCooldown = 100;
             Projectile.manualDirectionChange = true;
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 DamageClass d;
@@ -29,6 +33,10 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
         }
 
         private Vector2 oldVelocity;
+
+        private bool isAttached = false;
+
+        private float sineStart = Main.rand.NextFloat(10f);
 
         public override void AI()
         {
@@ -46,11 +54,26 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 Projectile.netUpdate = true;
             }
 
-            Projectile.direction = oldVelocity.X > 0 ? 1 : -1;
 
-            Projectile.rotation += Projectile.direction * 0.2f;
+            if (!isAttached) {
+                Projectile.direction = oldVelocity.X > 0 ? 1 : -1;
 
-            Projectile.velocity = oldVelocity.RotatedBy(MathF.Cos(Projectile.ai[1] * 0.19f) * 0.3f);
+                Projectile.rotation += Projectile.direction * 0.2f;
+
+                Projectile.velocity = oldVelocity.RotatedBy(MathF.Sin(Projectile.ai[1] * 0.1f + sineStart) * 0.2f);
+            }
+            else {
+                NPC target = Main.npc[(int)Projectile.ai[2]];
+                {
+                    if (target.active) {
+                        Projectile.Center += (target.position - target.oldPosition) / (Projectile.extraUpdates + 1);
+                        Projectile.netUpdate = true;
+                    }
+                    else {
+                        Projectile.Kill();
+                    }
+                }
+            }
 
             Projectile.ai[1]++;
         }
@@ -65,10 +88,28 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 d.velocity += Main.rand.NextVector2Circular(4, 4);
             }
 
-            if (Main.myPlayer == Projectile.owner) {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, -oldVelocity * 0.6f, ModContent.ProjectileType<CometKunaiGhostProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -1);
-                Projectile.netUpdate = true;
+            //if (Main.myPlayer == Projectile.owner) {
+            //    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, -oldVelocity * 0.6f, ModContent.ProjectileType<CometKunaiGhostProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -1);
+            //    Projectile.netUpdate = true;
+            //}
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            Projectile.ai[2] = target.whoAmI;
+            SoundStyle attachSound = AssetDirectory.Sounds.GoozmaMinions.StellarConstellationWave with { MaxInstances = 0, Pitch = 0.8f, PitchVariance = 0.1f, Volume = 0.4f };
+            SoundEngine.PlaySound(attachSound, Projectile.Center);
+            for (int i = 0; i < 9; i++) {
+                Color randomColor = Color.Lerp(Color.Blue, Color.RoyalBlue, Main.rand.NextFloat());
+                randomColor.A = 0;
+                Dust d = Dust.NewDustDirect(Projectile.Center - new Vector2(5), 10, 10, DustID.SparkForLightDisc, 0, 0, 0, randomColor, 2f);
+                d.noGravity = true;
+                d.velocity += Main.rand.NextVector2Circular(7, 7);
             }
+            Projectile.timeLeft = 70;
+            Projectile.Center += Projectile.velocity;
+            Projectile.velocity = Vector2.Zero;
+            isAttached = true;
         }
 
         public override bool PreDraw(ref Color lightColor)

@@ -33,14 +33,15 @@ namespace CalamityHunt.Content.Items.Misc
             if (Config.Instance.debugMode) {
                 if (time == 0) {
                     for (int i = 0; i < 15; i++) {
-                        CosmosMetaball.particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
+                        CalamityHunt.particles.Add(Particle.Create<FusionFlameParticle>(particle => {
                             particle.position = player.Center;
-                            particle.velocity = Main.rand.NextVector2Circular(90, 90) * Utils.GetLerpValue(0, 50, 1, true);
-                            particle.scale = Main.rand.NextFloat(20f, 30f) * Utils.GetLerpValue(-30, 50, 1, true);
-                            particle.maxTime = Main.rand.Next(70, 100);
-                            particle.color = Color.White;
-                            particle.fadeColor = Color.White;
-                            particle.anchor = () => player.velocity * 0.66f;
+                            particle.velocity = player.velocity * Main.rand.NextFloat();
+                            particle.rotation = player.velocity.ToRotation();
+                            particle.scale = 4.25f + Main.rand.NextFloat(1f, 2f);
+                            particle.maxTime = Main.rand.Next(25, 40);
+                            //particle.color = (glowColor * 0.8f) with { A = 50 };
+                            //particle.fadeColor = (glowColor * 0.1f) with { A = 20 };
+                            particle.emitLight = true;
                         }));
                     }
                 }

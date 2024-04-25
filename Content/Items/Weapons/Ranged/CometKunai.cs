@@ -60,7 +60,7 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
                 // if calamity is on, then do when stealthed up. if not, do when rclick
                 if (ModLoader.HasMod(HUtils.CalamityMod) ? CalamityStealth : player.altFunctionUse == 2) {
                     if (player.itemAnimation == player.itemAnimationMax) {
-                        Projectile stealthProj = Projectile.NewProjectileDirect(source, position, velocity * 3, ModContent.ProjectileType<CometKunaiSuperProjectile>(), damage * 2, knockback, player.whoAmI);
+                        Projectile stealthProj = Projectile.NewProjectileDirect(source, new Vector2(position.X, position.Y + 16), velocity * 3, ModContent.ProjectileType<CometKunaiSuperProjectile>(), damage * 2, knockback, player.whoAmI);
                         stealthProj.ai[1] = -1;
                         stealthProj.rotation += Main.rand.NextFloat(-1f, 1f);
                         if (ModLoader.HasMod(HUtils.CalamityMod)) {
@@ -73,7 +73,7 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
                 float ai = 0;
                 if (Main.rand.NextBool(30)) {
                     type = ModContent.ProjectileType<CometKunaiCritProjectile>();
-                    velocity *= 1.5f;
+                    velocity *= Main.rand.NextFloat(2.5f, 5f);
                     damage *= 3;
                     ai = Main.rand.NextFloat(2);
                 }
