@@ -37,7 +37,7 @@ public class ShakerSludgeMetaball : MetaballDrawer
 
         particles.Draw(spriteBatch, false);
 
-        foreach (Projectile projectile in Main.projectile.Where(n => n.active && n.type == ModContent.ProjectileType<ShakerSludge>())) {
+        foreach (Projectile projectile in Main.projectile.Where(n => n.active && n.type == ModContent.ProjectileType<DarkSludge>())) {
 
         }
 

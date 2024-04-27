@@ -299,6 +299,8 @@ public static class AssetDirectory
         public static readonly Asset<Effect> FusionRay = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/FusionRayEffect");
         public static readonly Asset<Effect> GoomoireWind = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/GoomoireSuckEffect");
 
+        public static readonly Asset<Effect> Debug = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/Debug");
+
         public static class Dyes
         {
             public static readonly Asset<Effect> Goop = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/GoopDye");

@@ -8,11 +8,11 @@ namespace CalamityHunt.Content.Particles;
 
 public class FlameParticle : Particle
 {
-    private int time;
+    public int time;
 
     public int maxTime;
 
-    private int style;
+    public int style;
 
     private int direction;
 

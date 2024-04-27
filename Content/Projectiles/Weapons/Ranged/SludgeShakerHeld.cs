@@ -97,7 +97,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 //    }));
                 //}
 
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.05f) * Main.rand.Next(15, 20), ModContent.ProjectileType<ShakerSludge>(), Owner.HeldItem.damage, 1f, Owner.whoAmI);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.05f) * Main.rand.Next(15, 20), ModContent.ProjectileType<DarkSludge>(), Owner.HeldItem.damage, 1f, Owner.whoAmI);
             }
 
             if (!Owner.channel) {
