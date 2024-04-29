@@ -542,6 +542,16 @@ Items: {
 		// Tooltip: "'They are best used to cool you off'"
 		// DisplayName: Thousand-Fold Paper Fans
 	}
+
+	NuclearLemonade: {
+		// DisplayName: Nuclear Lemonade
+		/* Tooltip:
+			'''
+			Major improvements to all stats
+			May kill you
+			'As cold as the nuclear winter!'
+			''' */
+	}
 }
 
 NPCs: {

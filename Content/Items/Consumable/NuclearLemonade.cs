@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace CalamityHunt.Content.Items.Consumables
+namespace CalamityHunt.Content.Items.Consumable
 {
     public class NuclearLemonade : ModItem
     {
@@ -15,12 +15,12 @@ namespace CalamityHunt.Content.Items.Consumables
             Main.RegisterItemAnimation(Type, new DrawAnimationVertical(int.MaxValue, 3));
 
             ItemID.Sets.DrinkParticleColors[Item.type] = new Color[3] {
-                new Color(48, 42, 81),// highlight
-                new Color(48, 63, 70),// midlight
-                new Color(41, 69, 71) // lowlight
+                new Color(255, 223, 145),// highlight
+                new Color(255, 211, 102),// midlight
+                new Color(229, 186, 43) // lowlight
             };
 
-            ItemID.Sets.IsFood[Type] = true; //This allows it to be placed on a plate and held correctly
+            ItemID.Sets.IsFood[Type] = true; 
         }
 
         public override void SetDefaults()
@@ -30,11 +30,11 @@ namespace CalamityHunt.Content.Items.Consumables
             Item.rare = ItemRarityID.Red;
         }
 
-        // If you want multiple buffs, you can apply the remainder of buffs with this method.
-        // Make sure the primary buff is set in SetDefaults so that the QuickBuff hotkey can work properly.
         public override void OnConsumeItem(Player player)
         {
-            player.AddBuff(BuffID.SugarRush, 3600);
+            // killa you
+            if (Main.rand.NextBool(500))
+                player.KillMe(PlayerDeathReason.ByCustomReason($"{player.name} must be drinking Lord Vertice Lemonade."), Main.rand.Next(220000000, 229999999), -1);
         }
     }
 }
