@@ -66,12 +66,11 @@ namespace CalamityHunt.Common.GlobalNPCs
             // community remix
             if (ModLoader.HasMod(HUtils.CommunityRemix)) {
                 Mod ccr = ModLoader.GetMod(HUtils.CommunityRemix);
-                List<string> morePlagueEnemies = new List<string>
-                {
+                List<string> morePlagueEnemies = new List<string> {
                     "EvilPlagueBee",
                     "Miasmius",
                     "PlaguedSpidrone",
-                    "PlagueTrapper",
+                    //"PlagueTrapper",
                     "PlagueEmperor"
                 };
                 foreach (string i in morePlagueEnemies) {
