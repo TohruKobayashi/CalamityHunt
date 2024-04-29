@@ -28,6 +28,7 @@ public static class HUtils
 
     public static string CalamityMod = "CalamityMod";
     public static string CatalystMod = "CatalystMod";
+    public static string CommunityRemix = "CalRemix";
 
     public static bool NonVanillaBalance => ModLoader.HasMod(CalamityMod);
 

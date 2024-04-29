@@ -62,6 +62,24 @@ namespace CalamityHunt.Common.GlobalNPCs
                     npcLoot.Add(ItemDropRule.Food(ModContent.ItemType<NuclearLemonade>(), 25));
                 }
             }
+
+            // community remix
+            if (ModLoader.HasMod(HUtils.CommunityRemix)) {
+                Mod ccr = ModLoader.GetMod(HUtils.CommunityRemix);
+                List<string> morePlagueEnemies = new List<string>
+                {
+                    "EvilPlagueBee",
+                    "Miasmius",
+                    "PlaguedSpidrone",
+                    "PlagueTrapper",
+                    "PlagueEmperor"
+                };
+                foreach (string i in morePlagueEnemies) {
+                    if (npc.type == ccr.Find<ModNPC>(i).Type) {
+                        npcLoot.Add(ItemDropRule.Food(ModContent.ItemType<NuclearLemonade>(), 25));
+                    }
+                }
+            }
         }
     }
 }
