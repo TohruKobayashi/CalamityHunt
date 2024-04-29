@@ -40,18 +40,18 @@ namespace CalamityHunt.Common.GlobalNPCs
                     npcLoot.Add(ItemDropRule.ByCondition(new YharonSoulDropRule(), ModContent.ItemType<YharonSoul>()));
                 }
 
-                List<ModNPC> plagueEnemies = new List<ModNPC>
+                List<string> plagueEnemies = new List<string>
                 {
-                    cal.Find<ModNPC>("Melter"),
-                    cal.Find<ModNPC>("PestilentSlime"),
-                    cal.Find<ModNPC>("PlaguebringerMiniboss"),
-                    cal.Find<ModNPC>("PlagueCharger"),
-                    cal.Find<ModNPC>("PlagueChargerLarge"),
-                    cal.Find<ModNPC>("Plagueshell"),
-                    cal.Find<ModNPC>("Viruling")
+                    "Melter",
+                    "PestilentSlime",
+                    "PlaguebringerMiniboss",
+                    "PlagueCharger",
+                    "PlagueChargerLarge",
+                    "Plagueshell",
+                    "Viruling"
                 };
-                foreach (ModNPC i in plagueEnemies) {
-                    if (npc.type == cal.Find<ModNPC>(i.Name).Type) {
+                foreach (string i in plagueEnemies) {
+                    if (npc.type == cal.Find<ModNPC>(i).Type) {
                         npcLoot.Add(ItemDropRule.Food(ModContent.ItemType<NuclearLemonade>(), 25));
                     }
                 }
