@@ -78,6 +78,12 @@ namespace CalamityHunt.Common.GlobalNPCs
                         npcLoot.Add(ItemDropRule.Food(ModContent.ItemType<NuclearLemonade>(), 25));
                     }
                 }
+
+                if (npc.type == ccr.Find<ModNPC>("Barocrab").Type) {
+                    npcLoot.Add(ItemDropRule.Food(ItemID.Fake_ShadowChest, 72, 3011, 4785));
+                    npcLoot.Add(ItemDropRule.Food(ItemID.LargeTopaz, 91, 2012, 3046));
+                    npcLoot.Add(ItemDropRule.Food(ItemID.GoblinStatue, 44, 768, 4172));
+                }
             }
         }
     }
