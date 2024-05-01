@@ -14,8 +14,7 @@ public sealed class GatekeepSystem : ModSystem
         base.OnModLoad();
 
         Undercover = Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Space);
-        if (Undercover) {
+        if (Undercover)
             SoundEngine.PlaySound(SoundID.Unlock);
-        }
     }
 }

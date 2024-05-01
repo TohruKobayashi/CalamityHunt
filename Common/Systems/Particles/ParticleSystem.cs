@@ -1,81 +1,165 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿#nullable enable
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Arch.Core;
+using Arch.Core.Extensions;
 using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+using Entity = Arch.Core.Entity;
 
 namespace CalamityHunt.Common.Systems.Particles;
 
-public class ParticleSystem
+[Autoload(Side = ModSide.Client)]
+public sealed class ParticleSystem : ModSystem
 {
-    public ParticleSystem()
+    public World ParticleWorld { get; } = World.Create();
+
+    public override void OnModLoad()
     {
-        particles = new HashSet<Particle>();
+        On_Main.UpdateParticleSystems += UpdateParticles;
+        On_Main.DoDraw_DrawNPCsOverTiles += DrawParticlesUnderEntities;
+        On_Main.DrawDust += DrawParticles;
     }
 
-    public HashSet<Particle> particles;
-
-    public void Add(Particle particle)
+    public override void OnModUnload()
     {
-        if (particles != null) particles.Add(particle);
+        On_Main.UpdateParticleSystems -= UpdateParticles;
+        On_Main.DoDraw_DrawNPCsOverTiles -= DrawParticlesUnderEntities;
+        On_Main.DrawDust -= DrawParticles;
     }
 
-    public void Clear() => particles.Clear();
-
-    public void Update()
+    public void UpdateParticles()
     {
-        if (Main.dedServ) {
-            if (particles.Count > 0) {
-                particles.Clear();
-            }
+        if (Main.dedServ || Main.gamePaused || Main.netMode == NetmodeID.Server)
             return;
-        }
 
-        foreach (Particle particle in particles.ToHashSet()) {
-            if (particle != null) {
-                particle.Update();
-                particle.position += particle.velocity;
-                if (particle.ShouldRemove) {
-                    particles.Remove(particle);
-                }
+        var query = new QueryDescription().WithAll<Particle, ParticlePosition, ParticleVelocity, ParticleActive>();
+        ParticleWorld.Query(
+            in query,
+            (in Entity entity) =>
+            {
+                ref var particle = ref entity.Get<Particle>();
+                ref var position = ref entity.Get<ParticlePosition>();
+                ref var velocity = ref entity.Get<ParticleVelocity>();
+                ref var active = ref entity.Get<ParticleActive>();
+
+                position.Value += velocity.Value;
+                particle.Behavior.Update(in entity);
+                if (!active.Value)
+                    ParticleWorld.Destroy(entity);
             }
-        }
+        );
     }
 
-    public void Draw(SpriteBatch spriteBatch, bool begin = true, Effect effect = null)
+    public void DrawParticlesUnderEntities(SpriteBatch spriteBatch)
     {
-        if (Main.dedServ) {
+        if (Main.dedServ || Main.gameMenu || Main.netMode == NetmodeID.Server)
             return;
-        }
 
-        if (!begin) {
-            spriteBatch.End();
-        }
+        spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
+        Rectangle value = new Rectangle((int)Main.screenPosition.X - Main.screenWidth, (int)Main.screenPosition.Y - Main.screenHeight, Main.screenWidth * 2, Main.screenHeight * 2);
 
-        spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, effect, Main.Transform);
-
-        Rectangle checkRect = new Rectangle((int)Main.screenPosition.X, (int)Main.screenPosition.Y, Main.ScreenSize.X, Main.ScreenSize.Y);
-        Rectangle particleRect = new Rectangle(0, 0, 400, 400);
-
-        foreach (Particle particle in particles.ToHashSet()) {
-
-            if (particle != null) {
-                float halfSize = 200 * particle.scale;
-                particleRect.X = (int)(particle.position.X - halfSize);
-                particleRect.Y = (int)(particle.position.Y - halfSize);
-                particleRect.Width = (int)(halfSize * 2f);
-                particleRect.Height = (int)(halfSize * 2f);
-
-                if (checkRect.Intersects(particleRect)) {
-                    particle.Draw(spriteBatch);
-                }
+        var query = new QueryDescription().WithAll<Particle, ParticlePosition, ParticleDrawBehindEntities>().WithNone<ParticleShader>();
+        ParticleWorld.Query(
+            in query,
+            (in Entity entity) =>
+            {
+                ref var particle = ref entity.Get<Particle>();
+                ref var position = ref entity.Get<ParticlePosition>();
+                
+                if (new Rectangle((int)position.Value.X - 3, (int)position.Value.Y - 3, 6, 6).Intersects(value))
+                    particle.Behavior.Draw(in entity, spriteBatch);
             }
-        }
+        );
 
         spriteBatch.End();
+        spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
+        
+        query = new QueryDescription().WithAll<Particle, ParticlePosition, ParticleDrawBehindEntities, ParticleShader>();
+        ParticleWorld.Query(
+            in query,
+            (in Entity entity) =>
+            {
+                ref var particle = ref entity.Get<Particle>();
+                ref var position = ref entity.Get<ParticlePosition>();
+                ref var shader = ref entity.Get<ParticleShader>();
 
-        if (!begin) {
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
-        }
+                if (!new Rectangle((int)position.Value.X - 3, (int)position.Value.Y - 3, 6, 6).Intersects(value))
+                    return;
+
+                shader.Value.Apply(null);
+                particle.Behavior.Draw(in entity, spriteBatch);
+                Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+            }
+        );
+
+        spriteBatch.End();
+    }
+
+    public void DrawParticles(SpriteBatch spriteBatch)
+    {
+        if (Main.dedServ || Main.gameMenu || Main.netMode == NetmodeID.Server)
+            return;
+
+        spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
+        Rectangle value = new Rectangle((int)Main.screenPosition.X - Main.screenWidth, (int)Main.screenPosition.Y - Main.screenHeight, Main.screenWidth * 2, Main.screenHeight * 2);
+        
+        var query = new QueryDescription().WithAll<Particle, ParticlePosition>().WithNone<ParticleShader, ParticleDrawBehindEntities>();
+        ParticleWorld.Query(
+            in query,
+            (in Entity entity) =>
+            {
+                ref var particle = ref entity.Get<Particle>();
+                ref var position = ref entity.Get<ParticlePosition>();
+
+                if (new Rectangle((int)position.Value.X - 3, (int)position.Value.Y - 3, 6, 6).Intersects(value))
+                    particle.Behavior.Draw(in entity, spriteBatch);
+            }
+        );
+
+        spriteBatch.End();
+        spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
+        
+        query = new QueryDescription().WithAll<Particle, ParticlePosition, ParticleShader>().WithNone<ParticleDrawBehindEntities>();
+        ParticleWorld.Query(
+            in query,
+            (ref Entity entity) =>
+            {
+                ref var particle = ref entity.Get<Particle>();
+                ref var position = ref entity.Get<ParticlePosition>();
+                ref var shader = ref entity.Get<ParticleShader>();
+
+                if (!new Rectangle((int)position.Value.X - 3, (int)position.Value.Y - 3, 6, 6).Intersects(value))
+                    return;
+
+                shader.Value?.Apply(null);
+                particle.Behavior.Draw(in entity, spriteBatch);
+                Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+            }
+        );
+
+        spriteBatch.End();
+    }
+
+    private void DrawParticlesUnderEntities(On_Main.orig_DoDraw_DrawNPCsOverTiles orig, Main self)
+    {
+        DrawParticlesUnderEntities(Main.spriteBatch);
+
+        orig(self);
+    }
+
+    private void DrawParticles(On_Main.orig_DrawDust orig, Main self)
+    {
+        DrawParticles(Main.spriteBatch);
+
+        orig(self);
+    }
+
+    private void UpdateParticles(On_Main.orig_UpdateParticleSystems orig, Main self)
+    {
+        orig(self);
+        UpdateParticles();
     }
 }

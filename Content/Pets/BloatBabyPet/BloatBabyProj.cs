@@ -1,11 +1,15 @@
-﻿using System;
-using CalamityHunt.Common.Systems.Particles;
-using CalamityHunt.Common.Utilities;
-using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
+﻿using CalamityHunt.Common.Systems.Particles;
+using CalamityHunt.Content.Bosses.Goozma;
 using CalamityHunt.Content.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using ReLogic.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Arch.Core.Extensions;
+using CalamityHunt.Core;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -48,64 +52,55 @@ namespace CalamityHunt.Content.Pets.BloatBabyPet
 
             Projectile.rotation = Utils.AngleLerp(Projectile.velocity.X * 0.05f, Projectile.velocity.ToRotation() + MathHelper.PiOver2, Math.Clamp(Projectile.velocity.Length() * 0.5f, 0f, 1f));
 
-            if (Projectile.Distance(player.MountedCenter) > 600) {
+            if (Projectile.Distance(player.MountedCenter) > 600)
                 Projectile.Center = Vector2.Lerp(Projectile.Center, Projectile.Center + Projectile.DirectionTo(targetPos).SafeNormalize(Vector2.Zero) * (Projectile.Distance(targetPos) - 600) * 0.3f, 0.1f);
-            }
 
             int waitTime = 600;
-            if (player.velocity.Length() < 5f) {
+            if (player.velocity.Length() < 5f)
+            {
                 Projectile.ai[1]++;
-                if (Projectile.ai[1] <= waitTime) {
+                if (Projectile.ai[1] <= waitTime)
                     Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.DirectionTo(targetPos).SafeNormalize(Vector2.Zero) * (Projectile.Distance(targetPos) - 2) * 0.1f, 0.02f);
-                }
             }
-            else {
+            else
+            {
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.DirectionTo(targetPos).SafeNormalize(Vector2.Zero) * (Projectile.Distance(targetPos) - 2) * 0.1f, 0.02f);
                 Projectile.ai[1] = 0;
             }
 
-            if (Projectile.ai[1] > waitTime) {
+            if (Projectile.ai[1] > waitTime)
+            {
                 Vector2 off = new Vector2((float)Math.Sin(Projectile.ai[0] * 0.005) * 60f * player.direction, (float)Math.Sin(Projectile.ai[0] * 0.01) * 60f);
                 Projectile.velocity += Projectile.DirectionTo(Main.MouseWorld + off).SafeNormalize(Vector2.Zero) * Projectile.Distance(Main.MouseWorld) * 0.0002f;
                 Projectile.velocity += Projectile.DirectionTo(Main.MouseWorld + off).SafeNormalize(Vector2.Zero) * 0.0005f;
                 Projectile.velocity *= 0.98f;
             }
 
-            if (Projectile.velocity.X > 2f) {
+            if (Projectile.velocity.X > 2f)
                 Projectile.direction = 1;
-            }
-
-            if (Projectile.velocity.X < -2f) {
+            if (Projectile.velocity.X < -2f)
                 Projectile.direction = -1;
-            }
 
-            if (oldVels == null) {
+            if (oldVels == null)
+            {
                 oldVels = new Vector2[10];
-                for (int i = 0; i < oldVels.Length; i++) {
+                for (int i = 0; i < oldVels.Length; i++)
                     oldVels[i] = Projectile.velocity;
-                }
             }
-            for (int i = 9; i > 0; i--) {
+            for (int i = 9; i > 0; i--)
                 oldVels[i] = Vector2.Lerp(oldVels[i], oldVels[i - 1] * 1.2f, 0.5f);
-            }
-
             oldVels[0] = Vector2.Lerp(oldVels[0], (Projectile.rotation - MathHelper.PiOver2).ToRotationVector2(), 0.5f);
 
             Projectile.ai[0]++;
             Projectile.localAI[0]++;
 
-            if (!player.dead && player.HasBuff<BloatBabyBuff>()) {
+            if (!player.dead && player.HasBuff<BloatBabyBuff>())
                 Projectile.timeLeft = 2;
-            }
 
-            if (Main.rand.NextBool(7)) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                    particle.position = Projectile.Center + Main.rand.NextVector2Circular(30, 30);
-                    particle.velocity = Projectile.velocity * 0.2f;
-                    particle.scale = 1f;
-                    particle.color = Color.White;
-                    particle.colorData = new ColorOffsetData(true, Projectile.localAI[0]);
-                }));
+            if (Main.rand.NextBool(7))
+            {
+                var hue = ParticleBehavior.NewParticle(ModContent.GetInstance<HueLightDustParticleBehavior>(), Projectile.Center + Main.rand.NextVector2Circular(30, 30), Projectile.velocity * 0.2f, Color.White, 1f);
+                hue.Add(new ParticleData<float> { Value = Projectile.localAI[0] });
             }
 
             Lighting.AddLight(Projectile.Center, new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(Projectile.localAI[0]).ToVector3() * 0.2f);
@@ -119,13 +114,9 @@ namespace CalamityHunt.Content.Pets.BloatBabyPet
             float travelVolume = Math.Clamp(1.1f - Main.LocalPlayer.Distance(Projectile.Center) * 0.0002f, 0, 1.1f) * Projectile.scale * Projectile.velocity.Length() * 0.77f;
             float travelPitch = Math.Clamp(Projectile.velocity.Length() * 0.025f - Main.LocalPlayer.Distance(Projectile.Center) * 0.0001f, -0.8f, 0.8f);
 
-            travelSound ??= new LoopingSound(AssetDirectory.Sounds.BloatBabyWarbleLoop, new ProjectileAudioTracker(Projectile).IsActiveAndInGame);
-            travelSound.PlaySound(() => Projectile.Center, () => travelVolume, () => travelPitch);
-        }
-
-        public override void OnKill(int timeLeft)
-        {
-            travelSound.StopSound();
+            if (travelSound == null)
+                travelSound = new LoopingSound(AssetDirectory.Sounds.BloatBabyWarbleLoop, new ProjectileAudioTracker(Projectile).IsActiveAndInGame);
+            travelSound.Update(() => Projectile.Center, () => travelVolume, () => travelPitch);
         }
 
         public float crownRotation;
@@ -141,13 +132,14 @@ namespace CalamityHunt.Content.Pets.BloatBabyPet
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture = TextureAssets.Projectile[Type].Value;
-            Texture2D glow = AssetDirectory.Textures.Glow[0].Value;
-            Texture2D ring = AssetDirectory.Textures.Glow[3].Value;
+            Texture2D glow = AssetDirectory.Textures.Glow.Value;
+            Texture2D ring = AssetDirectory.Textures.GlowRing.Value;
             SpriteEffects flip = SpriteEffects.None;// Projectile.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
             Color glowColor = new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(Projectile.localAI[0]);
             glowColor.A = 0;
-            if (Main.player[Projectile.owner].cPet <= 0) {
+            if (Main.player[Projectile.owner].cPet <= 0)
+            {
                 float auraSize = 0.8f + (float)Math.Sin(Projectile.localAI[0] * 0.04f) * 0.2f;
                 Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition, glow.Frame(), glowColor * 0.1f * auraSize, 0, glow.Size() * 0.5f, Projectile.scale * 5f * auraSize, 0, 0);
                 Main.EntitySpriteDraw(ring, Projectile.Center - Main.screenPosition, ring.Frame(), glowColor * 0.02f * auraSize, 0, ring.Size() * 0.5f, Projectile.scale * 2f * auraSize, 0, 0);
@@ -165,7 +157,8 @@ namespace CalamityHunt.Content.Pets.BloatBabyPet
             Main.EntitySpriteDraw(crownTexture, Projectile.Center + new Vector2(0, -17).RotatedBy(crownRotation) * Projectile.scale - Main.screenPosition, null, Color.Lerp(lightColor, Color.White, 0.5f), crownRotation, crownTexture.Size() * new Vector2(0.5f, 0.9f), Projectile.scale * 1.05f, flip, 0);
             Main.EntitySpriteDraw(crownTexture, Projectile.Center + new Vector2(0, -17).RotatedBy(crownRotation) * Projectile.scale - Main.screenPosition, null, glowColor * 0.3f, crownRotation, crownTexture.Size() * new Vector2(0.5f, 0.9f), Projectile.scale * 1.15f, flip, 0);
 
-            if (Main.player[Projectile.owner].cPet <= 0) {
+            if (Main.player[Projectile.owner].cPet <= 0)
+            {
                 Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition, glow.Frame(), glowColor * 0.1f, Projectile.rotation, glow.Size() * 0.5f, Projectile.scale, 0, 0);
 
                 Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition, glow.Frame(), glowColor * 0.1f, Projectile.rotation, glow.Size() * 0.5f, Projectile.scale * 2f, 0, 0);
@@ -177,17 +170,18 @@ namespace CalamityHunt.Content.Pets.BloatBabyPet
 
         public void DrawTentacles(Color lightColor, Color growColor)
         {
-            Texture2D glow = AssetDirectory.Textures.Glow[0].Value;
+            Texture2D glow = AssetDirectory.Textures.Glow.Value;
 
-            if (oldVels == null) {
+            if (oldVels == null)
+            {
                 oldVels = new Vector2[10];
-                for (int i = 0; i < oldVels.Length; i++) {
+                for (int i = 0; i < oldVels.Length; i++)
                     oldVels[i] = Projectile.velocity;
-                }
             }
 
             float tentaCount = 2;
-            for (int j = 0; j < tentaCount; j++) {
+            for (int j = 0; j < tentaCount; j++)
+            {
                 int dir = j > 0 ? 1 : -1;
 
                 float rot = Projectile.rotation + MathHelper.PiOver2;
@@ -197,16 +191,14 @@ namespace CalamityHunt.Content.Pets.BloatBabyPet
 
                 Vector2 lastPos = pos;
 
-                for (int i = 0; i < segments; i++) {
+                for (int i = 0; i < segments; i++)
+                {
                     float prog = i / (float)segments;
                     int segFrame = Math.Clamp((int)(prog * 5f), 1, 3);
-                    if (i == 0) {
+                    if (i == 0)
                         segFrame = 0;
-                    }
-
-                    if (i == segments - 1) {
+                    if (i == segments - 1)
                         segFrame = 4;
-                    }
 
                     Rectangle frame = tentacleTexture.Frame(3, 5, 0, segFrame);
                     Rectangle glowFrame = tentacleTexture.Frame(3, 5, 1, segFrame);
@@ -221,9 +213,8 @@ namespace CalamityHunt.Content.Pets.BloatBabyPet
                     Main.EntitySpriteDraw(tentacleTexture, lastPos - Main.screenPosition, glowFrame, growColor * bloomScale, stickRot - MathHelper.PiOver2, frame.Size() * 0.5f, stretch, 0, 0);
                     Main.EntitySpriteDraw(tentacleTexture, lastPos - Main.screenPosition, glowFrame, growColor * 0.1f * bloomScale, stickRot - MathHelper.PiOver2, frame.Size() * 0.5f, stretch * 1.05f, 0, 0);
 
-                    if (Main.player[Projectile.owner].cPet <= 0) {
+                    if (Main.player[Projectile.owner].cPet <= 0)
                         Main.EntitySpriteDraw(glow, lastPos + oldVels[i] * 0.1f - Main.screenPosition, glow.Frame(), growColor * bloomScale * 0.1f, Projectile.rotation, glow.Size() * 0.5f, Projectile.scale * new Vector2(1f, 1.5f) * bloomScale, 0, 0);
-                    }
                 }
             }
         }

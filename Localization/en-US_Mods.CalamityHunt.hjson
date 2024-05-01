@@ -34,11 +34,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	GoozmaRelic: {
-		DisplayName: Goozma Relic
-		Tooltip: ""
-	}
-
 	GoozmaLore: {
 		DisplayName: Goozma
 		Tooltip: tooltip
@@ -79,11 +74,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	GoozmaTrophy: {
-		DisplayName: Goozma Trophy
-		Tooltip: ""
-	}
-
 	ImperialGelato: {
 		DisplayName: Imperial Gelato
 		Tooltip:
@@ -108,19 +98,9 @@ Items: {
 		Tooltip: ""
 	}
 
-	GoozmaSoul: {
-		DisplayName: Chromatic Auric Soul
-		Tooltip: Absorb to gain immense, slimy powers
-	}
-
 	YharonSoulMusicBox: {
 		DisplayName: Music Box (Draconic Soul)
 		Tooltip: ""
-	}
-
-	YharonSoul: {
-		DisplayName: Draconic Auric Soul
-		Tooltip: Absorb to gain immense, draconic powers
 	}
 
 	SlimeMonsoonMonolith: {
@@ -196,7 +176,7 @@ Items: {
 			'''
 			<right> to disable
 			Allows you to slide on every surface
-			Warning: May result in extraordinarily high speeds
+			Warning: May result in exceedingly high speeds
 			'Yharim would hate you for this'
 			'''
 	}
@@ -207,7 +187,7 @@ Items: {
 			'''
 			<right> to enable
 			Allows you to slide on every surface
-			Warning: May result in extraordinarily high speeds
+			Warning: May result in exceedingly high speeds
 			'Yharim would hate you for this'
 			'''
 	}
@@ -217,17 +197,7 @@ Items: {
 		Tooltip: ""
 	}
 
-	EbonianBehemuckTrophy: {
-		DisplayName: Ebonian Behemuck Trophy
-		Tooltip: ""
-	}
-
 	DivineGargooptuarTrophyItem: {
-		DisplayName: Divine Gargooptuar Trophy
-		Tooltip: ""
-	}
-
-	DivineGargooptuarTrophy: {
 		DisplayName: Divine Gargooptuar Trophy
 		Tooltip: ""
 	}
@@ -237,17 +207,7 @@ Items: {
 		Tooltip: ""
 	}
 
-	CrimulanGlopstrosityTrophy: {
-		DisplayName: Crimulan Glopstrosity Trophy
-		Tooltip: ""
-	}
-
 	StellarGeliathTrophyItem: {
-		DisplayName: Stellar Geliath Trophy
-		Tooltip: ""
-	}
-
-	StellarGeliathTrophy: {
 		DisplayName: Stellar Geliath Trophy
 		Tooltip: ""
 	}
@@ -385,6 +345,11 @@ Items: {
 			'''
 	}
 
+	GoozmaAuricSoul: {
+		DisplayName: Chromatic Auric Soul
+		Tooltip: Absorb to gain immense, slimy powers
+	}
+
 	ScytheOfTheOldGod: {
 		DisplayName: Scythe of the Old God
 		Tooltip:
@@ -393,6 +358,11 @@ Items: {
 			'Not to be confused with the Scythe of the Old Duke...
 			...And nothing else.'
 			'''
+	}
+
+	FieryAuricSoul: {
+		DisplayName: Draconic Auric Soul
+		Tooltip: Absorb to gain immense, draconic powers
 	}
 
 	Goomoire: {
@@ -409,7 +379,6 @@ Items: {
 		Tooltip:
 			'''
 			Surround with 4 Slime Statues and interact with a Gelatinous Catalyst to start a Slime Rain
-			Greatly accelerates the accumulation of slime when powered
 			'Who is this guy, anyways?'
 			'''
 	}
@@ -481,77 +450,6 @@ Items: {
 		DisplayName: Goop Hair Dye
 		Tooltip: ""
 	}
-
-	AncientSlimeMonsoonMonolith: {
-		DisplayName: Ancient Slime Monsoon Monolith
-		Tooltip: ""
-	}
-
-	AntiMassAccumulator: {
-		DisplayName: Anti-Mass Accumulator
-		Tooltip:
-			'''
-			Blasts out balls of packed protons and bolts of energized electrons one after another
-			Proton balls charge anything they hit and can damage enemies in a radius
-			Electron bolts do extra damage to positively charged enemies
-			'Do not look directly at the operational end of the device.'
-			'''
-	}
-
-	GoozmaBoulderItem: {
-		DisplayName: Motley Marble
-		Tooltip: "'Highly dangerous'"
-	}
-
-	IOUASoul: {
-		DisplayName: I O U A Soul
-		Tooltip: REMOVED content LOOOOOOL
-	}
-
-	StrangeManPortrait: {
-		DisplayName: Portrait of a Strange Man
-		Tooltip: ""
-	}
-
-	TendrilCursorAttachment: {
-		DisplayName: Cursor Mutagen
-		Tooltip:
-			'''
-			Attaches hanging chromatic tendrils to your mouse cursor
-			The amount of tendrils depends on the slot this item is placed in
-			'They somehow know how to untangle themselves'
-			'''
-	}
-
-	FissionFlayer: {
-		DisplayName: to be determined
-		Tooltip: ""
-	}
-
-	TrailblazerGoggles: {
-		DisplayName: Trailblazed Goggles
-		Tooltip: "'To lead the way, you must see it first. These do not let you see.'"
-	}
-
-	TrailblazerBackpack: {
-		DisplayName: Trailblazed Tactical Backpack
-		Tooltip: "'To be a forerunner is to be prepared. Thankfully, this backpack is filled with nothing but fuel.'"
-	}
-
-	ShogunWings: {
-		Tooltip: "'They are best used to cool you off'"
-		DisplayName: Thousand-Fold Paper Fans
-	}
-
-	NuclearLemonade: {
-		DisplayName: Nuclear Lemonade
-		Tooltip:
-			'''
-			Major improvements to all stats
-			May kill you
-			'As cold as the nuclear winter!'
-			'''
-	}
 }
 
 NPCs: {
@@ -570,8 +468,6 @@ NPCs: {
 	EbonianBehemuck.DisplayName: Ebonian Behemuck
 	StellarGeliath.DisplayName: Stellar Geliath
 	Goozmite.DisplayName: Goozmite
-	GelatinousSpawn.DisplayName: Gelatinous Spawn
-	PluripotentSpawn.DisplayName: Pluripotent Spawn
 }
 
 Projectiles: {
@@ -650,18 +546,6 @@ Projectiles: {
 	BlinkySpikeBall.DisplayName: Blinky's Spike Ball
 	PinkyLight.DisplayName: Pinky's Light
 	GoozmoemRay.DisplayName: Fusion Ray
-	AntiMassBioBall.DisplayName: Anti-Mass Bio Ball
-	AntiMassColliderProj.DisplayName: Anti-Mass Collider
-	AntiMassMacroLaser.DisplayName: Anti Mass Macro Laser
-	AntiMassDeathLaser.DisplayName: Anti Mass Death Laser
-	AntiMassBioStrike.DisplayName: Anti Mass Bio Strike
-	AntiMassAccumulatorProj.DisplayName: Anti Mass Accumulator Proj
-	ShakerSludge.DisplayName: Shaker Sludge
-	GoozmaBoulderProjectile.DisplayName: Motley Marble
-	StellarBlackHole.DisplayName: Stellar Black Hole
-	FissionFlyerProjectile.DisplayName: Fission Flyer
-	CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
-	FissionFlayerProjectile.DisplayName: to be determined
 }
 
 Chat: {
@@ -719,11 +603,6 @@ Buffs: {
 		DisplayName: Slime Soirée
 		Description: Inky, Blinky, Pinky, and Clyde will protect you
 	}
-
-	Doomed: {
-		DisplayName: Doomed
-		Description: Mods.CalamityHunt.Buffs.Doomed.Description
-	}
 }
 
 Tiles: {
@@ -763,11 +642,9 @@ Config: {
 	}
 
 	LightningToggle: {
-		Label: Monsoon Thunder
+		Label: Monsoon Thunder Toggle
 		Tooltip: Enables or disables the Slime Monsoon's thunder visuals
 	}
-
-	ContentHeader: Content
 }
 
 LoreGeneric:
@@ -821,43 +698,18 @@ Configs: {
 		}
 
 		shadowspecCurse: {
-			Label: Shadowspec Curse
-			Tooltip: Curses all Shadowspec-tier items until Goozma is defeated, making them unusable
-		}
-
-		oldsky: {
-			Label: oldsky
+			Label: shadowspec Curse
 			Tooltip: ""
-		}
-
-		overrideVanillaBalance: {
-			Label: override Vanilla Balance
-			Tooltip: ""
-		}
-
-		photosensitiveToggle: {
-			Label: Toggle Photosensitive Effects
-			Tooltip: Disables certain effects which may trigger photosensitivity
-		}
-
-		debugMode: {
-			Label: Debug Mode
-			Tooltip:
-				'''
-				Enables features optimized for testing game mechanics
-				Not recommended for usage by players
-				'''
 		}
 	}
 }
 
-OrRev: " or Revengeance"
 SetBonuses.Shogun:
 	'''
 	17% increased damage and +5 max minions
 	{$CommonItemTooltip.FlightAndSlowfall}
-	Wearing any wings overrides this flight
 	{$CommonItemTooltip.PressDownToHover}
+	Wearing any wings overrides this flight
 	Allows the ability to dash and enhances other dashes
 	Hold DOWN to fastfall
 	Increases jump speed 
@@ -870,7 +722,7 @@ StickyHandStats:
 	Reelback Velocity: 10
 	Pull Velocity: 17
 	'''
-GoozmaShadowspecCurse: "[c/5C95A1:insertwhateverthefuck]"
+GoozmaShadowspecCurse: Mods.CalamityHunt.GoozmaShadowspecCurse
 AnyEvilBlock: Any Evil Block
 SludgeWarning: Cannot be used to summon the Slime God
 
@@ -878,5 +730,3 @@ CalamityModName: {
 	Display: Calamity Mod
 	Internal: CalamityMod
 }
-
-Emotes.GoozmaEmote.Command: goozma

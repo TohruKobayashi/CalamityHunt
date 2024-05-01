@@ -1,6 +1,10 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -32,7 +36,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
 
         public override void AI()
         {
-            if (Projectile.localAI[1] == 0) {
+            if (Projectile.localAI[1] == 0)
+            {
                 WeightedRandom<int> randomEyes = new WeightedRandom<int>();
                 randomEyes.Add(0, 1f);
                 randomEyes.Add(1, 0.1f);
@@ -46,54 +51,59 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
                 Projectile.localAI[1] = 1;
             }
 
-            if (Projectile.ai[0] < 5) {
+            if (Projectile.ai[0] < 5)
+            {
                 int target = (int)Projectile.ai[2];
                 bool hasTarget = false;
-                if (target > -1) {
+                if (target > -1)
+                {
                     hasTarget = true;
-                    if (Main.npc[target].active && Main.npc[target].CanBeChasedBy(Projectile)) {
-                        if (Main.myPlayer == Projectile.owner) {
+                    if (Main.npc[target].active && Main.npc[target].CanBeChasedBy(Projectile))
+                    {
+                        if (Main.myPlayer == Projectile.owner)
+                        {
                             Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.DirectionTo(Main.npc[target].Center).SafeNormalize(Vector2.Zero).RotatedByRandom(0.2f) * 20, 0.07f);
                             Projectile.netUpdate = true;
                         }
-                        if (Projectile.Distance(Main.npc[target].Center) < 100 && Projectile.ai[1] < 1) {
+                        if (Projectile.Distance(Main.npc[target].Center) < 100 && Projectile.ai[1] < 1)
                             Projectile.ai[1]++;
-                        }
                     }
-                    else {
+                    else
                         hasTarget = false;
-                    }
                 }
 
-                if (!hasTarget) {
+                if (!hasTarget)
                     Projectile.Minion_FindTargetInRange(800, ref target, false);
-                }
             }
 
-            if (Projectile.ai[1] > 0) {
+            if (Projectile.ai[1] > 0)
                 Projectile.ai[0]++;
-            }
 
-            if (Projectile.ai[0] > 5) {
+            if (Projectile.ai[0] > 5)
+            {
                 Projectile.velocity *= 0.95f;
 
-                if (Projectile.ai[1] < 2) {
+                if (Projectile.ai[1] < 2)
+                {
                     Projectile.ai[1]++;
                     Projectile.timeLeft = 50;
                 }
 
-                if (Projectile.ai[0] == 16) {
+                if (Projectile.ai[0] == 16)
+                {
                     SoundStyle spike = SoundID.NPCDeath12 with { MaxInstances = 0, Pitch = 0.6f, PitchVariance = 0.2f, Volume = 0.8f };
                     SoundEngine.PlaySound(spike, Projectile.Center);
                 }
 
-                if (++Projectile.frameCounter > 5) {
+                if (++Projectile.frameCounter > 5)
+                {
                     Projectile.frameCounter = 0;
                     Projectile.frame = Math.Clamp(Projectile.frame + 1, 0, 5);
                 }
             }
 
-            if (Projectile.timeLeft < 10) {
+            if (Projectile.timeLeft < 10)
+            {
                 Projectile.scale *= 0.96f;
                 Dust gibs = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(16, 16), Main.rand.NextBool(2) ? DustID.Bone : DustID.CorruptGibs, Main.rand.NextVector2Circular(2, 2), 0, Color.White, 1f);
                 gibs.noGravity = Main.rand.NextBool();
@@ -104,7 +114,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
 
         public override void OnKill(int timeLeft)
         {
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 20; i++)
+            {
                 Dust gibs = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(16, 16), Main.rand.NextBool(2) ? DustID.Bone : DustID.CorruptGibs, Main.rand.NextVector2Circular(2, 2) - Vector2.UnitY, 0, Color.White, 0.31f + Main.rand.NextFloat());
                 gibs.noGravity = Main.rand.NextBool(5);
             }
@@ -117,7 +128,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Projectile.ai[1] < 3 && Main.myPlayer == Projectile.owner) {
+            if (Projectile.ai[1] < 3 && Main.myPlayer == Projectile.owner)
+            {
                 Projectile.ai[1]++;
                 Projectile.netUpdate = true;
             }
@@ -127,9 +139,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
         {
             float radius = MathHelper.Clamp(Projectile.Center.Distance(targetHitbox.Center.ToVector2()), 0, 80);
             Vector2 checkPoint = Projectile.Center + (targetHitbox.Center.ToVector2() - Projectile.Center).SafeNormalize(Vector2.Zero) * radius;
-            if (targetHitbox.Contains(checkPoint.ToPoint())) {
+            if (targetHitbox.Contains(checkPoint.ToPoint()))
                 return true;
-            }
 
             return false;
         }

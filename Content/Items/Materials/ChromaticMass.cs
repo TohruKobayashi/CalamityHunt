@@ -1,11 +1,13 @@
-﻿using System;
-using CalamityHunt.Common.Systems.Particles;
-using CalamityHunt.Common.Utilities;
+﻿using CalamityHunt.Common.Systems.Particles;
+using CalamityHunt.Content.Bosses.Goozma;
 using CalamityHunt.Content.Items.Rarities;
-using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
 using CalamityHunt.Content.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using Arch.Core.Extensions;
+using CalamityHunt.Common.Utilities;
+using CalamityHunt.Core;
 using ReLogic.Content;
 using Terraria;
 using Terraria.DataStructures;
@@ -32,9 +34,10 @@ namespace CalamityHunt.Content.Items.Materials
             Item.value = Item.sellPrice(0, 30);
             Item.rare = ModContent.RarityType<VioletRarity>();
             Item.maxStack = Item.CommonMaxStack;
-            if (ModLoader.HasMod(HUtils.CalamityMod)) {
+            if (ModLoader.HasMod("CalamityMod"))
+            {
                 ModRarity r;
-                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
+                Mod calamity = ModLoader.GetMod("CalamityMod");
                 calamity.TryFind<ModRarity>("Violet", out r);
                 Item.rare = r.Type;
             }
@@ -42,19 +45,16 @@ namespace CalamityHunt.Content.Items.Materials
 
         public override void PostUpdate()
         {
-            if (Main.rand.NextBool(5)) {
+            if (Main.rand.NextBool(5))
+            {
                 Dust dark = Dust.NewDustPerfect(Item.Center + Main.rand.NextVector2Circular(18, 18), DustID.TintableDust, -Vector2.UnitY.RotatedByRandom(0.1f) * Main.rand.NextFloat(3f), 150, Color.Black, 1f + Main.rand.NextFloat());
                 dark.noGravity = true;
-            }
-
-            if (Main.rand.NextBool(20)) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                    particle.position = Item.Center + Main.rand.NextVector2Circular(15, 15);
-                    particle.velocity = -Vector2.UnitY * Main.rand.NextFloat(2f);
-                    particle.scale = Main.rand.NextFloat(0.7f, 1.7f);
-                    particle.color = Color.White;
-                    particle.colorData = new ColorOffsetData(true, Main.GlobalTimeWrappedHourly * 40f);
-                }));
+            }            
+            
+            if (Main.rand.NextBool(20))
+            {
+                var spark = ParticleBehavior.NewParticle(ModContent.GetInstance<HueLightDustParticleBehavior>(), Item.Center + Main.rand.NextVector2Circular(15, 15), -Vector2.UnitY * Main.rand.NextFloat(2f), Color.White, 0.7f + Main.rand.NextFloat());
+                spark.Add(new ParticleData<float> { Value = Main.GlobalTimeWrappedHourly * 40f });
             }
         }
 

@@ -1,10 +1,17 @@
-﻿using CalamityHunt.Common.Players;
-using CalamityHunt.Common.Systems;
-using CalamityHunt.Common.Utilities;
+﻿using CalamityHunt.Common.Systems;
+using CalamityHunt.Common.Systems.Particles;
 using CalamityHunt.Content.Items.Rarities;
+using CalamityHunt.Content.Particles;
 using CalamityHunt.Content.Projectiles.Weapons.Magic;
+using CalamityHunt.Content.Projectiles.Weapons.Melee;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CalamityHunt.Core;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -37,9 +44,10 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
             Item.value = Item.sellPrice(gold: 20);
             Item.shoot = ModContent.ProjectileType<CrystalGauntletBall>();
             Item.shootSpeed = 4f;
-            if (ModLoader.HasMod(HUtils.CalamityMod)) {
+            if (ModLoader.HasMod("CalamityMod"))
+            {
                 ModRarity r;
-                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
+                Mod calamity = ModLoader.GetMod("CalamityMod");
                 calamity.TryFind<ModRarity>("Violet", out r);
                 Item.rare = r.Type;
             }
@@ -47,9 +55,10 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
 
         public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
-            if (Main.LocalPlayer.HeldItem == Item || Main.mouseItem == Item) {
-                Texture2D bar = AssetDirectory.Textures.Bars.Bar[1].Value;
-                Texture2D barCharge = AssetDirectory.Textures.Bars.BarFill[1].Value;
+            if (Main.LocalPlayer.HeldItem == Item || Main.mouseItem == Item)
+            {
+                Texture2D bar = AssetDirectory.Textures.Bars.Bar.Value;
+                Texture2D barCharge = AssetDirectory.Textures.Bars.BarCharge.Value;
 
                 Rectangle chargeFrame = new Rectangle(0, 0, (int)(barCharge.Width * Main.LocalPlayer.GetModPlayer<GoozmaWeaponsPlayer>().CrystalGauntletsCharge), barCharge.Height);
 
@@ -62,9 +71,8 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
 
         public override void ModifyManaCost(Player player, ref float reduce, ref float mult)
         {
-            if (player.altFunctionUse > 0) {
+            if (player.altFunctionUse > 0)
                 reduce *= 0.25f;
-            }
         }
 
         public override bool CanUseItem(Player player) => player.ownedProjectileCounts[ModContent.ProjectileType<CrystalGauntletBall>()] <= 0;
@@ -83,13 +91,14 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
         {
             player.manaCost = 0f;
 
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<CrystalGauntletBall>()] <= 0) {
-                if (player.altFunctionUse == 0) {
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<CrystalGauntletBall>()] <= 0)
+            {
+                if (player.altFunctionUse == 0)
                     Projectile.NewProjectileDirect(source, position, velocity, type, damage, 0, player.whoAmI);
-                }
             }
 
-            if (player.altFunctionUse > 0) {
+            if (player.altFunctionUse > 0)
+            {
                 player.GetModPlayer<GoozmaWeaponsPlayer>().crystalGauntletsClapTime = 30;
                 player.GetModPlayer<GoozmaWeaponsPlayer>().crystalGauntletsClapDir = player.DirectionTo(Main.MouseWorld);
 

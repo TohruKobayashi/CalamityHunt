@@ -1,29 +1,22 @@
-﻿using Terraria;
+﻿using CalamityHunt.Common.Systems;
 using Terraria.GameContent.ItemDropRules;
-using Terraria.Localization;
+using Terraria;
+using Terraria.ModLoader;
 
 namespace CalamityHunt.Common.DropRules
 {
     public class MasterRevDropRule : IItemDropRuleCondition
     {
-        private static bool CheckRevenge()
+        bool IItemDropRuleCondition.CanDrop(DropAttemptInfo info)
         {
-            return ModCompatibility.Calamity.IsLoaded && (bool)ModCompatibility.Calamity.Mod!.Call("GetDifficultyActive", "revengeance");
+            if (ModCompatibility.Calamity.IsLoaded)
+                return (bool)ModCompatibility.Calamity.Mod!.Call("GetDifficultyActive", "revengeance") || Main.masterMode;
+            else
+                return Main.masterMode;
         }
 
-        bool IItemDropRuleCondition.CanDrop(DropAttemptInfo info) => CheckRevenge() || Main.masterMode;
+        bool IItemDropRuleCondition.CanShowItemDropInUI() => false;
 
-        bool IItemDropRuleCondition.CanShowItemDropInUI() => CheckRevenge() || Main.masterMode;
-
-        string IProvideItemConditionDescription.GetConditionDescription()
-        {
-            // Replicates the behavior of Calamity's "Master or Rev" description
-            // The "Master" drop line takes priority if the world is in Master mode
-            // The "Revengeance" drop line takes priority otherwise
-            // (Unless calamity isn't enabled, then only use the Master drop line)
-            return ModCompatibility.Calamity.IsLoaded && !Main.masterMode
-                ? Language.GetTextValue("Mods.CalamityMod.Condition.Drops.IsRev")
-                : Language.GetTextValue("Bestiary_ItemDropConditions.IsMasterMode");
-        }
+        string IProvideItemConditionDescription.GetConditionDescription() => ModCompatibility.Calamity.IsLoaded ? "Drops in Revengeance or Master Mode" : "Drops in Master Mode";
     }
 }
