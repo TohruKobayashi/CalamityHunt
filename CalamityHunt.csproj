@@ -3,7 +3,7 @@
   <Import Project="..\tModLoader.targets" />
   <PropertyGroup>
     <AssemblyName>CalamityHunt</AssemblyName>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>11</LangVersion>
   </PropertyGroup>
   <ItemGroup>
   </ItemGroup>
