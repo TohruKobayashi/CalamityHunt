@@ -89,7 +89,7 @@ public sealed class ParticleSystem : ModSystem
                 if (!new Rectangle((int)position.Value.X - 3, (int)position.Value.Y - 3, 6, 6).Intersects(value))
                     return;
 
-                shader.Value.Apply(null);
+                shader.Value?.Apply(null);
                 particle.Behavior.Draw(in entity, spriteBatch);
                 Main.pixelShader.CurrentTechnique.Passes[0].Apply();
             }
@@ -123,6 +123,7 @@ public sealed class ParticleSystem : ModSystem
         spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
         
         query = new QueryDescription().WithAll<Particle, ParticlePosition, ParticleShader>().WithNone<ParticleDrawBehindEntities>();
+        
         ParticleWorld.Query(
             in query,
             (ref Entity entity) =>
