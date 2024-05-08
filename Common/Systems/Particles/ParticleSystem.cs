@@ -38,7 +38,7 @@ public sealed class ParticleSystem : ModSystem
         var query = new QueryDescription().WithAll<Particle, ParticlePosition, ParticleVelocity, ParticleActive>();
         ParticleWorld.Query(
             in query,
-            (in Entity entity) =>
+            new ForEach((in Entity entity) =>
             {
                 ref var particle = ref entity.Get<Particle>();
                 ref var position = ref entity.Get<ParticlePosition>();
@@ -49,7 +49,7 @@ public sealed class ParticleSystem : ModSystem
                 particle.Behavior.Update(in entity);
                 if (!active.Value)
                     ParticleWorld.Destroy(entity);
-            }
+            })
         );
     }
 
@@ -64,14 +64,14 @@ public sealed class ParticleSystem : ModSystem
         var query = new QueryDescription().WithAll<Particle, ParticlePosition, ParticleDrawBehindEntities>().WithNone<ParticleShader>();
         ParticleWorld.Query(
             in query,
-            (in Entity entity) =>
+            new ForEach((in Entity entity) =>
             {
                 ref var particle = ref entity.Get<Particle>();
                 ref var position = ref entity.Get<ParticlePosition>();
                 
                 if (new Rectangle((int)position.Value.X - 3, (int)position.Value.Y - 3, 6, 6).Intersects(value))
                     particle.Behavior.Draw(in entity, spriteBatch);
-            }
+            })
         );
 
         spriteBatch.End();
@@ -80,7 +80,7 @@ public sealed class ParticleSystem : ModSystem
         query = new QueryDescription().WithAll<Particle, ParticlePosition, ParticleDrawBehindEntities, ParticleShader>();
         ParticleWorld.Query(
             in query,
-            (in Entity entity) =>
+            new ForEach((in Entity entity) =>
             {
                 ref var particle = ref entity.Get<Particle>();
                 ref var position = ref entity.Get<ParticlePosition>();
@@ -92,7 +92,7 @@ public sealed class ParticleSystem : ModSystem
                 shader.Value?.Apply(null);
                 particle.Behavior.Draw(in entity, spriteBatch);
                 Main.pixelShader.CurrentTechnique.Passes[0].Apply();
-            }
+            })
         );
 
         spriteBatch.End();
@@ -109,14 +109,14 @@ public sealed class ParticleSystem : ModSystem
         var query = new QueryDescription().WithAll<Particle, ParticlePosition>().WithNone<ParticleShader, ParticleDrawBehindEntities>();
         ParticleWorld.Query(
             in query,
-            (in Entity entity) =>
+            new ForEach((in Entity entity) =>
             {
                 ref var particle = ref entity.Get<Particle>();
                 ref var position = ref entity.Get<ParticlePosition>();
 
                 if (new Rectangle((int)position.Value.X - 3, (int)position.Value.Y - 3, 6, 6).Intersects(value))
                     particle.Behavior.Draw(in entity, spriteBatch);
-            }
+            })
         );
 
         spriteBatch.End();
@@ -126,7 +126,7 @@ public sealed class ParticleSystem : ModSystem
         
         ParticleWorld.Query(
             in query,
-            (ref Entity entity) =>
+            new ForEach((in Entity entity) =>
             {
                 ref var particle = ref entity.Get<Particle>();
                 ref var position = ref entity.Get<ParticlePosition>();
@@ -138,7 +138,7 @@ public sealed class ParticleSystem : ModSystem
                 shader.Value?.Apply(null);
                 particle.Behavior.Draw(in entity, spriteBatch);
                 Main.pixelShader.CurrentTechnique.Passes[0].Apply();
-            }
+            })
         );
 
         spriteBatch.End();

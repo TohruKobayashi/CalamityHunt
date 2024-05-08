@@ -65,7 +65,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             var particleSystem = ModContent.GetInstance<ParticleSystem>();
             particleSystem.ParticleWorld.Query(
                 in query,
-                (in Entity entity) =>
+                new ForEach((in Entity entity) =>
                 {
                     ref readonly var particle = ref entity.Get<Particle>();
                     ref readonly var velocity = ref entity.Get<ParticleVelocity>();
@@ -90,13 +90,13 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
 
                     Color color = Lighting.GetColor(position.Value.ToTileCoordinates());
                     Main.spriteBatch.Draw(texture.Value, (position.Value - Main.screenPosition) / 2f, frame, color, rotation.Value, frame.Size() * new Vector2(0.5f, 0.84f), scale.Value * grow * squish * 0.5f, 0, 0);
-                }
+                })
             );
             
             query = new QueryDescription().WithAll<Particle, ParticlePosition, ParticleRotation, ParticleScale, ParticleData<string>, ParticleMegaFlame>();
             particleSystem.ParticleWorld.Query(
                 in query,
-                (in Entity entity) =>
+                new ForEach((in Entity entity) =>
                 {
                     ref readonly var particle = ref entity.Get<Particle>();
                     ref readonly var position = ref entity.Get<ParticlePosition>();
@@ -115,7 +115,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
 
                     Color color = Lighting.GetColor(position.Value.ToTileCoordinates());
                     Main.spriteBatch.Draw(texture.Value, (position.Value - Main.screenPosition) / 2f, frame, color * opacity, rotation.Value - MathHelper.PiOver2, frame.Size() * 0.5f, scale.Value * grow * 0.5f, 0, 0);
-                }
+                })
             );
 
             Main.graphics.GraphicsDevice.SetRenderTarget(null);

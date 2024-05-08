@@ -64,7 +64,7 @@ namespace CalamityHunt.Common.Graphics
             var particleSystem = ModContent.GetInstance<ParticleSystem>();
             particleSystem?.ParticleWorld.Query(
                 in query,
-                (in Entity entity) =>
+                new ForEach((in Entity entity) =>
                 {
                     ref readonly var active = ref entity.Get<ParticleActive>();
                     if (!active.Value)
@@ -98,7 +98,7 @@ namespace CalamityHunt.Common.Graphics
                             break;
                         }
                     }
-                }
+                })
             );
 
             Effect absorbEffect = ModContent.Request<Effect>($"{nameof(CalamityHunt)}/Assets/Effects/SpaceAbsorb", AssetRequestMode.ImmediateLoad).Value;
