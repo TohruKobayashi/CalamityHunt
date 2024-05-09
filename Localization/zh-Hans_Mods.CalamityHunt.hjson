@@ -129,7 +129,7 @@ Items: {
 	}
 
 	CrimulanMask: {
-		DisplayName: 血伤面具
+		DisplayName: 血污面具
 		Tooltip: ""
 	}
 
@@ -213,7 +213,7 @@ Items: {
 	}
 
 	EbonianBehemuckTrophyItem: {
-		DisplayName: 噬全屎霉纪念章
+		DisplayName: 腐檀邪浆纪念章
 		Tooltip: ""
 	}
 
@@ -223,7 +223,7 @@ Items: {
 	}
 
 	DivineGargooptuarTrophyItem: {
-		DisplayName: 神清厚熠纪念章
+		DisplayName: 圣洁凝魔纪念章
 		Tooltip: ""
 	}
 
@@ -233,7 +233,7 @@ Items: {
 	}
 
 	CrimulanGlopstrosityTrophyItem: {
-		DisplayName: 血伤痂霜纪念章
+		DisplayName: 血污噬胶纪念章
 		Tooltip: ""
 	}
 
@@ -243,7 +243,7 @@ Items: {
 	}
 
 	StellarGeliathTrophyItem: {
-		DisplayName: 星祸寥源纪念章
+		DisplayName: 星恒粘兽纪念章
 		Tooltip: ""
 	}
 
@@ -543,13 +543,12 @@ Items: {
 	}
 
 	NuclearLemonade: {
-		// DisplayName: 核柠檬水
+		// DisplayName: Nuclear Lemonade
 		/* Tooltip:
 			'''
-			所有属性大幅提升
-			可能致命
-			'比核冬天还冷！'
-                        A nice, cold glass of 裂变ade
+			Major improvements to all stats
+			May kill you
+			'As cold as the nuclear winter!'
 			''' */
 	}
 }
@@ -565,11 +564,10 @@ NPCs: {
 		}
 	}
 
-        // CommentsAboutTheChengyuJoke:   [雪上加霜] 血伤痂霜~CG   [深情厚谊] 神清厚熠~DG  [十全十美] 噬全屎霉~EB   [星火燎原] 星祸寥源~SG
-	CrimulanGlopstrosity.DisplayName: 血伤痂霜
-	DivineGargooptuar.DisplayName: 神清厚熠
-	EbonianBehemuck.DisplayName: 噬全屎霉
-	StellarGeliath.DisplayName: 星祸寥源
+	CrimulanGlopstrosity.DisplayName: 血污噬胶
+	DivineGargooptuar.DisplayName: 圣洁凝魔
+	EbonianBehemuck.DisplayName: 腐檀邪浆
+	StellarGeliath.DisplayName: 星恒黏兽
 	Goozmite.DisplayName: 古泽蚂
 	// GelatinousSpawn.DisplayName: Gelatinous Spawn
 	// PluripotentSpawn.DisplayName: Pluripotent Spawn
@@ -591,9 +589,9 @@ Projectiles: {
 	BloatedBlast.DisplayName: 湮灭膨胀
 	PixieBall.DisplayName: 精灵球
 	GelCrystalShard.DisplayName: 凝胶水晶碎片
-	EbonianBehemuckClone.DisplayName: 小噬全屎霉
+	EbonianBehemuckClone.DisplayName: 小腐檀邪浆
 	HolyExplosion.DisplayName: 圣光爆发
-	CrimulanSmasher.DisplayName: 血伤碾压
+	CrimulanSmasher.DisplayName: 血污碾压
 	FusionRay.DisplayName: 聚能射线
 	GoozmaDeathGodrays.DisplayName: 旧神死光
 	BloatBabyProj.DisplayName: Bloat Baby
@@ -672,12 +670,11 @@ Chat: {
 }
 
 Bestiary: {
-        // CommentsAboutTheChengyuJokeReminder:   [雪上加霜] 血伤痂霜~CG   [深情厚谊] 神清厚熠~DG  [十全十美] 噬全屎霉~EB   [星火燎原] 星祸寥源~SG
 	Goozma: 一个接近临界点的史莱姆奇点，吞噬了一个过饱和的核心。它释放出强大的信息素，将其意志施加到其主体之外并影响所有的史莱姆。
-	CrimulanGlopstrosity: 一团浓缩的内脏腐烂物，以邪恶、扭曲的热情凶猛地捍卫其粘液主人。古泽玛的圣卫被有意地避免了同化以获得保护。雪上加霜的是，它们具有同样的破坏力。
-	DivineGargooptuar: 一团浓缩的辉煌神性，以令人眼花缭乱、浮夸的热情凶猛地捍卫其粘液主人。古泽玛与每一位圣卫都有着深情厚谊，从而产生完全的尊重。
-	EbonianBehemuck: 一团浓缩的剧毒腐蚀物，以无情、坚定的热忱凶猛地捍卫其粘液主人。古泽玛的圣卫需要十全十美的核心才能组建。
-	StellarGeliath: 一团浓缩的至高无上的力量，以空灵、超凡的活力凶猛地捍卫其粘液主人。古泽玛的同化能力是星火燎原。如果不加以控制，它可能会吞噬整个宇宙。
+	CrimulanGlopstrosity: 一团浓缩的内脏腐烂物，以邪恶、扭曲的热情凶猛地捍卫其粘液主人。古泽玛的每一位圣卫都由独特的核心分别凝固而成。
+	DivineGargooptuar: 一团浓缩的辉煌神性，以令人眼花缭乱、浮夸的热情凶猛地捍卫其粘液主人。作为其身体的延伸，古泽玛的圣卫只拥有有限的自主权。
+	EbonianBehemuck: 一团浓缩的剧毒腐蚀物，以无情、坚定的热忱凶猛地捍卫其粘液主人。古泽玛的圣卫被有意地避免了同化。
+	StellarGeliath: 一团浓缩的至高无上的力量，以空灵、超凡的活力凶猛地捍卫其粘液主人。如果单独留下，古泽玛可以吸收宇宙中的所有物质。
 	Goozmite: 严格来说这不是一个独立的个体；相反，古泽玛身体的一个无定形部分已经分化，可以虹吸物质进行粘稠的自我复制。古泽玛的粘液用途广泛且在物理上矛盾，它是几乎所有现存物质的混合体。
 }
 
