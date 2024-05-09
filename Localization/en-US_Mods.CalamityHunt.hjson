@@ -671,12 +671,12 @@ Chat: {
 }
 
 Bestiary: {
-	Goozma: A singularity of slimes assimilating to the point of criticality, engulfing an oversaturated core. It emits powerful pheromones that exert its will beyond its main body, affecting all slimes.
-	CrimulanGlopstrosity: A concentrated mass of visceral rot that ferociously defends its mucilaginous master with vicious, twisted fervor. Each of Goozma's paladins coagulated individually from unique cores.
-	DivineGargooptuar: A concentrated mass of resplendent divinity that ferociously defends its mucilaginous master with dazzling, flamboyant ardor. As extensions of its body, Goozma's paladins possess only limited autonomy.
-	EbonianBehemuck: A concentrated mass of virulent corrosion that ferociously defends its mucilaginous master with ruthless, determined zeal. Goozma's paladins are deliberately spared from assimilation.
-	StellarGeliath: A concentrated mass of empyrean infinity that ferociously defends its mucilaginous master with ethereal, unearthly vigor. Left alone, Goozma could assimilate all matter in the universe.
-	Goozmite: Not strictly an autonomous individual; rather, an amorphous portion of Goozma's body that has cellularly differentiated to siphon matter for slimy self-replication. Goozma's slime is versatile and physically paradoxical, being an amalgamation of nearly every type of substance to exist.
+	Goozma: An intelligent, aberrant singularity formed from the coalescence of every slimy creature.
+	CrimulanGlopstrosity: A viscerally rotting paladin that defends its mucilaginous master with twisted fervor. Goozma's paladins are deliberately spared from assimilation.
+	DivineGargooptuar: A resplendently divine paladin that defends its mucilaginous master with dazzling passion. Goozma's paladins exhibit only limited autonomy.
+	EbonianBehemuck: A virulently corrosive paladin that defends its mucilaginous master with ruthless ardor. Goozma's paladins require uniquely powerful cores.
+	StellarGeliath: A cosmically empyrean paladin that defends its mucilaginous master with ethereal vigor. Left alone, Goozma could assimilate the entire universe.
+	Goozmite: An appendage that homogenizes nearby matter into self-repairing slime. Goozma's body is incredibly viscous, yet it demonstrates a contradictory fluidity.
 }
 
 Buffs: {
