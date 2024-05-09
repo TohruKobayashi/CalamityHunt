@@ -543,12 +543,13 @@ Items: {
 	}
 
 	NuclearLemonade: {
-		// DisplayName: Nuclear Lemonade
+		// DisplayName: 核柠檬水
 		/* Tooltip:
 			'''
-			Major improvements to all stats
-			May kill you
-			'As cold as the nuclear winter!'
+			所有属性大幅提升
+			可能致命
+			'比核冬天还冷！'
+                        A nice, cold glass of Lièbiànade
 			''' */
 	}
 }
@@ -564,6 +565,7 @@ NPCs: {
 		}
 	}
 
+        // Comments: 雪上加霜 深情厚谊 十全十美 星火燎原
 	CrimulanGlopstrosity.DisplayName: 血伤痂霜
 	DivineGargooptuar.DisplayName: 神清厚熠
 	EbonianBehemuck.DisplayName: 噬惓屎霉
