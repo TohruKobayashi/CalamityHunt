@@ -129,7 +129,7 @@ Items: {
 	}
 
 	CrimulanMask: {
-		DisplayName: 血污面具
+		DisplayName: 血伤面具
 		Tooltip: ""
 	}
 
@@ -213,7 +213,7 @@ Items: {
 	}
 
 	EbonianBehemuckTrophyItem: {
-		DisplayName: 腐檀邪浆纪念章
+		DisplayName: 噬惓屎霉纪念章
 		Tooltip: ""
 	}
 
@@ -223,7 +223,7 @@ Items: {
 	}
 
 	DivineGargooptuarTrophyItem: {
-		DisplayName: 圣洁凝魔纪念章
+		DisplayName: 神清厚熠纪念章
 		Tooltip: ""
 	}
 
@@ -233,7 +233,7 @@ Items: {
 	}
 
 	CrimulanGlopstrosityTrophyItem: {
-		DisplayName: 血污噬胶纪念章
+		DisplayName: 血伤痂霜纪念章
 		Tooltip: ""
 	}
 
@@ -243,7 +243,7 @@ Items: {
 	}
 
 	StellarGeliathTrophyItem: {
-		DisplayName: 星恒粘兽纪念章
+		DisplayName: 星祸寥源纪念章
 		Tooltip: ""
 	}
 
@@ -564,10 +564,10 @@ NPCs: {
 		}
 	}
 
-	CrimulanGlopstrosity.DisplayName: 血污噬胶
-	DivineGargooptuar.DisplayName: 圣洁凝魔
-	EbonianBehemuck.DisplayName: 腐檀邪浆
-	StellarGeliath.DisplayName: 星恒黏兽
+	CrimulanGlopstrosity.DisplayName: 血伤痂霜
+	DivineGargooptuar.DisplayName: 神清厚熠
+	EbonianBehemuck.DisplayName: 噬惓屎霉
+	StellarGeliath.DisplayName: 星祸寥源
 	Goozmite.DisplayName: 古泽蚂
 	// GelatinousSpawn.DisplayName: Gelatinous Spawn
 	// PluripotentSpawn.DisplayName: Pluripotent Spawn
@@ -589,9 +589,9 @@ Projectiles: {
 	BloatedBlast.DisplayName: 湮灭膨胀
 	PixieBall.DisplayName: 精灵球
 	GelCrystalShard.DisplayName: 凝胶水晶碎片
-	EbonianBehemuckClone.DisplayName: 小腐檀邪浆
+	EbonianBehemuckClone.DisplayName: 小噬惓屎霉
 	HolyExplosion.DisplayName: 圣光爆发
-	CrimulanSmasher.DisplayName: 血污碾压
+	CrimulanSmasher.DisplayName: 血伤碾压
 	FusionRay.DisplayName: 聚能射线
 	GoozmaDeathGodrays.DisplayName: 旧神死光
 	BloatBabyProj.DisplayName: Bloat Baby
