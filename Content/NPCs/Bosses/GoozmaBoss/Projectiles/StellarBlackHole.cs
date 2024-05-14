@@ -101,7 +101,6 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                         particle.anchor = () => Projectile.velocity * 0.66f;
                     }));
                 }
-                Main.NewText("alive!");
             }
         }
 

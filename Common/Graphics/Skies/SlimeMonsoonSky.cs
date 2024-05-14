@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CalamityHunt.Common.Systems;
 using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
+using CalamityHunt.Content.Menus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -11,6 +12,7 @@ using Terraria.GameContent;
 using Terraria.Graphics;
 using Terraria.Graphics.Effects;
 using Terraria.Utilities;
+using Terraria.ModLoader;
 
 namespace CalamityHunt.Common.Graphics.Skies;
 
@@ -32,7 +34,7 @@ public class SlimeMonsoonSky : CustomSky
         additionalLightningChance = 0;
     }
 
-    public override bool IsActive() => _strength > 0.001f && !Main.gameMenu;
+    public override bool IsActive() => (_strength > 0.001f && !Main.gameMenu) || (ModContent.GetInstance<GoozmaMenu>() && MenuLoader.CurrentMenu);
 
     public override void Reset()
     {
@@ -84,6 +86,10 @@ public class SlimeMonsoonSky : CustomSky
         if (forceStrength.HasValue) {
             _strength = forceStrength.Value;
             forceStrength = null;
+        }
+
+        if (ModContent.GetInstance<GoozmaMenu>() && Main.gameMenu) {
+
         }
 
         radialDistortPos = Vector2.Lerp(radialDistortPos, Main.LocalPlayer.Center, 0.5f);
@@ -213,7 +219,7 @@ public class SlimeMonsoonSky : CustomSky
             maxTime = this.time;
             colorOffset = _random.NextFloat(0, 100f);
 
-            LightningData data = new LightningData(this.position + _random.NextVector2CircularEdge(800, 200) - Vector2.UnitY * 800, this.position - _random.NextVector2Circular(1000, 300), this.position + _random.NextVector2CircularEdge(100, 200) + Vector2.UnitY * 900, 0.2f);
+            LightningData data = new LightningData(this.position + _random.NextVector2CircularEdge(800, 200) - Vector2.UnitY * 800, this.position - _random.NextVector2Circular(1000, 300), this.position + _random.NextVector2CircularEdge(100, 200) + Vector2.UnitY * 900);
             points = data.Value;
 
 
