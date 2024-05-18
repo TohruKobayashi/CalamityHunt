@@ -1,6 +1,6 @@
 displayName = Hunt of the Old God
 loadAfter = CalamityMod
 author = Team Hypnos
-version = 1.0.7
+version = 1.0.8
 sortAfter = WMITF
 dllReferences = arch/Arch,arch/Collections.Pooled,arch/CommunityToolkit.HighPerformance,arch/JobScheduler,arch/Microsoft.Extensions.ObjectPool
