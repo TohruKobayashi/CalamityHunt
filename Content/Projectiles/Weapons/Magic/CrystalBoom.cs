@@ -1,9 +1,18 @@
-﻿using System;
+﻿using CalamityHunt.Content.Items.Rarities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Terraria.ID;
+using Terraria;
+using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria;
+using CalamityHunt.Content.Items.Weapons.Magic;
+using CalamityHunt.Common.Systems.Particles;
+using CalamityHunt.Content.Particles;
 using Terraria.GameContent;
-using Terraria.ModLoader;
 
 namespace CalamityHunt.Content.Projectiles.Weapons.Magic
 {
@@ -30,13 +39,11 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
             Projectile.velocity = Vector2.Zero;
             Projectile.scale = MathF.Sqrt(Utils.GetLerpValue(0, 35, Time, true)) * (Size + 1f);
 
-            if (Time == 0) {
+            if (Time == 0)
                 Projectile.localAI[1] = Main.rand.NextFloat(-1f, 1f);
-            }
 
-            if (Time > 35) {
+            if (Time > 35)
                 Projectile.Kill();
-            }
 
             Time++;
             Projectile.localAI[0]++;
@@ -46,17 +53,15 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             Point checkPoint = (Projectile.Center + Projectile.DirectionTo(targetHitbox.Center()) * 120f * Projectile.scale).ToPoint();
-            if (targetHitbox.Contains(checkPoint)) {
+            if (targetHitbox.Contains(checkPoint))
                 return true;
-            }
-
             return false;
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture = TextureAssets.Projectile[Type].Value;
-            Texture2D glow = AssetDirectory.Textures.Glow[0].Value;
+            Texture2D glow = AssetDirectory.Textures.Glow.Value;
             float scale = Projectile.scale * 3f;
 
             Color rainbowColor = Main.hslToRgb(Projectile.localAI[0] * 0.03f % 1f, 0.5f, 0.55f, 0) * Utils.GetLerpValue(35, 15, Time, true) * 0.9f;

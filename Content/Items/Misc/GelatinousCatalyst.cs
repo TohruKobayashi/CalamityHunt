@@ -1,3 +1,7 @@
+using CalamityHunt.Content.Items.Materials;
+using CalamityHunt.Content.Particles;
+using Microsoft.Xna.Framework;
+using CalamityHunt.Common.Systems.Particles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

@@ -1,10 +1,18 @@
-﻿using System;
+﻿using CalamityHunt.Content.Items.Rarities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Terraria.ID;
+using Terraria;
+using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria;
+using CalamityHunt.Content.Items.Weapons.Magic;
+using CalamityHunt.Common.Systems.Particles;
+using CalamityHunt.Content.Particles;
 using Terraria.GameContent;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace CalamityHunt.Content.Projectiles.Weapons.Magic
 {
@@ -28,7 +36,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
 
         public override void AI()
         {
-            if (Time > 25) {
+            if (Time > 25)
+            {
                 Projectile.velocity *= 0.96f;
                 Projectile.scale *= 0.96f;
             }
@@ -43,11 +52,13 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
 
         private void MagicParticles()
         {
-            if (Time == 0) {
+            if (Time == 0)
+            {
 
             }
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 3; i++)
+            {
                 Color glowColor = Main.hslToRgb(Projectile.localAI[0] * 0.03f % 1f, 0.5f, 0.6f, 0);
                 Dust mainGlow = Dust.NewDustPerfect(Projectile.Center - Projectile.velocity * (i / 3f), DustID.PortalBoltTrail, Projectile.velocity * 0.2f, 0, glowColor, 0.8f * Projectile.scale);
                 mainGlow.noGravity = true;
@@ -67,7 +78,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture = TextureAssets.Projectile[Type].Value;
-            Texture2D glow = AssetDirectory.Textures.Glow[0].Value;
+            Texture2D glow = AssetDirectory.Textures.Glow.Value;
             float scale = MathF.Sqrt(Projectile.scale) * (1f + MathF.Sin(Time * 0.9f) * 0.08f) * 1.5f * Utils.GetLerpValue(0, 20, Time, true);
 
             Color rainbowColor = Main.hslToRgb(Projectile.localAI[0] * 0.03f % 1f, 0.5f, 0.55f, 0);

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using CalamityHunt.Common.Players;
-using CalamityHunt.Common.Utilities;
-using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
+﻿using CalamityHunt.Common.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using CalamityHunt.Core;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
-using Terraria.Graphics;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -27,7 +25,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
         public override void SetDefaults()
         {
             Projectile.width = 30;
-            Projectile.height = 50;
+            Projectile.height = 50; 
             Projectile.friendly = true;
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;
@@ -52,50 +50,47 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
 
         public override void AI()
         {
-            if (!Player.GetModPlayer<SlimeCanePlayer>().slimes || Player.dead || Player.GetModPlayer<SlimeCanePlayer>().SlimeRank() < SlimeCanePlayer.HighestRank) {
+            if (!Player.GetModPlayer<SlimeCanePlayer>().slimes || Player.dead || Player.GetModPlayer<SlimeCanePlayer>().SlimeRank() < SlimeCanePlayer.HighestRank)
                 Projectile.Kill();
-            }
-            else {
+            else
                 Projectile.timeLeft = 2;
-            }
 
             int target = -1;
             Projectile.Minion_FindTargetInRange(1200, ref target, true);
             bool hasTarget = false;
-            if (target > -1) {
+            if (target > -1)
+            {
                 hasTarget = true;
-                if (Main.npc[target].active && Main.npc[target].CanBeChasedBy(Projectile)) {
+                if (Main.npc[target].active && Main.npc[target].CanBeChasedBy(Projectile))
                     Attack(target);
-                }
-                else {
+                else
                     hasTarget = false;
-                }
             }
-            if (!hasTarget) {
+            if (!hasTarget)
                 Idle();
-            }
 
             Dust gas = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(16, 25), DustID.TintableDust, Main.rand.NextVector2Circular(1, 1), 150, Color.Black, 0.5f + Main.rand.NextFloat());
             gas.noGravity = true;
             gas.shader = GameShaders.Armor.GetSecondaryShader(Player.cMinion, Player);
 
-            if (AttackCD > 0) {
+            if (AttackCD > 0)
                 AttackCD--;
-            }
 
-            if (Projectile.frameCounter++ > 3) {
+            if (Projectile.frameCounter++ > 3)
+            {
                 Projectile.frameCounter = 0;
                 Projectile.frame = (Projectile.frame + 1) % 6;
             }
 
-            Vector2 cordStart = new Vector2(512) + new Vector2(10 * Projectile.direction, 2).RotatedBy(Projectile.rotation) * Projectile.scale * 0.5f;
-            Vector2 cordEnd = new Vector2(512) + (Player.MountedCenter - Projectile.Center) * 0.5f;
-            cordRope ??= new Rope(cordStart, cordEnd, 16, 2f, Vector2.Zero, 0.5f, 10);
+            Vector2 cordStart = new Vector2(256) + new Vector2(10 * Projectile.direction, 2).RotatedBy(Projectile.rotation) * Projectile.scale * 0.5f;
+            Vector2 cordEnd = new Vector2(256) + (Player.MountedCenter - Projectile.Center) * 0.5f;
+            if (cordRope == null)
+                cordRope = new Rope(cordStart, cordEnd, 16, 2f, Vector2.Zero, 0.5f, 10);
 
-            cordRope.segmentLength = MathF.Sqrt(Projectile.Distance(Player.MountedCenter)) * 0.5f;
+            cordRope.segmentLength = MathF.Sqrt(Projectile.Distance(Player.MountedCenter)) * 0.4f;
             cordRope.StartPos = cordStart;
             cordRope.EndPos = cordEnd;
-            cordRope.gravity = new Vector2(Player.direction * 1, -0.5f) * 0.2f;
+            cordRope.gravity = new Vector2(Player.direction * 1, -0.5f) * 0.3f;
             cordRope.Update();
         }
 
@@ -105,17 +100,15 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
         {
             Time = 0;
 
-            if (Math.Abs(Projectile.velocity.X) < 1f) {
+            if (Math.Abs(Projectile.velocity.X) < 1f)
                 Projectile.direction = Player.direction;
-            }
-            else {
+            else
                 Projectile.direction = Math.Sign(Projectile.velocity.X);
-            }
 
-            if (Projectile.Distance(HomePosition) > 14) {
+            if (Projectile.Distance(HomePosition) > 14)
                 Projectile.velocity += Projectile.DirectionTo(HomePosition).SafeNormalize(Vector2.Zero) * MathF.Max(0.1f, Projectile.Distance(HomePosition) * 0.03f);
-            }
-            else {
+            else
+            {
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, Main.rand.NextVector2Circular(2, 2), 0.3f);
                 Projectile.velocity *= 0.9f;
                 Projectile.netUpdate = true;
@@ -129,22 +122,24 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
         {
             NPC target = Main.npc[whoAmI];
 
-            if (Projectile.Distance(HomePosition) > 14) {
+            if (Projectile.Distance(HomePosition) > 14)
                 Projectile.velocity += Projectile.DirectionTo(HomePosition).SafeNormalize(Vector2.Zero) * MathF.Max(0.1f, Projectile.Distance(HomePosition) * 0.03f);
-            }
-            else {
+            else
+            {
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, Main.rand.NextVector2Circular(2, 2), 0.3f);
                 Projectile.velocity *= 0.9f;
                 Projectile.netUpdate = true;
             }
 
-            if (AttackCD == 0) {
+            if (AttackCD == 0)
+            {
                 Time++;
 
-                if (Time > 100) {
+                if (Time > 100)
+                {
                     SoundStyle deep = SoundID.Item15 with { MaxInstances = 0, Pitch = -1f, PitchVariance = 0.2f, Volume = 0.5f };
                     SoundEngine.PlaySound(deep, Projectile.Center);
-                    SoundStyle shootSound = AssetDirectory.Sounds.Weapons.GoozmoemRay;
+                    SoundStyle shootSound = AssetDirectory.Sounds.GoozmoemRay;
                     SoundEngine.PlaySound(shootSound, Projectile.Center);
 
                     int direction = Main.rand.NextBool().ToDirectionInt();
@@ -156,7 +151,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
                     AttackCD = 60;
                 }
             }
-            else {
+            else
+            {
                 Projectile.direction = Projectile.Center.X > target.Center.X ? -1 : 1;
                 eyeOffset = Vector2.Lerp(eyeOffset, new Vector2(4 * Projectile.direction, 0) + Main.rand.NextVector2Circular(4, 4), 0.3f);
             }
@@ -168,147 +164,68 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
 
         public Vector2 eyeOffset;
 
-        public static Texture2D eyeTexture;
-        public static Texture2D crownTexture;
-        public static RenderTargetDrawContent cordContent;
-        public static RenderTargetDrawContent creatureContent;
-        public VertexStrip cordStrip;
+        public static GoozmoemTextureContent goozmoemTextureContent;
+        public static GoozmoemCordTextureContent goozmoemCordTextureContent;
 
         public override void Load()
         {
-            eyeTexture = AssetUtilities.RequestImmediate<Texture2D>(Texture + "Eye").Value;
-            crownTexture = AssetUtilities.RequestImmediate<Texture2D>(Texture + "Crown").Value;
-            Main.ContentThatNeedsRenderTargets.Add(creatureContent = new RenderTargetDrawContent());
-            Main.ContentThatNeedsRenderTargets.Add(cordContent = new RenderTargetDrawContent());
+            Main.ContentThatNeedsRenderTargets.Add(goozmoemTextureContent = new GoozmoemTextureContent());
+            Main.ContentThatNeedsRenderTargets.Add(goozmoemCordTextureContent = new GoozmoemCordTextureContent());
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture = TextureAssets.Projectile[Type].Value;
-
             Vector2 scale = Projectile.scale * Vector2.One;
 
-            cordContent.Request(1024, 1024, Projectile.whoAmI, DrawCord);
-
-            creatureContent.Request(1024, 1024, Projectile.whoAmI, spriteBatch => {
-
-                Vector2 creaturePos = new Vector2(512);
-                GetGradientMapValues(out float[] brightnesses, out Vector3[] colors);
-                Effect effect = AssetDirectory.Effects.HolographicGel.Value;
-                effect.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly % 1f);
-                effect.Parameters["colors"].SetValue(colors);
-                effect.Parameters["brightnesses"].SetValue(brightnesses);
-                effect.Parameters["baseToScreenPercent"].SetValue(1.05f);
-                effect.Parameters["baseToMapPercent"].SetValue(-0.05f);
-
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, effect);
-                SpriteEffects direction = Projectile.direction < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-
-                Rectangle frame = texture.Frame(1, 7, 0, Projectile.frame, -2, -2);
-                if (cordRope != null) {
-
-                    if (cordContent.IsTargetReady(Projectile.whoAmI)) {
-                        Texture2D goozmoemCord = cordContent.GetTarget(Projectile.whoAmI);
-                        Main.EntitySpriteDraw(goozmoemCord, creaturePos, goozmoemCord.Frame(), Color.White, Projectile.rotation, goozmoemCord.Size() * 0.5f, 2f, 0, 0);
-                    }
-
-                    Main.EntitySpriteDraw(texture, creaturePos, frame, Color.White, Projectile.rotation, new Vector2(frame.Width * 0.5f, 22), 1f, direction, 0);
-                    Main.EntitySpriteDraw(eyeTexture, creaturePos + eyeOffset + new Vector2(0, -4).RotatedBy(Projectile.rotation), eyeTexture.Frame(), Color.White, Projectile.rotation, eyeTexture.Size() * 0.5f, 1f, direction, 0);
-                }
-                spriteBatch.End();
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null);
-                Main.EntitySpriteDraw(crownTexture, creaturePos, frame, Color.White, Projectile.rotation, new Vector2(frame.Width * 0.5f, 22), 1f, direction, 0);
-                spriteBatch.End();
-            });
-
-            if (creatureContent.IsTargetReady(Projectile.whoAmI)) {
-                Texture2D goozmoem = creatureContent.GetTarget(Projectile.whoAmI);
+            goozmoemTextureContent.width = 512;
+            goozmoemTextureContent.height = 512;
+            goozmoemTextureContent.drawFunction = DrawCreature;
+            goozmoemTextureContent.drawNonGlowFunction = DrawCreatureCrown;
+            goozmoemTextureContent.Request();
+            if (goozmoemTextureContent.IsReady)
+            {
+                Texture2D goozmoem = goozmoemTextureContent.GetTarget();
                 Main.EntitySpriteDraw(goozmoem, Projectile.Center - Main.screenPosition, goozmoem.Frame(), Color.White, Projectile.rotation, goozmoem.Size() * 0.5f, scale, 0, 0);
             }
 
             return false;
         }
 
-        public void DrawCord(SpriteBatch spriteBatch)
+        public void DrawCreature()
         {
-            List<Vector2> points = cordRope.GetPoints();
-            points.Add(new Vector2(512) + (Player.MountedCenter - Projectile.Center) * 0.5f);
-            Vector2[] positions = points.ToArray();
-            float[] rotations = new float[positions.Length];
-            for (int i = 1; i < positions.Length; i++) {
-                rotations[i] = positions[i - 1].AngleTo(positions[i]);
+            SpriteEffects direction = Projectile.direction < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+
+            if (cordRope != null)
+            {
+                Texture2D texture = TextureAssets.Projectile[Type].Value;
+                Texture2D eyeTexture = AssetDirectory.Textures.Extras.GoozmoemEye.Value;
+                Rectangle frame = texture.Frame(1, 7, 0, Projectile.frame, -2, -2);
+
+                goozmoemCordTextureContent.width = 512;
+                goozmoemCordTextureContent.height = 512;
+                List<Vector2> points = cordRope.GetPoints();
+                points.Add(new Vector2(256) + (Player.MountedCenter - Projectile.Center) * 0.5f);
+                goozmoemCordTextureContent.positions = points.ToArray();
+                goozmoemCordTextureContent.Request();
+
+                if (goozmoemCordTextureContent.IsReady)
+                {
+                    Texture2D goozmoemCord = goozmoemCordTextureContent.GetTarget();
+                    Main.EntitySpriteDraw(goozmoemCord, new Vector2(256), goozmoemCord.Frame(), Color.White, Projectile.rotation, goozmoemCord.Size() * 0.5f, 2f, 0, 0);
+                }
+
+                Main.EntitySpriteDraw(texture, new Vector2(256), frame, Color.White, Projectile.rotation, new Vector2(frame.Width * 0.5f, 22), 1f, direction, 0);
+                Main.EntitySpriteDraw(eyeTexture, new Vector2(256) + eyeOffset + new Vector2(0, -4).RotatedBy(Projectile.rotation), eyeTexture.Frame(), Color.White, Projectile.rotation, eyeTexture.Size() * 0.5f, 1f, direction, 0);
             }
-
-            rotations[positions.Length - 1] = rotations[positions.Length - 2];
-
-            Effect effect = AssetDirectory.Effects.GoozmaCordMap.Value;
-            effect.Parameters["uTransformMatrix"].SetValue(Matrix.Invert(Main.GameViewMatrix.EffectMatrix) * Matrix.CreateOrthographicOffCenter(0, 1024, 1024, 0, -1, 1));
-            if (!Main.gameInactive) {
-                effect.Parameters["uTime"].SetValue(Main.GlobalTimeWrappedHourly * 0.5f);
-            }
-            effect.Parameters["uTexture"].SetValue(AssetDirectory.Textures.Goozma.LiquidTrail.Value);
-            effect.Parameters["uMap"].SetValue(AssetDirectory.Textures.ColorMap[0].Value);
-
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null);
-            effect.CurrentTechnique.Passes[0].Apply();
-
-            cordStrip ??= new VertexStrip();
-
-            Color ColorFunc(float progress) => Color.White;
-            float WidthFunc(float progress) => MathF.Pow(Utils.GetLerpValue(0f, 0.1f, progress, true) * Utils.GetLerpValue(1.2f, 0.5f, progress, true), 0.7f) * 7f;
-            cordStrip.PrepareStrip(positions, rotations, ColorFunc, WidthFunc, Vector2.Zero, positions.Length, true);
-            cordStrip.DrawTrail();
-
-            Main.pixelShader.CurrentTechnique.Passes[0].Apply();
-            spriteBatch.End();
         }
 
-        private void GetGradientMapValues(out float[] brightnesses, out Vector3[] colors)
+        public void DrawCreatureCrown()
         {
-            brightnesses = new float[10];
-            colors = new Vector3[10];
+            SpriteEffects direction = Projectile.direction < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-            float maxBright = 0.667f;
-            float rainbowStartOffset = 0.35f + Main.GlobalTimeWrappedHourly * 0.5f % (maxBright * 2f);
-            //Calculate and store every non-modulo brightness, with the shifting offset. 
-            //The first brightness is ignored for the moment, it will be relevant later. Setting it to -1 temporarily
-            brightnesses[0] = -1;
-            brightnesses[1] = rainbowStartOffset + 0.35f;
-            brightnesses[2] = rainbowStartOffset + 0.42f;
-            brightnesses[3] = rainbowStartOffset + 0.47f;
-            brightnesses[4] = rainbowStartOffset + 0.51f;
-            brightnesses[5] = rainbowStartOffset + 0.56f;
-            brightnesses[6] = rainbowStartOffset + 0.61f;
-            brightnesses[7] = rainbowStartOffset + 0.64f;
-            brightnesses[8] = rainbowStartOffset + 0.72f;
-            brightnesses[9] = rainbowStartOffset + 0.75f;
-
-            //Pass the entire rainbow through modulo 1
-            for (int i = 1; i < 10; i++) {
-                brightnesses[i] = HUtils.Modulo(brightnesses[i], maxBright) * maxBright;
-            }
-
-            //Store the first element's value so we can find it again later
-            float firstBrightnessValue = brightnesses[1];
-
-            //Sort the values from lowest to highest
-            Array.Sort(brightnesses);
-
-            //Find the new index of the original first element after the list being sorted
-            int rainbowStartIndex = Array.IndexOf(brightnesses, firstBrightnessValue);
-            //Substract 1 from the index, because we are ignoring the currently negative first array slot.
-            rainbowStartIndex--;
-
-            //9 loop, filling a list of colors in a array of 10 elements (ignoring the first one)
-            for (int i = 0; i < 9; i++) {
-                colors[1 + (rainbowStartIndex + i) % 9] = GoozmaColorUtils.Oil[i];
-            }
-
-            //We always want a brightness at index 0 to be the lower bound
-            brightnesses[0] = 0;
-            //Make the color at index 0 be a mix between the first and last colors in the list, based on the distance between the 2.
-            float interpolant = (1 - brightnesses[9]) / (brightnesses[1] + (1 - brightnesses[9]));
-            colors[0] = Vector3.Lerp(colors[9], colors[0], interpolant);
+            Texture2D texture = AssetDirectory.Textures.Extras.GoozmoemCrown.Value;
+            Rectangle frame = texture.Frame(1, 7, 0, Projectile.frame, -2, -2);
+            Main.EntitySpriteDraw(texture, new Vector2(256), frame, Color.White, Projectile.rotation, new Vector2(frame.Width * 0.5f, 22), 1f, direction, 0);
         }
     }
 }

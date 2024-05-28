@@ -1,22 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\tModLoader.targets" />
   <PropertyGroup>
     <AssemblyName>CalamityHunt</AssemblyName>
-    <TargetFramework>net6.0</TargetFramework>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>11</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Assets\Effects\PluripotentDistortion.fx" />
-    <None Remove="Assets\Textures\NPCs\Bosses\Goozma_Head_Boss.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\Textures\NPCs\Bosses\Inventors\" />
-    <Folder Include="Common\UI\SoulInterface\" />
-    <Folder Include="Content\NPCs\Bosses\Inventors\" />
+    <Reference Include="Arch">
+      <HintPath>lib\arch\Arch.dll</HintPath>
+    </Reference>
+    <Reference Include="Collections.Pooled">
+      <HintPath>lib\arch\Collections.Pooled.dll</HintPath>
+    </Reference>
+    <Reference Include="CommunityToolkit.HighPerformance">
+      <HintPath>lib\arch\CommunityToolkit.HighPerformance.dll</HintPath>
+    </Reference>
+    <Reference Include="JobScheduler">
+      <HintPath>lib\arch\JobScheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool">
+      <HintPath>lib\arch\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

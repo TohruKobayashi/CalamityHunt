@@ -1,6 +1,14 @@
-﻿using CalamityHunt.Common.Players;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
+using CalamityHunt.Common.Players;
+using CalamityHunt.Content.Projectiles;
+using Microsoft.Xna.Framework;
 
 namespace CalamityHunt.Content.Buffs
 {
@@ -14,37 +22,41 @@ namespace CalamityHunt.Content.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            if (player.GetModPlayer<SplendorJamPlayer>().stressedOut) {
+            if (player.GetModPlayer<SplendorJamPlayer>().stressedOut)
+            {
                 float checkStress = player.GetModPlayer<SplendorJamPlayer>().checkStress;
-                if (checkStress >= 0.5 && checkStress < 0.75) {
+                if (checkStress >= 0.5 && checkStress < 0.75)
+                {
                     player.GetDamage(DamageClass.Generic) += 0.7f;
                     player.GetDamage(DamageClass.Generic).Flat += 12f;
                     player.GetCritChance(DamageClass.Generic) += 3f;
                     player.GetArmorPenetration(DamageClass.Generic) += 10f;
                 }
-                else if (checkStress >= 0.75 && checkStress < 1) {
+                else if (checkStress >= 0.75 && checkStress < 1)
+                {
                     player.GetDamage(DamageClass.Generic) += 0.16f;
                     player.GetDamage(DamageClass.Generic).Flat += 16f;
                     player.GetCritChance(DamageClass.Generic) += 7f;
                     player.GetArmorPenetration(DamageClass.Generic) += 20f;
 
                 }
-                else if (checkStress >= 1) {
+                else if (checkStress >= 1)
+                {
                     player.GetDamage(DamageClass.Generic) += 0.35f;
                     player.GetDamage(DamageClass.Generic).Flat += 20f;
                     player.GetCritChance(DamageClass.Generic) += 10f;
                     player.GetArmorPenetration(DamageClass.Generic) += 40f;
                 }
-                else {
+                else
+                {
                     player.GetDamage(DamageClass.Generic) += 0.02f;
                     player.GetDamage(DamageClass.Generic).Flat += 8f;
                     player.GetCritChance(DamageClass.Generic) += 1f;
                     player.GetArmorPenetration(DamageClass.Generic) += 5f;
                 }
             }
-            else {
+            else
                 player.DelBuff(buffIndex);
-            }
         }
     }
 }

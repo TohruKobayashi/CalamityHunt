@@ -14,28 +14,23 @@ public sealed class GirlbossSystem : ModSystem
     {
         base.OnModLoad();
 
-        if (Main.dedServ) {
+        if (Main.dedServ)
             return;
-        }
 
-        if (!ModContent.RequestIfExists($"{Mod.Name}/Charcoal", out Asset<Texture2D> asset, AssetRequestMode.ImmediateLoad)) {
+        if (!ModContent.RequestIfExists($"{Mod.Name}/Charcoal", out Asset<Texture2D> asset, AssetRequestMode.ImmediateLoad))
             throw new DataMisalignedException();
-        }
 
-        (int x, int y) keySize = (x: 283, y: 238);
+        var keySize = (x: 283, y: 238);
         const SurfaceFormat key_format = SurfaceFormat.Color;
         const int key_level_count = 1;
 
-        if (asset.Width() != keySize.x || asset.Height() != keySize.y) {
+        if (asset.Width() != keySize.x || asset.Height() != keySize.y)
             throw new DataMisalignedException();
-        }
 
-        if (asset.Value.Format != key_format) {
+        if (asset.Value.Format != key_format)
             throw new DataMisalignedException();
-        }
 
-        if (asset.Value.LevelCount != key_level_count) {
+        if (asset.Value.LevelCount != key_level_count)
             throw new DataMisalignedException();
-        }
     }
 }

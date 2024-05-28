@@ -1,9 +1,11 @@
-﻿using CalamityHunt.Common.Utilities;
+﻿using CalamityHunt.Common.Systems;
+using CalamityHunt.Common.Utilities;
+using CalamityHunt.Content.Bosses.Goozma;
 using CalamityHunt.Content.Items.Materials;
 using CalamityHunt.Content.Items.Rarities;
-using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
 using CalamityHunt.Content.Projectiles.Weapons.Melee;
 using CalamityHunt.Content.Tiles;
+using CalamityHunt.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -30,22 +32,23 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
             Item.DamageType = DamageClass.Melee;
             Item.rare = ModContent.RarityType<VioletRarity>();
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.useTime = 35;
-            Item.useAnimation = 35;
+            Item.useTime = 40;
+            Item.useAnimation = 40;
             Item.channel = true;
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.value = Item.sellPrice(gold: 20);
             Item.shoot = ModContent.ProjectileType<ScytheOfTheOldGodHeld>();
             Item.shootSpeed = 5f;
-            if (ModLoader.HasMod(HUtils.CalamityMod)) {
+            if (ModLoader.HasMod("CalamityMod"))
+            {
                 ModRarity r;
-                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
+                Mod calamity = ModLoader.GetMod("CalamityMod");
                 calamity.TryFind<ModRarity>("Violet", out r);
                 Item.rare = r.Type;
             }
             swingStyle = 0;
-            Item.autoReuse = true;
+
         }
 
         public static Asset<Texture2D> glowTexture;
@@ -79,7 +82,8 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<ScytheOfTheOldGodHeld>()] <= 0) {
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<ScytheOfTheOldGodHeld>()] <= 0)
+            {
                 Projectile.NewProjectileDirect(source, position, velocity, type, damage, 0, player.whoAmI, ai0: -1, ai1: swingStyle);
                 swingStyle = (swingStyle + 1) % 3;
             }
@@ -91,8 +95,9 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
 
         public override void AddRecipes()
         {
-            if (ModLoader.HasMod(HUtils.CalamityMod)) {
-                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
+            if (ModLoader.HasMod("CalamityMod"))
+            {
+                Mod calamity = ModLoader.GetMod("CalamityMod");
                 CreateRecipe()
                     .AddIngredient<ChromaticMass>(15)
                     .AddIngredient(calamity.Find<ModItem>("DeathsAscension").Type)
@@ -102,7 +107,8 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
                     .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
                     .Register();
             }
-            else {
+            else 
+            {
                 CreateRecipe()
                     .AddIngredient(ItemID.Sickle)
                     .AddIngredient<ChromaticMass>(15)

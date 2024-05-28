@@ -1,17 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using Terraria.DataStructures;
+using Terraria.Enums;
+using Terraria.Localization;
+using Terraria.ObjectData;
+using Terraria;
+using Terraria.ModLoader;
+using Terraria.GameContent.Creative;
 using CalamityHunt.Content.Items.Materials;
 using CalamityHunt.Content.Items.Rarities;
-using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
-using static CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.GoozmaColorUtils;
+using static CalamityHunt.Content.Bosses.Goozma.GoozmaColorUtils;
+using CalamityHunt.Content.Bosses.Goozma;
 
 
 namespace CalamityHunt.Content.Items.Dyes
@@ -29,9 +40,8 @@ namespace CalamityHunt.Content.Items.Dyes
             loadedDyeCount = 0;
             Hunt = ModLoader.GetMod("CalamityHunt");
 
-            while (loadedDyeCount < Palettes.Count) {
+            while (loadedDyeCount < Palettes.Count)
                 LoadNextChromaDye();
-            }
         }
 
         public static int loadedDyeCount;
@@ -104,9 +114,7 @@ namespace CalamityHunt.Content.Items.Dyes
             Kindergarten,
             Daniel,
             Autumnal,
-            Subworld,
-            CrabSecret,
-            Garroth
+            Subworld
         };
     }
 
@@ -138,8 +146,9 @@ namespace CalamityHunt.Content.Items.Dyes
         public override void SetStaticDefaults()
         {
             Item.ResearchUnlockCount = 3;
-            if (!Main.dedServ) {
-                Effect goopShader = AssetDirectory.Effects.Dyes.Holograph.Value;
+            if (!Main.dedServ)
+            {
+                Effect goopShader = ModContent.Request<Effect>($"{nameof(CalamityHunt)}/Assets/Effects/HolographDyeEffect", AssetRequestMode.ImmediateLoad).Value;
                 GameShaders.Armor.BindShader(Type, new ChromaticDyeShaderData(new Ref<Effect>(goopShader), "LiquidPass", Index));
             }
         }
@@ -150,9 +159,10 @@ namespace CalamityHunt.Content.Items.Dyes
             Item.CloneDefaults(ItemID.BrownDye);
             Item.dye = dye;
             Item.rare = ModContent.RarityType<VioletRarity>();
-            if (ModLoader.HasMod(HUtils.CalamityMod)) {
+            if (ModLoader.HasMod("CalamityMod"))
+            {
                 ModRarity r;
-                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
+                Mod calamity = ModLoader.GetMod("CalamityMod");
                 calamity.TryFind<ModRarity>("Violet", out r);
                 Item.rare = r.Type;
             }
@@ -170,7 +180,7 @@ namespace CalamityHunt.Content.Items.Dyes
         #region Drawing in world
         public Effect GetShader()
         {
-            Effect effect = AssetDirectory.Effects.Dyes.Holograph.Value;
+            Effect effect = ModContent.Request<Effect>($"{nameof(CalamityHunt)}/Assets/Effects/HolographDyeEffect").Value;
             Goozma.GetGradientMapValues(ChromaticDyeLoader.Palettes[Index], out float[] brightnesses, out Vector3[] colors);
 
             effect.Parameters["uColor"].SetValue(new Color(39, 31, 34).ToVector3());
@@ -223,7 +233,7 @@ namespace CalamityHunt.Content.Items.Dyes
     {
         public int index;
 
-        public ChromaticDyeShaderData(Ref<Effect> shader, string passName, int index) : base(shader, passName)
+        public ChromaticDyeShaderData(Ref<Effect> shader, string passName, int index) : base(shader, passName) 
         {
             this.index = index;
         }

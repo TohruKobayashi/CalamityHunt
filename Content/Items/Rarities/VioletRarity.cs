@@ -10,14 +10,10 @@ namespace CalamityHunt.Content.Items.Rarities
 
         public override int GetPrefixedRarity(int offset, float valueMult)
         {
-            if (offset < 0) {
+            if (offset < 0)
                 return ItemRarityID.Blue;
-            }
-
-            if (offset > 0) {
+            if (offset > 0)
                 return ModContent.RarityType<CalamityRedRarity>();
-            }
-
             return Type;
         }
     }

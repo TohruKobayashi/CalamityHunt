@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CalamityHunt.Common.Systems.Particles;
+﻿using CalamityHunt.Common.Systems.Particles;
+using CalamityHunt.Content.Items.Armor.Shogun;
 using CalamityHunt.Content.Particles;
 using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Security.Policy;
+using System.Text;
+using System.Threading.Tasks;
 using Terraria;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -36,48 +42,43 @@ namespace CalamityHunt.Common.Players
             bool deactivatedEffect = false;
             float rotation = 0;
 
-            foreach (IShogunSpinModifier spinEffect in spinEffects) {
+            foreach (IShogunSpinModifier spinEffect in spinEffects)
+            {
                 bool previousState = spinEffect.ActiveState;
                 spinEffect.ActiveState = spinEffect.Active(Player, this);
 
-                if (spinEffect.ActiveState != previousState) {
+                if (spinEffect.ActiveState != previousState)
+                {
                     //If we turned active while before we weren't, reactivate the effect
-                    if (!previousState) {
+                    if (!previousState)
                         spinEffect.Reactivate(Player, this);
-                    }
-                    else {
+                    else
                         deactivatedEffect = true;
-                    }
                 }
 
-                if (spinEffect.ActiveState) {
+                if (spinEffect.ActiveState)
                     spinEffect.Update(Player, this, ref rotation);
-                }
             }
 
             //Set the rotation if we have any active effects
-            if (spinEffects.Any(s => s.ActiveState)) {
+            if (spinEffects.Any(s => s.ActiveState))
+            {
                 Player.fullRotation = rotation;
                 Player.fullRotationOrigin = Player.Size * 0.5f;
             }
             //If there's no more active effects after we deactivated one, that means we have to reset the rotation
-            else if (deactivatedEffect) {
-                Player.fullRotation = 0;
-            }
+            else if (deactivatedEffect)
+                 Player.fullRotation = 0; 
 
-            if (active) {
-                if (Player.dashDelay < 0) {
+            if (active)
+            {
+                if (Player.dashDelay < 0)
+                {
                     //Main.SetCameraLerp(0.1f, 25);
-                    for (int i = 0; i < 6; i++) {
+                    for (int i = 0; i < 6; i++)
                         Dust.NewDustPerfect(Player.Center + Main.rand.NextVector2Circular(25, 25), DustID.TintableDust, Player.velocity * -Main.rand.NextFloat(-0.5f, 1f), 100, Color.Black, 1f + Main.rand.NextFloat(1.5f)).noGravity = true;
-                    }
 
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                        particle.position = Player.Center + Main.rand.NextVector2Circular(25, 25);
-                        particle.velocity = Player.velocity * -Main.rand.NextFloat(-0.6f, 0.6f);
-                        particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
-                        particle.color = Player.shirtColor;
-                    }));
+                    ParticleBehavior.NewParticle(ModContent.GetInstance<HueLightDustParticleBehavior>(), Player.Center + Main.rand.NextVector2Circular(25, 25), Player.velocity * -Main.rand.NextFloat(-0.6f, 0.6f), Player.shirtColor, 0.5f + Main.rand.NextFloat());
                 }
                 //else if (slamPower > 0)
                 //{
@@ -88,7 +89,8 @@ namespace CalamityHunt.Common.Players
 
                 //If the wing logic isnt the same as the visual wings that means its vanity. Vanilla does the same to check if the wings are real or not
                 bool playerHasVanityWings = Player.wings > 0 && Player.wingsLogic != Player.wings;
-                if (!playerHasVanityWings) {
+                if (!playerHasVanityWings)
+                {
                     Player.wings = EquipLoader.GetEquipSlot(Mod, "ShogunChestplate", EquipType.Wings);
                 }
             }
@@ -97,100 +99,89 @@ namespace CalamityHunt.Common.Players
         public override void PostUpdateRunSpeeds()
         {
             bool inAir = !WorldGen.SolidOrSlopedTile(Main.tile[(Player.Bottom / 16f).ToPoint()]) && !Collision.SolidCollision(Player.position, Player.width, Player.height);
-            if (active) {
-                if (Player.controlDown && !Player.mount.Active) {
+            if (active)
+            {
+                if (Player.controlDown && !Player.mount.Active)
                     Player.gravity *= 1.1111f;
-                }
 
-                if (Player.controlDown && Player.velocity.Y > 1f && !Player.mount.Active) {
+                if (Player.controlDown && Player.velocity.Y > 1f && !Player.mount.Active)
                     slamPower++;
-                }
-                else {
+                else
                     slamPower = 0;
-                }
 
                 slamPower = Math.Clamp(slamPower, 0, 10);
 
                 Player.maxFallSpeed += slamPower;
 
-                if (inertiaTimer > 0) {
+                if (inertiaTimer > 0)
+                {
                     inertiaTimer--;
                     Player.runSlowdown *= 0.33f;
                 }
 
-                if (Player.dashDelay < 0) {
+                if (Player.dashDelay < 0)
+                {
                     inertiaTimer = 1;
 
-                    if (Player.controlJump && Player.releaseJump) {
+                    if (Player.controlJump && Player.releaseJump)
+                    {
                         Player.dashDelay = 0;
                         inertiaTimer = 60;
                     }
                 }
-                else if (slamPower > 0) {
+                else if (slamPower > 0)
                     Player.velocity.X += (Player.direction * 0.2f - Player.velocity.X * 0.01f) * Math.Clamp(Player.velocity.X, 0, 1);
-                }
 
-                if (Player.dashDelay > 0) {
+                if (Player.dashDelay > 0)
                     Player.dashDelay--;
-                }
 
-                if (!inAir && slamPower > 6) {
+                if (!inAir && slamPower > 6)
                     slamming = true;
-                }
 
-                if (slamming) {
+                if (slamming)
+                {
                     bunnyHopCounter += 25;
-                    for (int i = 0; i < 40; i++) {
+                    for (int i = 0; i < 40; i++)
                         Dust.NewDustPerfect(Player.Bottom + Main.rand.NextVector2Circular(20, 5), DustID.TintableDust, Main.rand.NextVector2Circular(10, 1) - Vector2.UnitY * Main.rand.NextFloat(5f), 100, Color.Black, 1f + Main.rand.NextFloat(1.5f)).noGravity = true;
-                    }
 
-                    for (int i = 0; i < 5; i++) {
-                        CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                            particle.position = Player.Bottom + Main.rand.NextVector2Circular(30, 5);
-                            particle.velocity = Main.rand.NextVector2Circular(6, 1) - Vector2.UnitY * Main.rand.NextFloat(2f);
-                            particle.scale = 1f;
-                            particle.color = Player.shirtColor;
-                        }));
-                    }
+                    for (int i = 0; i < 5; i++)
+                        ParticleBehavior.NewParticle(ModContent.GetInstance<HueLightDustParticleBehavior>(), Player.Bottom + Main.rand.NextVector2Circular(30, 5), Main.rand.NextVector2Circular(6, 1) - Vector2.UnitY * Main.rand.NextFloat(2f), Player.shirtColor, 1f);
+
                     slamPower = 0;
                 }
 
-                if (bunnyHopCounter > 0) {
+                if (bunnyHopCounter > 0)
+                {
                     bunnyHopCounter--;
 
-                    if (Player.controlJump || Player.dashDelay < 0) {
+                    if (Player.controlJump || Player.dashDelay < 0)
+                    {
                         bunnyHopCounter = -20;
                         Player.velocity.X *= 2f;
-                        for (int i = 0; i < 40; i++) {
+                        for (int i = 0; i < 40; i++)
                             Dust.NewDustPerfect(Player.Bottom + Main.rand.NextVector2Circular(20, 5), DustID.TintableDust, -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(7f) * (i / 40f) - new Vector2(Player.direction * 10f, 0f), 100, Color.Black, 1f + Main.rand.NextFloat(1.5f)).noGravity = true;
-                        }
 
-                        for (int i = 0; i < 5; i++) {
-                            CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                                particle.position = Player.Bottom + Main.rand.NextVector2Circular(20, 5);
-                                particle.velocity = -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(2f) * (i / 40f) - new Vector2(Player.direction * 10f, 0f);
-                                particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
-                                particle.color = Player.shirtColor;
-                            }));
-                        }
+                        for (int i = 0; i < 5; i++)
+                            ParticleBehavior.NewParticle(ModContent.GetInstance<HueLightDustParticleBehavior>(), Player.Bottom + Main.rand.NextVector2Circular(20, 5), -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(2f) * (i / 40f) - new Vector2(Player.direction * 10f, 0f), Player.shirtColor, 0.5f + Main.rand.NextFloat());
+
                     }
                 }
-                if (bunnyHopCounter < 0) {
+                if (bunnyHopCounter < 0)
+                {
                     bunnyHopCounter++;
                 }
 
-                if (inAir) {
+                if (inAir)
                     Player.maxRunSpeed *= 1.2f;
-                }
             }
-            else {
+            else
+            {
                 bunnyHopCounter = 0;
                 slamPower = 0;
             }
 
-            if (dashTime > 0) {
+            if (dashTime > 0)
                 dashTime--;
-            }
         }
 
         public override void ResetEffects()
@@ -206,53 +197,36 @@ namespace CalamityHunt.Common.Players
 
         public override void PostUpdateEquips()
         {
-            if (active) {
+            if (active)
+            {
                 int wingSlot = EquipLoader.GetEquipSlot(Mod, "ShogunChestplate", EquipType.Wings);
 
-                if (Player.equippedWings == null) {
+                if (Player.equippedWings == null)
+                {
                     Player.wingsLogic = wingSlot;
                     Player.wingTime = 1;
                     Player.wingTimeMax = 1;
                     Player.equippedWings = Player.armor[1];
 
-                    if (ModLoader.HasMod(HUtils.CalamityMod)) {
-                        ModLoader.GetMod(HUtils.CalamityMod).Call("ToggleInfiniteFlight", Player, true);
-                    }
+                    if (ModLoader.HasMod("CalamityMod"))
+                        ModLoader.GetMod("CalamityMod").Call("ToggleInfiniteFlight", Player, true);
 
-                    //blockaroz what the fuck did you mean by this
-                    //if (Player.controlJump && Player.wingTime > 0f && !Player.GetJumpState(ExtraJump.CloudInABottle).Available && Player.jump == 0) {
-                    //    bool hovering = Player.TryingToHoverDown && !Player.merman;
-                    //    if (hovering) {
-                    //        Player.runAcceleration += 5;
-                    //        Player.maxRunSpeed += 5;
+                    if (Player.controlJump && Player.wingTime > 0f && !Player.GetJumpState(ExtraJump.CloudInABottle).Available && Player.jump == 0)
+                    {
+                        bool hovering = Player.TryingToHoverDown && !Player.merman;
+                        if (hovering)
+                        {
+                            Player.runAcceleration += 5;
+                            Player.maxRunSpeed += 5;
 
-                    //        Player.velocity.Y *= 0.7f;
-                    //        if (Player.velocity.Y > -2f && Player.velocity.Y < 1f) {
-                    //            Player.velocity.Y = 1E-05f;
-                    //        }
-                    //    }
-                    //}
-
-                    //WHAT DID YOU INTEND THIS TO DO??????? 
-                    //FOR CONTEXT: THIS LINE OF CODE MAKES IT SO IF YOU HOLD UP (W) YOU GO UPWARDS
-                    //VERY FAST
-                    //UNCAPPED
-                    //EVEN IF YOU ARENT HOVERING
-                    //??????????????????????????????????????????????????????????????????????????????????????????????????
-                    //COMMENT YOUR DAMN CODE
-                    //if (Player.TryingToHoverUp && !Player.mount.Active) {
-                    //    Player.velocity.Y -= 1f;
-                    //}
-
-                    //thank you fargos souls flight mastery soul hover code writer for making logic that works
-                    //this requires some bullshit to be done in shogunchestplace but other than that it actually works!!!!!!
-                    if (Player.controlDown && Player.controlJump && !Player.mount.Active && Player.wingTime > 0f) {
-                        if (Player.velocity.Y > 0.01f || Player.velocity.Y < -0.01f)
-                            Player.velocity.Y *= 0.005f;
-                        else {
-                            Player.position.Y -= Player.velocity.Y;
+                            Player.velocity.Y *= 0.7f;
+                            if (Player.velocity.Y > -2f && Player.velocity.Y < 1f)
+                                Player.velocity.Y = 1E-05f;
                         }
                     }
+
+                    if (Player.TryingToHoverUp && !Player.mount.Active)
+                        Player.velocity.Y -= 1f;
                 }
 
                 Player.noFallDmg = true;
@@ -261,7 +235,8 @@ namespace CalamityHunt.Common.Players
 
         private void ShogunDash(On_Player.orig_DashMovement orig, Player self)
         {
-            if (self.GetModPlayer<ShogunArmorPlayer>().active) {
+            if (self.GetModPlayer<ShogunArmorPlayer>().active)
+            {
                 //if (self.dashDelay > 0)
                 //{
                 //    if (self.eocDash > 0)
@@ -306,54 +281,56 @@ namespace CalamityHunt.Common.Players
 
                 self.dashType = 1;
             }
-
+           
             orig(self);
         }
 
         public override void PostUpdateMiscEffects()
         {
-            if (active) {
-                Player.buffImmune[BuffID.Silenced] = true;
-                Player.buffImmune[BuffID.Cursed] = true;
-                Player.buffImmune[BuffID.OgreSpit] = true;
-                Player.buffImmune[BuffID.Frozen] = true;
-                Player.buffImmune[BuffID.Webbed] = true;
-                Player.buffImmune[BuffID.Stoned] = true;
-                Player.buffImmune[BuffID.VortexDebuff] = true;
-                Player.buffImmune[BuffID.Electrified] = true;
-                Player.buffImmune[BuffID.Burning] = true;
-                Player.buffImmune[BuffID.Stinky] = true;
-                Player.buffImmune[BuffID.Dazed] = true;
-                Player.buffImmune[BuffID.Venom] = true;
-                Player.buffImmune[BuffID.CursedInferno] = true;
-                if (ModLoader.HasMod(HUtils.CalamityMod)) {
-                    Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
-                    Player.buffImmune[calamity.Find<ModBuff>("Clamity").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("Dragonfire").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("DoGExtremeGravity").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("FishAlert").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("GlacialState").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("GodSlayerInferno").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("HolyFlames").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("IcarusFolly").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("MiracleBlight").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("Nightwither").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("Plague").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("VulnerabilityHex").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("Warped").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("WeakPetrification").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("WhisperingDeath").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("FabsolVodkaBuff").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("FrozenLungs").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("PopoNoselessBuff").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("SearingLava").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("ShellfishClaps").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("BrimstoneFlames").Type] = true;
-                    calamity.Call("SetWearingRogueArmor", Player, true);
-                    calamity.Call("SetWearingPostMLSummonerArmor", Player, true);
+            if (active)
+            {
+            Player.buffImmune[BuffID.Silenced] = true;
+            Player.buffImmune[BuffID.Cursed] = true;
+            Player.buffImmune[BuffID.OgreSpit] = true;
+            Player.buffImmune[BuffID.Frozen] = true;
+            Player.buffImmune[BuffID.Webbed] = true;
+            Player.buffImmune[BuffID.Stoned] = true;
+            Player.buffImmune[BuffID.VortexDebuff] = true;
+            Player.buffImmune[BuffID.Electrified] = true;
+            Player.buffImmune[BuffID.Burning] = true;
+            Player.buffImmune[BuffID.Stinky] = true;
+            Player.buffImmune[BuffID.Dazed] = true;
+            Player.buffImmune[BuffID.Venom] = true;
+            Player.buffImmune[BuffID.CursedInferno] = true;
+            if (ModLoader.HasMod("CalamityMod"))
+            {
+                Mod calamity = ModLoader.GetMod("CalamityMod");
+                Player.buffImmune[calamity.Find<ModBuff>("Clamity").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("Dragonfire").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("DoGExtremeGravity").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("FishAlert").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("GlacialState").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("GodSlayerInferno").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("HolyFlames").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("IcarusFolly").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("MiracleBlight").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("Nightwither").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("Plague").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("VulnerabilityHex").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("Warped").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("WeakPetrification").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("WhisperingDeath").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("FabsolVodkaBuff").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("FrozenLungs").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("PopoNoselessBuff").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("SearingLava").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("ShellfishClaps").Type] = true;
+                Player.buffImmune[calamity.Find<ModBuff>("BrimstoneFlames").Type] = true;
+                calamity.Call("SetWearingRogueArmor", Player, true);
+                calamity.Call("SetWearingPostMLSummonerArmor", Player, true);
                 }
-            }
-        }
+          }
+          }
     }
 
     public interface IShogunSpinModifier

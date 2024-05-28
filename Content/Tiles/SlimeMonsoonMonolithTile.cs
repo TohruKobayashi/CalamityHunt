@@ -1,14 +1,21 @@
-﻿using CalamityHunt.Common.Systems;
-using CalamityHunt.Content.Items.Placeable;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria;
-using Terraria.Audio;
+﻿using System;
+using System.Collections.Generic;
 using Terraria.DataStructures;
-using Terraria.GameContent.ObjectInteractions;
-using Terraria.ID;
+using Terraria;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using Microsoft.Xna.Framework;
+using Terraria.Localization;
+using CalamityHunt.Content.Items.Placeable;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Terraria.ID;
+using Terraria.GameContent.ObjectInteractions;
+using CalamityHunt.Common.Systems;
+using CalamityHunt.Common.Graphics.SlimeMonsoon;
+using Terraria.Enums;
+using Terraria.GameContent;
+using Terraria.Audio;
 
 namespace CalamityHunt.Content.Tiles
 {
@@ -16,7 +23,7 @@ namespace CalamityHunt.Content.Tiles
     {
         public override void SetStaticDefaults()
         {
-            Main.tileFrameImportant[Type] = true;
+            Main.tileFrameImportant[Type] = true; 
             TileID.Sets.HasOutlines[Type] = true;
             TileID.Sets.DisableSmartCursor[Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
@@ -30,22 +37,20 @@ namespace CalamityHunt.Content.Tiles
 
             DustType = DustID.Cobalt;
             AnimationFrameHeight = 56;
+
+            RegisterItemDrop(ModContent.ItemType<SlimeMonsoonMonolith>());
         }
 
         public override void NearbyEffects(int i, int j, bool closer)
         {
-            if (Main.tile[i, j].TileFrameY < 56) {
+            if (Main.tile[i,j].TileFrameY < 56)
                 return;
-            }
 
             Player player = Main.LocalPlayer;
-            if (player is null) {
+            if (player is null)
                 return;
-            }
-
-            if (player.active) {
-                Main.LocalPlayer.GetModPlayer<SceneEffectPlayer>().effectActive[(ushort)SceneEffectPlayer.EffectorType.SlimeMonsoon] = 30;
-            }
+            if (player.active)
+                Main.LocalPlayer.GetModPlayer<EffectTilePlayer>().effectorCount["SlimeMonsoon"] = 60;
         }
 
         public override void AnimateTile(ref int frame, ref int frameCounter)
@@ -73,21 +78,27 @@ namespace CalamityHunt.Content.Tiles
 
         public override void HitWire(int i, int j)
         {
-            Main.tile[i, j].GetTopLeftTile(ref i, ref j, out _, out _);
+            Main.tile[i, j].GetTopLeft(ref i, ref j, out _, out _);
 
-            for (int l = i; l < i + 2; l++) {
-                for (int m = j; m < j + 3; m++) {
-                    if (Main.tile[l, m].TileType == Type) {
-                        if (Main.tile[l, m].TileFrameY < 56) {
+            for (int l = i; l < i + 2; l++)
+            {
+                for (int m = j; m < j + 3; m++)
+                {
+                    if (Main.tile[l, m].TileType == Type)
+                    {
+                        if (Main.tile[l, m].TileFrameY < 56)
+                        {
                             Main.tile[l, m].TileFrameY += 56;
                         }
-                        else {
+                        else
+                        {
                             Main.tile[l, m].TileFrameY -= 56;
                         }
                     }
                 }
             }
-            if (Wiring.running) {
+            if (Wiring.running)
+            {
                 Wiring.SkipWire(i, j);
                 Wiring.SkipWire(i, j + 1);
                 Wiring.SkipWire(i, j + 2);
@@ -101,12 +112,10 @@ namespace CalamityHunt.Content.Tiles
         public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset)
         {
             Tile tile = Main.tile[i, j];
-            if (tile.TileFrameY >= 56) {
+            if (tile.TileFrameY >= 56)
                 frameYOffset = Main.tileFrame[type] * 56;
-            }
-            else {
+            else
                 frameYOffset = 0;
-            }
         }
 
         public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)

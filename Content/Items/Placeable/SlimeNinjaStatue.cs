@@ -1,4 +1,7 @@
-﻿using CalamityHunt.Content.Tiles;
+﻿using CalamityHunt.Common.Systems;
+using CalamityHunt.Content.Items.Materials;
+using CalamityHunt.Content.Items.Rarities;
+using CalamityHunt.Content.Tiles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -23,7 +26,8 @@ namespace CalamityHunt.Content.Items.Placeable
                 .AddCondition(Condition.Hardmode)
                 .Register();
 
-            if (ModLoader.TryGetMod(HUtils.CalamityMod, out _)) {
+            if (ModLoader.TryGetMod("CalamityMod", out _))
+            {
                 Recipe.Create(ItemID.SlimeStatue)
                     .AddIngredient(ItemID.StoneBlock, 100)
                     .AddIngredient(ItemID.Gel, 200)

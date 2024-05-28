@@ -34,11 +34,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	GoozmaRelic: {
-		// DisplayName: Goozma Relic
-		// Tooltip: ""
-	}
-
 	GoozmaLore: {
 		DisplayName: 古泽玛
 		Tooltip: tooltip
@@ -79,11 +74,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	GoozmaTrophy: {
-		// DisplayName: Goozma Trophy
-		// Tooltip: ""
-	}
-
 	ImperialGelato: {
 		DisplayName: 意式皇家冰淇淋
 		Tooltip:
@@ -108,19 +98,9 @@ Items: {
 		Tooltip: ""
 	}
 
-	GoozmaSoul: {
-		// DisplayName: Chromatic Auric Soul
-		// Tooltip: Absorb to gain immense, slimy powers
-	}
-
 	YharonSoulMusicBox: {
 		DisplayName: 音乐盒（巨龙之魂）
 		Tooltip: ""
-	}
-
-	YharonSoul: {
-		// DisplayName: Draconic Auric Soul
-		// Tooltip: Absorb to gain immense, draconic powers
 	}
 
 	SlimeMonsoonMonolith: {
@@ -217,19 +197,9 @@ Items: {
 		Tooltip: ""
 	}
 
-	EbonianBehemuckTrophy: {
-		// DisplayName: Ebonian Behemuck Trophy
-		// Tooltip: ""
-	}
-
 	DivineGargooptuarTrophyItem: {
 		DisplayName: 圣洁凝魔纪念章
 		Tooltip: ""
-	}
-
-	DivineGargooptuarTrophy: {
-		// DisplayName: Divine Gargooptuar Trophy
-		// Tooltip: ""
 	}
 
 	CrimulanGlopstrosityTrophyItem: {
@@ -237,19 +207,9 @@ Items: {
 		Tooltip: ""
 	}
 
-	CrimulanGlopstrosityTrophy: {
-		// DisplayName: Crimulan Glopstrosity Trophy
-		// Tooltip: ""
-	}
-
 	StellarGeliathTrophyItem: {
 		DisplayName: 星恒粘兽纪念章
 		Tooltip: ""
-	}
-
-	StellarGeliathTrophy: {
-		// DisplayName: Stellar Geliath Trophy
-		// Tooltip: ""
 	}
 
 	PumpActionSwampgun: {
@@ -385,6 +345,11 @@ Items: {
 			'''
 	}
 
+	GoozmaAuricSoul: {
+		DisplayName: 虹色金源魄
+		Tooltip: 吸收以获得无边粘稠之力
+	}
+
 	ScytheOfTheOldGod: {
 		DisplayName: 旧神巨镰
 		Tooltip:
@@ -393,6 +358,11 @@ Items: {
 			“别和硫海遗爵的镰刀搞混了……
 			……没别的了。”
 			'''
+	}
+
+	FieryAuricSoul: {
+		DisplayName: 巨龙金源魄
+		Tooltip: 吸收以获得无边巨龙之力
 	}
 
 	Goomoire: {
@@ -480,77 +450,6 @@ Items: {
 		DisplayName: 凝浆染发剂
 		Tooltip: ""
 	}
-
-	AncientSlimeMonsoonMonolith: {
-		// DisplayName: Ancient Slime Monsoon Monolith
-		// Tooltip: ""
-	}
-
-	AntiMassAccumulator: {
-		// DisplayName: Anti-Mass Accumulator
-		/* Tooltip:
-			'''
-			Blasts out balls of packed protons and bolts of energized electrons one after another
-			Proton balls charge anything they hit and can damage enemies in a radius
-			Electron bolts do extra damage to positively charged enemies
-			'Do not look directly at the operational end of the device.'
-			''' */
-	}
-
-	GoozmaBoulderItem: {
-		// DisplayName: Motley Marble
-		// Tooltip: "'Highly dangerous'"
-	}
-
-	IOUASoul: {
-		// DisplayName: I O U A Soul
-		// Tooltip: REMOVED content LOOOOOOL
-	}
-
-	StrangeManPortrait: {
-		// DisplayName: Portrait of a Strange Man
-		// Tooltip: ""
-	}
-
-	TendrilCursorAttachment: {
-		// DisplayName: Cursor Mutagen
-		/* Tooltip:
-			'''
-			Attaches hanging chromatic tendrils to your mouse cursor
-			The amount of tendrils depends on the slot this item is placed in
-			'They somehow know how to untangle themselves'
-			''' */
-	}
-
-	FissionFlayer: {
-		// DisplayName: to be determined
-		// Tooltip: ""
-	}
-
-	TrailblazerGoggles: {
-		// DisplayName: Trailblazed Goggles
-		// Tooltip: "'To lead the way, you must see it first. These do not let you see.'"
-	}
-
-	TrailblazerBackpack: {
-		// DisplayName: Trailblazed Tactical Backpack
-		// Tooltip: "'To be a forerunner is to be prepared. Thankfully, this backpack is filled with nothing but fuel.'"
-	}
-
-	ShogunWings: {
-		// Tooltip: "'They are best used to cool you off'"
-		// DisplayName: Thousand-Fold Paper Fans
-	}
-
-	NuclearLemonade: {
-		// DisplayName: Nuclear Lemonade
-		/* Tooltip:
-			'''
-			Major improvements to all stats
-			May kill you
-			'As cold as the nuclear winter!'
-			''' */
-	}
 }
 
 NPCs: {
@@ -569,8 +468,6 @@ NPCs: {
 	EbonianBehemuck.DisplayName: 腐檀邪浆
 	StellarGeliath.DisplayName: 星恒黏兽
 	Goozmite.DisplayName: 古泽蚂
-	// GelatinousSpawn.DisplayName: Gelatinous Spawn
-	// PluripotentSpawn.DisplayName: Pluripotent Spawn
 }
 
 Projectiles: {
@@ -649,18 +546,6 @@ Projectiles: {
 	BlinkySpikeBall.DisplayName: 小闪的刺球
 	PinkyLight.DisplayName: 小粉的闪光
 	GoozmoemRay.DisplayName: 熔融射线
-	// AntiMassBioBall.DisplayName: Anti-Mass Bio Ball
-	// AntiMassColliderProj.DisplayName: Anti-Mass Collider
-	// AntiMassMacroLaser.DisplayName: Anti Mass Macro Laser
-	// AntiMassDeathLaser.DisplayName: Anti Mass Death Laser
-	// AntiMassBioStrike.DisplayName: Anti Mass Bio Strike
-	// AntiMassAccumulatorProj.DisplayName: Anti Mass Accumulator Proj
-	// ShakerSludge.DisplayName: Shaker Sludge
-	// GoozmaBoulderProjectile.DisplayName: Motley Marble
-	// StellarBlackHole.DisplayName: Stellar Black Hole
-	// FissionFlyerProjectile.DisplayName: Fission Flyer
-	// CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
-	// FissionFlayerProjectile.DisplayName: to be determined
 }
 
 Chat: {
@@ -718,11 +603,6 @@ Buffs: {
 		DisplayName: 史莱姆派对
 		Description: Inky、Blinky、Pinky和Clyde会保护你
 	}
-
-	Doomed: {
-		// DisplayName: Doomed
-		// Description: Mods.CalamityHunt.Buffs.Doomed.Description
-	}
 }
 
 Tiles: {
@@ -765,8 +645,6 @@ Config: {
 		Label: 季风雷暴切换
 		Tooltip: 启用或禁用史莱姆季风的雷暴视觉效果
 	}
-
-	// ContentHeader: Content
 }
 
 LoreGeneric:
@@ -820,37 +698,12 @@ Configs: {
 		}
 
 		shadowspecCurse: {
-			// Label: Shadowspec Curse
-			// Tooltip: Curses all Shadowspec-tier items until Goozma is defeated, making them unusable
-		}
-
-		oldsky: {
-			// Label: oldsky
+			// Label: shadowspec Curse
 			// Tooltip: ""
-		}
-
-		overrideVanillaBalance: {
-			// Label: override Vanilla Balance
-			// Tooltip: ""
-		}
-
-		photosensitiveToggle: {
-			// Label: Toggle Photosensitive Effects
-			// Tooltip: Disables certain effects which may trigger photosensitivity
-		}
-
-		debugMode: {
-			// Label: Debug Mode
-			/* Tooltip:
-				'''
-				Enables features optimized for testing game mechanics
-				Not recommended for usage by players
-				''' */
 		}
 	}
 }
 
-// OrRev: " or Revengeance"
 SetBonuses.Shogun:
 	'''
 	增加17%伤害和5仆从栏
@@ -877,5 +730,3 @@ CalamityModName: {
 	Display: Calamity Mod
 	Internal: CalamityMod
 }
-
-// Emotes.GoozmaEmote.Command: goozma
