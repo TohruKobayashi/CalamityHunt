@@ -13,6 +13,10 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
 {
     public class FissionFlayer : ModItem
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return Main.rand.NextBool(222);
+        }
         public override void SetStaticDefaults()
         {
             ItemID.Sets.SkipsInitialUseSound[Type] = true;
@@ -75,25 +79,12 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
 
         public override void AddRecipes()
         {
-            if (ModLoader.HasMod(HUtils.CalamityMod)) {
-                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
-                CreateRecipe()
-                    .AddIngredient<ChromaticMass>(15)
-                    .AddIngredient(calamity.Find<ModItem>("MangroveChakram").Type)
-                    .AddIngredient(calamity.Find<ModItem>("Valediction").Type)
-                    .AddIngredient(calamity.Find<ModItem>("ToxicantTwister").Type)
-                    .AddIngredient(calamity.Find<ModItem>("SludgeSplotch").Type, 100)
-                    .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
-                    .Register();
-            }
-            else {
-                CreateRecipe()
-                    .AddIngredient(ItemID.StaffofEarth)
-                    .AddIngredient(ItemID.Trimarang)
-                    .AddIngredient<ChromaticMass>(15)
-                    .AddTile<SlimeNinjaStatueTile>()
-                    .Register();
-            }
+            CreateRecipe()
+                .AddIngredient(ItemID.StaffofEarth)
+                .AddIngredient(ItemID.Trimarang)
+                .AddIngredient<ChromaticMass>(15)
+                .AddTile<SlimeNinjaStatueTile>()
+                .Register();
         }
     }
 }
