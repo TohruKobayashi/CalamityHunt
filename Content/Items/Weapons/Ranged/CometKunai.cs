@@ -65,7 +65,9 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
                         stealthProj.rotation += Main.rand.NextFloat(-1f, 1f);
                         if (ModLoader.HasMod(HUtils.CalamityMod)) {
                             ModLoader.GetMod(HUtils.CalamityMod).Call("SetStealthProjectile", stealthProj, true);
+                            ModLoader.GetMod(HUtils.CalamityMod).Call("ConsumeStealth", Main.LocalPlayer);
                         }
+
                     }
                     return false;
                 }

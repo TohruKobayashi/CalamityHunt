@@ -40,6 +40,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 3;
             Projectile.DamageType = DamageClass.Melee;
+            if (ModLoader.HasMod(HUtils.CalamityMod)) {
+                DamageClass d;
+                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
+                calamity.TryFind<DamageClass>("TrueMeleeDamageClass", out d);
+                Projectile.DamageType = d;
+            }
             Projectile.noEnchantmentVisuals = true;
         }
 

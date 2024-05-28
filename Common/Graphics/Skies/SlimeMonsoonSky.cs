@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using CalamityHunt.Common.Systems;
 using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
-using CalamityHunt.Content.Menus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -34,7 +33,7 @@ public class SlimeMonsoonSky : CustomSky
         additionalLightningChance = 0;
     }
 
-    public override bool IsActive() => (_strength > 0.001f && !Main.gameMenu) || (ModContent.GetInstance<GoozmaMenu>() && MenuLoader.CurrentMenu);
+    public override bool IsActive() => (_strength > 0.001f && !Main.gameMenu);
 
     public override void Reset()
     {
@@ -86,10 +85,6 @@ public class SlimeMonsoonSky : CustomSky
         if (forceStrength.HasValue) {
             _strength = forceStrength.Value;
             forceStrength = null;
-        }
-
-        if (ModContent.GetInstance<GoozmaMenu>() && Main.gameMenu) {
-
         }
 
         radialDistortPos = Vector2.Lerp(radialDistortPos, Main.LocalPlayer.Center, 0.5f);

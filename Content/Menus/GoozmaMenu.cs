@@ -1,4 +1,4 @@
-﻿using CalamityHunt.Common.Graphics.Skies;
+﻿/*using CalamityHunt.Common.Graphics.Skies;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -41,3 +41,4 @@ namespace CalamityHunt.Content.Menus
         }
     }
 }
+*/

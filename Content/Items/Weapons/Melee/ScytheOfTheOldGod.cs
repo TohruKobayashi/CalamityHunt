@@ -41,7 +41,9 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 ModRarity r;
                 Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
+                calamity.TryFind("TrueMeleeDamageClass", out DamageClass d);
                 calamity.TryFind<ModRarity>("Violet", out r);
+                Item.DamageType = d;
                 Item.rare = r.Type;
             }
             swingStyle = 0;

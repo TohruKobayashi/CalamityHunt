@@ -86,7 +86,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 calamity.Call("SetDebuffVulnerabilities", "poison", false);
                 calamity.Call("SetDebuffVulnerabilities", "heat", true);
                 calamity.Call("SetDefenseDamageNPC", NPC, true);
-                ModBiome astral = calamity.Find<ModBiome>("AbovegroundAstralBiome");
+                ModBiome astral = calamity.Find<ModBiome>("AstralInfectionBiome");
                 SpawnModBiomes = new int[1] { astral.Type };
             }
         }
