@@ -1,62 +1,103 @@
-﻿using CalamityHunt.Common.Graphics.SlimeMonsoon;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using CalamityHunt.Common.Graphics.Skies;
+using CalamityHunt.Common.Players;
 using CalamityHunt.Common.Systems;
+using CalamityHunt.Common.Systems.Particles;
+using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Buffs;
 using CalamityHunt.Content.Items.Misc;
 using CalamityHunt.Content.Items.Weapons.Summoner;
-using CalamityHunt.Content.Bosses.Goozma;
+using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
 using CalamityHunt.Content.Projectiles.Weapons.Summoner;
+using CalamityHunt.Content.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using CalamityHunt.Common.Utilities;
+using ReLogic.Content.Sources;
 using Terraria;
+using Terraria.Audio;
+using Terraria.Chat;
+using Terraria.DataStructures;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
-using Terraria.ModLoader;
-using ReLogic.Content.Sources;
-using Terraria.Audio;
+using Terraria.ID;
 using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace CalamityHunt
 {
-	public class CalamityHunt : Mod
-	{
+    public class CalamityHunt : Mod
+    {
         public static Mod Instance;
+
+        public static ParticleSystem particles;
+        public static ParticleSystem particlesBehindEntities;
 
         public override void Load()
         {
             Instance = this;
 
-            Ref<Effect> stellarblackhole = new Ref<Effect>(ModContent.Request<Effect>($"{nameof(CalamityHunt)}/Assets/Effects/SpaceHole", AssetRequestMode.ImmediateLoad).Value);
+            particles = new ParticleSystem();
+            particlesBehindEntities = new ParticleSystem();
+
+            On_Main.UpdateParticleSystems += UpdateParticleSystems;
+            On_Main.DrawDust += DrawParticleSystems;
+            On_Main.DoDraw_DrawNPCsOverTiles += DrawParticleSystemBehindEntities;
+
+            Ref<Effect> stellarblackhole = new Ref<Effect>(AssetDirectory.Effects.BlackHole.Value);
             Filters.Scene["HuntOfTheOldGods:StellarBlackHole"] = new Filter(new ScreenShaderData(stellarblackhole, "BlackHolePass"), EffectPriority.VeryHigh);
             Filters.Scene["HuntOfTheOldGods:StellarBlackHole"].Load();
 
-            Ref<Effect> distort = new Ref<Effect>(ModContent.Request<Effect>($"{nameof(CalamityHunt)}/Assets/Effects/RadialDistortion", AssetRequestMode.ImmediateLoad).Value);
-            Filters.Scene["HuntOfTheOldGods:SlimeMonsoon"] = new Filter(new ScreenShaderData(distort, "DistortionPass"), EffectPriority.Medium);
-            Filters.Scene["HuntOfTheOldGods:SlimeMonsoon"].Load();
+            Ref<Effect> pluripotentSpawnDistort = new Ref<Effect>(AssetDirectory.Effects.PluripotentDistortion.Value);
+            Filters.Scene["HuntOfTheOldGods:PluripotentSpawn"] = new Filter(new ScreenShaderData(pluripotentSpawnDistort, "DistortionPass"), EffectPriority.Medium);
+            Filters.Scene["HuntOfTheOldGods:PluripotentSpawn"].Load();
 
-            SkyManager.Instance["HuntOfTheOldGods:SlimeMonsoon"] = new SlimeMonsoonBackground();
+            Ref<Effect> slimeMonsoonDistort = new Ref<Effect>(AssetDirectory.Effects.SlimeMonsoonDistortion.Value);
+            Filters.Scene["HuntOfTheOldGods:SlimeMonsoon"] = new Filter(new ScreenShaderData(slimeMonsoonDistort, "DistortionPass"), EffectPriority.Medium);
+            Filters.Scene["HuntOfTheOldGods:SlimeMonsoon"].Load();
+            SkyManager.Instance["HuntOfTheOldGods:SlimeMonsoon"] = new SlimeMonsoonSky();
             SkyManager.Instance["HuntOfTheOldGods:SlimeMonsoon"].Load();
         }
 
+        private void UpdateParticleSystems(On_Main.orig_UpdateParticleSystems orig, Main self)
+        {
+            orig(self);
+            particlesBehindEntities.Update();
+            particles.Update();
+        }
+
+        private void DrawParticleSystems(On_Main.orig_DrawDust orig, Main self)
+        {
+            orig(self);
+            particles.Draw(Main.spriteBatch);
+        }
+
+        private void DrawParticleSystemBehindEntities(On_Main.orig_DoDraw_DrawNPCsOverTiles orig, Main self)
+        {
+            particlesBehindEntities.Draw(Main.spriteBatch);
+            orig(self);
+        }
+
         public override void PostSetupContent()
-        { 
+        {
             // Kill Old Duke and inject Goozma into boss rush
-            if (ModLoader.HasMod("CalamityMod"))
-            {
-                BossRushInjection(ModLoader.GetMod("CalamityMod"));
+            if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
+                BossRushInjection(calamity);
+                Predicate<NPC> hasGobbed = (NPC npc) => npc.HasBuff<Gobbed>();
+                Predicate<NPC> hasSwamped = (NPC npc) => npc.HasBuff<Swamped>();
+                Predicate<NPC> hasBurn = (NPC npc) => npc.GetGlobalNPC<FusionBurnNPC>().active;
+                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Gobbed", hasGobbed);
+                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Swamped", hasSwamped);
+                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/FusionBurn", hasBurn);
             }
-            if (ModLoader.HasMod("BossChecklist"))
-            {
-                BossChecklist(ModLoader.GetMod("BossChecklist"));
-            } 
-            // Add this whenever Slime Cane is added
-            if (ModLoader.HasMod("SummonersAssociation"))
-            {
-                Mod sAssociation = ModLoader.GetMod("SummonersAssociation");
+
+            if (ModLoader.TryGetMod("BossChecklist", out Mod bossChecklist)) {
+                BossChecklist(bossChecklist);
+            }
+
+            if (ModLoader.TryGetMod("SummonersAssociation", out Mod sAssociation)) {
                 sAssociation.Call("AddMinionInfo", ModContent.ItemType<SlimeCane>(), ModContent.BuffType<SlimeCaneBuff>(), new List<Dictionary<string, object>>
                 {
                     new Dictionary<string, object>()
@@ -82,7 +123,7 @@ namespace CalamityHunt
                 });
             }
         }
-        
+
         public static void BossRushInjection(Mod cal)
         {
             // Goozma
@@ -98,34 +139,34 @@ namespace CalamityHunt
                 NPC.SpawnOnPlayer(whomst, ModContent.NPCType<Goozma>());
             };
             int ODID = cal.Find<ModNPC>("OldDuke").Type;
+            int InsertID = cal.Find<ModNPC>("SupremeCalamitas").Type;
 
-            for (int i = 0; i < brEntries.Count(); i++)
-            {
-                if (brEntries[i].Item1 == ODID)
-                {
+            for (int i = 0; i < brEntries.Count(); i++) {
+                if (brEntries[i].Item1 == ODID) {
                     brEntries.RemoveAt(i);
                     ODID = i;
-                    break;
+                }
+                if (brEntries[i].Item1 == InsertID) {
+                    InsertID = i;
                 }
             }
 
-            brEntries.Insert(ODID, (ModContent.NPCType<Goozma>(), -1, pr, 180, true, 0f, slimeIDs, goozmaID));
+            brEntries.Insert(InsertID + 1, (ModContent.NPCType<Goozma>(), -1, pr, 180, true, 0f, slimeIDs, goozmaID));
             cal.Call("SetBossRushEntries", brEntries);
         }
 
         public void BossChecklist(Mod bossChecklist)
         {
             int sludge = ModContent.ItemType<OverloadedSludge>();
-            if (ModLoader.HasMod("CalamityMod"))
-            {
-                sludge = ModLoader.GetMod("CalamityMod").Find<ModItem>("OverloadedSludge").Type;
+            if (ModLoader.HasMod(HUtils.CalamityMod)) {
+                sludge = ModLoader.GetMod(HUtils.CalamityMod).Find<ModItem>("OverloadedSludge").Type;
             }
             Action<SpriteBatch, Rectangle, Color> portrait = (SpriteBatch sb, Rectangle rect, Color color) => {
-                Texture2D texture = AssetDirectory.Textures.Goozma.BC.Value;
+                Texture2D texture = AssetDirectory.Textures.Goozma.BossChecklistPortrait.Value;
                 Vector2 centered = new Vector2(rect.Center.X - (texture.Width / 2), rect.Center.Y - (texture.Height / 2));
                 sb.Draw(texture, centered, color);
             };
-            bossChecklist.Call("LogBoss", this, "Goozma", 23.6, () => ModContent.GetInstance<BossDownedSystem>().GoozmaDowned, ModContent.NPCType<Goozma>(), new Dictionary<string, object>()
+            bossChecklist.Call("LogBoss", this, "Goozma", 23.6, () => BossDownedSystem.Instance.GoozmaDowned, ModContent.NPCType<Goozma>(), new Dictionary<string, object>()
             {
                 ["spawnItems"] = sludge,
                 ["customPortrait"] = portrait,
@@ -143,8 +184,7 @@ namespace CalamityHunt
             string adjective = "Mods.CalamityHunt.NPCs.Goozma.Titles.Adjective" + Main.rand.Next(1, numberOfAdjectives + 1);
             string noun = "Mods.CalamityHunt.NPCs.Goozma.Titles.Noun" + Main.rand.Next(1, numberOfNouns + 1);
             LocalizedText final = Language.GetText("Mods.CalamityHunt.NPCs.Goozma.BossChecklistIntegration.DespawnMessage").WithFormatArgs(Language.GetText(adjective), Language.GetText(noun));
-            if (Main.rand.NextBool(specialChance))
-            {
+            if (Main.rand.NextBool(specialChance)) {
                 string special = "Mods.CalamityHunt.NPCs.Goozma.Titles.Specific" + Main.rand.Next(1, numberOfSpecial + 1);
                 final = Language.GetText("Mods.CalamityHunt.NPCs.Goozma.BossChecklistIntegration.DespawnMessage").WithFormatArgs(Language.GetText(special), Language.GetOrRegister(""));
             }
@@ -153,10 +193,53 @@ namespace CalamityHunt
 
         public override IContentSource CreateDefaultContentSource()
         {
-            var source = new SmartContentSource(base.CreateDefaultContentSource());
+            SmartContentSource source = new SmartContentSource(base.CreateDefaultContentSource());
             source.AddDirectoryRedirect("Content", "Assets/Textures");
             source.AddDirectoryRedirect("Common", "Assets/Textures");
             return source;
+        }
+
+        public override void HandlePacket(BinaryReader reader, int whoAmI)
+        {
+            PacketType packet = (PacketType)reader.ReadByte();
+            switch (packet) {
+                case PacketType.TrollPlayer:
+                    ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Got packet to epically troll someone"), Color.White);
+                    int playerNum = reader.ReadByte();
+                    int projNum = reader.ReadByte();
+                    ref Player player = ref Main.player[playerNum];
+
+                    if (player.difficulty != 1 && player.difficulty != 2) {
+                        player.DropItems();
+                    }
+
+                    player.ghost = true;
+                    player.statLife = 0;
+                    player.KillMe(PlayerDeathReason.ByProjectile(playerNum, projNum), 1, 0);
+                    break;
+                case PacketType.SummonPluripotentSpawn: // client → server
+                    short center = reader.ReadInt16();
+                    short top = reader.ReadInt16();
+                    SlimeNinjaStatueTile.SummonPluripotentSpawn(center, top);
+                    break;
+                case PacketType.SyncPlayer:
+                    byte playerNumber = reader.ReadByte();
+                    AuricSoulPlayer auricSoulPlayer = Main.player[playerNumber].GetModPlayer<AuricSoulPlayer>();
+                    auricSoulPlayer.ReceivePlayerSync(reader);
+
+                    if (Main.netMode == NetmodeID.Server) {
+                        // Forward the changes to the other clients
+                        auricSoulPlayer.SyncPlayer(-1, whoAmI, false);
+                    }
+                    break;
+            }
+        }
+
+        public enum PacketType : byte
+        {
+            TrollPlayer,
+            SummonPluripotentSpawn,
+            SyncPlayer
         }
     }
 }

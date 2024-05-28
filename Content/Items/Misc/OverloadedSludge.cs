@@ -21,11 +21,9 @@ namespace CalamityHunt.Content.Items.Misc
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             TooltipLine tooltip = new(Mod, "CalamityHunt:SludgeWarning", Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.SludgeWarning").Value);
-            if (ModLoader.HasMod("CalamityMod"))
-            {
+            if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 int check = tooltips.IndexOf(tooltips.Find(t => t.Text.Equals("Summons the Slime God")));
-                if(check == -1)
-                {
+                if (check == -1) {
                     check = tooltips.IndexOf(tooltips.Find(t => t.Name == "Tooltip0"));
                 }
                 tooltips.RemoveAt(check);
@@ -34,8 +32,7 @@ namespace CalamityHunt.Content.Items.Misc
         }
         public override void AddRecipes()
         {
-            if (!ModLoader.HasMod("CalamityMod"))
-            {
+            if (!ModLoader.HasMod(HUtils.CalamityMod)) {
                 CreateRecipe()
                     .AddIngredient(ItemID.PinkGel, 40)
                     .AddRecipeGroup("CalamityHunt:AnyEvilBlock", 40)

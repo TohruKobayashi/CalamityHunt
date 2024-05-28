@@ -1,20 +1,13 @@
 ﻿using CalamityHunt.Common.Players;
-using CalamityHunt.Content.Items.Masks;
+using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Items.Rarities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.PlayerDrawLayer;
 
 namespace CalamityHunt.Content.Items.Armor.Shogun
 {
@@ -28,10 +21,9 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
             Item.value = Item.sellPrice(gold: 10);
             Item.rare = ModContent.RarityType<VioletRarity>();
             Item.defense = 48;
-            if (ModLoader.HasMod("CalamityMod"))
-            {
+            if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 ModRarity r;
-                Mod calamity = ModLoader.GetMod("CalamityMod");
+                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
                 calamity.TryFind<ModRarity>("Violet", out r);
                 Item.rare = r.Type;
             }

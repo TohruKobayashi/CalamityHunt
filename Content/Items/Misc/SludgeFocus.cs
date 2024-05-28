@@ -1,16 +1,13 @@
+using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Items.Materials;
 using CalamityHunt.Content.Items.Rarities;
-using CalamityHunt.Content.Particles;
+using CalamityHunt.Content.Tiles;
 using Microsoft.Xna.Framework;
-using CalamityHunt.Common.Systems.Particles;
-using CalamityHunt.Common.Utilities;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using CalamityHunt.Content.Tiles;
-using CalamityHunt.Content.Bosses.Goozma;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 
 namespace CalamityHunt.Content.Items.Misc
 {
@@ -23,10 +20,9 @@ namespace CalamityHunt.Content.Items.Misc
             Item.knockBack = 6;
             Item.value = 10000;
             Item.rare = ModContent.RarityType<VioletRarity>();
-            if (ModLoader.HasMod("CalamityMod"))
-            {
+            if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 ModRarity r;
-                Mod calamity = ModLoader.GetMod("CalamityMod");
+                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
                 calamity.TryFind<ModRarity>("Violet", out r);
                 Item.rare = r.Type;
             }

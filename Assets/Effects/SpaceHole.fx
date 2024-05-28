@@ -20,29 +20,30 @@ float uSaturation;
 float4 uSourceRect;
 float2 uZoom;
 
-texture distortionSample;
-sampler2D distortTex = sampler_state
-{
-    texture = <distortionSample>;
-    magfilter = LINEAR;
-    minfilter = LINEAR;
-    mipfilter = LINEAR;
-    AddressU = wrap;
-    AddressV = wrap;
-};
-float2 distortSize;
+float uSize;
+float uAngle;
+float uPower;
 
-float inEdge;
-float outEdge;
-float2 uSize;
+float2 RotatedBy(float2 coords, float theta)
+{
+    float s = sin(theta);
+    float c = cos(theta);
+    return float2(coords.x * c - coords.y * s, coords.x * s + coords.y * c);
+}
 
 float4 PixelShaderFunction(float4 baseColor : COLOR0, float2 coords : TEXCOORD0) : COLOR0
 {
     float2 targetCoords = (uTargetPosition - uScreenPosition) / uScreenResolution;
-    float2 center = ((coords - targetCoords)) * (uScreenResolution / uScreenResolution.y) / uZoom / uSize;
-    float2 polar = float2(atan2(center.x, center.y) / 6.28, length(center) * 0.6);
-    float4 distort = tex2D(distortTex, polar + float2(0, uProgress)) * (smoothstep(1.1 * uIntensity, 0, length(center))) * length(center);
-    return tex2D(uImage0, coords + length(distort) * center - center * (smoothstep(0.8 * uIntensity, 0, length(center)))) * (smoothstep(0.25 * uIntensity, 0.4 * uIntensity, length(center) - length(distort)));
+    float2 targetCenter = ((coords - targetCoords) * (uScreenResolution / uScreenResolution.y)) / uZoom;
+    float totalPower = uIntensity * uPower;
+    
+    float distanceToTarget = length(targetCenter);
+    float angle = uAngle * totalPower * exp(-distanceToTarget / uSize * 1.9) * smoothstep(1.5, -0.1, distanceToTarget);
+    float2 rotatedCoords = RotatedBy(coords - 0.5, angle) + 0.5;
+    
+    float4 color = float4(lerp(uColor, 1, smoothstep(0.3, 0.27, distanceToTarget + 0.8 - uIntensity * 0.85)), 1) * smoothstep(0.45, 0.28, distanceToTarget + 0.55 - uIntensity * 0.6);
+    
+    return (tex2D(uImage0, rotatedCoords) - smoothstep(uSize + 0.2, uSize - 0.2, distanceToTarget) * 2 * totalPower + color) * clamp(1 - smoothstep(1, 2, 1 - distanceToTarget / 2) * totalPower, 0, 1);
 
 }
 
@@ -50,6 +51,6 @@ technique Technique1
 {
     pass BlackHolePass
     {
-        PixelShader = compile ps_2_0 PixelShaderFunction();
+        PixelShader = compile ps_3_0 PixelShaderFunction();
     }
 }

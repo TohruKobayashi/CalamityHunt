@@ -41,7 +41,9 @@ float4 PixelShaderFunction(float4 baseColor : COLOR0, float2 coords : TEXCOORD0)
     float brightness = (img.r + img.g + img.b) / 3;
     float4 map = float4(GradientMap(brightness, 10, brightnesses, colors), 1);
     if (length(img) > 0)
-        return lerp(lerp(img * baseColor, map, baseToMapPercent), Screen(lerp(img * baseColor, map, baseToMapPercent), map), baseToScreenPercent);
+    {
+        return lerp(lerp(img * baseColor, map, baseToMapPercent), Screen(lerp(img * baseColor, map, baseToMapPercent), map * 1.1), baseToScreenPercent);
+    }
     return 0;
 }
 

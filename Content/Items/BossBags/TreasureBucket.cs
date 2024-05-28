@@ -1,5 +1,4 @@
-﻿using CalamityHunt.Common.Systems;
-using CalamityHunt.Content.Bosses.Goozma;
+﻿using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Items.Accessories;
 using CalamityHunt.Content.Items.Armor.Shogun;
 using CalamityHunt.Content.Items.Masks;
@@ -9,14 +8,11 @@ using CalamityHunt.Content.Items.Mounts;
 using CalamityHunt.Content.Items.Weapons.Magic;
 using CalamityHunt.Content.Items.Weapons.Melee;
 using CalamityHunt.Content.Items.Weapons.Ranged;
-using CalamityHunt.Content.Items.Weapons.Rogue;
 using CalamityHunt.Content.Items.Weapons.Summoner;
+using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
-using System.Collections.Generic;
-using CalamityHunt.Core;
 using Terraria;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -52,7 +48,8 @@ namespace CalamityHunt.Content.Items.BossBags
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<StickyHand>(), 3));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<PaladinPalanquin>(), 2));
             itemLoot.Add(ItemDropRule.FewFromOptions(1, 7, ModContent.ItemType<EbonianMask>(), ModContent.ItemType<DivineMask>(), ModContent.ItemType<CrimulanMask>(), ModContent.ItemType<StellarMask>()));
-            itemLoot.Add(ItemDropRule.FewFromOptions(1, 1, ModContent.ItemType<Parasanguine>(), ModContent.ItemType<SludgeShaker>(), ModContent.ItemType<CrystalGauntlets>(), ModContent.ItemType<SlimeCane>(), ModContent.ItemType<CometKunai>()));
+            itemLoot.Add(ItemDropRule.FewFromOptions(2, 1, ModContent.ItemType<Parasanguine>(), ModContent.ItemType<SludgeShaker>(), ModContent.ItemType<CrystalGauntlets>(), ModContent.ItemType<SlimeCane>(), ModContent.ItemType<CometKunai>()));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TendrilCursorAttachment>(), 20));
         }
 
         public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
@@ -67,7 +64,7 @@ namespace CalamityHunt.Content.Items.BossBags
         {
             Asset<Texture2D> glow = ModContent.Request<Texture2D>(Texture + "Glow");
             Color color = new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(Main.GlobalTimeWrappedHourly * 20f);
-           
+
             spriteBatch.Draw(glow.Value, Item.Center - Main.screenPosition, null, color * 0.5f, rotation, Item.Size * 0.5f, scale, 0, 0);
             spriteBatch.Draw(glow.Value, Item.Center - Main.screenPosition, null, new Color(color.R, color.G, color.B, 0), rotation, Item.Size * 0.5f, scale, 0, 0);
         }

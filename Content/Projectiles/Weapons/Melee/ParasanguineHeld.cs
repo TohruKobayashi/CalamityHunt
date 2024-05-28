@@ -1,13 +1,8 @@
-﻿using CalamityHunt.Common.Systems;
+﻿using System;
+using CalamityHunt.Common.Players;
 using CalamityHunt.Common.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -51,14 +46,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
 
         public override void AI()
         {
-            if (!Player.active || Player.dead || Player.noItems || Player.CCed)
-            {
+            if (!Player.active || Player.dead || Player.noItems || Player.CCed) {
                 Projectile.Kill();
                 return;
             }
 
-            if (Time <= 1 && Mode != 3)
-            {
+            if (Time <= 1 && Mode != 3) {
                 Projectile.velocity = Player.DirectionTo(Main.MouseWorld).SafeNormalize(Vector2.Zero) * 5f;
                 Projectile.direction = Projectile.velocity.X < 0 ? -1 : 1;
                 Projectile.scale = 1.3f * Player.GetAdjustedItemScale(Player.HeldItem);
@@ -75,51 +68,47 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
 
             float speed = (Player.itemAnimationMax / 35f) / (0.9f + Player.GetTotalAttackSpeed(DamageClass.Melee) * 0.1f);
 
-            switch (Mode)
-            {
+            switch (Mode) {
                 default:
                 case 0:
                     rotation = -2.1f + SwingProgress(MathF.Pow(Utils.GetLerpValue(0, (int)(45 * speed), Time, true), 1.5f)) * 4f;
 
-                    if (Time > (int)(15 * speed) && Time < (int)(40 * speed))
-                    {
+                    if (Time > (int)(15 * speed) && Time < (int)(40 * speed)) {
                         Projectile.damage = Player.GetWeaponDamage(Player.HeldItem);
 
-                        for (int i = 0; i < 8; i++)
-                        {
+                        for (int i = 0; i < 8; i++) {
                             Vector2 pos = Projectile.Center + Projectile.rotation.ToRotationVector2() * 70f + Main.rand.NextVector2Circular(70, 30).RotatedBy(Projectile.rotation);
                             Dust blood = Dust.NewDustPerfect(pos, DustID.Blood, Main.rand.NextVector2Circular(4, 4), 0, Color.DarkRed, 1f + Main.rand.NextFloat());
                             blood.noGravity = true;
                         }
                     }
-                    else
+                    else {
                         Projectile.damage = 0;
+                    }
 
-                    if (Time > (int)(25 * speed) && Time < (int)(33 * speed))
-                    {
+                    if (Time > (int)(25 * speed) && Time < (int)(33 * speed)) {
                         Vector2 stickyVelocity = (Projectile.velocity.ToRotation() + (rotation * 0.3f - 0.15f) * Projectile.direction).ToRotationVector2() * Main.rand.NextFloat(16f, 25f) * Utils.GetLerpValue(0, 35, Time, true);
                         Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.rotation.ToRotationVector2() * 60f, stickyVelocity + Player.velocity, ModContent.ProjectileType<ParasanguineBlood>(), Projectile.damage / 3, 0.5f, Player.whoAmI);
                     }
 
-                    if (Time > (int)(45 * speed))
-                    {
-                        if (Player.controlUseItem)
-                        {
+                    if (Time > (int)(45 * speed)) {
+                        if (Player.controlUseItem) {
                             Time = -1;
                             Mode++;
                         }
-                        else if (Time > (int)(65 * speed))
+                        else if (Time > (int)(65 * speed)) {
                             canKill = true;
+                        }
 
-                        if (Player.altFunctionUse == 1 && Player.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent > 0.5f)
-                        {
+                        if (Player.altFunctionUse == 1 && Player.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent > 0.5f) {
                             Time = -1;
                             Mode = 2;
                         }
                     }
 
-                    if (Time == 22)
+                    if (Time == 22) {
                         SoundEngine.PlaySound(swingSound.WithPitchOffset(0.2f), Projectile.Center);
+                    }
 
                     Projectile.spriteDirection = -Projectile.direction;
 
@@ -129,44 +118,40 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
 
                     rotation = 2f - SwingProgress(MathF.Pow(Utils.GetLerpValue(0, (int)(35 * speed), Time, true), 3f)) * 4f;
 
-                    if (Time > (int)(20 * speed) && Time < (int)(32 * speed))
-                    {
+                    if (Time > (int)(20 * speed) && Time < (int)(32 * speed)) {
                         Vector2 stickyVelocity = (Projectile.velocity.ToRotation() + (rotation * 0.3f - 0.77f) * Projectile.direction).ToRotationVector2() * Main.rand.NextFloat(17f, 27f) * Utils.GetLerpValue(0, (int)(35 * speed), Time, true) * Utils.GetLerpValue((int)(35 * speed), (int)(30 * speed), Time, true) * 1.1f;
                         Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.rotation.ToRotationVector2() * 70f, stickyVelocity + Player.velocity, ModContent.ProjectileType<ParasanguineBlood>(), Projectile.damage / 3, 0.5f, Player.whoAmI);
                     }
 
-                    if (Time > (int)(40 * speed))
-                    {
+                    if (Time > (int)(40 * speed)) {
                         Projectile.damage = 0;
 
-                        if (Player.controlUseItem)
-                        {
+                        if (Player.controlUseItem) {
                             Time = -1;
                             Mode--;
                         }
-                        else if (Time > (int)(55 * speed))
+                        else if (Time > (int)(55 * speed)) {
                             canKill = true;
+                        }
 
-                        if (Player.altFunctionUse == 1 && Player.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent > 0.5f)
-                        {
+                        if (Player.altFunctionUse == 1 && Player.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent > 0.5f) {
                             Time = -1;
                             Mode = 2;
                         }
                     }
-                    else
-                    {
+                    else {
                         Projectile.damage = Player.GetWeaponDamage(Player.HeldItem);
 
-                        for (int i = 0; i < 5; i++)
-                        {
+                        for (int i = 0; i < 5; i++) {
                             Vector2 pos = Projectile.Center + Projectile.rotation.ToRotationVector2() * 70f + Main.rand.NextVector2Circular(70, 30).RotatedBy(Projectile.rotation);
                             Dust blood = Dust.NewDustPerfect(pos, DustID.Blood, Main.rand.NextVector2Circular(4, 4), 0, Color.DarkRed, 1f + Main.rand.NextFloat());
                             blood.noGravity = true;
                         }
                     }
-                    if (Time == (int)(15 * speed))
+                    if (Time == (int)(15 * speed)) {
                         SoundEngine.PlaySound(swingSound.WithPitchOffset(0.2f), Projectile.Center);
-                    
+                    }
+
                     Projectile.spriteDirection = Projectile.direction;
 
                     break;
@@ -177,54 +162,47 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
                     Projectile.damage = 0;
                     Projectile.direction = Projectile.velocity.X < 0 ? -1 : 1;
 
-                    if (Time < 25)
-                    {
+                    if (Time < 25) {
                         Projectile.velocity = Vector2.Lerp(Projectile.velocity, Player.DirectionTo(Main.MouseWorld).SafeNormalize(Vector2.Zero) * 5f, 0.3f * Utils.GetLerpValue(25, 0, Time, true));
 
                         Projectile.frame = (int)(Utils.GetLerpValue(5, 15, Time, true) * 2);
                         Projectile.scale = 1.4f * Player.GetAdjustedItemScale(Player.HeldItem) * (0.7f + MathF.Pow(Utils.GetLerpValue(25, 0, Time, true), 2f) * 0.2f);
-                        for (int i = 0; i < 3; i++)
-                        {
+                        for (int i = 0; i < 3; i++) {
                             Vector2 pos = Projectile.Center + Main.rand.NextVector2Circular(120, 120) + Projectile.velocity * 20;
                             Dust blood = Dust.NewDustPerfect(pos, DustID.Blood, pos.DirectionTo(Projectile.Center) * Main.rand.NextFloat(5f), 100, Color.DarkRed, 1f + Main.rand.NextFloat(2f));
                             blood.noGravity = true;
                         }
                     }
-                    else
-                    {
+                    else {
                         Player.GetModPlayer<GoozmaWeaponsPlayer>().parasolBlood -= 100;
                         Projectile.frame = 3;
                         Projectile.scale = 1.4f * Player.GetAdjustedItemScale(Player.HeldItem) * (0.7f + MathF.Sqrt(Utils.GetLerpValue(25, 27, Time, true)) * 0.3f);
                     }
 
-                    if (Time == 27)
-                    {
+                    if (Time == 27) {
                         SoundEngine.PlaySound(SoundID.NPCDeath1.WithPitchOffset(-0.5f).WithVolumeScale(0.5f), Projectile.Center);
                         SoundEngine.PlaySound(SoundID.Item100, Projectile.Center);
                     }
-                    if (Time > 25 && Time < 35)
-                    {
-                        for (int i = 0; i < 5; i++)
-                        {
+                    if (Time > 25 && Time < 35) {
+                        for (int i = 0; i < 5; i++) {
                             Vector2 stickyVelocity = Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedByRandom(1f) * Main.rand.NextFloat(18f, 32f) * Utils.GetLerpValue(0, 35, Time, true);
                             Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero) * 70f, stickyVelocity + Player.velocity, ModContent.ProjectileType<ParasanguineBlood>(), Player.GetWeaponDamage(Player.HeldItem) / 2, 0.5f, Player.whoAmI);
                         }
                     }
 
-                    if (Time > 40)
-                    {
-                        if (Player.controlUseItem && Player.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent > 0.5f)
-                        {
+                    if (Time > 40) {
+                        if (Player.controlUseItem && Player.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent > 0.5f) {
                             Time = -1;
                             Mode++;
                         }
-                        else if (Time > 50)
+                        else if (Time > 50) {
                             canKill = true;
+                        }
                     }
 
 
-                    break;                
-                
+                    break;
+
                 case 3:
 
                     addRot = -MathHelper.TwoPi * 4f * MathHelper.SmoothStep(0, 1, Utils.GetLerpValue(15, 75, Time, true));
@@ -234,15 +212,14 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
                     Projectile.frame = (int)(Utils.GetLerpValue(93, 87, Time, true) * 3);
                     Projectile.scale = 1.4f * Player.GetAdjustedItemScale(Player.HeldItem) * (1f + MathF.Sqrt(Utils.GetLerpValue(25, 0, Time, true) * Utils.GetLerpValue(95, 75, Time, true)) * 0.2f);
 
-                    if (Time < 30 && Time > 70)
+                    if (Time < 30 && Time > 70) {
                         Projectile.damage = 0;
-                    else
-                    {
+                    }
+                    else {
                         Player.GetModPlayer<GoozmaWeaponsPlayer>().parasolBlood -= 100;
                         Projectile.damage = Player.GetWeaponDamage(Player.HeldItem);
 
-                        for (int i = 0; i < 10; i++)
-                        {
+                        for (int i = 0; i < 10; i++) {
                             Vector2 pos = Projectile.Center + Projectile.rotation.ToRotationVector2() * 80f + Main.rand.NextVector2Circular(120, 40).RotatedBy(Projectile.rotation);
                             Vector2 vel = (Projectile.rotation - MathHelper.PiOver2 * Projectile.spriteDirection).ToRotationVector2() * Main.rand.NextFloat(5f);
                             Dust blood = Dust.NewDustPerfect(pos, DustID.Blood, vel.RotatedByRandom(1f), 0, Color.DarkRed, 1f + Main.rand.NextFloat());
@@ -250,30 +227,27 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
                         }
                     }
 
-                    if (Time >= 30 && Time <= 65)
-                    {
+                    if (Time >= 30 && Time <= 65) {
                         Projectile.localNPCHitCooldown = 10;
 
-                        for (int i = 0; i < 2; i++)
-                        {
+                        for (int i = 0; i < 2; i++) {
                             Vector2 stickyVelocity = (Projectile.rotation + i * 0.2f * Projectile.direction).ToRotationVector2() * Main.rand.NextFloat(18f, 32f) * Utils.GetLerpValue(0, 35, Time, true);
                             Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.rotation.ToRotationVector2() * 60f, stickyVelocity + Player.velocity, ModContent.ProjectileType<ParasanguineBlood>(), Projectile.damage / 2, 0.5f, Player.whoAmI);
                         }
 
-                        if ((Time - 20) % 10 == 0)
+                        if ((Time - 20) % 10 == 0) {
                             SoundEngine.PlaySound(swingSound.WithPitchOffset(0.5f), Projectile.Center);
-
+                        }
                     }
 
-                    if (Time > 95)
-                    {
-                        if (Player.controlUseItem)
-                        {
+                    if (Time > 95) {
+                        if (Player.controlUseItem) {
                             Time = -1;
                             Mode = 0;
                         }
-                        else
+                        else {
                             canKill = true;
+                        }
                     }
 
                     Projectile.spriteDirection = Projectile.direction;
@@ -281,26 +255,24 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
                     break;
             }
 
-            if (Projectile.damage > 0)
-            {
+            if (Projectile.damage > 0) {
                 Projectile.EmitEnchantmentVisualsAt(Projectile.Center + Projectile.rotation.ToRotationVector2() * 100 - new Vector2(50), 100, 100);
 
-                if (Mode < 2)
-                {
-                    WeaponBars.DisplayBar();
+                if (Mode < 2) {
+                    WeaponBar.DisplayBar(Color.DarkRed, Color.Red, Main.LocalPlayer.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent);
                     Player.GetModPlayer<GoozmaWeaponsPlayer>().parasolBlood += 10;
                     Player.GetModPlayer<GoozmaWeaponsPlayer>().parasolBloodWaitTime += 20;
                 }
             }
 
-            if (canKill)
+            if (canKill) {
                 Projectile.Kill();
+            }
 
             Projectile.rotation = Projectile.velocity.ToRotation() + (rotation + MathHelper.WrapAngle(addRot)) * Projectile.direction;
             Player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Projectile.rotation - MathHelper.PiOver2);
             Vector2 position = Player.GetFrontHandPosition(Player.CompositeArmStretchAmount.Full, Projectile.rotation - MathHelper.PiOver2);
-            if (Mode == 3)
-            {
+            if (Mode == 3) {
                 Player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Projectile.velocity.ToRotation() + (rotation * 0.5f - MathF.Sin(MathHelper.WrapAngle(addRot)) * 0.3f) * Projectile.direction - MathHelper.PiOver2);
                 position = Player.GetFrontHandPosition(Player.CompositeArmStretchAmount.Full, Projectile.velocity.ToRotation() + (rotation * 0.7f - MathF.Sin(MathHelper.WrapAngle(addRot)) * 0.05f) * Projectile.direction - MathHelper.PiOver2);
             }
@@ -315,13 +287,15 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
             Time++;
 
             slashRotation = slashRotation.AngleLerp(Projectile.rotation, 0.6f);
-            for (int i = ProjectileID.Sets.TrailCacheLength[Type] - 1; i > 0; i--)
+            for (int i = ProjectileID.Sets.TrailCacheLength[Type] - 1; i > 0; i--) {
                 Projectile.oldRot[i] = Projectile.oldRot[i].AngleLerp(Projectile.oldRot[i - 1], 0.4f);
+            }
 
             Projectile.oldRot[0] = Projectile.oldRot[0].AngleLerp(slashRotation, 0.5f);
 
-            if (hitCD > 0)
+            if (hitCD > 0) {
                 hitCD--;
+            }
         }
 
         public float SwingProgress(float x)
@@ -334,24 +308,31 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
                 -2f * MathF.Pow(x - 0.85f, 2f) + 1.05f
             };
 
-            if (x < 0f)
+            if (x < 0f) {
                 return 0f;
-            if (x < 0.25f)
+            }
+
+            if (x < 0.25f) {
                 return MathHelper.Lerp(functions[0], functions[1], Utils.GetLerpValue(0.1f, 0.25f, x, true));
-            if (x < 0.6f)
+            }
+
+            if (x < 0.6f) {
                 return MathHelper.Lerp(functions[1], functions[2], Utils.GetLerpValue(0.5f, 0.6f, x, true));
-            if (x < 0.7f)
+            }
+
+            if (x < 0.7f) {
                 return MathHelper.Lerp(functions[2], functions[3], Utils.GetLerpValue(0.6f, 0.7f, x, true));
-            else
+            }
+            else {
                 return MathHelper.Lerp(functions[3], 1f, Utils.GetLerpValue(0.7f, 0.97f, x, true));
+            }
         }
 
         public int hitCD;
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Mode < 2 && hitCD <= 0)
-            {
+            if (Mode < 2 && hitCD <= 0) {
                 hitCD = 12;
                 Player.GetModPlayer<GoozmaWeaponsPlayer>().parasolBlood += 200 + (int)(damageDone * 0.01f);
                 Player.GetModPlayer<GoozmaWeaponsPlayer>().parasolBloodWaitTime += 30;
@@ -361,13 +342,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
 
             SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundMiss, Projectile.Center);
 
-            WeaponBars.DisplayBar();
+            WeaponBar.DisplayBar(Color.DarkRed, Color.Red, Main.LocalPlayer.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            if (Mode < 2 && hitCD <= 0)
-            {
+            if (Mode < 2 && hitCD <= 0) {
                 hitCD = 12;
 
                 Player.GetModPlayer<GoozmaWeaponsPlayer>().parasolBlood += 200 + (int)(info.Damage * 0.01f);
@@ -378,7 +358,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
 
             SoundEngine.PlaySound(SoundID.DD2_MonkStaffGroundMiss, Projectile.Center);
 
-            WeaponBars.DisplayBar();
+            WeaponBar.DisplayBar(Color.DarkRed, Color.Red, Main.LocalPlayer.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent);
         }
 
         public override void ModifyDamageHitbox(ref Rectangle hitbox)
@@ -394,20 +374,17 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
         {
             Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
             Texture2D flare = TextureAssets.Extra[89].Value;
-            Texture2D slash = AssetDirectory.Textures.SwordSwing.Bloody.Value;
+            Texture2D slash = AssetDirectory.Textures.SwordSwing[1].Value;
             Texture2D splatTexture = ModContent.Request<Texture2D>(Texture + "Splat").Value;
             Rectangle frame = texture.Frame(1, 4, 0, Projectile.frame);
             Vector2 origin = frame.Size() * new Vector2(0.1f, 0.5f - 0.35f * Projectile.direction);
             SpriteEffects spriteEffects = Projectile.direction < 0 ? SpriteEffects.None : SpriteEffects.FlipVertically;
 
-            if (Mode != 2)
-            {
-                for (int i = 0; i < 4; i++)
-                {
+            if (Mode != 2) {
+                for (int i = 0; i < 4; i++) {
                     float speed = (Player.itemAnimationMax / 35f) / Player.GetTotalAttackSpeed(DamageClass.Melee);
                     float slashPower = 0f;
-                    switch (Mode)
-                    {
+                    switch (Mode) {
                         case 0:
 
                             slashPower = Utils.GetLerpValue((int)(20 * speed), (int)(35 * speed), Time + i * 2f - 6f, true) * Utils.GetLerpValue((int)(40 * speed), (int)(35 * speed), Time - i * 3f + 2f, true);
@@ -435,17 +412,16 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
             }
 
             float strength = Utils.GetLerpValue(0.5f, 0.6f, Player.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent, true);
-            if (Mode > 1)
+            if (Mode > 1) {
                 strength = 1f;
-            if (Player.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent > 0.5f || Mode > 1)
-            {
-                for (int i = 0; i < 6; i++)
-                {
+            }
+
+            if (Player.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent > 0.5f || Mode > 1) {
+                for (int i = 0; i < 6; i++) {
                     Vector2 off = new Vector2(3).RotatedBy(MathHelper.TwoPi / 6f * i + Projectile.rotation);
                     Main.EntitySpriteDraw(texture, Projectile.Center + off - Main.screenPosition, frame, Color.Black * 0.5f * strength, Projectile.rotation - MathHelper.PiOver4 * Projectile.direction, origin, Projectile.scale, spriteEffects, 0);
-                }                
-                for (int i = 0; i < 6; i++)
-                {
+                }
+                for (int i = 0; i < 6; i++) {
                     Vector2 off = new Vector2(3).RotatedBy(MathHelper.TwoPi / 6f * i + Projectile.rotation);
                     Main.EntitySpriteDraw(texture, Projectile.Center + off - Main.screenPosition, frame, new Color(211, 10, 15, 0) * strength, Projectile.rotation - MathHelper.PiOver4 * Projectile.direction, origin, Projectile.scale, spriteEffects, 0);
                 }
@@ -453,17 +429,15 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
 
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, frame, lightColor, Projectile.rotation - MathHelper.PiOver4 * Projectile.direction, origin, Projectile.scale, spriteEffects, 0);
 
-            if (Player.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent > 0.5f && Mode < 2)
-            {
+            if (Player.GetModPlayer<GoozmaWeaponsPlayer>().ParasolBloodPercent > 0.5f && Mode < 2) {
                 Vector2 tip = new Vector2(Projectile.scale * 92, -5 * Projectile.direction).RotatedBy(Projectile.rotation);
                 Main.EntitySpriteDraw(flare, Projectile.Center + tip - Main.screenPosition, flare.Frame(), Color.Black * 0.9f * strength, 0, flare.Size() * 0.5f, new Vector2(0.4f, 1.5f), spriteEffects, 0);
                 Main.EntitySpriteDraw(flare, Projectile.Center + tip - Main.screenPosition, flare.Frame(), Color.Black * 0.9f * strength, MathHelper.PiOver2, flare.Size() * 0.5f, new Vector2(0.4f, 2f), spriteEffects, 0);
                 Main.EntitySpriteDraw(flare, Projectile.Center + tip - Main.screenPosition, flare.Frame(), new Color(211, 10, 15, 0) * strength, 0, flare.Size() * 0.5f, new Vector2(0.5f, 1.5f), spriteEffects, 0);
                 Main.EntitySpriteDraw(flare, Projectile.Center + tip - Main.screenPosition, flare.Frame(), new Color(211, 10, 15, 0) * strength, MathHelper.PiOver2, flare.Size() * 0.5f, new Vector2(0.5f, 2f), spriteEffects, 0);
             }
-       
-            if (Mode == 2 && Time >= 25 && Time <= 45)
-            {
+
+            if (Mode == 2 && Time >= 25 && Time <= 45) {
                 Rectangle splatFrame = splatTexture.Frame(1, 6, 0, (int)(Utils.GetLerpValue(25, 45, Time, true) * 6f));
                 Vector2 tip = new Vector2(Projectile.scale * 60, -5 * Projectile.direction).RotatedBy(Projectile.rotation);
                 Main.EntitySpriteDraw(splatTexture, Projectile.Center + tip * 1.03f - Main.screenPosition, splatFrame, Color.Black * 0.8f, Projectile.rotation + MathHelper.PiOver2, splatFrame.Size() * new Vector2(0.5f, 1f), 0.7f + Projectile.scale * 0.5f, 0, 0);

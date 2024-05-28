@@ -1,4 +1,4 @@
-﻿using CalamityHunt.Common.Players;
+﻿using CalamityHunt.Content.Items.Misc;
 using CalamityHunt.Content.Items.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -6,6 +6,7 @@ using Terraria.DataStructures;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static CalamityHunt.AssetDirectory;
 
 namespace CalamityHunt.Content.Items.Armor.Shogun
 {
@@ -15,7 +16,8 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
         public override void Load()
         {
             EquipLoader.AddEquipTexture(Mod, Texture + "_Waist", EquipType.Waist, this);
-            EquipLoader.AddEquipTexture(Mod, Texture.Replace("Chestplate", "Wings"), EquipType.Wings, this);
+            EquipLoader.AddEquipTexture(Mod, AssetPath + "Textures/Items/Misc/ShogunWings_Wings", EquipType.Wings, this);
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<ShogunWings>();
         }
 
         public override void SetStaticDefaults()
@@ -34,10 +36,9 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
             Item.defense = 50;
             Item.lifeRegen = 3;
 
-            if (ModLoader.HasMod("CalamityMod"))
-            {
+            if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 ModRarity r;
-                Mod calamity = ModLoader.GetMod("CalamityMod");
+                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
                 calamity.TryFind<ModRarity>("Violet", out r);
                 Item.rare = r.Type;
             }
@@ -53,8 +54,7 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
 
         public override bool WingUpdate(Player player, bool inUse)
         {
-            if (inUse)
-            {
+            if (inUse) {
                 Dust d = Dust.NewDustDirect(player.Center - new Vector2(30), 60, 60, DustID.Sand, 0, 0, 100, Color.Black, 1f);
                 d.noGravity = true;
                 d.shader = GameShaders.Armor.GetSecondaryShader(player.cWings, player);
@@ -65,35 +65,43 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
 
         public override void VerticalWingSpeeds(Player player, ref float ascentWhenFalling, ref float ascentWhenRising, ref float maxCanAscendMultiplier, ref float maxAscentMultiplier, ref float constantAscend)
         {
-            ascentWhenFalling = 0.95f;
-            ascentWhenRising = 0.1f;
-            maxCanAscendMultiplier = 1f;
-            maxAscentMultiplier = 4f;
-            constantAscend = 0.2f; 
+            //this is so the hover code in shogunarmorplayer actually works. if theres a way to make it all work in shogunarmorplayer, PLEASE!!!
+            if (player.controlDown && player.controlJump && !player.mount.Active && player.wingTime > 0f) {
+                ascentWhenFalling = 0f;
+                maxAscentMultiplier = 0f;
+                constantAscend = 0f;
+                player.canRocket = false;
+            }
+            else {
+
+                ascentWhenFalling = 1f;
+                maxAscentMultiplier = 4f;
+                constantAscend = 0.2f;
+            }
+            ascentWhenRising = 0.2f;
+            maxCanAscendMultiplier = 1.4f;
         }
 
         public override void HorizontalWingSpeeds(Player player, ref float speed, ref float acceleration)
         {
             speed = 12f;
-            acceleration = 2f;
+            //acceleration = 2f; //dont even TRY to give these things accel, it just fucks it all up entirely
         }
 
         public override void EquipFrameEffects(Player player, EquipType type)
         {
-            if (player.equippedWings != null)
-            {
-                if (player.equippedWings.wingSlot == player.wingsLogic)
-                {
+            if (player.equippedWings != null) {
+                if (player.equippedWings.wingSlot == player.wingsLogic) {
                     player.wings = Item.wingSlot;
                     player.cWings = player.cBody;
                 }
             }
 
-            if (player.wingsLogic == Item.wingSlot && player.wings <= 0)
+            if (player.wingsLogic == Item.wingSlot && player.wings <= 0) {
                 player.wings = Item.wingSlot;
+            }
 
-            if (player.body == Item.bodySlot)
-            {
+            if (player.body == Item.bodySlot) {
                 player.waist = EquipLoader.GetEquipSlot(Mod, Name, EquipType.Waist);
                 player.cWaist = player.cBody;
             }

@@ -34,6 +34,11 @@ Items: {
 		Tooltip: ""
 	}
 
+	GoozmaRelic: {
+		// DisplayName: Goozma Relic
+		// Tooltip: ""
+	}
+
 	GoozmaLore: {
 		DisplayName: Goozma
 		Tooltip: tooltip
@@ -74,6 +79,11 @@ Items: {
 		Tooltip: ""
 	}
 
+	GoozmaTrophy: {
+		// DisplayName: Goozma Trophy
+		// Tooltip: ""
+	}
+
 	ImperialGelato: {
 		DisplayName: Gelato Impérial
 		Tooltip:
@@ -98,9 +108,19 @@ Items: {
 		Tooltip: ""
 	}
 
+	GoozmaSoul: {
+		// DisplayName: Chromatic Auric Soul
+		// Tooltip: Absorb to gain immense, slimy powers
+	}
+
 	YharonSoulMusicBox: {
 		DisplayName: Boîte à musique (Âme Draconique)
 		Tooltip: ""
+	}
+
+	YharonSoul: {
+		// DisplayName: Draconic Auric Soul
+		// Tooltip: Absorb to gain immense, draconic powers
 	}
 
 	SlimeMonsoonMonolith: {
@@ -198,9 +218,19 @@ Items: {
 		Tooltip: ""
 	}
 
+	EbonianBehemuckTrophy: {
+		// DisplayName: Ebonian Behemuck Trophy
+		// Tooltip: ""
+	}
+
 	DivineGargooptuarTrophyItem: {
 		DisplayName: Trophée de la Divinité Gargadouesque
 		Tooltip: ""
+	}
+
+	DivineGargooptuarTrophy: {
+		// DisplayName: Divine Gargooptuar Trophy
+		// Tooltip: ""
 	}
 
 	CrimulanGlopstrosityTrophyItem: {
@@ -208,9 +238,19 @@ Items: {
 		Tooltip: ""
 	}
 
+	CrimulanGlopstrosityTrophy: {
+		// DisplayName: Crimulan Glopstrosity Trophy
+		// Tooltip: ""
+	}
+
 	StellarGeliathTrophyItem: {
 		DisplayName: Trophée du Geliath Stellaire
 		Tooltip: ""
+	}
+
+	StellarGeliathTrophy: {
+		// DisplayName: Stellar Geliath Trophy
+		// Tooltip: ""
 	}
 
 	PumpActionSwampgun: {
@@ -346,11 +386,6 @@ Items: {
 			'''
 	}
 
-	GoozmaAuricSoul: {
-		DisplayName: Âme aurique chromatique
-		Tooltip: Confére des pouvoirs immenséments... visqueux... une fois aborbée
-	}
-
 	ScytheOfTheOldGod: {
 		DisplayName: Faux de l'Ancien Dieu
 		Tooltip:
@@ -359,11 +394,6 @@ Items: {
 			'A ne pas confondre avec la faux de l'Ancien Duc...
 			...et rien d'autre du tout.'
 			'''
-	}
-
-	FieryAuricSoul: {
-		DisplayName: Âme aurique draconique
-		Tooltip: Confére des pouvoirs draconiques immenses une fois aborbée
 	}
 
 	Goomoire: {
@@ -451,6 +481,77 @@ Items: {
 		DisplayName: Coloration visqueuse
 		Tooltip: ""
 	}
+
+	AncientSlimeMonsoonMonolith: {
+		// DisplayName: Ancient Slime Monsoon Monolith
+		// Tooltip: ""
+	}
+
+	AntiMassAccumulator: {
+		// DisplayName: Anti-Mass Accumulator
+		/* Tooltip:
+			'''
+			Blasts out balls of packed protons and bolts of energized electrons one after another
+			Proton balls charge anything they hit and can damage enemies in a radius
+			Electron bolts do extra damage to positively charged enemies
+			'Do not look directly at the operational end of the device.'
+			''' */
+	}
+
+	GoozmaBoulderItem: {
+		// DisplayName: Motley Marble
+		// Tooltip: "'Highly dangerous'"
+	}
+
+	IOUASoul: {
+		// DisplayName: I O U A Soul
+		// Tooltip: REMOVED content LOOOOOOL
+	}
+
+	StrangeManPortrait: {
+		// DisplayName: Portrait of a Strange Man
+		// Tooltip: ""
+	}
+
+	TendrilCursorAttachment: {
+		// DisplayName: Cursor Mutagen
+		/* Tooltip:
+			'''
+			Attaches hanging chromatic tendrils to your mouse cursor
+			The amount of tendrils depends on the slot this item is placed in
+			'They somehow know how to untangle themselves'
+			''' */
+	}
+
+	FissionFlayer: {
+		// DisplayName: to be determined
+		// Tooltip: ""
+	}
+
+	TrailblazerGoggles: {
+		// DisplayName: Trailblazed Goggles
+		// Tooltip: "'To lead the way, you must see it first. These do not let you see.'"
+	}
+
+	TrailblazerBackpack: {
+		// DisplayName: Trailblazed Tactical Backpack
+		// Tooltip: "'To be a forerunner is to be prepared. Thankfully, this backpack is filled with nothing but fuel.'"
+	}
+
+	ShogunWings: {
+		// Tooltip: "'They are best used to cool you off'"
+		// DisplayName: Thousand-Fold Paper Fans
+	}
+
+	NuclearLemonade: {
+		// DisplayName: Nuclear Lemonade
+		/* Tooltip:
+			'''
+			Major improvements to all stats
+			May kill you
+			'As cold as the nuclear winter!'
+			''' */
+	}
 }
 
 NPCs: {
@@ -469,6 +570,8 @@ NPCs: {
 	EbonianBehemuck.DisplayName: Mastodonte d'éboue
 	StellarGeliath.DisplayName: Geliath stellaire
 	Goozmite.DisplayName: Goozinou
+	// GelatinousSpawn.DisplayName: Gelatinous Spawn
+	// PluripotentSpawn.DisplayName: Pluripotent Spawn
 }
 
 Projectiles: {
@@ -547,6 +650,18 @@ Projectiles: {
 	BlinkySpikeBall.DisplayName: La balle piquante de Blinky
 	PinkyLight.DisplayName: La lumière de Pinky
 	GoozmoemRay.DisplayName: Rayon à fusion
+	// AntiMassBioBall.DisplayName: Anti-Mass Bio Ball
+	// AntiMassColliderProj.DisplayName: Anti-Mass Collider
+	// AntiMassMacroLaser.DisplayName: Anti Mass Macro Laser
+	// AntiMassDeathLaser.DisplayName: Anti Mass Death Laser
+	// AntiMassBioStrike.DisplayName: Anti Mass Bio Strike
+	// AntiMassAccumulatorProj.DisplayName: Anti Mass Accumulator Proj
+	// ShakerSludge.DisplayName: Shaker Sludge
+	// GoozmaBoulderProjectile.DisplayName: Motley Marble
+	// StellarBlackHole.DisplayName: Stellar Black Hole
+	// FissionFlyerProjectile.DisplayName: Fission Flyer
+	// CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
+	// FissionFlayerProjectile.DisplayName: to be determined
 }
 
 Chat: {
@@ -604,6 +719,11 @@ Buffs: {
 		DisplayName: Soirée de gelée
 		Description: Inky, Blinky, Pinky, et Cylde vont se battre à vos côtés
 	}
+
+	Doomed: {
+		// DisplayName: Doomed
+		// Description: Mods.CalamityHunt.Buffs.Doomed.Description
+	}
 }
 
 Tiles: {
@@ -646,6 +766,8 @@ Config: {
 		Label: Tonnere de la Mousson gélatineuse
 		Tooltip: Active ou désactive les visuels du tonnere de la Mousson gélatineuse
 	}
+
+	// ContentHeader: Content
 }
 
 LoreGeneric:
@@ -702,9 +824,34 @@ Configs: {
 			Label: Shadowspec Maudit
 			Tooltip: ""
 		}
+
+		oldsky: {
+			// Label: oldsky
+			// Tooltip: ""
+		}
+
+		overrideVanillaBalance: {
+			// Label: override Vanilla Balance
+			// Tooltip: ""
+		}
+
+		photosensitiveToggle: {
+			// Label: Toggle Photosensitive Effects
+			// Tooltip: Disables certain effects which may trigger photosensitivity
+		}
+
+		debugMode: {
+			// Label: Debug Mode
+			/* Tooltip:
+				'''
+				Enables features optimized for testing game mechanics
+				Not recommended for usage by players
+				''' */
+		}
 	}
 }
 
+// OrRev: " or Revengeance"
 SetBonuses.Shogun:
 	'''
 	+ 17% de dégats et +5 sbires maximum
@@ -723,7 +870,7 @@ StickyHandStats:
 	Vitesse de retraction: 10
 	Vitesse de traction: 17
 	'''
-// GoozmaShadowspecCurse: Mods.CalamityHunt.GoozmaShadowspecCurse
+// GoozmaShadowspecCurse: "[c/5C95A1:insertwhateverthefuck]"
 // AnyEvilBlock: Any Evil Block
 // SludgeWarning: Cannot be used to summon the Slime God
 
@@ -731,3 +878,5 @@ CalamityModName: {
 	Display: Calamity Mod
 	Internal: CalamityMod
 }
+
+// Emotes.GoozmaEmote.Command: goozma

@@ -36,7 +36,7 @@ public static class ModCompatibility
 
         // TODO: We could just use mod != null, but who cares?
         private static readonly Lazy<bool> is_loaded = new(() => ModLoader.HasMod(ModName));
-        private static readonly Lazy<Mod?> mod = new(() => ModLoader.TryGetMod(ModName, out var theMod) ? theMod : null);
+        private static readonly Lazy<Mod?> mod = new(() => ModLoader.TryGetMod(ModName, out Mod? theMod) ? theMod : null);
 
         /// <summary>
         ///     The internal name of the mod.
@@ -63,7 +63,7 @@ public static class ModCompatibility
     {
         public sealed class CalamityNameProvider : IModNameProvider
         {
-            string IModNameProvider.ModName => "CalamityMod";
+            string IModNameProvider.ModName => HUtils.CalamityMod;
         }
     }
 }

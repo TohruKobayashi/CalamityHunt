@@ -11,10 +11,11 @@ using Terraria.ObjectData;
 namespace CalamityHunt.Content.Tiles
 {
     public class GoozmaMusicBoxP2Tile : ModTile
-	{
-		public override void SetStaticDefaults() {
-			Main.tileFrameImportant[Type] = true;
-			Main.tileObsidianKill[Type] = true;
+    {
+        public override void SetStaticDefaults()
+        {
+            Main.tileFrameImportant[Type] = true;
+            Main.tileObsidianKill[Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
             TileObjectData.newTile.Origin = new Point16(0, 1);
             TileObjectData.newTile.LavaDeath = false;
@@ -24,17 +25,18 @@ namespace CalamityHunt.Content.Tiles
 
             DustType = DustID.Platinum;
             LocalizedText name = CreateMapEntryName();
-			AddMapEntry(new Color(200, 200, 200), name);
-		}
+            AddMapEntry(new Color(200, 200, 200), name);
+        }
 
         public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings) => true;
 
-        public override void MouseOver(int i, int j) {
+        public override void MouseOver(int i, int j)
+        {
 
             Player player = Main.LocalPlayer;
-			player.noThrow = 2;
-			player.cursorItemIconEnabled = true;
-			player.cursorItemIconID = ModContent.ItemType<GoozmaMusicBoxP2>();
-		}
-	}
+            player.noThrow = 2;
+            player.cursorItemIconEnabled = true;
+            player.cursorItemIconID = ModContent.ItemType<GoozmaMusicBoxP2>();
+        }
+    }
 }

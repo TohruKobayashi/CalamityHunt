@@ -10,7 +10,7 @@ namespace CalamityHunt.Content.Items.Placeable
         {
             ItemID.Sets.CanGetPrefixes[Type] = false;
             ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.MusicBox;
-            MusicLoader.AddMusicBox(Mod, MusicLoader.GetMusicSlot($"{nameof(CalamityHunt)}/Assets/Music/GlutinousArbitration"), ModContent.ItemType<GoozmaMusicBoxP1>(), ModContent.TileType<GoozmaMusicBoxP1Tile>());
+            MusicLoader.AddMusicBox(Mod, AssetDirectory.Music.GoozmaPhase1, ModContent.ItemType<GoozmaMusicBoxP1>(), ModContent.TileType<GoozmaMusicBoxP1Tile>());
         }
 
         public override void SetDefaults()

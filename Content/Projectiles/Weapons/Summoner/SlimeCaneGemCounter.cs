@@ -1,13 +1,7 @@
 ﻿using CalamityHunt.Common.Players;
-using CalamityHunt.Content.Buffs;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Terraria;
-using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Humanizer.In;
 
 namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
 {
@@ -37,17 +31,18 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
 
 
         public override void AI()
-        { 
+        {
             Player player = Main.player[Projectile.owner];
 
-            if (player.GetModPlayer<SlimeCanePlayer>().slimes)
+            if (player.GetModPlayer<SlimeCanePlayer>().slimes) {
                 Projectile.timeLeft = 2;
+            }
 
-            if (++Projectile.frameCounter >= 4)
-            {
+            if (++Projectile.frameCounter >= 4) {
                 Projectile.frameCounter = 0;
-                if (++Projectile.frame >= 6)
+                if (++Projectile.frame >= 6) {
                     Projectile.frame = 0;
+                }
             }
         }
 

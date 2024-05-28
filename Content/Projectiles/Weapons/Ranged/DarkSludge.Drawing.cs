@@ -9,11 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Arch.Core;
-using Arch.Core.Extensions;
 using Terraria;
 using Terraria.ModLoader;
-using Entity = Arch.Core.Entity;
 
 namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
 {
@@ -61,62 +58,46 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 Main.spriteBatch.Draw(texture, (projectile.Bottom - Main.screenPosition) / 2f, frame, color, projectile.rotation - MathHelper.PiOver2, frame.Size() * new Vector2(0.5f, 0.8f), projectile.scale * squish * 0.5f, 0, 0);
             }
 
-            var query = new QueryDescription().WithAll<Particle, ParticleVelocity, ParticlePosition, ParticleRotation, ParticleScale, ParticleDarkSludgeChunk>();
-            var particleSystem = ModContent.GetInstance<ParticleSystem>();
-            particleSystem.ParticleWorld.Query(
-                in query,
-                new ForEach((in Entity entity) =>
+            if (CalamityHunt.particles is null) {
+                Main.graphics.GraphicsDevice.SetRenderTarget(null);
+                Main.spriteBatch.End();
+
+                return;
+            }
+
+            foreach (DarkSludgeChunk particle in CalamityHunt.particles.particles.Where(n => n is DarkSludgeChunk))
+            {
+                if (particle.time > 0)
                 {
-                    ref readonly var particle = ref entity.Get<Particle>();
-                    ref readonly var velocity = ref entity.Get<ParticleVelocity>();
-                    ref readonly var position = ref entity.Get<ParticlePosition>();
-                    ref readonly var rotation = ref entity.Get<ParticleRotation>();
-                    ref readonly var scale = ref entity.Get<ParticleScale>();
-                    ref readonly var darkSludgeChunk = ref entity.Get<ParticleDarkSludgeChunk>();
-
-                    if (darkSludgeChunk.Time <= 0)
-                        return;
-
-                    Asset<Texture2D> texture = ModContent.Request<Texture2D>(particle.Behavior.Texture);
-                    Rectangle frame = texture.Frame(4, 1, darkSludgeChunk.Variant, 0);
-                    Vector2 squish = new Vector2(1f - velocity.Value.Length() * 0.01f, 1f + velocity.Value.Length() * 0.01f);
-                    float grow = (float)Math.Sqrt(Utils.GetLerpValue(-20, 40, darkSludgeChunk.Time, true));
-                    if (darkSludgeChunk.Stuck)
+                    Asset<Texture2D> texture = ModContent.Request<Texture2D>(particle.Texture);
+                    Rectangle frame = texture.Frame(4, 1, particle.variant, 0);
+                    Vector2 squish = new Vector2(1f - particle.velocity.Length() * 0.01f, 1f + particle.velocity.Length() * 0.01f);
+                    float grow = (float)Math.Sqrt(Utils.GetLerpValue(-20, 40, particle.time, true));
+                    if (particle.stuck)
                     {
                         grow = 1f;
-                        frame = texture.Frame(4, 1, darkSludgeChunk.Variant + 2, 0);
-                        squish = new Vector2(1f + (float)Math.Sqrt(Utils.GetLerpValue(20, 0, darkSludgeChunk.Time, true)) * 0.33f, 1f - (float)Math.Sqrt(Utils.GetLerpValue(20, 0, darkSludgeChunk.Time, true)) * 0.33f);
+                        frame = texture.Frame(4, 1, particle.variant + 2, 0);
+                        squish = new Vector2(1f + (float)Math.Sqrt(Utils.GetLerpValue(20, 0, particle.time, true)) * 0.33f, 1f - (float)Math.Sqrt(Utils.GetLerpValue(20, 0, particle.time, true)) * 0.33f);
                     }
 
-                    Color color = Lighting.GetColor(position.Value.ToTileCoordinates());
-                    Main.spriteBatch.Draw(texture.Value, (position.Value - Main.screenPosition) / 2f, frame, color, rotation.Value, frame.Size() * new Vector2(0.5f, 0.84f), scale.Value * grow * squish * 0.5f, 0, 0);
-                })
-            );
-            
-            query = new QueryDescription().WithAll<Particle, ParticlePosition, ParticleRotation, ParticleScale, ParticleData<string>, ParticleMegaFlame>();
-            particleSystem.ParticleWorld.Query(
-                in query,
-                new ForEach((in Entity entity) =>
-                {
-                    ref readonly var particle = ref entity.Get<Particle>();
-                    ref readonly var position = ref entity.Get<ParticlePosition>();
-                    ref readonly var rotation = ref entity.Get<ParticleRotation>();
-                    ref readonly var scale = ref entity.Get<ParticleScale>();
-                    ref readonly var stringData = ref entity.Get<ParticleData<string>>();
-                    ref readonly var megaFlame = ref entity.Get<ParticleMegaFlame>();
+                    Color color = Lighting.GetColor(particle.position.ToTileCoordinates());
+                    Main.spriteBatch.Draw(texture.Value, (particle.position - Main.screenPosition) / 2f, frame, color, particle.rotation, frame.Size() * new Vector2(0.5f, 0.84f), particle.scale * grow * squish * 0.5f, 0, 0);
+                }
+            }
 
-                    if (stringData.Value != "Sludge")
-                        return;
+            //foreach (FlameParticle particle in ParticleSystem.particle.Where(n => n.Active && n is FlameParticle && n.data is string))
+            //{
+            //    if ((string)particle.data == "Sludge")
+            //    {
+            //        Asset<Texture2D> texture = ModContent.Request<Texture2D>(particle.Texture + "Sludge");
+            //        Rectangle frame = texture.Frame(4, 2, particle.variant % 4, (int)(particle.variant / 4f));
+            //        float grow = (float)Math.Sqrt(Utils.GetLerpValue(0, particle.maxTime * 0.3f, particle.time, true));
+            //        float opacity = Utils.GetLerpValue(particle.maxTime * 0.8f, particle.maxTime * 0.3f, particle.time, true) * Math.Clamp(particle.scale, 0, 1);
 
-                    Asset<Texture2D> texture = ModContent.Request<Texture2D>(particle.Behavior.Texture + "Sludge");
-                    Rectangle frame = texture.Frame(4, 2, megaFlame.Variant % 4, (int)(megaFlame.Variant / 4f));
-                    float grow = (float)Math.Sqrt(Utils.GetLerpValue(0, megaFlame.MaxTime * 0.3f, megaFlame.Time, true));
-                    float opacity = Utils.GetLerpValue(megaFlame.MaxTime * 0.8f, megaFlame.MaxTime * 0.3f, megaFlame.Time, true) * Math.Clamp(scale.Value, 0, 1);
-
-                    Color color = Lighting.GetColor(position.Value.ToTileCoordinates());
-                    Main.spriteBatch.Draw(texture.Value, (position.Value - Main.screenPosition) / 2f, frame, color * opacity, rotation.Value - MathHelper.PiOver2, frame.Size() * 0.5f, scale.Value * grow * 0.5f, 0, 0);
-                })
-            );
+            //        Color color = Lighting.GetColor(particle.position.ToTileCoordinates());
+            //        Main.spriteBatch.Draw(texture.Value, (particle.position - Main.screenPosition) / 2f, frame, color * opacity, particle.rotation - MathHelper.PiOver2, frame.Size() * 0.5f, particle.scale * grow * 0.5f, 0, 0);
+            //    }
+            //}
 
             Main.graphics.GraphicsDevice.SetRenderTarget(null);
 
@@ -127,8 +108,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
 
         private void DrawSludge(On_Main.orig_DoDraw_Tiles_Solid orig, Main self)
         {
-            Texture2D baseTex = AssetDirectory.Textures.Goozma.DarkSludge.Value;
-            Texture2D glowTex = AssetDirectory.Textures.Goozma.DarkSludgeGlow.Value;
+            Texture2D baseTex = ModContent.Request<Texture2D>($"{nameof(CalamityHunt)}/Assets/Textures/Extra/DarkSludgeTexture").Value;
+            Texture2D glowTex = ModContent.Request<Texture2D>($"{nameof(CalamityHunt)}/Assets/Textures/Extra/DarkSludgeTextureGlow").Value;
             Effect effect = ModContent.Request<Effect>($"{nameof(CalamityHunt)}/Assets/Effects/SludgeEffect", AssetRequestMode.ImmediateLoad).Value;
             effect.Parameters["uPosition"].SetValue(Main.screenPosition * 0.5f);
             effect.Parameters["uBaseTexture"].SetValue(baseTex);

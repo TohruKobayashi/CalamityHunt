@@ -1,13 +1,11 @@
-﻿using CalamityHunt.Content.Bosses.Goozma;
+﻿using System.Collections.Generic;
+using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Items.Rarities;
+using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
 using CalamityHunt.Content.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using System.Collections.Generic;
-using CalamityHunt.Core;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
@@ -25,10 +23,9 @@ namespace CalamityHunt.Content.Items.Misc
             Item.shoot = ModContent.ProjectileType<StickyHandProj>();
             Item.shootSpeed = 25f;
             Item.rare = ModContent.RarityType<VioletRarity>();
-            if (ModLoader.HasMod("CalamityMod"))
-            {
+            if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 ModRarity r;
-                Mod calamity = ModLoader.GetMod("CalamityMod");
+                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
                 calamity.TryFind<ModRarity>("Violet", out r);
                 Item.rare = r.Type;
             }
@@ -37,8 +34,9 @@ namespace CalamityHunt.Content.Items.Misc
         {
             TooltipLine tooltip = new(Mod, "CalamityHunt:HookStats", Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.StickyHandStats").Value);
             int check = tooltips.IndexOf(tooltips.Find(t => t.Text.Equals("\'It won't break, I promise\'")));
-            if (ModLoader.HasMod("CalamityMod"))
+            if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 tooltips.Insert(check, tooltip);
+            }
         }
         public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {

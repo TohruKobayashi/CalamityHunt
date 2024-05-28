@@ -1,11 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using Terraria;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.Localization;
+﻿using Terraria;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.PlayerDrawLayer;
 
 namespace CalamityHunt.Content.Buffs
 {

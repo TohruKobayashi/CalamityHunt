@@ -10,7 +10,7 @@ namespace CalamityHunt.Content.Items.Placeable
         {
             ItemID.Sets.CanGetPrefixes[Type] = false;
             ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.MusicBox;
-            MusicLoader.AddMusicBox(Mod, MusicLoader.GetMusicSlot($"{nameof(CalamityHunt)}/Assets/Music/ViscousDesperation"), ModContent.ItemType<GoozmaMusicBoxP2>(), ModContent.TileType<GoozmaMusicBoxP2Tile>());
+            MusicLoader.AddMusicBox(Mod, AssetDirectory.Music.GoozmaPhase2, ModContent.ItemType<GoozmaMusicBoxP2>(), ModContent.TileType<GoozmaMusicBoxP2Tile>());
         }
 
         public override void SetDefaults()

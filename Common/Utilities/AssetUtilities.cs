@@ -1,4 +1,5 @@
-﻿using ReLogic.Content;
+﻿using System.Collections.Generic;
+using ReLogic.Content;
 using Terraria.ModLoader;
 
 namespace CalamityHunt.Common.Utilities;
@@ -12,7 +13,7 @@ public static class AssetUtilities
     // originally made for a more sophisticated asset loading system. I'd like
     // to keep these methods in use in the event a use arises for them again.
     // - Tomat
-    
+
     /// <summary>
     ///     Makes a cacheable request for an asset.
     /// </summary>
@@ -24,9 +25,24 @@ public static class AssetUtilities
     public static Asset<T>[] RequestArrayImmediate<T>(string path, int count, int start = 0) where T : class
     {
         Asset<T>[] assets = new Asset<T>[count];
-        for (int i = 0; i < assets.Length; i++)
+        for (int i = 0; i < assets.Length; i++) {
             assets[i] = RequestImmediate<T>(path + (i + start));
+        }
+
         return assets;
+    }
+
+    public static Asset<T>[] RequestArrayTotalImmediate<T>(string name) where T : class
+    {
+        List<Asset<T>> assets = new List<Asset<T>>();
+
+        int i = 0;
+        while (ModContent.RequestIfExists(name + i, out Asset<T> asset, AssetRequestMode.ImmediateLoad)) {
+            assets.Add(asset);
+            i++;
+        }
+
+        return assets.ToArray();
     }
 
     private static Asset<T> Request<T>(string path, AssetRequestMode requestMode) where T : class

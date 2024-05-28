@@ -1,5 +1,4 @@
-﻿using CalamityHunt.Content.Items.Materials;
-using CalamityHunt.Content.Tiles;
+﻿using CalamityHunt.Content.Tiles;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -11,7 +10,7 @@ namespace CalamityHunt.Content.Items.Placeable
         {
             ItemID.Sets.CanGetPrefixes[Type] = false;
             ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.MusicBox;
-            MusicLoader.AddMusicBox(Mod, MusicLoader.GetMusicSlot($"{nameof(CalamityHunt)}/Assets/Music/YharonAuricSoulMusic"), ModContent.ItemType<YharonSoulMusicBox>(), ModContent.TileType<YharonSoulMusicBoxTile>());
+            MusicLoader.AddMusicBox(Mod, AssetDirectory.Music.YharonSoul, ModContent.ItemType<YharonSoulMusicBox>(), ModContent.TileType<YharonSoulMusicBoxTile>());
         }
 
         public override void SetDefaults()
@@ -21,17 +20,15 @@ namespace CalamityHunt.Content.Items.Placeable
 
         public override void AddRecipes()
         {
-            if (ModLoader.HasMod("CalamityMod"))
-            {
-                Mod calamity = ModLoader.GetMod("CalamityMod");
+            if (ModLoader.HasMod(HUtils.CalamityMod)) {
+                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
                 CreateRecipe()
                     .AddIngredient(ItemID.MusicBox)
                     .AddIngredient(calamity.Find<ModItem>("YharonSoulFragment").Type, 15)
                     .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
                     .Register();
             }
-            else 
-            {
+            else {
                 CreateRecipe()
                     .AddIngredient(ItemID.MusicBox)
                     .AddIngredient(ItemID.FragmentSolar, 15)

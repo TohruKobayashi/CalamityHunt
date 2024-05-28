@@ -1,7 +1,6 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -46,39 +45,43 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
         public override void AI()
         {
             Projectile.scale = MathF.Sqrt(Utils.GetLerpValue(-5, 8, Time, true) * Utils.GetLerpValue(250, 200, Time, true)) * 1.1f;
-            if (Mode == 0)
+            if (Mode == 0) {
                 Projectile.rotation = Projectile.velocity.ToRotation();
+            }
 
             Projectile.velocity *= 0.999f;
-            if (Projectile.velocity.Length() > 15f)
+            if (Projectile.velocity.Length() > 15f) {
                 Projectile.velocity *= 0.98f;
+            }
 
             Projectile.velocity.Y += Time < 25 ? 0.15f : 0.7f;
 
-            if (Time > 250)
+            if (Time > 250) {
                 Projectile.Kill();
+            }
 
-            if (Main.rand.NextBool(25) || (Main.rand.NextBool(7) && Mode == 0))
-            {
+            if (Main.rand.NextBool(25) || (Main.rand.NextBool(7) && Mode == 0)) {
                 Dust blood = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(12, 10), DustID.Blood, -Projectile.velocity * 0.5f + Main.rand.NextVector2Circular(5, 5), 0, Color.DarkRed, 2f + Main.rand.NextFloat());
                 blood.noGravity = true;
             }
 
-            if (StickHost > -1)
-            {
-                if (Time < 200)
+            if (StickHost > -1) {
+                if (Time < 200) {
                     Time = 200;
+                }
 
-                if (!Main.npc[(int)StickHost].active)
+                if (!Main.npc[(int)StickHost].active) {
                     Projectile.Kill();
+                }
 
                 Projectile.velocity = Vector2.Zero;
                 Projectile.rotation = Projectile.AngleTo(Main.npc[(int)StickHost].Center);
                 Projectile.Center += Main.npc[(int)StickHost].position - Main.npc[(int)StickHost].oldPosition;
             }
 
-            if (Mode == 2)
+            if (Mode == 2) {
                 Projectile.rotation = Projectile.rotation.AngleLerp(MathHelper.PiOver2, 0.5f);
+            }
 
             Projectile.frame = (Mode > 0 ? 2 : 0) + (int)Projectile.localAI[0];
 
@@ -96,18 +99,19 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
         {
             Projectile.velocity.X *= 0.8f;
 
-            if (Mode == 0 && Projectile.velocity.Y >= 0)
-            {
+            if (Mode == 0 && Projectile.velocity.Y >= 0) {
                 Mode = 2;
-                if (Time < 200)
+                if (Time < 200) {
                     Time = 200;
+                }
 
                 SoundEngine.PlaySound(SoundID.NPCDeath9, Projectile.Center);
 
             }
 
-            if (Mode == 0 && MathF.Abs(Projectile.velocity.Y - oldVelocity.Y) > 0)
+            if (Mode == 0 && MathF.Abs(Projectile.velocity.Y - oldVelocity.Y) > 0) {
                 Projectile.velocity.Y *= -1;
+            }
 
             return false;
         }
@@ -118,8 +122,9 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
             Projectile.frame = (Mode > 0 ? 2 : 0) + (int)Projectile.localAI[0];
             Rectangle frame = texture.Frame(4, 1, Projectile.frame, 0);
             Vector2 squish = new Vector2(1.05f - Projectile.velocity.Length() * 0.005f, 1.05f + Projectile.velocity.Length() * 0.01f);
-            if (Mode == 2)
+            if (Mode == 2) {
                 squish = new Vector2(1.2f, 0.8f);
+            }
 
             SpriteEffects spriteEffects = Projectile.spriteDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipVertically;
 

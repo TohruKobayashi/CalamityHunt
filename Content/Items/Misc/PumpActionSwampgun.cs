@@ -1,8 +1,6 @@
 ﻿using CalamityHunt.Content.Items.Rarities;
 using CalamityHunt.Content.Projectiles;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -25,10 +23,9 @@ namespace CalamityHunt.Content.Items.Misc
             Item.shoot = ModContent.ProjectileType<PumpActionSwampgunHeld>();
             Item.shootSpeed = 5f;
             Item.rare = ModContent.RarityType<VioletRarity>();
-            if (ModLoader.HasMod("CalamityMod"))
-            {
+            if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 ModRarity r;
-                Mod calamity = ModLoader.GetMod("CalamityMod");
+                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
                 calamity.TryFind<ModRarity>("Violet", out r);
                 Item.rare = r.Type;
             }
@@ -38,8 +35,10 @@ namespace CalamityHunt.Content.Items.Misc
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (player.ownedProjectileCounts[ModContent.ProjectileType<PumpActionSwampgunHeld>()] <= 0)
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<PumpActionSwampgunHeld>()] <= 0) {
                 Projectile.NewProjectile(source, position, velocity, type, 0, 0, player.whoAmI);
+            }
+
             return false;
         }
     }
