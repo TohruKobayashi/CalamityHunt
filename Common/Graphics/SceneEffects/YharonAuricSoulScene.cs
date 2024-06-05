@@ -11,7 +11,7 @@ namespace CalamityHunt.Common.Graphics.SceneEffects;
 
 public class YharonAuricSoulScene : ModSceneEffect
 {
-    public override SceneEffectPriority Priority => SceneEffectPriority.BossHigh;
+    public override SceneEffectPriority Priority => SceneEffectPriority.Event;
 
     public override int Music => AssetDirectory.Music.YharonSoul;
 

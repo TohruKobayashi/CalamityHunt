@@ -119,8 +119,8 @@ Items: {
 	}
 
 	YharonSoul: {
-		DisplayName: Draconic Auric Soul
-		Tooltip: Absorb to gain immense, draconic powers
+		DisplayName: Rebirth Auric Soul
+		Tooltip: Absorb to gain immense, rebirth powers
 	}
 
 	SlimeMonsoonMonolith: {
@@ -552,6 +552,11 @@ Items: {
 			'As cold as the nuclear winter!'
 			'''
 	}
+
+	ChromaticCampfire: {
+		DisplayName: Chromatic Campfire
+		Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -731,6 +736,7 @@ Tiles: {
 	GoozmaMusicBoxP2Tile.MapEntry: Music Box
 	GoozmaSoulMusicBoxTile.MapEntry: Music Box
 	YharonSoulMusicBoxTile.MapEntry: Music Box
+	ChromaticCampfirePlaced.MapEntry: Chromatic Campfire Placed
 }
 
 Config: {
