@@ -13,7 +13,7 @@ public class AntiMassAccumulator : ModItem
 {
     public override void SetDefaults()
     {
-        if (HUtils.NonVanillaBalance) {
+        if (!HUtils.NonVanillaBalance) {
             Item.damage = 98;
             Item.rare = ItemRarityID.Red;
         }
