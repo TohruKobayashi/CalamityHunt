@@ -18,9 +18,7 @@ namespace CalamityHunt.Common.Systems
     {
         public override void PostUpdateNPCs()
         {
-            if (Main.zenithWorld) {
-                SpawnGoozmaOld();
-            }
+            SpawnGoozmaOld();
 
             //stop black hole shader
             if (!Main.projectile.Any(n => n.active && n.type == ModContent.ProjectileType<StellarBlackHole>())) {
