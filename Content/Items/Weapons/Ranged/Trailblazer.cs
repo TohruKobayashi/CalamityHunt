@@ -76,7 +76,7 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
                 Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
                 CreateRecipe()
                     .AddIngredient<ChromaticMass>(15)
-                    .AddIngredient(calamity.Find<ModItem>("GodsBellows").Type)
+                    .AddIngredient(calamity.Find<ModItem>("CleansingBlaze").Type)
                     .AddIngredient(calamity.Find<ModItem>("PristineFury").Type)
                     .AddIngredient(calamity.Find<ModItem>("OverloadedBlaster").Type)
                     .AddIngredient(calamity.Find<ModItem>("AuroraBlazer").Type)
