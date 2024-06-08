@@ -232,6 +232,9 @@ namespace CalamityHunt
                         auricSoulPlayer.SyncPlayer(-1, whoAmI, false);
                     }
                     break;
+                case PacketType.SlimeRainActivate:
+                    SlimeNinjaStatueTile.ActivateSlimeRain();
+                    break;
             }
         }
 
@@ -239,7 +242,8 @@ namespace CalamityHunt
         {
             TrollPlayer,
             SummonPluripotentSpawn,
-            SyncPlayer
+            SyncPlayer,
+            SlimeRainActivate
         }
     }
 }
