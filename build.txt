@@ -1,5 +1,5 @@
 displayName = Calamity: Hunt of the Old God
 loadAfter = CalamityMod
 author = Team Hypnos
-version = 1.1.1
+version = 1.1.2
 sortAfter = WMITF
