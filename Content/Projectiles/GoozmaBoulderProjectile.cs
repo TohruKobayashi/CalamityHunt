@@ -107,7 +107,7 @@ namespace CalamityHunt.Content.Projectiles
         {
             byte closestPlayer = FindClosestAlive(Projectile.position, Projectile.width, Projectile.height);
             Player player = Main.player[closestPlayer];
-            Projectile.rotation += Projectile.velocity.X * 0.02f;
+            Projectile.rotation += 0.4f;
             Projectile.velocity = Vector2.Zero;
             float distance = Vector2.Distance(Projectile.Center, player.Center);
             float amount = Math.Clamp((1 - 1 / distance) * 0.05f, 0, 1);
