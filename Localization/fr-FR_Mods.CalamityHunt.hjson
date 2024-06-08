@@ -727,7 +727,7 @@ Buffs: {
 
 	Doomed: {
 		// DisplayName: Doomed
-		// Description: Mods.CalamityHunt.Buffs.Doomed.Description
+		// Description: It's so over
 	}
 }
 
@@ -886,3 +886,18 @@ CalamityModName: {
 }
 
 // Emotes.GoozmaEmote.Command: goozma
+/* Draeting.Goozma:
+	'''
+	A living paradox, and a shock to everything I believed fact about the nature of the Auric soul. 
+	The Godseeker seemed so certain that the nature of the god was fundamentally tied to ritual. Though that is a thoroughly unscientific prospect, I had no choice but to accept it: he knew better than I, being linked to one of the few remaining auric dragons, and to invoke his wrath would put a quick end to my work.  It is not a surprise that I did not have the whole story, and even now, I am still missing many pieces. 
+
+	I have been tirelessly analyzing the replay of that battle since the moment it concluded. Though a natural phenomena has seemingly created a new Auric soul, I know very little about the nature of the process that occurred; just as quickly as it was created, it was returned to the primordial soup it was forged from. 
+
+	I have two prevailing theories, though my confidence in their accuracy is shaky at best. 
+	The first is related to the method in which it was born. The natural process of pressurization is not altogether difficult for even the most basic of scientists to grasp. For an easily understood example, however, consider carbon; its makeup will shift when compressed with extreme force, transforming it into diamond. Considering this fact, it may not be altogether unlikely that a spiritual equivalent to this phenomena exists; a mundane soul, forced into a single point by many other similarly basic souls, could very well shift in such a way that it grows exponentially in power.
+
+	The other I am less certain of, but must still consider: It is possible the 'Slime God', as you called it, is but a splinter of a much older, more venerated deity, and the ritual you performed simply granted it its original form back. This would mean that its soul was not spontaneously created, as I currently believe, but was splintered instead- creating the illusion of mundanity from sparks of a greater power.
+
+	Either theory, should one be proven true, provides new, investing paths of study. 
+	Though your naming ability leaves much to be desired, I must commend your ability to leave nothing unstudied, no matter how well documented said creature may be- I never could have anticipated that such a massive scientific breakthrough could have been hiding in the most common pest of all. 
+	''' */

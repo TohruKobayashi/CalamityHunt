@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CalamityHunt.Common.GlobalNPCs;
 using CalamityHunt.Common.Graphics.Skies;
 using CalamityHunt.Common.Players;
 using CalamityHunt.Common.Systems;
@@ -82,15 +83,20 @@ namespace CalamityHunt
 
         public override void PostSetupContent()
         {
-            // Kill Old Duke and inject Goozma into boss rush
             if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
+                // Add Goozma to the Pantheon of Hallownest
                 BossRushInjection(calamity);
+                // Add Goozma as a character in Calamari High
+                CodebreakerInjection(calamity);
+                // Make debuffs draw over enemies when inflicted i think?????
                 Predicate<NPC> hasGobbed = (NPC npc) => npc.HasBuff<Gobbed>();
                 Predicate<NPC> hasSwamped = (NPC npc) => npc.HasBuff<Swamped>();
                 Predicate<NPC> hasBurn = (NPC npc) => npc.GetGlobalNPC<FusionBurnNPC>().active;
+                //Predicate<NPC> isDoomed = (NPC npc) => npc.GetGlobalNPC<DoomedNPC>().active;
                 calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Gobbed", hasGobbed);
                 calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Swamped", hasSwamped);
                 calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/FusionBurn", hasBurn);
+                //calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Doomed", isDoomed);
             }
 
             if (ModLoader.TryGetMod("BossChecklist", out Mod bossChecklist)) {
@@ -153,6 +159,11 @@ namespace CalamityHunt
 
             brEntries.Insert(InsertID + 1, (ModContent.NPCType<Goozma>(), -1, pr, 180, true, 0f, slimeIDs, goozmaID));
             cal.Call("SetBossRushEntries", brEntries);
+        }
+
+        public static void CodebreakerInjection (Mod cal)
+        {
+            cal.Call("CreateCodebreakerDialogOption", Language.GetTextValue("Mods.CalamityHunt.NPCs.Goozma.DisplayName"), Language.GetTextValue("Mods.CalamityHunt.Draeting.Goozma"), () => BossDownedSystem.Instance.GoozmaDowned);
         }
 
         public void BossChecklist(Mod bossChecklist)
