@@ -127,8 +127,15 @@ namespace CalamityHunt.Content.Tiles
                                 d.noGravity = true;
                             }
 
-                            Main.StartSlimeRain(true);
-                            NetMessage.SendData(MessageID.SetMiscEventValues);
+                            if (Main.netMode != NetmodeID.MultiplayerClient) {
+                                ActivateSlimeRain();
+                            }
+                            else {
+                                ModPacket packet = Mod.GetPacket();
+                                packet.Write((byte)CalamityHunt.PacketType.SlimeRainActivate);
+                                packet.Send();
+                            }
+                            
 
                             SoundStyle spawnsound = AssetDirectory.Sounds.SlimeRainActivate;
                             SoundEngine.PlaySound(AssetDirectory.Sounds.SlimeRainActivate, new Vector2(center * 16, (top - 1) * 16));
@@ -155,6 +162,12 @@ namespace CalamityHunt.Content.Tiles
         public static void SummonPluripotentSpawn(int center, int top)
         {
             NPC.NewNPCDirect(Entity.GetSource_NaturalSpawn(), new Vector2(center * 16 - 8, top * 16), ModContent.NPCType<PluripotentSpawn>());
+        }
+
+        public static void ActivateSlimeRain()
+        {
+            Main.StartSlimeRain(true);
+            NetMessage.SendData(MessageID.SetMiscEventValues);
         }
     }
 }
