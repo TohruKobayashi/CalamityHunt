@@ -5,7 +5,7 @@ Items: {
 			'''
 			Summons the Slime God
 			Not consumable
-			'It looks corrupted'
+			'Writhing and bloated with the pus of Gods long dead.'
 			'''
 	}
 
@@ -727,7 +727,7 @@ Buffs: {
 
 	Doomed: {
 		DisplayName: Doomed
-		Description: Mods.CalamityHunt.Buffs.Doomed.Description
+		Description: It's so over
 	}
 }
 
@@ -876,7 +876,7 @@ StickyHandStats:
 	Reelback Velocity: 10
 	Pull Velocity: 17
 	'''
-GoozmaShadowspecCurse: "[c/5C95A1:insertwhateverthefuck]"
+GoozmaShadowspecCurse: "[c/462545:A mucilaginous curse prevents you from using this item...]"
 AnyEvilBlock: Any Evil Block
 SludgeWarning: Cannot be used to summon the Slime God
 
