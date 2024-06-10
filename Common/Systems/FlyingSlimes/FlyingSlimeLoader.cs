@@ -52,7 +52,7 @@ public class FlyingSlimeLoader : ILoadable
 
         public static bool IsPolterghastDead() => ModLoader.HasMod(HUtils.CalamityMod) ? (bool)ModLoader.GetMod(HUtils.CalamityMod).Call("GetBossDowned", "Polterghast") : false;
 
-        public static bool IsAstrageldonDead() => ModLoader.HasMod(HUtils.CatalystMod) ? (!NPC.downedMoonlord || (bool)ModLoader.GetMod(HUtils.CatalystMod).Call("worlddefeats.astrageldon")) : false;
+        public static bool IsAstrageldonDead() => ModLoader.HasMod(HUtils.CatalystMod);
     }
 
     private static class DrawMethods
