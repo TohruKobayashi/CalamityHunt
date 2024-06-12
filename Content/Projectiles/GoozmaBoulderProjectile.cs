@@ -156,10 +156,6 @@ namespace CalamityHunt.Content.Projectiles
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (Main.netMode == NetmodeID.SinglePlayer) {
-                if (target.difficulty != 1 && target.difficulty != 2) {
-                    target.DropItems();
-                }
-
                 target.ghost = true;
                 target.statLife = 0;
                 target.KillMe(PlayerDeathReason.ByProjectile(target.whoAmI, Projectile.whoAmI), 1, 0);
