@@ -1515,10 +1515,11 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
  
                 Attack = (int)AttackList.DevouringTheInnocent;
 
-                NPC.velocity = Vector2.Lerp(NPC.velocity, Vector2.UnitY * -8, 0.2f) * Utils.GetLerpValue(60, 20, Time, true);
                 NPC.dontTakeDamage = true;
 
                 if (NPC.AnyNPCs(catalyst.Find<ModNPC>("Astrageldon").Type)) {
+
+                    NPC.velocity = Vector2.Lerp(NPC.velocity, Vector2.UnitY * -8, 0.2f) * Utils.GetLerpValue(60, 20, Time, true);
                     int astrageldon = NPC.FindFirstNPC(catalyst.Find<ModNPC>("Astrageldon").Type);
                     Type astrageldonType = astrageldon.GetType();
                     NPC astrageldonNPC = Main.npc[astrageldon];
