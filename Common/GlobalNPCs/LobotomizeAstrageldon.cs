@@ -16,6 +16,16 @@ using Terraria.ModLoader;
 namespace CalamityHunt.Common.GlobalNPCs;
 public class LobotomizeAstrageldon : GlobalNPC
 {
+    public static FieldInfo CatalystAstraNebulaField;
+    public override void SetStaticDefaults()
+    {
+        if (ModLoader.TryGetMod(HUtils.CatalystMod, out Mod catalyst)) {
+            ModNPC astrageldon = catalyst.Find<ModNPC>("Astrageldon");
+            Type astrageldonType = astrageldon.GetType();
+
+            CatalystAstraNebulaField = astrageldonType.GetField("NebulaForm", BindingFlags.Instance | BindingFlags.Public);
+        }
+    }
     public override bool PreAI(NPC npc)
     {
         if (ModLoader.HasMod(HUtils.CatalystMod)) {

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using CalamityHunt.Common.DropRules;
+using CalamityHunt.Common.GlobalNPCs;
 using CalamityHunt.Common.Graphics;
 using CalamityHunt.Common.Graphics.Skies;
 using CalamityHunt.Common.Systems;
@@ -72,14 +73,6 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
         };
 
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
-
-        public static FieldInfo neb;
-        if (ModLoader.TryGetMod(HUtils.CatalystMod, out Mod catalyst)) {
-            int astrageldon = NPC.FindFirstNPC(catalyst.Find<ModNPC>("Astrageldon").Type);
-            Type astrageldonType = astrageldon.GetType();
-
-            neb = astrageldonType.GetField("NebulaForm", BindingFlags.Instance | BindingFlags.Public);
-        }
     }
 
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -1534,9 +1527,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     // steady down there, pardner
                     if (Time <= 100) {
                         astrageldonNPC.velocity = Vector2.Zero;
-                        //astrageldonNPC.position = astrageldonNPC.oldPosition;
-                        //FieldInfo neb = astrageldonType.GetField("NebulaForm", BindingFlags.Instance | BindingFlags.Public);
-                        neb.SetValue(astrageldonNPC.ModNPC, true);
+                        LobotomizeAstrageldon.CatalystAstraNebulaField.SetValue(astrageldonNPC.ModNPC, false);
                     }
                     // begin suction
                     else {
