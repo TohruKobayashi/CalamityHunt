@@ -48,7 +48,7 @@ public class AntiMassAccumulator : ModItem
     {
         if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
             if (ModLoader.TryGetMod(HUtils.CatalystMod, out Mod catalyst)) {
-                CreateRecipe() //calamity + catalyst recipe
+                CreateRecipe() //calamity + catalyst recipe for that metanova swag
                     .AddIngredient(calamity.Find<ModItem>("AdamantiteParticleAccelerator").Type)
                     .AddIngredient(catalyst.Find<ModItem>("MetanovaBar").Type, 6)
                     .AddIngredient(calamity.Find<ModItem>("ExodiumCluster").Type, 30)
@@ -57,8 +57,7 @@ public class AntiMassAccumulator : ModItem
                     .AddTile(TileID.LunarCraftingStation)
                     .Register();
             }
-            else {
-                CreateRecipe() //calamity recipe
+            CreateRecipe() //calamity recipe for that tarragon swag
                     .AddIngredient(calamity.Find<ModItem>("AdamantiteParticleAccelerator").Type)
                     .AddIngredient(calamity.Find<ModItem>("UelibloomBar").Type, 12)
                     .AddIngredient(calamity.Find<ModItem>("ExodiumCluster").Type, 30)
@@ -66,10 +65,9 @@ public class AntiMassAccumulator : ModItem
                     .AddIngredient(calamity.Find<ModItem>("SuspiciousScrap").Type, 3) //this is the illegal gun parts of calamity
                     .AddTile(TileID.LunarCraftingStation)
                     .Register();
-            }
         }
         else {
-            CreateRecipe() //vanilla recipe
+            CreateRecipe() //vanilla recipe for that              swag
                 .AddIngredient(ItemID.AdamantiteBar, 10)
                 .AddIngredient(ItemID.SoulofFlight, 6)
                 .AddIngredient(ItemID.LunarBar, 90) //value of uelibloom bar and exodium cluster (108 gold) / value of liminite bar (1.2 gold) = 90 luminite bars

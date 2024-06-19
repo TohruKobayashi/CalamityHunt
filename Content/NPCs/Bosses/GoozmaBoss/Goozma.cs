@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using CalamityHunt.Common.DropRules;
 using CalamityHunt.Common.Graphics;
 using CalamityHunt.Common.Graphics.Skies;
@@ -45,6 +46,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 using static CalamityHunt.Common.Systems.ConditionalValue;
+using static tModPorter.ProgressUpdate;
 
 namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
 
@@ -70,6 +72,14 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
         };
 
         NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
+
+        public static FieldInfo neb;
+        if (ModLoader.TryGetMod(HUtils.CatalystMod, out Mod catalyst)) {
+            int astrageldon = NPC.FindFirstNPC(catalyst.Find<ModNPC>("Astrageldon").Type);
+            Type astrageldonType = astrageldon.GetType();
+
+            neb = astrageldonType.GetField("NebulaForm", BindingFlags.Instance | BindingFlags.Public);
+        }
     }
 
     public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -216,6 +226,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
     public enum AttackList
     {
         Shimmering,
+        DevouringTheInnocent,
         SpawnSelf,
         SpawnSlime,
         BurstLightning,
@@ -1452,7 +1463,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 NPC.Center += Main.rand.NextVector2Circular(15, 15) * Utils.GetLerpValue(0, 100, Time, true);
                 NPC.netUpdate = true;
 
-                if (Time < 15) {
+                if (Time < 15 && ActiveSlime.active) {
                     KillSlime(currentSlime);
                 }
 
@@ -1505,6 +1516,55 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                 break;
 
+            case -23:
+                // eat astrageldon
+                Mod catalyst = ModLoader.GetMod(HUtils.CatalystMod);
+ 
+                Attack = (int)AttackList.DevouringTheInnocent;
+
+                NPC.velocity = Vector2.Lerp(NPC.velocity, Vector2.UnitY * -8, 0.2f) * Utils.GetLerpValue(60, 20, Time, true);
+                NPC.dontTakeDamage = true;
+
+                if (NPC.AnyNPCs(catalyst.Find<ModNPC>("Astrageldon").Type)) {
+                    int astrageldon = NPC.FindFirstNPC(catalyst.Find<ModNPC>("Astrageldon").Type);
+                    Type astrageldonType = astrageldon.GetType();
+                    NPC astrageldonNPC = Main.npc[astrageldon];
+                    ModNPC astrageldonModNPC = NPCLoader.GetNPC(catalyst.Find<ModNPC>("Astrageldon").Type);
+
+                    // steady down there, pardner
+                    if (Time <= 100) {
+                        astrageldonNPC.velocity = Vector2.Zero;
+                        //astrageldonNPC.position = astrageldonNPC.oldPosition;
+                        //FieldInfo neb = astrageldonType.GetField("NebulaForm", BindingFlags.Instance | BindingFlags.Public);
+                        neb.SetValue(astrageldonNPC.ModNPC, true);
+                    }
+                    // begin suction
+                    else {
+                        astrageldonNPC.Center = Vector2.Lerp(astrageldonNPC.Center, NPC.Center, (float)Math.Pow((Time - 80) / 100, 10) + 0.0005f);
+                        //Main.NewText((float)Math.Pow((Time - 80) / 100, 10));
+                        //Main.NewText(Time - 81);
+                        //SoundEngine.PlaySound(AssetDirectory.Sounds.GoozmaMinions.StellarBlackHoleGulp, NPC.Center);
+                    }
+
+                    // eat him
+                    if (astrageldonNPC.Distance(NPC.Center) < 30) {
+                        SoundEngine.PlaySound(AssetDirectory.Sounds.GoozmaMinions.StellarBlackHoleGulp, NPC.Center);
+                        Projectile.NewProjectileDirect(astrageldonNPC.GetSource_FromThis(), astrageldonNPC.Center, Vector2.Zero, catalyst.Find<ModProjectile>("NebulaHitbox").Type, 0, 0);
+                        astrageldonNPC.active = false;
+                    }
+                }
+                else if (Time < 220) {
+                    //Main.NewText(Time);
+                }
+                else {
+                    // leave
+                    NPC.velocity.Y -= 0.2f;
+                    if (Vector2.Distance(NPC.Center, Target.Center) > 4000) {
+                        NPC.active = false;
+                    }
+                }
+                
+                break;
             default:
 
                 SetPhase(-5);
@@ -1567,11 +1627,23 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
         if (Phase != -21 && Phase != -1 && Main.tile[NPC.Center.ToTileCoordinates()].LiquidType == LiquidID.Shimmer) {
             Phase = -21;
             Time = 0;
-            for (int i = 0; i < 4; i++) {
-                KillSlime(currentSlime);
+            if (!noSlime) {
+                for (int i = 0; i < 4; i++)
+                    KillSlime(currentSlime);
+                ActiveSlime.active = false;
             }
-
-            ActiveSlime.active = false;
+        }
+        //astrageldon
+        else if (ModLoader.TryGetMod(HUtils.CatalystMod, out Mod catalyst)) {
+            if (Phase != -23 && Phase != -1 && NPC.AnyNPCs(catalyst.Find<ModNPC>("Astrageldon").Type)) {
+                Phase = -23;
+                Time = 0;
+                if (!noSlime) {
+                    for (int i = 0; i < 4; i++)
+                        KillSlime(currentSlime);
+                    ActiveSlime.active = false;
+                }
+            }
         }
 
         if (hitTimer > 0) {
