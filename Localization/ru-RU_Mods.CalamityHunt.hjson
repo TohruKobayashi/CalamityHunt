@@ -110,7 +110,7 @@ Items: {
 
 	GoozmaSoul: {
 		DisplayName: Хроматическая Ауритовая Душа
-		Tooltip: Поглоти, чтобы обрести необъятные, скользкие силы
+		Tooltip: Поглотите, чтобы обрести необъятные, скользкие силы
 	}
 
 	YharonSoulMusicBox: {
@@ -120,7 +120,7 @@ Items: {
 
 	YharonSoul: {
 		DisplayName: Возрождённая Ауритовая Душа
-		Tooltip: Поглоти, чтобы обрести необъятные силы возрождения
+		Tooltip: Поглотите, чтобы обрести необъятные силы возрождения
 	}
 
 	SlimeMonsoonMonolith: {
@@ -313,7 +313,7 @@ Items: {
 			'''
 			Стреляет существенной суспензией слипающейся слизи
 			Во время стрельбы слизь застревает, образуя пробку
-			Нажмите ПКМ, пока орудие забито, чтобы выпустить желчную бомбу
+			Нажмите <right>, пока орудие забито, чтобы выпустить желчную бомбу
 			'Не путать с Багровым слизнем'
 			'''
 	}
@@ -380,7 +380,7 @@ Items: {
 		DisplayName: Расщепляющий Резак
 		Tooltip:
 			'''
-			Бросает шакрам, разделяющийся на 3 колких кольца
+			Бросает шакрам, разделяющийся на 3 Колких Кольца
 			Скрытные удары разделяются на большее количество колец и оставляют огромный клинок
 			'''
 	}
@@ -410,7 +410,7 @@ Items: {
 			'''
 			Окружите 4 статуями слизня, а после воспользуйтесь Желейным Катализатором, чтобы вызвать дождь из слизней
 			Значительно ускоряет сбор слизней при активации
-			'Собственно, а кто он такой?
+			'Собственно, а кто он такой?'
 			'''
 	}
 
@@ -449,7 +449,7 @@ Items: {
 
 	DynamoRod: {
 		DisplayName: Динамо Динамит
-		Tooltip: Взрывается в виде огромной, разрушающей блоки чёрной дыре
+		Tooltip: Взрывается в виде огромной, разрушающей блоки чёрной дыры
 	}
 
 	BadApple: {
@@ -566,7 +566,7 @@ NPCs: {
 		BossChecklistIntegration: {
 			EntryName: Гузма
 			SpawnInfo: Киньте [i:CalamityHunt/OverloadedSludge] в Короля Слизней во время Слизневого дождя после победы над Стеной Плоти.
-			DespawnMessage: "[c/7a7a7a:{0} {1} дизинтегрируется...]"
+			DespawnMessage: "[c/7a7a7a:{0} {1} дезинтегрируется...]"
 		}
 	}
 
@@ -582,7 +582,7 @@ NPCs: {
 Projectiles: {
 	EbonstonePillar.DisplayName: Эбонитовый Столб
 	EbonstoneTooth.DisplayName: Эбонитовый Зуб
-	FoulSlime.DisplayName: Ложный Слизень
+	FoulSlime.DisplayName: Скверный Слизень
 	// PureSlimeball.DisplayName: Pure Slime
 	SlimeShot.DisplayName: Слизневый Выстрел
 	ToxicSludge.DisplayName: Токсичный Ил
@@ -618,7 +618,7 @@ Projectiles: {
 	RainbowLaser.DisplayName: Радужный Лазер
 	PumpActionSwampgunHeld.DisplayName: Помповый Болотовик
 	ParasanguineHeld.DisplayName: Парасангвинник
-	ParasanguineBlood.DisplayName: Парасангвинник Кровь
+	ParasanguineBlood.DisplayName: Кровь Парасангвинника
 	SwampBall.DisplayName: Болотный Шар
 	GobfloggerProj.DisplayName: Слизьтатель
 	CrystalGauntletBall.DisplayName: Шаровая Молния
@@ -631,7 +631,7 @@ Projectiles: {
 	DarkSludge.DisplayName: Тёмная Слякоть
 	SludgeLighter.DisplayName: Зажигалка Слякоти
 	StickyHandProj.DisplayName: Мерзкая Рука
-	TrailblazerFlame.DisplayName: Огонь Первопроходца
+	TrailblazerFlame.DisplayName: Пламя Первопроходца
 	FissionFlyerProj.DisplayName: Расщепляющий Резак
 	FissionFlyerMiniRing.DisplayName: Колкое Кольцо
 	ScytheOfTheOldGodHeld.DisplayName: Коса Старого Бога
@@ -643,7 +643,7 @@ Projectiles: {
 	ChromaticGooztickProjectile.DisplayName: Хроматическая Светящаяся Липалка
 	// DynamoRodProjectile.DisplayName: Dynamo Dynamite
 	CrimulanClyde.DisplayName: Багротановый Клайд
-	DivinePinky.DisplayName: Святая Пинки
+	DivinePinky.DisplayName: Божественная Пинки
 	EbonianBlinky.DisplayName: Эбонитовый Блинки
 	StellarInky.DisplayName: Звёздный Инки
 	CometKunaiCritProjectile.DisplayName: Кометный Кунай
@@ -664,23 +664,23 @@ Projectiles: {
 	// ShakerSludge.DisplayName: Shaker Sludge
 	GoozmaBoulderProjectile.DisplayName: Пёстрый Шарик
 	StellarBlackHole.DisplayName: Звёздная Чёрная Дыра
-	FissionFlyerProjectile.DisplayName: Расщепляющий Резам
+	FissionFlyerProjectile.DisplayName: Расщепляющий Резак
 	CometKunaiSuperProjectile.DisplayName: Кометный Кунай Супер
 	FissionFlayerProjectile.DisplayName: требует определения
 }
 
 Chat: {
 	SlimeMonsoon: Слизневый Муссон начался...
-	NinjaShrineFailure: Святыня не будет полной без нужного количества статуй слизня.
+	NinjaShrineFailure: Святыня не будет завершённой без нужного количества статуй слизня.
 	NinjaShrineFailureFunny: Вы делаете преподношение, но ничего не получаете.
 }
 
 Bestiary: {
 	Goozma: Разумное, отклоняющееся от нормы единство, образованное от слияния всех слизневых созданий.
-	CrimulanGlopstrosity: Инстинктивно гниющий паладин, защищающий своего мастера с искривлённым пулом. Паладины Гузмы специально пощажены от уподобления.
+	CrimulanGlopstrosity: Инстинктивно гниющий паладин, защищающий своего мастера с искривлённым пылом. Паладины Гузмы специально пощажены от уподобления.
 	DivineGargooptuar: Блестяще божественный паладин, охраняющий своего мастера с ослепительной страстью. Паладины Гузмы обладают сильно ограниченной самостоятельностью.
-	EbonianBehemuck: Ядовито порченный паладин, заступающийся за своего мастера с беспощадным задором. Паладины Гузмы нуждаются в уникально сильных ядрак.
-	StellarGeliath: Космический небесный паладин, оберегающий своего мастера с неземной силой. В одиночку, Гузма мог бы уподобить целую вселенную.
+	EbonianBehemuck: Ядовито порченный паладин, заступающийся за своего мастера с беспощадным задором. Паладины Гузмы нуждаются в уникально сильных ядрах.
+	StellarGeliath: Космический небесный паладин, оберегающий своего мастера с неземной силой. Оставь всё на самотёк, и Гузма мог бы уподобить целую вселенную.
 	Goozmite: Привесок, который усредняет материю вблизи в самовосстанавливающегося слизня. Тело Гузмы невероятно вязкое, но при этом обладает противоречивой текучестью.
 }
 
@@ -764,7 +764,7 @@ Config: {
 	}
 
 	Distortion: {
-		Label: Сила Искажение Муссона
+		Label: Сила Искажения Муссона
 		Tooltip: Регулирует силу эффекта искажения Муссона Слизней
 	}
 
@@ -784,7 +784,7 @@ LoreGeneric:
 LoreGoozma:
 	'''
 	Самое устрашающее разочарование в иерархическом владении всего живущего.
-	Только подумать, что кульминация нижайших существ смогла бы несмотря ни на что обладать Ауритовой душой, при этом не имея драконьего происхождения…
+	Только подумать, что кульминация нижайших существ смогла бы несмотря ни на что обладать Ауритовой душой, при этом не имея драконьего происхождения...
 	Оно стало чем-то великим, приблизилось к идеальной сущности, состоящей из ничего, кроме неидеальных частей... Возможно, истинный источник божественной силы навсегда останется загадкой.
 	В противовес моим опасениям насчёт твоей культивации этого гротескного чудища стоит интерес в его сторону.
 	Что могло бы привести его к такой форме? Его внешность разоблачает хитрость и изысканность манипуляции над его подчинёнными. 
@@ -888,7 +888,7 @@ CalamityModName: {
 Emotes.GoozmaEmote.Command: goozma
 Draeting.Goozma:
 	'''
-	THIS WAS DELIBERATELY LEFT UNTRANSLATED DUE TO FONT LIMITATIONS. PLEASE DO NOT BOTHER NEITHER CALAMITY NOT HUNT OF THE OLD GOD TEAMS WITH IT.
+	THIS WAS DELIBERATELY LEFT UNTRANSLATED DUE TO FONT LIMITATIONS. PLEASE DO NOT BOTHER NEITHER CALAMITY NOR HUNT OF THE OLD GOD TEAMS WITH IT.
 	
 	A living paradox, and a shock to everything I believed fact about the nature of the Auric soul.
 	The Godseeker seemed so certain that the nature of the god was fundamentally tied to ritual. Though that is a thoroughly unscientific prospect, I had no choice but to accept it: he knew better than I, being linked to one of the few remaining auric dragons, and to invoke his wrath would put a quick end to my work.  It is not a surprise that I did not have the whole story, and even now, I am still missing many pieces. 
