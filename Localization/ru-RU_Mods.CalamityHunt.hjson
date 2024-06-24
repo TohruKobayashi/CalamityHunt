@@ -671,8 +671,8 @@ Projectiles: {
 
 Chat: {
 	SlimeMonsoon: Слизневый Муссон начался...
-	NinjaShrineFailure: Святыня не будет завершённой без нужного количества статуй слизня.
-	NinjaShrineFailureFunny: Вы делаете преподношение, но ничего не получаете.
+	NinjaShrineFailure: Святилище не будет завершённым без нужного количества статуй слизня.
+	NinjaShrineFailureFunny: Вы возлагаете дары на святилище, но ничего не получаете.
 }
 
 Bestiary: {
