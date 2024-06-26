@@ -276,7 +276,12 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     NPC.rotation = 0;
 
                     for (int i = 0; i < Main.rand.Next(1, 2); i++) {
-                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Bottom, Main.rand.NextVector2Circular(20, 15) + Vector2.UnitY * 15 + NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * 10f, ModContent.ProjectileType<ToxicSludge>(), GetDamage(1), 0);
+                        Vector2 velocity = Main.rand.NextVector2Circular(20, 15) + Vector2.UnitY * 15 + NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * 10f;
+                        // Prevent bubbles from shooting directly up. Any bubbles that would have spawned shooting upwards with next to no horizontal velocity are pushed away
+                        if (Math.Abs(velocity.X) < 6 && velocity.Y < 0) {
+                            velocity.X = 6 * Math.Sign(velocity.X);
+                        }
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Bottom, velocity, ModContent.ProjectileType<ToxicSludge>(), GetDamage(1), 0);
                     }
 
                     if (localTime % 2 == 0) {
@@ -314,7 +319,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
         private void Trifecta()
         {
             int pairCount = 5;
-            int pairTime = 30;
+            int pairTime = 50;
             int waitTime = 100;
             int countOfMe = Main.projectile.Count(n => n.type == ModContent.ProjectileType<EbonianBehemuckClone>() && n.active);
 

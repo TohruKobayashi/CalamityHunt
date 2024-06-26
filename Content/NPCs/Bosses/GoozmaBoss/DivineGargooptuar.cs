@@ -238,7 +238,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                         float randSpin = Main.rand.NextFloat(-3f, 3f);
                         for (int i = 0; i < prismCount; i++) {
                             Projectile prism = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<PrismDestroyer>(), GetDamage(1), 0, 
-                                ai0: -66 + i,
+                                ai0: -80 + i,
                                 ai1: i,
                                 ai2: randSpin);
 
