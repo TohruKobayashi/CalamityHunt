@@ -556,6 +556,11 @@ Items: {
 		// DisplayName: Chromatic Campfire
 		// Tooltip: ""
 	}
+
+	SacredArms: {
+		// DisplayName: Sacred Arms
+		// Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -666,6 +671,8 @@ Projectiles: {
 	// FissionFlyerProjectile.DisplayName: Fission Flyer
 	// CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
 	// FissionFlayerProjectile.DisplayName: to be determined
+	// SacredArmsHeld.DisplayName: Sacred Arms Held
+	// SacredArmsWand.DisplayName: Sacred Arms Wand
 }
 
 Chat: {

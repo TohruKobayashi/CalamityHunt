@@ -557,6 +557,11 @@ Items: {
 		DisplayName: Хроматический Костёр
 		Tooltip: ""
 	}
+
+	SacredArms: {
+		// DisplayName: Sacred Arms
+		// Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -667,6 +672,8 @@ Projectiles: {
 	FissionFlyerProjectile.DisplayName: Расщепляющий Резак
 	CometKunaiSuperProjectile.DisplayName: Кометный Кунай Супер
 	FissionFlayerProjectile.DisplayName: требует определения
+	// SacredArmsHeld.DisplayName: Sacred Arms Held
+	// SacredArmsWand.DisplayName: Sacred Arms Wand
 }
 
 Chat: {
