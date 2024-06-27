@@ -21,8 +21,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
 
         public override void SetDefaults()
         {
-            Projectile.width = 46;
-            Projectile.height = 44;
+            Projectile.width = 44;
+            Projectile.height = 48;
             Projectile.friendly = true;
             Projectile.timeLeft = 10000;
             Projectile.penetrate = -1;
@@ -53,14 +53,17 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
             Owner.heldProj = Projectile.whoAmI;
 
             // the position we want our wand to go to
-            Vector2 idealPosition = Owner.MountedCenter + Owner.MountedCenter.DirectionTo(Main.MouseWorld) * 80;
+            Vector2 idealPosition = Owner.MountedCenter + Owner.MountedCenter.DirectionTo(Main.MouseWorld) * 60;
             // warble idle effect
             Projectile.Center = new Vector2(Projectile.Center.X + (MathF.Sin(Time / 25) * 0.95f), Projectile.Center.Y + (MathF.Sin(Time / 30) * 0.95f));
             // move towards the ideal position snappy
             Projectile.velocity += Projectile.DirectionTo(idealPosition).SafeNormalize(Vector2.Zero) * (Projectile.Distance(idealPosition) * 0.1f);
             Projectile.velocity *= 0.7f;
+            // account for player movement a little bit so it doesnt lag behind as much
+            Projectile.velocity += Owner.velocity * 0.2f;
             // point towards the cursor, relative to the player 
-            Projectile.rotation = Owner.MountedCenter.DirectionTo(Main.MouseWorld).ToRotation() + 0.75f;
+            // tmrw look up "how to interpolate radians without wraparound messing it up" thanks iban
+            Projectile.rotation = MathHelper.SmoothStep(Projectile.rotation, Owner.MountedCenter.DirectionTo(Main.MouseWorld).ToRotation() + 0.75f, 0.75f);
 
             // if farther than 1 tile to the cursor, 
             if (Projectile.Distance(idealPosition) > 16) {
@@ -69,6 +72,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
 
             Time++;
         }
+
+        public override bool? CanCutTiles() => false;
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
