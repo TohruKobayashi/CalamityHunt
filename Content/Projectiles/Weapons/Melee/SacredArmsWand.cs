@@ -50,24 +50,22 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
                 Projectile.active = false;
             }
 
-            // the position we want our wand to go to
-            Vector2 idealPosition = Main.MouseWorld;
-            idealPosition = new Vector2((Owner.MountedCenter.X + Main.MouseWorld.X) / 2, (Owner.MountedCenter.Y + Main.MouseWorld.Y) / 2);
-            idealPosition = Owner.MountedCenter + Owner.MountedCenter.DirectionTo(Main.MouseWorld) * 80;
-
             Owner.heldProj = Projectile.whoAmI;
 
-            Projectile.Center = idealPosition;
-            Projectile.Center = new Vector2(Projectile.Center.X + (MathF.Sin(Time / 25) * 8), Projectile.Center.Y + (MathF.Sin(Time / 30) * 8));
-            //Projectile.velocity += Projectile.DirectionTo(idealPosition).SafeNormalize(Vector2.Zero);
+            // the position we want our wand to go to
+            Vector2 idealPosition = Owner.MountedCenter + Owner.MountedCenter.DirectionTo(Main.MouseWorld) * 80;
+            // warble idle effect
+            Projectile.Center = new Vector2(Projectile.Center.X + (MathF.Sin(Time / 25) * 0.95f), Projectile.Center.Y + (MathF.Sin(Time / 30) * 0.95f));
+            // move towards the ideal position snappy
+            Projectile.velocity += Projectile.DirectionTo(idealPosition).SafeNormalize(Vector2.Zero) * (Projectile.Distance(idealPosition) * 0.1f);
+            Projectile.velocity *= 0.7f;
+            // point towards the cursor, relative to the player 
+            Projectile.rotation = Owner.MountedCenter.DirectionTo(Main.MouseWorld).ToRotation() + 0.75f;
 
             // if farther than 1 tile to the cursor, 
             if (Projectile.Distance(idealPosition) > 16) {
                 
             }
-
-            // point towards the cursor, relative to the player 
-            Projectile.rotation = Owner.MountedCenter.DirectionTo(Main.MouseWorld).ToRotation() + 0.75f;
 
             Time++;
         }
