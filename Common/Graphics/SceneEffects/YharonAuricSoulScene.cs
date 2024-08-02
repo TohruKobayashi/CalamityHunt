@@ -7,6 +7,8 @@ using Terraria.ModLoader.Config;
 using System.Linq;
 using System.Reflection;
 using System;
+using System.Collections;
+using CalamityHunt.Common.Systems;
 
 namespace CalamityHunt.Common.Graphics.SceneEffects;
 
@@ -23,33 +25,20 @@ public class YharonAuricSoulScene : ModSceneEffect
         bool active = Main.item.Any(n => n.active && n.type == ModContent.ItemType<YharonSoul>());
 
         if (ModLoader.HasMod(HUtils.CalamityMod)) {
-            string configName = !HUtils.SSO ? "CalamityConfig" : "CalamityClientConfig";
-            // Disable the interlude 3 config
-            ModConfig calConfig =    ModLoader.GetMod(HUtils.CalamityMod).GetConfig(configName);
-            PropertyInfo interlude3 = calConfig.GetType().GetProperty("Interlude3", BindingFlags.Instance | BindingFlags.Public);
-
             if (active) {
-                if ((bool)interlude3.GetValue(calConfig)) {
-                    interlude3.SetValue(calConfig, false);
+                // Disable the interlude 3 config
+                if ((bool)YharonReflectionSystem.interlude3Config.GetValue(YharonReflectionSystem.calamityConfig)) {
+                    YharonReflectionSystem.interlude3Config.SetValue(YharonReflectionSystem.calamityConfig, false);
                     interludeConfigWasOn = true;
                 }
-                bool soulPresent = false;
-                Item soul = null;
-
-                for (int i = 0; i < Main.maxItems; i++) {
-                    if (Main.item[i].type == ModContent.ItemType<YharonSoul>()) {
-                        soul = Main.item[i];
-                        soulPresent = true;
-                    }
-                    if (soulPresent) {
-                        Vector2 itemPos = soul.position;
-                        Filters.Scene.Activate("CalamityMod:Yharon", itemPos);
-                    }
-                }
+                // Set the Yharon monolith to on
+                if (YharonReflectionSystem.yharonolithField != null)
+                    YharonReflectionSystem.yharonolithField.SetValue(YharonReflectionSystem.calPlayer, 30);
             }
             else {
+                // If the config was enabled and the scene is disabled, turn the config back on
                 if (interludeConfigWasOn) {
-                    interlude3.SetValue(calConfig, true);
+                    YharonReflectionSystem.interlude3Config.SetValue(YharonReflectionSystem.calamityConfig, true);
                 }
             }
         }

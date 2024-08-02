@@ -88,20 +88,11 @@ namespace CalamityHunt
                 BossRushInjection(calamity);
                 // Add Goozma as a character in Calamari High
                 CodebreakerInjection(calamity);
-                // Make debuffs draw over enemies when inflicted i think?????
-                Predicate<NPC> hasGobbed = (NPC npc) => npc.HasBuff<Gobbed>();
-                Predicate<NPC> hasSwamped = (NPC npc) => npc.HasBuff<Swamped>();
-                Predicate<NPC> hasBurn = (NPC npc) => npc.GetGlobalNPC<FusionBurnNPC>().active;
-                //Predicate<NPC> isDoomed = (NPC npc) => npc.GetGlobalNPC<DoomedNPC>().active;
-                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Gobbed", hasGobbed);
-                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Swamped", hasSwamped);
-                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/FusionBurn", hasBurn);
+                // Make debuffs draw over enemies when inflicted
+                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Gobbed", (NPC npc) => npc.HasBuff<Gobbed>());
+                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Swamped", (NPC npc) => npc.HasBuff<Swamped>());
+                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/FusionBurn", (NPC npc) => npc.GetGlobalNPC<FusionBurnNPC>().active);
                 //calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Doomed", isDoomed);
-
-                if (calamity.TryFind<ModItem>("NimbleBounder", out ModItem nothing))
-                {
-                    HUtils.SSO = true;
-                }
             }
 
             if (ModLoader.TryGetMod("BossChecklist", out Mod bossChecklist)) {

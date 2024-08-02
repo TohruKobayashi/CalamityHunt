@@ -30,8 +30,6 @@ public static class HUtils
     public static string CatalystMod = "CatalystMod";
     public static string CommunityRemix = "CalRemix";
 
-    public static bool SSO = false;
-
     public static bool NonVanillaBalance => ModLoader.HasMod(CalamityMod);
 
     public static readonly Color BossTextColor = new Color(175, 75, 255);
