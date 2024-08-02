@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 using System.Linq;
 using System.Reflection;
+using System;
 
 namespace CalamityHunt.Common.Graphics.SceneEffects;
 
@@ -22,8 +23,9 @@ public class YharonAuricSoulScene : ModSceneEffect
         bool active = Main.item.Any(n => n.active && n.type == ModContent.ItemType<YharonSoul>());
 
         if (ModLoader.HasMod(HUtils.CalamityMod)) {
+            string configName = !HUtils.SSO ? "CalamityConfig" : "CalamityClientConfig";
             // Disable the interlude 3 config
-            ModConfig calConfig = ModLoader.GetMod(HUtils.CalamityMod).GetConfig("CalamityConfig");
+            ModConfig calConfig =    ModLoader.GetMod(HUtils.CalamityMod).GetConfig(configName);
             PropertyInfo interlude3 = calConfig.GetType().GetProperty("Interlude3", BindingFlags.Instance | BindingFlags.Public);
 
             if (active) {

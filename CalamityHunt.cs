@@ -97,6 +97,11 @@ namespace CalamityHunt
                 calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Swamped", hasSwamped);
                 calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/FusionBurn", hasBurn);
                 //calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Doomed", isDoomed);
+
+                if (calamity.TryFind<ModItem>("NimbleBounder", out ModItem nothing))
+                {
+                    HUtils.SSO = true;
+                }
             }
 
             if (ModLoader.TryGetMod("BossChecklist", out Mod bossChecklist)) {
