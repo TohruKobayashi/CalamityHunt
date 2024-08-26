@@ -351,6 +351,7 @@ Items: {
 			Automatically detaches you when close to the hook
 			Hold the hook button down to keep the hook attached to blocks
 			'It won't break, I promise'
+			{$}
 			'''
 	}
 
