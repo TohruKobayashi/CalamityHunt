@@ -80,7 +80,7 @@ Items: {
 	}
 
 	GoozmaTrophy: {
-		// DisplayName: Goozma Trophy
+		// DisplayName: 古泽玛纪念章
 		// Tooltip: ""
 	}
 
@@ -884,7 +884,7 @@ CalamityModName: {
 	Internal: CalamityMod
 }
 
-// Emotes.GoozmaEmote.Command: goozma
+// Emotes.GoozmaEmote.Command: 古泽玛
 /* Draeting.Goozma:
 	'''
 	A living paradox, and a shock to everything I believed fact about the nature of the Auric soul. 
