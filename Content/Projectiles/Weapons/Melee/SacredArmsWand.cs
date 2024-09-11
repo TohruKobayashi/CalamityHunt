@@ -30,6 +30,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 60;
             Projectile.DamageType = DamageClass.Melee;
+            Projectile.noEnchantmentVisuals = true;
         }
 
         public ref float Time => ref Projectile.ai[0];
@@ -53,23 +54,27 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
             Owner.heldProj = Projectile.whoAmI;
 
             // the position we want our wand to go to
-            Vector2 idealPosition = Owner.MountedCenter + Owner.MountedCenter.DirectionTo(Main.MouseWorld) * 60;
+            // it should be a set position a little in front of the player, between the cursor and the players center
+            Vector2 idealPosition = Owner.MountedCenter + Owner.MountedCenter.DirectionTo(Main.MouseWorld) * 80;
             // warble idle effect
+            // i must be honest this is kind of stupid
             Projectile.Center = new Vector2(Projectile.Center.X + (MathF.Sin(Time / 25) * 0.95f), Projectile.Center.Y + (MathF.Sin(Time / 30) * 0.95f));
             // move towards the ideal position snappy
-            Projectile.velocity += Projectile.DirectionTo(idealPosition).SafeNormalize(Vector2.Zero) * (Projectile.Distance(idealPosition) * 0.1f);
+            // safety applied because you can put ur cursor over the players center and the projectile gets nan'd
+            Projectile.velocity += Projectile.SafeDirectionTo(idealPosition) * (Projectile.Distance(idealPosition) * 0.1f);
             Projectile.velocity *= 0.7f;
             // account for player movement a little bit so it doesnt lag behind as much
             Projectile.velocity += Owner.velocity * 0.2f;
             // point towards the cursor, relative to the player 
-            // tmrw look up "how to interpolate radians without wraparound messing it up" thanks iban
-            Projectile.rotation = MathHelper.SmoothStep(Projectile.rotation, Owner.MountedCenter.DirectionTo(Main.MouseWorld).ToRotation() + 0.75f, 0.75f);
+            Projectile.rotation = Utils.AngleLerp(Projectile.rotation, Owner.MountedCenter.DirectionTo(Main.MouseWorld).ToRotation() + 0.75f, 0.5f);
 
             // if farther than 1 tile to the cursor, 
             if (Projectile.Distance(idealPosition) > 16) {
                 
             }
 
+            // if u held the wand out for like 20 years whatd happen to the timer
+            // since it isnt reset when ur just holding it
             Time++;
         }
 

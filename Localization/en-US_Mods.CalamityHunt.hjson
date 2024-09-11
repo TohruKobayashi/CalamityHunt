@@ -559,8 +559,8 @@ Items: {
 	}
 
 	SacredArms: {
-		DisplayName: Sacred Arms
-		Tooltip: ""
+		DisplayName: Wick & Matchstick
+		Tooltip: "'The hammer is Wick, and you can guess the rest'"
 	}
 }
 
@@ -672,8 +672,8 @@ Projectiles: {
 	FissionFlyerProjectile.DisplayName: Fission Flyer
 	CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
 	FissionFlayerProjectile.DisplayName: to be determined
-	SacredArmsHeld.DisplayName: Sacred Arms Held
-	SacredArmsWand.DisplayName: Sacred Arms Wand
+	SacredArmsHeld.DisplayName: Wick
+	SacredArmsWand.DisplayName: Matchstick
 }
 
 Chat: {
@@ -798,7 +798,25 @@ LoreGoozma:
 	What a pity it is that the fruits of its effort came to nothing in the end. An unremitting pattern in the cyclic annals of history.
 	Perhaps, from the perspective of Terraria, our own achievements amount to little more than the impotent writhing of slimes.
 	'''
-
+GameTips: {
+	# this one is technically inaccurate bcuz u need to be in hm but whatever..............
+	GoozmaTip1: If you're looking for fun, throw an Overloading Sludge onto a sizable slime during a Slime Rain. Something might happen...
+	GoozmaTip2: With the right stuff, you can pray to the slimes themselves! Make yourself four Slime Statues and a Ninja statue, and find the right catalysts...
+	RemixTip: If you're looking for an even better experience, try out Calamity: Community Remix!
+	StoryModeTip: Nothing built can last forever.
+	SprEatrTip: Wires in the sky, they watch me die.
+	HeartbeatTip: Sometimes, if I listen closely, I can hear a faint heartbeat.
+	OminousTip1: Something feels different. It's that same sort of feeling when you find something where you didn't put it.
+	OminousTip2: Everything is changing. Relish what you enjoy while you can.
+	OminousTip3: This is different than when I last checked. I wonder how much has changed?
+	
+	Voice1: ILL BE SEEING YOU SOON
+	Voice2: I LOOK FORWARD TO MEET YOU
+	Voice4: PUT ON A GOOD SHOW
+	VoiceTip1: PRIORITIZE STYLE OVER ANYTHING ELSE
+	VoiceTip2: BE MORE TRUSTING IN YOUR LIFE IT WILL LEAD TO GREATNESS
+	VoiceTip3: WHEN FIGHTING A BOSS ALWAYS GO FOR RISKY MANEUVERS 
+}
 Configs: {
 	Config: {
 		DisplayName: Config

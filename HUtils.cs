@@ -115,4 +115,14 @@ public static class HUtils
     }
 
     public static Matrix NormalizedEffectMatrix => Matrix.Invert(Main.GameViewMatrix.EffectMatrix) * Matrix.CreateOrthographicOffCenter(0f, Main.instance.GraphicsDevice.Viewport.Width, Main.instance.GraphicsDevice.Viewport.Height, 0f, 0f, 1f);
+
+    // thank you zibanzlay
+    public static Vector2 SafeDirectionTo(this Entity entity, Vector2 other)
+    {
+        Vector2 center = entity.Center;
+        if (center == other)
+            return Vector2.Zero;
+        return center.DirectionTo(other);
+
+    }
 }

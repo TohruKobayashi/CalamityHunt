@@ -93,6 +93,12 @@ public static class AssetDirectory
             public static readonly Asset<Texture2D> StressTopped = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/UI/StressBarTopped");
         }
 
+        public static class UI
+        {
+            public static readonly Asset<Texture2D> PanelBackgroundSquare = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/UI/PanelBackgroundSquare");
+            public static readonly Asset<Texture2D> PanelBorderSquare = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/UI/PanelBorderSquare");
+        }
+
         public static class SlimeMonsoon
         {
             public static readonly Asset<Texture2D> MapBG = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/SlimeMonsoonBG");

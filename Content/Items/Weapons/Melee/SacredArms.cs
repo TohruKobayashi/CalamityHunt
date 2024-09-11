@@ -48,5 +48,14 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
                 Projectile.NewProjectileDirect(player.GetSource_FromThis(), player.position, new Vector2(5, 5), ModContent.ProjectileType<SacredArmsWand>(), Item.damage, 0);
             }
         }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            if (player.ownedProjectileCounts[ModContent.ProjectileType<SacredArmsHeld>()] <= 0) {
+                Projectile.NewProjectile(source, position, velocity, type, 0, 0, player.whoAmI);
+            }
+
+            return false;
+        }
     }
 }

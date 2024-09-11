@@ -559,8 +559,8 @@ Items: {
 	}
 
 	SacredArms: {
-		// DisplayName: Sacred Arms
-		// Tooltip: ""
+		// DisplayName: Wick & Matchstick
+		// Tooltip: "'The hammer is Wick, and you can guess the rest'"
 	}
 }
 
@@ -672,8 +672,8 @@ Projectiles: {
 	FissionFlyerProjectile.DisplayName: Расщепляющий Резак
 	CometKunaiSuperProjectile.DisplayName: Кометный Кунай Супер
 	FissionFlayerProjectile.DisplayName: требует определения
-	// SacredArmsHeld.DisplayName: Sacred Arms Held
-	// SacredArmsWand.DisplayName: Sacred Arms Wand
+	// SacredArmsHeld.DisplayName: Wick
+	// SacredArmsWand.DisplayName: Matchstick
 }
 
 Chat: {
