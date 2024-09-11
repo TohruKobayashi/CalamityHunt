@@ -35,8 +35,8 @@ Items: {
 	}
 
 	GoozmaRelic: {
-		// DisplayName: Goozma Relic
-		// Tooltip: ""
+		DisplayName: 古泽玛圣物
+		Tooltip: ""
 	}
 
 	GoozmaLore: {
@@ -80,8 +80,8 @@ Items: {
 	}
 
 	GoozmaTrophy: {
-		// DisplayName: 古泽玛纪念章
-		// Tooltip: ""
+		DisplayName: 古泽玛纪念章
+		Tooltip: ""
 	}
 
 	ImperialGelato: {
@@ -218,7 +218,7 @@ Items: {
 	}
 
 	EbonianBehemuckTrophy: {
-		// DisplayName: Ebonian Behemuck Trophy
+		// DisplayName: 腐檀邪浆纪念章
 		// Tooltip: ""
 	}
 
@@ -228,7 +228,7 @@ Items: {
 	}
 
 	DivineGargooptuarTrophy: {
-		// DisplayName: Divine Gargooptuar Trophy
+		// DisplayName: 圣洁凝魔纪念章
 		// Tooltip: ""
 	}
 
@@ -238,17 +238,17 @@ Items: {
 	}
 
 	CrimulanGlopstrosityTrophy: {
-		// DisplayName: Crimulan Glopstrosity Trophy
+		// DisplayName: 血污噬胶纪念章
 		// Tooltip: ""
 	}
 
 	StellarGeliathTrophyItem: {
-		DisplayName: 星恒粘兽纪念章
+		DisplayName: 星恒黏兽纪念章
 		Tooltip: ""
 	}
 
 	StellarGeliathTrophy: {
-		// DisplayName: Stellar Geliath Trophy
+		// DisplayName: 星恒黏兽纪念章
 		// Tooltip: ""
 	}
 
@@ -258,7 +258,7 @@ Items: {
 	}
 
 	Parasanguine: {
-		DisplayName: 赤血阳伞
+		DisplayName: 赤血凝伞
 		Tooltip:
 			'''
 			按住<left>或攻击敌人会积攒额外的血液
@@ -574,8 +574,8 @@ NPCs: {
 	EbonianBehemuck.DisplayName: 腐檀邪浆
 	StellarGeliath.DisplayName: 星恒黏兽
 	Goozmite.DisplayName: 古泽蚂
-	// GelatinousSpawn.DisplayName: Gelatinous Spawn
-	// PluripotentSpawn.DisplayName: Pluripotent Spawn
+	// GelatinousSpawn.DisplayName: 凝胶之卵
+	// PluripotentSpawn.DisplayName: 多能之卵
 }
 
 Projectiles: {
@@ -846,7 +846,7 @@ Configs: {
 		}
 
 		debugMode: {
-			// Label: Debug Mode
+			// Label: Debug模式
 			/* Tooltip:
 				'''
 				Enables features optimized for testing game mechanics
@@ -856,7 +856,7 @@ Configs: {
 	}
 }
 
-// OrRev: " or Revengeance"
+OrRev: " 或复仇"
 SetBonuses.Shogun:
 	'''
 	增加17%伤害和5仆从栏
@@ -884,19 +884,18 @@ CalamityModName: {
 	Internal: CalamityMod
 }
 
-// Emotes.GoozmaEmote.Command: 古泽玛
-/* Draeting.Goozma:
+Emotes.GoozmaEmote.Command: 古泽玛
+Draeting.Goozma:
 	'''
-	A living paradox, and a shock to everything I believed fact about the nature of the Auric soul. 
-	The Godseeker seemed so certain that the nature of the god was fundamentally tied to ritual. Though that is a thoroughly unscientific prospect, I had no choice but to accept it: he knew better than I, being linked to one of the few remaining auric dragons, and to invoke his wrath would put a quick end to my work.  It is not a surprise that I did not have the whole story, and even now, I am still missing many pieces. 
+	一个活着的悖论，颠覆了我对金源魄本质的一切认知。 
+	神明的本质与仪式不可分割，寻神者似乎对此深信不疑。虽然这是一个完全不科学的推测，但我别无选择，只能接受这一点——他和仅存的金源巨龙具有联系，知道的比我更多，如果引起了他的愤怒，他很快就会终止我的工作。这并不奇怪，我并不知道故事的全貌，直至现在，我仍然错过了许多细节。 
 
-	I have been tirelessly analyzing the replay of that battle since the moment it concluded. Though a natural phenomena has seemingly created a new Auric soul, I know very little about the nature of the process that occurred; just as quickly as it was created, it was returned to the primordial soup it was forged from. 
+	从战斗结束的那一刻起，我就在马不停蹄地分析它的回放。虽然一种自然现象似乎创造出了一个全新的金源魄，但我对于这一过程的本质知之甚少；正如它被创造出来一样，它又回到了诞生之初的摇篮之中。 
 
-	I have two prevailing theories, though my confidence in their accuracy is shaky at best. 
-	The first is related to the method in which it was born. The natural process of pressurization is not altogether difficult for even the most basic of scientists to grasp. For an easily understood example, however, consider carbon; its makeup will shift when compressed with extreme force, transforming it into diamond. Considering this fact, it may not be altogether unlikely that a spiritual equivalent to this phenomena exists; a mundane soul, forced into a single point by many other similarly basic souls, could very well shift in such a way that it grows exponentially in power.
+	对此，我有两种主流理论，尽管我对它们的准确性没有太大的信心。 
+	第一种与它诞生的方式有关。即使是最基本的科学家也不难掌握加压的自然过程。举个通俗易懂的例子，就拿碳来说，当受到极大的压力时，它的结构就会发生变化，变为钻石。基于这一事实，在灵魂层面或许也有与这类似的现象；一抹平平无奇的灵魂，作为基本单位，与其他相似的灵魂共压缩于一点，指数级爆炸增长的力量或将产生。
 
-	The other I am less certain of, but must still consider: It is possible the 'Slime God', as you called it, is but a splinter of a much older, more venerated deity, and the ritual you performed simply granted it its original form back. This would mean that its soul was not spontaneously created, as I currently believe, but was splintered instead- creating the illusion of mundanity from sparks of a greater power.
+	另一种我并不确定，但仍有考虑的余地：你所说的“史莱姆之神”可能是一个更古老、更受崇敬的一位神祇的碎片，而你的仪式只是让它恢复了最初的形态。这也就意味着，它的灵魂并非像我现在想的那样是自然产生的，而是分裂出来的——用强大力量的一小部分创造出的平凡假象。
 
-	Either theory, should one be proven true, provides new, investing paths of study. 
-	Though your naming ability leaves much to be desired, I must commend your ability to leave nothing unstudied, no matter how well documented said creature may be- I never could have anticipated that such a massive scientific breakthrough could have been hiding in the most common pest of all. 
-	''' */
+	这两种理论，无论哪种被证明是正确的，都将会提供新的研究路径。尽管你的取名能力还有待提高，但我必须赞扬你不留余力进行研究的本领，无论被研究的生物的资料有多么充足——而我也从未预想过如此巨大的科学突破会隐藏在最常见的有害生物当中。 
+	'''
