@@ -26,14 +26,12 @@ namespace CalamityHunt.Common.UI
 
         public override void OnInitialize()
         {
-            StyleDimension sizeButton = new StyleDimension(0f, 0.5f);
-            
             Asset<Texture2D> panelBackgroundSquare = AssetDirectory.Textures.UI.PanelBackgroundSquare;
             Asset<Texture2D> panelBorderSquare = AssetDirectory.Textures.UI.PanelBorderSquare;
 
             _uiPanel = new UIPanel(panelBackgroundSquare, panelBorderSquare);
-            _uiPanel.Width = sizeButton;
-            _uiPanel.Height = sizeButton;
+            _uiPanel.Width = StyleDimension.Fill;
+            _uiPanel.Height = StyleDimension.Fill;
             _uiPanel.BorderColor = Color.White;
             _uiPanel.BackgroundColor = new Color(5, 20, 30) * 0.9f;
             Append(_uiPanel);
