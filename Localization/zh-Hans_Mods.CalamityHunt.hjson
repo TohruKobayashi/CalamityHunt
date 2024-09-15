@@ -482,18 +482,18 @@ Items: {
 	}
 
 	AncientSlimeMonsoonMonolith: {
-		// DisplayName: Ancient Slime Monsoon Monolith
+		// DisplayName: 远古史莱姆季风天塔柱
 		// Tooltip: ""
 	}
 
 	AntiMassAccumulator: {
-		// DisplayName: Anti-Mass Accumulator
+		// DisplayName: 反质量蓄能器
 		/* Tooltip:
 			'''
-			Blasts out balls of packed protons and bolts of energized electrons one after another
-			Proton balls charge anything they hit and can damage enemies in a radius
-			Electron bolts do extra damage to positively charged enemies
-			'Do not look directly at the operational end of the device.'
+			交替射出质子球和充能电子束
+			质子球会对半径内的敌人造成伤害，并使被击中的敌人带电
+			电子束会对带电的敌人造成额外伤害
+			“请勿直视设备的操作终端”
 			''' */
 	}
 
@@ -513,12 +513,12 @@ Items: {
 	}
 
 	TendrilCursorAttachment: {
-		// DisplayName: Cursor Mutagen
+		// DisplayName: 缠绕光标
 		/* Tooltip:
 			'''
-			Attaches hanging chromatic tendrils to your mouse cursor
-			The amount of tendrils depends on the slot this item is placed in
-			'They somehow know how to untangle themselves'
+			将悬挂的虹色卷须附着到光标上
+			卷须的数量取决于该物品放置的栏位
+			“不知为何，它们知道如何解开自己”
 			''' */
 	}
 
@@ -538,17 +538,17 @@ Items: {
 	}
 
 	ShogunWings: {
-		// Tooltip: "'They are best used to cool you off'"
-		// DisplayName: Thousand-Fold Paper Fans
+		// Tooltip: "“让你降温的最佳选择”"
+		// DisplayName: 千折纸扇
 	}
 
 	NuclearLemonade: {
 		// DisplayName: 核子柠檬水
 		/* Tooltip:
 			'''
-			Major improvements to all stats
-			May kill you
-			'As cold as the nuclear winter!'
+			所有属性大幅提升
+			可能会杀死你
+			“像核冬天一样冷！”
 			''' */
 	}
 
@@ -599,10 +599,10 @@ Projectiles: {
 	CrimulanSmasher.DisplayName: 血污碾压
 	FusionRay.DisplayName: 聚能射线
 	GoozmaDeathGodrays.DisplayName: 旧神死光
-	BloatBabyProj.DisplayName: Bloat Baby
+	BloatBabyProj.DisplayName: 肿包泡泡宝宝
 	ShootingStar.DisplayName: 流星
-	GoozmagaBomb.DisplayName: Planetary Glob
-	GoozmagaShrapnel.DisplayName: Microplanetary Glob
+	GoozmagaBomb.DisplayName: 行星团
+	GoozmagaShrapnel.DisplayName: 微行星团
 	StellarGelatine.DisplayName: 恒星明胶
 	ConstellationStar.DisplayName: 星体
 	ConstellationLine.DisplayName: 星座线
@@ -654,17 +654,17 @@ Projectiles: {
 	BlinkySpikeBall.DisplayName: 小闪的刺球
 	PinkyLight.DisplayName: 小粉的闪光
 	GoozmoemRay.DisplayName: 熔融射线
-	// AntiMassBioBall.DisplayName: Anti-Mass Bio Ball
-	// AntiMassColliderProj.DisplayName: Anti-Mass Collider
-	// AntiMassMacroLaser.DisplayName: Anti Mass Macro Laser
-	// AntiMassDeathLaser.DisplayName: Anti Mass Death Laser
-	// AntiMassBioStrike.DisplayName: Anti Mass Bio Strike
-	// AntiMassAccumulatorProj.DisplayName: Anti Mass Accumulator Proj
-	// ShakerSludge.DisplayName: Shaker Sludge
-	// GoozmaBoulderProjectile.DisplayName: Motley Marble
-	// StellarBlackHole.DisplayName: Stellar Black Hole
-	// FissionFlyerProjectile.DisplayName: Fission Flyer
-	// CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
+	// AntiMassBioBall.DisplayName: 反质量生物球
+	// AntiMassColliderProj.DisplayName: 反物质对撞器
+	// AntiMassMacroLaser.DisplayName: 反物质巨型激光
+	// AntiMassDeathLaser.DisplayName: 反物质死亡激光
+	// AntiMassBioStrike.DisplayName: 反物质生物火花
+	// AntiMassAccumulatorProj.DisplayName: 反物质蓄能器
+	// ShakerSludge.DisplayName: 混凝污泥
+	// GoozmaBoulderProjectile.DisplayName: 杂色巨石
+	// StellarBlackHole.DisplayName: 恒星黑洞
+	// FissionFlyerProjectile.DisplayName: 裂变飞刀
+	// CometKunaiSuperProjectile.DisplayName: 超级彗星苦无
 	// FissionFlayerProjectile.DisplayName: to be determined
 }
 
@@ -772,7 +772,7 @@ Config: {
 		Tooltip: 启用或禁用史莱姆季风的雷暴视觉效果
 	}
 
-	// ContentHeader: Content
+	// ContentHeader: 目录
 }
 
 LoreGeneric:
