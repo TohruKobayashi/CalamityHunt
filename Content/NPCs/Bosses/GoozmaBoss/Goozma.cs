@@ -124,6 +124,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             if ((bool)calamity.Call("GetDifficultyActive", "revengeance")) {
                 NPC.lifeMax = 4225000;
             }
+
+            NPC.lifeMax = (int)(NPC.lifeMax * (float)calamity.Call("GetBossHealthBoost"));
         }
         else {
             NPC.lifeMax = 1787500;
