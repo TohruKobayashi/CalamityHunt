@@ -1,9 +1,9 @@
 Items: {
 	OverloadedSludge: {
-		DisplayName: Перегруженная Слякоть
+		DisplayName: Перегруженная слякоть
 		Tooltip:
 			'''
-			Призывает Бога Слизней
+			Призывает Бога слизней
 			Не расходуется
 			'Извивается, раздувшись гноем Богов давно мёртвых.'
 			'''
@@ -15,12 +15,12 @@ Items: {
 	}
 
 	GoopDye: {
-		DisplayName: Склизкий Краситель
+		DisplayName: Склизкий краситель
 		Tooltip: ""
 	}
 
 	ChromaticMass: {
-		DisplayName: Хроматическая Масса
+		DisplayName: Хроматическая масса
 		Tooltip: "'Ощущается как холодная плазма'"
 	}
 
@@ -60,7 +60,7 @@ Items: {
 	}
 
 	TreasureTrunk: {
-		DisplayName: Кофр с Сокровищами
+		DisplayName: Кофр с сокровищами
 		Tooltip: <right> для открытия
 	}
 
@@ -70,7 +70,7 @@ Items: {
 	}
 
 	TreasureBucket: {
-		DisplayName: Ведро с Сокровищами
+		DisplayName: Ведро с сокровищами
 		Tooltip: <right> для открытия
 	}
 
@@ -85,7 +85,7 @@ Items: {
 	}
 
 	ImperialGelato: {
-		DisplayName: Имперское Джелато
+		DisplayName: Имперское джелато
 		Tooltip:
 			'''
 			Призывает раздутого малыша-каплю
@@ -94,57 +94,57 @@ Items: {
 	}
 
 	GoozmaMusicBoxP1: {
-		DisplayName: Музыкальная Шкатулка (Гузма)
+		DisplayName: Музыкальная шкатулка (Гузма)
 		Tooltip: ""
 	}
 
 	GoozmaMusicBoxP2: {
-		DisplayName: Музыкальная Шкатулка (Отчаянный Гузма)
+		DisplayName: Музыкальная шкатулка (Отчаянный Гузма)
 		Tooltip: ""
 	}
 
 	GoozmaSoulMusicBox: {
-		DisplayName: Музыкальная Шкатулка (Хроматическая Душа)
+		DisplayName: Музыкальная шкатулка (Хроматическая душа)
 		Tooltip: ""
 	}
 
 	GoozmaSoul: {
-		DisplayName: Хроматическая Ауритовая Душа
+		DisplayName: Хроматическая ауритовая душа
 		Tooltip: Поглотите, чтобы обрести необъятные, скользкие силы
 	}
 
 	YharonSoulMusicBox: {
-		DisplayName: Музыкальная Шкатулка (Драконическая Душа)
+		DisplayName: Музыкальная шкатулка (Драконическая душа)
 		Tooltip: ""
 	}
 
 	YharonSoul: {
-		DisplayName: Возрождённая Ауритовая Душа
+		DisplayName: Возрождённая ауритовая душа
 		Tooltip: Поглотите, чтобы обрести необъятные силы возрождения
 	}
 
 	SlimeMonsoonMonolith: {
-		DisplayName: Монолит Муссона Слизней
+		DisplayName: Монолит слизневого муссона
 		Tooltip: "'Вызывает достаточно большое количество слизи'"
 	}
 
 	CrimulanMask: {
-		DisplayName: Багротановая Маска
+		DisplayName: Багротановая маска
 		Tooltip: ""
 	}
 
 	DivineMask: {
-		DisplayName: Божественная Маска
+		DisplayName: Божественная маска
 		Tooltip: ""
 	}
 
 	EbonianMask: {
-		DisplayName: Эбонитовая Маска
+		DisplayName: Эбонитовая маска
 		Tooltip: ""
 	}
 
 	StellarMask: {
-		DisplayName: Звёздная Маска
+		DisplayName: Звёздная маска
 		Tooltip: ""
 	}
 
@@ -161,7 +161,7 @@ Items: {
 	}
 
 	ShogunChestplate: {
-		DisplayName: Нагрудник Скользкого Сёгуна
+		DisplayName: Нагрудник скользкого сёгуна
 		Tooltip:
 			'''
 			Увеличивает урон на 20%
@@ -171,7 +171,7 @@ Items: {
 	}
 
 	ShogunHelm: {
-		DisplayName: Шлем Скользкого Сёгуна
+		DisplayName: Шлем скользкого сёгуна
 		Tooltip:
 			'''
 			Увеличивает урон на 20%
@@ -181,7 +181,7 @@ Items: {
 	}
 
 	ShogunPants: {
-		DisplayName: Штаны Скользкого Сёгуна
+		DisplayName: Штаны скользкого сёгуна
 		Tooltip:
 			'''
 			Увеличивают урон на 20%
@@ -191,7 +191,7 @@ Items: {
 	}
 
 	AuricSole: {
-		DisplayName: Ауритовая Подушва
+		DisplayName: Ауритовая подушва
 		Tooltip:
 			'''
 			Нажмите <right>, чтобы отключить 
@@ -202,7 +202,7 @@ Items: {
 	}
 
 	DischargedAuricSole: {
-		DisplayName: Разряженная Ауритовая Подушва
+		DisplayName: Разряженная ауритовая подушва
 		Tooltip:
 			'''
 			Нажмите <right>, чтобы включить
@@ -213,47 +213,47 @@ Items: {
 	}
 
 	EbonianBehemuckTrophyItem: {
-		DisplayName: Трофей Эбонитового Гряземота
+		DisplayName: Трофей Эбонитового гряземота
 		Tooltip: ""
 	}
 
 	EbonianBehemuckTrophy: {
-		DisplayName: Трофей Эбонитового Гряземота
+		DisplayName: Трофей Эбонитового гряземота
 		Tooltip: ""
 	}
 
 	DivineGargooptuarTrophyItem: {
-		DisplayName: Трофей Божественного Бурдантюа
+		DisplayName: Трофей Божественного бурдантюа
 		Tooltip: ""
 	}
 
 	DivineGargooptuarTrophy: {
-		DisplayName: Трофей Божественного Бурдантюа
+		DisplayName: Трофей Божественного бурдантюа
 		Tooltip: ""
 	}
 
 	CrimulanGlopstrosityTrophyItem: {
-		DisplayName: Трофей Багротанового Каплища
+		DisplayName: Трофей Багротанового каплища
 		Tooltip: ""
 	}
 
 	CrimulanGlopstrosityTrophy: {
-		DisplayName: Трофей Багротанового Каплища
+		DisplayName: Трофей Багротанового каплища
 		Tooltip: ""
 	}
 
 	StellarGeliathTrophyItem: {
-		DisplayName: Трофей Звёздного Гелиафа
+		DisplayName: Трофей Звёздного гелиафа
 		Tooltip: ""
 	}
 
 	StellarGeliathTrophy: {
-		DisplayName: Трофей Звёздного Гелиафа
+		DisplayName: Трофей Звёздного гелиафа
 		Tooltip: ""
 	}
 
 	PumpActionSwampgun: {
-		DisplayName: Помповый Болотовик
+		DisplayName: Помповый болотовик
 		Tooltip: Стреляет относительно безобидным всплеском слизи
 	}
 
@@ -294,14 +294,14 @@ Items: {
 		DisplayName: Варенье Великолепия
 		Tooltip:
 			'''
-			Активирует Шкалу Стресса
+			Активирует шкалу стресса
 			Стресс постепенно накапливается, однако возле противников стресс накапливается быстрее
-			Вы излучаете свет, сила которого зависит от уровня Стресса
-			При достижении 0%, 25%, 50%, 75%, и 100% Стресса, дарует вам Спецтакль
-			При достижении 25% Стресса, ваше оружие начнёт создавать взрывы
-			При достижении 75% Стресса, ваши взрывы становятся больше и сильнее
-			Дважды нажмите ВНИЗ, пока уровень Стресса выше 25%, чтобы войти в режим Злобы
-			Режим Злобы значительно увеличивает ваш урон, а также даёт фиксированную прибавку к нему, пробиванию брони и шансу критического удара
+			Вы излучаете свет, сила которого зависит от уровня стресса
+			При достижении 0%, 25%, 50%, 75%, и 100% стресса, дарует вам Спецтакль
+			При достижении 25% стресса, ваше оружие начнёт создавать взрывы
+			При достижении 75% стресса, ваши взрывы становятся больше и сильнее
+			Дважды нажмите ВНИЗ, пока уровень стресса выше 25%, чтобы войти в режим злобы
+			Режим злобы значительно увеличивает ваш урон, а также даёт фиксированную прибавку к нему, пробиванию брони и шансу критического удара
 			Бонусы и их длительность масштабируются с количеством вашего стресса
 			'Близится что-то ужасающее...'
 			'''
@@ -324,7 +324,7 @@ Items: {
 	}
 
 	SludgeShaker: {
-		DisplayName: Сотрясатель Слякоти
+		DisplayName: Сотрясатель слякоти
 		Tooltip:
 			'''
 			Стреляет существенной суспензией слипающейся слизи
@@ -340,17 +340,18 @@ Items: {
 	}
 
 	ChromaticTorch: {
-		DisplayName: Хроматический Факел
+		DisplayName: Хроматический факел
 		Tooltip: ""
 	}
 
 	StickyHand: {
-		DisplayName: Мерзкая Рука
+		DisplayName: Мерзкая рука
 		Tooltip:
 			'''
 			Автоматически отцепляется, когда вы достаточно близки к крюку
 			Зажмите клавишу крюка, чтобы прикрепиться к блоку
-			'Уверяю Вас — она не порвётся'
+			'It won't break, I promise'
+			//'Уверяю Вас — она не порвётся'
 			'''
 	}
 
@@ -365,7 +366,7 @@ Items: {
 	}
 
 	SlimeCane: {
-		DisplayName: Трость Слизня
+		DisplayName: Трость слизня
 		Tooltip:
 			'''
 			Призывает команду из 4 слизней-оруженосцев, защищающих вас
@@ -377,7 +378,7 @@ Items: {
 	}
 
 	FissionFlyer: {
-		DisplayName: Расщепляющий Резак
+		DisplayName: Расщепляющий резак
 		Tooltip:
 			'''
 			Бросает шакрам, разделяющийся на 3 Колких Кольца
@@ -386,7 +387,7 @@ Items: {
 	}
 
 	ScytheOfTheOldGod: {
-		DisplayName: Коса Старого Бога
+		DisplayName: Коса старого бога
 		Tooltip:
 			'''
 			Взмахивает огромной косой, разрезающей врагов тройным комбо
@@ -405,55 +406,55 @@ Items: {
 	}
 
 	SlimeNinjaStatue: {
-		DisplayName: Статуя Ниндзя Слизней
+		DisplayName: Статуя ниндзя слизней
 		Tooltip:
 			'''
-			Окружите 4 статуями слизня, а после воспользуйтесь Желейным Катализатором, чтобы вызвать дождь из слизней
+			Окружите 4 статуями слизня, а после воспользуйтесь желейным катализатором, чтобы вызвать дождь из слизней
 			Значительно ускоряет сбор слизней при активации
 			'Собственно, а кто он такой?'
 			'''
 	}
 
 	GelatinousCatalyst: {
-		DisplayName: Желейный Катализатор
-		Tooltip: Используйте на статуе Ниндзя Слизней, находящейся возле 4 статуй слизня, чтобы вызвать дождь из слизней
+		DisplayName: Желейный катализатор
+		Tooltip: Используйте на статуе ниндзя слизней, находящейся возле 4 статуй слизня, чтобы вызвать дождь из слизней
 	}
 
 	SludgeFocus: {
-		DisplayName: Плюрипотентное Яйцо Призыва
+		DisplayName: Плюрипотентное яйцо призыва
 		Tooltip:
 			'''
-			Используйте на статуе Ниндзя Слизней, находящейся возле 4 статуй слизня, чтобы призвать Гузму без дождя
+			Используйте на статуе ниндзя слизней, находящейся возле 4 статуй слизня, чтобы призвать Гузму без дождя
 			Не расходуется
 			'''
 	}
 
 	PaladinPalanquin: {
-		DisplayName: Паланкин Паладина
+		DisplayName: Паланкин паладина
 		Tooltip:
 			'''
-			Призывает ездовой Масляной Шарик
+			Призывает ездовой Масляной шарик
 			'Почувствуйте себя императором!'
 			'''
 	}
 
 	ChromaticBomb: {
-		DisplayName: Хроматическая Бомба
+		DisplayName: Хроматическая бомба
 		Tooltip: Бросает игнорирующую гравитацию чёрную дыру, уничтожающую блоки
 	}
 
 	ChromaticGooztick: {
-		DisplayName: Хроматическая Светящаяся Липалка
+		DisplayName: Хроматическая светящаяся липалка
 		Tooltip: Игнорирует гравитацию и отскакивает от блоков
 	}
 
 	DynamoRod: {
-		DisplayName: Динамо Динамит
+		DisplayName: Динамо динамит
 		Tooltip: Взрывается в виде огромной, разрушающей блоки чёрной дыры
 	}
 
 	BadApple: {
-		DisplayName: Плохое Яблоко
+		DisplayName: Плохое яблоко
 		Tooltip:
 			'''
 			'Яблоко, упавшее с древа, что пострадало от очередной вспышки ярости Гузмы. 
@@ -468,7 +469,7 @@ Items: {
 	}
 
 	CometKunai: {
-		DisplayName: Кометный Кунай
+		DisplayName: Кометный кунай
 		Tooltip:
 			'''
 			Выпускает шквал из кунаев и звёзд, создающих собственные копии при успешном попадании
@@ -478,7 +479,7 @@ Items: {
 	}
 
 	GoopHairDye: {
-		DisplayName: Склизкая Краска для Волос
+		DisplayName: Склизкая краска для волос
 		Tooltip: ""
 	}
 
@@ -488,7 +489,7 @@ Items: {
 	}
 
 	AntiMassAccumulator: {
-		DisplayName: Аккумулятор Анти-Массы
+		DisplayName: Аккумулятор анти-массы
 		Tooltip:
 			'''
 			Выстреливает шарами сгруппированных протонов и болтами заряженных электронов друг за другом
@@ -499,8 +500,8 @@ Items: {
 	}
 
 	GoozmaBoulderItem: {
-		DisplayName: Пёстрый Шарик
-		Tooltip: "'Чрезвычайно Опасен'"
+		DisplayName: Пёстрый шарик
+		Tooltip: "'Чрезвычайно опасен'"
 	}
 
 	IOUASoul: {
@@ -509,12 +510,12 @@ Items: {
 	}
 
 	StrangeManPortrait: {
-		DisplayName: Портрет Странного Мужчины
+		DisplayName: Портрет странного мужчины
 		Tooltip: ""
 	}
 
 	TendrilCursorAttachment: {
-		DisplayName: Мутаген Курсора
+		DisplayName: Мутаген курсора
 		Tooltip:
 			'''
 			Прикрепляет к вашему курсору мыши свисающие хроматические усики
@@ -529,22 +530,22 @@ Items: {
 	}
 
 	TrailblazerGoggles: {
-		DisplayName: Очки Первопроходца
+		DisplayName: Очки первопроходца
 		Tooltip: "'Чтобы провести кого-то, нужно увидеть путь. С ними вы ничего не увидите.'"
 	}
 
 	TrailblazerBackpack: {
-		DisplayName: Тактический Рюкзачок Первопроходца
+		DisplayName: Тактический рюкзачок первопроходца
 		Tooltip: "''Быть первопроходцем — значит быть готовым. К счастью, в этом рюкзаке одно лишь топливо.'"
 	}
 
 	ShogunWings: {
 		Tooltip: "'Лучшее им применение — немного себя остудить'"
-		DisplayName: Тысячекратно Сложенные Бумажные Веера
+		DisplayName: Тысячекратно сложенные бумажные веера
 	}
 
 	NuclearLemonade: {
-		DisplayName: Ядерный Лимонад
+		DisplayName: Ядерный лимонад
 		Tooltip:
 			'''
 			Сильно повышает все характеристики
@@ -554,7 +555,7 @@ Items: {
 	}
 
 	ChromaticCampfire: {
-		DisplayName: Хроматический Костёр
+		DisplayName: Хроматический костёр
 		Tooltip: ""
 	}
 
@@ -570,114 +571,120 @@ NPCs: {
 
 		BossChecklistIntegration: {
 			EntryName: Гузма
-			SpawnInfo: Киньте [i:CalamityHunt/OverloadedSludge] в Короля Слизней во время Слизневого дождя после победы над Стеной Плоти.
+			SpawnInfo: Киньте [i:CalamityHunt/OverloadedSludge] в Короля слизней во время слизневого дождя после победы над Стеной плоти.
 			DespawnMessage: "[c/7a7a7a:{0} {1} дезинтегрируется...]"
 		}
+
+		/* InfernumTitle:
+			'''
+			Sludge Flashpoint 
+			Goozma
+			''' */
 	}
 
-	CrimulanGlopstrosity.DisplayName: Багротановое Каплище
-	DivineGargooptuar.DisplayName: Божественный Бурдантюа
-	EbonianBehemuck.DisplayName: Эбонитовый Гряземот
-	StellarGeliath.DisplayName: Звёздный Гелиаф
+	CrimulanGlopstrosity.DisplayName: Багротановое каплище
+	DivineGargooptuar.DisplayName: Божественный бурдантюа
+	EbonianBehemuck.DisplayName: Эбонитовый гряземот
+	StellarGeliath.DisplayName: Звёздный гелиаф
 	Goozmite.DisplayName: Гузмит
 	// GelatinousSpawn.DisplayName: Gelatinous Spawn
-	PluripotentSpawn.DisplayName: Плюрипотентный Отросток
+	PluripotentSpawn.DisplayName: Плюрипотентный отросток
 }
 
 Projectiles: {
-	EbonstonePillar.DisplayName: Эбонитовый Столб
-	EbonstoneTooth.DisplayName: Эбонитовый Зуб
-	FoulSlime.DisplayName: Скверный Слизень
+	EbonstonePillar.DisplayName: Эбонитовый столб
+	EbonstoneTooth.DisplayName: Эбонитовый зуб
+	FoulSlime.DisplayName: Скверный слизень
 	// PureSlimeball.DisplayName: Pure Slime
-	SlimeShot.DisplayName: Слизневый Выстрел
-	ToxicSludge.DisplayName: Токсичный Ил
+	SlimeShot.DisplayName: Слизневый выстрел
+	ToxicSludge.DisplayName: Токсичный ил
 	// TrailingStar.DisplayName: Trailing Star
 	// Wormhole.DisplayName: Wormhole
 	// GoozmaSpawn.DisplayName: Slime Singularity
-	GooLightning.DisplayName: Молния Слизи
-	RainbowBall.DisplayName: Радужный Шар
-	PrismDestroyer.DisplayName: Разрушитель Призмы
-	BloatedBlast.DisplayName: Вздутый Взрыв
-	PixieBall.DisplayName: Шар Пикси
-	GelCrystalShard.DisplayName: Осколок Гелевого Кристала
-	EbonianBehemuckClone.DisplayName: Клон Эбонитового Гряземота
-	HolyExplosion.DisplayName: Святой Взрыв
-	CrimulanSmasher.DisplayName: Багротановый Сокрушитель
-	FusionRay.DisplayName: Термоядерный Луч
+	GooLightning.DisplayName: Молния слизи
+	RainbowBall.DisplayName: Радужный шар
+	PrismDestroyer.DisplayName: Разрушитель призмы
+	BloatedBlast.DisplayName: Вздутый взрыв
+	PixieBall.DisplayName: Шар пикси
+	GelCrystalShard.DisplayName: Осколок гелевого кристалла
+	EbonianBehemuckClone.DisplayName: Клон Эбонитового гряземота
+	HolyExplosion.DisplayName: Святой взрыв
+	CrimulanSmasher.DisplayName: Багротановый сокрушитель
+	FusionRay.DisplayName: Термоядерный луч
 	GoozmaDeathGodrays.DisplayName: Боголучи
-	BloatBabyProj.DisplayName: Малыш-Раздутыш
+	BloatBabyProj.DisplayName: Малыш-раздутыш
 	// ShootingStar.DisplayName: Shooting Star
-	GoozmagaBomb.DisplayName: Планетарная Капля
-	GoozmagaShrapnel.DisplayName: Микропланетарная Капля
-	StellarGelatine.DisplayName: Звёздный Желатин
-	ConstellationStar.DisplayName: Звезда Созвездия
-	ConstellationLine.DisplayName: Отрезок Созвездия
-	SlimeBomb.DisplayName: Слизнебомба с Часовым Механизмом
+	GoozmagaBomb.DisplayName: Планетарная капля
+	GoozmagaShrapnel.DisplayName: Микропланетарная капля
+	StellarGelatine.DisplayName: Звёздный желатин
+	ConstellationStar.DisplayName: Звезда созвездия
+	ConstellationLine.DisplayName: Отрезок созвездия
+	SlimeBomb.DisplayName: Слизнебомба с часовым механизмом
 	// SpaceRock.DisplayName: Space Rock
-	StellarDebris.DisplayName: Звёздные Обломки
+	StellarDebris.DisplayName: Звёздные обломки
 	// BlackHoleBlender.DisplayName: Black Hole Blender
 	// CosmicDust.DisplayName: Cosmic Dust
-	InterstellarFlame.DisplayName: Межзвёздное Пламя
-	ThrowableChunk.DisplayName: Бросаемые Куски
+	InterstellarFlame.DisplayName: Межзвёздное пламя
+	ThrowableChunk.DisplayName: Бросаемые куски
 	// MiniRainbowBall.DisplayName: Mini Rainbow Ball
-	RainbowLaser.DisplayName: Радужный Лазер
-	PumpActionSwampgunHeld.DisplayName: Помповый Болотовик
+	RainbowLaser.DisplayName: Радужный лазер
+	PumpActionSwampgunHeld.DisplayName: Помповый болотовик
 	ParasanguineHeld.DisplayName: Парасангвинник
 	ParasanguineBlood.DisplayName: Кровь Парасангвинника
-	SwampBall.DisplayName: Болотный Шар
+	SwampBall.DisplayName: Болотный шар
 	GobfloggerProj.DisplayName: Слизьтатель
-	CrystalGauntletBall.DisplayName: Шаровая Молния
-	CrystalLightning.DisplayName: Кристальная Молния
-	CrystalGauntletBallThrown.DisplayName: Шаровая Молния
-	CrystalPiercer.DisplayName: Кристальный Пронзатель
+	CrystalGauntletBall.DisplayName: Шаровая молния
+	CrystalLightning.DisplayName: Кристальная молния
+	CrystalGauntletBallThrown.DisplayName: Шаровая молния
+	CrystalPiercer.DisplayName: Кристальный пронзатель
 	CrystalBoom.DisplayName: Хлопок
-	CrimulanShockwave.DisplayName: Багротановая Ударная Волна
-	SludgeShakerHeld.DisplayName: Сотрясатель Слякоти
-	DarkSludge.DisplayName: Тёмная Слякоть
-	SludgeLighter.DisplayName: Зажигалка Слякоти
-	StickyHandProj.DisplayName: Мерзкая Рука
-	TrailblazerFlame.DisplayName: Пламя Первопроходца
-	FissionFlyerProj.DisplayName: Расщепляющий Резак
-	FissionFlyerMiniRing.DisplayName: Колкое Кольцо
-	ScytheOfTheOldGodHeld.DisplayName: Коса Старого Бога
-	StressExplosion.DisplayName: Стрессовый Взрыв
+	CrimulanShockwave.DisplayName: Багротановая ударная волна
+	SludgeShakerHeld.DisplayName: Сотрясатель слякоти
+	DarkSludge.DisplayName: Тёмная слякоть
+	SludgeLighter.DisplayName: Зажигатель слякоти
+	StickyHandProj.DisplayName: Мерзкая рука
+	TrailblazerFlame.DisplayName: Пламя первопроходца
+	FissionFlyerProj.DisplayName: Расщепляющий резак
+	FissionFlyerMiniRing.DisplayName: Колкое кольцо
+	ScytheOfTheOldGodHeld.DisplayName: Коса старого бога
+	StressExplosion.DisplayName: Стрессовый взрыв
 	GoomoireSuck.DisplayName: Всасывание Гумуара
 	SplendorTentacle.DisplayName: Спецтакль
-	SlimeCaneGemCounter.DisplayName: Самоцветный Счётчик Трости Слизней
+	SlimeCaneGemCounter.DisplayName: Самоцветный счётчик трости слизней
 	// ChromaticBombProjectile.DisplayName: Chromatic Bomb
-	ChromaticGooztickProjectile.DisplayName: Хроматическая Светящаяся Липалка
+	ChromaticGooztickProjectile.DisplayName: Хроматическая светящаяся липалка
 	// DynamoRodProjectile.DisplayName: Dynamo Dynamite
 	CrimulanClyde.DisplayName: Багротановый Клайд
 	DivinePinky.DisplayName: Божественная Пинки
 	EbonianBlinky.DisplayName: Эбонитовый Блинки
 	StellarInky.DisplayName: Звёздный Инки
-	CometKunaiCritProjectile.DisplayName: Кометный Кунай
-	CometKunaiGhostProjectile.DisplayName: Кометный Кунай
-	CometKunaiProjectile.DisplayName: Кометный Кунай
-	CometKunaiStealthProjectile.DisplayName: Кометный Кунай
-	CometKunaiStarfall.DisplayName: Кометный Кунай
+	CometKunaiCritProjectile.DisplayName: Кометный кунай
+	CometKunaiGhostProjectile.DisplayName: Кометный кунай
+	CometKunaiProjectile.DisplayName: Кометный кунай
+	CometKunaiStealthProjectile.DisplayName: Кометный кунай
+	CometKunaiStarfall.DisplayName: Кометный кунай
 	Goozmoem.DisplayName: Гузмоэм
-	BlinkySpikeBall.DisplayName: Шипастый Шар Блинки
+	BlinkySpikeBall.DisplayName: Шипастый шар Блинки
 	PinkyLight.DisplayName: Свет Пинки
-	GoozmoemRay.DisplayName: Термоядерный Луч
-	AntiMassBioBall.DisplayName: Био Шар Анти-Массы
+	GoozmoemRay.DisplayName: Термоядерный луч
+	AntiMassBioBall.DisplayName: Биошар анти-массы
 	// AntiMassColliderProj.DisplayName: Anti-Mass Collider
 	// AntiMassMacroLaser.DisplayName: Anti Mass Macro Laser
-	AntiMassDeathLaser.DisplayName: Луч Смерти Анти-Массы
-	AntiMassBioStrike.DisplayName: Био Удар Анти-Массы
-	AntiMassAccumulatorProj.DisplayName: Аккумулятор Анти-Массы Снар
+	AntiMassDeathLaser.DisplayName: Луч смерти анти-массы
+	AntiMassBioStrike.DisplayName: Био удар анти-массы
+	AntiMassAccumulatorProj.DisplayName: Аккумулятор анти-массы снар
 	// ShakerSludge.DisplayName: Shaker Sludge
-	GoozmaBoulderProjectile.DisplayName: Пёстрый Шарик
-	StellarBlackHole.DisplayName: Звёздная Чёрная Дыра
-	FissionFlyerProjectile.DisplayName: Расщепляющий Резак
-	CometKunaiSuperProjectile.DisplayName: Кометный Кунай Супер
+	GoozmaBoulderProjectile.DisplayName: Пёстрый шарик
+	StellarBlackHole.DisplayName: Звёздная чёрная дыра
+	FissionFlyerProjectile.DisplayName: Расщепляющий резак
+	CometKunaiSuperProjectile.DisplayName: Кометный кунай супер
 	FissionFlayerProjectile.DisplayName: требует определения
 	// SacredArmsHeld.DisplayName: Wick
 	// SacredArmsWand.DisplayName: Matchstick
 }
 
 Chat: {
-	SlimeMonsoon: Слизневый Муссон начался...
+	SlimeMonsoon: Слизневый муссон начался...
 	NinjaShrineFailure: Святилище не будет завершённым без нужного количества статуй слизня.
 	NinjaShrineFailureFunny: Вы возлагаете дары на святилище, но ничего не получаете.
 }
@@ -693,7 +700,7 @@ Bestiary: {
 
 Buffs: {
 	BloatBabyBuff: {
-		DisplayName: Малыш-Раздутыш
+		DisplayName: Малыш-раздутыш
 		Description: Кажется, он любит тебя так же, как и других
 	}
 
@@ -713,22 +720,22 @@ Buffs: {
 	}
 
 	FusionBurn: {
-		DisplayName: Термоядерный Ожог
+		DisplayName: Термоядерный ожог
 		Description: Мне больно, Варик
 	}
 
 	PaladinPalanquinBuff: {
-		DisplayName: Паланкин Паладина
+		DisplayName: Паланкин паладина
 		Description: Почти как внутри настоящего слизня
 	}
 
 	SplendorJamBuff: {
-		DisplayName: Режим Злобы
+		DisplayName: Режим злобы
 		Description: Вы в неописуемом стрессе
 	}
 
 	SlimeCaneBuff: {
-		DisplayName: Склизкая Вечеринка
+		DisplayName: Склизкая вечеринка
 		Description: Инки, Блинки, Пинки и Клайд защищают вас
 	}
 
@@ -739,45 +746,45 @@ Buffs: {
 }
 
 Tiles: {
-	GoozmaMusicBoxP1Tile.MapEntry: Музыкальная Шкатулка
-	GoozmaMusicBoxP2Tile.MapEntry: Музыкальная Шкатулка
-	GoozmaSoulMusicBoxTile.MapEntry: Музыкальная Шкатулка
-	YharonSoulMusicBoxTile.MapEntry: Музыкальная Шкатулка
-	ChromaticCampfirePlaced.MapEntry: Поставленный Хроматический Костёр
+	GoozmaMusicBoxP1Tile.MapEntry: Музыкальная шкатулка
+	GoozmaMusicBoxP2Tile.MapEntry: Музыкальная шкатулка
+	GoozmaSoulMusicBoxTile.MapEntry: Музыкальная шкатулка
+	YharonSoulMusicBoxTile.MapEntry: Музыкальная шкатулка
+	ChromaticCampfirePlaced.MapEntry: Поставленный хроматический костёр
 }
 
 Config: {
 	VisualHeader: Визуал
-	StressHeader: Шкала Стресса
+	StressHeader: Шкала стресса
 
 	HolyExplosionToggle: {
-		Label: Тряска Экрана от Святого Взрыва
-		Tooltip: Выключите, чтобы снизить визуальные эффекты святого взрыва Божественного Бурдантюа
+		Label: Тряска экрана от святого взрыва
+		Tooltip: Выключите, чтобы снизить визуальные эффекты святого взрыва Божественного бурдантюа
 	}
 
 	StressPosX: {
-		Label: Позиция Шкалы Стресса по X
-		Tooltip: Выставляет горизонтальную позицию Шкалы Стресса
+		Label: Позиция шкалы стресса по X
+		Tooltip: Выставляет горизонтальную позицию шкалы стресса
 	}
 
 	StressPosY: {
-		Label: Позиция Шкалы Стресса по Y
-		Tooltip: Выставляет вертикальную позицию Шкалы Стресса
+		Label: Позиция шкалы стресса по Y
+		Tooltip: Выставляет вертикальную позицию шкалы стресса
 	}
 
 	StressShake: {
-		Label: Тряска Шкалы Стресса
-		Tooltip: Регулирует силу эффекта тряски Шкалы Стресса
+		Label: Тряска шкалы стресса
+		Tooltip: Регулирует силу эффекта тряски шкалы стресса
 	}
 
 	Distortion: {
-		Label: Сила Искажения Муссона
-		Tooltip: Регулирует силу эффекта искажения Муссона Слизней
+		Label: Сила искажения муссона
+		Tooltip: Регулирует силу эффекта искажения муссона слизней
 	}
 
 	LightningToggle: {
-		Label: Гроза Муссона
-		Tooltip: Включает эффект грозы во время Муссона Слизней
+		Label: Гроза муссона
+		Tooltip: Включает эффект грозы во время муссона слизней
 	}
 
 	ContentHeader: Контент
@@ -791,7 +798,7 @@ LoreGeneric:
 LoreGoozma:
 	'''
 	Самое устрашающее разочарование в иерархическом владении всего живущего.
-	Только подумать, что кульминация нижайших существ смогла бы несмотря ни на что обладать Ауритовой душой, при этом не имея драконьего происхождения...
+	Только подумать, что кульминация нижайших существ смогла бы несмотря ни на что обладать Ауритовой душой, не имея при этом драконьего происхождения...
 	Оно стало чем-то великим, приблизилось к идеальной сущности, состоящей из ничего, кроме неидеальных частей... Возможно, истинный источник божественной силы навсегда останется загадкой.
 	В противовес моим опасениям насчёт твоей культивации этого гротескного чудища стоит интерес в его сторону.
 	Что могло бы привести его к такой форме? Его внешность разоблачает хитрость и изысканность манипуляции над его подчинёнными. 
@@ -853,8 +860,8 @@ Configs: {
 		}
 
 		shadowspecCurse: {
-			Label: Проклятье Тенефаза
-			Tooltip: Проклинает все предметы уровня Тенефаза, из-за чего их невозможно использовать, пока Гузма не побеждён
+			Label: Проклятье тенефаза
+			Tooltip: Проклинает все предметы уровня тенефаза, из-за чего их невозможно использовать, пока Гузма не побеждён
 		}
 
 		oldsky: {
@@ -868,12 +875,12 @@ Configs: {
 		}
 
 		photosensitiveToggle: {
-			Label: Переключить Светочувствительные Эффекты
+			Label: Переключить светочувствительные эффекты
 			Tooltip: Выключает некоторые эффекты, которые могут вызвать эпилепсию
 		}
 
 		debugMode: {
-			Label: Режим Дебага
+			Label: Режим дебага
 			Tooltip:
 				'''
 				Включает некоторые фичи, оптимизированные для тестирования игровых механик
@@ -903,8 +910,8 @@ StickyHandStats:
 	Скорость притягивания: 17
 	'''
 GoozmaShadowspecCurse: "[c/462545:Желейное проклятье покрыло этот предмет и не даёт им воспользоваться...]"
-AnyEvilBlock: Любой Блок Зла
-SludgeWarning: Не может быть использован для призыва Бога Слизней
+AnyEvilBlock: Любой блок зла
+SludgeWarning: Не может быть использован для призыва Бога слизней
 
 CalamityModName: {
 	Display: Calamity Mod
@@ -929,3 +936,4 @@ Draeting.Goozma:
 	Either theory, should one be proven true, provides new, investing paths of study. 
 	Though your naming ability leaves much to be desired, I must commend your ability to leave nothing unstudied, no matter how well documented said creature may be- I never could have anticipated that such a massive scientific breakthrough could have been hiding in the most common pest of all. 
 	'''
+// Mods.CalamityHunt.NPCs.Goozma.InfernumTitle: Mods.CalamityHunt.Mods.CalamityHunt.NPCs.Goozma.InfernumTitle

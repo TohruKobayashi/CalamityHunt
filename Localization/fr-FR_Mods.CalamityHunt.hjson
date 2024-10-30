@@ -573,6 +573,12 @@ NPCs: {
 			SpawnInfo: Lâchez un [i:CalamityHunt/OverloadedSludge] sur le Roi des gelées pendant une pluie de gelées aprés avoir battu le Mur de chair.
 			DespawnMessage: "[c/7a7a7a:{1} {0} se désintègre...]"
 		}
+
+		/* InfernumTitle:
+			'''
+			Sludge Flashpoint 
+			Goozma
+			''' */
 	}
 
 	CrimulanGlopstrosity.DisplayName: Monstrosité Sangluante
@@ -927,3 +933,4 @@ CalamityModName: {
 	Either theory, should one be proven true, provides new, investing paths of study. 
 	Though your naming ability leaves much to be desired, I must commend your ability to leave nothing unstudied, no matter how well documented said creature may be- I never could have anticipated that such a massive scientific breakthrough could have been hiding in the most common pest of all. 
 	''' */
+// Mods.CalamityHunt.NPCs.Goozma.InfernumTitle: Mods.CalamityHunt.Mods.CalamityHunt.NPCs.Goozma.InfernumTitle
