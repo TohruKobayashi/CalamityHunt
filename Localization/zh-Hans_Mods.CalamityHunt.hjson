@@ -418,7 +418,7 @@ Items: {
 		Tooltip: 在史莱姆忍者雕像两侧摆放4个史莱姆雕像并对其使用，可以召唤一场史莱姆雨
 	}
 
-	SludgeFocus: {
+	PluripotentSpawnEgg: {
 		DisplayName: 多能刷怪蛋
 		Tooltip:
 			'''

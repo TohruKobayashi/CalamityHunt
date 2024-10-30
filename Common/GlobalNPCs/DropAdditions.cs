@@ -30,7 +30,7 @@ namespace CalamityHunt.Common.GlobalNPCs
         {
             // calamity and calamityless
             if (npc.type == NPCID.QueenSlimeBoss) {
-                npcLoot.Add(ItemDropRule.ByCondition(new RemixWorldDropRule(), ModContent.ItemType<SludgeFocus>()));
+                npcLoot.Add(ItemDropRule.ByCondition(new RemixWorldDropRule(), ModContent.ItemType<PluripotentSpawnEgg>()));
             }
 
             // calamity only

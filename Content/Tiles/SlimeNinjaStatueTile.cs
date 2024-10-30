@@ -51,8 +51,8 @@ namespace CalamityHunt.Content.Tiles
             player.cursorItemIconEnabled = true;
             player.cursorItemIconID = ModContent.ItemType<GelatinousCatalyst>();
 
-            if (player.HasItem(ModContent.ItemType<SludgeFocus>())) {
-                player.cursorItemIconID = ModContent.ItemType<SludgeFocus>();
+            if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>())) {
+                player.cursorItemIconID = ModContent.ItemType<PluripotentSpawnEgg>();
             }
         }
 
@@ -101,7 +101,7 @@ namespace CalamityHunt.Content.Tiles
                 if (GoozmaSystem.FindSlimeStatues(center, top, 40, 30)) {
 
 
-                    if (player.HasItem(ModContent.ItemType<SludgeFocus>())) {
+                    if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>())) {
                         if (Main.netMode != NetmodeID.MultiplayerClient) {
                             SummonPluripotentSpawn(center, top);
                         }
