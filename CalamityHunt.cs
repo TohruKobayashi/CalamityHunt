@@ -124,6 +124,10 @@ namespace CalamityHunt
                     }
                 });
             }
+
+            if (ModLoader.TryGetMod("InfernumMode", out Mod Infernum)) {
+                MakeInfernumCard(Infernum, () => NPC.AnyNPCs(ModContent.NPCType<Goozma>()), (float horz, float anim) => Color.Lerp(Color.Black, Main.DiscoColor, anim), Language.GetText("Mods.CalamityHunt.NPCs.Goozma.InfernumTitle"), AssetDirectory.Sounds.Goozma.Hurt, AssetDirectory.Sounds.Goozma.Awaken, size: 2);
+            }
         }
 
         public static void BossRushInjection(Mod cal)
@@ -197,6 +201,36 @@ namespace CalamityHunt
             }
             return final;
         };
+
+
+        internal void MakeInfernumCard(Mod Infernum, Func<bool> condition, Func<float, float, Color> color, LocalizedText title, SoundStyle tickSound, SoundStyle endSound, int time = 300, float size = 1f)
+        {
+            // Initialize the base instance for the intro card. Alternative effects may be added separately.
+            Func<float, float, Color> textColorSelectionDelegate = color;
+            object instance = Infernum.Call("InitializeIntroScreen", title, time, true, condition, textColorSelectionDelegate);
+            Infernum.Call("IntroScreenSetupLetterDisplayCompletionRatio", instance, new Func<int, float>(animationTimer => MathHelper.Clamp(animationTimer / (float)time * 1.36f, 0f, 1f)));
+
+            // dnc but needed or else it errors
+            Action onCompletionDelegate = Nothing;
+            Infernum.Call("IntroScreenSetupCompletionEffects", instance, onCompletionDelegate);
+
+            // Letter addition sound.
+            Func<SoundStyle> chooseLetterSoundDelegate = () => tickSound;
+            Infernum.Call("IntroScreenSetupLetterAdditionSound", instance, chooseLetterSoundDelegate);
+
+            // Main sound.
+            Func<SoundStyle> chooseMainSoundDelegate = () => endSound;
+            Func<int, int, float, float, bool> why = (_, _2, _3, _4) => true;
+            Infernum.Call("IntroScreenSetupMainSound", instance, why, chooseMainSoundDelegate);
+
+            // Text scale.
+            Infernum.Call("IntroScreenSetupTextScale", instance, size);
+
+            // Register the intro card.
+            Infernum.Call("RegisterIntroScreen", instance);
+        }
+
+        internal void Nothing() { }
 
         public override IContentSource CreateDefaultContentSource()
         {

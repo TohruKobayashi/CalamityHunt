@@ -567,6 +567,12 @@ NPCs: {
 			SpawnInfo: 击败血肉墙后，将[i:CalamityHunt/OverloadedSludge]在史莱姆雨期间扔到史莱姆王身上。
 			DespawnMessage: "[c/7a7a7a:{0} {1}分崩离析了……]"
 		}
+
+		/* InfernumTitle:
+			'''
+			Sludge Flashpoint 
+			Goozma
+			''' */
 	}
 
 	CrimulanGlopstrosity.DisplayName: 血污噬胶
@@ -900,3 +906,4 @@ CalamityModName: {
 	Either theory, should one be proven true, provides new, investing paths of study. 
 	Though your naming ability leaves much to be desired, I must commend your ability to leave nothing unstudied, no matter how well documented said creature may be- I never could have anticipated that such a massive scientific breakthrough could have been hiding in the most common pest of all. 
 	''' */
+// Mods.CalamityHunt.NPCs.Goozma.InfernumTitle: Mods.CalamityHunt.Mods.CalamityHunt.NPCs.Goozma.InfernumTitle

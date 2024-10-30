@@ -569,6 +569,12 @@ NPCs: {
 			SpawnInfo: Drop an [i:CalamityHunt/OverloadedSludge] on King Slime during a Slime Rain after the Wall of Flesh has been defeated.
 			DespawnMessage: "[c/7a7a7a:The {0} {1} disintegrates...]"
 		}
+
+		InfernumTitle:
+			'''
+			Sludge Flashpoint 
+			Goozma
+			'''
 	}
 
 	CrimulanGlopstrosity.DisplayName: Crimulan Glopstrosity
