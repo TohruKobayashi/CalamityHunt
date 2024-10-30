@@ -11,7 +11,6 @@ using Terraria.GameContent;
 using Terraria.Graphics;
 using Terraria.Graphics.Effects;
 using Terraria.Utilities;
-using Terraria.ModLoader;
 
 namespace CalamityHunt.Common.Graphics.Skies;
 
@@ -135,9 +134,12 @@ public class SlimeMonsoonSky : CustomSky
         Color darkColor = Color.Lerp(brightColor, Color.Black, 0.3f);
         lightColor = Color.Lerp(Color.DimGray, brightColor, 0.9f);
 
+        int screenWidth = Main.instance.GraphicsDevice.Viewport.Width;
+        int screenHeight = Main.instance.GraphicsDevice.Viewport.Width;
+
         if (maxDepth >= float.MaxValue && minDepth < float.MaxValue) {
-            spriteBatch.Draw(TextureAssets.BlackTile.Value, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), Color.Black * (float)Math.Sqrt(_strength));
-            spriteBatch.Draw(AssetDirectory.Textures.Noise[4].Value, new Rectangle(0, -yOffset, Main.screenWidth, Main.screenHeight * 2), darkColor * _strength * 0.66f);
+            spriteBatch.Draw(TextureAssets.BlackTile.Value, new Rectangle(0, 0, screenWidth, screenHeight), Color.Black * (float)Math.Sqrt(_strength));
+            spriteBatch.Draw(AssetDirectory.Textures.Noise[4].Value, new Rectangle(0, -yOffset, screenWidth, screenHeight * 2), darkColor * _strength * 0.66f);
         }
 
         Effect skyClouds = AssetDirectory.Effects.SlimeMonsoonCloudLayer.Value;
@@ -175,7 +177,7 @@ public class SlimeMonsoonSky : CustomSky
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, skyClouds, Main.BackgroundViewMatrix.TransformationMatrix);
 
-            spriteBatch.Draw(TextureAssets.BlackTile.Value, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), Color.White);
+            spriteBatch.Draw(TextureAssets.BlackTile.Value, new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
 
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.BackgroundViewMatrix.TransformationMatrix);

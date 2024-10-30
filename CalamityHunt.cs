@@ -88,14 +88,10 @@ namespace CalamityHunt
                 BossRushInjection(calamity);
                 // Add Goozma as a character in Calamari High
                 CodebreakerInjection(calamity);
-                // Make debuffs draw over enemies when inflicted i think?????
-                Predicate<NPC> hasGobbed = (NPC npc) => npc.HasBuff<Gobbed>();
-                Predicate<NPC> hasSwamped = (NPC npc) => npc.HasBuff<Swamped>();
-                Predicate<NPC> hasBurn = (NPC npc) => npc.GetGlobalNPC<FusionBurnNPC>().active;
-                //Predicate<NPC> isDoomed = (NPC npc) => npc.GetGlobalNPC<DoomedNPC>().active;
-                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Gobbed", hasGobbed);
-                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Swamped", hasSwamped);
-                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/FusionBurn", hasBurn);
+                // Make debuffs draw over enemies when inflicted
+                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Gobbed", (NPC npc) => npc.HasBuff<Gobbed>());
+                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Swamped", (NPC npc) => npc.HasBuff<Swamped>());
+                calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/FusionBurn", (NPC npc) => npc.GetGlobalNPC<FusionBurnNPC>().active);
                 //calamity.Call("RegisterDebuff", "CalamityHunt/Assets/Textures/Buffs/Doomed", isDoomed);
             }
 
@@ -127,6 +123,10 @@ namespace CalamityHunt
                         ["ProjID"] = ModContent.ProjectileType<Goozmoem>()
                     }
                 });
+            }
+
+            if (ModLoader.TryGetMod("InfernumMode", out Mod Infernum)) {
+                MakeInfernumCard(Infernum, () => NPC.AnyNPCs(ModContent.NPCType<Goozma>()), (float horz, float anim) => Color.Lerp(Color.Black, Main.DiscoColor, anim), Language.GetText("Mods.CalamityHunt.NPCs.Goozma.InfernumTitle"), AssetDirectory.Sounds.Goozma.Hurt, AssetDirectory.Sounds.Goozma.Awaken, size: 2);
             }
         }
 
@@ -201,6 +201,36 @@ namespace CalamityHunt
             }
             return final;
         };
+
+
+        internal void MakeInfernumCard(Mod Infernum, Func<bool> condition, Func<float, float, Color> color, LocalizedText title, SoundStyle tickSound, SoundStyle endSound, int time = 300, float size = 1f)
+        {
+            // Initialize the base instance for the intro card. Alternative effects may be added separately.
+            Func<float, float, Color> textColorSelectionDelegate = color;
+            object instance = Infernum.Call("InitializeIntroScreen", title, time, true, condition, textColorSelectionDelegate);
+            Infernum.Call("IntroScreenSetupLetterDisplayCompletionRatio", instance, new Func<int, float>(animationTimer => MathHelper.Clamp(animationTimer / (float)time * 1.36f, 0f, 1f)));
+
+            // dnc but needed or else it errors
+            Action onCompletionDelegate = Nothing;
+            Infernum.Call("IntroScreenSetupCompletionEffects", instance, onCompletionDelegate);
+
+            // Letter addition sound.
+            Func<SoundStyle> chooseLetterSoundDelegate = () => tickSound;
+            Infernum.Call("IntroScreenSetupLetterAdditionSound", instance, chooseLetterSoundDelegate);
+
+            // Main sound.
+            Func<SoundStyle> chooseMainSoundDelegate = () => endSound;
+            Func<int, int, float, float, bool> why = (_, _2, _3, _4) => true;
+            Infernum.Call("IntroScreenSetupMainSound", instance, why, chooseMainSoundDelegate);
+
+            // Text scale.
+            Infernum.Call("IntroScreenSetupTextScale", instance, size);
+
+            // Register the intro card.
+            Infernum.Call("RegisterIntroScreen", instance);
+        }
+
+        internal void Nothing() { }
 
         public override IContentSource CreateDefaultContentSource()
         {
