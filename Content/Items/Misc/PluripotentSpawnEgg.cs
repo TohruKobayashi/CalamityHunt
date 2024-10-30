@@ -1,4 +1,4 @@
-using CalamityHunt.Common.Utilities;
+﻿using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Items.Materials;
 using CalamityHunt.Content.Items.Rarities;
 using CalamityHunt.Content.Tiles;
@@ -11,7 +11,8 @@ using Terraria.ModLoader;
 
 namespace CalamityHunt.Content.Items.Misc
 {
-    public class SludgeFocus : ModItem
+    [LegacyName("SludgeFocus")]
+    public class PluripotentSpawnEgg : ModItem
     {
         public override void SetDefaults()
         {

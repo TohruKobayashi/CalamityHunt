@@ -35,6 +35,7 @@ public class LobotomizeAstrageldon : GlobalNPC
             // if armageddon slime and goomba are present, lobotomize 
             // this also involves putting him out of nebula mode 
             if (NPC.AnyNPCs(ModContent.NPCType<Goozma>()) && npc.type == catalyst.Find<ModNPC>("Astrageldon").Type && npc.active) {
+                npc.velocity *= 0.98f;
                 //FieldInfo neb = astrageldonType.GetField("NebulaForm", BindingFlags.Instance | BindingFlags.Public);
                 //neb.SetValue(npc.ModNPC, true);
                 return false;

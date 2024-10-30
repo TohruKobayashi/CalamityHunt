@@ -280,7 +280,7 @@ Items: {
 	}
 
 	CrystalGauntlets: {
-		DisplayName: Кристаллические Перчатки
+		DisplayName: Кристаллические перчатки
 		Tooltip:
 			'''
 			Удерживайте <left>, чтобы собирать энергию, формируя мощный шар из молний
@@ -291,7 +291,7 @@ Items: {
 	}
 
 	SplendorJam: {
-		DisplayName: Варенье Великолепия
+		DisplayName: Варенье великолепия
 		Tooltip:
 			'''
 			Активирует шкалу стресса
@@ -335,7 +335,7 @@ Items: {
 
 	SupremeRestorationPotion: {
 		RestoreLifeText: Mods.CalamityHunt.Items.SupremeRestorationPotion.RestoreLifeText
-		DisplayName: Омега Зелье Восстановления
+		DisplayName: Омега зелье восстановления
 		Tooltip: Снижено время перезарядки зелий
 	}
 
@@ -350,8 +350,8 @@ Items: {
 			'''
 			Автоматически отцепляется, когда вы достаточно близки к крюку
 			Зажмите клавишу крюка, чтобы прикрепиться к блоку
-			'It won't break, I promise'
-			//'Уверяю Вас — она не порвётся'
+			{$}
+			'Уверяю Вас — она не порвётся'
 			'''
 	}
 
@@ -420,7 +420,7 @@ Items: {
 		Tooltip: Используйте на статуе ниндзя слизней, находящейся возле 4 статуй слизня, чтобы вызвать дождь из слизней
 	}
 
-	SludgeFocus: {
+	PluripotentSpawnEgg: {
 		DisplayName: Плюрипотентное яйцо призыва
 		Tooltip:
 			'''
@@ -575,11 +575,11 @@ NPCs: {
 			DespawnMessage: "[c/7a7a7a:{0} {1} дезинтегрируется...]"
 		}
 
-		/* InfernumTitle:
+		InfernumTitle:
 			'''
-			Sludge Flashpoint 
-			Goozma
-			''' */
+			Точка Возгорания Слизи 
+			Гузма
+			'''
 	}
 
 	CrimulanGlopstrosity.DisplayName: Багротановое каплище
@@ -587,7 +587,7 @@ NPCs: {
 	EbonianBehemuck.DisplayName: Эбонитовый гряземот
 	StellarGeliath.DisplayName: Звёздный гелиаф
 	Goozmite.DisplayName: Гузмит
-	// GelatinousSpawn.DisplayName: Gelatinous Spawn
+	GelatinousSpawn.DisplayName: Желатиновый отросток
 	PluripotentSpawn.DisplayName: Плюрипотентный отросток
 }
 
@@ -936,4 +936,3 @@ Draeting.Goozma:
 	Either theory, should one be proven true, provides new, investing paths of study. 
 	Though your naming ability leaves much to be desired, I must commend your ability to leave nothing unstudied, no matter how well documented said creature may be- I never could have anticipated that such a massive scientific breakthrough could have been hiding in the most common pest of all. 
 	'''
-// Mods.CalamityHunt.NPCs.Goozma.InfernumTitle: Mods.CalamityHunt.Mods.CalamityHunt.NPCs.Goozma.InfernumTitle
