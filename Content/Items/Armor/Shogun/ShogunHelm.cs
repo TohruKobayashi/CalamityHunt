@@ -46,7 +46,7 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
         public override void UpdateEquip(Player player)
         {
             player.GetDamage(DamageClass.Generic) += 0.20f;
-            player.GetCritChance(DamageClass.Generic) += 0.15f;
+            player.GetCritChance(DamageClass.Generic) += 15;
             player.GetAttackSpeed(DamageClass.Melee) += 0.15f;
         }
 
