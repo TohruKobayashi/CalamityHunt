@@ -104,7 +104,12 @@ namespace CalamityHunt.Common.Systems
                         foreach (Item item in Main.item.Where(n => n.active && n.type == calamity.Find<ModItem>("OverloadedSludge").Type)) {
                             if (Main.npc[slimeBoss].Hitbox.Intersects(item.Hitbox)) {
                                 spawnPos = item.Center;
-                                item.active = false;
+                                if (item.stack > 1) {
+                                    item.stack--;
+                                }
+                                else {
+                                    item.active = false;
+                                }
                                 conditionsMet = true;
                             }
                         }
@@ -117,8 +122,6 @@ namespace CalamityHunt.Common.Systems
                             conditionsMet = true;
                         }
                     }
-
-
                 }
             }
 

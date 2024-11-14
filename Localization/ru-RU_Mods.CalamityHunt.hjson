@@ -558,6 +558,16 @@ Items: {
 		DisplayName: Хроматический костёр
 		Tooltip: ""
 	}
+
+	AshenSoul: {
+		// DisplayName: Ashen Auric Soul
+		// Tooltip: Absorb to gain immense, magmic powers
+	}
+
+	RottenSoul: {
+		// DisplayName: Rotten Auric Soul
+		// Tooltip: Absorb to gain immense, radioactive powers
+	}
 }
 
 NPCs: {

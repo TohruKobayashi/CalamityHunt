@@ -29,6 +29,8 @@ public static class AssetDirectory
         public static readonly Asset<Texture2D> Balloons = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/Balloons");
 
         public static readonly Asset<Texture2D> ChromaticSoulEye = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/SoulEyes/ChromaticSoulEye");
+        public static readonly Asset<Texture2D> AshenSoulEye = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/SoulEyes/AshenSoulEye");
+        public static readonly Asset<Texture2D> RottenSoulEye = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/SoulEyes/RottenSoulEye");
 
         public static Dictionary<int, Asset<Texture2D>> Particle = new Dictionary<int, Asset<Texture2D>>();
         public static Dictionary<int, Asset<Texture2D>> Relic = new Dictionary<int, Asset<Texture2D>>();
@@ -107,6 +109,9 @@ public static class AssetDirectory
 
             // yharon soul
             public static readonly Asset<Texture2D> YharonSoulChain = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/AuricSouls/YharonSoulChain");
+
+            // old duke soul
+            public static readonly Asset<Texture2D> OldDukeSoulChain = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/AuricSouls/OldDukeSoulTrail");
         }
     }
 
