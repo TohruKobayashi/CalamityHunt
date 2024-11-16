@@ -409,22 +409,22 @@ Items: {
 		DisplayName: Slime Ninja Statue
 		Tooltip:
 			'''
-			Surround with 4 Slime Statues and interact with a Gelatinous Catalyst to start a Slime Rain
-			Greatly accelerates the accumulation of slime when powered
+			Surround with 4 Slime Statues to empower
+			Can perform various rituals when empowered
 			'Who is this guy, anyways?'
 			'''
 	}
 
 	GelatinousCatalyst: {
 		DisplayName: Gelatinous Catalyst
-		Tooltip: Use on a Slime Ninja Statue with 4 Slime Statues present to start a Slime Rain
+		Tooltip: Use on an empowered Slime Ninja Statue to start a Slime Rain
 	}
 
 	PluripotentSpawnEgg: {
 		DisplayName: Pluripotent Spawn Egg
 		Tooltip:
 			'''
-			Use on a Slime Ninja Statue with 4 Slime Statues present to summon Goozma directly
+			Use on an empowered Slime Ninja Statue during a Slime Rain to combine every slime
 			Not consumable 
 			'''
 	}
@@ -576,7 +576,7 @@ NPCs: {
 
 		BossChecklistIntegration: {
 			EntryName: Goozma
-			SpawnInfo: Drop an [i:CalamityHunt/OverloadedSludge] on King Slime during a Slime Rain after the Wall of Flesh has been defeated.
+			SpawnInfo: Use a [i:CalamityHunt/PluripotentSpawnEgg] on an empowered Slime Ninja Statue.
 			DespawnMessage: "[c/7a7a7a:The {0} {1} disintegrates...]"
 		}
 
@@ -753,7 +753,7 @@ Tiles: {
 	GoozmaMusicBoxP2Tile.MapEntry: Music Box
 	GoozmaSoulMusicBoxTile.MapEntry: Music Box
 	YharonSoulMusicBoxTile.MapEntry: Music Box
-	ChromaticCampfirePlaced.MapEntry: Chromatic Campfire Placed
+	ChromaticCampfirePlaced.MapEntry: Chromatic Campfire
 }
 
 Config: {

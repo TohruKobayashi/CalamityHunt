@@ -46,13 +46,20 @@ namespace CalamityHunt.Content.Tiles
 
         public override void MouseOver(int i, int j)
         {
+            Main.NewText(GoozmaSystem.GoozmaActive);
+            Main.NewText(GoozmaSystem.GoozmaBeingSummoned);
+
             Player player = Main.LocalPlayer;
             player.noThrow = 2;
             player.cursorItemIconEnabled = true;
-            player.cursorItemIconID = ModContent.ItemType<GelatinousCatalyst>();
 
-            if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>())) {
-                player.cursorItemIconID = ModContent.ItemType<PluripotentSpawnEgg>();
+            if (!GoozmaSystem.GoozmaActive || !GoozmaSystem.GoozmaBeingSummoned) {
+                if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>()) && Main.slimeRain) {
+                    player.cursorItemIconID = ModContent.ItemType<PluripotentSpawnEgg>();
+                }
+                else if (player.HasItem(ModContent.ItemType<GelatinousCatalyst>())) {
+                    player.cursorItemIconID = ModContent.ItemType<GelatinousCatalyst>();
+                }
             }
         }
 
@@ -98,12 +105,12 @@ namespace CalamityHunt.Content.Tiles
 
             Player player = Main.LocalPlayer;
 
-            if (!GoozmaSystem.GoozmaActive) {
+            if (!GoozmaSystem.GoozmaActive || !GoozmaSystem.GoozmaBeingSummoned) {
 
                 if (GoozmaSystem.FindSlimeStatues(center, top, 40, 30)) {
 
 
-                    if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>())) {
+                    if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>()) && Main.slimeRain) {
                         if (Main.netMode != NetmodeID.MultiplayerClient) {
                             SummonPluripotentSpawn(center, top);
                         }

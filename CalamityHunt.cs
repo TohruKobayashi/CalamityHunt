@@ -168,10 +168,7 @@ namespace CalamityHunt
 
         public void BossChecklist(Mod bossChecklist)
         {
-            int sludge = ModContent.ItemType<OverloadedSludge>();
-            if (ModLoader.HasMod(HUtils.CalamityMod)) {
-                sludge = ModLoader.GetMod(HUtils.CalamityMod).Find<ModItem>("OverloadedSludge").Type;
-            }
+            int sludge = ModContent.ItemType<PluripotentSpawnEgg>();
             Action<SpriteBatch, Rectangle, Color> portrait = (SpriteBatch sb, Rectangle rect, Color color) => {
                 Texture2D texture = AssetDirectory.Textures.Goozma.BossChecklistPortrait.Value;
                 Vector2 centered = new Vector2(rect.Center.X - (texture.Width / 2), rect.Center.Y - (texture.Height / 2));

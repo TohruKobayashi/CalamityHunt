@@ -34,7 +34,7 @@ namespace CalamityHunt.Content.Items.Misc
         {
             if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
                 CreateRecipe()
-                .AddIngredient(calamity.Find<ModItem>("YharonSoulFragment").Type, 5)
+                .AddIngredient(calamity.Find<ModItem>("AscendantSpiritEssence").Type, 10)
                 .AddIngredient(ItemID.Gel, 250)
                 .AddIngredient<GelatinousCatalyst>()
                 .AddTile<SlimeNinjaStatueTile>()

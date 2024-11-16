@@ -751,7 +751,7 @@ Tiles: {
 	GoozmaMusicBoxP2Tile.MapEntry: 音乐盒
 	GoozmaSoulMusicBoxTile.MapEntry: 音乐盒
 	YharonSoulMusicBoxTile.MapEntry: 音乐盒
-	// ChromaticCampfirePlaced.MapEntry: Chromatic Campfire Placed
+	// ChromaticCampfirePlaced.MapEntry: Chromatic Campfire
 }
 
 Config: {
