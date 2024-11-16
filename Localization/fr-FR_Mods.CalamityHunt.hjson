@@ -419,7 +419,7 @@ Items: {
 		Tooltip: Utiliser cela sur une statue de ninja visqueux entourée de 4 statues de gelée pour amener une pluie de gelée
 	}
 
-	SludgeFocus: {
+	PluripotentSpawnEgg: {
 		DisplayName: Œuf pluripotent
 		Tooltip:
 			'''
@@ -556,6 +556,16 @@ Items: {
 	ChromaticCampfire: {
 		// DisplayName: Chromatic Campfire
 		// Tooltip: ""
+	}
+
+	AshenSoul: {
+		// DisplayName: Ashen Auric Soul
+		// Tooltip: Absorb to gain immense, magmic powers
+	}
+
+	RottenSoul: {
+		// DisplayName: Rotten Auric Soul
+		// Tooltip: Absorb to gain immense, radioactive powers
 	}
 }
 
@@ -907,4 +917,3 @@ CalamityModName: {
 	Either theory, should one be proven true, provides new, investing paths of study. 
 	Though your naming ability leaves much to be desired, I must commend your ability to leave nothing unstudied, no matter how well documented said creature may be- I never could have anticipated that such a massive scientific breakthrough could have been hiding in the most common pest of all. 
 	''' */
-// Mods.CalamityHunt.NPCs.Goozma.InfernumTitle: Mods.CalamityHunt.Mods.CalamityHunt.NPCs.Goozma.InfernumTitle

@@ -30,7 +30,7 @@ namespace CalamityHunt.Common.GlobalNPCs
         {
             // calamity and calamityless
             if (npc.type == NPCID.QueenSlimeBoss) {
-                npcLoot.Add(ItemDropRule.ByCondition(new RemixWorldDropRule(), ModContent.ItemType<SludgeFocus>()));
+                npcLoot.Add(ItemDropRule.ByCondition(new RemixWorldDropRule(), ModContent.ItemType<PluripotentSpawnEgg>()));
             }
 
             // calamity only
@@ -38,6 +38,10 @@ namespace CalamityHunt.Common.GlobalNPCs
                 Mod cal = ModLoader.GetMod(HUtils.CalamityMod);
                 if (npc.type == cal.Find<ModNPC>("Yharon").Type) {
                     npcLoot.Add(ItemDropRule.ByCondition(new YharonSoulDropRule(), ModContent.ItemType<YharonSoul>()));
+                }
+
+                if (npc.type == cal.Find<ModNPC>("OldDuke").Type) {
+                    npcLoot.Add(ItemDropRule.ByCondition(new OldDukeSoulDropRule(), ModContent.ItemType<RottenSoul>()));
                 }
 
                 List<string> plagueEnemies = new List<string>
@@ -84,7 +88,22 @@ namespace CalamityHunt.Common.GlobalNPCs
                     npcLoot.Add(ItemDropRule.Food(ItemID.LargeTopaz, 91, 2012, 3046));
                     npcLoot.Add(ItemDropRule.Food(ItemID.GoblinStatue, 44, 768, 4172));
                 }
+
+                if (ccr.TryFind("Pyrogen", out ModNPC pyro)) {
+                    if (npc.type == pyro.Type)
+                        npcLoot.Add(ItemDropRule.ByCondition(new PyrogenSoulDropRule(), ModContent.ItemType<AshenSoul>()));
+                }
             }
+
+            /*if (ModLoader.HasMod("NoxusBoss")) {
+                Mod nox = ModLoader.GetMod("NoxusBoss");
+                if (npc.type == nox.Find<ModNPC>("NamelessDeity").Type) {
+                    npcLoot.Add(ItemDropRule.ByCondition(new NamelessDeitySoulDropRule(), ModContent.ItemType<LightSoul>()));
+                }
+                if (npc.type == nox.Find<ModNPC>("AvatarofEmptinessorNoxusorsomethingidkifhisnamechanged").Type) {
+                    npcLoot.Add(ItemDropRule.ByCondition(new AvatarSoulDropRule(), ModContent.ItemType<NightSoul>()));
+                }
+            }*/
         }
     }
 }

@@ -420,7 +420,7 @@ Items: {
 		Tooltip: Use on a Slime Ninja Statue with 4 Slime Statues present to start a Slime Rain
 	}
 
-	SludgeFocus: {
+	PluripotentSpawnEgg: {
 		DisplayName: Pluripotent Spawn Egg
 		Tooltip:
 			'''
@@ -557,6 +557,16 @@ Items: {
 	ChromaticCampfire: {
 		DisplayName: Chromatic Campfire
 		Tooltip: ""
+	}
+
+	AshenSoul: {
+		DisplayName: Ashen Auric Soul
+		Tooltip: Absorb to gain immense, magmatic powers
+	}
+
+	RottenSoul: {
+		DisplayName: Rotten Auric Soul
+		Tooltip: Absorb to gain immense, radioactive powers
 	}
 }
 
