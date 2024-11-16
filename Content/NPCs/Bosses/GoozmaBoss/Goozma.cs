@@ -705,6 +705,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     switch (currentSlime) {
                         //ebonian
                         case 0:
+                            NPC.damage = 0;
                             switch (ActiveSlime.ai[1]) {
                                 case 0:
 
@@ -740,6 +741,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                         //divine
                         case 1:
+                            NPC.damage = 0;
                             switch (ActiveSlime.ai[1]) {
                                 case 0:
 
@@ -771,6 +773,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                         //crimulan
                         case 2:
+                            NPC.damage = 0;
                             switch (ActiveSlime.ai[1]) {
                                 case 0:
 
@@ -843,6 +846,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                                     if (Time < 590) {
                                         SortedProjectileAttack(ActiveSlime.Center, SortedProjectileAttackTypes.StellarTaunt);
                                     }
+                                    NPC.damage = 0;
 
                                     break;
                             }

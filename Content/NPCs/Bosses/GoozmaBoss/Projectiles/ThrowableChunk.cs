@@ -134,7 +134,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
             if (Main.myPlayer == Projectile.owner) {
                 if (Time % 35 == 20) {
-                    Projectile.velocity += Main.rand.NextVector2Circular(2, 2);
+                    if (Projectile.velocity.Length() < 20)
+                        Projectile.velocity += Main.rand.NextVector2Circular(2, 2);
                     Projectile.netUpdate = true;
                 }
             }

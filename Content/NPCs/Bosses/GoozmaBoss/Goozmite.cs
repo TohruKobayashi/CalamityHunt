@@ -34,8 +34,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.CursedInferno] = true;
             NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
             NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
-            if (ModCompatibility.Calamity.IsLoaded) {
-                NPCID.Sets.SpecificDebuffImmunity[Type][ModCompatibility.Calamity.Mod.Find<ModBuff>("MiracleBlight").Type] = true;
+            if (Common.ModCompatibility.Calamity.IsLoaded) {
+                NPCID.Sets.SpecificDebuffImmunity[Type][Common.ModCompatibility.Calamity.Mod.Find<ModBuff>("VulnerabilityHex").Type] = true;
             }
 
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()

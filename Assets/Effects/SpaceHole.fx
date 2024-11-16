@@ -41,7 +41,11 @@ float4 PixelShaderFunction(float4 baseColor : COLOR0, float2 coords : TEXCOORD0)
     float angle = uAngle * totalPower * exp(-distanceToTarget / uSize * 1.9) * smoothstep(1.5, -0.1, distanceToTarget);
     float2 rotatedCoords = RotatedBy(coords - 0.5, angle) + 0.5;
     
-    float4 color = float4(lerp(uColor, 1, smoothstep(0.3, 0.27, distanceToTarget + 0.8 - uIntensity * 0.85)), 1) * smoothstep(0.45, 0.28, distanceToTarget + 0.55 - uIntensity * 0.6);
+    float4 red = float4(1, 0, 0, 1);
+    
+    float4 orangewhite = float4(lerp(uColor, 1, smoothstep(0.3, 0.23, distanceToTarget + 0.8 - uIntensity * 0.85)), 1);
+    
+    float4 color = lerp(red, orangewhite, smoothstep(0.35, 0.3, distanceToTarget + 0.79 - uIntensity * 0.823)) * smoothstep(0.45, 0.28, distanceToTarget + 0.55 - uIntensity * 0.6);
     
     return (tex2D(uImage0, rotatedCoords) - smoothstep(uSize + 0.2, uSize - 0.2, distanceToTarget) * 2 * totalPower + color) * clamp(1 - smoothstep(1, 2, 1 - distanceToTarget / 2) * totalPower, 0, 1);
 

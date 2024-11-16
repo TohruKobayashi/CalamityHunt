@@ -38,7 +38,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
             NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
             if (Common.ModCompatibility.Calamity.IsLoaded) {
-                NPCID.Sets.SpecificDebuffImmunity[Type][Common.ModCompatibility.Calamity.Mod.Find<ModBuff>("MiracleBlight").Type] = true;
+                NPCID.Sets.SpecificDebuffImmunity[Type][Common.ModCompatibility.Calamity.Mod.Find<ModBuff>("VulnerabilityHex").Type] = true;
             }
 
             //NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0) { };
@@ -503,6 +503,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 else {
                     NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * (NPC.Distance(Target.Center) - 140) * 0.2f, 0.2f) * Utils.GetLerpValue(40, 20, Time, true);
                 }
+                NPC.damage = 0;
             }
             else if (Time < 40 + waitTime) {
                 if (Time == 45) {
@@ -549,7 +550,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     int count = (int)DifficultyBasedValue(2, 2, 3, 3, 4, master: 3, masterrev: 4, masterdeath: 6);
                     for (int i = 0; i < count; i++) {
                         Vector2 starPosition = new Vector2(Main.rand.Next(-50, 50), Main.rand.Next(-10, 10));
-                        Vector2 starVelocity = new Vector2(starPosition.X * 0.2f, -Main.rand.Next(5, 25)) + NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * Main.rand.Next(5);
+                        Vector2 starVelocity = new Vector2(starPosition.X * 0.2f, -Main.rand.Next(5, 25)) + NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * Main.rand.Next(3);
                         Projectile starbit = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), NPC.Center + starPosition, starVelocity, ModContent.ProjectileType<StellarGelatine>(), GetDamage(4), 0f);
                         starbit.ai[0] = (int)(Time * 0.2f) - (40 + waitTime + 12) + Utils.GetLerpValue(0, count, i, true) * 40 - 20;
                         starbit.ai[2] = NPC.whoAmI;
@@ -564,7 +565,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             else {
                 NPC.damage = 0;
 
-                NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * (NPC.Distance(Target.Center) - 300) * 0.07f, 0.02f) * Utils.GetLerpValue(40 + waitTime + 130, 40 + waitTime + 150, Time, true);
+                NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * (NPC.Distance(Target.Center) - 300) * 0.05f, 0.02f) * Utils.GetLerpValue(40 + waitTime + 130, 40 + waitTime + 150, Time, true);
                 NPC.rotation = 0;
                 squishFactor = Vector2.Lerp(squishFactor, Vector2.One, Utils.GetLerpValue(40 + waitTime + 130, 40 + waitTime + 150, Time, true) * 0.2f);
                 if (NPC.scale < 1f && Time < 40 + waitTime + 250) {
@@ -625,7 +626,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                 if (Time % 13 == 5 && Time < 430) {
                     int chosenSize = Main.rand.Next(0, 3);
-                    Projectile rock = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), Target.Center + NPC.DirectionTo(Target.Center + Target.Velocity * 30).SafeNormalize(Vector2.Zero).RotatedByRandom(1.6f) * Main.rand.Next(1300, 1600), Vector2.Zero, ModContent.ProjectileType<ThrowableChunk>(), GetDamage(6 + chosenSize), 0);
+                    Projectile rock = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), Target.Center + NPC.DirectionTo(Target.Center + Target.Velocity * 30).SafeNormalize(Vector2.Zero).RotatedByRandom(1.6f) * Main.rand.Next(2000, 2400), Vector2.Zero, ModContent.ProjectileType<ThrowableChunk>(), GetDamage(6 + chosenSize), 0);
                     rock.ai[1] = chosenSize;
                 }
 
