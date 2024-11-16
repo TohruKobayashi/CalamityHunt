@@ -1,3 +1,4 @@
+﻿using CalamityHunt.Content.Tiles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -20,11 +21,15 @@ namespace CalamityHunt.Content.Items.Misc
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.Gel, 200)
-                .AddIngredient(ItemID.SoulofMight, 3)
-                .AddIngredient(ItemID.SoulofSight, 3)
-                .AddIngredient(ItemID.SoulofFright, 3)
-                .AddTile(TileID.CrystalBall)
+                .AddIngredient(ItemID.Gel, 100)
+                .AddIngredient(ItemID.CopperBar, 15)
+                .AddTile<SlimeNinjaStatueTile>()
+                .Register();
+
+            CreateRecipe()
+                .AddIngredient(ItemID.Gel, 100)
+                .AddIngredient(ItemID.TinBar, 15)
+                .AddTile<SlimeNinjaStatueTile>()
                 .Register();
         }
     }
