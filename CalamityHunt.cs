@@ -273,6 +273,9 @@ namespace CalamityHunt
                 case PacketType.SlimeRainActivate:
                     SlimeNinjaStatueTile.ActivateSlimeRain();
                     break;
+                case PacketType.SlimeRainCancel:
+                    Main.StopSlimeRain();
+                    break;
             }
         }
 
@@ -281,7 +284,8 @@ namespace CalamityHunt
             TrollPlayer,
             SummonPluripotentSpawn,
             SyncPlayer,
-            SlimeRainActivate
+            SlimeRainActivate,
+            SlimeRainCancel
         }
     }
 }

@@ -568,6 +568,11 @@ Items: {
 		// DisplayName: Rotten Auric Soul
 		// Tooltip: Absorb to gain immense, radioactive powers
 	}
+
+	CancelSlimeRain: {
+		// Tooltip: ""
+		// DisplayName: Cancel Slime Rain
+	}
 }
 
 NPCs: {

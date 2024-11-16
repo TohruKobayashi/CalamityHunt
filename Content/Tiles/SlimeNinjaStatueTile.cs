@@ -46,18 +46,20 @@ namespace CalamityHunt.Content.Tiles
 
         public override void MouseOver(int i, int j)
         {
-            Main.NewText(GoozmaSystem.GoozmaActive);
-            Main.NewText(GoozmaSystem.GoozmaBeingSummoned);
-
             Player player = Main.LocalPlayer;
             player.noThrow = 2;
             player.cursorItemIconEnabled = true;
 
             if (!GoozmaSystem.GoozmaActive || !GoozmaSystem.GoozmaBeingSummoned) {
-                if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>()) && Main.slimeRain) {
-                    player.cursorItemIconID = ModContent.ItemType<PluripotentSpawnEgg>();
+                if (Main.slimeRain) {
+                    if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>())) {
+                        player.cursorItemIconID = ModContent.ItemType<PluripotentSpawnEgg>();
+                    }
+                    else if (player.HasItem(ModContent.ItemType<CancelSlimeRain>())) {
+                        player.cursorItemIconID = ModContent.ItemType<CancelSlimeRain>();
+                    }
                 }
-                else if (player.HasItem(ModContent.ItemType<GelatinousCatalyst>())) {
+                else if (player.HasItem(ModContent.ItemType<GelatinousCatalyst>()) && !Main.slimeRain) {
                     player.cursorItemIconID = ModContent.ItemType<GelatinousCatalyst>();
                 }
             }
@@ -109,7 +111,6 @@ namespace CalamityHunt.Content.Tiles
 
                 if (GoozmaSystem.FindSlimeStatues(center, top, 40, 30)) {
 
-
                     if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>()) && Main.slimeRain) {
                         if (Main.netMode != NetmodeID.MultiplayerClient) {
                             SummonPluripotentSpawn(center, top);
@@ -121,6 +122,32 @@ namespace CalamityHunt.Content.Tiles
                             packet.Write((short)top);
                             packet.Send();
                         }
+                    }
+                    else if (player.HasItem(ModContent.ItemType<CancelSlimeRain>()) && Main.slimeRain) {
+                        foreach (Vector2 position in GoozmaSystem.slimeStatuePoints) {
+                            for (int r = 0; r < 5; r++) {
+                                Dust d = Dust.NewDustDirect(position - new Vector2(16, 0), 32, 38, DustID.TintableDust, 0, -Main.rand.NextFloat(2f, 5f), 160, new Color(200, 200, 255), 1f + Main.rand.NextFloat());
+                                d.noGravity = true;
+                            }
+                        }
+
+                        for (int r = 0; r < 15; r++) {
+                            Dust d = Dust.NewDustDirect(GoozmaSystem.ninjaStatuePoint - new Vector2(32, 4), 64, 92, DustID.TintableDust, 0, -Main.rand.NextFloat(2f, 5f), 160, new Color(200, 200, 255), 1f + Main.rand.NextFloat());
+                            d.noGravity = true;
+                        }
+
+                        if (Main.netMode != NetmodeID.MultiplayerClient) {
+                            Main.StopSlimeRain();
+                        }
+                        else {
+                            ModPacket packet = Mod.GetPacket();
+                            packet.Write((byte)CalamityHunt.PacketType.SlimeRainCancel);
+                            packet.Send();
+                        }
+
+
+                        SoundStyle spawnsound = AssetDirectory.Sounds.SlimeRainActivate;
+                        SoundEngine.PlaySound(AssetDirectory.Sounds.SlimeRainActivate, new Vector2(center * 16, (top - 1) * 16));
                     }
                     else if (!Main.slimeRain) {
                         if (player.ConsumeItem(ModContent.ItemType<GelatinousCatalyst>())) {
