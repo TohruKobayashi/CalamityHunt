@@ -21,6 +21,8 @@ namespace CalamityHunt.Content.Tiles
         public override string Texture => AssetDirectory.AssetPath + "Textures/Tiles/RelicPedestal_" + PedestalStyle;
         public virtual int PedestalStyle { get; }
 
+        public virtual int ItemType { get; }
+
         public override void SetStaticDefaults()
         {
             Main.tileShine[Type] = 400; // Responsible for golden particles
@@ -49,6 +51,8 @@ namespace CalamityHunt.Content.Tiles
 
             Asset<Texture2D> newAsset = AssetUtilities.RequestImmediate<Texture2D>(AssetDirectory.AssetPath + "Textures/Tiles/Relics/" + Name);
             AssetDirectory.Textures.Relic.Add(Type, newAsset);
+
+            RegisterItemDrop(ItemType);
         }
 
         public override bool CreateDust(int i, int j, ref int type) => false;
