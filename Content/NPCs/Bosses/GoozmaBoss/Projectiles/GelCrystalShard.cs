@@ -19,7 +19,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Projectile.friendly = false;
             Projectile.penetrate = -1;
             Projectile.aiStyle = -1;
-            Projectile.timeLeft = 400;
+            Projectile.timeLeft = 500;
             Projectile.extraUpdates = 1;
         }
 
@@ -32,7 +32,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         {
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
             if (Projectile.ai[0] == 0) {
-                Projectile.velocity.Y += 0.06f;
+                Projectile.velocity.Y += 0.04f;
             }
 
             if (Main.rand.NextBool(2)) {

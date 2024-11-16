@@ -86,7 +86,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 Projectile.scale = MathHelper.Lerp(Projectile.scale, 0.8f, 0.1f);
                 Projectile.rotation = Projectile.AngleTo(Main.npc[owner].Center) - MathHelper.PiOver2;
 
-                float distanceOut = 220 + (float)Math.Pow(Utils.GetLerpValue(-30, 0, Time, true), 2f) * 200;
+                float distanceOut = (220 + (float)Math.Pow(Utils.GetLerpValue(-30, 0, Time, true), 2f) * 200);
                 Vector2 outerTarget = Main.npc[owner].Center + new Vector2(distanceOut * (float)Math.Sqrt(Utils.GetLerpValue(-150, -80, Time + WhichOne % slimeCount * 40, true)), 0).RotatedBy(MathHelper.TwoPi / slimeCount * WhichOne + CupGameRotation);
 
                 if (Projectile.ai[1] >= slimeCount) {
@@ -94,13 +94,20 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 }
 
                 CupGameRotation += Main.npc[owner].velocity.X * 0.001f;
-                Projectile.velocity = Projectile.DirectionTo(outerTarget).SafeNormalize(Vector2.Zero) * Projectile.Distance(outerTarget) * 0.2f;
+                Vector2 baseVelocity = Projectile.DirectionTo(outerTarget).SafeNormalize(Vector2.Zero) * Projectile.Distance(outerTarget) * 0.2f;
+                Projectile.velocity = baseVelocity;
                 saveTarget = target.Center;
                 squish = Vector2.SmoothStep(Vector2.One, new Vector2(1.3f, 0.8f), Utils.GetLerpValue(-20, 0, Time, true));
             }
             else if (Projectile.ai[1] >= 0) {
-                squish = new Vector2(0.6f, 1.5f);
-                Projectile.velocity = Projectile.DirectionTo(saveTarget).SafeNormalize(Vector2.Zero) * Utils.GetLerpValue(5, 10, Time, true) * (float)Math.Pow(Utils.GetLerpValue(0, 30, Time, true), 1.5f) * 70;
+                float squishX = (float)Utils.Lerp(1.3f, 0.6f, Utils.GetLerpValue(0, 20, Time, true));
+                float squishY = (float)Utils.Lerp(0.8f, 1.5f, Utils.GetLerpValue(0, 20, Time, true));
+                squish = new Vector2(squishX, squishY);
+                if (Time >= 20)
+                    Projectile.velocity = Projectile.DirectionTo(saveTarget).SafeNormalize(Vector2.Zero) * Utils.GetLerpValue(20, 30, Time, true) * (float)Math.Pow(Utils.GetLerpValue(0, 30, Time, true), 1.5f) * 70;
+                else
+                    Projectile.velocity = Projectile.DirectionTo(saveTarget).SafeNormalize(Vector2.Zero) * -Utils.GetLerpValue(0, 20, Time, true) * Utils.GetLerpValue(0, 20, Time, true) * 20;
+
                 if (Projectile.Distance(saveTarget) < 60) {
                     Projectile.Center = saveTarget;// + (Projectile.rotation - MathHelper.PiOver2).ToRotationVector2();
                     Projectile.velocity = Vector2.Zero;
@@ -200,7 +207,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 Main.EntitySpriteDraw(texture, Projectile.Center + off - Main.screenPosition, frame, Color.SlateBlue * 0.1f, Projectile.rotation, frame.Size() * new Vector2(0.5f, 0.9f), Projectile.scale * squish * scale, 0, 0);
             }
             if (Projectile.ai[1] >= 0) {
-                float tellFade = (float)Math.Sqrt(Utils.GetLerpValue(-20, 0, Time, true) * Utils.GetLerpValue(10, 0, Time, true)) * 2f;
+                float tellFade = (float)Math.Sqrt(Utils.GetLerpValue(-90, 20, Time, true) * Utils.GetLerpValue(30, 0, Time, true)) * 2f;
                 Main.EntitySpriteDraw(tell, Projectile.Center - Main.screenPosition, tell.Frame(), new Color(18, 8, 40, 0) * 0.8f * tellFade, Projectile.rotation, tell.Size() * new Vector2(0.5f, 0.6f), Projectile.scale * (7f + Utils.GetLerpValue(-20, 10, Time, true)), 0, 0);
             }
 

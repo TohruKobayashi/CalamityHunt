@@ -82,7 +82,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                     }
                 }
 
-                foreach (Player player in Main.player.Where(n => n.active && !n.dead && n.Distance(Projectile.Center) < 64)) {
+                foreach (Player player in Main.player.Where(n => n.active && !n.dead && n.Distance(Projectile.Center) < 84)) {
                     if (HitCount < 0 || HitCount == 1) {
                         HitCount++;
                         Cooldown += 15;

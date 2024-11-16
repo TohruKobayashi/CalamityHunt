@@ -40,7 +40,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
         public override void AI()
         {
-            Projectile.scale = (float)Math.Sqrt(Utils.GetLerpValue(6, 10, Time, true) * Utils.GetLerpValue(OutTime, OutTime - 20, Time, true));
+            Projectile.scale = (float)Math.Sqrt(Utils.GetLerpValue(6, 10, Time, true) * Utils.GetLerpValue(OutTime, OutTime - 10, Time, true));
             Projectile.localAI[1]++;
             Time++;
 
