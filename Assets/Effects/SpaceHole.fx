@@ -43,7 +43,7 @@ float4 PixelShaderFunction(float4 baseColor : COLOR0, float2 coords : TEXCOORD0)
     
     float4 red = float4(1, 0, 0, 1);
     
-    float4 orangewhite = float4(lerp(uColor, 1, smoothstep(0.3, 0.23, distanceToTarget + 0.8 - uIntensity * 0.85)), 1);
+    float4 orangewhite = float4(lerp(uColor, 1, smoothstep(0.3, 0.23, distanceToTarget + 0.8 - uIntensity * 0.86)), 1);
     
     float4 color = lerp(red, orangewhite, smoothstep(0.35, 0.3, distanceToTarget + 0.79 - uIntensity * 0.823)) * smoothstep(0.45, 0.28, distanceToTarget + 0.55 - uIntensity * 0.6);
     
