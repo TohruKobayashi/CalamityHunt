@@ -573,6 +573,16 @@ Items: {
 		// Tooltip: ""
 		// DisplayName: Cancel Slime Rain
 	}
+
+	OfferingNoSlimes: {
+		// Tooltip: ""
+		// DisplayName: Offering No Slimes
+	}
+
+	OfferingBetterSlimes: {
+		// Tooltip: ""
+		// DisplayName: Offering Better Slimes
+	}
 }
 
 NPCs: {

@@ -573,6 +573,26 @@ Items: {
 		Tooltip: ""
 		DisplayName: Cancel Slime Rain
 	}
+
+	OfferingNoSlimes: {
+		DisplayName: Offering of the Night Sky
+		Tooltip:
+		'''
+		Present to an empowered Slime Ninja Statue to gain Blessing of the Night Sky
+		Blessing of the Night Sky makes treasure-eating slimes contain more valuable rewards in larger quantities
+		'Satisfies the limitless thirst of slimekind'
+		'''
+	}
+
+	OfferingBetterSlimes: {
+		DisplayName: Offering of a Voracious Hunger
+		Tooltip:
+		'''
+		Present to an empowered Slime Ninja Statue to gain Blessing of a Voracious Hunger
+		Blessing of a Voracious Hunger makes treasure-eating slimes far more frequent and allows them to appear in odd locations
+		'flavor'
+		'''
+	}
 }
 
 NPCs: {
