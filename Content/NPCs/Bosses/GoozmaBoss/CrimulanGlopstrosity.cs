@@ -411,8 +411,11 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     }
 
                     if (Time == waitTime + 60) {
+                        // how many clones are spawned in each direction (multiply by 2 for total clones)
                         int count = (int)DifficultyBasedValue(12, death: 16, master: 16, masterrev: 18, masterdeath: 20);
+                        // the delay at which clones slam down
                         int time = (int)DifficultyBasedValue(6, 5, 4, 3, master:4, masterrev: 3, masterdeath: 2);
+                        // how long it takes before the first clone slams down
                         int telegraphTime = 30;
 
                         if (Main.netMode != NetmodeID.MultiplayerClient) {
@@ -428,12 +431,9 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                             }
                         }
 
-                        //Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Bottom, Vector2.Zero, ModContent.ProjectileType<CrimulanShockwave>(), 0, 0, ai1: 2000);
-
                         SoundStyle slam = AssetDirectory.Sounds.GoozmaMinions.SlimeSlam;
                         SoundEngine.PlaySound(slam, NPC.Center);
 
-                        // summon his minions from the side one-by-one
                         for (int i = 0; i < Main.rand.Next(30, 40); i++) {
                             Vector2 velocity = Main.rand.NextVector2Circular(8, 1) - Vector2.UnitY * Main.rand.NextFloat(7f, 15f);
                             Vector2 position = NPC.Center + Main.rand.NextVector2Circular(1, 50) + new Vector2(velocity.X * 15f, 32f);
@@ -517,20 +517,17 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                 int count = (int)DifficultyBasedValue(12, death: 16, master: 16, masterrev: 18, masterdeath: 20);
                 int time = (int)DifficultyBasedValue(6, 5, 4, 3, master: 4, masterrev: 3, masterdeath: 2);
+                int telegraphTime = 30;
 
                 if (Main.netMode != NetmodeID.MultiplayerClient) {
                     for (int i = 0; i < count; i++) {
                         Projectile leftProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * 130 - 130 * count - 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
-                            ai0: -30 - time * i,
+                            ai0: -telegraphTime - time * i,
                             ai1: -1);
-                        //leftProj.ai[0] = -30 - time * i;
-                        //leftProj.ai[1] = -1;
                         leftProj.localAI[0] = 1;
                         Projectile rightProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * -130 + 130 * count + 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
-                            ai0: -30 - time * i,
+                            ai0: -telegraphTime - time * i,
                             ai1: -1);
-                        //rightProj.ai[0] = -30 - time * i;
-                        //rightProj.ai[1] = -1;
                         rightProj.localAI[0] = 1;
                     }
                 }
@@ -545,6 +542,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             }
         }
 
+        // no.
         private void EndlessChase()
         {
             int jumpCount = (int)DifficultyBasedValue(8, 9, 10, 11, 12, master: 10, masterrev: 11, masterdeath: 12);
