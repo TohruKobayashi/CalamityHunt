@@ -659,8 +659,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         int slimeAttack = GetSlimeAttack();
 
                         //Test slimes and attacks
-                        //currentSlime = 3;
-                        //slimeAttack = 1;
+                        //currentSlime = 0;
+                        //slimeAttack = 2;
 
                         if (Main.zenithWorld) {
                             currentSlime = (short)Main.rand.Next(0, 4);
@@ -881,7 +881,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 //    NPC.life = (int)(NPC.lifeMax * 0.33f);
                 //}
                 NPC.life = 1 + (int)((float)Math.Pow(Utils.GetLerpValue(300, 530, Time, true), 3) * (NPC.lifeMax - 1));
-                eyePower = Vector2.SmoothStep(Vector2.One * 1.2f, new Vector2(1.5f, 1.45f), Utils.GetLerpValue(300, 500, Time, true));
+                eyePower = Vector2.SmoothStep(Vector2.One * 0.8f, Vector2.One * 0.9f, Utils.GetLerpValue(300, 500, Time, true));
 
                 if (Time < 15) {
                     KillSlime(currentSlime);
