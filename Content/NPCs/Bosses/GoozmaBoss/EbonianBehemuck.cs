@@ -395,8 +395,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
         private void RockPillar()
         {
             int spikeCount = (int)DifficultyBasedValue(2, 3, 3, 4, master: 3, masterrev: 4, masterdeath: 6);
-            int spikeTime = (int)(DifficultyBasedValue(140, 130, 120, 120, master: 120, masterrev: 110, masterdeath: 100) * 1.2f);
             int telegraphTime = 80;
+            int spikeTime = telegraphTime + (int)DifficultyBasedValue(30, 20, 10, 10, master: 10, masterrev: 0, masterdeath: 0);
 
             NPC.dontTakeDamage = true;
 
