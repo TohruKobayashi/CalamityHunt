@@ -464,7 +464,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                         SoundStyle spiking = AssetDirectory.Sounds.GoozmaMinions.EbonstoneToothTelegraph;
                         SoundEngine.PlaySound(spiking, Main.LocalPlayer.MountedCenter);
                     }
-                    if ((Time - 150) % spikeTime > 55 && (Time - 150) % spikeTime == (telegraphTime + 1)) {
+                    if ((Time - 150) % spikeTime > 55 && (Time - 150) % spikeTime == (telegraphTime - 1)) {
                         SoundStyle spiked = AssetDirectory.Sounds.GoozmaMinions.EbonstoneToothEmerge;
                         SoundEngine.PlaySound(spiked, Main.LocalPlayer.MountedCenter);
                     }
