@@ -106,9 +106,11 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
         {
             useNinjaSlamFrame = false;
 
+            // despawn if Goozma isn't active
             if (!Main.npc.Any(n => n.type == ModContent.NPCType<Goozma>() && n.active)) {
                 NPC.active = false;
             }
+            // otherwise set its host to Goozma
             else {
                 NPC.ai[2] = Main.npc.First(n => n.type == ModContent.NPCType<Goozma>() && n.active).whoAmI;
             }
@@ -123,40 +125,9 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 NPC.active = false;
             }
 
-            //if (Attack != (int)AttackList.TooFar && Attack != (int)AttackList.SlamDown)
-            //{
-            //    foreach (Player player in Main.player.Where(n => n.active && !n.dead))
-            //    {
-            //        float distance = 0;
-            //        for (int i = 0; i < Main.tile.Height; i++)
-            //        {
-            //            Point playerTile = player.MountedCenter.ToTileCoordinates();
-            //            if (WorldGen.InWorld(playerTile.X, playerTile.Y + i))
-            //            {
-            //                if (WorldGen.SolidTileAllowTopSlope(playerTile.X, playerTile.Y + i))
-            //                {
-            //                    distance = i;
-            //                    break;
-            //                }
-            //            }
-            //            else
-            //            {
-            //                distance = i;
-            //                break;
-            //            }
-            //        }
-            //        if (distance > 36)
-            //        {
-            //            player.velocity.Y += distance * 0.3f;
-            //            player.maxFallSpeed += distance;
-            //            player.gravity *= 10;
-            //        }
-            //        //inflict debuff
-            //    }
-            //}
-
             NPC.damage = GetDamage(0);
 
+            // spawn animation
             if (Time < 0) {
                 NPC.velocity *= 0.9f;
                 NPC.damage = 0;
@@ -164,10 +135,12 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 if (Time == -2) {
                     StoreAttack();
 
+                    // i dont think this code even matters since going too far automatically despawns the guy
                     if (NPC.Distance(Target.Center) > 1000) {
                         SetAttack(AttackList.TooFar);
                     }
 
+                    // if the player is more than 36 tiles off the ground, grab them and pull them down
                     float distance = 0;
                     for (int i = 0; i < Main.tile.Height; i++) {
                         Point playerTile = Target.Center.ToTileCoordinates();
@@ -207,6 +180,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                         SlamDown();
                         break;
 
+                    // chill for a bit then despawn
                     case (int)AttackList.Interrupt:
                         NPC.noTileCollide = true;
                         NPC.damage = 0;
@@ -218,6 +192,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                         break;
 
+                    // functionally unused
                     case (int)AttackList.TooFar:
 
                         if (Time < 5) {
@@ -259,18 +234,25 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         private Vector2 saveTarget;
 
+        // attempt to slam onto the player, then create spreads of clones on impact and repeat
         private void SlamRain()
         {
+            // the amount of times this attack is performed
             int ceilingCount = (int)DifficultyBasedValue(2, 2, 3, 4, master: 3, masterrev: 4, masterdeath: 6);
+            int waveTime = 170;
 
-            if (Time <= ceilingCount * 170) {
-                float localTime = Time % 170;
+
+            // most of the behaviour
+            //
+            if (Time <= ceilingCount * waveTime) {
+                float localTime = Time % waveTime;
 
                 if (localTime == 35) {
                     SoundStyle createSound = AssetDirectory.Sounds.GoozmaMinions.CrimslimeTelegraph;
                     SoundEngine.PlaySound(createSound.WithVolumeScale(1.5f), NPC.Center);
                 }
 
+                // slow to a stop then jump
                 if (localTime < 32) {
                     NPC.velocity *= 0.1f;
                     squishFactor = new Vector2(1f + (float)Math.Cbrt(Utils.GetLerpValue(10, 26, localTime, true)) * 0.4f, 1f - (float)Math.Sqrt(Utils.GetLerpValue(10, 26, localTime, true)) * 0.5f);
@@ -282,14 +264,17 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                 }
 
+                // rise to position where the stomp will begin
                 else if (localTime < 35) {
                     NPC.velocity.Y = -14;
                     squishFactor = new Vector2(0.5f, 1.4f);
                 }
 
+                // everything else
                 else if (localTime < 140) {
                     Vector2 airTarget = Target.Center - Vector2.UnitY * 450 + Target.Velocity * 4;
 
+                    // smash towards the player
                     if (localTime < 70) {
                         squishFactor = Vector2.Lerp(Vector2.One, new Vector2(0.5f, 1.4f), (float)Math.Cbrt(Utils.GetLerpValue(58, 40, localTime, true)));
                         NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(airTarget).SafeNormalize(Vector2.Zero) * Math.Max(2, NPC.Distance(airTarget)) * 0.2f, 0.08f) * Utils.GetLerpValue(90, 75, localTime, true);
@@ -302,35 +287,39 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                         NPC.velocity *= 0.5f;
                         useNinjaSlamFrame = true;
 
+                        // squiche
                         if (localTime < 100) {
                             squishFactor = Vector2.Lerp(Vector2.One, new Vector2(0.5f, 1.5f), (float)Math.Pow(Utils.GetLerpValue(75, 85, localTime, true), 2));
                             NPC.frameCounter++;
                         }
 
+                        // squiche 2
                         if (localTime > 100) {
                             NPC.rotation = 0;
                             squishFactor = Vector2.Lerp(Vector2.One, new Vector2(0.5f, 1.5f), (float)Math.Pow(Utils.GetLerpValue(90, 93, localTime, true), 2));
                             squishFactor = new Vector2(1f + (float)Math.Pow(Utils.GetLerpValue(118, 103, localTime, true), 2) * 0.6f, 1f - (float)Math.Pow(Utils.GetLerpValue(118, 103, localTime, true), 4) * 0.8f);
                         }
 
+                        // spawn clones
                         if (localTime == 100) {
+                            // the amount of clones spawned 
                             int extension = (int)DifficultyBasedValue(10, 12, 16, 18, 20, master: 16, masterrev: 18, masterdeath: 20);
+                            int telegraphTime = 60;
 
                             if (Main.netMode != NetmodeID.MultiplayerClient) {
+                                // purely visual shockwave
                                 Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Bottom, Vector2.Zero, ModContent.ProjectileType<CrimulanShockwave>(), 0, 0, ai1: 2500);
 
                                 for (int i = 0; i < extension; i++) {
                                     Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2((Target.Center.X - NPC.Center.X) * 0.02f + i * Main.rand.NextFloat(-10f, 10f), 0), ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
-                                        ai0: -60 - i,
+                                        ai0: -telegraphTime - i,
                                         ai1: -1,
                                         ai2: 1);
-                                    //proj.ai[0] = -40 - i;
-                                    //proj.ai[1] = -1;
-                                    //proj.ai[2] = 1;
                                     proj.localAI[0] = 1;
                                 }
                             }
 
+                            // you Will stay.
                             foreach (Player player in Main.player.Where(n => n.active && !n.dead && n.Distance(NPC.Center) < 600)) {
                                 player.velocity += player.DirectionFrom(NPC.Bottom + Vector2.UnitY * 10) * 5;
                             }
@@ -350,6 +339,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                             }
                         }
 
+                        // shake the screen
                         if (Time >= 106 && Time % 2 == 0) {
                             Main.instance.CameraModifiers.Add(new PunchCameraModifier(saveTarget, Main.rand.NextVector2CircularEdge(3, 3), 5f, 10, 12));
                         }
@@ -357,13 +347,13 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 }
             }
 
-
-            if (Time > ceilingCount * 170 + 10) {
+            // end attack
+            if (Time > ceilingCount * waveTime + 10) {
                 Reset();
             }
         }
 
-        // crimson 2
+        // stomp to create evenly spaced clones on both sides, then stomp again
         private void CollidingCrush()
         {
             int waitTime = 70;
@@ -423,20 +413,17 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     if (Time == waitTime + 60) {
                         int count = (int)DifficultyBasedValue(12, death: 16, master: 16, masterrev: 18, masterdeath: 20);
                         int time = (int)DifficultyBasedValue(6, 5, 4, 3, master:4, masterrev: 3, masterdeath: 2);
+                        int telegraphTime = 30;
 
                         if (Main.netMode != NetmodeID.MultiplayerClient) {
                             for (int i = 0; i < count; i++) {
                                 Projectile leftProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * 130 - 130 * count - 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
-                                    ai0: -30 - time * i,
+                                    ai0: -telegraphTime - time * i,
                                     ai1: -1);
-                                //leftProj.ai[0] = -30 - time * i;
-                                //leftProj.ai[1] = -1;
                                 leftProj.localAI[0] = 1;
                                 Projectile rightProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * -130 + 130 * count + 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
-                                    ai0: -30 - time * i,
+                                    ai0: -telegraphTime - time * i,
                                     ai1: -1);
-                                //rightProj.ai[0] = -30 - time * i;
-                                //rightProj.ai[1] = -1;
                                 rightProj.localAI[0] = 1;
                             }
                         }
