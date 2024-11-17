@@ -356,7 +356,14 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
         // stomp to create evenly spaced clones on both sides, then stomp again
         private void CollidingCrush()
         {
-            int waitTime = 70;
+            int waitTime = 60; // how long he waits before jumping
+            int firstJumpUp = 32; // when he first begins to jump
+            int slowAfterJump = 35; // when he starts slowing down
+            int slamDuration = 80; // how long the first slam lasts
+            int slamDuration2 = 150; // how long the second slam lasts
+
+            if (NPC.oldPos[1].Y >= NPC.position.Y)
+                NPC.damage = 0;
 
             // produce telegraph 
             if (Time == waitTime + 5) {
@@ -365,7 +372,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             }
 
             // big jump
-            if (Time < 62) {
+            if (Time < firstJumpUp) {
                 NPC.velocity *= 0.1f;
                 squishFactor = new Vector2(1f + (float)Math.Cbrt(Utils.GetLerpValue(15, 56, Time, true)) * 0.4f, 1f - (float)Math.Sqrt(Utils.GetLerpValue(15, 56, Time, true)) * 0.5f);
                 if (Time == 58) {
@@ -376,13 +383,13 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             }
 
             // slow down jump and prepare to slam down
-            else if (Time < 65) {
+            else if (Time < slowAfterJump) {
                 NPC.velocity.Y = -14;
                 squishFactor = new Vector2(0.5f, 1.4f);
             }
 
             // SLAM !!
-            else if (Time < waitTime + 80) {
+            else if (Time < waitTime + slamDuration) {
                 useNinjaSlamFrame = true;
 
                 Vector2 airTarget = Target.Center - Vector2.UnitY * 320;
@@ -416,7 +423,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                         // the delay at which clones slam down
                         int time = (int)DifficultyBasedValue(6, 5, 4, 3, master:4, masterrev: 3, masterdeath: 2);
                         // how long it takes before the first clone slams down
-                        int telegraphTime = 30;
+                        int telegraphTime = 50;
 
                         if (Main.netMode != NetmodeID.MultiplayerClient) {
                             for (int i = 0; i < count; i++) {
@@ -453,8 +460,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             }
 
             // and now its copy pasted and going thru it again but with mysteriou subtle edits. why not like restart the timer??????????
-            int doubleWaitTime = waitTime + 20;
-            if (Time > doubleWaitTime + 80 && Time < doubleWaitTime + 150) {
+            int doubleWaitTime = waitTime + 60;
+            if (Time > doubleWaitTime + slamDuration && Time < doubleWaitTime + slamDuration2) {
                 if (Time < doubleWaitTime + 100) {
                     NPC.velocity *= 0.1f;
                     squishFactor = new Vector2(1f + (float)Math.Cbrt(Utils.GetLerpValue(doubleWaitTime + 80, doubleWaitTime + 100, Time, true)) * 0.4f, 1f - (float)Math.Sqrt(Utils.GetLerpValue(doubleWaitTime + 80, doubleWaitTime + 100, Time, true)) * 0.5f);
@@ -517,7 +524,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                 int count = (int)DifficultyBasedValue(12, death: 16, master: 16, masterrev: 18, masterdeath: 20);
                 int time = (int)DifficultyBasedValue(6, 5, 4, 3, master: 4, masterrev: 3, masterdeath: 2);
-                int telegraphTime = 30;
+                int telegraphTime = 50;
 
                 if (Main.netMode != NetmodeID.MultiplayerClient) {
                     for (int i = 0; i < count; i++) {
