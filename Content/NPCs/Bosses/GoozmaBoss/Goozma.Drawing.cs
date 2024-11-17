@@ -246,6 +246,9 @@ public partial class Goozma : ModNPC
 
             float tentaCount = 5;
             int segmentCount = 12;
+            float tentacleRotationSwerve = NPC.velocity.Length() * 0.001f;
+            float tentacleWobbleFactor = 1f + tentacleRotationSwerve * 24f;
+
             for (int j = 0; j < tentaCount; j++) {
                 float rot = 0.2f - (j / tentaCount) * 0.5f + MathHelper.PiOver2 - tilt * 0.2f;
                 Vector2 pos = basePos + new Vector2(0, 20).RotatedBy(MathHelper.Lerp(0.5f, -1.3f, j / tentaCount));
@@ -265,8 +268,8 @@ public partial class Goozma : ModNPC
                     }
 
                     float tentacleLerp = Utils.GetLerpValue(tentaCount * 0.5f, tentaCount, j - Math.Abs(tentacleVel.X) * 0.001f * (1f - prog)) * (i / (float)segments);
-                    float newRot = Math.Clamp(tentacleVel.X * 0.01f, -1, 1) * prog - Math.Clamp(tentacleVel.Y * 0.015f, -0.6f, 1f) * tentacleLerp;
-                    float tentacleWobble = (float)Math.Sin((NPC.localAI[0] * 0.06f - prog * freq - (j / tentaCount) * 0.5f) % MathHelper.TwoPi) * (0.66f - tentacleVel.Length() * 0.1f);
+                    float newRot = Math.Clamp(tentacleVel.X * 0.01f, -1, 1) * prog - Math.Clamp(tentacleVel.Y * 0.015f, -0.6f, 1f) * tentacleLerp - i * (extraTentacleSwerve + tentacleRotationSwerve);
+                    float tentacleWobble = (float)Math.Sin((NPC.localAI[0] * 0.06f - prog * freq - (j / tentaCount) * 0.5f) % MathHelper.TwoPi) * (0.66f - tentacleVel.Length() * 0.1f) * tentacleWobbleFactor;
                     Vector2 nextStick = stick.RotatedBy(newRot + tentacleWobble * tentacleLerp);
                     Vector2 stretch = new Vector2(0.6f + prog * 0.7f, lastPos.Distance(lastPos + nextStick) / (frame.Height - 4)) * MathHelper.Lerp(headScale, 1f, i / (float)segments);
                     if (i == 0 || i >= segments - 1) {
