@@ -624,9 +624,17 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     }
                 }
 
+                // spawn meteors in a full 360 degree range
+                if (Time % 22 == 0 && Time < 430) {
+                    int chosenSize = Main.rand.Next(0, 3);
+                    Projectile rock = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), Target.Center + Main.rand.NextVector2CircularEdge(2000, 2400), Vector2.Zero, ModContent.ProjectileType<ThrowableChunk>(), GetDamage(6 + chosenSize), 0);
+                    rock.ai[1] = chosenSize;
+                }
+
+                // spawn more meteors but angled towards where the player is relative to the slime
                 if (Time % 13 == 5 && Time < 430) {
                     int chosenSize = Main.rand.Next(0, 3);
-                    Projectile rock = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), Target.Center + NPC.DirectionTo(Target.Center + Target.Velocity * 30).SafeNormalize(Vector2.Zero).RotatedByRandom(1.6f) * Main.rand.Next(2000, 2400), Vector2.Zero, ModContent.ProjectileType<ThrowableChunk>(), GetDamage(6 + chosenSize), 0);
+                    Projectile rock = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), Target.Center + NPC.DirectionTo(Target.Center + Target.Velocity * 30).SafeNormalize(Vector2.Zero).RotatedByRandom(1.6f) * Main.rand.Next(4000, 4800), Vector2.Zero, ModContent.ProjectileType<ThrowableChunk>(), GetDamage(6 + chosenSize), 0);
                     rock.ai[1] = chosenSize;
                 }
 
