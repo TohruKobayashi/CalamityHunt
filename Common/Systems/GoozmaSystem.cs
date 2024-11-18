@@ -40,7 +40,7 @@ namespace CalamityHunt.Common.Systems
             }
         }
 
-        public static bool GoozmaActive => Main.npc.Any(n => n is ISubjectOfNPC<Goozma> && n.active);
+        public static bool GoozmaActive => Main.npc.Any(n => n.type == ModContent.NPCType<Goozma>() && n.active);
         public static bool GoozmaBeingSummoned => Main.npc.Any(n => n is ISubjectOfNPC<PluripotentSpawn> && n.active);
 
         public static Vector2 ninjaStatuePoint;
