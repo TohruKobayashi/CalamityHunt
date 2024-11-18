@@ -590,6 +590,10 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 }
             }
 
+            if (Time < 40 + waitTime + 10) {
+                NPC.damage = 0;
+            }
+
             if (Time > 40 + waitTime + 280) {
                 Reset();
             }
