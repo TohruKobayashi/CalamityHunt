@@ -659,7 +659,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         int slimeAttack = GetSlimeAttack();
 
                         //Test slimes and attacks
-                        //currentSlime = 0;
+                        //currentSlime = 3;
                         //slimeAttack = 2;
 
                         if (Main.zenithWorld) {
@@ -2152,7 +2152,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 //}
 
                 if (Time % 130 == 10) {
-                    if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(targetPos).SafeNormalize(Vector2.Zero).RotatedByRandom(1.3f) * NPC.Distance(targetPos) * 0.0016f * Main.rand.NextFloat(0.9f, 1.2f), ModContent.ProjectileType<SlimeBomb>(), GetDamage(2), 0);
+                    if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, -8 * (NPC.DirectionTo(targetPos).SafeNormalize(Vector2.Zero).RotatedByRandom(1.3f) * NPC.Distance(targetPos) * 0.0016f * Main.rand.NextFloat(0.9f, 1.2f)), ModContent.ProjectileType<SlimeBomb>(), GetDamage(2), 0);
                 }
 
                 break;
