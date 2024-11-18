@@ -176,9 +176,13 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition, glow.Frame(), new Color(35, 5, 10, 0) * 0.3f * power, Projectile.rotation, glow.Size() * 0.5f, Projectile.scale * power * (Size + 1) * 4f, 0, 0);
                 Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition, glow.Frame(), new Color(150, 90, 20, 0) * 0.3f * power, Projectile.rotation, glow.Size() * 0.5f, Projectile.scale * power * (Size + 1) * 2.33f, 0, 0);
 
-                for (int i = 0; i < 8; i++) {
-                    Vector2 off = new Vector2(6).RotatedBy(MathHelper.TwoPi / 8f * i + Projectile.rotation);
-                    Main.EntitySpriteDraw(texture, Projectile.Center + off - Main.screenPosition, frame, new Color(150, 50, 20, 0) * power, Projectile.rotation, frame.Size() * 0.5f, Projectile.scale * power, 0, 0);
+                int gelindex = NPC.FindFirstNPC(ModContent.NPCType<StellarGeliath>());
+                if (gelindex > -1) {
+                    NPC gel = Main.npc[gelindex];
+                    for (int i = 0; i < 8; i++) {
+                        Vector2 off = new Vector2(6).RotatedBy(MathHelper.TwoPi / 8f * i + Projectile.rotation);
+                        Main.EntitySpriteDraw(texture, Projectile.Center + off - Main.screenPosition + Projectile.DirectionTo(gel.Center) * 3 * Size, frame, new Color(150, 50, 20, 0) * power, Projectile.rotation, frame.Size() * 0.5f, Projectile.scale * power, 0, 0);
+                    }
                 }
                 Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, frame, Color.Lerp(lightColor, Color.Coral, 0.2f), Projectile.rotation, frame.Size() * 0.5f, Projectile.scale * power, 0, 0);
             }
