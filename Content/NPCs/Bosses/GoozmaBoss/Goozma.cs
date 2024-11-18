@@ -1139,9 +1139,10 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                                     if (rotationHorizontality < 0.97f) {
                                         float rotationSlowdown = Utils.GetLerpValue(0.97f, 0.45f, rotationHorizontality, true);
                                         NPC.rotation += drillDashDriftDirection * rotationSlowdown * 0.22f;
-                                        extraTentacleSwerve = MathHelper.Lerp(extraTentacleSwerve, drillDashDriftDirection * rotationSlowdown * -0.22f, 0.16f);
+                                        extraTentacleSwerve = MathHelper.Lerp(extraTentacleSwerve, rotationSlowdown * -0.22f, 0.16f);
                                         rotate = true;
                                     }
+                                    NPC.direction = drillDashDriftDirection;
                                     //}
                                 }
 
