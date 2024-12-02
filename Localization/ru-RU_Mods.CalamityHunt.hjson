@@ -807,22 +807,26 @@ LoreGoozma:
 	'''
 
 GameTips: {
+	# goozma tips
 	# this one is technically inaccurate bcuz u need to be in hm but whatever..............
 	// GoozmaTip1: If you're looking for fun, throw an Overloading Sludge onto a sizable slime during a Slime Rain. Something might happen...
 	// GoozmaTip2: With the right stuff, you can pray to the slimes themselves! Make yourself four Slime Statues and a Ninja statue, and find the right catalysts...
+	# advertisement
 	// RemixTip: If you're looking for an even better experience, try out Calamity: Community Remix!
+	# reference to minecraft story mode opening line
 	// StoryModeTip: Nothing built can last forever.
+	# reference to SPR_EATR bestiary entry from star of providence
 	// SprEatrTip: Wires in the sky, they watch me die.
+	# generic ominous tips
 	// HeartbeatTip: Sometimes, if I listen closely, I can hear a faint heartbeat.
 	// OminousTip1: Something feels different. It's that same sort of feeling when you find something where you didn't put it.
 	// OminousTip2: Everything is changing. Relish what you enjoy while you can.
 	// OminousTip3: This is different than when I last checked. I wonder how much has changed?
-	// Voice1: ILL BE SEEING YOU SOON
-	// Voice2: I LOOK FORWARD TO MEET YOU
-	// Voice4: PUT ON A GOOD SHOW
+	#
 	// VoiceTip1: PRIORITIZE STYLE OVER ANYTHING ELSE
 	// VoiceTip2: BE MORE TRUSTING IN YOUR LIFE IT WILL LEAD TO GREATNESS
-	// VoiceTip3: WHEN FIGHTING A BOSS ALWAYS GO FOR RISKY MANEUVERS
+	// VoiceTip3: GO FOR THE UNSEEN ROUTE WHEN YOU CAN
+	// VoiceTip4: YOU CANNOT OUTLAST TIME
 }
 
 Configs: {
