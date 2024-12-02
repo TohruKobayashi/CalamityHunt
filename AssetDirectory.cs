@@ -97,6 +97,8 @@ public static class AssetDirectory
         {
             public static readonly Asset<Texture2D> PanelBackgroundSquare = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/UI/PanelBackgroundSquare");
             public static readonly Asset<Texture2D> PanelBorderSquare = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/UI/PanelBorderSquare");
+
+            public static readonly Asset<Texture2D> LordOfWeedsPortraitSprite = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/UI/low");
         }
 
         public static class SlimeMonsoon

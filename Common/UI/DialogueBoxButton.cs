@@ -19,9 +19,10 @@ namespace CalamityHunt.Common.UI
         private UIPanel _uiPanel;
         private UIText _uiText;
 
-        public DialogueBoxButton(MouseEvent clickAction) : base()
+        public DialogueBoxButton(MouseEvent clickAction, UIText uIText) : base()
         { 
             _clickAction = clickAction;
+            _uiText = uIText;
         }
 
         public override void OnInitialize()
@@ -36,7 +37,7 @@ namespace CalamityHunt.Common.UI
             _uiPanel.BackgroundColor = new Color(5, 20, 30) * 0.9f;
             Append(_uiPanel);
 
-            _uiText = new UIText("More", 0.75f);
+            //_uiText = new UIText("More", 0.75f);
             _uiText.VAlign = _uiText.HAlign = 0.5f;
             _uiPanel.Append(_uiText);
 
