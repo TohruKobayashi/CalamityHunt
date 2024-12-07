@@ -568,22 +568,22 @@ Items: {
 	}
 
 	GoozmaMusicBoxExiledP1: {
-		// DisplayName: Goozma Music Box Exiled P1
+		// DisplayName: Music Box (Exiled Goozma)
 		// Tooltip: ""
 	}
 
 	GoozmaMusicBoxExiledP2: {
-		// DisplayName: Goozma Music Box Exiled P2
+		// DisplayName: Music Box (Exiled Goozma Desperate)
 		// Tooltip: ""
 	}
 
 	GoozmaMusicBoxJteohP1: {
-		// DisplayName: Goozma Music Box Jteoh P1
+		// DisplayName: Music Box (Jteoh Goozma)
 		// Tooltip: ""
 	}
 
 	GoozmaMusicBoxJteohP2: {
-		// DisplayName: Goozma Music Box Jteoh P2
+		// DisplayName: Music Box (Jteoh Goozma Desperate)
 		// Tooltip: ""
 	}
 }
