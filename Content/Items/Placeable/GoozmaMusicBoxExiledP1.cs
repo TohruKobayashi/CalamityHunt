@@ -4,18 +4,19 @@ using Terraria.ModLoader;
 
 namespace CalamityHunt.Content.Items.Placeable
 {
-    public class GoozmaMusicBoxP2 : ModItem
+    [LegacyName("GoozmaMusicBoxP1")]
+    public class GoozmaMusicBoxExiledP1 : ModItem
     {
         public override void SetStaticDefaults()
         {
             ItemID.Sets.CanGetPrefixes[Type] = false;
             ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.MusicBox;
-            MusicLoader.AddMusicBox(Mod, AssetDirectory.Music.ExiledGoozma2, ModContent.ItemType<GoozmaMusicBoxP2>(), ModContent.TileType<GoozmaMusicBoxP2Tile>());
+            MusicLoader.AddMusicBox(Mod, AssetDirectory.Music.ExiledGoozma1, ModContent.ItemType<GoozmaMusicBoxExiledP1>(), ModContent.TileType<GoozmaMusicBoxExiledP1Tile>());
         }
 
         public override void SetDefaults()
         {
-            Item.DefaultToMusicBox(ModContent.TileType<GoozmaMusicBoxP2Tile>(), 0);
+            Item.DefaultToMusicBox(ModContent.TileType<GoozmaMusicBoxExiledP1Tile>(), 0);
         }
     }
 }

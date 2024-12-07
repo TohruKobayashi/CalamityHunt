@@ -568,6 +568,26 @@ Items: {
 		DisplayName: Rotten Auric Soul
 		Tooltip: Absorb to gain immense, radioactive powers
 	}
+
+	GoozmaMusicBoxExiledP1: {
+		DisplayName: Music Box (Exiled Goozma)
+		Tooltip: ""
+	}
+
+	GoozmaMusicBoxExiledP2: {
+		DisplayName: Music Box (Exiled Goozma Desperate)
+		Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP1: {
+		DisplayName: Music Box (Jteoh Goozma)
+		Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP2: {
+		DisplayName: Music Box (Jteoh Goozma Desperate)
+		Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -754,6 +774,10 @@ Tiles: {
 	GoozmaSoulMusicBoxTile.MapEntry: Music Box
 	YharonSoulMusicBoxTile.MapEntry: Music Box
 	ChromaticCampfirePlaced.MapEntry: Chromatic Campfire Placed
+	GoozmaMusicBoxExiledP1Tile.MapEntry: Goozma Music Box Exiled P1 Tile
+	GoozmaMusicBoxExiledP2Tile.MapEntry: Goozma Music Box Exiled P2 Tile
+	GoozmaMusicBoxJteohP1Tile.MapEntry: Goozma Music Box Jteoh P1 Tile
+	GoozmaMusicBoxJteohP2Tile.MapEntry: Goozma Music Box Jteoh P2 Tile
 }
 
 Config: {

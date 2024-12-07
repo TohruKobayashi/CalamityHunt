@@ -10,7 +10,8 @@ using Terraria.ObjectData;
 
 namespace CalamityHunt.Content.Tiles
 {
-    public class GoozmaMusicBoxP1Tile : ModTile
+    [LegacyName("GoozmaMusicBoxP2Tile")]
+    public class GoozmaMusicBoxExiledP2Tile : ModTile
     {
         public override void SetStaticDefaults()
         {
@@ -36,7 +37,7 @@ namespace CalamityHunt.Content.Tiles
             Player player = Main.LocalPlayer;
             player.noThrow = 2;
             player.cursorItemIconEnabled = true;
-            player.cursorItemIconID = ModContent.ItemType<GoozmaMusicBoxP1>();
+            player.cursorItemIconID = ModContent.ItemType<GoozmaMusicBoxExiledP2>();
         }
     }
 }
