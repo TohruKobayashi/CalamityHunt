@@ -871,6 +871,11 @@ Configs: {
 				Not recommended for usage by players
 				'''
 		}
+
+		GoozmaMusicPreference: {
+			Label: Goozma Music Preference
+			Tooltip: ""
+		}
 	}
 }
 

@@ -105,8 +105,25 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
         if (!Main.dedServ) {
             Music = AssetDirectory.Music.GoozmaSoul;
-            Music1 = AssetDirectory.Music.GoozmaPhase1;
-            Music2 = AssetDirectory.Music.GoozmaPhase2;
+
+            switch (Config.Instance.GoozmaMusicPreference) {
+                case "Vanilla":
+                    Music1 = MusicID.QueenSlime;
+                    Music2 = MusicID.MartianMadness;
+                    break;
+                case "Exiled One":
+                    Music1 = AssetDirectory.Music.ExiledGoozma1;
+                    Music2 = AssetDirectory.Music.ExiledGoozma2;
+                    break;
+                case "Jteoh":
+                    Music1 = AssetDirectory.Music.JteohGoozma1;
+                    Music2 = AssetDirectory.Music.JteohGoozma2;
+                    break;
+                default:
+                    Music1 = AssetDirectory.Music.ExiledGoozma1;
+                    Music2 = AssetDirectory.Music.ExiledGoozma2;
+                    break;
+            }
         }
 
         if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
