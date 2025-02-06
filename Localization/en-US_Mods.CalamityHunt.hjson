@@ -328,7 +328,7 @@ Items: {
 		Tooltip:
 			'''
 			Sprays a sizable slurry of sticky slime
-			Slime sticks to structures as it is spewed
+			Slime sticks to structures and other slime as it is spewed
 			'Shaken, not stirred'
 			'''
 	}
