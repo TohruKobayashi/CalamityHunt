@@ -1057,28 +1057,6 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 spriteBatch.End();
                 spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
             }
-
-            if (Attack == (int)AttackList.BlackHole && Time < 570 && Time > 50) {
-
-                Texture2D claw = TextureAssets.MagicPixel.Value;
-                int screenWidthD2 = (int)(Main.screenWidth / 24);
-                int screenHeightD2 = (int)(Main.screenHeight / 24);
-                Point playerPos = Main.LocalPlayer.position.ToTileCoordinates();
-                for (int i = playerPos.X - screenWidthD2; i < playerPos.X + screenWidthD2; i++) {
-                    for (int j = playerPos.Y - screenHeightD2; j < playerPos.Y + screenHeightD2; j++) {
-                        Tile t = Framing.GetTileSafely(new Point(i, j));
-                        Tile ta = Framing.GetTileSafely(new Point(i, j - 1));
-
-                        Tile tr = Framing.GetTileSafely(new Point(i + 1, j));
-                        Tile tl = Framing.GetTileSafely(new Point(i - 1, j));
-                        Tile td = Framing.GetTileSafely(new Point(i, j + 1));
-                        if (WorldGen.SolidOrSlopedTile(t) && (!WorldGen.SolidOrSlopedTile(ta) || !WorldGen.SolidOrSlopedTile(tl) || !WorldGen.SolidOrSlopedTile(td) || !WorldGen.SolidOrSlopedTile(tr))) {
-                            Main.EntitySpriteDraw(claw, new Vector2(i * 16, j * 16) - Main.screenPosition, new Rectangle(0, 0, 16, 16), Color.Orange, 0, Vector2.Zero, 1f, 0, 0);
-                        }
-                    }
-                }
-            }
-
             return false;
         }
 

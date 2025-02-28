@@ -296,6 +296,7 @@ public static class AssetDirectory
         public static readonly Asset<Effect> RainbowGel = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/RainbowGel");
         public static readonly Asset<Effect> HolographicGel = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/HolographEffect");
         public static readonly Asset<Effect> BlackHole = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/SpaceHole");
+        public static readonly Asset<Effect> TileEdgeHighlight = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/EdgeHighlightEffect");
 
         // goozma weapons
         public static readonly Asset<Effect> CometKunaiTrail = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/CometKunaiTrail");
