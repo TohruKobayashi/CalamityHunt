@@ -69,7 +69,7 @@ float4 PixelShaderFunction(float2 coords : TEXCOORD0) : COLOR0
     float edges = diffInner(image, coords + offsetRounded);
     float edgesOuter = diffOuter(image, coords + offsetRounded);
     
-    float4 totalEdge = edges * uSecondaryColor * (1 - distance) + edgesOuter * lerp(uColor, uSecondaryColor, smoothstep(uDistance - 0.1, uDistance + 0.2, distance));
+    float4 totalEdge = edges * uSecondaryColor * (1 - distance) + edgesOuter * lerp(uColor, uSecondaryColor, smoothstep(uDistance - 0.1, uDistance + 0.3, distance));
 
     return totalEdge;
 }

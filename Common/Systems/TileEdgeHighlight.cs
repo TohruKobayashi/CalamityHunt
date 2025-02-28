@@ -28,10 +28,10 @@ public class TileEdgeHighlight : ModSystem
         Main.targetSet = false;
 
         On_Main.UpdateAtmosphereTransparencyToSkyColor += CombineTileTargets;
-        On_Main.DoDraw_WallsTilesNPCs += DrawHighlight;
+        On_Main.DrawPlayers_AfterProjectiles += DrawHighlight;
     }
 
-    private void DrawHighlight(On_Main.orig_DoDraw_WallsTilesNPCs orig, Main self)
+    private void DrawHighlight(On_Main.orig_DrawPlayers_AfterProjectiles orig, Main self)
     {
         orig(self);
 
@@ -41,7 +41,7 @@ public class TileEdgeHighlight : ModSystem
         Effect edgeEffect = AssetDirectory.Effects.TileEdgeHighlight.Value;
         Vector2 size = tileTarget.Size();
         edgeEffect.Parameters["uImageSize"].SetValue(size);
-        edgeEffect.Parameters["uColor"].SetValue(new Vector4(1f, 0.5f, 0f, 1f) * _fade);
+        edgeEffect.Parameters["uColor"].SetValue(new Vector4(1f, 0.23f, 0f, 1f) * _fade);
         edgeEffect.Parameters["uSecondaryColor"].SetValue(new Vector4(0.1f, 0.5f, 0.8f, 0.5f) * _fade);
 
         edgeEffect.Parameters["uNoise"].SetValue(AssetDirectory.Textures.Noise[17].Value);
@@ -55,11 +55,10 @@ public class TileEdgeHighlight : ModSystem
         //Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);        
         //Main.spriteBatch.Draw(TextureAssets.BlackTile.Value, Vector2.Zero, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), (Color.MidnightBlue * 0.15f) with { A = 255 });
         
-        Main.spriteBatch.End();
         Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, edgeEffect, Main.Transform);
         Main.spriteBatch.Draw(tileTarget, Vector2.Zero, Color.White);
         Main.spriteBatch.End();
-        Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
+        //Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
     }
 
     private void CombineTileTargets(On_Main.orig_UpdateAtmosphereTransparencyToSkyColor orig)
@@ -74,6 +73,12 @@ public class TileEdgeHighlight : ModSystem
 
         Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null);
         Main.spriteBatch.Draw(Main.instance.tileTarget, Main.sceneTilePos - Main.screenPosition, Color.White);
+        Main.spriteBatch.End();
+
+        Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null);
+        foreach (Player p in Main.ActivePlayers)
+            Main.PlayerRenderer.DrawPlayer(Main.Camera, p, p.VisualPosition, p.fullRotation, p.fullRotationOrigin, 0f, 1f);
+
         Main.spriteBatch.End();
 
         // Pseudo DrawBlack
