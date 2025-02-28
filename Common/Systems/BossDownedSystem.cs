@@ -9,6 +9,7 @@ public sealed class BossDownedSystem : ModSystem
 {
     public const string KeyPrefix = "downedBoss";
     public const string GoozmaKey = "Goozma";
+    public const string PluriKey = "Pluripotent";
 
     public static BossDownedSystem Instance => ModContent.GetInstance<BossDownedSystem>();
 
@@ -17,21 +18,29 @@ public sealed class BossDownedSystem : ModSystem
         get => downedBoss[GoozmaKey];
         set => downedBoss[GoozmaKey] = value;
     }
+    public bool PluripotentDowned
+    {
+        get => downedBoss[PluriKey];
+        set => downedBoss[PluriKey] = value;
+    }
 
     private readonly Dictionary<string, bool> downedBoss = new()
     {
         { GoozmaKey, false },
+        { PluriKey, false },
     };
 
     public override void NetSend(BinaryWriter writer)
     {
         writer.Write(GoozmaDowned);
+        writer.Write(PluripotentDowned);
         base.NetSend(writer);
     }
 
     public override void NetReceive(BinaryReader reader)
     {
         GoozmaDowned = reader.ReadBoolean();
+        PluripotentDowned = reader.ReadBoolean();
         base.NetReceive(reader);
     }
 

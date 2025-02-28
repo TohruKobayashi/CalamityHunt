@@ -75,12 +75,13 @@ namespace CalamityHunt.Common.Systems
                 slimeStatuePoints = count.ToArray();
                 return true;
             }
-            else {
+            return false;
+            /*else {
                 slimeStatuePoints = new Vector2[4];
 
                 //text
                 return false;
-            }
+            }*/
         }
 
         private void SpawnGoozmaOld()

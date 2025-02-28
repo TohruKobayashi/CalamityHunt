@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using CalamityHunt.Common.Systems;
 using CalamityHunt.Common.Systems.FlyingSlimes;
 using CalamityHunt.Common.Systems.Particles;
 using CalamityHunt.Common.Utilities;
@@ -57,7 +59,8 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
 
     public ref float Time => ref NPC.ai[0];
 
-    public bool Skip => NPC.ai[1] == 1 || NPC.ai[3] == 1;
+    // having 5+ statues brings back the full animation
+    public bool Skip => NPC.ai[1] == 1 || NPC.ai[3] == 1 || (BossDownedSystem.Instance.PluripotentDowned && GoozmaSystem.slimeStatuePoints.Length <= 4);
 
     public float size;
 
@@ -187,6 +190,14 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
                         particle.color = Color.White;
                         particle.colorData = new ColorOffsetData(true, NPC.localAI[0] * 0.33f);
                     }));
+                }
+            }
+
+            if (!BossDownedSystem.Instance.PluripotentDowned) {
+                BossDownedSystem.Instance.PluripotentDowned = true;
+
+                if (Main.netMode == NetmodeID.Server) {
+                    NetMessage.SendData(MessageID.WorldData);
                 }
             }
         }
