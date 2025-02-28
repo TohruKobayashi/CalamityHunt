@@ -1816,6 +1816,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             ModLoader.GetMod(HUtils.CalamityMod).Call("SendNPCAlert", new int[] { NPCID.Stylist }, BossDownedSystem.Instance.GoozmaDowned);
         }
         BossDownedSystem.Instance.GoozmaDowned = true;
+        BossDownedSystem.Instance.PluripotentDowned = false;
 
         //Main.StopSlimeRain();
 
