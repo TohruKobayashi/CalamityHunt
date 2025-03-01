@@ -311,7 +311,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                                 Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Bottom, Vector2.Zero, ModContent.ProjectileType<CrimulanShockwave>(), 0, 0, ai1: 2500);
 
                                 for (int i = 0; i < extension; i++) {
-                                    Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2((Target.Center.X - NPC.Center.X) * 0.02f + i * Main.rand.NextFloat(-10f, 10f), 0), ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
+                                    Projectile proj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2((Target.Center.X - NPC.Center.X) * 0.02f + i * Main.rand.NextFloat(-15f, 15f), 0), ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
                                         ai0: -telegraphTime - i,
                                         ai1: -1,
                                         ai2: 1);
