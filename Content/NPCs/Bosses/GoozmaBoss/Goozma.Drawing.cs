@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CalamityHunt.Common.Systems;
 using CalamityHunt.Common.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -128,8 +129,22 @@ public partial class Goozma : ModNPC
             // My solid color blast
             Main.pixelShader.CurrentTechnique.Passes["ColorOnly"].Apply();
 
+            bool blackHole = false;
+            int geliath = NPC.FindFirstNPC(ModContent.NPCType<StellarGeliath>());
+
+            // Turn outline orange during black hole
+            if (geliath != -1) {
+
+                StellarGeliath geliathMod = Main.npc[geliath].ModNPC as StellarGeliath;
+
+                if (geliathMod.Attack == 2 && geliathMod.Time < 570 && geliathMod.Time > 50) {
+                    blackHole = true;
+                }
+            }
+
             // Outline 
             for (int i = 0; i < NPCID.Sets.TrailCacheLength[Type]; i++) {
+
                 Color outlineColor = (new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(NPC.localAI[0] * 5f)) with { A = 170 };
                 outlineColor = Color.Lerp(outlineColor, Color.Transparent, MathF.Pow((float)i / NPCID.Sets.TrailCacheLength[Type], 0.3f)) * 0.5f;
                 spriteBatch.Draw(goozmaTexture, (NPC.position + NPC.Size * 0.5f) + drawOffset - screenPos, goozmaTexture.Frame(), outlineColor, NPC.rotation, goozmaTexture.Size() * 0.5f, NPC.scale, direction, 0);
@@ -137,7 +152,8 @@ public partial class Goozma : ModNPC
 
             for (int i = 0; i < 4; i++) {
                 Vector2 off = new Vector2(2, 0).RotatedBy(MathHelper.TwoPi / 4f * i + NPC.rotation);
-                spriteBatch.Draw(goozmaTexture, NPC.Center + drawOffset + off - screenPos, goozmaTexture.Frame(), glowColor with { A = 170 }, NPC.rotation, goozmaTexture.Size() * 0.5f, NPC.scale, direction, 0);
+                Color finalOutlineColor = blackHole ? new Color(255, 60, 0) : glowColor;
+                spriteBatch.Draw(goozmaTexture, NPC.Center + drawOffset + off - screenPos, goozmaTexture.Frame(), finalOutlineColor with { A = 170 }, NPC.rotation, goozmaTexture.Size() * 0.5f, NPC.scale, direction, 0);
             }
 
             // No more solid color blast

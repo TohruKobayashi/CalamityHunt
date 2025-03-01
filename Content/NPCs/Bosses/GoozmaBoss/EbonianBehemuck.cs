@@ -411,6 +411,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 if (Time == 60) {
                     foreach (Player player in Main.player.Where(n => n.active && !n.dead && n.Distance(NPC.Center) < 8000)) {
                         player.velocity.Y = -20;
+                        player.wingTime = player.wingTimeMax;
                     }
 
                     Projectile leftPillar = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), saveTarget + new Vector2(-190, 100), Vector2.Zero, ModContent.ProjectileType<EbonstonePillar>(), GetDamage(3), 0);
@@ -473,13 +474,6 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
             if (Time > 90 && Time < 170 + spikeCount * spikeTime) {
                 foreach (Player player in Main.player.Where(n => n.active && !n.dead && n.Distance(NPC.Center) < 8000)) {
-
-                    if (ModLoader.HasMod(HUtils.CalamityMod)) {
-                        ModLoader.GetMod(HUtils.CalamityMod).Call("ToggleInfiniteFlight", player, true);
-                    }
-                    else {
-                        player.wingTime = player.wingTimeMax;
-                    }
 
                     if (player.Center.Y < NPC.Bottom.Y) {
                         player.velocity.Y = -player.velocity.Y + 7;

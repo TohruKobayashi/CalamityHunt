@@ -241,6 +241,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             int ceilingCount = (int)DifficultyBasedValue(2, 2, 3, 4, master: 3, masterrev: 4, masterdeath: 6);
             int waveTime = 170;
 
+            bool disableDamage = true;
+
 
             // most of the behaviour
             //
@@ -279,9 +281,10 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                         squishFactor = Vector2.Lerp(Vector2.One, new Vector2(0.5f, 1.4f), (float)Math.Cbrt(Utils.GetLerpValue(58, 40, localTime, true)));
                         NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(airTarget).SafeNormalize(Vector2.Zero) * Math.Max(2, NPC.Distance(airTarget)) * 0.2f, 0.08f) * Utils.GetLerpValue(90, 75, localTime, true);
                         saveTarget = Target.Center + Target.Velocity * 5;
-                        NPC.rotation = NPC.rotation.AngleLerp(NPC.Top.AngleTo(NPC.FindSmashSpot(saveTarget)) - MathHelper.PiOver2, 0.5f) * 0.4f;
+                        NPC.rotation = NPC.rotation.AngleLerp(NPC.Top.AngleTo(NPC.FindSmashSpot(saveTarget)) - MathHelper.PiOver2, 0.5f) * 0.4f; 
                     }
                     else {
+                        disableDamage = false;
                         NPC.rotation = NPC.rotation.AngleLerp(NPC.Top.AngleTo(NPC.FindSmashSpot(saveTarget)) - MathHelper.PiOver2, 0.2f);
                         NPC.Center = Vector2.Lerp(NPC.Center, NPC.FindSmashSpot(saveTarget), Utils.GetLerpValue(75, 100, localTime, true));
                         NPC.velocity *= 0.5f;
@@ -347,6 +350,9 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 }
             }
 
+            if (disableDamage)
+                NPC.damage = 0;
+
             // end attack
             if (Time > ceilingCount * waveTime + 10) {
                 Reset();
@@ -362,8 +368,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             int slamDuration = 80; // how long the first slam lasts
             int slamDuration2 = 150; // how long the second slam lasts
 
-            if (NPC.oldPos[1].Y >= NPC.position.Y)
-                NPC.damage = 0;
+            bool disableDamage = true;
 
             // produce telegraph 
             if (Time == waitTime + 5) {
@@ -404,6 +409,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     NPC.rotation = NPC.rotation.AngleLerp(NPC.Top.AngleTo(NPC.FindSmashSpot(saveTarget)) - MathHelper.PiOver2, 0.5f) * 0.4f;
                 }
                 else {
+                    disableDamage = false;
                     NPC.rotation = NPC.rotation.AngleLerp(NPC.Top.AngleTo(NPC.FindSmashSpot(saveTarget)) - MathHelper.PiOver2, 0.2f);
                     NPC.Center = Vector2.Lerp(NPC.Center, NPC.FindSmashSpot(saveTarget), Utils.GetLerpValue(waitTime + 53, waitTime + 60, Time, true));
                     NPC.velocity *= 0.5f;
@@ -494,10 +500,10 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
             if (Time > doubleWaitTime + 170 && Time <= doubleWaitTime + 180) {
                 useNinjaSlamFrame = true;
+                disableDamage = false;
 
                 squishFactor = new Vector2(0.5f, 1.5f);
                 NPC.Center = Vector2.Lerp(NPC.Center, NPC.FindSmashSpot(saveTarget) + Vector2.UnitY, Utils.GetLerpValue(doubleWaitTime + 173, doubleWaitTime + 180, Time, true));
-                useNinjaSlamFrame = true;
             }
 
             if (Time == doubleWaitTime + 180) {
@@ -547,6 +553,9 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             if (Time > doubleWaitTime + 260) {
                 Reset();
             }
+
+            if (disableDamage)
+                NPC.damage = 0;
         }
 
         // no.
