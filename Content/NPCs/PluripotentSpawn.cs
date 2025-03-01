@@ -59,7 +59,6 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
 
     public ref float Time => ref NPC.ai[0];
 
-    // having 5+ statues brings back the full animation
     public bool Skip => NPC.ai[1] == 1 || NPC.ai[3] == 1 || BossDownedSystem.Instance.PluripotentDowned;
 
     public float size;
