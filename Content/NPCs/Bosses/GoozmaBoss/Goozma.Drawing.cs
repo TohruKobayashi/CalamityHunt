@@ -16,6 +16,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
 public partial class Goozma : ModNPC
 {
     private static float maxBright;
+    public static bool IsXmas => DateTime.Now.Month == 12 && DateTime.Now.Day >= 15;
 
     public static void GetGradientMapValues(out float[] brightnesses, out Vector3[] colors) => GetGradientMapValues(SlimeUtils.GoozColorsVector3, out brightnesses, out colors);
 
@@ -344,7 +345,7 @@ public partial class Goozma : ModNPC
 
             spriteBatch.Draw(texture, position, null, color, tilt * 0.9f, texture.Size() * 0.5f, headScale, 0, 0);
 
-            if (!Main.xMas) {
+            if (!IsXmas) {
                 spriteBatch.Draw(crownTexture, crownPos, null, color, tilt, crownTexture.Size() * new Vector2(0.5f, 1f), 1f, 0, 0);
             }
 
@@ -352,7 +353,7 @@ public partial class Goozma : ModNPC
 
             Vector2 eyeOffset = new Vector2(15, -22).RotatedBy(tilt * 0.9) * headScale;
 
-            if (Main.xMas) {
+            if (IsXmas) {
                 Texture2D santaHat = AssetDirectory.Textures.SantaHat.Value;
                 spriteBatch.Draw(santaHat, crownPos, null, Color.White, tilt - 0.66f, santaHat.Size() * new Vector2(0.25f, 0.46f), 0.66f, SpriteEffects.FlipHorizontally, 0);
             }

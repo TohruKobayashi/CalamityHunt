@@ -318,7 +318,7 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
         spriteBatch.End();
         spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
 
-        if (Main.xMas) {
+        if (Goozma.IsXmas) {
             Texture2D hat = AssetDirectory.Textures.SantaHat.Value;
             Main.EntitySpriteDraw(hat, drawPos - screenPos + new Vector2(0, 15 - 25 * NPC.scale), hat.Frame(), Color.White, 0.7f, hat.Size() * new Vector2(0.7f, 0.5f), NPC.scale * 0.5f - 0.2f, 0, 0);
         }

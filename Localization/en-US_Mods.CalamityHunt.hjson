@@ -328,7 +328,7 @@ Items: {
 		Tooltip:
 			'''
 			Sprays a sizable slurry of sticky slime
-			Slime sticks to structures as it is spewed
+			Slime sticks to structures and other slime as it is spewed
 			'Shaken, not stirred'
 			'''
 	}
@@ -570,9 +570,29 @@ Items: {
 		Tooltip: Absorb to gain immense, radioactive powers
 	}
 
+
 	CancelSlimeRain: {
 		Tooltip: ""
 		DisplayName: Cancel Slime Rain
+
+	GoozmaMusicBoxExiledP1: {
+		DisplayName: Music Box (Exiled Goozma)
+		Tooltip: ""
+	}
+
+	GoozmaMusicBoxExiledP2: {
+		DisplayName: Music Box (Exiled Goozma Desperate)
+		Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP1: {
+		DisplayName: Music Box (Jteoh Goozma)
+		Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP2: {
+		DisplayName: Music Box (Jteoh Goozma Desperate)
+		Tooltip: ""
 	}
 }
 
@@ -760,6 +780,11 @@ Tiles: {
 	GoozmaSoulMusicBoxTile.MapEntry: Music Box
 	YharonSoulMusicBoxTile.MapEntry: Music Box
 	ChromaticCampfirePlaced.MapEntry: Chromatic Campfire
+	ChromaticCampfirePlaced.MapEntry: Chromatic Campfire Placed
+	GoozmaMusicBoxExiledP1Tile.MapEntry: Goozma Music Box Exiled P1 Tile
+	GoozmaMusicBoxExiledP2Tile.MapEntry: Goozma Music Box Exiled P2 Tile
+	GoozmaMusicBoxJteohP1Tile.MapEntry: Goozma Music Box Jteoh P1 Tile
+	GoozmaMusicBoxJteohP2Tile.MapEntry: Goozma Music Box Jteoh P2 Tile
 }
 
 Config: {
@@ -876,6 +901,11 @@ Configs: {
 				Enables features optimized for testing game mechanics
 				Not recommended for usage by players
 				'''
+		}
+
+		GoozmaMusicPreference: {
+			Label: Goozma Music Preference
+			Tooltip: ""
 		}
 	}
 }

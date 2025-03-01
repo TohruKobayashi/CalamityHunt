@@ -462,7 +462,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
             FlipShadersOnOff(spriteBatch, null, false);
 
-            if (Main.xMas) {
+            if (Goozma.IsXmas) {
                 Texture2D elfHat = AssetDirectory.Textures.ElfHat.Value;
                 spriteBatch.Draw(elfHat, NPC.Top - screenPos, null, Color.White, NPC.rotation + 0.1f * NPC.spriteDirection, elfHat.Size() * new Vector2(0.5f, 0.9f), NPC.scale * 0.4f, direction, 0);
             }

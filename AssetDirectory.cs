@@ -119,8 +119,10 @@ public static class AssetDirectory
     public static class Music
     {
         // goozma
-        public static readonly int GoozmaPhase1 = MusicLoader.GetMusicSlot(AssetPath + "Music/GlutinousArbitration");
-        public static readonly int GoozmaPhase2 = MusicLoader.GetMusicSlot(AssetPath + "Music/ViscousDesperation");
+        public static readonly int ExiledGoozma1 = MusicLoader.GetMusicSlot(AssetPath + "Music/Goozma/ExiledGoozma1");
+        public static readonly int ExiledGoozma2 = MusicLoader.GetMusicSlot(AssetPath + "Music/Goozma/ExiledGoozma2");
+        public static readonly int JteohGoozma1 = MusicLoader.GetMusicSlot(AssetPath + "Music/Goozma/JteohGoozma1");
+        public static readonly int JteohGoozma2 = MusicLoader.GetMusicSlot(AssetPath + "Music/Goozma/JteohGoozma2");
 
         // auric souls
         public static readonly int GoozmaSoul = MusicLoader.GetMusicSlot(AssetPath + "Music/Souls/GoozmaSoul");

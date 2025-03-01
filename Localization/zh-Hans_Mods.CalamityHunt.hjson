@@ -570,6 +570,25 @@ Items: {
 	CancelSlimeRain: {
 		// Tooltip: ""
 		// DisplayName: Cancel Slime Rain
+
+	GoozmaMusicBoxExiledP1: {
+		// DisplayName: Music Box (Exiled Goozma)
+		// Tooltip: ""
+	}
+
+	GoozmaMusicBoxExiledP2: {
+		// DisplayName: Music Box (Exiled Goozma Desperate)
+		// Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP1: {
+		// DisplayName: Music Box (Jteoh Goozma)
+		// Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP2: {
+		// DisplayName: Music Box (Jteoh Goozma Desperate)
+		// Tooltip: ""
 	}
 }
 
@@ -757,6 +776,11 @@ Tiles: {
 	GoozmaSoulMusicBoxTile.MapEntry: 音乐盒
 	YharonSoulMusicBoxTile.MapEntry: 音乐盒
 	// ChromaticCampfirePlaced.MapEntry: Chromatic Campfire
+	// ChromaticCampfirePlaced.MapEntry: Chromatic Campfire Placed
+	// GoozmaMusicBoxExiledP1Tile.MapEntry: Goozma Music Box Exiled P1 Tile
+	// GoozmaMusicBoxExiledP2Tile.MapEntry: Goozma Music Box Exiled P2 Tile
+	// GoozmaMusicBoxJteohP1Tile.MapEntry: Goozma Music Box Jteoh P1 Tile
+	// GoozmaMusicBoxJteohP2Tile.MapEntry: Goozma Music Box Jteoh P2 Tile
 }
 
 Config: {
@@ -873,6 +897,11 @@ Configs: {
 				Enables features optimized for testing game mechanics
 				Not recommended for usage by players
 				''' */
+		}
+
+		GoozmaMusicPreference: {
+			// Label: Goozma Music Preference
+			// Tooltip: ""
 		}
 	}
 }

@@ -3,6 +3,7 @@ using CalamityHunt.Content.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
@@ -38,6 +39,16 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
         public ref float Grounded => ref Projectile.ai[1];
         public ref float StickHost => ref Projectile.ai[2];
 
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            Projectile.localAI[2] = reader.ReadSingle();
+        }
+
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write(Projectile.localAI[2]);
+        }
+
         public override void OnSpawn(IEntitySource source)
         {
             StickHost = -1;
@@ -48,6 +59,9 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
 
         public override void AI()
         {
+            Projectile bottom = Main.projectile[(int)Projectile.localAI[2]];
+            bool bottomValid = bottom != null && bottom.active && bottom.type == Type && bottom.Distance(Projectile.Center) < 30 && bottom.position.Y > Projectile.position.Y;
+            
             Projectile.scale = MathF.Sqrt(Utils.GetLerpValue(3, 7, Time, true) * Utils.GetLerpValue(550, 510, Time, true)) * Projectile.localAI[1];
 
             Grounded = (int)Math.Clamp(Grounded, 0, 1);
@@ -98,7 +112,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.extraUpdates = Time < 25 ? 1 : 0;
 
             if (Grounded == 0)
-                Projectile.velocity.Y += Time > 35 ? 1f : 0.3f;
+                if (!bottomValid || bottom.ai[0] > 500 || bottom.velocity != Vector2.Zero) {
+                    Projectile.velocity.Y += Time > 35 ? 1f : 0.3f;
+                }
+            else {
+                    Projectile.velocity = Vector2.Zero;
+                }
 
 
             if (Projectile.velocity.Length() > 25f)
@@ -117,6 +136,26 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             //        torch.noGravity = true;
             //    }
             //}
+            if (StickHost <= -1 && !bottomValid) {
+                float pushForce = 0.05f;
+                for (int k = 0; k < Main.maxProjectiles; k++) {
+                    Projectile otherProj = Main.projectile[k];
+                    // Short circuits to make the loop as fast as possible
+                    if (!otherProj.active || k == Projectile.whoAmI)
+                        continue;
+
+                    // If the other projectile is indeed the same owned by the same player and they're too close, nudge them away.
+                    bool sameProjType = otherProj.type == Projectile.type;
+                    float taxicabDist = Vector2.Distance(Projectile.Center, otherProj.Center);
+                    float distancegate = 44f;
+                    if (sameProjType && taxicabDist < distancegate) {
+                        if (Projectile.Center.Y < otherProj.Center.Y) {
+                            Projectile.localAI[2] = otherProj.whoAmI;
+                            break;
+                        }
+                    }
+                }
+            }
 
             if (Collision.SolidCollision(Projectile.Center - new Vector2(20), 40, 40))
                 Grounded = 1;
