@@ -6,6 +6,26 @@
     <LangVersion>11</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Arch">
+      <HintPath>lib\arch\Arch.dll</HintPath>
+    </Reference>
+    <Reference Include="Collections.Pooled">
+      <HintPath>lib\arch\Collections.Pooled.dll</HintPath>
+    </Reference>
+    <Reference Include="CommunityToolkit.HighPerformance">
+      <HintPath>lib\arch\CommunityToolkit.HighPerformance.dll</HintPath>
+    </Reference>
+    <Reference Include="JobScheduler">
+      <HintPath>lib\arch\JobScheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool">
+      <HintPath>lib\arch\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Assets\Effects\PluripotentDistortion.fx" />
     <None Remove="Assets\Textures\NPCs\Bosses\Goozma_Head_Boss.png" />
   </ItemGroup>
