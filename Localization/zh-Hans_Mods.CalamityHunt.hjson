@@ -570,6 +570,7 @@ Items: {
 	CancelSlimeRain: {
 		// Tooltip: ""
 		// DisplayName: Cancel Slime Rain
+	}
 
 	GoozmaMusicBoxExiledP1: {
 		// DisplayName: Music Box (Exiled Goozma)
