@@ -20,10 +20,6 @@ public struct ChromaticEnergyDust2
 
     public float Life { get; set; }
 
-    public float[] oldRot { get; set; }
-
-    public Vector2[] oldPos {  get; set; }
-
     public bool frog {  get; set; }
 }
 
@@ -41,8 +37,6 @@ public class ChromaticEnergyDust2Behavior : ParticleBehavior
         {
             Frame = Main.rand.Next(3),
         };
-        dust.oldPos = Enumerable.Repeat(position.Value, 8).ToArray();
-        dust.oldRot = Enumerable.Repeat(rotation.Value, 8).ToArray();
         if (Main.zenithWorld && BossDownedSystem.Instance.GoozmaDowned) {
             dust.frog = Main.rand.NextBool(100);
         }
@@ -66,13 +60,6 @@ public class ChromaticEnergyDust2Behavior : ParticleBehavior
         if (dust.Life > 4f) {
             scale.Value *= 0.95f;
         }
-
-        for (int i = dust.oldPos.Length - 1; i > 0; i--) {
-            dust.oldPos[i] = Vector2.Lerp(dust.oldPos[i - 1], position.Value, 0.1f);
-            dust.oldRot[i] = dust.oldRot[i - 1];
-        }
-        dust.oldRot[0] = position.Value.AngleFrom(dust.oldPos[0]);
-        dust.oldPos[0] = position.Value;
 
         velocity.Value *= 0.97f;
         velocity.Value = Vector2.Lerp(velocity.Value, Main.rand.NextVector2Circular(5, 5), 0.02f + dust.Life * 0.02f);
@@ -116,12 +103,6 @@ public class ChromaticEnergyDust2Behavior : ParticleBehavior
             texture = AssetDirectory.Textures.FrogParticle.Value;
             spriteBatch.Draw(texture, position.Value - Main.screenPosition, texture.Frame(), Color.Lerp(color.Value with { A = 128 }, Color.White, 0.5f + MathF.Sin(dust.Life * 0.1f) * 0.5f), rotation.Value, texture.Size() * 0.5f, scale.Value * 0.3f, 0, 0);
             return;
-        }
-
-        for (int i = 1; i < dust.oldPos.Length; i++) {
-            Color trailColor = color.Value with { A = 40 } * (float)Math.Pow(1f - ((float)i / dust.oldPos.Length), 2f) * 0.1f;
-            Vector2 trailStretch = new Vector2(dust.oldPos[i].Distance(dust.oldPos[i - 1]) * 0.5f, scale.Value * 0.4f);
-            spriteBatch.Draw(texture, dust.oldPos[i] - Main.screenPosition, null, trailColor, dust.oldRot[i], texture.Size() * 0.5f, trailStretch, 0, 0);
         }
 
         spriteBatch.Draw(texture, position.Value - Main.screenPosition, texture.Frame(), (color.Value * 0.9f) with { A = (byte)(color.Value.A / 2f + 20) }, rotation.Value, texture.Size() * 0.5f, scale.Value, 0, 0);
