@@ -33,7 +33,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.manualDirectionChange = true;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 12;
-            Projectile.DamageType = DamageClass.Melee;
+            Projectile.DamageType = DamageClass.Ranged;
             Projectile.noEnchantmentVisuals = true;
         }
 
@@ -96,8 +96,9 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 //        particle.emitLight = true;
                 //    }));
                 //}
-
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.05f) * Main.rand.Next(15, 20), ModContent.ProjectileType<DarkSludge>(), Owner.HeldItem.damage, 1f, Owner.whoAmI);
+                int damage = Owner.GetWeaponDamage(Owner.HeldItem);
+                float kb = Owner.GetWeaponKnockback(Owner.HeldItem, Owner.HeldItem.knockBack);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity.RotatedByRandom(0.05f) * Main.rand.Next(15, 20), ModContent.ProjectileType<DarkSludge>(), damage, kb, Owner.whoAmI);
             }
 
             if (!Owner.channel) {

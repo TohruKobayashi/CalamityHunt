@@ -22,7 +22,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.timeLeft = 10000;
             Projectile.penetrate = -1;
             Projectile.tileCollide = true;
-            Projectile.DamageType = DamageClass.Melee;
+            Projectile.DamageType = DamageClass.Ranged;
             Projectile.extraUpdates = 1;
             Projectile.noEnchantmentVisuals = true;
         }

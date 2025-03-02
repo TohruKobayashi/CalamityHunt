@@ -28,6 +28,7 @@ public class AntiMassBioStrike : ModProjectile
         Projectile.usesIDStaticNPCImmunity = true;
         Projectile.ignoreWater = true;
         Projectile.extraUpdates = 1;
+        Projectile.DamageType = DamageClass.Ranged;
     }
 
     public ref float Time => ref Projectile.ai[0];

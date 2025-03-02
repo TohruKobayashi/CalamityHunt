@@ -57,6 +57,8 @@ namespace CalamityHunt.Common.Players
                 SoundStyle clapSound = AssetDirectory.Sounds.Weapons.CrystalGauntletClap;
                 SoundEngine.PlaySound(clapSound.WithVolumeScale(0.5f), Player.Center);
 
+                int damage = Player.GetWeaponDamage(Player.HeldItem);
+                float kb = Player.GetWeaponKnockback(Player.HeldItem, Player.HeldItem.knockBack);
                 Projectile boom = Projectile.NewProjectileDirect(Player.GetSource_ItemUse(Player.HeldItem), Player.MountedCenter, Vector2.Zero, ModContent.ProjectileType<CrystalBoom>(), Player.HeldItem.damage, 0, Player.whoAmI);
                 boom.ai[1] = 1f;
                 boom.localAI[0] = Main.GlobalTimeWrappedHourly * 7f;

@@ -197,7 +197,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
                     Projectile.velocity += newVel;
                 }
                 else {
-                    Projectile.damage = 2;
+                    //Projectile.damage = 2;
                     Projectile.tileCollide = false;
                     Projectile.velocity = Projectile.DirectionTo(target.Center - new Vector2(0, 10)) * (Time + 0.1f) * Projectile.Distance(target.Center) * 0.02f;
                     Projectile.rotation = Utils.AngleLerp(Projectile.rotation, Projectile.velocity.ToRotation() - MathHelper.PiOver2, 0.5f);

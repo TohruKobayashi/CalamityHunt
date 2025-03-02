@@ -29,6 +29,7 @@ public class AntiMassBioBall : ModProjectile
         Projectile.usesLocalNPCImmunity = true;
         Projectile.ignoreWater = true;
         Projectile.penetrate = 2;
+        Projectile.DamageType = DamageClass.Ranged;
     }
 
     public const float MAX_RANGE = 500;

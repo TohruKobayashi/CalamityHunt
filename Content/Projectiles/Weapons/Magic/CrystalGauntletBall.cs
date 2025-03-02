@@ -45,6 +45,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
             }
 
             bool canKill = false;
+            int damage = Owner.GetWeaponDamage(Owner.HeldItem);
+            float kb = Owner.GetWeaponKnockback(Owner.HeldItem, Owner.HeldItem.knockBack);
 
             Owner.ChangeDir(Projectile.velocity.X > 0 ? 1 : -1);
             Owner.SetDummyItemTime(1);
@@ -77,7 +79,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
                     particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
                     particle.color = Main.hslToRgb(Time * 0.03f % 1f, 0.5f, 0.5f, 128);
                 }));
-                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.velocity * 5f + Main.rand.NextVector2Circular(16, 16), Projectile.velocity, ModContent.ProjectileType<CrystalLightning>(), Owner.HeldItem.damage, 1f, Owner.whoAmI, ai1: Projectile.whoAmI);
+                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.velocity * 5f + Main.rand.NextVector2Circular(16, 16), Projectile.velocity, ModContent.ProjectileType<CrystalLightning>(), damage, kb, Owner.whoAmI, ai1: Projectile.whoAmI);
             }
 
             //if ((Time - 8) % 5 == 1)
@@ -107,7 +109,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
             if (canKill && Owner.GetModPlayer<GoozmaWeaponsPlayer>().CrystalGauntletsCharge > 0.999f && Projectile.timeLeft > 3) {
                 Projectile.timeLeft = 3;
                 Owner.GetModPlayer<GoozmaWeaponsPlayer>().CrystalGauntletsCharge = 0;
-                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity.SafeNormalize(Vector2.Zero) * 3f, ModContent.ProjectileType<CrystalGauntletBallThrown>(), Owner.HeldItem.damage, 2f, Owner.whoAmI);
+                Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Projectile.velocity.SafeNormalize(Vector2.Zero) * 3f, ModContent.ProjectileType<CrystalGauntletBallThrown>(), damage, kb, Owner.whoAmI);
             }
             else {
                 Owner.GetModPlayer<GoozmaWeaponsPlayer>().CrystalGauntletsCharge += 0.002f + Owner.GetModPlayer<GoozmaWeaponsPlayer>().CrystalGauntletsCharge * 0.004f;
