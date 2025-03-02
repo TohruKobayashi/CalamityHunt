@@ -31,7 +31,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.tileCollide = true;
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 15;
-            Projectile.DamageType = DamageClass.Melee;
+            Projectile.DamageType = DamageClass.Ranged;
             Projectile.noEnchantmentVisuals = true;
         }
 
