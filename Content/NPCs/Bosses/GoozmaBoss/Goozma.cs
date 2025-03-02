@@ -676,8 +676,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         int slimeAttack = GetSlimeAttack();
 
                         //Test slimes and attacks
-                        //currentSlime = 1;
-                        //slimeAttack = 2;
+                        //currentSlime = 0;
+                        //slimeAttack = 1;
 
                         if (Main.zenithWorld) {
                             currentSlime = (short)Main.rand.Next(0, 4);
@@ -2097,7 +2097,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 break;
 
             case SortedProjectileAttackTypes.PixieBallDisruption:
-                if (Time % 180 < 20 && Time % 3 == 1 && Time > 110) {
+                if (Time % 180 < 20 && Time % 3 == 1 && Time > 110 && Time < PixieBall.MaxTime - 180) {
                     if (Main.netMode != NetmodeID.MultiplayerClient) {
                         
                         Projectile dart = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2(NPC.direction, 0).RotatedByRandom(MathHelper.TwoPi) * Main.rand.Next(6, 8), ModContent.ProjectileType<SlimeShotRedirecting>(), GetDamage(1), 0,
