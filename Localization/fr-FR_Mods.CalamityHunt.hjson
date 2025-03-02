@@ -594,13 +594,17 @@ Items: {
 	}
 
 	SludgeSpongeEmpty: {
-		// DisplayName: Sludge Sponge Empty
-		// Tooltip: ""
+		// DisplayName: Sludge Sponge
+		// Tooltip: Use on an empowered Slime Ninja Statue to end a Slime Rain
 	}
 
 	SludgeSpongeFull: {
-		// DisplayName: Sludge Sponge Full
-		// Tooltip: ""
+		// DisplayName: Engorged Sludge Sponge
+		/* Tooltip:
+			'''
+			Use on an empowered Slime Ninja Statue to start a Slime Rain
+			'Have fun wringing it out'
+			''' */
 	}
 }
 
