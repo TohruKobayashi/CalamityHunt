@@ -357,13 +357,11 @@ namespace CalamityHunt.Common.Players
                     if (ModLoader.HasMod(HUtils.CalamityMod)) {
                         ModPlayer calPlayer = HUtils.GetCalamityModPlayer("CalamityPlayer");
                         PropertyInfo dashIDProperty = calPlayer.GetType().GetProperty("DashID");
-                        Console.Out.WriteLine(dashIDProperty.GetValue(calPlayer).ToString());
 
                         if (dashIDProperty.GetValue(calPlayer).ToString() == "Default Dash") {
                             //dashIDProperty.SetValue(calPlayer, string.Empty);
                             Player.dashType = 1;
                         }
-                        Console.Out.WriteLine(dashIDProperty.GetValue(calPlayer).ToString());
                     }
                 }
             }
