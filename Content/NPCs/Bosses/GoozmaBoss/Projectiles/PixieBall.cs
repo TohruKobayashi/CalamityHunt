@@ -38,12 +38,15 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         public ref float Cooldown => ref Projectile.ai[1];
         public ref float HitCount => ref Projectile.ai[2];
 
+        public const float MaxTime = 800;
+
         private int owner;
         public override void AI()
         {
             Projectile.rotation += Projectile.velocity.Length() * 0.01f * (Projectile.velocity.X > 0 ? 1 : -1);
-            Projectile.scale = (float)Math.Sqrt(Utils.GetLerpValue(0, 17, Time, true) * Utils.GetLerpValue(1080, 1020, Time, true)) * 1.3f;
+            Projectile.scale = (float)Math.Sqrt(Utils.GetLerpValue(0, 17, Time, true) * Utils.GetLerpValue(MaxTime - 120, MaxTime - 180, Time, true)) * 1.3f;
             owner = -1;
+            bool fade = Time >= MaxTime - 180;
             if (!Main.npc.Any(n => n.type == ModContent.NPCType<DivineGargooptuar>() && n.active)) {
                 Projectile.active = false;
                 return;
@@ -56,77 +59,80 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, Main.npc[owner].GetTargetData().Velocity, 0.9f);
             }
 
-            if (HitCount < 0 || HitCount == 1) {
-                Projectile.velocity = Projectile.DirectionTo(Main.npc[owner].GetTargetData().Center).SafeNormalize(Vector2.Zero) * 36f;
-                Cooldown = 0;
-            }
-            else {
-                if (Main.rand.NextBool(5)) {
-                    Projectile.velocity += Main.rand.NextVector2Circular(3, 3);
+            if (!fade) {
+
+                if (HitCount % 2 != 0) {
+                    Projectile.velocity = Projectile.DirectionTo(Main.npc[owner].GetTargetData().Center).SafeNormalize(Vector2.Zero) * 36f;
+                    Cooldown = 0;
                 }
-
-                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.DirectionTo(Main.npc[owner].Center).SafeNormalize(Vector2.Zero) * 3f, 0.03f) * Utils.GetLerpValue(1300, 1270, Time, true);
-                Projectile.velocity += Projectile.DirectionTo(Main.npc[owner].Center).SafeNormalize(Vector2.Zero) * (0.3f + Utils.GetLerpValue(1200, 2400, Projectile.Distance(Main.npc[owner].Center), true));
-            }
-
-            if (Cooldown <= 0) {
-                if (Projectile.Distance(Main.npc[owner].Center) < 84 && Time > 60) {
-                    HitCount++;
-                    Main.npc[owner].localAI[1]++;
-                    Projectile.velocity = Projectile.DirectionTo(Main.npc[owner].GetTargetData().Center).SafeNormalize(Vector2.Zero) * (Main.npc[owner].GetTargetData().Velocity.Length() * 0.2f + Projectile.velocity.Length());
-                    Cooldown = 15;
-                    for (int i = 0; i < 40; i++) {
-                        Color glowColor = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.5f, 0);
-                        glowColor.A /= 2;
-                        Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(36, 36), DustID.AncientLight, Main.rand.NextVector2Circular(15, 15) + Projectile.velocity, 0, glowColor, 1f + Main.rand.NextFloat(2f)).noGravity = true;
+                else {
+                    if (Main.rand.NextBool(5)) {
+                        Projectile.velocity += Main.rand.NextVector2Circular(3, 3);
                     }
+
+                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.DirectionTo(Main.npc[owner].Center).SafeNormalize(Vector2.Zero) * 3f, 0.03f) * Utils.GetLerpValue(MaxTime + 100, MaxTime + 70, Time, true);
+                    Projectile.velocity += Projectile.DirectionTo(Main.npc[owner].Center).SafeNormalize(Vector2.Zero) * (0.3f + Utils.GetLerpValue(1200, 2400, Projectile.Distance(Main.npc[owner].Center), true));
                 }
 
-                foreach (Player player in Main.player.Where(n => n.active && !n.dead && n.Distance(Projectile.Center) < 84)) {
-                    if (HitCount < 0 || HitCount == 1) {
+                if (Cooldown <= 0) {
+                    if (Projectile.Distance(Main.npc[owner].Center) < 84 && Time > 60) {
                         HitCount++;
-                        Cooldown += 15;
-                        Projectile.velocity = -Vector2.UnitY * 10;
-                    }
-                    else {
-                        Projectile.velocity = Projectile.DirectionFrom(player.Center).SafeNormalize(Vector2.Zero) * (14f + Projectile.velocity.Length() + player.velocity.Length());
-                    }
-
-                    Cooldown += 15;
-
-                    if (Time > 40) {
-                        SoundEngine.PlaySound(AssetDirectory.Sounds.GoozmaMinions.PixieBallBounce, Projectile.Center);
-                    }
-
-                    for (int i = 0; i < 40; i++) {
-                        Color glowColor = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.5f, 0);
-                        glowColor.A /= 2;
-                        Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(36, 36), DustID.AncientLight, Main.rand.NextVector2Circular(15, 15) + Projectile.velocity, 0, glowColor, 1f + Main.rand.NextFloat(2f)).noGravity = true;
-
-                        if (Main.rand.NextBool(3)) {
-                            CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
-                                particle.position = Projectile.Center + Main.rand.NextVector2Circular(54, 54);
-                                particle.velocity = Main.rand.NextVector2Circular(10, 10) + Projectile.velocity * 0.1f;
-                                particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
-                                particle.color = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.7f, 0) * 0.5f;
-                            }));
+                        Main.npc[owner].localAI[1]++;
+                        Projectile.velocity = Projectile.DirectionTo(Main.npc[owner].GetTargetData().Center).SafeNormalize(Vector2.Zero) * (Main.npc[owner].GetTargetData().Velocity.Length() * 0.2f + Projectile.velocity.Length());
+                        Cooldown = 90;
+                        for (int i = 0; i < 40; i++) {
+                            Color glowColor = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.5f, 0);
+                            glowColor.A /= 2;
+                            Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(36, 36), DustID.AncientLight, Main.rand.NextVector2Circular(15, 15) + Projectile.velocity, 0, glowColor, 1f + Main.rand.NextFloat(2f)).noGravity = true;
                         }
                     }
 
-                    break;
-                }
+                    foreach (Player player in Main.player.Where(n => n.active && !n.dead && n.Distance(Projectile.Center) < 96)) {
+                        if (HitCount % 2 != 0) {
+                            HitCount++;
+                            Cooldown += 15;
+                            //Projectile.velocity = -Vector2.UnitY * 10;
+                        }
+                        else {
+                            Projectile.velocity = Projectile.DirectionFrom(player.Center).SafeNormalize(Vector2.Zero) * (14f + Projectile.velocity.Length() + player.velocity.Length());
+                        }
 
-                //foreach(NPC goozma in Main.npc.Where(n => n.active && n.type == ModContent.NPCType<Goozma>() && n.Distance(Projectile.Center) < 64))
-                //{
-                //    Projectile.velocity += Projectile.DirectionTo(goozma.GetTargetData().Center).SafeNormalize(Vector2.Zero) * (12f + Projectile.velocity.Length());
-                //    Cooldown = 15;
-                //    for (int i = 0; i < 40; i++)
-                //    {
-                //        Color glowColor = Main.hslToRgb((Projectile.localAI[0] * 0.01f + i / 120f) % 1f, 1f, 0.6f, 0);
-                //        glowColor.A /= 2;
-                //        Dust.NewDustPerfect(Projectile.Center, DustID.AncientLight, Main.rand.NextVector2Circular(5, 5) + Projectile.velocity, 0, glowColor, 1f + Main.rand.NextFloat(2f)).noGravity = true;
-                //    }
-                //}
+                        Cooldown += 15;
+
+                        if (Time > 40) {
+                            SoundEngine.PlaySound(AssetDirectory.Sounds.GoozmaMinions.PixieBallBounce, Projectile.Center);
+                        }
+
+                        for (int i = 0; i < 40; i++) {
+                            Color glowColor = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.5f, 0);
+                            glowColor.A /= 2;
+                            Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(36, 36), DustID.AncientLight, Main.rand.NextVector2Circular(15, 15) + Projectile.velocity, 0, glowColor, 1f + Main.rand.NextFloat(2f)).noGravity = true;
+
+                            if (Main.rand.NextBool(3)) {
+                                CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
+                                    particle.position = Projectile.Center + Main.rand.NextVector2Circular(54, 54);
+                                    particle.velocity = Main.rand.NextVector2Circular(10, 10) + Projectile.velocity * 0.1f;
+                                    particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
+                                    particle.color = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.7f, 0) * 0.5f;
+                                }));
+                            }
+                        }
+
+                        break;
+                    }
+
+                    //foreach(NPC goozma in Main.npc.Where(n => n.active && n.type == ModContent.NPCType<Goozma>() && n.Distance(Projectile.Center) < 64))
+                    //{
+                    //    Projectile.velocity += Projectile.DirectionTo(goozma.GetTargetData().Center).SafeNormalize(Vector2.Zero) * (12f + Projectile.velocity.Length());
+                    //    Cooldown = 15;
+                    //    for (int i = 0; i < 40; i++)
+                    //    {
+                    //        Color glowColor = Main.hslToRgb((Projectile.localAI[0] * 0.01f + i / 120f) % 1f, 1f, 0.6f, 0);
+                    //        glowColor.A /= 2;
+                    //        Dust.NewDustPerfect(Projectile.Center, DustID.AncientLight, Main.rand.NextVector2Circular(5, 5) + Projectile.velocity, 0, glowColor, 1f + Main.rand.NextFloat(2f)).noGravity = true;
+                    //    }
+                    //}
+                }
             }
 
             if (Cooldown > 0) {
@@ -143,7 +149,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 }));
             }
 
-            if (HitCount > 2) {
+            if (HitCount > 4) {
                 Main.npc[owner].ai[0] = 0;
                 Main.npc[owner].ai[1] = -1;
                 if (Main.netMode == NetmodeID.MultiplayerClient) {
@@ -153,11 +159,11 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 Projectile.Kill();
             }
 
-            if (Time > 1000) {
+            if (Time > MaxTime - 200) {
                 Projectile.velocity *= 0.9f;
             }
 
-            if (Time > 1080) {
+            if (Time > MaxTime - 120) {
                 Projectile.Kill();
             }
 
@@ -190,7 +196,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Projectile.oldPos[0] = Projectile.Center;
             Projectile.oldRot[0] = Projectile.rotation;
 
-            if (Time > 1000) {
+            if (Time > MaxTime - 200) {
                 for (int i = 0; i < 40 - Time / 2; i++) {
                     Color glowColor = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.5f, 0);
                     glowColor.A /= 2;
