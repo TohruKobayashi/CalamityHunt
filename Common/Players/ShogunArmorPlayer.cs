@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using CalamityHunt.Common.Systems.Particles;
 using CalamityHunt.Content.Particles;
 using Microsoft.Xna.Framework;
@@ -351,8 +352,29 @@ namespace CalamityHunt.Common.Players
                     Player.buffImmune[calamity.Find<ModBuff>("BrimstoneFlames").Type] = true;
                     calamity.Call("SetWearingRogueArmor", Player, true);
                     calamity.Call("SetWearingPostMLSummonerArmor", Player, true);
+
+                    // clear the default dash with our own dash if u have it
+                    if (ModLoader.HasMod(HUtils.CalamityMod)) {
+                        ModPlayer calPlayer = HUtils.GetCalamityModPlayer("CalamityPlayer");
+                        PropertyInfo dashIDProperty = calPlayer.GetType().GetProperty("DashID");
+                        Console.Out.WriteLine(dashIDProperty.GetValue(calPlayer).ToString());
+
+                        if (dashIDProperty.GetValue(calPlayer).ToString() == "Default Dash") {
+                            //dashIDProperty.SetValue(calPlayer, string.Empty);
+                            Player.dashType = 1;
+                        }
+                        Console.Out.WriteLine(dashIDProperty.GetValue(calPlayer).ToString());
+                    }
                 }
             }
+        }
+    }
+
+    public class ShogunKillStupidDefaultDash : GlobalItem
+    {
+        public override void UpdateAccessory(Item item, Player player, bool hideVisual)
+        {
+            
         }
     }
 

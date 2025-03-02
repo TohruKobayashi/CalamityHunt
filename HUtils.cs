@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -115,4 +116,25 @@ public static class HUtils
     }
 
     public static Matrix NormalizedEffectMatrix => Matrix.Invert(Main.GameViewMatrix.EffectMatrix) * Matrix.CreateOrthographicOffCenter(0f, Main.instance.GraphicsDevice.Viewport.Width, Main.instance.GraphicsDevice.Viewport.Height, 0f, 0f, 1f);
+
+    public static ModPlayer GetCalamityModPlayer (string modPlayer = "CalamityPlayer")
+    {
+        ModPlayer calPlayer = null;
+        if (ModLoader.HasMod(HUtils.CalamityMod)) {
+            // If there's no CalamityPlayer, go get it boy
+            Mod cal = ModLoader.GetMod(HUtils.CalamityMod);
+            // Cycle through ModPlayers to find CalamityPlayer
+            RefReadOnlyArray<ModPlayer> players = Main.LocalPlayer.ModPlayers;
+
+            foreach (ModPlayer p in players) {
+                // Grab the player 
+                if (p.Name == modPlayer) {
+                    calPlayer = p;
+                }
+            }
+        }
+
+        return calPlayer;
+    }
+
 }

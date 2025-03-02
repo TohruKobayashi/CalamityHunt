@@ -34,20 +34,11 @@ public class YharonReflectionSystem : ModSystem
     public override void OnWorldLoad()
     {
         if (ModLoader.HasMod(HUtils.CalamityMod)) {
-            // If there's no CalamityPlayer, go get it boy
-            if (calPlayer == null) { 
-                Mod cal = ModLoader.GetMod(HUtils.CalamityMod);
-                // Cycle through ModPlayers to find CalamityPlayer
-                RefReadOnlyArray<ModPlayer> players = Main.LocalPlayer.ModPlayers;
-
-                    foreach (ModPlayer p in players) {
-                    // Grab the Yharon monolith field and store the player as well
-                        if (p.Name == "CalamityPlayer") {
-                            yharonolithField = p.GetType().GetField("monolithYharonShader", BindingFlags.Public | BindingFlags.Instance);
-                            calPlayer = p;
-                        }
-                    }
-                }
+            // Grab the Yharon monolith field and store the player as well if this fella is empty
+            if (calPlayer == null) {
+                calPlayer = HUtils.GetCalamityModPlayer();
+                yharonolithField = calPlayer.GetType().GetField("monolithYharonShader", BindingFlags.Public | BindingFlags.Instance);
+            }
         }
     }
 
