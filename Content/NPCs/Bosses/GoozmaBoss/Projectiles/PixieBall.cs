@@ -66,7 +66,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 }
 
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.DirectionTo(Main.npc[owner].Center).SafeNormalize(Vector2.Zero) * 3f, 0.03f) * Utils.GetLerpValue(1300, 1270, Time, true);
-                Projectile.velocity += Projectile.DirectionTo(Main.npc[owner].Center).SafeNormalize(Vector2.Zero) * (0.3f + Utils.GetLerpValue(800, 1200, Projectile.Distance(Main.npc[owner].Center), true));
+                Projectile.velocity += Projectile.DirectionTo(Main.npc[owner].Center).SafeNormalize(Vector2.Zero) * (0.3f + Utils.GetLerpValue(1200, 2400, Projectile.Distance(Main.npc[owner].Center), true));
             }
 
             if (Cooldown <= 0) {
