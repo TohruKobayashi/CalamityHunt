@@ -49,7 +49,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
             float kb = Owner.GetWeaponKnockback(Owner.HeldItem, Owner.HeldItem.knockBack);
 
             Owner.ChangeDir(Projectile.velocity.X > 0 ? 1 : -1);
-            Owner.SetDummyItemTime(1);
+            Owner.SetDummyItemTime(4);
             SetMagicHands();
             Owner.heldProj = Projectile.whoAmI;
             Projectile.velocity = Vector2.Lerp(Projectile.velocity, Owner.DirectionTo(Main.MouseWorld).SafeNormalize(Vector2.Zero) * Owner.HeldItem.shootSpeed, 0.07f);
