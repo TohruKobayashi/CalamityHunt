@@ -6,6 +6,7 @@ using CalamityHunt.Common.Utilities.Interfaces;
 using CalamityHunt.Content.Buffs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -48,6 +49,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         }
 
         public List<Vector2> points;
+        public List<Vector2> pointVelocities;
 
         public override void AI()
         {
@@ -91,6 +93,12 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                     endPoint = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedByRandom(0.05f) * Length;
                     SoundEngine.PlaySound(AssetDirectory.Sounds.Goozma.BigThunder, Projectile.Center);
                 }
+
+                LightningData data = new LightningData(Projectile.Center, endPoint, 0.5f);
+                points = data.Value;
+                pointVelocities = new List<Vector2>();
+                for (int i = 0; i < points.Count; i++)
+                    pointVelocities.Add(Main.rand.NextVector2Circular(1, 1) * Math.Min(1f, Projectile.Distance(endPoint) * 0.0012f));
             }
 
             Projectile.rotation = Projectile.velocity.ToRotation();
@@ -102,19 +110,11 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                     Main.instance.CameraModifiers.Add(new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Circular(1, 1), 5f, 15, 20));
                 }
 
-                if (points == null) {
-                    Vector2 midPoint = Vector2.Lerp(Projectile.Center, endPoint, 0.5f) + Main.rand.NextVector2Circular(64, 64);
-                    points = new BezierCurve(new List<Vector2>()
-                    {
-                        Projectile.Center, midPoint, endPoint
-                    }).GetPoints(64);
-                }
 
-                for (int i = 0; i < points.Count; i++) {
-                    float progress = (float)i / points.Count;
-                    float size = Collides == 0 ? Collides == 2 ? 1f : 1.66f : 0.8f;
-                    Vector2 newOffset = new Vector2(0, MathF.Sin(progress * (5 + Time / 8f) - Time * 0.33f) * 80 * size * progress).RotatedBy(Projectile.rotation);
-                    points[i] = Vector2.Lerp(points[i], Vector2.Lerp(Projectile.Center, endPoint, progress) + newOffset, MathF.Pow(Time / 50f - progress * 0.2f, 2f));
+                for (int i = 0; i < points.Count - 1; i++) {
+                    points[i] = Vector2.Lerp(points[i], Vector2.Lerp(Projectile.Center, endPoint, (float)i / points.Count) + pointVelocities[i] * 6, 0.6f * (1f - (float)i / points.Count));
+                    pointVelocities[i] *= 1.07f * Math.Min(1f, Projectile.Distance(endPoint) * 0.003f) * Utils.GetLerpValue(0, 3, i, true) * Utils.GetLerpValue(points.Count, points.Count - 3, i, true);
+                    points[i] += Main.rand.NextVector2Circular(2, 2) * Utils.GetLerpValue(0, 3, i, true) * Utils.GetLerpValue(points.Count, points.Count - 3, i, true); ;
                 }
 
                 Projectile.velocity = Vector2.Zero;
@@ -151,40 +151,34 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         {
             if (Time <= 0) {
                 float small = Collides == 0 ? 1f : 0.7f;
-                Texture2D tell = TextureAssets.Extra[178].Value;
-                Color color = new GradientColor(SlimeUtils.GoozColors, 0.1f, 0.1f).ValueAt(Time + colOffset) with { A = 0 };
-                Main.EntitySpriteDraw(tell, Projectile.Center - Main.screenPosition, null, color * small * 1.2f * Utils.GetLerpValue(-50, 0, Time, true), Projectile.rotation, Vector2.UnitY, new Vector2(1f * small, 2f), 0, 0);
+                Color color = new GradientColor(SlimeUtils.GoozColors, 0.1f, 0.1f).ValueAt(Time + colOffset) * small;
+                color.A = 0;
+                Asset<Texture2D> tell = TextureAssets.Extra[178];
+                Main.EntitySpriteDraw(tell.Value, Projectile.Center - Main.screenPosition, null, color * 0.7f * Utils.GetLerpValue(-50, 0, Time, true), Projectile.velocity.ToRotation(), Vector2.UnitY, new Vector2(2f * small, 5f), 0, 0);
+                Main.EntitySpriteDraw(tell.Value, Projectile.Center - Main.screenPosition, null, color * 1.5f * Utils.GetLerpValue(-50, 0, Time, true), Projectile.velocity.ToRotation(), Vector2.UnitY, new Vector2(1f * small, 2f), 0, 0);
             }
-
-            if (points != null) {
-                vertexStrip ??= new VertexStrip();
+            if (Time > 0) {
+                VertexStrip strip = new VertexStrip();
                 float[] rotations = new float[points.Count];
-                for (int i = 0; i < points.Count - 1; i++) {
-                    rotations[i] = points[i].AngleFrom(points[i + 1]);
-                }
-                rotations[^1] = rotations[^2];
+                for (int i = 0; i < points.Count - 1; i++)
+                    rotations[i] = points[i].AngleTo(points[i + 1]);
 
-                vertexStrip.PrepareStrip(points.ToArray(), rotations, ColorFunction, WidthFunction, -Main.screenPosition, points.Count / 2, true);
+                rotations[points.Count - 1] = points[points.Count - 2].AngleTo(endPoint);
+
+                strip.PrepareStrip(points.ToArray(), rotations, ColorFunction, WidthFunction, -Main.screenPosition, points.Count, true);
 
                 Effect lightningEffect = AssetDirectory.Effects.GooLightning.Value;
                 lightningEffect.Parameters["uTransformMatrix"].SetValue(Main.GameViewMatrix.NormalizedTransformationmatrix);
-                lightningEffect.Parameters["uTexture0"].SetValue(AssetDirectory.Textures.Goozma.Lightning.Value);
-                lightningEffect.Parameters["uTexture1"].SetValue(AssetDirectory.Textures.Goozma.LightningGlow.Value);
-                lightningEffect.Parameters["uNoiseTexture"].SetValue(AssetDirectory.Textures.Noise[7].Value);
-                lightningEffect.Parameters["uTime"].SetValue(Projectile.localAI[1] * 0.05f);
+                lightningEffect.Parameters["uTexture"].SetValue(AssetDirectory.Textures.Goozma.Lightning.Value);
+                lightningEffect.Parameters["uGlow"].SetValue(AssetDirectory.Textures.Goozma.LightningGlow.Value);
+                lightningEffect.Parameters["uColor"].SetValue(Vector3.One);
+                lightningEffect.Parameters["uTime"].SetValue(-Projectile.localAI[0] * 0.05f);
+                lightningEffect.Parameters["uBackPower"].SetValue(0.5f);
                 lightningEffect.CurrentTechnique.Passes[0].Apply();
-                
-                vertexStrip.DrawTrail();
+
+                strip.DrawTrail();
 
                 Main.pixelShader.CurrentTechnique.Passes[0].Apply();
-
-                Texture2D glow = AssetDirectory.Textures.Glow[1].Value;
-                float scale = Projectile.scale * (float)Math.Sqrt(1f - Time / 51f);
-                Color endColor = new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(Time + colOffset + 48f) with { A = 0 };
-                Main.EntitySpriteDraw(glow, points[^1] - Main.screenPosition, null, endColor, Projectile.rotation, glow.Size() * 0.5f, scale, 0, 0);
-                Main.EntitySpriteDraw(glow, points[^1] - Main.screenPosition, null, Color.Lerp(endColor, Color.White, 0.4f) with { A = 0 }, Projectile.rotation, glow.Size() * 0.5f, scale * 0.5f, 0, 0);
-                Main.EntitySpriteDraw(glow, points[^1] - Main.screenPosition, null, Color.Lerp(endColor, Color.White, 0.7f) with { A = 0 }, Projectile.rotation, glow.Size() * 0.5f, scale * 0.3f, 0, 0);
-                Main.EntitySpriteDraw(glow, points[^1] - Main.screenPosition, null, Color.Lerp(endColor, Color.White, 0.7f) with { A = 0 }, Projectile.rotation, glow.Size() * 0.5f, scale * 0.1f, 0, 0);
             }
 
             return false;
@@ -192,16 +186,16 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
         public Color ColorFunction(float progress)
         {
-            Color color = new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(Time + colOffset + progress * 50) with { A = 40 };
-            float size = Collides == 0 ? 1.5f : 1f;
-            return color * (float)Math.Pow(1f - Time / 60f, 0.6f) * size;
+            Color color = new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(Projectile.localAI[0] + progress * 120);
+            float small = Collides == 0 ? 1f : 0.7f;
+            return color * (float)Math.Pow(1f - (Time / 30f), 0.6f) * small;
         }
 
         public float WidthFunction(float progress)
         {
-            float width = 160f * MathF.Sqrt(1f - progress * 0.44f) * MathF.Pow(0.7f + progress * 0.3f, 2) * (float)Math.Sqrt(1f - Time / 51f);
-            float size = Collides == 0 ? Collides == 2 ? 1f : 1.66f : 0.8f;
-            return width * size;
+            float width = (50f + (float)Math.Sqrt(Utils.GetLerpValue(0.1f, 0.5f, progress, true) * Utils.GetLerpValue(0.9f, 0.5f, progress, true)) * 100f) * (float)Math.Pow(1f - (Time / 30f), 0.8f);
+            float small = Collides == 0 ? (Collides == 2 ? 1f : 1.4f) : 0.33f;
+            return width * small;
         }
     }
 }

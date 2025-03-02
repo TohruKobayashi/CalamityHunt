@@ -93,6 +93,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                     outerTarget = Main.npc[owner].Center - new Vector2(distanceOut * (float)Math.Sqrt(Utils.GetLerpValue(-150, -90, Time + WhichOne % slimeCount * 40, true)), 0).RotatedBy(MathHelper.TwoPi / slimeCount * WhichOne + CupGameRotation);
                 }
 
+                float speedMult = Time < -60 ? 0.2f : 0.1f;
                 CupGameRotation += Main.npc[owner].velocity.X * 0.001f;
                 Vector2 baseVelocity = Projectile.DirectionTo(outerTarget).SafeNormalize(Vector2.Zero) * Projectile.Distance(outerTarget) * 0.2f;
                 Projectile.velocity = baseVelocity;

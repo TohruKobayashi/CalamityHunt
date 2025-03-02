@@ -460,7 +460,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         private void PixieBall()
         {
-            int attackLength = 1200;
+            int attackLength = (int)Projectiles.PixieBall.MaxTime;
             NPC.rotation = NPC.velocity.X * 0.022f;
 
             if (Time < 60) {
@@ -502,10 +502,10 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             }
 
             if (Time > 60) {
-                if (NPC.localAI[1] == 1) {
+                if (NPC.localAI[1] % 2 == 1) {
                     SoundEngine.PlaySound(SoundID.DeerclopsIceAttack.WithPitchOffset(0.5f).WithVolumeScale(1.5f), NPC.Center);
 
-                    shieldBreakPercent++;
+                    shieldBreakPercent += 0.5f;
                     NPC.localAI[1]++;
                 }
             }
