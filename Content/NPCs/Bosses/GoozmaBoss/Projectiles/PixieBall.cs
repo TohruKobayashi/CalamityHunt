@@ -42,7 +42,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         public override void AI()
         {
             Projectile.rotation += Projectile.velocity.Length() * 0.01f * (Projectile.velocity.X > 0 ? 1 : -1);
-            Projectile.scale = (float)Math.Sqrt(Utils.GetLerpValue(0, 17, Time, true) * Utils.GetLerpValue(480, 460, Time, true)) * 1.3f;
+            Projectile.scale = (float)Math.Sqrt(Utils.GetLerpValue(0, 17, Time, true) * Utils.GetLerpValue(1080, 1020, Time, true)) * 1.3f;
             owner = -1;
             if (!Main.npc.Any(n => n.type == ModContent.NPCType<DivineGargooptuar>() && n.active)) {
                 Projectile.active = false;
@@ -65,8 +65,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                     Projectile.velocity += Main.rand.NextVector2Circular(3, 3);
                 }
 
-                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.DirectionTo(Main.npc[owner].Center).SafeNormalize(Vector2.Zero) * 3f, 0.03f) * Utils.GetLerpValue(500, 470, Time, true);
-                Projectile.velocity += Projectile.DirectionTo(Main.npc[owner].Center).SafeNormalize(Vector2.Zero) * (0.3f + Utils.GetLerpValue(500, 800, Projectile.Distance(Main.npc[owner].Center), true));
+                Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.DirectionTo(Main.npc[owner].Center).SafeNormalize(Vector2.Zero) * 3f, 0.03f) * Utils.GetLerpValue(1300, 1270, Time, true);
+                Projectile.velocity += Projectile.DirectionTo(Main.npc[owner].Center).SafeNormalize(Vector2.Zero) * (0.3f + Utils.GetLerpValue(800, 1200, Projectile.Distance(Main.npc[owner].Center), true));
             }
 
             if (Cooldown <= 0) {
@@ -153,11 +153,11 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 Projectile.Kill();
             }
 
-            if (Time > 400) {
+            if (Time > 1000) {
                 Projectile.velocity *= 0.9f;
             }
 
-            if (Time > 480) {
+            if (Time > 1080) {
                 Projectile.Kill();
             }
 
@@ -190,7 +190,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Projectile.oldPos[0] = Projectile.Center;
             Projectile.oldRot[0] = Projectile.rotation;
 
-            if (Time > 400) {
+            if (Time > 1000) {
                 for (int i = 0; i < 40 - Time / 2; i++) {
                     Color glowColor = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.5f, 0);
                     glowColor.A /= 2;

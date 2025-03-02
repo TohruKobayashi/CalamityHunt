@@ -484,12 +484,11 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             else if (Time < attackLength - 100) {
                 squishFactor = Vector2.Lerp(squishFactor, new Vector2(1f + (float)Math.Cos(Time * 0.05f) * 0.2f, 1f + (float)Math.Cos(Time * 0.05f + MathHelper.Pi) * 0.2f), 0.3f);
 
-                /*Vector2 targetPos = Target.Center;
-                if (Main.projectile.Any(n => n.active && n.type == ModContent.ProjectileType<PixieBall>())) {
-                    targetPos = Vector2.Lerp(targetPos, Main.projectile.First(n => n.active && n.type == ModContent.ProjectileType<PixieBall>()).Center, 0.5f);
+                Vector2 targetPos = Target.Center;
+                if (Target.Center.Distance(NPC.Center) > 1000) {
+                    NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * MathF.Pow(NPC.Distance(targetPos) * 0.1f, 2f) * 0.01f, 0.04f);
                 }
-                NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(targetPos).SafeNormalize(Vector2.Zero) * MathF.Pow(NPC.Distance(targetPos) * 0.1f, 2f) * 0.01f, 0.02f);
-                */
+                
 
                 NPC.velocity *= 0.9f;
                 //if (Time % 80 == 0)
@@ -814,6 +813,13 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
         public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             GoozmaResistances.GoozmaProjectileResistances(projectile, ref modifiers);
+        }
+
+        public override bool CheckActive()
+        {
+            if (Attack == (float)AttackList.PixieBall)
+                return false;
+            return true;
         }
     }
 }
