@@ -676,8 +676,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         int slimeAttack = GetSlimeAttack();
 
                         //Test slimes and attacks
-                        currentSlime = 1;
-                        slimeAttack = 2;
+                        //currentSlime = 1;
+                        //slimeAttack = 2;
 
                         if (Main.zenithWorld) {
                             currentSlime = (short)Main.rand.Next(0, 4);
