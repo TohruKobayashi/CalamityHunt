@@ -24,6 +24,8 @@ namespace CalamityHunt.Content.Items.Misc.AuricSouls
 {
     public class AshenSoul : ModItem
     {
+        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(HUtils.CalamityMod);
+
         public static Texture2D chainTexture;
         public static Texture2D iconTexture;
 

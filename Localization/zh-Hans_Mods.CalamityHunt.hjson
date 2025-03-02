@@ -591,6 +591,16 @@ Items: {
 		// DisplayName: Music Box (Jteoh Goozma Desperate)
 		// Tooltip: ""
 	}
+
+	SludgeSpongeEmpty: {
+		// DisplayName: Sludge Sponge Empty
+		// Tooltip: ""
+	}
+
+	SludgeSpongeFull: {
+		// DisplayName: Sludge Sponge Full
+		// Tooltip: ""
+	}
 }
 
 NPCs: {

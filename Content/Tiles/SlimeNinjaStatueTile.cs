@@ -1,4 +1,5 @@
-﻿using CalamityHunt.Common.Systems;
+﻿using System.Linq;
+using CalamityHunt.Common.Systems;
 using CalamityHunt.Content.Items.Misc;
 using CalamityHunt.Content.NPCs;
 using Humanizer;
@@ -55,13 +56,13 @@ namespace CalamityHunt.Content.Tiles
                     if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>())) {
                         player.cursorItemIconID = ModContent.ItemType<PluripotentSpawnEgg>();
                     }
-                    else if (player.HasItem(ModContent.ItemType<CancelSlimeRain>())) {
-                        player.cursorItemIconID = ModContent.ItemType<CancelSlimeRain>();
+                    else if (player.HasItem(ModContent.ItemType<SludgeSpongeEmpty>())) {
+                        player.cursorItemIconID = ModContent.ItemType<SludgeSpongeEmpty>();
                     }
                 }
                 else if (!Main.slimeRain) {
-                    if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>()) || player.HasItem(ModContent.ItemType<GelatinousCatalyst>())) {
-                        player.cursorItemIconID = ModContent.ItemType<GelatinousCatalyst>();
+                    if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>()) || player.HasItem(ModContent.ItemType<SludgeSpongeFull>())) {
+                        player.cursorItemIconID = ModContent.ItemType<SludgeSpongeFull>();
                     }
                 }
             }
@@ -125,7 +126,7 @@ namespace CalamityHunt.Content.Tiles
                             packet.Send();
                         }
                     }
-                    else if (player.HasItem(ModContent.ItemType<CancelSlimeRain>()) && Main.slimeRain) {
+                    else if (player.HasItem(ModContent.ItemType<SludgeSpongeEmpty>()) && Main.slimeRain) {
                         foreach (Vector2 position in GoozmaSystem.slimeStatuePoints) {
                             for (int r = 0; r < 5; r++) {
                                 Dust d = Dust.NewDustDirect(position - new Vector2(16, 0), 32, 38, DustID.TintableDust, 0, -Main.rand.NextFloat(2f, 5f), 160, new Color(200, 200, 255), 1f + Main.rand.NextFloat());
@@ -147,6 +148,11 @@ namespace CalamityHunt.Content.Tiles
                             packet.Send();
                         }
 
+                        Item itemToSwap = player.inventory.First((Item i) => i.type == ModContent.ItemType<SludgeSpongeEmpty>());
+                        bool favorited = itemToSwap.favorited;
+                        itemToSwap.SetDefaults(ModContent.ItemType<SludgeSpongeFull>());
+                        //itemToSwap.stack++;
+                        itemToSwap.favorited = favorited;
 
                         SoundStyle spawnsound = AssetDirectory.Sounds.SlimeRainActivate;
                         SoundEngine.PlaySound(AssetDirectory.Sounds.SlimeRainActivate, new Vector2(center * 16, (top - 1) * 16));
@@ -174,11 +180,10 @@ namespace CalamityHunt.Content.Tiles
                                 packet.Send();
                             }
 
-
                             SoundStyle spawnsound = AssetDirectory.Sounds.SlimeRainActivate;
                             SoundEngine.PlaySound(AssetDirectory.Sounds.SlimeRainActivate, new Vector2(center * 16, (top - 1) * 16));
                         }
-                        else if (player.ConsumeItem(ModContent.ItemType<GelatinousCatalyst>())) {
+                        else if (player.HasItem(ModContent.ItemType<SludgeSpongeFull>())) {
                             foreach (Vector2 position in GoozmaSystem.slimeStatuePoints) {
                                 for (int r = 0; r < 5; r++) {
                                     Dust d = Dust.NewDustDirect(position - new Vector2(16, 0), 32, 38, DustID.TintableDust, 0, -Main.rand.NextFloat(2f, 5f), 160, new Color(200, 200, 255), 1f + Main.rand.NextFloat());
@@ -199,7 +204,12 @@ namespace CalamityHunt.Content.Tiles
                                 packet.Write((byte)CalamityHunt.PacketType.SlimeRainActivate);
                                 packet.Send();
                             }
-                            
+
+                            Item itemToSwap = player.inventory.First((Item i) => i.type == ModContent.ItemType<SludgeSpongeFull>());
+                            bool favorited = itemToSwap.favorited;
+                            itemToSwap.SetDefaults(ModContent.ItemType<SludgeSpongeEmpty>());
+                            //itemToSwap.stack++;
+                            itemToSwap.favorited = favorited;
 
                             SoundStyle spawnsound = AssetDirectory.Sounds.SlimeRainActivate;
                             SoundEngine.PlaySound(AssetDirectory.Sounds.SlimeRainActivate, new Vector2(center * 16, (top - 1) * 16));

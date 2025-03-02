@@ -593,6 +593,16 @@ Items: {
 		DisplayName: Музыкальная шкатулка (Гузма: Jteoh, отчаяние)
 		Tooltip: ""
 	}
+
+	SludgeSpongeEmpty: {
+		// DisplayName: Sludge Sponge Empty
+		// Tooltip: ""
+	}
+
+	SludgeSpongeFull: {
+		// DisplayName: Sludge Sponge Full
+		// Tooltip: ""
+	}
 }
 
 NPCs: {

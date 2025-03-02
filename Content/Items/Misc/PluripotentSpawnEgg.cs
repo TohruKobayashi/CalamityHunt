@@ -36,7 +36,7 @@ namespace CalamityHunt.Content.Items.Misc
                 CreateRecipe()
                 .AddIngredient(calamity.Find<ModItem>("AscendantSpiritEssence").Type, 10)
                 .AddIngredient(ItemID.Gel, 250)
-                .AddIngredient<GelatinousCatalyst>()
+                .AddIngredient<SludgeSpongeFull>()
                 .AddTile<SlimeNinjaStatueTile>()
                 .Register();
             }
@@ -44,7 +44,7 @@ namespace CalamityHunt.Content.Items.Misc
                 CreateRecipe()
                 .AddIngredient(ItemID.LunarBar, 5)
                 .AddIngredient(ItemID.Gel, 250)
-                .AddIngredient<GelatinousCatalyst>()
+                .AddIngredient<SludgeSpongeFull>()
                 .AddTile<SlimeNinjaStatueTile>()
                 .Register();
             }

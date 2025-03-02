@@ -15,7 +15,7 @@ namespace CalamityHunt.Common.GlobalNPCs
                 foreach (Player p in Main.player) {
                     if (p == null) continue;
                     if (!p.active) continue;
-                    if (!p.HasItem(ModContent.ItemType<GelatinousCatalyst>())) continue;
+                    if (!p.HasItem(ModContent.ItemType<SludgeSpongeFull>())) continue;
                     npc.chaseable = false;
                     break;
                 }

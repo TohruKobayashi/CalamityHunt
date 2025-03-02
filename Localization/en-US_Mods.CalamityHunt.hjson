@@ -594,6 +594,20 @@ Items: {
 		DisplayName: Music Box (Jteoh Goozma Desperate)
 		Tooltip: ""
 	}
+
+	SludgeSpongeEmpty: {
+		DisplayName: Sludge Sponge
+		Tooltip: Use on an empowered Slime Ninja Statue to end a Slime Rain
+	}
+
+	SludgeSpongeFull: {
+		DisplayName: Engorged Sludge Sponge
+		Tooltip:
+			'''
+			Use on an empowered Slime Ninja Statue to start a Slime Rain
+			'Have fun wringing it out'
+			'''
+	}
 }
 
 NPCs: {
