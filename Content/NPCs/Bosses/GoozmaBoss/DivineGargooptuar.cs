@@ -460,6 +460,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         private void PixieBall()
         {
+            int attackLength = 1200;
             NPC.rotation = NPC.velocity.X * 0.022f;
 
             if (Time < 60) {
@@ -480,15 +481,17 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     ? Vector2.Lerp(Vector2.One, new Vector2(1.5f, 0.6f), (float)Math.Sqrt(Utils.GetLerpValue(0, 50, Time, true)))
                     : Vector2.SmoothStep(new Vector2(1.5f, 0.8f), Vector2.One, (float)Math.Sqrt(Utils.GetLerpValue(50, 60, Time, true)));
             }
-            else if (Time < 500) {
+            else if (Time < attackLength - 100) {
                 squishFactor = Vector2.Lerp(squishFactor, new Vector2(1f + (float)Math.Cos(Time * 0.05f) * 0.2f, 1f + (float)Math.Cos(Time * 0.05f + MathHelper.Pi) * 0.2f), 0.3f);
 
-                Vector2 targetPos = Target.Center;
+                /*Vector2 targetPos = Target.Center;
                 if (Main.projectile.Any(n => n.active && n.type == ModContent.ProjectileType<PixieBall>())) {
                     targetPos = Vector2.Lerp(targetPos, Main.projectile.First(n => n.active && n.type == ModContent.ProjectileType<PixieBall>()).Center, 0.5f);
                 }
                 NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(targetPos).SafeNormalize(Vector2.Zero) * MathF.Pow(NPC.Distance(targetPos) * 0.1f, 2f) * 0.01f, 0.02f);
+                */
 
+                NPC.velocity *= 0.9f;
                 //if (Time % 80 == 0)
                 //    for (int i = 0; i < Main.rand.Next(10, 30); i++)
                 //        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Main.rand.NextVector2Circular(10, 10) - Vector2.UnitY * 10, ModContent.ProjectileType<GelCrystalShard>(), GetDamage(3), 0);
@@ -523,7 +526,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             //    }
             //}
 
-            if (Time > 600) {
+            if (Time > attackLength) {
                 ShatterShield();
                 Reset();
             }

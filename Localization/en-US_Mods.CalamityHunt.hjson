@@ -570,7 +570,6 @@ Items: {
 		Tooltip: Absorb to gain immense, radioactive powers
 	}
 
-
 	CancelSlimeRain: {
 		Tooltip: ""
 		DisplayName: Cancel Slime Rain
@@ -711,6 +710,7 @@ Projectiles: {
 	FissionFlyerProjectile.DisplayName: Fission Flyer
 	CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
 	FissionFlayerProjectile.DisplayName: to be determined
+	SlimeShotRedirecting.DisplayName: Slime Shot
 }
 
 Chat: {
@@ -780,7 +780,6 @@ Tiles: {
 	GoozmaMusicBoxP2Tile.MapEntry: Music Box
 	GoozmaSoulMusicBoxTile.MapEntry: Music Box
 	YharonSoulMusicBoxTile.MapEntry: Music Box
-	ChromaticCampfirePlaced.MapEntry: Chromatic Campfire
 	ChromaticCampfirePlaced.MapEntry: Chromatic Campfire Placed
 	GoozmaMusicBoxExiledP1Tile.MapEntry: Goozma Music Box Exiled P1 Tile
 	GoozmaMusicBoxExiledP2Tile.MapEntry: Goozma Music Box Exiled P2 Tile

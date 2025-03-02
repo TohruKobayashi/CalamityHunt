@@ -676,8 +676,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         int slimeAttack = GetSlimeAttack();
 
                         //Test slimes and attacks
-                        //currentSlime = 3;
-                        //slimeAttack = 2;
+                        currentSlime = 1;
+                        slimeAttack = 2;
 
                         if (Main.zenithWorld) {
                             currentSlime = (short)Main.rand.Next(0, 4);
@@ -2097,16 +2097,13 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 break;
 
             case SortedProjectileAttackTypes.PixieBallDisruption:
-                if (Time % 80 == 75) {
+                if (Time % 90 < 20 && Time % 3 == 1 && Time > 110) {
                     if (Main.netMode != NetmodeID.MultiplayerClient) {
-                        int count = Main.rand.Next(10, 18);
-                        for (int i = 0; i < count; i++) {
-                            Projectile dart = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2(Main.rand.Next(10, 20), 0).RotatedBy(MathHelper.TwoPi / count * i), ModContent.ProjectileType<BloatedBlast>(), GetDamage(1), 0,
-                                ai1: 1
-                                );
-                            //dart.ai[1] = 1;
-                            dart.localAI[0] = NPC.localAI[0] + i / (float)count * 90f;
-                        }
+                        
+                        Projectile dart = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, new Vector2(NPC.direction, 0).RotatedByRandom(MathHelper.TwoPi) * Main.rand.Next(6, 8), ModContent.ProjectileType<SlimeShotRedirecting>(), GetDamage(1), 0,
+                            ai0: -60
+                            );
+                        
                         SoundEngine.PlaySound(dartSound, NPC.Center);
                     }
                 }

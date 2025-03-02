@@ -569,6 +569,11 @@ Items: {
 		Tooltip: Поглотите, чтобы получить необъятные радиоактивные силы
 	}
 
+	CancelSlimeRain: {
+		// Tooltip: ""
+		// DisplayName: Cancel Slime Rain
+	}
+
 	GoozmaMusicBoxExiledP1: {
 		DisplayName: Музыкальная шкатулка (Гузма: Изгнание)
 		Tooltip: ""
@@ -587,11 +592,6 @@ Items: {
 	GoozmaMusicBoxJteohP2: {
 		DisplayName: Музыкальная шкатулка (Гузма: Jteoh, отчаяние)
 		Tooltip: ""
-	}
-
-	CancelSlimeRain: {
-		// Tooltip: ""
-		// DisplayName: Cancel Slime Rain
 	}
 }
 
@@ -709,6 +709,7 @@ Projectiles: {
 	FissionFlyerProjectile.DisplayName: Расщепляющий резак
 	CometKunaiSuperProjectile.DisplayName: Кометный кунай супер
 	FissionFlayerProjectile.DisplayName: требует определения
+	// SlimeShotRedirecting.DisplayName: Slime Shot
 }
 
 Chat: {
