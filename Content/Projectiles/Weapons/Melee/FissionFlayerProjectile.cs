@@ -33,8 +33,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
             Projectile.hostile = false;
             Projectile.manualDirectionChange = true;
             Projectile.hide = true;
-            Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 30;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 15;
             Projectile.ownerHitCheck = true;
             Projectile.timeLeft = 5;
 

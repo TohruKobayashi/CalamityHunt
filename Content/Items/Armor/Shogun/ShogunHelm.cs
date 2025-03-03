@@ -1,4 +1,5 @@
-﻿using CalamityHunt.Common.Players;
+﻿using System.Reflection;
+using CalamityHunt.Common.Players;
 using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Items.Rarities;
 using Microsoft.Xna.Framework;
@@ -8,6 +9,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static CalamityHunt.Common.ModCompatibility;
 
 namespace CalamityHunt.Content.Items.Armor.Shogun
 {
@@ -54,9 +56,19 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
         {
             player.setBonus = Language.GetOrRegister(Mod.GetLocalizationKey("SetBonuses.Shogun")).Value;
             player.jumpSpeedBoost += 2f;
+            player.noKnockback = true;
             player.GetModPlayer<ShogunArmorPlayer>().active = true;
             player.GetDamage(DamageClass.Generic) += 0.18f;
             player.maxMinions += 5;
+
+            // if holding a rogue weapon, give the player stealth
+            if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
+                calamity.TryFind("RogueDamageClass", out DamageClass d);
+                if (player.HeldItem.DamageType == d) {
+                    calamity.Call("SetWearingRogueArmor", player, true);
+                    calamity.Call("AddMaxStealth", player, 1f);
+                }
+            }
         }
     }
 

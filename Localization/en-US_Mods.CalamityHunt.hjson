@@ -928,13 +928,14 @@ OrRev: " or Revengeance"
 SetBonuses.Shogun:
 	'''
 	17% increased damage and +5 max minions
+	+100 maximum stealth while holding a Rogue weapon
 	{$CommonItemTooltip.FlightAndSlowfall}
 	Wearing any wings overrides this flight
 	{$CommonItemTooltip.PressDownToHover}
 	Allows the ability to dash and enhances other dashes
 	Hold DOWN to fastfall
 	Increases jump speed 
-	Grants immunity to many endgame and movement-based debuffs
+	Grants immunity to knockback and many endgame debuffs
 	'''
 StickyHandStats:
 	'''

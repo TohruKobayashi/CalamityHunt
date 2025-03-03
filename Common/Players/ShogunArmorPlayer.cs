@@ -355,7 +355,7 @@ namespace CalamityHunt.Common.Players
 
                     // clear the default dash with our own dash if u have it
                     if (ModLoader.HasMod(HUtils.CalamityMod)) {
-                        ModPlayer calPlayer = HUtils.GetCalamityModPlayer("CalamityPlayer");
+                        ModPlayer calPlayer = HUtils.GetCalamityModPlayer();
                         PropertyInfo dashIDProperty = calPlayer.GetType().GetProperty("DashID");
 
                         if (dashIDProperty.GetValue(calPlayer).ToString() == "Default Dash") {

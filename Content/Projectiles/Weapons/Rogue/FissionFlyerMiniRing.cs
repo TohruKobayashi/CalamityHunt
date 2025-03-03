@@ -24,6 +24,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
             Projectile.hostile = false;
             Projectile.timeLeft = 240;
             Projectile.extraUpdates = 1;
+            Projectile.usesIDStaticNPCImmunity = true;
+            Projectile.idStaticNPCHitCooldown = 15;
             Projectile.DamageType = DamageClass.Throwing;
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 DamageClass d;
