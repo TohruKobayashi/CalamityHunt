@@ -73,22 +73,15 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
                 }
 
                 float ai = 0;
-                if (Main.rand.NextBool(30)) {
-                    type = ModContent.ProjectileType<CometKunaiCritProjectile>();
-                    velocity *= Main.rand.NextFloat(2.5f, 5f);
-                    damage *= 3;
-                    ai = Main.rand.NextFloat(2);
-                }
-                else {
-                    Vector2 newVelocity = velocity * Main.rand.NextFloat(0.7f, 1f);
-                    float randRot = Main.rand.NextFloat(-1f, 1f);
-                    position += newVelocity.RotatedBy(randRot * 0.6f) * 2;
-                    velocity = newVelocity.RotatedBy(randRot * 0.05f);
-                }
+                Vector2 newVelocity = velocity * Main.rand.NextFloat(0.7f, 1f);
+                float randRot = Main.rand.NextFloat(-1f, 1f);
+                position += newVelocity.RotatedBy(randRot * 0.6f) * 2;
+                velocity = newVelocity.RotatedBy(randRot * 0.05f);
 
                 Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
                 proj.rotation = ai;
                 proj.ai[1] = ai;
+                ModLoader.GetMod(HUtils.CalamityMod).Call("ConsumeStealth", Main.LocalPlayer);
             }
 
             return false;
