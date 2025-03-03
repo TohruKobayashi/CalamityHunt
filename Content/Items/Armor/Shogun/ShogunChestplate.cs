@@ -43,6 +43,12 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
                 Item.rare = r.Type;
             }
         }
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+                .AddCustomShimmerResult(ModContent.ItemType<ShogunWings>())
+                .Register();
+        }
 
         public override void UpdateEquip(Player player)
         {
