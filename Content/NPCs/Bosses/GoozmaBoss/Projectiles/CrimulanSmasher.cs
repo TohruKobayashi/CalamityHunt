@@ -133,7 +133,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 }
             }
 
-            Main.EntitySpriteDraw(texture.Value, Projectile.Bottom - Main.screenPosition, null, Color.White, Projectile.rotation, texture.Size() * new Vector2(0.5f, 1f), Projectile.scale * squish * (0.5f + fadeOut * 0.5f), 0, 0);
+            Main.EntitySpriteDraw(texture.Value, Projectile.Bottom - Main.screenPosition, null, Color.White * MathHelper.Lerp(1, 0, Utils.GetLerpValue(15, 20, Time, true)), Projectile.rotation, texture.Size() * new Vector2(0.5f, 1f), Projectile.scale * squish * (0.5f + fadeOut * 0.5f), 0, 0);
 
             return false;
         }

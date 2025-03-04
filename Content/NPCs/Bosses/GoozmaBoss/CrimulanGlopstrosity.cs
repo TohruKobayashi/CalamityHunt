@@ -15,6 +15,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.Graphics.CameraModifiers;
 using Terraria.ID;
 using Terraria.ModLoader;
+using XPT.Core.Audio.MP3Sharp.IO;
 using static CalamityHunt.Common.Systems.ConditionalValue;
 
 namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
@@ -22,6 +23,23 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
     [AutoloadBossHead]
     public class CrimulanGlopstrosity : ModNPC
     {
+        /// <summary>
+        /// When the telegraph is played
+        /// </summary>
+        public const int Crim2Telegraph = 65;
+        /// <summary>
+        /// When one slam ends
+        /// </summary>
+        public const int Crim2SlamTimeMax = 140;
+        /// <summary>
+        /// When the clones are spawned
+        /// </summary>
+        public const int Crim2ImpactMoment = 120;
+        /// <summary>
+        /// How long one attack cycle lasts
+        /// </summary>
+        public const int Crim2SlamCycleTime = 200;
+
         public override void SetStaticDefaults()
         {
             Main.npcFrameCount[Type] = 4;
@@ -232,7 +250,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             }
         }
 
-        private Vector2 saveTarget;
+        public Vector2 saveTarget;
 
         // attempt to slam onto the player, then create spreads of clones on impact and repeat
         private void SlamRain()
@@ -365,192 +383,122 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             int waitTime = 60; // how long he waits before jumping
             int firstJumpUp = 32; // when he first begins to jump
             int slowAfterJump = 35; // when he starts slowing down
-            int slamDuration = 80; // how long the first slam lasts
-            int slamDuration2 = 150; // how long the second slam lasts
+            int jumpCount = 2; // how many times he jumps
+            int waitAfterFinal = 60; // how long he waits after his final jump
+            int totalTime = Crim2SlamCycleTime * jumpCount + waitAfterFinal; // time of the entire attack
 
-            bool disableDamage = true;
+            int minDist = 500; // minimum distance he jumps away on the second slam
+            int maxDist = 700; // maximum distance he jumps away on the second slam
 
-            // produce telegraph 
-            if (Time == waitTime + 5) {
-                SoundStyle createSound = AssetDirectory.Sounds.GoozmaMinions.CrimslimeTelegraph;
-                SoundEngine.PlaySound(createSound.WithVolumeScale(1.5f), NPC.Center);
-            }
+            bool disableDamage = true; // set false to enable contact damage
 
-            // big jump
-            if (Time < firstJumpUp) {
-                NPC.velocity *= 0.1f;
-                squishFactor = new Vector2(1f + (float)Math.Cbrt(Utils.GetLerpValue(15, 56, Time, true)) * 0.4f, 1f - (float)Math.Sqrt(Utils.GetLerpValue(15, 56, Time, true)) * 0.5f);
-                if (Time == 58) {
-                    SoundStyle hop = AssetDirectory.Sounds.Goozma.SlimeJump;
-                    SoundEngine.PlaySound(hop, NPC.Center);
-                    SoundEngine.PlaySound(SoundID.QueenSlime, NPC.Center);
-                }
-            }
+            float localTime = Time % Crim2SlamCycleTime;
+            int jumpNumber = (int)Math.Ceiling(Time / Crim2SlamCycleTime);
 
-            // slow down jump and prepare to slam down
-            else if (Time < slowAfterJump) {
-                NPC.velocity.Y = -14;
-                squishFactor = new Vector2(0.5f, 1.4f);
-            }
-
-            // SLAM !!
-            else if (Time < waitTime + slamDuration) {
-                useNinjaSlamFrame = true;
-
-                Vector2 airTarget = Target.Center - Vector2.UnitY * 320;
-
-                if (Time < waitTime + 20) {
-                    squishFactor = new Vector2(1f - Utils.GetLerpValue(waitTime + 18, waitTime, Time, true) * 0.5f, 1f + (float)Math.Cbrt(Utils.GetLerpValue(waitTime + 18, waitTime, Time, true)) * 0.4f);
+            if (Time <= jumpCount * Crim2SlamCycleTime) {
+                // produce telegraph 
+                if (localTime == Crim2Telegraph) {
+                    SoundStyle createSound = AssetDirectory.Sounds.GoozmaMinions.CrimslimeTelegraph;
+                    SoundEngine.PlaySound(createSound.WithVolumeScale(1.5f), NPC.Center);
                 }
 
-                if (Time < waitTime + 50) {
-                    NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(airTarget).SafeNormalize(Vector2.Zero) * Math.Max(2, NPC.Distance(airTarget)) * 0.1f, 0.06f) * Utils.GetLerpValue(waitTime + 50, waitTime + 35, Time, true);
-                    saveTarget = Target.Center;
-                    NPC.rotation = NPC.rotation.AngleLerp(NPC.Top.AngleTo(NPC.FindSmashSpot(saveTarget)) - MathHelper.PiOver2, 0.5f) * 0.4f;
+                // big jump
+                if (localTime < firstJumpUp) {
+                    NPC.velocity *= 0.1f;
+                    squishFactor = new Vector2(1f + (float)Math.Cbrt(Utils.GetLerpValue(15, 56, localTime, true)) * 0.4f, 1f - (float)Math.Sqrt(Utils.GetLerpValue(15, 56, localTime, true)) * 0.5f);
+                    if (localTime == 58) {
+                        SoundStyle hop = AssetDirectory.Sounds.Goozma.SlimeJump;
+                        SoundEngine.PlaySound(hop, NPC.Center);
+                        SoundEngine.PlaySound(SoundID.QueenSlime, NPC.Center);
+                    }
                 }
-                else {
-                    disableDamage = false;
-                    NPC.rotation = NPC.rotation.AngleLerp(NPC.Top.AngleTo(NPC.FindSmashSpot(saveTarget)) - MathHelper.PiOver2, 0.2f);
-                    NPC.Center = Vector2.Lerp(NPC.Center, NPC.FindSmashSpot(saveTarget), Utils.GetLerpValue(waitTime + 53, waitTime + 60, Time, true));
-                    NPC.velocity *= 0.5f;
 
-                    if (Time < waitTime + 60) {
-                        squishFactor = new Vector2(1f - (float)Math.Pow(Utils.GetLerpValue(waitTime + 50, waitTime + 53, Time, true), 2) * 0.5f, 1f + (float)Math.Pow(Utils.GetLerpValue(waitTime + 50, waitTime + 52, Time, true), 2) * 0.5f);
+                // slow down jump and prepare to slam down
+                else if (localTime < slowAfterJump) {
+                    NPC.velocity.Y = -14;
+                    squishFactor = new Vector2(0.5f, 1.4f);
+                }
+                // save the target location
+                else if (localTime == slowAfterJump) {
+                    saveTarget = Target.Center + Vector2.UnitX * Main.rand.Next(minDist, maxDist) * Main.rand.NextBool().ToDirectionInt();
+                }
+
+                // SLAM !!
+                else if (localTime < Crim2SlamTimeMax) {
+                    useNinjaSlamFrame = true;
+
+                    if (localTime < waitTime + 20) {
+                        squishFactor = new Vector2(1f - Utils.GetLerpValue(waitTime + 18, waitTime, localTime, true) * 0.5f, 1f + (float)Math.Cbrt(Utils.GetLerpValue(waitTime + 18, waitTime, localTime, true)) * 0.4f);
                     }
 
-                    if (Time > waitTime + 60) {
-                        NPC.rotation = 0;
-                        squishFactor = new Vector2(1f + (float)Math.Pow(Utils.GetLerpValue(waitTime + 78, waitTime + 63, Time, true), 2) * 0.6f, 1f - (float)Math.Pow(Utils.GetLerpValue(waitTime + 78, waitTime + 63, Time, true), 4) * 0.8f);
+                    if (localTime < waitTime + 50) {
+                        Vector2 airTarget = saveTarget - Vector2.UnitY * 320;
+
+                        NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(airTarget).SafeNormalize(Vector2.Zero) * Math.Max(2, NPC.Distance(airTarget)) * 0.1f, 0.06f) * Utils.GetLerpValue(waitTime + 50, waitTime + 35, localTime, true);
+                        
+                        NPC.rotation = NPC.rotation.AngleLerp(NPC.Top.AngleTo(NPC.FindSmashSpot(saveTarget)) - MathHelper.PiOver2, 0.5f) * 0.4f;
                     }
+                    else {
+                        disableDamage = false;
+                        NPC.rotation = NPC.rotation.AngleLerp(NPC.Top.AngleTo(NPC.FindSmashSpot(saveTarget)) - MathHelper.PiOver2, 0.2f);
+                        NPC.Center = Vector2.Lerp(NPC.Center, NPC.FindSmashSpot(saveTarget), Utils.GetLerpValue(waitTime + 53, waitTime + 60, localTime, true));
+                        NPC.velocity *= 0.5f;
 
-                    if (Time == waitTime + 60) {
-                        // how many clones are spawned in each direction (multiply by 2 for total clones)
-                        int count = (int)DifficultyBasedValue(12, death: 16, master: 16, masterrev: 18, masterdeath: 20);
-                        // the delay at which clones slam down
-                        int time = (int)DifficultyBasedValue(6, 5, 4, 3, master:4, masterrev: 3, masterdeath: 2);
-                        // how long it takes before the first clone slams down
-                        int telegraphTime = 50;
+                        if (localTime < Crim2ImpactMoment) {
+                            squishFactor = new Vector2(1f - (float)Math.Pow(Utils.GetLerpValue(waitTime + 50, waitTime + 53, localTime, true), 2) * 0.5f, 1f + (float)Math.Pow(Utils.GetLerpValue(waitTime + 50, waitTime + 52, localTime, true), 2) * 0.5f);
+                        }
 
-                        if (Main.netMode != NetmodeID.MultiplayerClient) {
-                            for (int i = 0; i < count; i++) {
-                                Projectile leftProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * 130 - 130 * count - 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
-                                    ai0: -telegraphTime - time * i,
-                                    ai1: -1);
-                                leftProj.localAI[0] = 1;
-                                Projectile rightProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * -130 + 130 * count + 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
-                                    ai0: -telegraphTime - time * i,
-                                    ai1: -1);
-                                rightProj.localAI[0] = 1;
+                        if (localTime > Crim2ImpactMoment) {
+                            NPC.rotation = 0;
+                            squishFactor = new Vector2(1f + (float)Math.Pow(Utils.GetLerpValue(waitTime + 78, waitTime + 63, localTime, true), 2) * 0.6f, 1f - (float)Math.Pow(Utils.GetLerpValue(waitTime + 78, waitTime + 63, localTime, true), 4) * 0.8f);
+                        }
+
+                        if (localTime == Crim2ImpactMoment) {
+                            // how many clones are spawned in each direction (multiply by 2 for total clones)
+                            int count = (int)DifficultyBasedValue(12, death: 16, master: 16, masterrev: 18, masterdeath: 20);
+                            // the delay at which clones slam down
+                            int time = (int)DifficultyBasedValue(6, 5, 4, 3, master: 4, masterrev: 3, masterdeath: 2);
+                            // how long it takes before the first clone slams down
+                            int telegraphlocalTime = 50;
+
+                            if (Main.netMode != NetmodeID.MultiplayerClient) {
+                                Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Bottom, Vector2.Zero, ModContent.ProjectileType<CrimulanShockwave>(), 0, 0, ai1: 2500);
+
+                                for (int i = 0; i < count; i++) {
+                                    Projectile leftProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * 130 - 130 * count - 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
+                                        ai0: -telegraphlocalTime - time * i,
+                                        ai1: -1);
+                                    leftProj.localAI[0] = 1;
+                                    Projectile rightProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * -130 + 130 * count + 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
+                                        ai0: -telegraphlocalTime - time * i,
+                                        ai1: -1);
+                                    rightProj.localAI[0] = 1;
+                                }
+                            }
+
+                            SoundStyle slam = AssetDirectory.Sounds.GoozmaMinions.SlimeSlam;
+                            SoundEngine.PlaySound(slam, NPC.Center);
+
+                            for (int i = 0; i < Main.rand.Next(30, 40); i++) {
+                                Vector2 velocity = Main.rand.NextVector2Circular(8, 1) - Vector2.UnitY * Main.rand.NextFloat(7f, 15f);
+                                Vector2 position = NPC.Center + Main.rand.NextVector2Circular(1, 50) + new Vector2(velocity.X * 15f, 32f);
+                                CalamityHunt.particles.Add(Particle.Create<CrimGelChunk>(particle => {
+                                    particle.position = position;
+                                    particle.velocity = velocity;
+                                    particle.scale = Main.rand.NextFloat(0.1f, 2.1f);
+                                    particle.color = Color.White;
+                                }));
                             }
                         }
 
-                        SoundStyle slam = AssetDirectory.Sounds.GoozmaMinions.SlimeSlam;
-                        SoundEngine.PlaySound(slam, NPC.Center);
-
-                        for (int i = 0; i < Main.rand.Next(30, 40); i++) {
-                            Vector2 velocity = Main.rand.NextVector2Circular(8, 1) - Vector2.UnitY * Main.rand.NextFloat(7f, 15f);
-                            Vector2 position = NPC.Center + Main.rand.NextVector2Circular(1, 50) + new Vector2(velocity.X * 15f, 32f);
-                            CalamityHunt.particles.Add(Particle.Create<CrimGelChunk>(particle => {
-                                particle.position = position;
-                                particle.velocity = velocity;
-                                particle.scale = Main.rand.NextFloat(0.1f, 2.1f);
-                                particle.color = Color.White;
-                            }));
+                        if (localTime >= waitTime + 55 && localTime % 2 == 0) {
+                            Main.instance.CameraModifiers.Add(new PunchCameraModifier(saveTarget, Main.rand.NextVector2CircularEdge(3, 3), 5f, 10, 12));
                         }
                     }
-
-                    if (Time >= waitTime + 55 && Time % 2 == 0) {
-                        Main.instance.CameraModifiers.Add(new PunchCameraModifier(saveTarget, Main.rand.NextVector2CircularEdge(3, 3), 5f, 10, 12));
-                    }
                 }
             }
 
-            // and now its copy pasted and going thru it again but with mysteriou subtle edits. why not like restart the timer??????????
-            int doubleWaitTime = waitTime + 60;
-            if (Time > doubleWaitTime + slamDuration && Time < doubleWaitTime + slamDuration2) {
-                if (Time < doubleWaitTime + 100) {
-                    NPC.velocity *= 0.1f;
-                    squishFactor = new Vector2(1f + (float)Math.Cbrt(Utils.GetLerpValue(doubleWaitTime + 80, doubleWaitTime + 100, Time, true)) * 0.4f, 1f - (float)Math.Sqrt(Utils.GetLerpValue(doubleWaitTime + 80, doubleWaitTime + 100, Time, true)) * 0.5f);
-
-                    if (Time == doubleWaitTime + 95) {
-                        SoundStyle hop = AssetDirectory.Sounds.Goozma.SlimeJump;
-                        SoundEngine.PlaySound(hop, NPC.Center);
-                    }
-                }
-                else if (Time < doubleWaitTime + 130) {
-                    NPC.velocity.Y = -20 * Utils.GetLerpValue(doubleWaitTime + 160, doubleWaitTime + 80, Time, true);
-                    squishFactor = new Vector2(1f - Utils.GetLerpValue(doubleWaitTime + 150, doubleWaitTime + 110, Time, true) * 0.5f, 1f + Utils.GetLerpValue(doubleWaitTime + 150, doubleWaitTime + 110, Time, true) * 0.5f);
-                }
-            }
-
-            if (Time == doubleWaitTime + 125) {
-                SoundStyle createSound = AssetDirectory.Sounds.GoozmaMinions.CrimslimeTelegraph;
-                SoundEngine.PlaySound(createSound.WithVolumeScale(1.5f), NPC.Center);
-            }
-            if (Time > doubleWaitTime + 100 && Time < doubleWaitTime + 170) {
-                useNinjaSlamFrame = true;
-
-                Vector2 airTarget = Target.Center - Vector2.UnitY * 320;
-
-                squishFactor = Vector2.Lerp(squishFactor, Vector2.One, 0.1f);
-                NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(airTarget).SafeNormalize(Vector2.Zero) * Math.Max(2, NPC.Distance(airTarget)) * 0.1f, 0.06f) * Utils.GetLerpValue(doubleWaitTime + 150, doubleWaitTime + 135, Time, true);
-                saveTarget = Target.Center;
-                NPC.rotation = NPC.rotation.AngleLerp(NPC.Top.AngleTo(NPC.FindSmashSpot(saveTarget)) - MathHelper.PiOver2, 0.5f) * 0.4f;
-            }
-
-            if (Time > doubleWaitTime + 170 && Time <= doubleWaitTime + 180) {
-                useNinjaSlamFrame = true;
-                disableDamage = false;
-
-                squishFactor = new Vector2(0.5f, 1.5f);
-                NPC.Center = Vector2.Lerp(NPC.Center, NPC.FindSmashSpot(saveTarget) + Vector2.UnitY, Utils.GetLerpValue(doubleWaitTime + 173, doubleWaitTime + 180, Time, true));
-            }
-
-            if (Time == doubleWaitTime + 180) {
-                NPC.rotation = 0;
-
-                if (Main.netMode != NetmodeID.MultiplayerClient)
-                    Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Bottom, Vector2.Zero, ModContent.ProjectileType<CrimulanShockwave>(), 0, 0, ai1: 2500);
-
-                SoundStyle slam = AssetDirectory.Sounds.GoozmaMinions.SlimeSlam;
-                SoundEngine.PlaySound(slam, NPC.Center);
-
-                for (int i = 0; i < Main.rand.Next(30, 40); i++) {
-                    Vector2 velocity = Main.rand.NextVector2Circular(8, 1) - Vector2.UnitY * Main.rand.NextFloat(7f, 15f);
-                    Vector2 position = NPC.Center + Main.rand.NextVector2Circular(1, 50) + new Vector2(velocity.X * 15f, 32f);
-                    CalamityHunt.particles.Add(Particle.Create<CrimGelChunk>(particle => {
-                        particle.position = position;
-                        particle.velocity = velocity;
-                        particle.scale = Main.rand.NextFloat(0.1f, 2.1f);
-                        particle.color = Color.White;
-                    }));
-                }
-
-                squishFactor = new Vector2(1.5f, 0.5f);
-
-                int count = (int)DifficultyBasedValue(12, death: 16, master: 16, masterrev: 18, masterdeath: 20);
-                int time = (int)DifficultyBasedValue(6, 5, 4, 3, master: 4, masterrev: 3, masterdeath: 2);
-                int telegraphTime = 50;
-
-                if (Main.netMode != NetmodeID.MultiplayerClient) {
-                    for (int i = 0; i < count; i++) {
-                        Projectile leftProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * 130 - 130 * count - 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
-                            ai0: -telegraphTime - time * i,
-                            ai1: -1);
-                        leftProj.localAI[0] = 1;
-                        Projectile rightProj = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.FindSmashSpot(NPC.Center + new Vector2(i * -130 + 130 * count + 60, 0)), Vector2.Zero, ModContent.ProjectileType<CrimulanSmasher>(), GetDamage(1), 0,
-                            ai0: -telegraphTime - time * i,
-                            ai1: -1);
-                        rightProj.localAI[0] = 1;
-                    }
-                }
-            }
-
-            if (Time > doubleWaitTime + 180) {
-                squishFactor = Vector2.Lerp(squishFactor, Vector2.One, 0.1f);
-            }
-
-            if (Time > doubleWaitTime + 260) {
+            if (Time > totalTime) {
                 Reset();
             }
 
@@ -744,6 +692,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
             switch (Attack) {
                 case (int)AttackList.SlamRain:
+
                     float tellFade = Utils.GetLerpValue(30, 85, Time % 170, true);
                     spriteBatch.Draw(tell, NPC.Bottom - new Vector2(0, NPC.height / 2f * squishFactor.Y).RotatedBy(NPC.rotation) - screenPos, null, new Color(200, 10, 20, 0) * tellFade, NPC.rotation + MathHelper.PiOver2, tell.Size() * new Vector2(0f, 0.5f), new Vector2(1f - tellFade, 110) * new Vector2(squishFactor.Y, squishFactor.X), 0, 0);
                     spriteBatch.Draw(tell, NPC.Bottom - new Vector2(0, NPC.height / 2f * squishFactor.Y).RotatedBy(NPC.rotation) - screenPos, null, new Color(200, 10, 20, 0) * tellFade, NPC.rotation - MathHelper.PiOver2, tell.Size() * new Vector2(0f, 0.5f), new Vector2((1f - tellFade) * 0.2f, 110) * new Vector2(squishFactor.Y, squishFactor.X), 0, 0);
@@ -751,18 +700,20 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     break;
 
                 case (int)AttackList.CollidingCrush:
-                    if (Time > 50 && Time < 130) {
+                    float localTime = Time % 200;
+                    int maxTime = 140;
+
+                    if (localTime > 50 && localTime < maxTime && Time < 400) {
                         for (int i = 0; i < 7; i++) {
                             Rectangle tellframe = texture.Frame(1, 4, 0, (int)((npcFrame + i * 0.5f) % 4));
 
-                            Vector2 offset = new Vector2(90 * i * (float)Math.Pow(Utils.GetLerpValue(70, 100, Time, true), 2) * (float)Math.Sqrt(Utils.GetLerpValue(70, 100, Time, true)), 0);
-                            spriteBatch.Draw(texture, NPC.Bottom - offset - new Vector2(0, (float)Math.Pow(i, 2f)).RotatedBy(NPC.rotation) - screenPos, tellframe, new Color(180, 20, 20, 20) * (0.5f - i / 14f) * Utils.GetLerpValue(70, 80, Time, true), NPC.rotation, frame.Size() * new Vector2(0.5f, 1f), NPC.scale * squishFactor, 0, 0);
-                            spriteBatch.Draw(texture, NPC.Bottom + offset - new Vector2(0, (float)Math.Pow(i, 2f)).RotatedBy(NPC.rotation) - screenPos, tellframe, new Color(180, 20, 20, 20) * (0.5f - i / 14f) * Utils.GetLerpValue(70, 80, Time, true), NPC.rotation, frame.Size() * new Vector2(0.5f, 1f), NPC.scale * squishFactor, 0, 0);
+                            Vector2 offset = new Vector2(90 * i * (float)Math.Pow(Utils.GetLerpValue(70, 100, localTime, true), 2) * (float)Math.Sqrt(Utils.GetLerpValue(70, 100, localTime, true)), 0);
+                            if (localTime > 110)
+                                offset = Vector2.Lerp(offset, Vector2.UnitX * 200 * i * Utils.GetLerpValue(70, 100, localTime, true), Utils.GetLerpValue(110, maxTime, localTime, true));
+                            Color afterimageColor = new Color(180, 20, 20, 20) * (0.5f - i / 14f) * MathF.Pow(Utils.GetLerpValue(70, 80, localTime, true), 2) * (float)(Math.Sqrt(Utils.GetLerpValue(maxTime, 110, localTime, true)));
+                            spriteBatch.Draw(texture, NPC.Bottom - offset - new Vector2(0, (float)Math.Pow(i, 2f)).RotatedBy(NPC.rotation) - screenPos, tellframe, afterimageColor, NPC.rotation, frame.Size() * new Vector2(0.5f, 1f), NPC.scale * squishFactor, 0, 0);
+                            spriteBatch.Draw(texture, NPC.Bottom + offset - new Vector2(0, (float)Math.Pow(i, 2f)).RotatedBy(NPC.rotation) - screenPos, tellframe, afterimageColor, NPC.rotation, frame.Size() * new Vector2(0.5f, 1f), NPC.scale * squishFactor, 0, 0);
                         }
-                    }
-                    if (Time > 180) {
-                        tellFade = Utils.GetLerpValue(180, 195, Time, true) * Utils.GetLerpValue(240, 200, Time, true);
-                        spriteBatch.Draw(texture, NPC.Bottom - screenPos + Vector2.UnitY * 40 * Utils.GetLerpValue(190, 240, Time, true), frame, new Color(180, 20, 20, 20) * tellFade, NPC.rotation, frame.Size() * new Vector2(0.5f, 1f), (1f + Utils.GetLerpValue(190, 240, Time, true)) * NPC.scale * squishFactor, 0, 0);
                     }
 
                     break;

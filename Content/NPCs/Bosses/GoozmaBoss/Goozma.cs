@@ -676,7 +676,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         int slimeAttack = GetSlimeAttack();
 
                         //Test slimes and attacks
-                        //currentSlime = 0;
+                        //currentSlime = 2;
                         //slimeAttack = 1;
 
                         if (Main.zenithWorld) {
@@ -810,7 +810,14 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                                     break;
                                 case 1:
 
-                                    Fly();
+                                    float localTime = ActiveSlime.ai[0] % CrimulanGlopstrosity.Crim2SlamCycleTime;
+                                    CrimulanGlopstrosity crim = ActiveSlime.ModNPC as CrimulanGlopstrosity;
+
+                                    if (crim.saveTarget != Vector2.Zero && ActiveSlime.ai[0] < CrimulanGlopstrosity.Crim2SlamCycleTime * 2)
+                                        FlyTo(new Vector2(Target.Center.X, Target.Center.Y) + new Vector2(MathHelper.Lerp(100, 1000, Utils.GetLerpValue(0, CrimulanGlopstrosity.Crim2ImpactMoment, localTime, true)) * (crim.saveTarget.X > Target.Center.X ? 1 : -1) * Utils.GetLerpValue(0, 100, Time, true), (float)Math.Sin(Time % 75 * MathHelper.TwoPi / 75f) * 130));
+
+                                    SortedProjectileAttack(Target.Center, SortedProjectileAttackTypes.CrimulanSlam);
+
                                     NPC.velocity *= 0.9f;
 
                                     break;
@@ -2112,18 +2119,16 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
             case SortedProjectileAttackTypes.CrimulanSlam:
 
-                if (NPC.Distance(Target.Center) > 300) {
+                float localTime = ActiveSlime.ai[0] % CrimulanGlopstrosity.Crim2SlamCycleTime;
+                int fireRate = 22;
+
+                if (localTime > fireRate && localTime < CrimulanGlopstrosity.Crim2SlamTimeMax && ActiveSlime.ai[0] < CrimulanGlopstrosity.Crim2SlamCycleTime * 2) {
                     if (Time % 25 == 0) {
                         SoundEngine.PlaySound(fizzSound, NPC.Center);
                         goozmaShootPowerTarget = 1f;
                     }
-
-                    if ((Time + Main.rand.Next(0, 2)) % 8 == 0) {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(targetPos).SafeNormalize(Vector2.Zero).RotatedByRandom(0.15f).RotatedBy(0.8f) * 20f, ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
-                    }
-
-                    if ((Time + Main.rand.Next(0, 2)) % 8 == 0) {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(targetPos).SafeNormalize(Vector2.Zero).RotatedByRandom(0.15f).RotatedBy(-0.8f) * 20f, ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
+                    if (Time % fireRate == 0) {
+                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(NPC.direction, 0).RotatedByRandom(MathHelper.Pi) * Main.rand.Next(6, 8), ModContent.ProjectileType<SlimeBomb>(), GetDamage(2), 0);
                     }
                 }
 

@@ -59,7 +59,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             //left
             for (int i = 0; i < 4; i++) {
                 Rectangle frame = texture.Frame(1, 4, 0, 3 - i);
-                Color waveColor = Color.Lerp(Color.Black * 0.5f, Color.Red, 1f - i / 4f) * Utils.GetLerpValue(45, 10, Time - i * 15f);
+                Color waveColor = Color.Lerp(Color.Black * 0.5f, Color.Red * 0.6f, 1f - i / 4f) * Utils.GetLerpValue(45, 10, Time - i * 15f);
                 Vector2 waveScale = Vector2.Lerp(new Vector2(2f, 0.1f), new Vector2(0.5f, 2f), MathF.Pow(Utils.GetLerpValue(2, 60, Time - i * 4f), 1.7f)) * (1f - i / 4f);
                 Vector2 off = new Vector2(MathF.Pow(Utils.GetLerpValue(10, 60, Time - i * 4f, true), 0.7f) * Size * 0.4f, 20).RotatedBy(Projectile.rotation);
                 Main.EntitySpriteDraw(texture, Projectile.Center + off - Main.screenPosition, frame, waveColor, Projectile.rotation, frame.Size() * new Vector2(0.7f, 0.66f), Projectile.scale * new Vector2(3f, 1.7f) * waveScale, SpriteEffects.None, 0);
@@ -67,7 +67,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             //right
             for (int i = 0; i < 4; i++) {
                 Rectangle frame = texture.Frame(1, 4, 0, 3 - i);
-                Color waveColor = Color.Lerp(Color.Black * 0.5f, Color.Red, 1f - i / 4f) * Utils.GetLerpValue(45, 10, Time - i * 15f);
+                Color waveColor = Color.Lerp(Color.Black * 0.5f, Color.Red * 0.6f, 1f - i / 4f) * Utils.GetLerpValue(45, 10, Time - i * 15f);
                 Vector2 waveScale = Vector2.Lerp(new Vector2(2f, 0.1f), new Vector2(0.5f, 2f), MathF.Pow(Utils.GetLerpValue(2, 60, Time - i * 6f), 1.7f)) * (1f - i / 4f);
                 Vector2 off = new Vector2(-MathF.Pow(Utils.GetLerpValue(10, 60, Time - i * 4f, true), 0.7f) * Size * 0.4f, 20).RotatedBy(Projectile.rotation);
                 Main.EntitySpriteDraw(texture, Projectile.Center + off - Main.screenPosition, frame, waveColor, Projectile.rotation, frame.Size() * new Vector2(0.3f, 0.66f), Projectile.scale * new Vector2(3f, 1.7f) * waveScale, SpriteEffects.FlipHorizontally, 0);
