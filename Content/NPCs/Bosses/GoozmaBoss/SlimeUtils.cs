@@ -8,7 +8,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
         public static Vector2 FindSmashSpot(this NPC NPC, Vector2 target)
         {
             Vector2 pos = target;
-            for (int j = 0; j < 36; j++) {
+            for (int j = 0; j < 200; j++) {
                 Point world = new Point(pos.ToTileCoordinates().X, pos.ToTileCoordinates().Y + j);
                 if (WorldGen.InWorld(world.X, world.Y)) {
                     if (WorldGen.SolidTileAllowTopSlope(world.X, world.Y + j)) {
@@ -23,7 +23,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
         public static Vector2 FindSmashSpot(this Projectile Projectile, Vector2 target)
         {
             Vector2 pos = target;
-            for (int j = 0; j < 32; j++) {
+            for (int j = 0; j < 200; j++) {
                 Point world = new Point(pos.ToTileCoordinates().X, pos.ToTileCoordinates().Y + j);
                 if (WorldGen.InWorld(world.X, world.Y)) {
                     if (WorldGen.SolidTileAllowTopSlope(world.X, world.Y + j)) {

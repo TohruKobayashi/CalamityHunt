@@ -421,6 +421,14 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 // save the target location
                 else if (localTime == slowAfterJump) {
                     saveTarget = Target.Center + Vector2.UnitX * Main.rand.Next(minDist, maxDist) * Main.rand.NextBool().ToDirectionInt();
+                    Point tileCords = saveTarget.ToTileCoordinates();
+                    for (int i = 0; i < 200; i++) {
+                        Tile t = Framing.GetTileSafely(tileCords.X, tileCords.Y + i);
+                        if (t.HasTile && (Main.tileSolidTop[t.TileType] || Main.tileSolid[t.TileType])) {
+                            saveTarget.Y += i * 16;
+                            break;
+                        }
+                    }
                 }
 
                 // SLAM !!
@@ -432,7 +440,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     }
 
                     if (localTime < waitTime + 50) {
-                        Vector2 airTarget = saveTarget - Vector2.UnitY * 320;
+                        Vector2 airTarget = new Vector2(saveTarget.X, Target.Center.Y) - Vector2.UnitY * 320;
 
                         NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(airTarget).SafeNormalize(Vector2.Zero) * Math.Max(2, NPC.Distance(airTarget)) * 0.1f, 0.06f) * Utils.GetLerpValue(waitTime + 50, waitTime + 35, localTime, true);
                         
