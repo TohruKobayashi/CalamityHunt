@@ -2130,7 +2130,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         goozmaShootPowerTarget = 1f;
                     }
                     if (Time % fireRate == 0) {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(NPC.direction, 0).RotatedByRandom(MathHelper.Pi) * Main.rand.Next(6, 8), ModContent.ProjectileType<SlimeBomb>(), GetDamage(2), 0);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(NPC.direction, 0).RotatedByRandom(MathHelper.Pi) * Main.rand.NextFloat(0, 2), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                     }
                 }
 
