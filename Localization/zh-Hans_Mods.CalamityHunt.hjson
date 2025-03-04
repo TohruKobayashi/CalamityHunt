@@ -605,6 +605,11 @@ Items: {
 			'Have fun wringing it out'
 			''' */
 	}
+
+	ReplicaGauntlets: {
+		// DisplayName: Replica Gauntlets
+		// Tooltip: ""
+	}
 }
 
 NPCs: {

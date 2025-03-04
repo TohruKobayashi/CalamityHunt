@@ -3,6 +3,7 @@ using CalamityHunt.Common.Systems;
 using CalamityHunt.Common.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 
@@ -12,7 +13,8 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
     {
         public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.HandOnAcc);
 
-        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo) => drawInfo.drawPlayer.HeldItem.ModItem is CrystalGauntlets;
+        //TODO: make this use only te crystalGauntlets flag, move flag here or move all this to vanityplayer
+        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo) => drawInfo.drawPlayer.HeldItem.ModItem is CrystalGauntlets || drawInfo.drawPlayer.GetModPlayer<VanityPlayer>().crystalGauntlets;
 
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {

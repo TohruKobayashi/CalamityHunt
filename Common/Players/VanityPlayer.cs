@@ -20,6 +20,7 @@ public class VanityPlayer : ModPlayer
 
     public bool trailblazerGoggles;
     public bool trailblazerBackpack;
+    public bool crystalGauntlets;
 
     public override void Load()
     {
@@ -53,6 +54,8 @@ public class VanityPlayer : ModPlayer
 
         trailblazerGoggles = false;
         trailblazerBackpack = false;
+        //TODO: implement this better
+        crystalGauntlets = false;  
     }
 }
 

@@ -608,6 +608,11 @@ Items: {
 			'Have fun wringing it out'
 			'''
 	}
+
+	ReplicaGauntlets: {
+		DisplayName: Replica Gauntlets
+		Tooltip: "'All the glitz without the glamour'"
+	}
 }
 
 NPCs: {
