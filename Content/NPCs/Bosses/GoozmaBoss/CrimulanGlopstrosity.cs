@@ -387,7 +387,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             int waitAfterFinal = 60; // how long he waits after his final jump
             int totalTime = Crim2SlamCycleTime * jumpCount + waitAfterFinal; // time of the entire attack
 
-            int minDist = 500; // minimum distance he jumps away on the second slam
+            int minDist = 600; // minimum distance he jumps away on the second slam
             int maxDist = 700; // maximum distance he jumps away on the second slam
 
             bool disableDamage = true; // set false to enable contact damage
