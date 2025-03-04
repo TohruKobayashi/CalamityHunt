@@ -504,7 +504,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                         }
                     }
                 }
-            }
+            }            
 
             if (Time > totalTime) {
                 Reset();

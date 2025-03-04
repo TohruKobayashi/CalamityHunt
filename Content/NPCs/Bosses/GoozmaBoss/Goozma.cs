@@ -816,7 +816,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                                     if (crim.saveTarget != Vector2.Zero && ActiveSlime.ai[0] < CrimulanGlopstrosity.Crim2SlamCycleTime * 2)
                                         FlyTo(new Vector2(Target.Center.X, Target.Center.Y) + new Vector2(MathHelper.Lerp(200, 1000, Utils.GetLerpValue(0, CrimulanGlopstrosity.Crim2ImpactMoment, localTime, true)) * (crim.saveTarget.X > Target.Center.X ? 1 : -1) * Utils.GetLerpValue(0, 100, Time, true), (float)Math.Sin(Time % 75 * MathHelper.TwoPi / 75f) * 130));
 
-                                    SortedProjectileAttack(Target.Center, SortedProjectileAttackTypes.CrimulanSlam);
+                                    if (NPC.Distance(Target.Center) > 400)
+                                        SortedProjectileAttack(Target.Center, SortedProjectileAttackTypes.CrimulanSlam);
 
                                     NPC.velocity *= 0.9f;
 
@@ -2122,7 +2123,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             case SortedProjectileAttackTypes.CrimulanSlam:
 
                 float localTime = ActiveSlime.ai[0] % CrimulanGlopstrosity.Crim2SlamCycleTime;
-                int fireRate = 22;
+                int fireRate = 11;
 
                 if (localTime > fireRate && localTime < CrimulanGlopstrosity.Crim2SlamTimeMax && ActiveSlime.ai[0] < CrimulanGlopstrosity.Crim2SlamCycleTime * 2) {
                     if (Time % 25 == 0) {
