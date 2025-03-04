@@ -463,11 +463,11 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                         if (localTime == Crim2ImpactMoment) {
                             // how many clones are spawned in each direction (multiply by 2 for total clones)
-                            int count = (int)DifficultyBasedValue(12, death: 16, master: 16, masterrev: 18, masterdeath: 20);
+                            int count = 40;
                             // the delay at which clones slam down
                             int time = (int)DifficultyBasedValue(6, 5, 4, 3, master: 4, masterrev: 3, masterdeath: 2);
                             // how long it takes before the first clone slams down
-                            int telegraphlocalTime = 50;
+                            int telegraphlocalTime = 0;
 
                             if (Main.netMode != NetmodeID.MultiplayerClient) {
                                 Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Bottom, Vector2.Zero, ModContent.ProjectileType<CrimulanShockwave>(), 0, 0, ai1: 2500);
