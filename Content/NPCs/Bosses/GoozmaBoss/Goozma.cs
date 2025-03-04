@@ -2125,13 +2125,13 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 float localTime = ActiveSlime.ai[0] % CrimulanGlopstrosity.Crim2SlamCycleTime;
                 int fireRate = 11;
 
-                if (localTime > fireRate && localTime < CrimulanGlopstrosity.Crim2SlamTimeMax && ActiveSlime.ai[0] < CrimulanGlopstrosity.Crim2SlamCycleTime * 2) {
+                if (localTime > fireRate && localTime < CrimulanGlopstrosity.Crim2SlamTimeMax && ActiveSlime.ai[0] < CrimulanGlopstrosity.Crim2SlamCycleTime * 2 && NPC.direction != Math.Sign(NPC.velocity.X)) {
                     if (Time % 25 == 0) {
                         SoundEngine.PlaySound(fizzSound, NPC.Center);
                         goozmaShootPowerTarget = 1f;
                     }
                     if (Time % fireRate == 0) {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(NPC.direction, 0).RotatedByRandom(MathHelper.Pi) * Main.rand.NextFloat(0, 2), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(NPC.direction, 0).RotatedByRandom(MathHelper.Pi) * Main.rand.NextFloat(0, 1), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                     }
                 }
 
