@@ -812,11 +812,17 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                                     float localTime = ActiveSlime.ai[0] % CrimulanGlopstrosity.Crim2SlamCycleTime;
                                     CrimulanGlopstrosity crim = ActiveSlime.ModNPC as CrimulanGlopstrosity;
+                                    int minDist = 200; // where Goozma's horizontal position starts relative to the player
+                                    int maxDist = 1000; // where Goozma horizontal position ends relative to the player
+                                    int waverSpeed = 75; // how fast Goozma moves up and down in a sine wave
+                                    int waverMagnitude = 130; // how far Goozma moves up and down in a sine wave
+                                    int minDistToShoot = 400; // Goozma must be this far from the player to start shooting
+                                    int timeofMaxSpeed = 100; // How long into an attack cycle it takes for Goozma to reach maximum speed
 
-                                    if (crim.saveTarget != Vector2.Zero && ActiveSlime.ai[0] < CrimulanGlopstrosity.Crim2SlamCycleTime * 2)
-                                        FlyTo(new Vector2(Target.Center.X, Target.Center.Y) + new Vector2(MathHelper.Lerp(200, 1000, Utils.GetLerpValue(0, CrimulanGlopstrosity.Crim2ImpactMoment, localTime, true)) * (crim.saveTarget.X > Target.Center.X ? 1 : -1) * Utils.GetLerpValue(0, 100, Time, true), (float)Math.Sin(Time % 75 * MathHelper.TwoPi / 75f) * 130));
+                                    if (crim.saveTarget != Vector2.Zero && ActiveSlime.ai[0] < CrimulanGlopstrosity.Crim2SlamCycleTime * CrimulanGlopstrosity.Crim2JumpCount)
+                                        FlyTo(new Vector2(Target.Center.X, Target.Center.Y) + new Vector2(MathHelper.Lerp(minDist, maxDist, Utils.GetLerpValue(0, CrimulanGlopstrosity.Crim2ImpactMoment, localTime, true)) * (crim.saveTarget.X > Target.Center.X ? 1 : -1) * Utils.GetLerpValue(0, timeofMaxSpeed, localTime, true), (float)Math.Sin(Time % waverSpeed * MathHelper.TwoPi / (float)waverSpeed) * waverMagnitude));
 
-                                    if (NPC.Distance(Target.Center) > 400)
+                                    if (NPC.Distance(Target.Center) > minDistToShoot)
                                         SortedProjectileAttack(Target.Center, SortedProjectileAttackTypes.CrimulanSlam);
 
                                     NPC.velocity *= 0.9f;
@@ -2123,15 +2129,17 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             case SortedProjectileAttackTypes.CrimulanSlam:
 
                 float localTime = ActiveSlime.ai[0] % CrimulanGlopstrosity.Crim2SlamCycleTime;
-                int fireRate = 11;
+                int fireRate = 11; // how often Goozma fires
+                float shotSpeed = Main.rand.NextFloat(0, 1); // the velocity magnitude at which shots are fired. Slime Shots naturally speed up over time, so keep this value low.
+                float spreadAngle = MathHelper.Pi; // The cone which Goozma fires projectiles at
 
-                if (localTime > fireRate && localTime < CrimulanGlopstrosity.Crim2SlamTimeMax && ActiveSlime.ai[0] < CrimulanGlopstrosity.Crim2SlamCycleTime * 2 && NPC.direction != Math.Sign(NPC.velocity.X)) {
+                if (localTime > fireRate && localTime < CrimulanGlopstrosity.Crim2SlamTimeMax && ActiveSlime.ai[0] < CrimulanGlopstrosity.Crim2SlamCycleTime * CrimulanGlopstrosity.Crim2JumpCount && NPC.direction != Math.Sign(NPC.velocity.X)) {
                     if (Time % 25 == 0) {
                         SoundEngine.PlaySound(fizzSound, NPC.Center);
                         goozmaShootPowerTarget = 1f;
                     }
                     if (Time % fireRate == 0) {
-                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(NPC.direction, 0).RotatedByRandom(MathHelper.Pi) * Main.rand.NextFloat(0, 1), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, new Vector2(NPC.direction, 0).RotatedByRandom(spreadAngle) * shotSpeed, ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                     }
                 }
 

@@ -23,6 +23,23 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
     [AutoloadBossHead]
     public class CrimulanGlopstrosity : ModNPC
     {
+        #region Crim2 variables
+        /// <summary>
+        /// How many times the slime jumps and slams
+        /// </summary>
+        public static int Crim2JumpCount => 2;
+        /// <summary>
+        /// When the slime jumps up
+        /// </summary>
+        public const int Crim2SlowBeforeJump = 32;
+        /// <summary>
+        /// How long the slime's jump takes before it starts hovering
+        /// </summary>
+        public const int Crim2JumpLength = 35;
+        /// <summary>
+        /// How long the slime waits after slam before performing its next slam
+        /// </summary>
+        public const int Crim2DownTime = 60;
         /// <summary>
         /// When the telegraph is played
         /// </summary>
@@ -36,9 +53,18 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
         /// </summary>
         public const int Crim2ImpactMoment = 120;
         /// <summary>
+        /// How long the slime waits after the final slam before Goozma chooses its next attack
+        /// </summary>
+        public const int Crim2WaitAtEnd = 60;
+        /// <summary>
         /// How long one attack cycle lasts
         /// </summary>
-        public const int Crim2SlamCycleTime = 200;
+        public static int Crim2SlamCycleTime => Crim2ImpactMoment + Crim2DownTime;
+        /// <summary>
+        /// How long the full attack lasts
+        /// </summary>
+        public static int Crim2FullDuration => Crim2SlamCycleTime * Crim2JumpCount + Crim2WaitAtEnd;
+        #endregion
 
         public override void SetStaticDefaults()
         {
@@ -387,12 +413,6 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
         private void CollidingCrush()
         {
             int waitTime = 60; // how long he waits before jumping
-            int firstJumpUp = 32; // when he first begins to jump
-            int slowAfterJump = 35; // when he starts slowing down
-            int jumpCount = 2; // how many times he jumps
-            int waitAfterFinal = 60; // how long he waits after his final jump
-            int totalTime = Crim2SlamCycleTime * jumpCount + waitAfterFinal; // time of the entire attack
-
             int minDist = 600; // minimum distance he jumps away on the second slam
             int maxDist = 700; // maximum distance he jumps away on the second slam
 
@@ -401,7 +421,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             float localTime = Time % Crim2SlamCycleTime;
             int jumpNumber = (int)Math.Ceiling(Time / Crim2SlamCycleTime); // the number of the current jump
 
-            if (Time <= jumpCount * Crim2SlamCycleTime) {
+            if (Time <= Crim2JumpCount * Crim2SlamCycleTime) {
                 // produce telegraph 
                 if (localTime == Crim2Telegraph) {
                     SoundStyle createSound = AssetDirectory.Sounds.GoozmaMinions.CrimslimeTelegraph;
@@ -409,7 +429,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 }
 
                 // big jump
-                if (localTime < firstJumpUp) {
+                if (localTime < Crim2SlowBeforeJump) {
                     NPC.velocity *= 0.1f;
                     squishFactor = new Vector2(1f + (float)Math.Cbrt(Utils.GetLerpValue(15, 56, localTime, true)) * 0.4f, 1f - (float)Math.Sqrt(Utils.GetLerpValue(15, 56, localTime, true)) * 0.5f);
                     if (localTime == 58) {
@@ -419,13 +439,13 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     }
                 }
 
-                // slow down jump and prepare to slam down
-                else if (localTime < slowAfterJump) {
+                // rise upwards
+                else if (localTime < Crim2JumpLength) {
                     NPC.velocity.Y = -14;
                     squishFactor = new Vector2(0.5f, 1.4f);
                 }
                 // save the target location
-                else if (localTime == slowAfterJump) {
+                else if (localTime == Crim2JumpLength) {
                     saveTarget = Target.Center + Vector2.UnitX * Main.rand.Next(minDist, maxDist) * Main.rand.NextBool().ToDirectionInt();
                     Point tileCords = saveTarget.ToTileCoordinates();
                     for (int i = 0; i < 200; i++) {
@@ -517,7 +537,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             }            
 
             // end the attack
-            if (Time > totalTime) {
+            if (Time > Crim2FullDuration) {
                 Reset();
             }
 
