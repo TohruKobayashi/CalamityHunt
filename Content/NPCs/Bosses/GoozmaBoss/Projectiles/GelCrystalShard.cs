@@ -13,6 +13,12 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 {
     public class GelCrystalShard : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.TrailCacheLength[Type] = 30;
+            ProjectileID.Sets.TrailingMode[Type] = 2;
+        }
+
         public override void SetDefaults()
         {
             Projectile.width = 36;
@@ -40,8 +46,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
             if (Main.rand.NextBool(2)) {
                 int dustType = Utils.SelectRandom(Main.rand, DustID.PinkCrystalShard, DustID.BlueCrystalShard, DustID.PurpleCrystalShard);
-                Dust dust = Dust.NewDustDirect(Projectile.Center - new Vector2(15), 30, 30, dustType, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, Color.White, Main.rand.NextFloat());
-                dust.noGravity = true;
+                //Dust dust = Dust.NewDustDirect(Projectile.Center - new Vector2(15), 30, 30, dustType, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, Color.White, Main.rand.NextFloat());
+                //dust.noGravity = true;
             }
 
             Lighting.AddLight(Projectile.Center, Color.Lerp(Color.DarkBlue, Color.HotPink, (float)Math.Sqrt(Math.Sin(Projectile.timeLeft * 0.1f))).ToVector3() * 0.2f);
@@ -53,6 +59,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             if (Projectile.velocity.Y > 7) {
                 Projectile.velocity.Y = 7;
             }
+            Projectile.ai[1]++;
         }
 
         public VertexStrip strip;
@@ -62,11 +69,11 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Texture2D texture = TextureAssets.Projectile[Type].Value;
             Texture2D glow = AssetDirectory.Textures.Glow[0].Value;
             Rectangle frame = texture.Frame(4, 1, Projectile.frame, 0);
-            Vector2 direction = Projectile.rotation.ToRotationVector2() * 10;
+            Vector2 direction = Projectile.rotation.ToRotationVector2() * 40;
 
             strip ??= new VertexStrip();
 
-            strip.PrepareStrip(Projectile.oldPos, Projectile.oldRot, StripColor, StripWidth, -Main.screenPosition + Projectile.Size * 0.5f + direction, Projectile.oldPos.Length);
+            strip.PrepareStrip(Projectile.oldPos, Projectile.oldRot, StripColor, StripWidth, -Main.screenPosition + Projectile.Size * 0.5f - direction.RotatedBy(-MathHelper.PiOver2), Projectile.oldPos.Length);
 
             //todo get this to work replace w custom trail
             Effect effect = AssetDirectory.Effects.CometKunaiTrail.Value;
@@ -97,7 +104,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             return false;
         }
 
-        public float StripWidth(float x) => 25f * (1 - x) * Utils.GetLerpValue(2, 8, Projectile.localAI[0], true) * MathF.Sqrt(Utils.GetLerpValue(0f, 0.1f, x, true));
+        public float StripWidth(float x) => 225f * (1 - x) * Utils.GetLerpValue(2, 8, Projectile.ai[1], true) * MathF.Sqrt(Utils.GetLerpValue(0f, 0.1f, x, true));
 
         public Color StripColor(float x) => Color.Lerp(new Color(10, 140, 255, 0), new Color(10, 170, 255, 128), Utils.GetLerpValue(0.9f, 0.7f, x, true));
     }
