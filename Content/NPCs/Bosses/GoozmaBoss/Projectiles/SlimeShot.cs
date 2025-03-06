@@ -58,7 +58,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 Projectile.velocity = Vector2.Lerp(Projectile.velocity, Projectile.DirectionTo(Main.player[target].MountedCenter).SafeNormalize(Vector2.Zero) * Projectile.oldVelocity.Length(), 0.015f);
             }
 
-            if (Main.rand.NextBool(10)) {
+            if (Main.rand.NextBool(20)) {
                 var hue = ParticleBehavior.NewParticle(ModContent.GetInstance<ChromaticEnergyDust2Behavior>(), Projectile.Center + Main.rand.NextVector2Circular(20, 20), Projectile.velocity * 0.4f, Color.White, 1f);
                 hue.Add(new ParticleData<float> { Value = Projectile.localAI[0] });
             }
@@ -75,7 +75,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
         public override void OnKill(int timeLeft)
         {
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < 3; i++) {
                 var hue = ParticleBehavior.NewParticle(ModContent.GetInstance<ChromaticEnergyDust2Behavior>(), Projectile.Center, Main.rand.NextVector2Circular(6, 6), Color.White, 1f);
                 hue.Add(new ParticleData<float> { Value = Projectile.localAI[0] });
 
@@ -102,7 +102,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Main.EntitySpriteDraw(glow, Projectile.Center + Projectile.velocity * 0.2f - Main.screenPosition, null, bloomColor * 0.15f, Projectile.rotation, glow.Size() * 0.5f, Projectile.scale * 2f * squishFactor, 0, 0);
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, baseFrame, lightColor * Utils.GetLerpValue(15, 30, Time, true), Projectile.rotation, baseFrame.Size() * 0.5f, Projectile.scale * squishFactor, 0, 0);
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, glowFrame, bloomColor, Projectile.rotation, glowFrame.Size() * 0.5f, Projectile.scale * squishFactor, 0, 0);
-            Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, glowFrame, bloomColor * 0.8f, Projectile.rotation, glowFrame.Size() * 0.5f, Projectile.scale * 1.05f * squishFactor, 0, 0);
+            //Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, glowFrame, bloomColor * 0.8f, Projectile.rotation, glowFrame.Size() * 0.5f, Projectile.scale * 1.05f * squishFactor, 0, 0);
             Main.EntitySpriteDraw(glow, Projectile.Center + Projectile.velocity * 0.1f - Main.screenPosition, null, bloomColor * 0.05f, Projectile.rotation, glow.Size() * 0.5f, Projectile.scale * 1.2f * squishFactor, 0, 0);
 
             return false;

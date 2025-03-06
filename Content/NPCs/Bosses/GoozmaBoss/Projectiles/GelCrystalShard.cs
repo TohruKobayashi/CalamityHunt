@@ -41,7 +41,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         {
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
             if (Projectile.ai[0] == 0) {
-                Projectile.velocity.Y += 0.04f;
+                Projectile.velocity.Y += 0.08f;
             }
 
             if (Main.rand.NextBool(2)) {

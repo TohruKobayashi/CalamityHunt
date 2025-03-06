@@ -301,7 +301,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         private void CrystalStorm()
         {
-            int crystalFrequency = (int)DifficultyBasedValue(1, 2, 3, master: 3, masterrev: 4, masterdeath: 5);
+            int crystalFrequency = (int)DifficultyBasedValue(2, 3, 4, master: 4, masterrev: 6, masterdeath: 8);
             int lengthOfAttack = (int)DifficultyBasedValue(240, 300, 360, 420, master: 370, masterrev: 410, masterdeath: 460);
 
             if (Time < 40) {
@@ -313,9 +313,9 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 squishFactor = Vector2.Lerp(Vector2.Lerp(squishFactor, wobble, Utils.GetLerpValue(40, lengthOfAttack, Time, true) * 0.2f), Vector2.Lerp(squishFactor, Vector2.One, 0.1f), Utils.GetLerpValue(40 + lengthOfAttack, 110 + lengthOfAttack, Time, true));
                 NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(Target.Center + new Vector2(0, -260)).SafeNormalize(Vector2.Zero) * NPC.Distance(Target.Center + new Vector2(0, -170)) * 0.2f, 0.2f + (float)Math.Sin(Time * 0.3f) * 0.1f);
 
-                if (Time <= lengthOfAttack + 100 && Time % 15 == 0) {
+                if (Time <= lengthOfAttack + 100 && Time > 40 && Time % 30 == 0) {
                     for (int i = 0; i < crystalFrequency; i++) {
-                        Projectile.NewProjectile(NPC.GetSource_FromAI(), new Vector2(NPC.Top.X, NPC.Top.Y + 20), Main.rand.NextVector2Circular(8, 5) - Vector2.UnitY * 10 + NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * 5f, ModContent.ProjectileType<GelCrystalShard>(), GetDamage(2), 0);
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), new Vector2(NPC.Top.X, NPC.Top.Y + 20), Main.rand.NextVector2Circular(8, 5) - Vector2.UnitY * 12 + NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * 5f, ModContent.ProjectileType<GelCrystalShard>(), GetDamage(2), 0);
                     }
                 }
             }
