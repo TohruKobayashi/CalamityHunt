@@ -549,7 +549,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     NPC.localAI[0] = 0;
                     Main.instance.CameraModifiers.Add(new PunchCameraModifier(NPC.Center, Main.rand.NextVector2CircularEdge(3, 3), 8f, 10, 12));
 
-                    int count = (int)DifficultyBasedValue(2, 2, 3, 3, 4, master: 3, masterrev: 4, masterdeath: 6);
+                    int count = (int)DifficultyBasedValue(1, 1, 2, 2, 3, master: 3, masterrev: 4, masterdeath: 6);
                     for (int i = 0; i < count; i++) {
                         Vector2 starPosition = new Vector2(Main.rand.Next(-50, 50), Main.rand.Next(-10, 10));
                         Vector2 starVelocity = new Vector2(starPosition.X * 0.2f, -Main.rand.Next(5, 25)) + NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * Main.rand.Next(3);
@@ -791,7 +791,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 1 => 80,//constellation star
                 2 => 100,//constellation line
                 3 => 60,//constellation debris
-                4 => 60,//rocket flame
+                4 => 0,//rocket flame
                 5 => 60,//star bit
                 6 => 120,//black hole large
                 7 => 100,//black hole medium
