@@ -30,7 +30,6 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
             Item.autoReuse = true;
             Item.shootSpeed = 15f;
             Item.rare = ModContent.RarityType<VioletRarity>();
-            Item.DamageType = DamageClass.Melee;
             Item.value = Item.sellPrice(gold: 20);
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 DamageClass d;
@@ -40,6 +39,9 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
                 calamity.TryFind<ModRarity>("Violet", out r);
                 Item.DamageType = d;
                 Item.rare = r.Type;
+            }
+            else {
+                Item.DamageType = DamageClass.Melee;
             }
             Item.shoot = ModContent.ProjectileType<FissionFlyerProj>();
         }
@@ -69,6 +71,10 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
 
             return false;
         }
+
+        public override bool WeaponPrefix() => true;
+
+        public override bool MeleePrefix() => !ModLoader.HasMod(HUtils.CalamityMod);
 
         public override void AddRecipes()
         {

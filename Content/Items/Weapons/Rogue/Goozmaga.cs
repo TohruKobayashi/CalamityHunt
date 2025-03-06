@@ -23,7 +23,6 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
             Item.autoReuse = true;
             Item.shootSpeed = 22f;
             Item.rare = ModContent.RarityType<VioletRarity>();
-            Item.DamageType = DamageClass.Throwing;
             Item.value = Item.sellPrice(gold: 20);
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 DamageClass d;
@@ -33,6 +32,9 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
                 calamity.TryFind<ModRarity>("CalamityRed", out r);
                 Item.DamageType = d;
                 Item.rare = r.Type;
+            }
+            else {
+                Item.DamageType = DamageClass.Throwing;
             }
             Item.shoot = ModContent.ProjectileType<GoozmagaBomb>();
         }
@@ -60,6 +62,7 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
             }
             return true;
         }
+        public override bool WeaponPrefix() => ModLoader.HasMod(HUtils.CalamityMod);
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

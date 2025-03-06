@@ -30,7 +30,6 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
             Item.autoReuse = true;
             Item.shootSpeed = 5f;
             Item.rare = ModContent.RarityType<VioletRarity>();
-            Item.DamageType = DamageClass.Ranged;
             Item.value = Item.sellPrice(gold: 20);
 
             if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
@@ -38,6 +37,9 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
                 calamity.TryFind("Violet", out ModRarity r);
                 Item.DamageType = d;
                 Item.rare = r.Type;
+            }
+            else {
+                Item.DamageType = DamageClass.Ranged;
             }
             Item.shoot = ModContent.ProjectileType<CometKunaiProjectile>();
             Item.channel = true;
@@ -48,6 +50,10 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
         public override bool AltFunctionUse(Player player) => !ModLoader.HasMod(HUtils.CalamityMod);
 
         public override bool CanUseItem(Player player) => true;
+
+        public override bool WeaponPrefix() => true;
+
+        public override bool RangedPrefix() => !ModLoader.HasMod(HUtils.CalamityMod);
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

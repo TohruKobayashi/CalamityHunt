@@ -1,10 +1,13 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.Graphics;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 {
@@ -46,13 +49,38 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             if (Projectile.timeLeft < 20) {
                 Projectile.velocity *= 0.9f;
             }
+            
+            if (Projectile.velocity.Y > 7) {
+                Projectile.velocity.Y = 7;
+            }
         }
+
+        public VertexStrip strip;
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Microsoft.Xna.Framework.Graphics.Texture2D texture = TextureAssets.Projectile[Type].Value;
-            Microsoft.Xna.Framework.Graphics.Texture2D glow = AssetDirectory.Textures.Glow[0].Value;
+            Texture2D texture = TextureAssets.Projectile[Type].Value;
+            Texture2D glow = AssetDirectory.Textures.Glow[0].Value;
             Rectangle frame = texture.Frame(4, 1, Projectile.frame, 0);
+            Vector2 direction = Projectile.rotation.ToRotationVector2() * 10;
+
+            strip ??= new VertexStrip();
+
+            strip.PrepareStrip(Projectile.oldPos, Projectile.oldRot, StripColor, StripWidth, -Main.screenPosition + Projectile.Size * 0.5f + direction, Projectile.oldPos.Length);
+
+            //todo get this to work replace w custom trail
+            Effect effect = AssetDirectory.Effects.CometKunaiTrail.Value;
+            effect.Parameters["uTransformMatrix"].SetValue(Main.GameViewMatrix.NormalizedTransformationmatrix);
+            effect.Parameters["uColor"].SetValue(new Color(0, 80, 255, 0).ToVector4());
+            effect.Parameters["uTexture0"].SetValue(TextureAssets.Extra[197].Value);
+            effect.Parameters["uTextureNoise0"].SetValue(AssetDirectory.Textures.Noise[16].Value);
+            effect.Parameters["uTextureNoise1"].SetValue(AssetDirectory.Textures.Noise[13].Value);
+            effect.Parameters["uTime"].SetValue(-(Main.GlobalTimeWrappedHourly * 2f % 1f));
+            effect.CurrentTechnique.Passes[0].Apply();
+
+            strip.DrawTrail();
+
+            Main.pixelShader.CurrentTechnique.Passes[0].Apply();
 
             Color darkBack = Color.BlueViolet * 0.15f;
             darkBack.A /= 2;
@@ -68,5 +96,9 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
             return false;
         }
+
+        public float StripWidth(float x) => 25f * (1 - x) * Utils.GetLerpValue(2, 8, Projectile.localAI[0], true) * MathF.Sqrt(Utils.GetLerpValue(0f, 0.1f, x, true));
+
+        public Color StripColor(float x) => Color.Lerp(new Color(10, 140, 255, 0), new Color(10, 170, 255, 128), Utils.GetLerpValue(0.9f, 0.7f, x, true));
     }
 }

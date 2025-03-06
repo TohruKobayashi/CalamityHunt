@@ -17,13 +17,13 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
         {
             EquipLoader.AddEquipTexture(Mod, Texture + "_Waist", EquipType.Waist, this);
             EquipLoader.AddEquipTexture(Mod, AssetPath + "Textures/Items/Misc/ShogunWings_Wings", EquipType.Wings, this);
-            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<ShogunWings>();
         }
 
         public override void SetStaticDefaults()
         {
             Item.wingSlot = EquipLoader.GetEquipSlot(Mod, Name, EquipType.Wings);
             ArmorIDs.Wing.Sets.Stats[Item.wingSlot] = new WingStats(2400, 20f, 3f, true, 20f);
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<ShogunWings>();
         }
 
         public override void SetDefaults()
@@ -42,12 +42,6 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
                 calamity.TryFind<ModRarity>("Violet", out r);
                 Item.rare = r.Type;
             }
-        }
-        public override void AddRecipes()
-        {
-            CreateRecipe()
-                .AddCustomShimmerResult(ModContent.ItemType<ShogunWings>())
-                .Register();
         }
 
         public override void UpdateEquip(Player player)

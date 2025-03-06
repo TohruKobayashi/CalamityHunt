@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -38,7 +39,7 @@ namespace CalamityHunt.Content.Items.Misc
     [LegacyName("GelatinousCatalyst")]
     public class SludgeSpongeFull : ModItem
     {
-        public override void Load()
+        public override void SetStaticDefaults()
         {
             ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<SludgeSpongeEmpty>();
         }
@@ -49,12 +50,6 @@ namespace CalamityHunt.Content.Items.Misc
             Item.knockBack = 6;
             Item.value = 10000;
             Item.rare = ItemRarityID.Blue;
-        }
-        public override void AddRecipes()
-        {
-            CreateRecipe()
-                .AddCustomShimmerResult(ModContent.ItemType<SludgeSpongeEmpty>())
-                .Register();
         }
     }
 }

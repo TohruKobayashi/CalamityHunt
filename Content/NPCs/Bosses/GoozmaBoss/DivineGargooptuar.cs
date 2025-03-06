@@ -315,7 +315,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                 if (Time <= lengthOfAttack + 100 && Time % 15 == 0) {
                     for (int i = 0; i < crystalFrequency; i++) {
-                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Top, Main.rand.NextVector2Circular(8, 5) - Vector2.UnitY * 12 + NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * 5f, ModContent.ProjectileType<GelCrystalShard>(), GetDamage(2), 0);
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), new Vector2(NPC.Top.X, NPC.Top.Y + 20), Main.rand.NextVector2Circular(8, 5) - Vector2.UnitY * 10 + NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * 5f, ModContent.ProjectileType<GelCrystalShard>(), GetDamage(2), 0);
                     }
                 }
             }
