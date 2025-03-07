@@ -615,6 +615,11 @@ Items: {
 		// DisplayName: Goozma Wings
 		// Tooltip: ""
 	}
+
+	ChromaSphere: {
+		// DisplayName: Chroma Sphere
+		// Tooltip: ""
+	}
 }
 
 NPCs: {
