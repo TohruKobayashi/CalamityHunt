@@ -553,7 +553,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     for (int i = 0; i < count; i++) {
                         Vector2 starPosition = new Vector2(Main.rand.Next(-50, 50), Main.rand.Next(-10, 10));
                         Vector2 starVelocity = new Vector2(starPosition.X * 0.2f, -Main.rand.Next(5, 25)) + NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * Main.rand.Next(3);
-                        Projectile starbit = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), NPC.Center + starPosition, starVelocity, ModContent.ProjectileType<StellarGelatine>(), GetDamage(4), 0f);
+                        Projectile starbit = Projectile.NewProjectileDirect(NPC.GetSource_FromThis(), NPC.Center + starPosition, starVelocity, ModContent.ProjectileType<StellarGelatine>(), GetDamage(5), 0f);
                         starbit.ai[0] = (int)(Time * 0.2f) - (40 + waitTime + 12) + Utils.GetLerpValue(0, count, i, true) * 40 - 20;
                         starbit.ai[2] = NPC.whoAmI;
                     }

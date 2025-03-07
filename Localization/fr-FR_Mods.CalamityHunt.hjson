@@ -611,6 +611,11 @@ Items: {
 		// DisplayName: Replica Gauntlets
 		// Tooltip: "'All the glitz without the glamour'"
 	}
+
+	GoozmaWings: {
+		// DisplayName: Goozma Wings
+		// Tooltip: ""
+	}
 }
 
 NPCs: {

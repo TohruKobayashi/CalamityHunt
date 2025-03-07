@@ -676,8 +676,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         int slimeAttack = GetSlimeAttack();
 
                         //Test slimes and attacks
-                        currentSlime = 3;
-                        slimeAttack = 1;
+                        //currentSlime = 3;
+                        //slimeAttack = 1;
 
                         if (Main.zenithWorld) {
                             currentSlime = (short)Main.rand.Next(0, 4);
@@ -2059,17 +2059,17 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     float angle = MathHelper.SmoothStep(1.5f, 0.9f, Time / 350f);
                     if (Time % 6 == 0) {
 
-                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(angle).RotatedByRandom(0.3f) * Main.rand.Next(4, 7), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
-                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(-angle).RotatedByRandom(0.3f) * Main.rand.Next(4, 7), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(angle).RotatedByRandom(0.3f) * Main.rand.NextFloat(4, 7), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(-angle).RotatedByRandom(0.3f) * Main.rand.NextFloat(4, 7), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                     }
                     if ((Time + 6) % 6 == 0) {
 
-                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(angle + 0.3f).RotatedByRandom(0.3f) * Main.rand.Next(2, 4), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
-                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(-angle - 0.3f).RotatedByRandom(0.3f) * Main.rand.Next(2, 4), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(angle + 0.3f).RotatedByRandom(0.3f) * Main.rand.NextFloat(2, 4), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(-angle - 0.3f).RotatedByRandom(0.3f) * Main.rand.NextFloat(2, 4), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                     }
                     if (Target.Center.Y < NPC.Top.Y - 300) {
 
-                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * Main.rand.Next(2, 8), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
+                        if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * Main.rand.NextFloat(2, 8), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                     }
                 }
 

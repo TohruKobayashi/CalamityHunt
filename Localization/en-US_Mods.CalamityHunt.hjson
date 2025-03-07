@@ -424,8 +424,7 @@ Items: {
 		DisplayName: Pluripotent Spawn Egg
 		Tooltip:
 			'''
-			Use on an empowered Slime Ninja Statue to start a Slime Rain
-			Use on an empowered Slime Ninja Statue during a Slime Rain to combine every slime
+			Use on an empowered Slime Ninja Statue to summon something sinister
 			Not consumable 
 			'''
 	}
@@ -612,6 +611,11 @@ Items: {
 	ReplicaGauntlets: {
 		DisplayName: Replica Gauntlets
 		Tooltip: "'All the glitz without the glamour'"
+	}
+
+	GoozmaWings: {
+		DisplayName: Goozma Wings
+		Tooltip: ""
 	}
 }
 
