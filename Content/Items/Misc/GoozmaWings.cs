@@ -39,12 +39,12 @@ namespace CalamityHunt.Content.Items.Misc
 
         public override void UpdateVanity(Player player)
         {
-            player.GetModPlayer<ChromaSpherePlayer>().trail = true;
+            player.GetModPlayer<ChromaSpherePlayer>().active = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             if (!hideVisual) {
-                player.GetModPlayer<ChromaSpherePlayer>().trail = true;
+                player.GetModPlayer<ChromaSpherePlayer>().active = true;
             }
         }
         public override void UpdateEquip(Player player)
@@ -56,23 +56,17 @@ namespace CalamityHunt.Content.Items.Misc
     public class ChromaSpherePlayer : ModPlayer
     {
         public bool active;
-        
-        public bool trail;
-        public Vector2[] trailOldPos = new Vector2[10];
-
         public override void ResetEffects()
         {
             active = false;
-            trail = false;
-            //trailOldPos = new Vector2[10];
         }
 
-        public override void PreUpdate()
+        public override void FrameEffects()
         {
-            for (int i = 0; i < trailOldPos.Length - 1; i++) {
-                trailOldPos[i] =  trailOldPos[i + 1];
+            if (active) {
+                Player.armorEffectDrawShadow = true;
+                Player.armorEffectDrawOutlines = true;
             }
-            trailOldPos[9] = Player.position;
         }
     }
 
@@ -80,51 +74,63 @@ namespace CalamityHunt.Content.Items.Misc
     {
         public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.LastVanillaLayer);
 
-        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo) => drawInfo.drawPlayer.GetModPlayer<ChromaSpherePlayer>().trail;
+        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo) => drawInfo.drawPlayer.GetModPlayer<ChromaSpherePlayer>().active && drawInfo.shadow != 0;
         
-        public Player clone;
 
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {
-            Vector2[] positions = drawInfo.drawPlayer.GetModPlayer<ChromaSpherePlayer>().trailOldPos;
             Player drawPlayer = drawInfo.drawPlayer;
             List<DrawData> existingDrawData = drawInfo.DrawDataCache;
             float milesPerHour = drawPlayer.velocity.Length() * 5.11f; // 225f / 44f
             float movementSpeedInterpolant = Utils.GetLerpValue(0f, 80, milesPerHour, true);
             movementSpeedInterpolant = (float)Math.Pow(movementSpeedInterpolant, 1.67f); // 5 / 3
-            for (float i = 0f; i < positions.Length; i += 1.7f) {
-                float completionRatio = i / (float)positions.Length;
-                float scale = MathHelper.Lerp(1f, 0.6f, completionRatio);
-                float opacity = MathHelper.Lerp(0.12f, 0.03f, completionRatio) * movementSpeedInterpolant;
-                List<DrawData> afterimages = new List<DrawData>();
-                // go through every player layer and apply effects
-                for (int j = 0; j < existingDrawData.Count; j++) {
-                    var drawData = existingDrawData[j];
-                    drawData.position = existingDrawData[j].position - drawPlayer.position + drawPlayer.oldPosition;
-                    Color trailColor = (new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(Main.GlobalTimeWrappedHourly - i * 5f + Main.GlobalTimeWrappedHourly * 48)) with { A = 170 };
-                    drawData.color = trailColor * opacity;
-                    drawData.scale = new Vector2(scale);
-                    int colorOnlyShaderIndex = ContentSamples.CommonlyUsedContentSamples.ColorOnlyShaderIndex;
-                    drawData.shader = colorOnlyShaderIndex;
-                    // only run once. we run this inside of the other loop as to avoid looping through the player layer list multiple times
-                    if (i == 0) {
-                        // create a glowy outline
-                        for (int k = 0; k < 4; k++) {
-                            var outlineData = existingDrawData[j];
-                            // this sucks but I have no better solution rn
-                            if (existingDrawData[j].shader == ContentSamples.CommonlyUsedContentSamples.ColorOnlyShaderIndex)
-                                continue;
-                            Vector2 off = new Vector2(2, 0).RotatedBy(MathHelper.TwoPi / 4f * k + drawPlayer.fullRotation);
-                            outlineData.shader = colorOnlyShaderIndex;
-                            outlineData.color = trailColor;
-                            outlineData.position += off;
-                            afterimages.Add(outlineData);
-                        }
-                    }
-                    afterimages.Add(drawData);
-                }
-                drawInfo.DrawDataCache.InsertRange(0, afterimages);
+            int colorOnlyShaderIndex = ContentSamples.CommonlyUsedContentSamples.ColorOnlyShaderIndex;
+            List<DrawData> drawcache = new List<DrawData>();
+            float completionRatio = (float)drawInfo.shadow;
+            float scale = MathHelper.Lerp(1f, 0.6f, completionRatio);
+            float opacity = MathHelper.Lerp(0.48f, 0.12f, completionRatio) * movementSpeedInterpolant;
+            Color trailColor = (new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(Main.GlobalTimeWrappedHourly - drawInfo.shadow * 25f + Main.GlobalTimeWrappedHourly * 96)) with { A = 180 };
+            // go through every player layer and apply effects
+            for (int j = 0; j < existingDrawData.Count; j++) {
+                var drawData = existingDrawData[j];
+                Vector2 pos = existingDrawData[j].position - drawPlayer.position + drawPlayer.oldPosition;
+                drawData.color = trailColor * opacity;
+                drawData.shader = colorOnlyShaderIndex;
+                drawInfo.DrawDataCache[j] = drawData;
             }
         }
+    }
+
+    public class ChromaSphereOutline : PlayerDrawLayer
+    {
+        public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.LastVanillaLayer);
+
+        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo) => drawInfo.drawPlayer.GetModPlayer<ChromaSpherePlayer>().active && drawInfo.shadow == 0;
+
+        protected override void Draw(ref PlayerDrawSet drawInfo)
+        {
+            Player drawPlayer = drawInfo.drawPlayer;
+            List<DrawData> existingDrawData = drawInfo.DrawDataCache;
+            int colorOnlyShaderIndex = ContentSamples.CommonlyUsedContentSamples.ColorOnlyShaderIndex;
+
+            Color trailColor = (new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(Main.GlobalTimeWrappedHourly * 48)) with { A = 170 };
+
+            List<DrawData> outlines = new List<DrawData>();
+
+            // go through every player layer and apply effects
+            for (int j = 0; j < existingDrawData.Count; j++) {
+                // create a glowy outline
+                for (int k = 0; k < 4; k++) {
+                    var outlineData = existingDrawData[j];
+                    Vector2 off = new Vector2(2, 0).RotatedBy(MathHelper.TwoPi / 4f * k + drawPlayer.fullRotation);
+                    Vector2 newPosition = outlineData.position + off;
+                    outlineData.shader = colorOnlyShaderIndex;
+                    outlineData.color = trailColor;
+                    outlineData.position += off;
+                    outlines.Add(outlineData);
+                }
+            }
+            drawInfo.DrawDataCache.InsertRange(0, outlines);
+        }        
     }
 }
