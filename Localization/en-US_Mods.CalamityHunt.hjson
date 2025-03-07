@@ -615,7 +615,7 @@ Items: {
 
 	ChromaSphere: {
 		DisplayName: Chroma Sphere
-		Tooltip: "Adds a bit of color to your afterimages"
+		Tooltip: Adds a bit of color to your afterimages
 	}
 }
 

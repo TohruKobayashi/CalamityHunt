@@ -89,14 +89,15 @@ namespace CalamityHunt.Content.Items.Misc
             Vector2[] positions = drawInfo.drawPlayer.GetModPlayer<ChromaSpherePlayer>().trailOldPos;
             Player drawPlayer = drawInfo.drawPlayer;
             List<DrawData> existingDrawData = drawInfo.DrawDataCache;
-            float milesPerHour = drawPlayer.velocity.Length() * 225f / 44f;
+            float milesPerHour = drawPlayer.velocity.Length() * 5.11f; // 225f / 44f
             float movementSpeedInterpolant = Utils.GetLerpValue(0f, 80, milesPerHour, true);
-            movementSpeedInterpolant = (float)Math.Pow(movementSpeedInterpolant, 5D / 3D);
+            movementSpeedInterpolant = (float)Math.Pow(movementSpeedInterpolant, 1.67f); // 5 / 3
             for (float i = 0f; i < positions.Length; i += 1.7f) {
                 float completionRatio = i / (float)positions.Length;
                 float scale = MathHelper.Lerp(1f, 0.6f, completionRatio);
                 float opacity = MathHelper.Lerp(0.12f, 0.03f, completionRatio) * movementSpeedInterpolant;
                 List<DrawData> afterimages = new List<DrawData>();
+                // go through every player layer and apply effects
                 for (int j = 0; j < existingDrawData.Count; j++) {
                     var drawData = existingDrawData[j];
                     drawData.position = existingDrawData[j].position - drawPlayer.position + drawPlayer.oldPosition;
@@ -105,6 +106,21 @@ namespace CalamityHunt.Content.Items.Misc
                     drawData.scale = new Vector2(scale);
                     int colorOnlyShaderIndex = ContentSamples.CommonlyUsedContentSamples.ColorOnlyShaderIndex;
                     drawData.shader = colorOnlyShaderIndex;
+                    // only run once. we run this inside of the other loop as to avoid looping through the player layer list multiple times
+                    if (i == 0) {
+                        // create a glowy outline
+                        for (int k = 0; k < 4; k++) {
+                            var outlineData = existingDrawData[j];
+                            // this sucks but I have no better solution rn
+                            if (existingDrawData[j].shader == ContentSamples.CommonlyUsedContentSamples.ColorOnlyShaderIndex)
+                                continue;
+                            Vector2 off = new Vector2(2, 0).RotatedBy(MathHelper.TwoPi / 4f * k + drawPlayer.fullRotation);
+                            outlineData.shader = colorOnlyShaderIndex;
+                            outlineData.color = trailColor;
+                            outlineData.position += off;
+                            afterimages.Add(outlineData);
+                        }
+                    }
                     afterimages.Add(drawData);
                 }
                 drawInfo.DrawDataCache.InsertRange(0, afterimages);

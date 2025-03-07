@@ -611,14 +611,9 @@ Items: {
 		// Tooltip: "'All the glitz without the glamour'"
 	}
 
-	GoozmaWings: {
-		// DisplayName: Goozma Wings
-		// Tooltip: ""
-	}
-
 	ChromaSphere: {
 		// DisplayName: Chroma Sphere
-		// Tooltip: ""
+		// Tooltip: Adds a bit of color to your afterimages
 	}
 }
 
