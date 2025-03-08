@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using CalamityHunt.Common.Systems;
 using CalamityHunt.Common.Systems.Particles;
 using CalamityHunt.Content.Particles;
 using Microsoft.Xna.Framework;
@@ -344,7 +345,12 @@ namespace CalamityHunt.Common.Players
                     Player.buffImmune[calamity.Find<ModBuff>("Warped").Type] = true;
                     Player.buffImmune[calamity.Find<ModBuff>("WeakPetrification").Type] = true;
                     Player.buffImmune[calamity.Find<ModBuff>("WhisperingDeath").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("FabsolVodkaBuff").Type] = true;
+                    int vodkaID;
+                    if (YharonReflectionSystem.SSO)
+                        vodkaID = calamity.Find<ModBuff>("CirrusVodkaBuff").Type;
+                    else
+                        vodkaID = calamity.Find<ModBuff>("FabsolsVodkaBuff").Type;
+                    Player.buffImmune[vodkaID] = true;
                     Player.buffImmune[calamity.Find<ModBuff>("FrozenLungs").Type] = true;
                     Player.buffImmune[calamity.Find<ModBuff>("PopoNoselessBuff").Type] = true;
                     Player.buffImmune[calamity.Find<ModBuff>("SearingLava").Type] = true;
