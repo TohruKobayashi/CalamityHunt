@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using CalamityHunt.Content.Items.Materials;
 using CalamityHunt.Content.Items.Rarities;
 using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoMod.RuntimeDetour;
 using ReLogic.Content;
 using Terraria;
 using Terraria.DataStructures;
@@ -18,6 +20,10 @@ namespace CalamityHunt.Content.Items.Dyes
 {
     public class ChromaticDyeLoader : ModSystem
     {
+        public static MethodInfo resizeMethod = typeof(ModContent).GetMethod("ResizeArrays", BindingFlags.Static | BindingFlags.NonPublic);
+        public static Hook loadStoneHook;
+        public delegate void orig_ResizeArrays(bool optional);
+
         public static Mod Hunt;
 
         //Use this list to get obtention methods or whatever
@@ -27,11 +33,21 @@ namespace CalamityHunt.Content.Items.Dyes
         {
             LoadedDyes = new List<int>();
             loadedDyeCount = 0;
-            Hunt = ModLoader.GetMod("CalamityHunt");
+            Hunt = ModLoader.GetMod("CalamityHunt"); 
+            loadStoneHook = new Hook(resizeMethod, AddDyes);
+        }
 
-            while (loadedDyeCount < Palettes.Count) {
-                LoadNextChromaDye();
+        public static void AddDyes(orig_ResizeArrays orig, bool unloading)
+        {
+            FieldInfo modLoading = typeof(Mod).GetField("loading", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (modLoading != null) {
+                modLoading.SetValue(CalamityHunt.Instance, true);
+                while (loadedDyeCount < Palettes.Count) {
+                    LoadNextChromaDye();
+                }
+                modLoading.SetValue(CalamityHunt.Instance, false);
             }
+            orig(unloading);
         }
 
         public static int loadedDyeCount;
