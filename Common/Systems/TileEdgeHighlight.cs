@@ -44,7 +44,7 @@ public class TileEdgeHighlight : ModSystem
         edgeEffect.Parameters["uColor"].SetValue(new Vector4(1f, 0.23f, 0f, 1f) * _fade);
         edgeEffect.Parameters["uSecondaryColor"].SetValue(new Vector4(0.1f, 0.5f, 0.8f, 0.5f) * _fade);
 
-        edgeEffect.Parameters["uNoise"].SetValue(AssetDirectory.Textures.Noise[17].Value);
+        edgeEffect.Parameters["uNoise"].SetValue(AssetDirectory.Textures.Noise[11].Value);
         edgeEffect.Parameters["uTime"].SetValue(-Main.GlobalTimeWrappedHourly / 30f % 1);
         edgeEffect.Parameters["uDistortionStrength"].SetValue(30f);
         edgeEffect.Parameters["uCenter"].SetValue((Main.LocalPlayer.Center - Main.screenPosition) / size);
