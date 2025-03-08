@@ -617,6 +617,11 @@ Items: {
 		DisplayName: Chroma Sphere
 		Tooltip: Adds a bit of color to your afterimages
 	}
+
+	EbonianCystDye: {
+		DisplayName: Ebonian Cyst Dye
+		Tooltip: ""
+	}
 }
 
 NPCs: {
