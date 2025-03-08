@@ -20,10 +20,8 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
             Item.damage = 950;
             Item.noMelee = true;
             Item.noUseGraphic = true;
-            Item.useAnimation = 10;
-            Item.useTime = 10;
-            Item.reuseDelay = 20;
-            Item.useLimitPerAnimation = 3;
+            Item.useAnimation = 30;
+            Item.useTime = 30;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 5f;
             Item.UseSound = SoundID.DD2_SkyDragonsFuryShot;
@@ -48,7 +46,8 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            bool stealth = false;
+            if (Main.myPlayer == player.whoAmI) {
+                bool stealth = false;
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
 
@@ -58,7 +57,6 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
             else if (player.vortexStealthActive || player.shroomiteStealth)
                 stealth = true;
 
-            if (Main.myPlayer == player.whoAmI) {
                 Vector2 mouseWorld = Main.MouseWorld;
                 player.LimitPointToPlayerReachableArea(ref mouseWorld);
                 velocity = velocity.SafeNormalize(Vector2.Zero).RotatedByRandom(0.3f) * Main.rand.NextFloat(0.8f, 1.3f) * Math.Max(170, player.Distance(mouseWorld)) * MathF.E * 0.009f;
