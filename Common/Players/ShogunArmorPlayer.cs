@@ -349,7 +349,7 @@ namespace CalamityHunt.Common.Players
                     if (YharonReflectionSystem.SSO)
                         vodkaID = calamity.Find<ModBuff>("CirrusVodkaBuff").Type;
                     else
-                        vodkaID = calamity.Find<ModBuff>("FabsolsVodkaBuff").Type;
+                        vodkaID = calamity.Find<ModBuff>("FabsolVodkaBuff").Type;
                     Player.buffImmune[vodkaID] = true;
                     Player.buffImmune[calamity.Find<ModBuff>("FrozenLungs").Type] = true;
                     Player.buffImmune[calamity.Find<ModBuff>("PopoNoselessBuff").Type] = true;

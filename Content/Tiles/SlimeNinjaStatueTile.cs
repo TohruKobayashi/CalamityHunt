@@ -61,7 +61,10 @@ namespace CalamityHunt.Content.Tiles
                     }
                 }
                 else if (!Main.slimeRain) {
-                    if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>()) || player.HasItem(ModContent.ItemType<SludgeSpongeFull>())) {
+                    if (player.HasItem(ModContent.ItemType<PluripotentSpawnEgg>())) {
+                        player.cursorItemIconID = ModContent.ItemType<PluripotentSpawnEgg>();
+                    }
+                    else if (player.HasItem(ModContent.ItemType<SludgeSpongeFull>())) {
                         player.cursorItemIconID = ModContent.ItemType<SludgeSpongeFull>();
                     }
                 }
