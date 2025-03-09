@@ -91,6 +91,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Mode = 1;
+            Projectile.damage = 0;
             Projectile.velocity *= 0.9f;
             StickHost = target.whoAmI;
         }
