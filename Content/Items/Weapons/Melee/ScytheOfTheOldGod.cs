@@ -101,7 +101,7 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
                     .AddIngredient(calamity.Find<ModItem>("LifefruitScythe").Type)
                     .AddIngredient(calamity.Find<ModItem>("EssenceFlayer").Type)
                     .AddIngredient(calamity.Find<ModItem>("AstralScythe").Type)
-                    .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
+                    .AddTile(calamity.Find<ModTile>("CosmicAnvil").Type)
                     .Register();
             }
             else {

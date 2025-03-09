@@ -74,7 +74,7 @@ namespace CalamityHunt.Content.Items.Weapons.Summoner
                     .AddIngredient(calamity.Find<ModItem>("UnderBite").Type)
                     .AddIngredient(calamity.Find<ModItem>("CongeledDuoWhip").Type)
                     .AddIngredient(calamity.Find<ModItem>("BlossomsBlessing").Type)
-                    .AddTile(calamityfr.Find<ModTile>("DraedonsForge").Type)
+                    .AddTile(calamityfr.Find<ModTile>("CosmicAnvil").Type)
                     .Register();
             }
             else if (ModLoader.HasMod(HUtils.CalamityMod)) {
@@ -85,7 +85,7 @@ namespace CalamityHunt.Content.Items.Weapons.Summoner
                     .AddIngredient(calamity.Find<ModItem>("Mourningstar").Type)
                     .AddIngredient(calamity.Find<ModItem>("CrescentMoon").Type)
                     .AddIngredient(calamity.Find<ModItem>("Nebulash").Type)
-                    .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
+                    .AddTile(calamity.Find<ModTile>("CosmicAnvil").Type)
                     .Register();
             }
             else {

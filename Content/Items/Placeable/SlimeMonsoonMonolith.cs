@@ -47,7 +47,7 @@ namespace CalamityHunt.Content.Items.Placeable
                 Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
                 CreateRecipe()
                     .AddIngredient<ChromaticMass>(15)
-                    .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
+                    .AddTile(calamity.Find<ModTile>("CosmicAnvil").Type)
                     .DisableDecraft()
                     .Register();
             }

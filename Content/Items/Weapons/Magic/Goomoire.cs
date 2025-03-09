@@ -62,7 +62,7 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
                     .AddIngredient(calamity.Find<ModItem>("Biofusillade").Type)
                     .AddIngredient(calamity.Find<ModItem>("AbyssalTome").Type)
                     .AddIngredient(calamity.Find<ModItem>("WintersFury").Type)
-                    .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
+                    .AddTile(calamity.Find<ModTile>("CosmicAnvil").Type)
                     .Register();
             }
             else {

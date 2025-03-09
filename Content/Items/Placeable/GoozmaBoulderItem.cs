@@ -24,7 +24,7 @@ namespace CalamityHunt.Content.Items.Placeable
                 CreateRecipe()
                     .AddIngredient(ItemID.Boulder)
                     .AddIngredient<ChromaticMass>(5)
-                    .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
+                    .AddTile(calamity.Find<ModTile>("CosmicAnvil").Type)
                     .AddCondition(Condition.InGraveyard)
                     .Register();
             }

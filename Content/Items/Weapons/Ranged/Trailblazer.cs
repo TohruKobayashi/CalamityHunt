@@ -80,7 +80,7 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
                     .AddIngredient(calamity.Find<ModItem>("PristineFury").Type)
                     .AddIngredient(calamity.Find<ModItem>("OverloadedBlaster").Type)
                     .AddIngredient(calamity.Find<ModItem>("AuroraBlazer").Type)
-                    .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
+                    .AddTile(calamity.Find<ModTile>("CosmicAnvil").Type)
                     .AddCustomShimmerResult(calamityHunt.Find<ModItem>("TrailblazerGoggles").Type)
                     .AddCustomShimmerResult(calamityHunt.Find<ModItem>("TrailblazerBackpack").Type)
                     .Register();

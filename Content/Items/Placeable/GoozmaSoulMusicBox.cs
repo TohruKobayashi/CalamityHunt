@@ -26,7 +26,7 @@ namespace CalamityHunt.Content.Items.Placeable
                 CreateRecipe()
                     .AddIngredient(ItemID.MusicBox)
                     .AddIngredient<ChromaticMass>(15)
-                    .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
+                    .AddTile(calamity.Find<ModTile>("CosmicAnvil").Type)
                     .Register();
             }
             else {

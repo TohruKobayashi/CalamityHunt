@@ -57,7 +57,7 @@ namespace CalamityHunt.Content.Items.Misc
                 CreateRecipe()
                     .AddIngredient(calamity.Find<ModItem>("AuricBar").Type, 10)
                     .AddIngredient<ChromaticMass>(5)
-                    .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
+                    .AddTile(calamity.Find<ModTile>("CosmicAnvil").Type)
                     .Register();
             }
             else {
