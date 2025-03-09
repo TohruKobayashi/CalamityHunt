@@ -251,17 +251,17 @@ public static class AssetDirectory
 
             // goomoire
             public static readonly SoundStyle GoomoireWindLoop = new(AssetPath + "Sounds/Weapons/GoomoireWindLoop") { MaxInstances = 0, IsLooped = true };
-            
+
             // sludge shaker
             public static readonly SoundStyle SludgeShakerFiringLoop = new(AssetPath + "Sounds/Weapons/SludgeShakerFiringLoop") { MaxInstances = 0, IsLooped = true };
-           
+
             // trailblazer
             public static readonly SoundStyle TrailBlazerFireStart = new(AssetPath + "Sounds/Weapons/TrailBlazerFireStart") { MaxInstances = 0, PitchVariance = 0.1f };
             public static readonly SoundStyle TrailblazerFireLoop = new(AssetPath + "Sounds/Weapons/TrailBlazerFireLoop") { MaxInstances = 0, IsLooped = true };
-            
+
             // fission flyer
             public static readonly SoundStyle FissionFlyerExplode = new(AssetPath + "Sounds/Weapons/FissionFlyerExplode") { MaxInstances = 0 };
-            
+
             // slime cane 
             public static readonly SoundStyle GoozmoemRay = new(AssetPath + "Sounds/Weapons/GoozmoemFusionRayShoot") { MaxInstances = 0, Volume = 0.8f };
 
@@ -354,6 +354,9 @@ public static class AssetDirectory
             public static readonly Asset<Effect> Holograph = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/HolographDyeEffect");
 
             public static readonly Asset<Effect> EbonianCyst = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/EbonianCystDye");
+            public static readonly Asset<Effect> CrimulanGouge = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/CrimulanGougeDye");
+            public static readonly Asset<Effect> StellarHeaven = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/StellarHeavenDye");
+            //public static readonly Asset<Effect> DivineResplendance = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/DivineResplendanceDye");
         }
     }
 }
