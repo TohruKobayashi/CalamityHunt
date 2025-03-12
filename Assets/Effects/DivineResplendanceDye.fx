@@ -38,20 +38,15 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 coords : TEXCOORD
     float2 pixelationFactor = 2 / uImageSize0;
     float2 noiseCoords = floor(coords / pixelationFactor) * pixelationFactor;
     float2 frameCoords = (noiseCoords * uImageSize0 - uSourceRect.xy) / uSourceRect.zw * 0.2;
-    float2 noiseCoordsWithTime = frameCoords + float2(uTime * -0.03, uTime * -0.05);
+    float2 noiseCoordsWithTime = frameCoords + ((sin(uTime / 3) / 4) + 0.5);
     
     float4 noise = tex2D(noisemapSampler, noiseCoordsWithTime);
     
-    // get the noisemaps luminosity and the color itll be when applied
-    float noiseLuminosity = (noise.r + noise.g + noise.b) / 3;
-    float3 colorBright = uColor * 4;
+    // get the noisemaps luminosity 
+    float colorLuminosity = (color.r + color.g + color.b) / 3;
     
     // put it all together, with color of course
-    color.rgb *= uColor;
-    if (noiseLuminosity > 0.4)
-    {
-        color.rgb *= noiseLuminosity * colorBright;
-    }
+    color.rgb = noise.rgb * colorLuminosity;
     
     return color * sampleColor * color.a;
 }

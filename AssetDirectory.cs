@@ -356,7 +356,7 @@ public static class AssetDirectory
             public static readonly Asset<Effect> EbonianCyst = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/EbonianCystDye");
             public static readonly Asset<Effect> CrimulanGouge = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/CrimulanGougeDye");
             public static readonly Asset<Effect> StellarHeaven = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/StellarHeavenDye");
-            //public static readonly Asset<Effect> DivineResplendance = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/DivineResplendanceDye");
+            public static readonly Asset<Effect> DivineResplendance = AssetUtilities.RequestImmediate<Effect>(AssetPath + "Effects/DivineResplendanceDye");
         }
     }
 }

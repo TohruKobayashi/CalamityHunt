@@ -631,6 +631,11 @@ Items: {
 		// DisplayName: Stellar Heaven Dye
 		// Tooltip: ""
 	}
+
+	DivineResplendanceDye: {
+		// DisplayName: Divine Resplendance Dye
+		// Tooltip: ""
+	}
 }
 
 NPCs: {
