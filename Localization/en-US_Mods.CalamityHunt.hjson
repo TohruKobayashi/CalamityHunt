@@ -360,7 +360,7 @@ Items: {
 		Tooltip:
 			'''
 			Uses gel for ammo
-			Ignores 15 points of enemy Defense
+			Ignores 30 points of enemy Defense
 			80% chance save ammo
 			'''
 	}

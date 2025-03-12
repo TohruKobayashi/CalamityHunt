@@ -27,7 +27,7 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
         {
             Item.width = 90;
             Item.height = 38;
-            Item.damage = 750;
+            Item.damage = 400;
             Item.noMelee = true;
             Item.useAnimation = 15;
             Item.useTime = 3;
@@ -41,7 +41,6 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
             Item.rare = ModContent.RarityType<VioletRarity>();
             Item.useAmmo = AmmoID.Gel;
             Item.value = Item.sellPrice(gold: 20);
-            Item.ArmorPenetration = 15;
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 ModRarity r;
                 Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);

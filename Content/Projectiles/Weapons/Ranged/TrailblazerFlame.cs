@@ -21,10 +21,11 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.width = 64;
             Projectile.height = 64;
             Projectile.aiStyle = -1;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 5;
             Projectile.timeLeft = 80;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
+            Projectile.ArmorPenetration += 30;
         }
 
         public ref float Time => ref Projectile.ai[0];
