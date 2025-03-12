@@ -27,7 +27,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.height = 14;
             Projectile.friendly = true;
             Projectile.timeLeft = 10000;
-            Projectile.penetrate = 10;
+            Projectile.penetrate = 5;
             Projectile.tileCollide = true;
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 15;
