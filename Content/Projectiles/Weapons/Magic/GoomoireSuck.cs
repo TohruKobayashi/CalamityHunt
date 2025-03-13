@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using CalamityHunt.Common.Systems.Particles;
 using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
@@ -19,6 +21,20 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
 {
     public class GoomoireSuck : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            Type calLists;
+            FieldInfo pierceList = null;
+            // adds goomoire to the exception list for calamitys pierce resist
+            if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
+                calLists = calamity.Code.GetType("CalamityMod.CalamityLists");
+                pierceList = calLists.GetField("pierceResistExceptionList", BindingFlags.Public | BindingFlags.Static);
+                List<int> pierceListReal = (List<int>)pierceList.GetValue(null);
+                pierceListReal.Append(ModContent.ProjectileType<GoomoireSuck>());
+                pierceList.SetValue(pierceList, pierceListReal);
+            }
+        }
+
         public override void SetDefaults()
         {
             Projectile.width = 24;
