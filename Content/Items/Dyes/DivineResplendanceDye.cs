@@ -11,11 +11,11 @@ using Terraria.ModLoader;
 
 namespace CalamityHunt.Content.Items.Dyes
 {
-    public class EbonianCystDyeShaderData : ArmorShaderData
+    public class DivineResplendanceDyeShaderData : ArmorShaderData
     {
-        public EbonianCystDyeShaderData(Ref<Effect> shader, string passName) : base(shader, passName)
+        public DivineResplendanceDyeShaderData(Ref<Effect> shader, string passName) : base(shader, passName)
         {
-            map = AssetDirectory.Textures.Noise[7].Value;
+            map = AssetDirectory.Textures.ColorMap[2].Value;
             mapSize = map.Size();
         }
 
@@ -25,22 +25,22 @@ namespace CalamityHunt.Content.Items.Dyes
         public override void Apply(Entity entity, DrawData? drawData = null)
         {
             if (drawData.HasValue) {
-                UseColor(new Color(149, 143, 234));
+                UseColor(new Color(147, 38, 31));
                 Shader.Parameters["noisemap"].SetValue(map);
                 Shader.Parameters["noisemapSize"].SetValue(mapSize);
             }
             base.Apply(entity, drawData);
         }
     }
-    public class EbonianCystDye : ModItem
+    public class DivineResplendanceDye : ModItem
     {
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
 
             if (!Main.dedServ) {
-                Effect ebonShader = AssetDirectory.Effects.Dyes.EbonianCyst.Value;
-                GameShaders.Armor.BindShader(ModContent.ItemType<EbonianCystDye>(), new EbonianCystDyeShaderData(new Ref<Effect>(ebonShader), "DyePass"));
+                Effect hallowShader = AssetDirectory.Effects.Dyes.DivineResplendance.Value;
+                GameShaders.Armor.BindShader(ModContent.ItemType<DivineResplendanceDye>(), new DivineResplendanceDyeShaderData(new Ref<Effect>(hallowShader), "DyePass"));
             }
         }
 

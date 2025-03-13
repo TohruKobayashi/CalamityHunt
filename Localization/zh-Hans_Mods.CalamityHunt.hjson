@@ -620,6 +620,21 @@ Items: {
 		// DisplayName: Ebonian Cyst Dye
 		// Tooltip: ""
 	}
+
+	CrimulanGougeDye: {
+		// DisplayName: Crimulan Gouge Dye
+		// Tooltip: ""
+	}
+
+	StellarHeavenDye: {
+		// DisplayName: Stellar Heaven Dye
+		// Tooltip: ""
+	}
+
+	DivineResplendanceDye: {
+		// DisplayName: Divine Resplendance Dye
+		// Tooltip: ""
+	}
 }
 
 NPCs: {
