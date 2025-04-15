@@ -21,6 +21,11 @@ public sealed class ChromaticGooBurst : Particle<ChromaticGooBurst>
     public override void FetchFromPool()
     {
         base.FetchFromPool();
+
+        colorData = default(ColorOffsetData);
+        style = 0;
+        frame = 0;
+        frameCounter = 0;
     }
 
     public override void OnSpawn()

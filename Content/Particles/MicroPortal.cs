@@ -20,6 +20,11 @@ public sealed class MicroPortal : Particle<MicroPortal>
     public override void FetchFromPool()
     {
         base.FetchFromPool();
+
+        secondColor = default(Color);
+        shader = null;
+        life = 0f;
+        direction = 0;
     }
 
     public override void OnSpawn()

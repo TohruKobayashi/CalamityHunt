@@ -14,6 +14,9 @@ public sealed class CrossSparkle : Particle<CrossSparkle>
     public override void FetchFromPool()
     {
         base.FetchFromPool();
+
+        time = 0;
+        anchor = null;
     }
 
     public override void OnSpawn()

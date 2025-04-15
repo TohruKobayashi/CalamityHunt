@@ -17,6 +17,10 @@ public sealed class MicroShockwave : Particle<MicroShockwave>
     public override void FetchFromPool()
     {
         base.FetchFromPool();
+
+        scaleLife = 0f;
+        secondColor = default(Color);
+        shader = null;
     }
 
     public override void OnSpawn()

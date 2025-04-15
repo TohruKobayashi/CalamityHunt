@@ -13,6 +13,8 @@ public sealed class PrettySparkle : Particle<PrettySparkle>
     public override void FetchFromPool()
     {
         base.FetchFromPool();
+
+        time = 0;
     }
 
     public override void OnSpawn()

@@ -28,6 +28,15 @@ public sealed class SmokeSplatterMetaball : Particle<SmokeSplatterMetaball>
     public override void FetchFromPool()
     {
         base.FetchFromPool();
+
+        time = 0;
+        maxTime = 0;
+        style = 0;
+        direction = 0;
+        rotationalVelocity = 0f;
+        anchor = null;
+        gravity = Vector2.Zero;
+        fadeColor = default(Color);
     }
 
     public override void OnSpawn()

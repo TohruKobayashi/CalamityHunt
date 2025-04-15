@@ -15,6 +15,10 @@ public abstract class BaseGelChunk<T> : Particle<T> where T : BaseGelChunk<T>
     public override void FetchFromPool()
     {
         base.FetchFromPool();
+
+        style = 0;
+        time = 0;
+        sticking = false;
     }
 
     public override void OnSpawn()

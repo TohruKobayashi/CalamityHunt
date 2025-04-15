@@ -23,6 +23,13 @@ public sealed class LightningParticle : Particle<LightningParticle>
     public override void FetchFromPool()
     {
         base.FetchFromPool();
+
+        time = 0;
+        maxTime = 0;
+        style = 0;
+        direction = 0;
+        anchor = null;
+        flickerSpeed = 0f;
     }
 
     public override void OnSpawn()

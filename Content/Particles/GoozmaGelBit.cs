@@ -26,6 +26,13 @@ public sealed class GoozmaGelBit : Particle<GoozmaGelBit>
     public override void FetchFromPool()
     {
         base.FetchFromPool();
+
+        style = 0;
+        direction = 0;
+        time = 0;
+        holdTime = 0;
+        anchor = null;
+        colorData = default(ColorOffsetData);
     }
 
     public override void OnSpawn()

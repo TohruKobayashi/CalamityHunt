@@ -33,6 +33,18 @@ public sealed class FusionFlameParticle : Particle<FusionFlameParticle>
     public override void FetchFromPool()
     {
         base.FetchFromPool();
+
+        time = 0;
+        maxTime = 0;
+        style = 0;
+        direction = 0;
+        rotationalVelocity = 0f;
+        anchor = null;
+        gravity = Vector2.Zero;
+        fadeColor = default(Color);
+        emitLight = false;
+        dissolveSize = 1f;
+        dissolvePower = 0f;
     }
 
     public override void OnSpawn()

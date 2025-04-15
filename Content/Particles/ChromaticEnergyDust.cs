@@ -25,6 +25,12 @@ public sealed class ChromaticEnergyDust : Particle<ChromaticEnergyDust>
     public override void FetchFromPool()
     {
         base.FetchFromPool();
+
+        life = 0;
+        colorData = default(ColorOffsetData);
+        frogicle = false;
+        oldPos = null;
+        oldRot = null;
     }
 
     public override void OnSpawn()
