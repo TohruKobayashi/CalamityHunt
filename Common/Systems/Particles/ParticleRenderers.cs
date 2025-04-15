@@ -83,7 +83,7 @@ public sealed class DefaultParticleRenderer : ParticleRenderer
         }
 
         sb.Begin(
-            SpriteSortMode.Immediate,
+            Effect is not null ? SpriteSortMode.Immediate : SpriteSortMode.Deferred,
             BlendState.AlphaBlend,
             Main.DefaultSamplerState,
             DepthStencilState.None,
