@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using ReLogic.Content;
+
 using Terraria.Graphics.Renderers;
 using Terraria.ModLoader;
 
@@ -16,25 +18,25 @@ public abstract class Particle<T> : ILoadable, IPooledParticle where T : Particl
 
     public virtual bool IsRestingInPool { get; protected set; }
 
-    public Vector2 Position { get; set; }
+    public virtual string Texture => (GetType().FullName!).Replace('.', '/');
 
-    public Vector2 Velocity { get; set; }
+    public Asset<Texture2D> TextureAsset => ModContent.Request<Texture2D>(Texture, AssetRequestMode.ImmediateLoad);
 
-    public Vector2 Acceleration { get; set; }
-
-    public float Rotation { get; set; }
-
-    public float RotationVelocity { get; set; }
-
-    public Vector2 Scale { get; set; } = Vector2.One;
-
-    public Vector2 ScaleVelocity { get; set; }
-
-    public Color Color { get; set; } = Color.White;
+    public Vector2 Position;
+    public Vector2 Velocity;
+    public Vector2 Acceleration;
+    public float Rotation;
+    public float RotationVelocity;
+    public Vector2 Scale = Vector2.One;
+    public Vector2 ScaleVelocity;
+    public Color Color = Color.White;
 
     void ILoadable.Load(Mod mod)
     {
         pool = new ParticlePool<T>(MaxParticles, NewInstance);
+
+        // Pre-load it.
+        ModContent.Request<Texture2D>(Texture);
     }
 
     void ILoadable.Unload() { }
@@ -49,12 +51,14 @@ public abstract class Particle<T> : ILoadable, IPooledParticle where T : Particl
         Draw(spritebatch);
     }
 
+    public virtual void OnSpawn() { }
+
     protected virtual void Update()
     {
-        Velocity         += Acceleration;
-        Position         += Velocity;
+        Velocity += Acceleration;
+        Position += Velocity;
         RotationVelocity += RotationVelocity;
-        Scale            += ScaleVelocity;
+        Scale += ScaleVelocity;
     }
 
     protected virtual void Draw(SpriteBatch sb) { }
@@ -66,16 +70,16 @@ public abstract class Particle<T> : ILoadable, IPooledParticle where T : Particl
 
     public virtual void FetchFromPool()
     {
-        IsRestingInPool             = false;
+        IsRestingInPool = false;
         ShouldBeRemovedFromRenderer = false;
 
-        Position         = Vector2.Zero;
-        Velocity         = Vector2.Zero;
-        Acceleration     = Vector2.Zero;
-        Rotation         = 0f;
+        Position = Vector2.Zero;
+        Velocity = Vector2.Zero;
+        Acceleration = Vector2.Zero;
+        Rotation = 0f;
         RotationVelocity = 0f;
-        Scale            = Vector2.One;
-        Color            = Color.White;
+        Scale = Vector2.One;
+        Color = Color.White;
     }
 
     protected abstract T NewInstance();

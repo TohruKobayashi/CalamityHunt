@@ -9,35 +9,40 @@ namespace CalamityHunt.Content.Particles;
 public sealed class PrettySparkle : Particle<PrettySparkle>
 {
     private int time;
+    
+    public override void FetchFromPool()
+    {
+        base.FetchFromPool();
+    }
 
     public override void OnSpawn()
     {
-        scale *= Main.rand.NextFloat(0.9f, 1.1f);
-        velocity *= Main.rand.NextFloat(0.9f, 1.1f);
-        rotation *= 0.05f;
+        Scale *= Main.rand.NextFloat(0.9f, 1.1f);
+        Velocity *= Main.rand.NextFloat(0.9f, 1.1f);
+        Rotation *= 0.05f;
     }
 
-    public override void Update()
+    protected override void Update()
     {
-        velocity *= 0.95f;
+        Velocity *= 0.95f;
         time++;
 
-        if (time > 40 + scale) {
-            scale *= 0.8f + Math.Min(scale * 0.2f, 0.18f);
+        if (time > 40 + Scale.X) {
+            Scale *= 0.8f + Math.Min(Scale.X * 0.2f, 0.18f);
         }
 
-        if (scale < 0.1f) {
-            ShouldRemove = true;
+        if (Scale.X < 0.1f) {
+            ShouldBeRemovedFromRenderer = true;
         }
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
+    protected override void Draw(SpriteBatch spriteBatch)
     {
-        Texture2D texture = AssetDirectory.Textures.Particle[Type].Value;
-        float drawScale = scale * (float)Math.Sqrt(Utils.GetLerpValue(-5, 10, time, true));
-        Color drawColor = Color.Lerp(color, Color.White, 0.6f) with { A = 0 };
-        spriteBatch.Draw(texture, position - Main.screenPosition, null, color with { A = (byte)(color.A / 2) }, rotation, texture.Size() * 0.5f, drawScale * 0.6f, 0, 0);
-        spriteBatch.Draw(texture, position - Main.screenPosition, null, drawColor, rotation, texture.Size() * 0.5f, drawScale * 0.3f, 0, 0);
+        Texture2D texture = TextureAsset.Value;
+        Vector2 drawScale = Scale * (float)Math.Sqrt(Utils.GetLerpValue(-5, 10, time, true));
+        Color drawColor = Color.Lerp(Color, Color.White, 0.6f) with { A = 0 };
+        spriteBatch.Draw(texture, Position - Main.screenPosition, null, Color with { A = (byte)(Color.A / 2) }, Rotation, texture.Size() * 0.5f, drawScale * 0.6f, 0, 0);
+        spriteBatch.Draw(texture, Position - Main.screenPosition, null, drawColor, Rotation, texture.Size() * 0.5f, drawScale * 0.3f, 0, 0);
     }
     
     protected override PrettySparkle NewInstance()

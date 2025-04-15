@@ -23,48 +23,53 @@ public sealed class SmokeSplatterParticle : Particle<SmokeSplatterParticle>
     public Vector2 gravity;
 
     public Color fadeColor;
+    
+    public override void FetchFromPool()
+    {
+        base.FetchFromPool();
+    }
 
     public override void OnSpawn()
     {
         style = Main.rand.Next(5);
         direction = Main.rand.NextBool().ToDirectionInt();
-        scale *= Main.rand.NextFloat(0.9f, 1.1f);
+        Scale *= Main.rand.NextFloat(0.9f, 1.1f);
         rotationalVelocity = Main.rand.NextFloat(0.2f);
         maxTime = (int)(maxTime * 0.66f);
     }
 
-    public override void Update()
+    protected override void Update()
     {
         float progress = (float)time / maxTime;
 
-        velocity *= 0.97f;
-        velocity += gravity * (0.5f + progress);
+        Velocity *= 0.97f;
+        Velocity += gravity * (0.5f + progress);
 
         if (time++ > maxTime) {
-            ShouldRemove = true;
+            ShouldBeRemovedFromRenderer = true;
         }
 
         if (anchor != null) {
-            position += anchor.Invoke();
+            Position += anchor.Invoke();
         }
 
         rotationalVelocity *= 0.96f;
-        rotation += (1f - MathF.Cbrt(progress)) * rotationalVelocity * direction;
+        Rotation += (1f - MathF.Cbrt(progress)) * rotationalVelocity * direction;
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
+    protected override void Draw(SpriteBatch spriteBatch)
     {
         float progress = (float)time / maxTime;
 
-        Texture2D texture = AssetDirectory.Textures.Particle[Type].Value;
+        Texture2D texture = TextureAsset.Value;
         Rectangle frame = texture.Frame(1, 5, 0, style);
         SpriteEffects flip = direction > 0 ? SpriteEffects.None : SpriteEffects.FlipVertically;
-        Color drawColor = Color.Lerp(color, fadeColor, Utils.GetLerpValue(0f, 0.5f, progress, true));
-        float drawScale = scale * MathF.Sqrt(Utils.GetLerpValue(0f, 6f, time, true)) * (0.4f + progress * 0.5f);
+        Color drawColor = Color.Lerp(Color, fadeColor, Utils.GetLerpValue(0f, 0.5f, progress, true));
+        Vector2 drawScale = Scale * MathF.Sqrt(Utils.GetLerpValue(0f, 6f, time, true)) * (0.4f + progress * 0.5f);
 
         Effect dissolveEffect = AssetDirectory.Effects.FlameDissolve.Value;
         dissolveEffect.Parameters["uTexture0"].SetValue(AssetDirectory.Textures.Noise[9].Value);
-        dissolveEffect.Parameters["uTextureScale"].SetValue(new Vector2(2f + scale * 0.07f));
+        dissolveEffect.Parameters["uTextureScale"].SetValue(new Vector2(2f) + Scale * 0.07f);
         dissolveEffect.Parameters["uFrameCount"].SetValue(5);
         dissolveEffect.Parameters["uProgress"].SetValue(MathF.Pow(progress, 1.3f));
         dissolveEffect.Parameters["uPower"].SetValue(2f + Utils.GetLerpValue(0.15f, 0.8f, progress, true) * 50f);
@@ -72,7 +77,7 @@ public sealed class SmokeSplatterParticle : Particle<SmokeSplatterParticle>
         dissolveEffect.CurrentTechnique.Passes[0].Apply();
 
         Vector2 squish = new Vector2(1f - progress * 0.1f, 1f + progress * 0.1f);
-        spriteBatch.Draw(texture, position - Main.screenPosition, frame, drawColor, rotation, frame.Size() * 0.5f, squish * drawScale * 0.5f, flip, 0);
+        spriteBatch.Draw(texture, Position - Main.screenPosition, frame, drawColor, Rotation, frame.Size() * 0.5f, squish * drawScale * 0.5f, flip, 0);
 
         Main.pixelShader.CurrentTechnique.Passes[0].Apply();
     }

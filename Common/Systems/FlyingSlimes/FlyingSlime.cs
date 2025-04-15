@@ -23,7 +23,7 @@ public class FlyingSlime
 
     public FlyingSlimeData data;
 
-    public bool ShouldRemove { get; private set; }
+    public bool ShouldBeRemovedFromRenderer { get; private set; }
 
     public float curvature;
 
@@ -37,7 +37,7 @@ public class FlyingSlime
         progress += data.Speed / 80f;
 
         if (currentPosition.Distance(targetPosition) < 20 || progress > Main.rand.NextFloat(0.98f, 1f)) {
-            ShouldRemove = true;
+            ShouldBeRemovedFromRenderer = true;
         }
 
         data.DustMethod?.Invoke(data, currentPosition);

@@ -17,16 +17,21 @@ public sealed class ChromaticGooBurst : Particle<ChromaticGooBurst>
     private int frame;
 
     private int frameCounter;
+    
+    public override void FetchFromPool()
+    {
+        base.FetchFromPool();
+    }
 
     public override void OnSpawn()
     {
-        scale *= Main.rand.NextFloat(0.9f, 1.1f);
+        Scale *= Main.rand.NextFloat(0.9f, 1.1f);
         style = Main.rand.Next(2);
-        rotation = velocity.ToRotation() + MathHelper.PiOver2;
-        velocity = Vector2.Zero;
+        Rotation = Velocity.ToRotation() + MathHelper.PiOver2;
+        Velocity = Vector2.Zero;
     }
 
-    public override void Update()
+    protected override void Update()
     {
         frameCounter++;
 
@@ -39,23 +44,23 @@ public sealed class ChromaticGooBurst : Particle<ChromaticGooBurst>
         }
 
         if (frame > 7) {
-            ShouldRemove = true;
+            ShouldBeRemovedFromRenderer = true;
         }
 
         if (colorData.active) {
-            color = new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(colorData.offset + Math.Max(0, frameCounter - 18) * 3f - 2f);
+            Color = new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(colorData.offset + Math.Max(0, frameCounter - 18) * 3f - 2f);
         }
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
+    protected override void Draw(SpriteBatch spriteBatch)
     {
-        Texture2D texture = AssetDirectory.Textures.Particle[Type].Value;
+        Texture2D texture = TextureAsset.Value;
         Rectangle drawFrame = texture.Frame(8, 4, frame, style);
         Rectangle glowFrame = texture.Frame(8, 4, frame, style + 2);
 
-        spriteBatch.Draw(texture, position - Main.screenPosition, drawFrame, Color.LightGray, rotation, drawFrame.Size() * new Vector2(0.5f, 1f), scale, 0, 0);
-        spriteBatch.Draw(texture, position - Main.screenPosition, glowFrame, color, rotation, glowFrame.Size() * new Vector2(0.5f, 1f), scale, 0, 0);
-        spriteBatch.Draw(texture, position - Main.screenPosition, glowFrame, (color * 0.5f) with { A = 0 }, rotation, glowFrame.Size() * new Vector2(0.5f, 1f), scale * 1.01f, 0, 0);
+        spriteBatch.Draw(texture, Position - Main.screenPosition, drawFrame, Color.LightGray, Rotation, drawFrame.Size() * new Vector2(0.5f, 1f), Scale, 0, 0);
+        spriteBatch.Draw(texture, Position - Main.screenPosition, glowFrame, Color, Rotation, glowFrame.Size() * new Vector2(0.5f, 1f), Scale, 0, 0);
+        spriteBatch.Draw(texture, Position - Main.screenPosition, glowFrame, (Color * 0.5f) with { A = 0 }, Rotation, glowFrame.Size() * new Vector2(0.5f, 1f), Scale * 1.01f, 0, 0);
     }
     
     protected override ChromaticGooBurst NewInstance()

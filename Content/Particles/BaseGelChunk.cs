@@ -12,44 +12,49 @@ public abstract class BaseGelChunk<T> : Particle<T> where T : BaseGelChunk<T>
 
     public bool sticking;
 
+    public override void FetchFromPool()
+    {
+        base.FetchFromPool();
+    }
+
     public override void OnSpawn()
     {
-        scale *= Main.rand.NextFloat(1f, 1.2f);
+        Scale *= Main.rand.NextFloat(1f, 1.2f);
         style = Main.rand.Next(2);
     }
 
-    public override void Update()
+    protected override void Update()
     {
         time++;
 
         if (!sticking) {
-            if (velocity.Y < 30) {
-                velocity += new Vector2(0, 0.5f);
+            if (Velocity.Y < 30) {
+                Velocity += new Vector2(0, 0.5f);
             }
 
-            rotation = velocity.ToRotation() - MathHelper.PiOver2;
+            Rotation = Velocity.ToRotation() - MathHelper.PiOver2;
 
-            if (Collision.IsWorldPointSolid(position + velocity) && time > 2) {
+            if (Collision.IsWorldPointSolid(Position + Velocity) && time > 2) {
                 time = 0;
                 sticking = true;
-                position = new Vector2(position.X, (int)(position.Y / 16f) * 16 + 16);
+                Position = new Vector2(Position.X, (int)(Position.Y / 16f) * 16 + 16);
                 for (int i = 0; i < 8; i++) {
-                    if (Collision.IsWorldPointSolid(position + velocity - new Vector2(0, 8 * i))) {
-                        position -= new Vector2(0, 8);
+                    if (Collision.IsWorldPointSolid(Position + Velocity - new Vector2(0, 8 * i))) {
+                        Position -= new Vector2(0, 8);
                     }
                 }
-                position -= new Vector2(0, 3);
+                Position -= new Vector2(0, 3);
             }
         }
         else {
-            rotation = 0;
-            velocity = Vector2.Zero;
+            Rotation = 0;
+            Velocity = Vector2.Zero;
             if (time > 10) {
-                scale *= 0.95f;
+                Scale *= 0.95f;
             }
 
-            if (scale < 0.1f) {
-                ShouldRemove = true;
+            if (Scale.X < 0.1f) {
+                ShouldBeRemovedFromRenderer = true;
             }
         }
     }

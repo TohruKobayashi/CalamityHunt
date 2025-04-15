@@ -13,33 +13,38 @@ public sealed class MicroShockwave : Particle<MicroShockwave>
     public Color secondColor;
 
     public ArmorShaderData shader;
+    
+    public override void FetchFromPool()
+    {
+        base.FetchFromPool();
+    }
 
     public override void OnSpawn()
     {
-        rotation = velocity.ToRotation();
-        velocity = Vector2.Zero;
+        Rotation = Velocity.ToRotation();
+        Velocity = Vector2.Zero;
     }
 
-    public override void Update()
+    protected override void Update()
     {
-        scaleLife += (scale - scaleLife * 0.8f) * 0.09f;
-        if (scaleLife > scale) {
-            ShouldRemove = true;
+        scaleLife += (Scale.X - scaleLife * 0.8f) * 0.09f;
+        if (scaleLife > Scale.X) {
+            ShouldBeRemovedFromRenderer = true;
         }
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
+    protected override void Draw(SpriteBatch spriteBatch)
     {
         shader?.Shader?.CurrentTechnique.Passes[0].Apply();
 
-        Texture2D texture = AssetDirectory.Textures.Particle[Type].Value;
+        Texture2D texture = TextureAsset.Value;
         Rectangle solidFrame = texture.Frame(1, 3, 0, 0);
         Rectangle colorFrame = texture.Frame(1, 3, 0, 1);
         Rectangle glowFrame = texture.Frame(1, 3, 0, 2);
-        float drawScale = Utils.GetLerpValue(scale, scale * 0.7f, scaleLife, true);
-        spriteBatch.Draw(texture, position - Main.screenPosition, solidFrame, Color.Black * 0.1f * drawScale, rotation, solidFrame.Size() * 0.5f, new Vector2(scaleLife, scaleLife * 0.5f), 0, 0);
-        spriteBatch.Draw(texture, position - Main.screenPosition, colorFrame, color * drawScale, rotation, colorFrame.Size() * 0.5f, new Vector2(scaleLife, scaleLife * 0.5f), 0, 0);
-        spriteBatch.Draw(texture, position - Main.screenPosition, glowFrame, secondColor * drawScale, rotation, glowFrame.Size() * 0.5f, new Vector2(scaleLife, scaleLife * 0.5f), 0, 0);
+        float drawScale = Utils.GetLerpValue(Scale.X, Scale.X * 0.7f, scaleLife, true);
+        spriteBatch.Draw(texture, Position - Main.screenPosition, solidFrame, Color.Black * 0.1f * drawScale, Rotation, solidFrame.Size() * 0.5f, new Vector2(scaleLife, scaleLife * 0.5f), 0, 0);
+        spriteBatch.Draw(texture, Position - Main.screenPosition, colorFrame, Color * drawScale, Rotation, colorFrame.Size() * 0.5f, new Vector2(scaleLife, scaleLife * 0.5f), 0, 0);
+        spriteBatch.Draw(texture, Position - Main.screenPosition, glowFrame, secondColor * drawScale, Rotation, glowFrame.Size() * 0.5f, new Vector2(scaleLife, scaleLife * 0.5f), 0, 0);
 
         Main.pixelShader.CurrentTechnique.Passes[0].Apply();
     }

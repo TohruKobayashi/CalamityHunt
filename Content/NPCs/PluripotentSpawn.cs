@@ -126,7 +126,7 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
                     }));
                 }
 
-                if (slime.ShouldRemove) {
+                if (slime.ShouldBeRemovedFromRenderer) {
 
                     if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(1 + (int)(Time * 0.005f))) {
                         CalamityHunt.Particles.Add(Particle.Create<ChromaticGooBurst>(particle => {

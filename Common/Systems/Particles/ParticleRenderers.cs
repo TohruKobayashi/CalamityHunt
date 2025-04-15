@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,7 +10,7 @@ namespace CalamityHunt.Common.Systems.Particles;
 
 public abstract class ParticleRenderer
 {
-    protected List<IPooledParticle>    particles = [];
+    protected List<IPooledParticle> particles = [];
     protected ParticleRendererSettings settings;
 
     public bool ShouldRestart { get; set; }
@@ -21,9 +22,12 @@ public abstract class ParticleRenderer
         return Main.dedServ ? new NoOpParticleRenderer() : new DefaultParticleRenderer();
     }
 
-    public T SpawnParticle<T>() where T : Particle<T>
+    public T SpawnParticle<T>(Action<T> initializer) where T : Particle<T>
     {
         var particle = Particle<T>.RequestParticle();
+        initializer(particle);
+        particle.OnSpawn();
+        
         Add(particle);
         return particle;
     }

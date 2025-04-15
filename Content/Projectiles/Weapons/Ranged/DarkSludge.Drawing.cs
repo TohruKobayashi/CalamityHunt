@@ -71,7 +71,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 {
                     Asset<Texture2D> texture = ModContent.Request<Texture2D>(particle.Texture);
                     Rectangle frame = texture.Frame(4, 1, particle.variant, 0);
-                    Vector2 squish = new Vector2(1f - particle.velocity.Length() * 0.01f, 1f + particle.velocity.Length() * 0.01f);
+                    Vector2 squish = new Vector2(1f - particle.Velocity.Length() * 0.01f, 1f + particle.Velocity.Length() * 0.01f);
                     float grow = (float)Math.Sqrt(Utils.GetLerpValue(-20, 40, particle.time, true));
                     if (particle.stuck)
                     {
@@ -80,8 +80,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                         squish = new Vector2(1f + (float)Math.Sqrt(Utils.GetLerpValue(20, 0, particle.time, true)) * 0.33f, 1f - (float)Math.Sqrt(Utils.GetLerpValue(20, 0, particle.time, true)) * 0.33f);
                     }
 
-                    Color color = Lighting.GetColor(particle.position.ToTileCoordinates());
-                    Main.spriteBatch.Draw(texture.Value, (particle.position - Main.screenPosition) / 2f, frame, color, particle.rotation, frame.Size() * new Vector2(0.5f, 0.84f), particle.scale * grow * squish * 0.5f, 0, 0);
+                    Color color = Lighting.GetColor(particle.Position.ToTileCoordinates());
+                    Main.spriteBatch.Draw(texture.Value, (particle.Position - Main.screenPosition) / 2f, frame, color, particle.Rotation, frame.Size() * new Vector2(0.5f, 0.84f), particle.Scale * grow * squish * 0.5f, 0, 0);
                 }
             }
 
