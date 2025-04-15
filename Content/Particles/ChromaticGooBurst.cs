@@ -8,7 +8,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class ChromaticGooBurst : Particle
+public sealed class ChromaticGooBurst : Particle<ChromaticGooBurst>
 {
     public ColorOffsetData colorData;
 
@@ -56,5 +56,10 @@ public class ChromaticGooBurst : Particle
         spriteBatch.Draw(texture, position - Main.screenPosition, drawFrame, Color.LightGray, rotation, drawFrame.Size() * new Vector2(0.5f, 1f), scale, 0, 0);
         spriteBatch.Draw(texture, position - Main.screenPosition, glowFrame, color, rotation, glowFrame.Size() * new Vector2(0.5f, 1f), scale, 0, 0);
         spriteBatch.Draw(texture, position - Main.screenPosition, glowFrame, (color * 0.5f) with { A = 0 }, rotation, glowFrame.Size() * new Vector2(0.5f, 1f), scale * 1.01f, 0, 0);
+    }
+    
+    protected override ChromaticGooBurst NewInstance()
+    {
+        return new ChromaticGooBurst();
     }
 }

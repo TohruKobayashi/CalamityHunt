@@ -5,7 +5,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class CrimGelChunk : BaseGelChunk
+public sealed class CrimGelChunk : BaseGelChunk<CrimGelChunk>
 {
     public override void Draw(SpriteBatch spriteBatch)
     {
@@ -21,5 +21,10 @@ public class CrimGelChunk : BaseGelChunk
 
         Color lightColor = Lighting.GetColor(position.ToTileCoordinates());
         spriteBatch.Draw(texture, position - Main.screenPosition, frame, Color.Lerp(color, color.MultiplyRGBA(lightColor), sticking ? 1f : Utils.GetLerpValue(10, 50, time, true)), rotation, frame.Size() * new Vector2(0.5f, 0.84f), scale * grow * squish, 0, 0);
+    }
+    
+    protected override CrimGelChunk NewInstance()
+    {
+        return new CrimGelChunk();
     }
 }

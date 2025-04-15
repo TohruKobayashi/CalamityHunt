@@ -6,7 +6,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class FusionFlameParticle : Particle
+public sealed class FusionFlameParticle : Particle<FusionFlameParticle>
 {
     private int time;
 
@@ -105,5 +105,10 @@ public class FusionFlameParticle : Particle
 
         Main.pixelShader.CurrentTechnique.Passes[0].Apply();
 
+    }
+    
+    protected override FusionFlameParticle NewInstance()
+    {
+        return new FusionFlameParticle();
     }
 }

@@ -6,7 +6,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class SmokeSplatterParticle : Particle
+public sealed class SmokeSplatterParticle : Particle<SmokeSplatterParticle>
 {
     private int time;
 
@@ -75,5 +75,10 @@ public class SmokeSplatterParticle : Particle
         spriteBatch.Draw(texture, position - Main.screenPosition, frame, drawColor, rotation, frame.Size() * 0.5f, squish * drawScale * 0.5f, flip, 0);
 
         Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+    }
+    
+    protected override SmokeSplatterParticle NewInstance()
+    {
+        return new SmokeSplatterParticle();
     }
 }

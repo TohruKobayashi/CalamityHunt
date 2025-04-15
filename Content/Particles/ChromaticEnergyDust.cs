@@ -10,7 +10,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class ChromaticEnergyDust : Particle
+public sealed class ChromaticEnergyDust : Particle<ChromaticEnergyDust>
 {
     public float life;
 
@@ -96,5 +96,10 @@ public class ChromaticEnergyDust : Particle
 
         float innerGlowScale = 0.7f * Utils.GetLerpValue(5f, 1.5f, life, true);
         spriteBatch.Draw(texture, position - Main.screenPosition, texture.Frame(), Color.White with { A = 0 }, rotation, texture.Size() * 0.5f, scale * innerGlowScale, 0, 0);
+    }
+
+    protected override ChromaticEnergyDust NewInstance()
+    {
+        return new ChromaticEnergyDust();
     }
 }

@@ -6,7 +6,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class FlameParticle : Particle
+public sealed class FlameParticle : Particle<FlameParticle>
 {
     public int time;
 
@@ -83,5 +83,10 @@ public class FlameParticle : Particle
         spriteBatch.Draw(texture, position - Main.screenPosition, frame, drawColor, rotation, frame.Size() * 0.5f, squish * drawScale * 0.45f, flip, 0);
 
         Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+    }
+    
+    protected override FlameParticle NewInstance()
+    {
+        return new FlameParticle();
     }
 }

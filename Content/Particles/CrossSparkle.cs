@@ -6,7 +6,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class CrossSparkle : Particle
+public sealed class CrossSparkle : Particle<CrossSparkle>
 {
     private int time;
     public Func<Vector2> anchor;
@@ -43,5 +43,10 @@ public class CrossSparkle : Particle
         spriteBatch.Draw(texture, position - Main.screenPosition, texture.Frame(), drawColor * 0.2f, rotation + MathHelper.PiOver4, texture.Size() * 0.5f, drawScale * new Vector2(0.4f, 2f), 0, 0);
         spriteBatch.Draw(texture, position - Main.screenPosition, texture.Frame(), new Color(255, 255, 255, 0), rotation - MathHelper.PiOver4, texture.Size() * 0.5f, drawScale * 0.5f, 0, 0);
         spriteBatch.Draw(texture, position - Main.screenPosition, texture.Frame(), new Color(255, 255, 255, 0), rotation + MathHelper.PiOver4, texture.Size() * 0.5f, drawScale * 0.5f, 0, 0);
+    }
+    
+    protected override CrossSparkle NewInstance()
+    {
+        return new CrossSparkle();
     }
 }

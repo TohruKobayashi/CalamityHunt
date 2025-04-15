@@ -7,7 +7,7 @@ using Terraria.Graphics.Shaders;
 
 namespace CalamityHunt.Content.Particles;
 
-public class MicroPortal : Particle
+public sealed class MicroPortal : Particle<MicroPortal>
 {
     public Color secondColor;
 
@@ -49,5 +49,10 @@ public class MicroPortal : Particle
         spriteBatch.Draw(texture, position - Main.screenPosition, glowFrame, secondColor, rotation, glowFrame.Size() * 0.5f, scale * 1.05f * curScale * (1f + MathF.Sin(life * 10f) * 0.05f), 0, 0);
 
         Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+    }
+    
+    protected override MicroPortal NewInstance()
+    {
+        return new MicroPortal();
     }
 }

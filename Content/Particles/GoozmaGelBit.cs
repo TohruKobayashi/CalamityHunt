@@ -9,7 +9,7 @@ using Terraria.ID;
 
 namespace CalamityHunt.Content.Particles;
 
-public class GoozmaGelBit : Particle
+public sealed class GoozmaGelBit : Particle<GoozmaGelBit>
 {
     public int style;
 
@@ -173,5 +173,10 @@ public class GoozmaGelBit : Particle
         //Make the color at index 0 be a mix between the first and last colors in the list, based on the distance between the 2.
         float interpolant = (1 - brightnesses[9]) / (brightnesses[1] + (1 - brightnesses[9]));
         colors[0] = Vector3.Lerp(colors[9], colors[0], interpolant);
+    }
+    
+    protected override GoozmaGelBit NewInstance()
+    {
+        return new GoozmaGelBit();
     }
 }

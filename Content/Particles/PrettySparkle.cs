@@ -6,7 +6,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class PrettySparkle : Particle
+public sealed class PrettySparkle : Particle<PrettySparkle>
 {
     private int time;
 
@@ -38,5 +38,10 @@ public class PrettySparkle : Particle
         Color drawColor = Color.Lerp(color, Color.White, 0.6f) with { A = 0 };
         spriteBatch.Draw(texture, position - Main.screenPosition, null, color with { A = (byte)(color.A / 2) }, rotation, texture.Size() * 0.5f, drawScale * 0.6f, 0, 0);
         spriteBatch.Draw(texture, position - Main.screenPosition, null, drawColor, rotation, texture.Size() * 0.5f, drawScale * 0.3f, 0, 0);
+    }
+    
+    protected override PrettySparkle NewInstance()
+    {
+        return new PrettySparkle();
     }
 }

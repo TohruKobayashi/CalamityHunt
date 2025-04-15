@@ -7,7 +7,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class SmokeSplatterMetaball : Particle
+public sealed class SmokeSplatterMetaball : Particle<SmokeSplatterMetaball>
 {
     private int time;
 
@@ -65,5 +65,10 @@ public class SmokeSplatterMetaball : Particle
 
         Vector2 squish = new Vector2(1f - progress * 0.1f, 1f + progress * 0.1f);
         spriteBatch.Draw(texture, position - Main.screenPosition, frame, scaleProgress, rotation, frame.Size() * 0.5f, squish * drawScale * 0.5f, flip, 0);
+    }
+    
+    protected override SmokeSplatterMetaball NewInstance()
+    {
+        return new SmokeSplatterMetaball();
     }
 }

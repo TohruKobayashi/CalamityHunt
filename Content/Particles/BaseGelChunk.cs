@@ -4,7 +4,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public abstract class BaseGelChunk : Particle
+public abstract class BaseGelChunk<T> : Particle<T> where T : BaseGelChunk<T>
 {
     public int style;
 

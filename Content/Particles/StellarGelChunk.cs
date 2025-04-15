@@ -5,7 +5,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class StellarGelChunk : BaseGelChunk
+public sealed class StellarGelChunk : BaseGelChunk<StellarGelChunk>
 {
     public override void Draw(SpriteBatch spriteBatch)
     {
@@ -23,5 +23,10 @@ public class StellarGelChunk : BaseGelChunk
         spriteBatch.Draw(texture, position - Main.screenPosition, glowFrame, new Color(10, 30, 110, 0) * 0.4f, rotation, glowFrame.Size() * new Vector2(0.5f, 0.87f), scale * grow * squish * new Vector2(1.3f, 1.5f), 0, 0);
         spriteBatch.Draw(texture, position - Main.screenPosition, frame, color, rotation, frame.Size() * new Vector2(0.5f, 0.84f), scale * grow * squish, 0, 0);
         spriteBatch.Draw(texture, position - Main.screenPosition, frame, new Color(60, 40, 35, 0).MultiplyRGBA(color), rotation, frame.Size() * new Vector2(0.5f, 0.84f), scale * 1.2f * grow * squish, 0, 0);
+    }
+    
+    protected override StellarGelChunk NewInstance()
+    {
+        return new StellarGelChunk();
     }
 }

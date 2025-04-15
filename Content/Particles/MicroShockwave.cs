@@ -6,7 +6,7 @@ using Terraria.Graphics.Shaders;
 
 namespace CalamityHunt.Content.Particles;
 
-public class MicroShockwave : Particle
+public sealed class MicroShockwave : Particle<MicroShockwave>
 {
     private float scaleLife;
 
@@ -42,5 +42,10 @@ public class MicroShockwave : Particle
         spriteBatch.Draw(texture, position - Main.screenPosition, glowFrame, secondColor * drawScale, rotation, glowFrame.Size() * 0.5f, new Vector2(scaleLife, scaleLife * 0.5f), 0, 0);
 
         Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+    }
+    
+    protected override MicroShockwave NewInstance()
+    {
+        return new MicroShockwave();
     }
 }

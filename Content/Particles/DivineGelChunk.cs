@@ -5,7 +5,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class DivineGelChunk : BaseGelChunk
+public sealed class DivineGelChunk : BaseGelChunk<DivineGelChunk>
 {
     public override void Draw(SpriteBatch spriteBatch)
     {
@@ -37,5 +37,10 @@ public class DivineGelChunk : BaseGelChunk
 
         spriteBatch.Draw(texture, position - Main.screenPosition, shineFrame, new Color(255, 255, 255, 0), rotation, frame.Size() * new Vector2(0.5f, 0.84f), scale * grow * squish, 0, 0);
 
+    }
+    
+    protected override DivineGelChunk NewInstance()
+    {
+        return new DivineGelChunk();
     }
 }

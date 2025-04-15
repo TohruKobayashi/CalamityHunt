@@ -7,7 +7,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class ChromaticGelChunk : BaseGelChunk
+public sealed class ChromaticGelChunk : BaseGelChunk<ChromaticGelChunk>
 {
     public ColorOffsetData colorData;
 
@@ -35,5 +35,10 @@ public class ChromaticGelChunk : BaseGelChunk
         spriteBatch.Draw(texture, position - Main.screenPosition, frame, color, rotation, frame.Size() * new Vector2(0.5f, 0.84f), scale * grow * squish, 0, 0);
 
         Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+    }
+    
+    protected override ChromaticGelChunk NewInstance()
+    {
+        return new ChromaticGelChunk();
     }
 }

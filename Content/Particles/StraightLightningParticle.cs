@@ -6,7 +6,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class StraightLightningParticle : Particle
+public sealed class StraightLightningParticle : Particle<StraightLightningParticle>
 {
     private int time;
 
@@ -63,5 +63,10 @@ public class StraightLightningParticle : Particle
         spriteBatch.Draw(texture, position - Main.screenPosition, frame, drawColor, rotation, frame.Size() * 0.5f, drawScale * 0.5f, flip, 0);
 
         Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+    }
+    
+    protected override StraightLightningParticle NewInstance()
+    {
+        return new StraightLightningParticle();
     }
 }

@@ -15,7 +15,7 @@ using Terraria.ModLoader;
 
 namespace CalamityHunt.Content.Particles
 {
-    public class DarkSludgeChunk : Particle
+    public sealed class DarkSludgeChunk : Particle<DarkSludgeChunk>
     {
         public int variant;
         public int time;
@@ -62,6 +62,11 @@ namespace CalamityHunt.Content.Particles
                     ShouldRemove = true; 
             }
 
+        }
+        
+        protected override DarkSludgeChunk NewInstance()
+        {
+            return new DarkSludgeChunk();
         }
     }
 }
