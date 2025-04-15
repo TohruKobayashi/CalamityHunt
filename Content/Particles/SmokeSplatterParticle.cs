@@ -23,7 +23,9 @@ public sealed class SmokeSplatterParticle : Particle<SmokeSplatterParticle>
     public Vector2 gravity;
 
     public Color fadeColor;
-    
+
+    public override bool RequiresImmediateMode => true;
+
     public override void FetchFromPool()
     {
         base.FetchFromPool();

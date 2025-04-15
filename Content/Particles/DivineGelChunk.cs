@@ -7,6 +7,8 @@ namespace CalamityHunt.Content.Particles;
 
 public sealed class DivineGelChunk : BaseGelChunk<DivineGelChunk>
 {
+    public override bool RequiresImmediateMode => true;
+    
     protected override void Draw(SpriteBatch spriteBatch)
     {
         Texture2D texture = TextureAsset.Value;

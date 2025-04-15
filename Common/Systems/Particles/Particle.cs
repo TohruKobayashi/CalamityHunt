@@ -8,7 +8,12 @@ using Terraria.ModLoader;
 
 namespace CalamityHunt.Common.Systems.Particles;
 
-public abstract class Particle<T> : ILoadable, IPooledParticle where T : Particle<T>
+public interface IGoozParticle : IPooledParticle
+{
+    bool RequiresImmediateMode { get; }
+}
+
+public abstract class Particle<T> : ILoadable, IGoozParticle where T : Particle<T>
 {
     private static ParticlePool<T> pool;
 
@@ -19,6 +24,8 @@ public abstract class Particle<T> : ILoadable, IPooledParticle where T : Particl
     public virtual bool IsRestingInPool { get; protected set; }
 
     public virtual string Texture => (GetType().FullName!).Replace('.', '/');
+
+    public virtual bool RequiresImmediateMode => false;
 
     public Asset<Texture2D> TextureAsset => ModContent.Request<Texture2D>(Texture, AssetRequestMode.ImmediateLoad);
 

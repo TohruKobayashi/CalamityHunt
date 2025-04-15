@@ -23,6 +23,8 @@ public sealed class GoozmaGelBit : Particle<GoozmaGelBit>
 
     public ColorOffsetData colorData;
     
+    public override bool RequiresImmediateMode => true;
+ 
     public override void FetchFromPool()
     {
         base.FetchFromPool();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,14 +11,14 @@ namespace CalamityHunt.Common.Systems.Particles;
 
 public abstract class ParticleRenderer
 {
-    protected List<IPooledParticle> particles = [];
+    protected List<IGoozParticle> particles = [];
     protected ParticleRendererSettings settings;
 
     public bool ShouldRestart { get; set; }
 
     public Effect Effect { get; set; }
     
-    public IEnumerable<IPooledParticle> Particles => particles;
+    public IEnumerable<IGoozParticle> Particles => particles;
 
     public static ParticleRenderer MakeDefaultRenderer()
     {
@@ -34,7 +35,7 @@ public abstract class ParticleRenderer
         return particle;
     }
 
-    public virtual void Add(IPooledParticle particle)
+    public virtual void Add(IGoozParticle particle)
     {
         particles.Add(particle);
     }
@@ -65,7 +66,7 @@ public abstract class ParticleRenderer
 
 public sealed class NoOpParticleRenderer : ParticleRenderer
 {
-    public override void Add(IPooledParticle particle) { }
+    public override void Add(IGoozParticle particle) { }
 
     public override void Clear() { }
 
@@ -82,8 +83,9 @@ public sealed class DefaultParticleRenderer : ParticleRenderer
             sb.End();
         }
 
+        var requiresImmediateMode = Effect is not null || particles.Any(x => x.RequiresImmediateMode);
         sb.Begin(
-            Effect is not null ? SpriteSortMode.Immediate : SpriteSortMode.Deferred,
+            requiresImmediateMode ? SpriteSortMode.Immediate : SpriteSortMode.Deferred,
             BlendState.AlphaBlend,
             Main.DefaultSamplerState,
             DepthStencilState.None,

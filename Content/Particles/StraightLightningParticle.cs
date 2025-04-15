@@ -24,6 +24,8 @@ public sealed class StraightLightningParticle : Particle<StraightLightningPartic
     public float stretch;
 
     public float flickerSpeed;
+    
+    public override bool RequiresImmediateMode => true;
 
     public override void FetchFromPool()
     {

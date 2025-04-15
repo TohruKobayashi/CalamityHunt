@@ -26,6 +26,8 @@ public sealed class FlameParticle : Particle<FlameParticle>
 
     public bool emitLight;
     
+    public override bool RequiresImmediateMode => true;
+
     public override void FetchFromPool()
     {
         base.FetchFromPool();

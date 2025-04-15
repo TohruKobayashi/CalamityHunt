@@ -30,6 +30,8 @@ public sealed class FusionFlameParticle : Particle<FusionFlameParticle>
 
     public float dissolvePower = 0f;
     
+    public override bool RequiresImmediateMode => true;
+ 
     public override void FetchFromPool()
     {
         base.FetchFromPool();

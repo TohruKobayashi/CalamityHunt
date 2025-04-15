@@ -20,6 +20,8 @@ public sealed class LightningParticle : Particle<LightningParticle>
 
     public float flickerSpeed;
     
+    public override bool RequiresImmediateMode => true;
+ 
     public override void FetchFromPool()
     {
         base.FetchFromPool();
