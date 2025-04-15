@@ -52,6 +52,8 @@ public sealed class FlameParticle : Particle<FlameParticle>
 
     protected override void Update()
     {
+        base.Update();
+        
         float progress = (float)time / maxTime;
 
         Velocity *= 0.97f - progress * 0.2f;

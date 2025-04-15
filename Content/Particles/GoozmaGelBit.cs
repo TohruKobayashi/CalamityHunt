@@ -52,6 +52,8 @@ public sealed class GoozmaGelBit : Particle<GoozmaGelBit>
 
     protected override void Update()
     {
+        base.Update();
+        
         Vector2 home = anchor.Invoke();
         float distanceFromHome = Position.Distance(home);
 

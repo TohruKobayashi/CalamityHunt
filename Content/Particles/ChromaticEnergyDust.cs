@@ -45,6 +45,8 @@ public sealed class ChromaticEnergyDust : Particle<ChromaticEnergyDust>
 
     protected override void Update()
     {
+        base.Update();
+        
         life += 0.1f;
         Scale *= 0.99f;
         Rotation += Velocity.X * 0.2f;

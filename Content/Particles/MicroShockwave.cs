@@ -31,6 +31,8 @@ public sealed class MicroShockwave : Particle<MicroShockwave>
 
     protected override void Update()
     {
+        base.Update();
+        
         scaleLife += (Scale.X - scaleLife * 0.8f) * 0.09f;
         if (scaleLife > Scale.X) {
             ShouldBeRemovedFromRenderer = true;

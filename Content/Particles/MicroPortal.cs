@@ -34,6 +34,8 @@ public sealed class MicroPortal : Particle<MicroPortal>
 
     protected override void Update()
     {
+        base.Update();
+        
         life += 0.05f / Scale.X;
 
         if (life > 1f) {

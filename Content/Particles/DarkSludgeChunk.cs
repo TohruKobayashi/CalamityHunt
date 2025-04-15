@@ -29,6 +29,8 @@ public sealed class DarkSludgeChunk : Particle<DarkSludgeChunk>
 
     protected override void Update()
     {
+        base.Update();
+        
         time++;
 
         if (!stuck) {

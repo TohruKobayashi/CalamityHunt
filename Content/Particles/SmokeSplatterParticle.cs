@@ -49,6 +49,8 @@ public sealed class SmokeSplatterParticle : Particle<SmokeSplatterParticle>
 
     protected override void Update()
     {
+        base.Update();
+        
         float progress = (float)time / maxTime;
 
         Velocity *= 0.97f;

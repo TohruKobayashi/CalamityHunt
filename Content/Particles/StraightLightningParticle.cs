@@ -48,6 +48,8 @@ public sealed class StraightLightningParticle : Particle<StraightLightningPartic
 
     protected override void Update()
     {
+        base.Update();
+        
         Velocity *= 0.97f;
 
         if (time++ > maxTime) {

@@ -58,6 +58,8 @@ public sealed class FusionFlameParticle : Particle<FusionFlameParticle>
 
     protected override void Update()
     {
+        base.Update();
+        
         float progress = (float)time / maxTime;
 
         Velocity *= 0.97f - progress * 0.15f;

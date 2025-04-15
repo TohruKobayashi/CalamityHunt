@@ -30,6 +30,8 @@ public sealed class ChromaticGooBurst : Particle<ChromaticGooBurst>
 
     public override void OnSpawn()
     {
+        base.Update();
+        
         Scale *= Main.rand.NextFloat(0.9f, 1.1f);
         style = Main.rand.Next(2);
         Rotation = Velocity.ToRotation() + MathHelper.PiOver2;

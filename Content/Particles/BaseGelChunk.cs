@@ -29,6 +29,8 @@ public abstract class BaseGelChunk<T> : Particle<T> where T : BaseGelChunk<T>
 
     protected override void Update()
     {
+        base.Update();
+        
         time++;
 
         if (!sticking) {

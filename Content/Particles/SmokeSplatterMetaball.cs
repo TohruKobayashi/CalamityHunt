@@ -41,6 +41,8 @@ public sealed class SmokeSplatterMetaball : Particle<SmokeSplatterMetaball>
 
     public override void OnSpawn()
     {
+        base.Update();
+        
         style = Main.rand.Next(5);
         direction = Main.rand.NextBool().ToDirectionInt();
         Scale *= Main.rand.NextFloat(0.9f, 1.1f);

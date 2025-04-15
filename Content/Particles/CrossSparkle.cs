@@ -27,6 +27,8 @@ public sealed class CrossSparkle : Particle<CrossSparkle>
 
     protected override void Update()
     {
+        base.Update();
+        
         time++;
         if (time > 15) {
             ShouldBeRemovedFromRenderer = true;

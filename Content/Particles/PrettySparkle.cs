@@ -26,6 +26,8 @@ public sealed class PrettySparkle : Particle<PrettySparkle>
 
     protected override void Update()
     {
+        base.Update();
+        
         Velocity *= 0.95f;
         time++;
 

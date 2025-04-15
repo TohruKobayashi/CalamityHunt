@@ -34,6 +34,8 @@ public sealed class LightningParticle : Particle<LightningParticle>
 
     public override void OnSpawn()
     {
+        base.Update();
+        
         style = Main.rand.Next(10);
         direction = Main.rand.NextBool().ToDirectionInt();
         maxTime = maxTime <= 0 ? Main.rand.Next(3, 6) : maxTime;
