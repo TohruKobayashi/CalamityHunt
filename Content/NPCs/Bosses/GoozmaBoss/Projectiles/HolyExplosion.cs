@@ -66,23 +66,23 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 for (int i = 0; i < 5; i++) {
                     Vector2 vel = Main.rand.NextVector2Circular(100, 100);
                     float distanceScale = 2f / Math.Max(vel.Length(), 0.9f) + Main.rand.NextFloat();
-                    CalamityHunt.Particles.Add(Particle.Create<PrettySparkle>(particle => {
-                        particle.position = Projectile.Center;
-                        particle.velocity = vel;
-                        particle.scale = 1f + distanceScale;
-                        particle.color = Main.hslToRgb(Time / 50f, 0.5f, 0.5f, 128);
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<PrettySparkle>(particle => {
+                        particle.Position = Projectile.Center;
+                        particle.Velocity = vel;
+                        particle.Scale = new Vector2(1f + distanceScale);
+                        particle.Color = Main.hslToRgb(Time / 50f, 0.5f, 0.5f, 128);
+                    });
                 }
 
                 for (int i = 0; i < 2; i++) {
                     Vector2 vel = Main.rand.NextVector2Circular(200, 200);
                     float distanceScale = 3f / Math.Max(vel.Length(), 0.9f) + Main.rand.NextFloat(2f);
-                    CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
-                        particle.position = Projectile.Center + vel;
-                        particle.velocity = Vector2.One;
-                        particle.scale = distanceScale + Main.rand.NextFloat(2f);
-                        particle.color = Main.hslToRgb(Time / 50f, 0.5f, 0.5f, 128);
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<CrossSparkle>(particle => {
+                        particle.Position = Projectile.Center + vel;
+                        particle.Velocity = Vector2.One;
+                        particle.Scale = new Vector2(distanceScale + Main.rand.NextFloat(2f));
+                        particle.Color = Main.hslToRgb(Time / 50f, 0.5f, 0.5f, 128);
+                    });
                 }
 
             }

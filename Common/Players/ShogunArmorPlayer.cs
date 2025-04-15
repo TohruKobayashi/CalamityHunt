@@ -74,12 +74,12 @@ namespace CalamityHunt.Common.Players
                         Dust.NewDustPerfect(Player.Center + Main.rand.NextVector2Circular(25, 25), DustID.TintableDust, Player.velocity * -Main.rand.NextFloat(-0.5f, 1f), 100, Color.Black, 1f + Main.rand.NextFloat(1.5f)).noGravity = true;
                     }
 
-                    CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                        particle.position = Player.Center + Main.rand.NextVector2Circular(25, 25);
-                        particle.velocity = Player.velocity * -Main.rand.NextFloat(-0.6f, 0.6f);
-                        particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
-                        particle.color = Player.shirtColor;
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                        particle.Position = Player.Center + Main.rand.NextVector2Circular(25, 25);
+                        particle.Velocity = Player.velocity * -Main.rand.NextFloat(-0.6f, 0.6f);
+                        particle.Scale = new Vector2(Main.rand.NextFloat(0.5f, 1.5f));
+                        particle.Color = Player.shirtColor;
+                    });
                 }
                 //else if (slamPower > 0)
                 //{
@@ -147,12 +147,12 @@ namespace CalamityHunt.Common.Players
                     }
 
                     for (int i = 0; i < 5; i++) {
-                        CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                            particle.position = Player.Bottom + Main.rand.NextVector2Circular(30, 5);
-                            particle.velocity = Main.rand.NextVector2Circular(6, 1) - Vector2.UnitY * Main.rand.NextFloat(2f);
-                            particle.scale = 1f;
-                            particle.color = Player.shirtColor;
-                        }));
+                        CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                            particle.Position = Player.Bottom + Main.rand.NextVector2Circular(30, 5);
+                            particle.Velocity = Main.rand.NextVector2Circular(6, 1) - Vector2.UnitY * Main.rand.NextFloat(2f);
+                            particle.Scale = new Vector2(1f);
+                            particle.Color = Player.shirtColor;
+                        });
                     }
                     slamPower = 0;
                 }
@@ -168,12 +168,12 @@ namespace CalamityHunt.Common.Players
                         }
 
                         for (int i = 0; i < 5; i++) {
-                            CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                                particle.position = Player.Bottom + Main.rand.NextVector2Circular(20, 5);
-                                particle.velocity = -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(2f) * (i / 40f) - new Vector2(Player.direction * 10f, 0f);
-                                particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
-                                particle.color = Player.shirtColor;
-                            }));
+                            CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                                particle.Position = Player.Bottom + Main.rand.NextVector2Circular(20, 5);
+                                particle.Velocity = -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(2f) * (i / 40f) - new Vector2(Player.direction * 10f, 0f);
+                                particle.Scale = new Vector2(Main.rand.NextFloat(0.5f, 1.5f));
+                                particle.Color = Player.shirtColor;
+                            });
                         }
                     }
                 }

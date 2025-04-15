@@ -81,14 +81,14 @@ public class AntiMassBioBall : ModProjectile
         Time++;
 
         for (int i = 0; i < 3; i++) {
-            CalamityHunt.Particles.Add(Particle.Create<LightningParticle>(particle => {
-                particle.position = Projectile.Center + Main.rand.NextVector2Circular(20, 20).RotatedBy(Projectile.rotation) * Projectile.scale;
-                particle.velocity = Main.rand.NextVector2Circular(6, 6);
-                particle.scale = Main.rand.NextFloat(0.2f, 0.9f) * Projectile.scale;
-                particle.color = Color.Lerp(AntiMassAccumulatorProj.MainColor, Color.Turquoise, (!Main.rand.NextBool((int)(Time / 30f + 2))).ToInt()) with { A = 0 };
-                particle.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
+            CalamityHunt.Particles.SpawnParticle<LightningParticle>(particle => {
+                particle.Position = Projectile.Center + Main.rand.NextVector2Circular(20, 20).RotatedBy(Projectile.rotation) * Projectile.scale;
+                particle.Velocity = Main.rand.NextVector2Circular(6, 6);
+                particle.Scale = new Vector2(Main.rand.NextFloat(0.2f, 0.9f) * Projectile.scale);
+                particle.Color = Color.Lerp(AntiMassAccumulatorProj.MainColor, Color.Turquoise, (!Main.rand.NextBool((int)(Time / 30f + 2))).ToInt()) with { A = 0 };
+                particle.Rotation = Main.rand.NextFloat(MathHelper.TwoPi);
                 particle.anchor = () => Projectile.velocity;
-            }));
+            });
         }
 
         Lighting.AddLight(Projectile.Center, Color.MediumTurquoise.ToVector3() * 0.6f);
@@ -117,16 +117,16 @@ public class AntiMassBioBall : ModProjectile
         SoundEngine.PlaySound(deathSound.WithPitchOffset(-0.2f), Projectile.Center);
 
         for (int i = 0; i < 40; i++) {
-            CalamityHunt.Particles.Add(Particle.Create<LightningParticle>(particle => {
+            CalamityHunt.Particles.SpawnParticle<LightningParticle>(particle => {
                 particle.maxTime = Main.rand.Next(10, 18);
-                particle.position = Projectile.Center + Main.rand.NextVector2Circular(10, 10).RotatedBy(Projectile.rotation) * Projectile.scale;
-                particle.velocity = Main.rand.NextVector2Circular(36, 36) * (1.5f / particle.maxTime);
-                particle.scale = Main.rand.NextFloat(0.5f, 1.5f) * Projectile.scale;
-                particle.color = Color.Lerp(AntiMassAccumulatorProj.MainColor, Color.MediumAquamarine, (!Main.rand.NextBool((int)(Time / 30f + 8))).ToInt()) with { A = 0 };
-                particle.rotation = particle.velocity.ToRotation() + Main.rand.NextFloat(-0.2f, 0.2f);
+                particle.Position = Projectile.Center + Main.rand.NextVector2Circular(10, 10).RotatedBy(Projectile.rotation) * Projectile.scale;
+                particle.Velocity = Main.rand.NextVector2Circular(36, 36) * (1.5f / particle.maxTime);
+                particle.Scale = new Vector2(Main.rand.NextFloat(0.5f, 1.5f) * Projectile.scale);
+                particle.Color = Color.Lerp(AntiMassAccumulatorProj.MainColor, Color.MediumAquamarine, (!Main.rand.NextBool((int)(Time / 30f + 8))).ToInt()) with { A = 0 };
+                particle.Rotation = particle.Velocity.ToRotation() + Main.rand.NextFloat(-0.2f, 0.2f);
                 particle.anchor = () => Projectile.velocity * 0.01f;
                 particle.flickerSpeed = 2.5f;
-            }));
+            });
 
             if (!Main.rand.NextBool(4)) {
                 Color color = Color.Lerp(AntiMassAccumulatorProj.MainColor, Color.Turquoise, (!Main.rand.NextBool(10)).ToInt()) with { A = 40 };

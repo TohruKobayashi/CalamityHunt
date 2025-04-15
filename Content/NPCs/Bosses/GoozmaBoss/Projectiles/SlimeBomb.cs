@@ -79,13 +79,13 @@ public class SlimeBomb : ModProjectile
             }
 
             if (Main.rand.NextBool(8)) {
-                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                    particle.position = Projectile.Center + Main.rand.NextVector2Circular(40, 40);
-                    particle.velocity = -Vector2.UnitY * Main.rand.NextFloat(2f);
-                    particle.scale = 1.2f;
-                    particle.color = Color.White;
+                CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                    particle.Position = Projectile.Center + Main.rand.NextVector2Circular(40, 40);
+                    particle.Velocity = -Vector2.UnitY * Main.rand.NextFloat(2f);
+                    particle.Scale = new Vector2(1.2f);
+                    particle.Color = Color.White;
                     particle.colorData = new ColorOffsetData(true, Projectile.localAI[1]);
-                }));
+                });
             }
 
             Projectile.frameCounter++;
@@ -115,24 +115,24 @@ public class SlimeBomb : ModProjectile
             if (Time < 3) {
                 for (int i = 0; i < 5; i++) {
                     Vector2 gooVelocity = new Vector2(1, 0).RotatedBy(MathHelper.TwoPi / 5f * i).RotatedByRandom(0.2f);
-                    CalamityHunt.Particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
-                        particle.position = Projectile.Center + gooVelocity * 2;
-                        particle.velocity = gooVelocity;
-                        particle.scale = 3f - Time + Main.rand.NextFloat();
-                        particle.color = Color.White;
+                    CalamityHunt.Particles.SpawnParticle<ChromaticGooBurst>(particle => {
+                        particle.Position = Projectile.Center + gooVelocity * 2;
+                        particle.Velocity = gooVelocity;
+                        particle.Scale = new Vector2(3f - Time + Main.rand.NextFloat());
+                        particle.Color = Color.White;
                         particle.colorData = new ColorOffsetData(true, Projectile.localAI[1]);
-                    }));
+                    });
                 }
             }
 
             if (Time < 10) {
-                CalamityHunt.Particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
-                    particle.position = Projectile.Center + Main.rand.NextVector2Circular(20, 20);
-                    particle.velocity = Main.rand.NextVector2Circular(25, 25);
-                    particle.scale = 1.5f;
-                    particle.color = Color.White;
+                CalamityHunt.Particles.SpawnParticle<ChromaticGooBurst>(particle => {
+                    particle.Position = Projectile.Center + Main.rand.NextVector2Circular(20, 20);
+                    particle.Velocity = Main.rand.NextVector2Circular(25, 25);
+                    particle.Scale = new Vector2(1.5f);
+                    particle.Color = Color.White;
                     particle.colorData = new ColorOffsetData(true, Projectile.localAI[1]);
-                }));
+                });
 
                 for (int i = 0; i < 10; i++) {
                     Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(20, 20), DustID.TintableDust, Main.rand.NextVector2Circular(10, 10), 100, Color.Black, 1f + Main.rand.NextFloat(2)).noGravity = true;

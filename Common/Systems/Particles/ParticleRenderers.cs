@@ -16,6 +16,8 @@ public abstract class ParticleRenderer
     public bool ShouldRestart { get; set; }
 
     public Effect Effect { get; set; }
+    
+    public IEnumerable<IPooledParticle> Particles => particles;
 
     public static ParticleRenderer MakeDefaultRenderer()
     {

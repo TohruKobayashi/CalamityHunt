@@ -48,13 +48,13 @@ namespace CalamityHunt.Content.Items.Materials
             }
 
             if (Main.rand.NextBool(20)) {
-                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                    particle.position = Item.Center + Main.rand.NextVector2Circular(15, 15);
-                    particle.velocity = -Vector2.UnitY * Main.rand.NextFloat(2f);
-                    particle.scale = Main.rand.NextFloat(0.7f, 1.7f);
-                    particle.color = Color.White;
+                CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                    particle.Position = Item.Center + Main.rand.NextVector2Circular(15, 15);
+                    particle.Velocity = -Vector2.UnitY * Main.rand.NextFloat(2f);
+                    particle.Scale = new Vector2(Main.rand.NextFloat(0.7f, 1.7f));
+                    particle.Color = Color.White;
                     particle.colorData = new ColorOffsetData(true, Main.GlobalTimeWrappedHourly * 40f);
-                }));
+                });
             }
         }
 

@@ -159,27 +159,27 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
                     if (Projectile.velocity.Length() > 5 && Main.myPlayer == Projectile.owner) {
                         if (teleportTime++ > 150 && Main.rand.NextBool(20)) {
                             Color color = new Color(5, 10, 100, 0);
-                            CalamityHunt.Particles.Add(Particle.Create<MicroPortal>(particle => {
-                                particle.position = Projectile.Center + Projectile.velocity * 0.1f;
-                                particle.velocity = Vector2.Zero;
-                                particle.scale = 1f;
-                                particle.color = color;
+                            CalamityHunt.Particles.SpawnParticle<MicroPortal>(particle => {
+                                particle.Position = Projectile.Center + Projectile.velocity * 0.1f;
+                                particle.Velocity = Vector2.Zero;
+                                particle.Scale = new Vector2(1f);
+                                particle.Color = color;
                                 particle.secondColor = new Color(255, 200, 90, 120);
                                 particle.shader = GameShaders.Armor.GetSecondaryShader(Player.cPet, Player);
-                            }));
+                            });
 
                             teleportTime = 0;
                             Projectile.Center -= Projectile.velocity.RotatedByRandom(2f) * Main.rand.Next(8, 15);
                             Projectile.netUpdate = true;
 
-                            CalamityHunt.Particles.Add(Particle.Create<MicroPortal>(particle => {
-                                particle.position = Projectile.Center - Projectile.velocity * 0.1f;
-                                particle.velocity = Vector2.Zero;
-                                particle.scale = 1f;
-                                particle.color = color;
+                            CalamityHunt.Particles.SpawnParticle<MicroPortal>(particle => {
+                                particle.Position = Projectile.Center - Projectile.velocity * 0.1f;
+                                particle.Velocity = Vector2.Zero;
+                                particle.Scale = new Vector2(1f);
+                                particle.Color = color;
                                 particle.secondColor = new Color(255, 200, 90, 120);
                                 particle.shader = GameShaders.Armor.GetSecondaryShader(Player.cPet, Player);
-                            }));
+                            });
 
                             //SoundStyle warpSound = SoundID.Item135;
                         }
@@ -293,26 +293,26 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
 
                             Color color = new Color(5, 10, 100, 0);
 
-                            CalamityHunt.Particles.Add(Particle.Create<MicroPortal>(particle => {
-                                particle.position = Projectile.Center + Projectile.velocity * 0.1f;
-                                particle.velocity = Vector2.Zero;
-                                particle.scale = 1f;
-                                particle.color = color;
+                            CalamityHunt.Particles.SpawnParticle<MicroPortal>(particle => {
+                                particle.Position = Projectile.Center + Projectile.velocity * 0.1f;
+                                particle.Velocity = Vector2.Zero;
+                                particle.Scale = new Vector2(1f);
+                                particle.Color = color;
                                 particle.secondColor = new Color(255, 200, 90, 120);
                                 particle.shader = GameShaders.Armor.GetSecondaryShader(Player.cPet, Player);
-                            }));
+                            });
 
                             targetPositionOffset += Main.rand.NextVector2Circular(1, 5);
                             Projectile.Center = target.Center + targetPositionOffset;
 
-                            CalamityHunt.Particles.Add(Particle.Create<MicroPortal>(particle => {
-                                particle.position = Projectile.Center - Projectile.velocity * 0.1f;
-                                particle.velocity = Vector2.Zero;
-                                particle.scale = 1f;
-                                particle.color = color;
+                            CalamityHunt.Particles.SpawnParticle<MicroPortal>(particle => {
+                                particle.Position = Projectile.Center - Projectile.velocity * 0.1f;
+                                particle.Velocity = Vector2.Zero;
+                                particle.Scale = new Vector2(1f);
+                                particle.Color = color;
                                 particle.secondColor = new Color(255, 200, 90, 120);
                                 particle.shader = GameShaders.Armor.GetSecondaryShader(Player.cPet, Player);
-                            }));
+                            });
 
                             //
                         }
@@ -363,14 +363,14 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
         {
             if (air) {
                 Color color = new Color(255, 150, 150, 0);
-                CalamityHunt.Particles.Add(Particle.Create<MicroShockwave>(particle => {
-                    particle.position = Projectile.Bottom;
-                    particle.velocity = Vector2.Zero;
-                    particle.scale = 1f;
-                    particle.color = color;
+                CalamityHunt.Particles.SpawnParticle<MicroShockwave>(particle => {
+                    particle.Position = Projectile.Bottom;
+                    particle.Velocity = Vector2.Zero;
+                    particle.Scale = new Vector2(1f);
+                    particle.Color = color;
                     particle.secondColor = new Color(255, 200, 90, 120);
                     particle.shader = GameShaders.Armor.GetSecondaryShader(Player.cPet, Player);
-                }));
+                });
 
                 for (int i = 0; i < Main.rand.Next(3, 7); i++) {
                     Dust sparkle = Dust.NewDustPerfect(Projectile.Bottom + Main.rand.NextVector2Circular(9, 4), DustID.SparkForLightDisc, Main.rand.NextVector2Circular(3, 1) - Vector2.UnitY * (i + 1) * 0.7f, 0, color, 1f + Main.rand.NextFloat());

@@ -1,4 +1,4 @@
-﻿using CalamityHunt.Common.Systems.Particles;
+﻿/*using CalamityHunt.Common.Systems.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -260,3 +260,4 @@ namespace CalamityHunt.Common.GlobalNPCs
         }
     }
 }
+*/

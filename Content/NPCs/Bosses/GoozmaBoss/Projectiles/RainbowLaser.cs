@@ -61,13 +61,13 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
             for (int i = 0; i < 3; i++) {
                 if (Main.rand.NextBool(15)) {
-                    CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                        particle.position = Projectile.Center - Projectile.velocity * i / 3f;
-                        particle.velocity = Projectile.velocity * 0.5f;
-                        particle.scale = 0.5f;
-                        particle.color = Color.White;
+                    CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                        particle.Position = Projectile.Center - Projectile.velocity * i / 3f;
+                        particle.Velocity = Projectile.velocity * 0.5f;
+                        particle.Scale = new Vector2(0.5f);
+                        particle.Color = Color.White;
                         particle.colorData = new ColorOffsetData(true, Projectile.localAI[0]);
-                    }));
+                    });
                 }
             }
 

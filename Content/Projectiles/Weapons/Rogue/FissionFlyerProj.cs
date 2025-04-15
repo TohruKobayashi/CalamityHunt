@@ -106,12 +106,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
             }
 
             if (Main.rand.NextBool(3)) {
-                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                    particle.position = Projectile.Center - Main.rand.NextVector2Circular(20, 20);
-                    particle.velocity = Projectile.velocity * Main.rand.NextFloat();
-                    particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
-                    particle.color = glowColor;
-                }));
+                CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                    particle.Position = Projectile.Center - Main.rand.NextVector2Circular(20, 20);
+                    particle.Velocity = Projectile.velocity * Main.rand.NextFloat();
+                    particle.Scale = new Vector2(Main.rand.NextFloat(0.5f, 1.5f));
+                    particle.Color = glowColor;
+                });
             }
 
             Dust dust = Dust.NewDustPerfect(Projectile.Center - Main.rand.NextVector2Circular(30, 30), DustID.Sand, Projectile.velocity * Main.rand.NextFloat(), 0, Color.Black, Main.rand.NextFloat());

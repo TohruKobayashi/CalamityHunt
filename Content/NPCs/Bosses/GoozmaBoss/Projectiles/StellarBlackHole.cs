@@ -91,15 +91,15 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
             if (Time < 50 || Time > 520) {
                 for (int i = 0; i < 6; i++) {
-                    CosmosMetaball.Particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
-                        particle.position = Projectile.Center;
-                        particle.velocity = Main.rand.NextVector2Circular(90, 90) * Utils.GetLerpValue(0, 50, Time, true);
-                        particle.scale = Main.rand.NextFloat(20f, 30f) * Utils.GetLerpValue(-30, 40, Time, true);
+                    CosmosMetaball.Particles.SpawnParticle<SmokeSplatterMetaball>(particle => {
+                        particle.Position = Projectile.Center;
+                        particle.Velocity = Main.rand.NextVector2Circular(90, 90) * Utils.GetLerpValue(0, 50, Time, true);
+                        particle.Scale = new Vector2(Main.rand.NextFloat(20f, 30f) * Utils.GetLerpValue(-30, 40, Time, true));
                         particle.maxTime = Main.rand.Next(70, 100);
-                        particle.color = Color.White;
+                        particle.Color = Color.White;
                         particle.fadeColor = Color.White;
                         particle.anchor = () => Projectile.velocity * 0.66f;
-                    }));
+                    });
                 }
             }
         }

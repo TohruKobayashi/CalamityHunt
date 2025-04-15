@@ -171,12 +171,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
             Color glowColor = new GradientColor(SlimeUtils.GoozOilColors, 0.2f, 0.2f).ValueAt(Time + 10);
 
             Vector2 inward = Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedByRandom(0.5f) * Main.rand.NextFloat(Size * Projectile.ai[2] * 1.5f);
-            CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                particle.position = Projectile.Center + inward;
-                particle.velocity = -inward * 0.03f;
-                particle.scale = Main.rand.NextFloat(1f, 2f);
-                particle.color = glowColor;
-            }));
+            CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                particle.Position = Projectile.Center + inward;
+                particle.Velocity = -inward * 0.03f;
+                particle.Scale = new Vector2(Main.rand.NextFloat(1f, 2f));
+                particle.Color = glowColor;
+            });
             Dust d = Dust.NewDustPerfect(Projectile.Center + inward, DustID.Sand, -inward * 0.04f, 10, Color.Black, 1f + Main.rand.NextFloat());
             d.noGravity = true;
         }
@@ -186,12 +186,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
             Color glowColor = new GradientColor(SlimeUtils.GoozOilColors, 0.2f, 0.2f).ValueAt(Time + 10);
 
             for (int i = 0; i < 5; i++) {
-                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                    particle.position = Projectile.Center;
-                    particle.velocity = Main.rand.NextVector2Circular(3, 3);
-                    particle.scale = 2;
-                    particle.color = glowColor;
-                }));
+                CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                    particle.Position = Projectile.Center;
+                    particle.Velocity = Main.rand.NextVector2Circular(3, 3);
+                    particle.Scale = new Vector2(2);
+                    particle.Color = glowColor;
+                });
             }
         }
 

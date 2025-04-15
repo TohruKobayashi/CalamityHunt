@@ -26,14 +26,14 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         {
             Projectile.velocity *= 0.9f;
             Projectile.scale += 0.1f;
-            CalamityHunt.Particles.Add(Particle.Create<FusionFlameParticle>(particle => {
-                particle.position = Projectile.Center + Main.rand.NextVector2Circular(10, 10);
-                particle.velocity = Main.rand.NextVector2Circular(6, 6) + Projectile.velocity * Utils.GetLerpValue(0, 8, Time, true);
-                particle.scale = Main.rand.NextFloat(1f, 3f) * Projectile.scale;
+            CalamityHunt.Particles.SpawnParticle<FusionFlameParticle>(particle => {
+                particle.Position = Projectile.Center + Main.rand.NextVector2Circular(10, 10);
+                particle.Velocity = Main.rand.NextVector2Circular(6, 6) + Projectile.velocity * Utils.GetLerpValue(0, 8, Time, true);
+                particle.Scale = new Vector2(Main.rand.NextFloat(1f, 3f) * Projectile.scale);
                 particle.maxTime = Main.rand.Next(16, 30);
-                particle.color = Color.Lerp(Color.Coral, Color.Goldenrod, 0.45f) with { A = 115 };
+                particle.Color = Color.Lerp(Color.Coral, Color.Goldenrod, 0.45f) with { A = 115 };
                 particle.fadeColor = Color.Lerp(Color.Coral * 0.3f, Color.MidnightBlue, Main.rand.NextFloat(0.4f, 0.7f)) with { A = 100 };
-            }));
+            });
 
             Time++;
 

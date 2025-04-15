@@ -138,20 +138,20 @@ namespace CalamityHunt.Content.Tiles
                 // Only emit dust from the top tiles, and only if toggled on. This logic limits dust spawning under different conditions.
                 if (tile.TileFrameY == 0 && Main.rand.NextBool(3) && ((Main.drawToScreen && Main.rand.NextBool(4)) || !Main.drawToScreen)) {
 
-                    CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                        particle.position = new Vector2(i * 16 + 2, j * 16 - 4);
+                    CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                        particle.Position = new Vector2(i * 16 + 2, j * 16 - 4);
                         if (tile.TileFrameX == 0)
-                            particle.position.X += Main.rand.Next(8);
+                            particle.Position.X += Main.rand.Next(8);
 
                         if (tile.TileFrameX == 36)
-                            particle.position.X -= Main.rand.Next(8);
-                        particle.scale = 1f;
-                        particle.color = Color.White;
+                            particle.Position.X -= Main.rand.Next(8);
+                        particle.Scale = new Vector2(1f);
+                        particle.Color = Color.White;
                         particle.colorData = new ColorOffsetData(true, Main.GlobalTimeWrappedHourly);
-                        particle.velocity = new Vector2(4, 8);
-                        particle.velocity *= 0.2f;
-                        particle.velocity.Y -= 0.5f + Main.rand.Next(10) * 0.1f;
-                    }));
+                        particle.Velocity = new Vector2(4, 8);
+                        particle.Velocity *= 0.2f;
+                        particle.Velocity.Y -= 0.5f + Main.rand.Next(10) * 0.1f;
+                    });
                 }
             }
         }

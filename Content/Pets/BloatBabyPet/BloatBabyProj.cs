@@ -99,13 +99,13 @@ namespace CalamityHunt.Content.Pets.BloatBabyPet
             }
 
             if (Main.rand.NextBool(7)) {
-                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                    particle.position = Projectile.Center + Main.rand.NextVector2Circular(30, 30);
-                    particle.velocity = Projectile.velocity * 0.2f;
-                    particle.scale = 1f;
-                    particle.color = Color.White;
+                CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                    particle.Position = Projectile.Center + Main.rand.NextVector2Circular(30, 30);
+                    particle.Velocity = Projectile.velocity * 0.2f;
+                    particle.Scale = new Vector2(1f);
+                    particle.Color = Color.White;
                     particle.colorData = new ColorOffsetData(true, Projectile.localAI[0]);
-                }));
+                });
             }
 
             Lighting.AddLight(Projectile.Center, new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(Projectile.localAI[0]).ToVector3() * 0.2f);

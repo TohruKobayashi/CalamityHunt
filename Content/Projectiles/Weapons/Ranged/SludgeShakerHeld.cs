@@ -86,15 +86,15 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             if (Time % shootSpeed == 0) {
 
                 //for (int i = 0; i < 5; i++) {
-                //    CalamityHunt.particles.Add(Particle.Create<FlameParticle>(particle => {
-                //        particle.position = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero) * 80;
-                //        particle.scale = Main.rand.NextFloat(1f, 3f);
-                //        particle.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * Main.rand.NextFloat(3f, 20f);
+                //    CalamityHunt.particles.SpawnParticle<FlameParticle>(particle => {
+                //        particle.Position = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero) * 80;
+                //        particle.Scale = new Vector2(new Vector2(Main.rand.NextFloat(1f, 3f)));
+                //        particle.Velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * Main.rand.NextFloat(3f, 20f);
                 //        particle.maxTime = Main.rand.Next(35, 40);
-                //        particle.color = Color.Orange with { A = 20 };
+                //        particle.Color = Color.Orange with { A = 20 };
                 //        particle.fadeColor = Color.Red with { A = 30 };
                 //        particle.emitLight = true;
-                //    }));
+                //    });
                 //}
                 int damage = Owner.GetWeaponDamage(Owner.HeldItem);
                 float kb = Owner.GetWeaponKnockback(Owner.HeldItem, Owner.HeldItem.knockBack);

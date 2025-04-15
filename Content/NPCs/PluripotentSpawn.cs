@@ -115,36 +115,36 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
                 slime.Update(MathF.Sin(Time * 0.12f) * 0.3f + 4f);
 
                 if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(8)) {
-                    CalamityHunt.Particles.Add(Particle.Create<SmokeSplatterParticle>(particle => {
-                        particle.position = slime.currentPosition + Main.rand.NextVector2Circular(20, 20);
-                        particle.velocity = slime.currentPosition.DirectionTo(slime.targetPosition);
-                        particle.rotation = Main.rand.NextFloat(-0.1f, 0.1f);
-                        particle.scale = 1.2f;
-                        particle.color = Color.Black;
+                    CalamityHunt.Particles.SpawnParticle<SmokeSplatterParticle>(particle => {
+                        particle.Position = slime.currentPosition + Main.rand.NextVector2Circular(20, 20);
+                        particle.Velocity = slime.currentPosition.DirectionTo(slime.targetPosition);
+                        particle.Rotation = Main.rand.NextFloat(-0.1f, 0.1f);
+                        particle.Scale = new Vector2(1.2f);
+                        particle.Color = Color.Black;
                         particle.fadeColor = Color.DimGray * 0.2f;
                         particle.maxTime = Main.rand.Next(30, 45);
-                    }));
+                    });
                 }
 
                 if (slime.ShouldBeRemovedFromRenderer) {
 
                     if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(1 + (int)(Time * 0.005f))) {
-                        CalamityHunt.Particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
-                            particle.position = slime.currentPosition;
-                            particle.velocity = (slime.rotation + MathHelper.PiOver2).ToRotationVector2();
-                            particle.scale = Main.rand.NextFloat(0.3f, 1f) * slime.scale;
-                            particle.color = new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(NPC.localAI[0] * 0.33f);
-                        }));
+                        CalamityHunt.Particles.SpawnParticle<ChromaticGooBurst>(particle => {
+                            particle.Position = slime.currentPosition;
+                            particle.Velocity = (slime.rotation + MathHelper.PiOver2).ToRotationVector2();
+                            particle.Scale = new Vector2(Main.rand.NextFloat(0.3f, 1f) * slime.scale);
+                            particle.Color = new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(NPC.localAI[0] * 0.33f);
+                        });
                     }
 
                     if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(10 + (int)(Time * 0.001f))) {
-                        CalamityHunt.Particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
-                            particle.position = slime.currentPosition;
-                            particle.velocity = (slime.rotation + MathHelper.PiOver2).ToRotationVector2().RotatedByRandom(0.2f);
-                            particle.scale = Main.rand.NextFloat(0.8f, 1.5f);
-                            particle.color = Color.White;
-                            particle.colorData = new ColorOffsetData(true, NPC.localAI[0] * 0.33f);
-                        }));
+                        CalamityHunt.Particles.SpawnParticle<ChromaticGelChunk>(particle => {
+                            particle.Position = slime.currentPosition;
+                            particle.Velocity = (slime.rotation + MathHelper.PiOver2).ToRotationVector2().RotatedByRandom(0.2f);
+                            particle.Scale = new Vector2(Main.rand.NextFloat(0.8f, 1.5f));
+                            particle.Color = Color.White;
+                            // particle.colorData = new ColorOffsetData(true, NPC.localAI[0] * 0.33f);
+                        });
                     }
 
                     SoundEngine.PlaySound(AssetDirectory.Sounds.Goozma.SlimeAbsorb.WithPitchOffset(0.5f), slime.currentPosition);
@@ -182,13 +182,13 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
 
             if (Main.netMode != NetmodeID.Server) {
                 for (int i = 0; i < 50; i++) {
-                    CalamityHunt.Particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
-                        particle.position = NPC.Center + Main.rand.NextVector2Circular(50, 50);
-                        particle.velocity = particle.position.DirectionFrom(NPC.Center).RotatedByRandom(0.4f) * Main.rand.Next(2, 10) - Vector2.UnitY * 2f;
-                        particle.scale = Main.rand.NextFloat(0.8f, 1.5f);
-                        particle.color = Color.White;
-                        particle.colorData = new ColorOffsetData(true, NPC.localAI[0] * 0.33f);
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<ChromaticGelChunk>(particle => {
+                        particle.Position = NPC.Center + Main.rand.NextVector2Circular(50, 50);
+                        particle.Velocity = particle.Position.DirectionFrom(NPC.Center).RotatedByRandom(0.4f) * Main.rand.Next(2, 10) - Vector2.UnitY * 2f;
+                        particle.Scale = new Vector2(Main.rand.NextFloat(0.8f, 1.5f));
+                        particle.Color = Color.White;
+                        // particle.colorData = new ColorOffsetData(true, NPC.localAI[0] * 0.33f);
+                    });
                 }
             }
 
@@ -209,15 +209,15 @@ public class PluripotentSpawn : ModNPC, ISubjectOfNPC<Goozma>
         shake *= 0.7f;
 
         if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(4)) {
-            CalamityHunt.Particles.Add(Particle.Create<LightningParticle>(particle => {
-                particle.position = NPC.Center + Main.rand.NextVector2Circular(30, 30) * NPC.scale;
-                particle.velocity = particle.position.DirectionFrom(NPC.Center) * Main.rand.NextFloat(0.5f, 3f);
-                particle.rotation = particle.velocity.ToRotation() + Main.rand.NextFloat(-0.1f, 0.1f);
-                particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
-                particle.color = (new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(NPC.localAI[0] * 0.33f) * 1.1f) with { A = 128 };
+            CalamityHunt.Particles.SpawnParticle<LightningParticle>(particle => {
+                particle.Position = NPC.Center + Main.rand.NextVector2Circular(30, 30) * NPC.scale;
+                particle.Velocity = particle.Position.DirectionFrom(NPC.Center) * Main.rand.NextFloat(0.5f, 3f);
+                particle.Rotation = particle.Velocity.ToRotation() + Main.rand.NextFloat(-0.1f, 0.1f);
+                particle.Scale = new Vector2(Main.rand.NextFloat(0.5f, 1.5f));
+                particle.Color = (new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).ValueAt(NPC.localAI[0] * 0.33f) * 1.1f) with { A = 128 };
                 particle.maxTime = Main.rand.Next(3, 8);
                 particle.anchor = () => NPC.velocity * 0.9f;
-            }));
+            });
         }
 
         NPC.localAI[0]++;

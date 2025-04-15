@@ -104,14 +104,14 @@ public class AntiMassBioStrike : ModProjectile
         SoundEngine.PlaySound(deathSound.WithPitchOffset(0.5f).WithVolumeScale(0.2f), Projectile.Center);
 
         for (int i = 0; i < 10; i++) {
-            CalamityHunt.Particles.Add(Particle.Create<LightningParticle>(particle => {
-                particle.position = Projectile.Center + Main.rand.NextVector2Circular(10, 10).RotatedBy(Projectile.rotation) * Projectile.scale;
-                particle.velocity = Main.rand.NextVector2Circular(16, 16);
-                particle.scale = Main.rand.NextFloat(0.5f, 1.5f) * Projectile.scale;
-                particle.color = Color.Lerp(AntiMassAccumulatorProj.MainColor, Color.MediumAquamarine, (!Main.rand.NextBool((int)(Time / 30f + 8))).ToInt()) with { A = 0 };
-                particle.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
+            CalamityHunt.Particles.SpawnParticle<LightningParticle>(particle => {
+                particle.Position = Projectile.Center + Main.rand.NextVector2Circular(10, 10).RotatedBy(Projectile.rotation) * Projectile.scale;
+                particle.Velocity = Main.rand.NextVector2Circular(16, 16);
+                particle.Scale = new Vector2(Main.rand.NextFloat(0.5f, 1.5f) * Projectile.scale);
+                particle.Color = Color.Lerp(AntiMassAccumulatorProj.MainColor, Color.MediumAquamarine, (!Main.rand.NextBool((int)(Time / 30f + 8))).ToInt()) with { A = 0 };
+                particle.Rotation = Main.rand.NextFloat(MathHelper.TwoPi);
                 particle.anchor = () => Projectile.velocity * 0.3f;
-            }));
+            });
 
             if (!Main.rand.NextBool(4)) {
                 Color color = Color.Lerp(AntiMassAccumulatorProj.MainColor, Color.Turquoise, (!Main.rand.NextBool(10)).ToInt()) with { A = 40 };

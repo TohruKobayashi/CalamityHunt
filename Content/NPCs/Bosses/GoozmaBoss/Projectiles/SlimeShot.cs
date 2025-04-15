@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Arch.Core.Extensions;
-using CalamityHunt.Common.Systems.Particles;
 using CalamityHunt.Common.Utilities;
-using CalamityHunt.Content.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;

@@ -71,14 +71,14 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 return;
             }
 
-            CosmosMetaball.Particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
-                particle.position = Projectile.Center + Projectile.velocity * 2f + Main.rand.NextVector2Circular(24, 24);
-                particle.velocity = Main.rand.NextVector2Circular(5, 5) + Projectile.velocity * 0.1f;
-                particle.scale = Main.rand.NextFloat(1f, 3f) * Projectile.scale;
+            CosmosMetaball.Particles.SpawnParticle<SmokeSplatterMetaball>(particle => {
+                particle.Position = Projectile.Center + Projectile.velocity * 2f + Main.rand.NextVector2Circular(24, 24);
+                particle.Velocity = Main.rand.NextVector2Circular(5, 5) + Projectile.velocity * 0.1f;
+                particle.Scale = new Vector2(Main.rand.NextFloat(1f, 3f) * Projectile.scale);
                 particle.maxTime = Main.rand.Next(10, 30);
-                particle.color = Color.White;
+                particle.Color = Color.White;
                 particle.fadeColor = Color.White;
-            }));
+            });
 
             if (Projectile.ai[1] == 0) {
                 Projectile.velocity += Main.npc[(int)Owner].GetTargetData().Velocity * 0.012f;
@@ -106,12 +106,12 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             }
 
             if (Main.rand.NextBool(30)) {
-                CalamityHunt.Particles.Add(Particle.Create<PrettySparkle>(particle => {
-                    particle.position = Projectile.Center + Main.rand.NextVector2Circular(12, 12) * Projectile.scale + Projectile.velocity;
-                    particle.velocity = Main.rand.NextVector2Circular(3, 3);
-                    particle.scale = Main.rand.NextFloat(0.4f, 1.4f) * Projectile.scale;
-                    particle.color = new Color(30, 15, 10, 0);
-                }));
+                CalamityHunt.Particles.SpawnParticle<PrettySparkle>(particle => {
+                    particle.Position = Projectile.Center + Main.rand.NextVector2Circular(12, 12) * Projectile.scale + Projectile.velocity;
+                    particle.Velocity = Main.rand.NextVector2Circular(3, 3);
+                    particle.Scale = new Vector2(Main.rand.NextFloat(0.4f, 1.4f) * Projectile.scale);
+                    particle.Color = new Color(30, 15, 10, 0);
+                });
             }
             Projectile.rotation += Projectile.velocity.Length() * Projectile.direction * 0.02f;
 

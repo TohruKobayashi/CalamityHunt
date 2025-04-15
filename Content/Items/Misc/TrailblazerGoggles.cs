@@ -1,4 +1,6 @@
-﻿using CalamityHunt.Common.Graphics.RenderTargets;
+﻿using System.Linq;
+
+using CalamityHunt.Common.Graphics.RenderTargets;
 using CalamityHunt.Common.Players;
 using CalamityHunt.Common.Systems;
 using CalamityHunt.Common.Systems.Particles;
@@ -45,9 +47,9 @@ public class TrailblazerGoggles : ModItem
             Main.NewText("");
             Main.NewText("");
             Main.NewText("");
-            Main.NewText("Current particles: " + CalamityHunt.Particles.particles.Count);
-            Main.NewText("Current bg particles: " + CalamityHunt.ParticlesBehindEntities.particles.Count);
-            Main.NewText("Current metaballs: " + CosmosMetaball.Particles.particles.Count);
+            Main.NewText("Current particles: " + CalamityHunt.Particles.Particles.Count());
+            Main.NewText("Current bg particles: " + CalamityHunt.ParticlesBehindEntities.Particles.Count());
+            Main.NewText("Current metaballs: " + CosmosMetaball.Particles.Particles.Count());
             int dustc = 0;
             foreach (Dust d in Main.dust) {
                 if (d.active)

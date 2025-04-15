@@ -43,15 +43,15 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Dust torch = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(2, 2), DustID.CursedTorch, Projectile.velocity.RotatedByRandom(0.3f) * Main.rand.NextFloat(1f, 3f), 0, Color.White, 0.1f + Main.rand.NextFloat(2f));
             torch.noGravity = true;
 
-            CalamityHunt.Particles.Add(Particle.Create<FlameParticle>(particle => {
-                particle.position = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero) * 80;
-                particle.scale = Main.rand.NextFloat(1f, 3f);
-                particle.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * Main.rand.NextFloat(3f, 20f);
+            CalamityHunt.Particles.SpawnParticle<FlameParticle>(particle => {
+                particle.Position = Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero) * 80;
+                particle.Scale = new Vector2(Main.rand.NextFloat(1f, 3f));
+                particle.Velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * Main.rand.NextFloat(3f, 20f);
                 particle.maxTime = Main.rand.Next(35, 40);
-                particle.color = Color.Chartreuse with { A = 20 };
+                particle.Color = Color.Chartreuse with { A = 20 };
                 particle.fadeColor = Color.GreenYellow with { A = 30 };
                 particle.emitLight = true;
-            }));
+            });
 
         }
 

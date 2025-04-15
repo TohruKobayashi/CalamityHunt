@@ -73,12 +73,12 @@ public sealed class ChromaticEnergyDust : Particle<ChromaticEnergyDust>
         }
 
         if (Main.rand.NextBool(250) && Scale.X > 0.25f) {
-            CalamityHunt.Particles.Add(Create<ChromaticEnergyDust>(newParticle => {
-                newParticle.position = Position;
-                newParticle.color = Color * 0.99f;
-                newParticle.scale = MathHelper.Clamp(Scale.X * 2f, 0.1f, 1.5f);
+            CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(newParticle => {
+                newParticle.Position = Position;
+                newParticle.Color = Color * 0.99f;
+                newParticle.Scale = new Vector2(MathHelper.Clamp(Scale.X * 2f, 0.1f, 1.5f));
                 newParticle.colorData = colorData;
-            }));
+            });
         }
 
         if (Scale.X < 0.1f) {

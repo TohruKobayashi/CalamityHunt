@@ -33,16 +33,16 @@ namespace CalamityHunt.Content.Items.Misc
             if (Config.Instance.debugMode) {
                 if (time == 0) {
                     for (int i = 0; i < 15; i++) {
-                        CalamityHunt.Particles.Add(Particle.Create<FusionFlameParticle>(particle => {
-                            particle.position = player.Center;
-                            particle.velocity = player.velocity * Main.rand.NextFloat();
-                            particle.rotation = player.velocity.ToRotation();
-                            particle.scale = 4.25f + Main.rand.NextFloat(1f, 2f);
+                        CalamityHunt.Particles.SpawnParticle<FusionFlameParticle>(particle => {
+                            particle.Position = player.Center;
+                            particle.Velocity = player.velocity * Main.rand.NextFloat();
+                            particle.Rotation = player.velocity.ToRotation();
+                            particle.Scale = new Vector2(4.25f + Main.rand.NextFloat(1f, 2f));
                             particle.maxTime = Main.rand.Next(25, 40);
-                            //particle.color = (glowColor * 0.8f) with { A = 50 };
+                            //particle.Color = (glowColor * 0.8f) with { A = 50 };
                             //particle.fadeColor = (glowColor * 0.1f) with { A = 20 };
                             particle.emitLight = true;
-                        }));
+                        });
                     }
                 }
                 time++;

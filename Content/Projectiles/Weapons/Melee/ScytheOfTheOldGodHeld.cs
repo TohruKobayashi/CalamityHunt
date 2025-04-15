@@ -164,17 +164,17 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
                 Color glowColor = new GradientColor(SlimeUtils.GoozOilColors, 0.1f, 0.1f).ValueAt(Projectile.localAI[0]) with { A = 128 };
 
                 for (int i = 0; i < 2 + (int)((swingPercent - 0.1) * 12f); i++) {
-                    CalamityHunt.Particles.Add(Particle.Create<FusionFlameParticle>(particle => {
-                        particle.position = Vector2.Lerp(scytheEnd, swingEnd, Main.rand.NextFloat(0.5f, 0.6f)) + Main.rand.NextVector2Circular(10, 120).RotatedBy(Projectile.rotation + (i / 5f * 0.1f) * Projectile.spriteDirection);
-                        particle.velocity = (Projectile.rotation + (MathHelper.PiOver2 + i / 5f * 0.01f) * Projectile.spriteDirection).ToRotationVector2().RotatedByRandom(0.2f) * Main.rand.NextFloat(3f, 6f);
-                        particle.rotation = particle.velocity.ToRotation();
-                        particle.scale = (swingPercent - 0.1f) * 5f + Main.rand.NextFloat(1f, 2f);
+                    CalamityHunt.Particles.SpawnParticle<FusionFlameParticle>(particle => {
+                        particle.Position = Vector2.Lerp(scytheEnd, swingEnd, Main.rand.NextFloat(0.5f, 0.6f)) + Main.rand.NextVector2Circular(10, 120).RotatedBy(Projectile.rotation + (i / 5f * 0.1f) * Projectile.spriteDirection);
+                        particle.Velocity = (Projectile.rotation + (MathHelper.PiOver2 + i / 5f * 0.01f) * Projectile.spriteDirection).ToRotationVector2().RotatedByRandom(0.2f) * Main.rand.NextFloat(3f, 6f);
+                        particle.Rotation = particle.Velocity.ToRotation();
+                        particle.Scale = new Vector2((swingPercent - 0.1f) * 5f + Main.rand.NextFloat(1f, 2f));
                         particle.maxTime = Main.rand.Next(25, 40);
-                        particle.color = glowColor * 1.5f;
+                        particle.Color = glowColor * 1.5f;
                         particle.fadeColor = glowColor * 0.4f;
                         particle.anchor = () => Player.velocity * 0.4f;
-                        particle.gravity = particle.position.DirectionTo(Projectile.Center) * 0.1f;
-                    }));
+                        particle.gravity = particle.Position.DirectionTo(Projectile.Center) * 0.1f;
+                    });
                 }
 
                 for (int i = 0; i < 2; i++) {
@@ -194,12 +194,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
                 Projectile.EmitEnchantmentVisualsAt(scytheEnd - new Vector2(75), 150, 150);
 
                 if (Main.rand.NextBool(2)) {
-                    CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
-                        particle.position = scytheEnd + Main.rand.NextVector2Circular(70, 70);
-                        particle.velocity = Vector2.Zero;
-                        particle.scale = Main.rand.NextFloat(1.5f);
-                        particle.color = glowColor;
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<CrossSparkle>(particle => {
+                        particle.Position = scytheEnd + Main.rand.NextVector2Circular(70, 70);
+                        particle.Velocity = Vector2.Zero;
+                        particle.Scale = new Vector2(Main.rand.NextFloat(1.5f));
+                        particle.Color = glowColor;
+                    });
                 }
             }
 
@@ -311,12 +311,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Color glowColor = new GradientColor(SlimeUtils.GoozOilColors, 0.1f, 0.1f).ValueAt(Time) with { A = 128 };
-            CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
-                particle.position = Main.rand.NextVector2FromRectangle(target.Hitbox);
-                particle.velocity = Vector2.Zero;
-                particle.scale = Main.rand.NextFloat(1f, 3f);
-                particle.color = glowColor;
-            }));
+            CalamityHunt.Particles.SpawnParticle<CrossSparkle>(particle => {
+                particle.Position = Main.rand.NextVector2FromRectangle(target.Hitbox);
+                particle.Velocity = Vector2.Zero;
+                particle.Scale = new Vector2(Main.rand.NextFloat(1f, 3f));
+                particle.Color = glowColor;
+            });
             target.AddBuff(ModContent.BuffType<FusionBurn>(), 300);
             shakeStrength *= 1.5f;
 
@@ -327,12 +327,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
         {
             Color glowColor = new GradientColor(SlimeUtils.GoozOilColors, 0.1f, 0.1f).ValueAt(Time) with { A = 128 };
 
-            CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
-                particle.position = Main.rand.NextVector2FromRectangle(target.Hitbox);
-                particle.velocity = Vector2.Zero;
-                particle.scale = Main.rand.NextFloat(1f, 3f);
-                particle.color = glowColor;
-            }));
+            CalamityHunt.Particles.SpawnParticle<CrossSparkle>(particle => {
+                particle.Position = Main.rand.NextVector2FromRectangle(target.Hitbox);
+                particle.Velocity = Vector2.Zero;
+                particle.Scale = new Vector2(Main.rand.NextFloat(1f, 3f));
+                particle.Color = glowColor;
+            });
 
             target.AddBuff(ModContent.BuffType<FusionBurn>(), 300);
             shakeStrength *= 1.5f;
