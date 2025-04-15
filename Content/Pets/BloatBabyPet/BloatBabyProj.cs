@@ -99,7 +99,7 @@ namespace CalamityHunt.Content.Pets.BloatBabyPet
             }
 
             if (Main.rand.NextBool(7)) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = Projectile.Center + Main.rand.NextVector2Circular(30, 30);
                     particle.velocity = Projectile.velocity * 0.2f;
                     particle.scale = 1f;

@@ -65,7 +65,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
             bool speedGate = Math.Clamp(Projectile.localAI[0], 0, 0.5f * maxStacks) == 0.5f * maxStacks ? true : false;
             if (speedGate) {
                 Color color = new Color(Main.rand.Next(150, 255), Main.rand.Next(150, 255), Main.rand.Next(150, 255));
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = Vector2.Zero;
                     particle.scale = 1f;
@@ -137,7 +137,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
                                 Color color = new Color(Main.rand.Next(150, 255), Main.rand.Next(150, 255), Main.rand.Next(150, 255));
                                 Vector2 inward = Projectile.Center + Main.rand.NextVector2Circular(1, 1);
 
-                                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                                     particle.position = inward;
                                     particle.velocity = -inward.DirectionTo(Projectile.Center) * Main.rand.NextFloat(3f);
                                     particle.scale = 1f;

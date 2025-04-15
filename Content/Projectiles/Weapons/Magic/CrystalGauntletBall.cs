@@ -73,7 +73,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
                     sparkle.noGravity = true;
                     sparkle.noLightEmittence = true;
                 }
-                CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
                     particle.position = Projectile.Center + Projectile.velocity * 5f + Main.rand.NextVector2Circular(16, 16);
                     particle.velocity = Vector2.Zero;
                     particle.scale = Main.rand.NextFloat(0.5f, 1.5f);

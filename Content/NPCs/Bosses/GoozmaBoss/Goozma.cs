@@ -592,7 +592,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     Vector2 particleVelocity = Vector2.UnitY.RotatedByRandom(1f);
                     particleVelocity.Y -= Main.rand.NextFloat(3f);
 
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
                         particle.position = Main.rand.NextVector2FromRectangle(NPC.Hitbox);
                         particle.velocity = particleVelocity + particle.position.DirectionFrom(NPC.Center);
                         particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
@@ -629,7 +629,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         for (int i = 0; i < 3; i++) {
                             Vector2 inward = NPC.Center + Main.rand.NextVector2Circular(70, 70) + Main.rand.NextVector2CircularEdge(100 - Time, 100 - Time);
 
-                            CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                            CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                                 particle.position = inward;
                                 particle.velocity = inward.DirectionTo(NPC.Center) * Main.rand.NextFloat(3f);
                                 particle.scale = 1f;
@@ -646,7 +646,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                             for (int i = 0; i < 45; i++) {
                                 Vector2 outward = NPC.Center + Main.rand.NextVector2Circular(10, 10);
 
-                                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                                     particle.position = outward;
                                     particle.velocity = outward.DirectionFrom(NPC.Center) * Main.rand.NextFloat(3f, 10f);
                                     particle.scale = Main.rand.NextFloat(1f, 2f);
@@ -925,7 +925,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 if (Main.netMode != NetmodeID.Server && Time > 45 && Time < 53) {
                     for (int i = 0; i < 5; i++) {
                         Dust.NewDustPerfect(NPC.Center + Main.rand.NextVector2Circular(10, 10), DustID.TintableDust, Main.rand.NextVector2CircularEdge(20, 20), 200, Color.Black, Main.rand.NextFloat(2, 4)).noGravity = true;
-                        CalamityHunt.particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
                             particle.position = NPC.Center + Main.rand.NextVector2Circular(10, 10);
                             particle.velocity = Main.rand.NextVector2Circular(20, 20) - Vector2.UnitY * 8f;
                             particle.scale = Main.rand.NextFloat(0.5f, 2f);
@@ -947,7 +947,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                     if (Main.netMode != NetmodeID.Server) {
                         for (int i = 0; i < Main.rand.Next(1, 4); i++) {
-                            CalamityHunt.particles.Add(Particle.Create<GoozmaGelBit>(particle => {
+                            CalamityHunt.Particles.Add(Particle.Create<GoozmaGelBit>(particle => {
                                 particle.position = NPC.Center + Main.rand.NextVector2Circular(30, 40);
                                 particle.velocity = Main.rand.NextVector2CircularEdge(10, 10) + Main.rand.NextVector2Circular(20, 20);
                                 particle.scale = Main.rand.NextFloat(1f, 2f);
@@ -973,7 +973,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 //}
 
                 if (Main.netMode != NetmodeID.Server && Time < 70 || Time > 400) {
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
                         particle.velocity = Main.rand.NextVector2Circular(2, 3);
                         particle.position = NPC.Center + particle.velocity * 27f * NPC.scale;
                         particle.scale = Main.rand.NextFloat(0.1f, 1.6f);
@@ -1001,13 +1001,13 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                 if (Time >= 290 && !initializedLocalP2Sparkle) {
                     if (Main.netMode != NetmodeID.Server) {
-                        CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
                             particle.velocity = MathHelper.PiOver4.ToRotationVector2();
                             particle.position = NPC.Center;
                             particle.scale = 2f;
                             particle.color = Color.White;
                         }));
-                        CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
                             particle.velocity = Vector2.Zero;
                             particle.position = NPC.Center;
                             particle.scale = 4f;
@@ -1075,7 +1075,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         SortedProjectileAttack(Target.Center + Target.Velocity * 1.5f, SortedProjectileAttackTypes.BurstLightning);
 
                         if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(30)) {
-                            CalamityHunt.particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
+                            CalamityHunt.Particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
                                 particle.position = NPC.Bottom + Main.rand.NextVector2Circular(10, 10);
                                 particle.velocity = Main.rand.NextVector2Circular(5, 2) - Vector2.UnitY * 5f + NPC.velocity * 0.1f;
                                 particle.scale = Main.rand.NextFloat(0.1f, 1.6f);
@@ -1143,7 +1143,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                                         Vector2 position = Vector2.Lerp(NPC.position, NPC.oldPos[0], i / 24f) + NPC.Size * 0.5f;
 
                                         //top
-                                        CalamityHunt.particlesBehindEntities.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                                        CalamityHunt.ParticlesBehindEntities.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                                             particle.position = position + Main.rand.NextVector2Circular(8, 8) + NPC.velocity;
                                             particle.velocity = -NPC.velocity.RotatedBy((float)Math.Sin((Time - (i / 8f)) * 0.23f) * 0.8f);
                                             particle.scale = 1.5f;
@@ -1152,7 +1152,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                                         }));
 
                                         //bottom
-                                        CalamityHunt.particlesBehindEntities.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                                        CalamityHunt.ParticlesBehindEntities.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                                             particle.position = position + Main.rand.NextVector2Circular(8, 8) + NPC.velocity;
                                             particle.velocity = -NPC.velocity.RotatedBy(-(float)Math.Sin((Time - (i / 8f)) * 0.23f) * 0.8f);
                                             particle.scale = 1.5f;
@@ -1385,7 +1385,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                 if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(2 + (int)(60 - Time / 5f))) {
                     for (int i = 0; i < Main.rand.Next(1, 4); i++) {
-                        CalamityHunt.particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
                             particle.position = NPC.Center + Main.rand.NextVector2Circular(10, 10);
                             particle.velocity = Main.rand.NextVector2Circular(20, 20) - Vector2.UnitY * 10f;
                             particle.scale = Main.rand.NextFloat(0.5f, 2f);
@@ -1396,7 +1396,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 }
 
                 if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(1 + (int)(65 - Time / 4.66f)) || Time > 250) {
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
                         particle.velocity = Main.rand.NextVector2CircularEdge(1, 2);
                         particle.position = NPC.Center + particle.velocity * Main.rand.NextFloat(4, 16) * NPC.scale;
                         particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
@@ -1488,7 +1488,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                 if (Main.netMode != NetmodeID.Server && Main.rand.NextBool(3)) {
 
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
                         particle.velocity = Main.rand.NextVector2CircularEdge(2, 3);
                         particle.position = NPC.Center + particle.velocity * Main.rand.NextFloat(4, 16) * NPC.scale;
                         particle.scale = Main.rand.NextFloat(0.75f, 1.75f);
@@ -1655,7 +1655,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             }
 
             if (Phase == 2 && Main.rand.NextBool()) {
-                CalamityHunt.particles.Add(Particle.Create<LightningParticle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<LightningParticle>(particle => {
                     particle.position = NPC.Center + Main.rand.NextVector2Circular(80, 130).RotatedBy(NPC.rotation) * NPC.scale;
                     particle.velocity = particle.position.DirectionFrom(NPC.Center) * Main.rand.NextFloat(0.5f, 2f);
                     particle.rotation = particle.velocity.ToRotation() + Main.rand.NextFloat(-0.1f, 0.1f);
@@ -1712,7 +1712,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             switch (index) {
                 case 0:
                     if (Main.netMode != NetmodeID.Server) {
-                        CalamityHunt.particles.Add(Particle.Create<EbonGelChunk>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<EbonGelChunk>(particle => {
                             particle.position = position;
                             particle.velocity = velocity;
                             particle.scale = Main.rand.NextFloat(0.1f, 2.1f);
@@ -1725,7 +1725,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                 case 1:
                     if (Main.netMode != NetmodeID.Server) {
-                        CalamityHunt.particles.Add(Particle.Create<DivineGelChunk>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<DivineGelChunk>(particle => {
                             particle.position = position;
                             particle.velocity = velocity;
                             particle.scale = Main.rand.NextFloat(0.1f, 2.1f);
@@ -1742,7 +1742,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     position = ActiveSlime.Center + Main.rand.NextVector2Circular(1, 50) + new Vector2(velocity.X * 16f, 32f);
 
                     if (Main.netMode != NetmodeID.Server) {
-                        CalamityHunt.particles.Add(Particle.Create<CrimGelChunk>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<CrimGelChunk>(particle => {
                             particle.position = position;
                             particle.velocity = velocity;
                             particle.scale = Main.rand.NextFloat(0.1f, 2.1f);
@@ -1756,7 +1756,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                 case 3:
 
                     if (Main.netMode != NetmodeID.Server) {
-                        CalamityHunt.particles.Add(Particle.Create<StellarGelChunk>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<StellarGelChunk>(particle => {
                             particle.position = position;
                             particle.velocity = velocity;
                             particle.scale = Main.rand.NextFloat(0.1f, 2.1f);
@@ -1782,7 +1782,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
             if (Main.netMode != NetmodeID.Server) {
                 for (int i = 0; i < Main.rand.Next(1, 6); i++) {
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
                         particle.position = NPC.Center + Main.rand.NextVector2Circular(40, 50);
                         particle.velocity = NPC.DirectionFrom(player.Center).RotatedByRandom(0.4f) * Main.rand.Next(4, 10);
                         particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
@@ -1804,7 +1804,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
             if (Main.netMode != NetmodeID.Server) {
                 for (int i = 0; i < Main.rand.Next(1, 6); i++) {
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
                         particle.position = NPC.Center + Main.rand.NextVector2Circular(40, 50);
                         particle.velocity = NPC.DirectionFrom(projectile.Center).RotatedByRandom(0.4f) * Main.rand.Next(4, 10);
                         particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
@@ -1834,7 +1834,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
         if (Main.netMode != NetmodeID.Server) {
             for (int i = 0; i < 200; i++) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticGelChunk>(particle => {
                     particle.position = NPC.Center + Main.rand.NextVector2Circular(20, 20);
                     particle.velocity = Main.rand.NextVector2Circular(30, 30) - Vector2.UnitY * 15f;
                     particle.scale = Main.rand.NextFloat(0.1f, 2.1f);

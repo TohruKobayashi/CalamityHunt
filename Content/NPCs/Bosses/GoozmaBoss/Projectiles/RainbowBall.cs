@@ -62,7 +62,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             }
 
             if (Main.rand.NextBool(2)) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = Projectile.Center + Main.rand.NextVector2Circular(30, 30) + Projectile.velocity;
                     particle.velocity = -Projectile.velocity * 0.5f;
                     particle.scale = 2f * Projectile.scale;
@@ -91,7 +91,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 20; i++) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = -Projectile.velocity * 0.2f + Main.rand.NextVector2Circular(3, 3);
                     particle.scale = 2f;

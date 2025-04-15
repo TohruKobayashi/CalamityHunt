@@ -190,7 +190,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             }
 
             if (Main.rand.NextBool(10)) {
-                CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<PrettySparkle>(particle => {
                     particle.position = NPC.Center + Main.rand.NextVector2Circular(100, 80);
                     particle.velocity = Main.rand.NextVector2Circular(3, 3);
                     particle.scale = Main.rand.NextFloat(0.3f, 1.3f);
@@ -263,7 +263,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     SoundEngine.PlaySound(createSound, NPC.Center);
 
                     for (int i = 0; i < Main.rand.Next(14, 20); i++) {
-                        CalamityHunt.particles.Add(Particle.Create<DivineGelChunk>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<DivineGelChunk>(particle => {
                             particle.position = NPC.Center + Main.rand.NextVector2Circular(80, 50);
                             particle.velocity = NPC.velocity.RotatedByRandom(1f) * Main.rand.NextFloat();
                             particle.scale = Main.rand.NextFloat(0.1f, 2.1f);
@@ -543,7 +543,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             NPC.frameCounter += 2;
 
             for (int i = 0; i < Time; i++) {
-                CalamityHunt.particles.Add(Particle.Create<DivineGelChunk>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<DivineGelChunk>(particle => {
                     particle.position = NPC.Center;
                     particle.velocity = Main.rand.NextVector2Circular(50, 50);
                     particle.scale = Time / 50f + Main.rand.NextFloat(0.7f, 1.7f);

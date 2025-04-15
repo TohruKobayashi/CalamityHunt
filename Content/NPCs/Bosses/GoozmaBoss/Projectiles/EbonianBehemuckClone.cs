@@ -117,7 +117,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                     for (int i = 0; i < Main.rand.Next(30, 40); i++) {
                         Vector2 velocity = Main.rand.NextVector2Circular(16, 16) - Projectile.rotation.ToRotationVector2() * 10f;
                         Vector2 position = Projectile.Center + Main.rand.NextVector2Circular(30, 30) + new Vector2(velocity.X * 15f, 32f);
-                        CalamityHunt.particles.Add(Particle.Create<EbonGelChunk>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<EbonGelChunk>(particle => {
                             particle.position = position;
                             particle.velocity = velocity;
                             particle.scale = Main.rand.NextFloat(0.1f, 2.1f);

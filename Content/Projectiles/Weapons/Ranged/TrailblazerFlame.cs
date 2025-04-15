@@ -50,7 +50,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Lighting.AddLight(Projectile.Center, glowColor.ToVector3() * 0.5f);
 
             if (Time > 75) {
-                CalamityHunt.particles.Add(Particle.Create<FusionFlameParticle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<FusionFlameParticle>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = Projectile.velocity * Main.rand.NextFloat();
                     particle.rotation = Projectile.velocity.ToRotation();
@@ -65,7 +65,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             }
             else if (Time > 6) {
                 if (Main.rand.NextBool(10)) {
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                         particle.position = Projectile.Center + Main.rand.NextVector2Circular(100, 100) * expand;
                         particle.velocity = Projectile.velocity * Main.rand.NextFloat(3f);
                         particle.scale = Main.rand.NextFloat(1f, 2f);
@@ -75,7 +75,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 }
 
                 if (Main.rand.NextBool(10)) {
-                    CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
                         particle.position = Projectile.Center + Main.rand.NextVector2Circular(100, 100) * expand;
                         particle.velocity = Vector2.Zero;
                         particle.scale = Main.rand.NextFloat(1.5f);
@@ -83,7 +83,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                     }));
                 }
 
-                CalamityHunt.particles.Add(Particle.Create<FusionFlameParticle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<FusionFlameParticle>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = Projectile.velocity * Main.rand.NextFloat();
                     particle.rotation = Projectile.velocity.ToRotation();

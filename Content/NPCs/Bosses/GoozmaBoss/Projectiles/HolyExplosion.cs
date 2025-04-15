@@ -66,7 +66,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 for (int i = 0; i < 5; i++) {
                     Vector2 vel = Main.rand.NextVector2Circular(100, 100);
                     float distanceScale = 2f / Math.Max(vel.Length(), 0.9f) + Main.rand.NextFloat();
-                    CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<PrettySparkle>(particle => {
                         particle.position = Projectile.Center;
                         particle.velocity = vel;
                         particle.scale = 1f + distanceScale;
@@ -77,7 +77,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 for (int i = 0; i < 2; i++) {
                     Vector2 vel = Main.rand.NextVector2Circular(200, 200);
                     float distanceScale = 3f / Math.Max(vel.Length(), 0.9f) + Main.rand.NextFloat(2f);
-                    CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
                         particle.position = Projectile.Center + vel;
                         particle.velocity = Vector2.One;
                         particle.scale = distanceScale + Main.rand.NextFloat(2f);

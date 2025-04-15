@@ -81,7 +81,7 @@ public class AntiMassBioBall : ModProjectile
         Time++;
 
         for (int i = 0; i < 3; i++) {
-            CalamityHunt.particles.Add(Particle.Create<LightningParticle>(particle => {
+            CalamityHunt.Particles.Add(Particle.Create<LightningParticle>(particle => {
                 particle.position = Projectile.Center + Main.rand.NextVector2Circular(20, 20).RotatedBy(Projectile.rotation) * Projectile.scale;
                 particle.velocity = Main.rand.NextVector2Circular(6, 6);
                 particle.scale = Main.rand.NextFloat(0.2f, 0.9f) * Projectile.scale;
@@ -117,7 +117,7 @@ public class AntiMassBioBall : ModProjectile
         SoundEngine.PlaySound(deathSound.WithPitchOffset(-0.2f), Projectile.Center);
 
         for (int i = 0; i < 40; i++) {
-            CalamityHunt.particles.Add(Particle.Create<LightningParticle>(particle => {
+            CalamityHunt.Particles.Add(Particle.Create<LightningParticle>(particle => {
                 particle.maxTime = Main.rand.Next(10, 18);
                 particle.position = Projectile.Center + Main.rand.NextVector2Circular(10, 10).RotatedBy(Projectile.rotation) * Projectile.scale;
                 particle.velocity = Main.rand.NextVector2Circular(36, 36) * (1.5f / particle.maxTime);

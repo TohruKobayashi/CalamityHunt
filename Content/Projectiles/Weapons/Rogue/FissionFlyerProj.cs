@@ -106,7 +106,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
             }
 
             if (Main.rand.NextBool(3)) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = Projectile.Center - Main.rand.NextVector2Circular(20, 20);
                     particle.velocity = Projectile.velocity * Main.rand.NextFloat();
                     particle.scale = Main.rand.NextFloat(0.5f, 1.5f);

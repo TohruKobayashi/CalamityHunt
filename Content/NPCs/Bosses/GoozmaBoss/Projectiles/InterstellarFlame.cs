@@ -26,7 +26,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         {
             Projectile.velocity *= 0.9f;
             Projectile.scale += 0.1f;
-            CalamityHunt.particles.Add(Particle.Create<FusionFlameParticle>(particle => {
+            CalamityHunt.Particles.Add(Particle.Create<FusionFlameParticle>(particle => {
                 particle.position = Projectile.Center + Main.rand.NextVector2Circular(10, 10);
                 particle.velocity = Main.rand.NextVector2Circular(6, 6) + Projectile.velocity * Utils.GetLerpValue(0, 8, Time, true);
                 particle.scale = Main.rand.NextFloat(1f, 3f) * Projectile.scale;

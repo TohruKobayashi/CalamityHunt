@@ -168,7 +168,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             //}
 
             if (!Main.rand.NextBool((int)(Time * 0.5f + 15))) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = Projectile.rotation.ToRotationVector2().RotatedByRandom(1f) * Main.rand.NextFloat(5f, 15f);
                     particle.scale = 2f;
@@ -184,7 +184,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                     color.A = 0;
                     Vector2 position = Projectile.Center + new Vector2(progress, Main.rand.NextFloat(-80f, 80f) * (progress / 3300f)).RotatedBy(Projectile.rotation);
                     if (Main.rand.NextBool(5)) {
-                        CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                             particle.position = position;
                             particle.velocity = Projectile.velocity.RotatedByRandom(0.4f) * Main.rand.NextFloat(15f, 45f);
                             particle.scale = 4f * grow;

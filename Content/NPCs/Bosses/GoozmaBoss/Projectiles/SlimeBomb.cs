@@ -79,7 +79,7 @@ public class SlimeBomb : ModProjectile
             }
 
             if (Main.rand.NextBool(8)) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = Projectile.Center + Main.rand.NextVector2Circular(40, 40);
                     particle.velocity = -Vector2.UnitY * Main.rand.NextFloat(2f);
                     particle.scale = 1.2f;
@@ -115,7 +115,7 @@ public class SlimeBomb : ModProjectile
             if (Time < 3) {
                 for (int i = 0; i < 5; i++) {
                     Vector2 gooVelocity = new Vector2(1, 0).RotatedBy(MathHelper.TwoPi / 5f * i).RotatedByRandom(0.2f);
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
                         particle.position = Projectile.Center + gooVelocity * 2;
                         particle.velocity = gooVelocity;
                         particle.scale = 3f - Time + Main.rand.NextFloat();
@@ -126,7 +126,7 @@ public class SlimeBomb : ModProjectile
             }
 
             if (Time < 10) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
                     particle.position = Projectile.Center + Main.rand.NextVector2Circular(20, 20);
                     particle.velocity = Main.rand.NextVector2Circular(25, 25);
                     particle.scale = 1.5f;

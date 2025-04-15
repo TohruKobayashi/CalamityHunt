@@ -33,7 +33,7 @@ namespace CalamityHunt.Content.Items.Misc
             if (Config.Instance.debugMode) {
                 if (time == 0) {
                     for (int i = 0; i < 15; i++) {
-                        CalamityHunt.particles.Add(Particle.Create<FusionFlameParticle>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<FusionFlameParticle>(particle => {
                             particle.position = player.Center;
                             particle.velocity = player.velocity * Main.rand.NextFloat();
                             particle.rotation = player.velocity.ToRotation();

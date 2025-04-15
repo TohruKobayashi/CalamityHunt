@@ -48,7 +48,7 @@ namespace CalamityHunt.Content.Items.Materials
             }
 
             if (Main.rand.NextBool(20)) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = Item.Center + Main.rand.NextVector2Circular(15, 15);
                     particle.velocity = -Vector2.UnitY * Main.rand.NextFloat(2f);
                     particle.scale = Main.rand.NextFloat(0.7f, 1.7f);

@@ -159,7 +159,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
                     if (Projectile.velocity.Length() > 5 && Main.myPlayer == Projectile.owner) {
                         if (teleportTime++ > 150 && Main.rand.NextBool(20)) {
                             Color color = new Color(5, 10, 100, 0);
-                            CalamityHunt.particles.Add(Particle.Create<MicroPortal>(particle => {
+                            CalamityHunt.Particles.Add(Particle.Create<MicroPortal>(particle => {
                                 particle.position = Projectile.Center + Projectile.velocity * 0.1f;
                                 particle.velocity = Vector2.Zero;
                                 particle.scale = 1f;
@@ -172,7 +172,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
                             Projectile.Center -= Projectile.velocity.RotatedByRandom(2f) * Main.rand.Next(8, 15);
                             Projectile.netUpdate = true;
 
-                            CalamityHunt.particles.Add(Particle.Create<MicroPortal>(particle => {
+                            CalamityHunt.Particles.Add(Particle.Create<MicroPortal>(particle => {
                                 particle.position = Projectile.Center - Projectile.velocity * 0.1f;
                                 particle.velocity = Vector2.Zero;
                                 particle.scale = 1f;
@@ -293,7 +293,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
 
                             Color color = new Color(5, 10, 100, 0);
 
-                            CalamityHunt.particles.Add(Particle.Create<MicroPortal>(particle => {
+                            CalamityHunt.Particles.Add(Particle.Create<MicroPortal>(particle => {
                                 particle.position = Projectile.Center + Projectile.velocity * 0.1f;
                                 particle.velocity = Vector2.Zero;
                                 particle.scale = 1f;
@@ -305,7 +305,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
                             targetPositionOffset += Main.rand.NextVector2Circular(1, 5);
                             Projectile.Center = target.Center + targetPositionOffset;
 
-                            CalamityHunt.particles.Add(Particle.Create<MicroPortal>(particle => {
+                            CalamityHunt.Particles.Add(Particle.Create<MicroPortal>(particle => {
                                 particle.position = Projectile.Center - Projectile.velocity * 0.1f;
                                 particle.velocity = Vector2.Zero;
                                 particle.scale = 1f;
@@ -363,7 +363,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
         {
             if (air) {
                 Color color = new Color(255, 150, 150, 0);
-                CalamityHunt.particles.Add(Particle.Create<MicroShockwave>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<MicroShockwave>(particle => {
                     particle.position = Projectile.Bottom;
                     particle.velocity = Vector2.Zero;
                     particle.scale = 1f;

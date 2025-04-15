@@ -53,7 +53,7 @@ namespace CalamityHunt.Content.Items.Misc
         public override void HoldItem(Player player)
         {
             if (Main.rand.NextBool(player.itemAnimation > 0 ? 40 : 80)) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = new Vector2(player.itemLocation.X + 16f * player.direction, player.itemLocation.Y - 14f * player.gravDir);
                     particle.velocity = -Vector2.UnitY;
                     particle.scale = 1f;

@@ -126,7 +126,7 @@ public class AntiMassAccumulatorProj : ModProjectile
 
         for (int i = 0; i < 8; i++) {
             if (recoilFactor > 0.0005f && Main.rand.NextBool((int)(25 - recoilFactor * 24))) {
-                CalamityHunt.particles.Add(Particle.Create<LightningParticle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<LightningParticle>(particle => {
                     particle.position = muzzlePosition + Main.rand.NextVector2Circular(27, 10).RotatedBy(Projectile.rotation);
                     particle.rotation = Projectile.rotation + Main.rand.NextFloat(-1f, 1f);
                     particle.velocity = particle.rotation.ToRotationVector2();

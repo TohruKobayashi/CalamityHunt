@@ -269,7 +269,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
         {
             if (air) {
                 Color color = new Color(255, 150, 150, 0);
-                CalamityHunt.particles.Add(Particle.Create<MicroShockwave>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<MicroShockwave>(particle => {
                     particle.position = Projectile.Bottom;
                     particle.velocity = Vector2.Zero;
                     particle.scale = 1.5f;

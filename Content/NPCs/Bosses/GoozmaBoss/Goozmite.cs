@@ -187,7 +187,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     }
 
                     for (int i = 0; i < 50; i++) {
-                        CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                             particle.position = NPC.Center + Main.rand.NextVector2Circular(10, 10);
                             particle.velocity = Main.rand.NextVector2Circular(9, 9);
                             particle.scale = Main.rand.NextFloat(1f, 2f);
@@ -204,7 +204,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 NPC.velocity = NPC.velocity.RotatedBy(0.02f * NPC.direction);
                 NPC.rotation = NPC.rotation.AngleLerp(NPC.velocity.ToRotation() + MathHelper.PiOver2, 0.2f * Utils.GetLerpValue(0, 40, Time, true));
 
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = NPC.Center + Main.rand.NextVector2Circular(40, 40);
                     particle.velocity = NPC.velocity * Main.rand.NextFloat();
                     particle.scale = Main.rand.NextFloat(1f, 2f);
@@ -226,7 +226,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     }
 
                     for (int i = 0; i < 30; i++) {
-                        CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                             particle.position = NPC.Center + Main.rand.NextVector2Circular(10, 10);
                             particle.velocity = -NPC.velocity.RotatedByRandom(1f) * Main.rand.NextFloat(0.3f);
                             particle.scale = 1f;
@@ -237,7 +237,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     for (int i = 0; i < 2; i++) {
                         Vector2 gooVelocity = new Vector2(2, 0).RotatedBy(MathHelper.TwoPi / 2f * i + NPC.velocity.ToRotation());
 
-                        CalamityHunt.particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
                             particle.position = NPC.Center + gooVelocity;
                             particle.velocity = gooVelocity;
                             particle.scale = 1.5f - i * 0.8f;
@@ -251,7 +251,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 NPC.scale = 1f + (float)Math.Pow(Time / 10f, 4f) * 0.2f;
                 if (Time > 10) {
                     for (int i = 0; i < 20; i++) {
-                        CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                             particle.position = NPC.Center + Main.rand.NextVector2Circular(10, 10);
                             particle.velocity = Main.rand.NextVector2Circular(10, 10);
                             particle.scale = 1f;
@@ -262,7 +262,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     for (int i = 0; i < 3; i++) {
                         Vector2 gooVelocity = new Vector2(1).RotatedBy(MathHelper.TwoPi / 3f * i).RotatedByRandom(0.6f);
 
-                        CalamityHunt.particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
                             particle.position = NPC.Center + gooVelocity;
                             particle.velocity = gooVelocity;
                             particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
@@ -280,7 +280,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 dust.noGravity = true;
             }
             if (Main.rand.NextBool(6)) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = NPC.Center + Main.rand.NextVector2Circular(50, 50);
                     particle.velocity = Main.rand.NextVector2Circular(1, 1) - Vector2.UnitY * 3f;
                     particle.scale = 1f;

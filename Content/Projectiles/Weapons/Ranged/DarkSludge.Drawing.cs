@@ -58,14 +58,14 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 Main.spriteBatch.Draw(texture, (projectile.Bottom - Main.screenPosition) / 2f, frame, color, projectile.rotation - MathHelper.PiOver2, frame.Size() * new Vector2(0.5f, 0.8f), projectile.scale * squish * 0.5f, 0, 0);
             }
 
-            if (CalamityHunt.particles is null) {
+            if (CalamityHunt.Particles is null) {
                 Main.graphics.GraphicsDevice.SetRenderTarget(null);
                 Main.spriteBatch.End();
 
                 return;
             }
 
-            foreach (DarkSludgeChunk particle in CalamityHunt.particles.particles.Where(n => n is DarkSludgeChunk))
+            foreach (DarkSludgeChunk particle in CalamityHunt.Particles.particles.Where(n => n is DarkSludgeChunk))
             {
                 if (particle.time > 0)
                 {

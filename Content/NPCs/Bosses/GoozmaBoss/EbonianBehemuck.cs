@@ -301,7 +301,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     for (int i = 0; i < Main.rand.Next(14, 20); i++) {
                         Vector2 velocity = Main.rand.NextVector2Circular(8, 1) - Vector2.UnitY * Main.rand.NextFloat(7f, 12f);
                         Vector2 position = NPC.Center + Main.rand.NextVector2Circular(1, 50) + new Vector2(velocity.X * 15f, 32f);
-                        CalamityHunt.particles.Add(Particle.Create<EbonGelChunk>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<EbonGelChunk>(particle => {
                             particle.position = position;
                             particle.velocity = velocity;
                             particle.scale = Main.rand.NextFloat(0.1f, 2.1f);
@@ -335,7 +335,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     for (int i = 0; i < Main.rand.Next(3, 5); i++) {
                         Vector2 velocity = Main.rand.NextVector2Circular(16, 16);
                         Vector2 position = NPC.Center + Main.rand.NextVector2Circular(50, 50) + new Vector2(velocity.X * 15f, 32f);
-                        CalamityHunt.particles.Add(Particle.Create<EbonGelChunk>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<EbonGelChunk>(particle => {
                             particle.position = position;
                             particle.velocity = velocity;
                             particle.scale = Main.rand.NextFloat(0.1f, 2.1f);

@@ -36,7 +36,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
             int target = Projectile.FindTargetWithLineOfSight(1000);
             if (target >= 0) {
                 if (Time % 8 == 4 && Projectile.Distance(Main.npc[target].Center) < 400) {
-                    CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
                         particle.position = Projectile.Center + Projectile.velocity * 5f + Main.rand.NextVector2Circular(16, 16);
                         particle.velocity = Vector2.Zero;
                         particle.scale = Main.rand.NextFloat(0.5f, 1.5f);

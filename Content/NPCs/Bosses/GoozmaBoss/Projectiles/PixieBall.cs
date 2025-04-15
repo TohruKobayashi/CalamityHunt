@@ -109,7 +109,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                             Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(36, 36), DustID.AncientLight, Main.rand.NextVector2Circular(15, 15) + Projectile.velocity, 0, glowColor, 1f + Main.rand.NextFloat(2f)).noGravity = true;
 
                             if (Main.rand.NextBool(3)) {
-                                CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
+                                CalamityHunt.Particles.Add(Particle.Create<PrettySparkle>(particle => {
                                     particle.position = Projectile.Center + Main.rand.NextVector2Circular(54, 54);
                                     particle.velocity = Main.rand.NextVector2Circular(10, 10) + Projectile.velocity * 0.1f;
                                     particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
@@ -138,7 +138,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             if (Cooldown > 0) {
                 Cooldown--;
 
-                CalamityHunt.particles.Add(Particle.Create<FlameParticle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<FlameParticle>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = Main.rand.NextVector2Circular(3, 3) + Projectile.velocity.RotatedByRandom(0.1f) * 0.1f;
                     particle.scale = Main.rand.NextFloat(1f, 3f) + Projectile.scale;
@@ -172,7 +172,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             }
 
             if (Main.rand.NextBool(2)) {
-                CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<PrettySparkle>(particle => {
                     particle.position = Projectile.Center + Main.rand.NextVector2Circular(54, 54);
                     particle.velocity = Main.rand.NextVector2Circular(7, 7);
                     particle.scale = Main.rand.NextFloat(0.2f, 1.2f);
@@ -180,7 +180,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 }));
             }
 
-            CalamityHunt.particles.Add(Particle.Create<FlameParticle>(particle => {
+            CalamityHunt.Particles.Add(Particle.Create<FlameParticle>(particle => {
                 particle.position = Projectile.Center;
                 particle.velocity = Projectile.velocity.RotatedByRandom(0.5f);
                 particle.scale = Projectile.scale + Main.rand.NextFloat(0.7f);

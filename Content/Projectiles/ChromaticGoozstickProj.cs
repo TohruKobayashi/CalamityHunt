@@ -31,7 +31,7 @@ namespace CalamityHunt.Content.Projectiles
             Lighting.AddLight(Projectile.position, rainbowGlow.ToVector3());
 
             if (Main.rand.NextBool(5)) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = -Vector2.UnitY;
                     particle.scale = 1f;

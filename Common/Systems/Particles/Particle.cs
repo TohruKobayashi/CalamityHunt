@@ -1,54 +1,87 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using Terraria;
-using Terraria.ID;
+
+using Terraria.Graphics.Renderers;
 using Terraria.ModLoader;
 
 namespace CalamityHunt.Common.Systems.Particles;
 
-[Autoload(Side = ModSide.Client)]
-public abstract class Particle : ModTexturedType
+public abstract class Particle<T> : ILoadable, IPooledParticle where T : Particle<T>
 {
-    public int Type { get; private set; }
+    private static ParticlePool<T> pool;
 
-    public bool ShouldRemove { get; set; } = false;
+    protected virtual int MaxParticles => 200;
 
-    public Vector2 position;
+    public virtual bool ShouldBeRemovedFromRenderer { get; protected set; }
 
-    public Vector2 velocity;
+    public virtual bool IsRestingInPool { get; protected set; }
 
-    public float rotation;
+    public Vector2 Position { get; set; }
 
-    public float scale = 1f;
+    public Vector2 Velocity { get; set; }
 
-    public Color color = Color.White;
+    public Vector2 Acceleration { get; set; }
 
-    public virtual void OnSpawn() { }
+    public float Rotation { get; set; }
 
-    public virtual void Update() { }
+    public float RotationVelocity { get; set; }
 
-    public virtual void Draw(SpriteBatch spriteBatch) { }
+    public Vector2 Scale { get; set; } = Vector2.One;
 
-    protected override void Register()
+    public Vector2 ScaleVelocity { get; set; }
+
+    public Color Color { get; set; } = Color.White;
+
+    void ILoadable.Load(Mod mod)
     {
-        Type = ParticleLoader.ReserveID();
-
-        AssetDirectory.Textures.Particle ??= new Dictionary<int, Asset<Texture2D>>();
-        AssetDirectory.Textures.Particle.Add(Type, ModContent.Request<Texture2D>(Texture));
-
-        ParticleLoader.Instance ??= new Dictionary<Type, Particle>();
-        ParticleLoader.Instance.Add(GetType(), this);
+        pool = new ParticlePool<T>(MaxParticles, NewInstance);
     }
 
-    public static T Create<T>(Action<T> initializer) where T : Particle
+    void ILoadable.Unload() { }
+
+    void IParticle.Update(ref ParticleRendererSettings settings)
     {
-        if (Main.dedServ) return null;
-        T newParticle = (T)ParticleLoader.Instance[typeof(T)].MemberwiseClone();
-        initializer(newParticle);
-        newParticle.OnSpawn();
-        return newParticle;
+        Update();
+    }
+
+    void IParticle.Draw(ref ParticleRendererSettings settings, SpriteBatch spritebatch)
+    {
+        Draw(spritebatch);
+    }
+
+    protected virtual void Update()
+    {
+        Velocity         += Acceleration;
+        Position         += Velocity;
+        RotationVelocity += RotationVelocity;
+        Scale            += ScaleVelocity;
+    }
+
+    protected virtual void Draw(SpriteBatch sb) { }
+
+    public virtual void RestInPool()
+    {
+        IsRestingInPool = true;
+    }
+
+    public virtual void FetchFromPool()
+    {
+        IsRestingInPool             = false;
+        ShouldBeRemovedFromRenderer = false;
+
+        Position         = Vector2.Zero;
+        Velocity         = Vector2.Zero;
+        Acceleration     = Vector2.Zero;
+        Rotation         = 0f;
+        RotationVelocity = 0f;
+        Scale            = Vector2.One;
+        Color            = Color.White;
+    }
+
+    protected abstract T NewInstance();
+
+    public static T RequestParticle()
+    {
+        return pool.RequestParticle();
     }
 }

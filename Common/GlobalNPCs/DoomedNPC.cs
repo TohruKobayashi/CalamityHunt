@@ -27,7 +27,7 @@ public class DoomedNPC : GlobalNPC
                 sparks.noGravity = true;
             }
 
-            CalamityHunt.particles.Add(Particle.Create<LightningParticle>(particle => {
+            CalamityHunt.Particles.Add(Particle.Create<LightningParticle>(particle => {
                 particle.position = Main.rand.NextVector2FromRectangle(npc.Hitbox);
                 particle.velocity = particle.position.DirectionFrom(npc.Bottom) * Main.rand.NextFloat(2f);
                 particle.rotation = particle.velocity.ToRotation() + Main.rand.NextFloat(-0.5f, 0.5f);

@@ -104,7 +104,7 @@ public class AntiMassBioStrike : ModProjectile
         SoundEngine.PlaySound(deathSound.WithPitchOffset(0.5f).WithVolumeScale(0.2f), Projectile.Center);
 
         for (int i = 0; i < 10; i++) {
-            CalamityHunt.particles.Add(Particle.Create<LightningParticle>(particle => {
+            CalamityHunt.Particles.Add(Particle.Create<LightningParticle>(particle => {
                 particle.position = Projectile.Center + Main.rand.NextVector2Circular(10, 10).RotatedBy(Projectile.rotation) * Projectile.scale;
                 particle.velocity = Main.rand.NextVector2Circular(16, 16);
                 particle.scale = Main.rand.NextFloat(0.5f, 1.5f) * Projectile.scale;

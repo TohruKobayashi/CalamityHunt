@@ -93,7 +93,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
                     offsets.Add(Main.rand.NextVector2Circular(5, 20).RotatedBy(Projectile.AngleTo(endPoint)) * Utils.GetLerpValue(1, points.Count * 0.3f, i, true) * Utils.GetLerpValue(points.Count - 1, points.Count * 0.7f, i, true));
                     velocities.Add(Projectile.DirectionTo(endPoint).RotatedByRandom(1.5f) * Main.rand.NextFloat(1f, 3f));
                 }
-                CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
                     particle.position = endPoint;
                     particle.velocity = Vector2.Zero;
                     particle.scale = Main.rand.NextFloat(1f, 2f);
@@ -120,7 +120,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
                 }
 
                 if (Main.rand.NextBool(10)) {
-                    CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
                         particle.position = Main.rand.Next(points) + Main.rand.NextVector2Circular(10, 10);
                         particle.velocity = Vector2.Zero;
                         particle.scale = Main.rand.NextFloat(0.1f, 0.7f);
@@ -129,7 +129,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
                 }
 
                 if (Time <= 17 && Time % 5 == 1) {
-                    CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
                         particle.position = endPoint + Main.rand.NextVector2Circular(40, 40);
                         particle.velocity = Vector2.Zero;
                         particle.scale = Main.rand.NextFloat(1.5f);

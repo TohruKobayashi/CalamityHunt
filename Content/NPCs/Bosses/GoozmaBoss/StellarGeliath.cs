@@ -112,7 +112,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
         {
             if (NPC.scale > 0.1f) {
                 for (int i = 0; i < 2; i++) {
-                    CosmosMetaball.particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
+                    CosmosMetaball.Particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
                         particle.position = NPC.Center + Main.rand.NextVector2Circular(90, 60) * NPC.scale + NPC.velocity * (i / 6f) * 0.3f;
                         particle.velocity = Main.rand.NextVector2Circular(2, 2) + NPC.velocity * (i / 6f) * 0.5f;
                         particle.scale = Main.rand.NextFloat(2f, 6f) * (0.5f + NPC.scale * 0.5f);
@@ -122,7 +122,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     }));
                 }
                 if (Main.rand.NextBool(15)) {
-                    CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<PrettySparkle>(particle => {
                         particle.position = NPC.Center + Main.rand.NextVector2Circular(90, 60) * NPC.scale;
                         particle.velocity = Main.rand.NextVector2Circular(3, 3);
                         particle.scale = Main.rand.NextFloat(0.2f, 1.2f) * NPC.scale;
@@ -131,7 +131,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 }
                 if (Main.rand.NextBool(4)) {
                     Vector2 discOff = (Main.rand.NextVector2CircularEdge(150, 50) + Main.rand.NextVector2Circular(18, 18)).RotatedBy(discRot) * discScale;
-                    CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<PrettySparkle>(particle => {
                         particle.position = discPos + discOff;
                         particle.velocity = discOff.RotatedBy(MathHelper.PiOver4) * 0.01f;
                         particle.scale = Main.rand.NextFloat(0.1f, 0.6f) * NPC.scale;
@@ -538,7 +538,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     for (int i = 0; i < Main.rand.Next(2, 5); i++) {
                         Vector2 velocity = Main.rand.NextVector2Circular(8, 1) - Vector2.UnitY * Main.rand.NextFloat(10f, 20f);
                         Vector2 position = NPC.Center + Main.rand.NextVector2Circular(1, 50) + new Vector2(velocity.X * 12f, 32f);
-                        CalamityHunt.particles.Add(Particle.Create<StellarGelChunk>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<StellarGelChunk>(particle => {
                             particle.position = position;
                             particle.velocity = velocity;
                             particle.scale = Main.rand.NextFloat(0.1f, 2.1f);
@@ -663,7 +663,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     for (int i = 0; i < Main.rand.Next(1, 5); i++) {
                         Vector2 velocity = Main.rand.NextVector2Circular(8, 1) - Vector2.UnitY * Main.rand.NextFloat(10f, 20f);
                         Vector2 position = NPC.Center + Main.rand.NextVector2Circular(1, 50) * NPC.scale + new Vector2(velocity.X * 12f, 32f);
-                        CalamityHunt.particles.Add(Particle.Create<StellarGelChunk>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<StellarGelChunk>(particle => {
                             particle.position = position;
                             particle.velocity = velocity;
                             particle.scale = Main.rand.NextFloat(0.1f, 2.1f);

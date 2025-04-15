@@ -49,7 +49,7 @@ namespace CalamityHunt.Content.Buffs
                 Color glowColor = new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).Value; //goozma's main color
 
                 if (Main.rand.NextBool(5)) {
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                         particle.position = Main.rand.NextVector2FromRectangle(box);
                         particle.velocity = -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(3f);
                         particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
@@ -57,7 +57,7 @@ namespace CalamityHunt.Content.Buffs
                     }));
                 }
 
-                CalamityHunt.particles.Add(Particle.Create<FusionFlameParticle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<FusionFlameParticle>(particle => {
                     particle.position = Main.rand.NextVector2FromRectangle(box);
                     particle.velocity = -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(2f);
                     particle.scale = Main.rand.NextFloat(1f, 3f);
@@ -95,7 +95,7 @@ namespace CalamityHunt.Content.Buffs
                 Color glowColor = new GradientColor(SlimeUtils.GoozOilColors, 0.2f, 0.2f).Value with { A = 0 }; //oil, bc not from goozma
 
                 if (Main.rand.NextBool(3)) {
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
                         particle.position = Main.rand.NextVector2FromRectangle(npc.Hitbox);
                         particle.velocity = -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(3f);
                         particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
@@ -103,7 +103,7 @@ namespace CalamityHunt.Content.Buffs
                     }));
                 }
 
-                CalamityHunt.particles.Add(Particle.Create<FusionFlameParticle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<FusionFlameParticle>(particle => {
                     particle.position = Main.rand.NextVector2FromRectangle(npc.Hitbox);
                     particle.velocity = -Vector2.UnitY.RotatedByRandom(0.5f) * Main.rand.NextFloat(1f, 5f);
                     particle.rotation = particle.velocity.ToRotation();

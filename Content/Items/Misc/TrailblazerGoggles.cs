@@ -45,9 +45,9 @@ public class TrailblazerGoggles : ModItem
             Main.NewText("");
             Main.NewText("");
             Main.NewText("");
-            Main.NewText("Current particles: " + CalamityHunt.particles.particles.Count);
-            Main.NewText("Current bg particles: " + CalamityHunt.particlesBehindEntities.particles.Count);
-            Main.NewText("Current metaballs: " + CosmosMetaball.particles.particles.Count);
+            Main.NewText("Current particles: " + CalamityHunt.Particles.particles.Count);
+            Main.NewText("Current bg particles: " + CalamityHunt.ParticlesBehindEntities.particles.Count);
+            Main.NewText("Current metaballs: " + CosmosMetaball.Particles.particles.Count);
             int dustc = 0;
             foreach (Dust d in Main.dust) {
                 if (d.active)

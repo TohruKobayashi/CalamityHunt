@@ -63,7 +63,7 @@ public class GoozmaGelBit : Particle
         }
         if (Main.netMode != NetmodeID.Server) {
             if (Main.rand.NextBool(50)) {
-                CalamityHunt.particlesBehindEntities.Add(Create<ChromaticEnergyDust>(particle => {
+                CalamityHunt.ParticlesBehindEntities.Add(Create<ChromaticEnergyDust>(particle => {
                     particle.position = position + Main.rand.NextVector2Circular(30, 30);
                     particle.velocity = Main.rand.NextVector2Circular(2, 2) - Vector2.UnitY * 2f;
                     particle.scale = Main.rand.NextFloat(0.1f, 1.6f);
@@ -73,7 +73,7 @@ public class GoozmaGelBit : Particle
             }
 
             if (Main.rand.NextBool(120)) {
-                CalamityHunt.particlesBehindEntities.Add(Create<ChromaticGooBurst>(particle => {
+                CalamityHunt.ParticlesBehindEntities.Add(Create<ChromaticGooBurst>(particle => {
                     particle.position = position + Main.rand.NextVector2Circular(30, 30);
                     particle.velocity = -velocity.SafeNormalize(Vector2.Zero).RotatedByRandom(0.2f) - Vector2.UnitY * Main.rand.NextFloat();
                     particle.scale = Main.rand.NextFloat(0.1f, 1.6f);

@@ -71,7 +71,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             }
 
             if (Main.rand.NextBool(10)) {
-                CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<PrettySparkle>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = Main.rand.NextVector2Circular(4, 4);
                     particle.scale = Main.rand.NextFloat(0.15f, 1.15f) * Projectile.scale;
@@ -79,7 +79,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 }));
             }
 
-            CosmosMetaball.particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
+            CosmosMetaball.Particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
                 particle.position = Projectile.Center;
                 particle.velocity = Main.rand.NextVector2Circular(4, 4);
                 particle.scale = Main.rand.NextFloat(1f, 2f) * Projectile.scale;

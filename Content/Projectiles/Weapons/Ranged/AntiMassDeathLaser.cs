@@ -56,7 +56,7 @@ public class AntiMassDeathLaser : ModProjectile
             sparks.noGravity = true;
 
             if (Time % 9 == 5) {
-                CalamityHunt.particles.Add(Particle.Create<StraightLightningParticle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<StraightLightningParticle>(particle => {
                     particle.position = Projectile.Center - Projectile.velocity * 0.5f;
                     particle.velocity = Projectile.velocity * 0.15f;
                     particle.scale = Main.rand.NextFloat(0.5f, 1f) * Projectile.scale;
@@ -69,7 +69,7 @@ public class AntiMassDeathLaser : ModProjectile
             }
 
             if (Time % 6 == 3) {
-                CalamityHunt.particles.Add(Particle.Create<StraightLightningParticle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<StraightLightningParticle>(particle => {
                     particle.position = Projectile.Center - Projectile.velocity * 0.5f;
                     particle.velocity = Projectile.velocity * 0.1f;
                     particle.scale = Main.rand.NextFloat(1f, 2f) * Projectile.scale;
@@ -82,7 +82,7 @@ public class AntiMassDeathLaser : ModProjectile
             }
 
             if (Main.rand.NextBool(18)) {
-                CalamityHunt.particles.Add(Particle.Create<LightningParticle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<LightningParticle>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = Projectile.velocity.RotatedByRandom(1f) * Main.rand.NextFloat(0.2f);
                     particle.scale = Main.rand.NextFloat(0.1f, 0.5f) * Projectile.scale;
@@ -117,7 +117,7 @@ public class AntiMassDeathLaser : ModProjectile
 
         if (Projectile.timeLeft < 240 || DrillTime > 0) {
             if (Main.rand.NextBool(3)) {
-                CalamityHunt.particles.Add(Particle.Create<LightningParticle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<LightningParticle>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = Main.rand.NextVector2Circular(20, 20);
                     particle.scale = Main.rand.NextFloat(1f, 2f);
@@ -158,7 +158,7 @@ public class AntiMassDeathLaser : ModProjectile
 
         if (laser) {
             for (int i = 0; i < 20; i++) {
-                CalamityHunt.particles.Add(Particle.Create<LightningParticle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<LightningParticle>(particle => {
                     particle.position = Projectile.Center;
                     particle.velocity = Main.rand.NextVector2Circular(40, 40);
                     particle.scale = Main.rand.NextFloat(1f, 2f);

@@ -50,7 +50,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 }
 
                 if (Main.rand.NextBool(50)) {
-                    CalamityHunt.particles.Add(Particle.Create<SmokeSplatterParticle>(particle => {
+                    CalamityHunt.Particles.Add(Particle.Create<SmokeSplatterParticle>(particle => {
                         particle.position = Projectile.Center + Projectile.velocity + Main.rand.NextVector2Circular(20, 20);
                         particle.velocity = Projectile.velocity * 0.5f;
                         particle.scale = Main.rand.NextFloat(0.5f, 1f);
@@ -83,14 +83,14 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                     Projectile.timeLeft = 240;
                     MiscTime++;
                     if (MiscTime == 60) {
-                        CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
                             particle.position = Projectile.Center;
                             particle.velocity = MathHelper.PiOver4.ToRotationVector2();
                             particle.scale = 3f;
                             particle.color = new Color(50, 180, 255, 0);
                             particle.anchor = () => Projectile.velocity * 0.2f;
                         }));
-                        CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
+                        CalamityHunt.Particles.Add(Particle.Create<CrossSparkle>(particle => {
                             particle.position = Projectile.Center;
                             particle.velocity = Vector2.Zero;
                             particle.scale = 2f;
@@ -173,7 +173,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.timeLeft = stick ? 180 : 30;
 
             for (int i = 0; i < 3; i++) {
-                CalamityHunt.particles.Add(Particle.Create<SmokeSplatterParticle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<SmokeSplatterParticle>(particle => {
                     particle.position = Projectile.Center + Projectile.velocity + Main.rand.NextVector2Circular(20, 20);
                     particle.velocity = Vector2.Zero;
                     particle.scale = Main.rand.NextFloat(2f, 4f);

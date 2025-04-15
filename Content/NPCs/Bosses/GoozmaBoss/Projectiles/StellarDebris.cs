@@ -98,7 +98,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 Projectile.Kill();
             }
 
-            CosmosMetaball.particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
+            CosmosMetaball.Particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
                 particle.position = Projectile.Center + Projectile.velocity * 2f + Main.rand.NextVector2Circular(24, 24);
                 particle.velocity = Main.rand.NextVector2Circular(5, 5) + Projectile.velocity * 0.2f;
                 particle.scale = Main.rand.NextFloat(1f, 2f) * Projectile.scale;
@@ -108,7 +108,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             }));
 
             if (Main.rand.NextBool(50)) {
-                CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
+                CalamityHunt.Particles.Add(Particle.Create<PrettySparkle>(particle => {
                     particle.position = Projectile.Center + Main.rand.NextVector2Circular(24, 24) * Projectile.scale + Projectile.velocity;
                     particle.velocity = Main.rand.NextVector2Circular(3, 3);
                     particle.scale = Main.rand.NextFloat(0.2f, 1.2f) * Projectile.scale;
