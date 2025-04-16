@@ -27,7 +27,8 @@ public abstract class Particle<T> : ILoadable, IGoozParticle where T : Particle<
 
     public virtual bool RequiresImmediateMode => false;
 
-    public Asset<Texture2D> TextureAsset => ModContent.Request<Texture2D>(Texture, AssetRequestMode.ImmediateLoad);
+    // ReSharper disable once StaticMemberInGenericType
+    protected static Asset<Texture2D> TextureAsset { get; private set; }
 
     public Vector2 Position;
     public Vector2 Velocity;
@@ -43,7 +44,7 @@ public abstract class Particle<T> : ILoadable, IGoozParticle where T : Particle<
         pool = new ParticlePool<T>(MaxParticles, NewInstance);
 
         // Pre-load it.
-        ModContent.Request<Texture2D>(Texture);
+        TextureAsset = ModContent.Request<Texture2D>(Texture);
     }
 
     void ILoadable.Unload() { }
