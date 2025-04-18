@@ -6,4 +6,8 @@
     <AssemblyName>CalamityHunt</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ClCompile Include="Assets\Effects\IckyHand.hlsl" />
+  </ItemGroup>
+
 </Project>

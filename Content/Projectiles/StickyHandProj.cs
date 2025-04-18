@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+
+using CalamityHunt.Common.Graphics.RenderTargets;
 using CalamityHunt.Common.Players;
 using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
@@ -10,6 +12,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -17,6 +20,8 @@ namespace CalamityHunt.Content.Projectiles
 {
     public class StickyHandProj : ModProjectile
     {
+        private static IckyHandRopeContent ickyHandRopeContent;
+        
         public override void SetStaticDefaults()
         {
             //ProjectileID.Sets.SingleGrappleHook[Type] = true;
@@ -290,54 +295,49 @@ namespace CalamityHunt.Content.Projectiles
         }
 
         public static Asset<Texture2D> chainTexture;
+        public static MiscShaderData ickyHandShader;
+        
+        public Rope rope;
 
         public override void Load()
         {
             chainTexture = AssetUtilities.RequestImmediate<Texture2D>(Texture + "Chain");
+
+            if (!Main.dedServ) {
+                Main.ContentThatNeedsRenderTargets.Add(ickyHandRopeContent = new IckyHandRopeContent());
+                
+                On_Main.DrawProjectiles += DrawStickyHandRopes;
+                
+                var ickyHandEffect = ModContent.Request<Effect>("CalamityHunt/Assets/Effects/IckyHand");
+                ickyHandShader = new MiscShaderData(ickyHandEffect, "IckyHand");
+            }
         }
 
-        public Rope rope;
+        private static void DrawStickyHandRopes(On_Main.orig_DrawProjectiles orig, Main self)
+        {
+            if (ickyHandRopeContent != null) {
+                ickyHandRopeContent.width = Main.screenWidth;
+                ickyHandRopeContent.height = Main.screenHeight;
+                ickyHandRopeContent.Request();
+                if (ickyHandRopeContent.IsReady) {
+                    Texture2D screen = ickyHandRopeContent.GetTarget();
+                    
+                    Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.UIScaleMatrix);
+                    ickyHandShader.Shader.Parameters["uSize"]?.SetValue(screen.Size());
+                    ickyHandShader.Apply();
+                    
+                    Main.spriteBatch.Draw(screen, Vector2.Zero, Color.White);
+                    
+                    Main.spriteBatch.End();
+                    Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+                }
+            }
+
+            orig(self);
+        }
 
         public override bool PreDrawExtras() => false;
 
-        public override bool PreDraw(ref Color lightColor)
-        {
-            Player player = Main.player[Projectile.owner];
-
-            if (rope != null) {
-                List<Vector2> points = rope.GetPoints();
-                points.Add(Projectile.Center);
-                BezierCurve curve = new BezierCurve(points);
-                int pointCount = 50;
-                points = curve.GetPoints(pointCount);
-                points.Add(Projectile.Center);
-
-                Texture2D texture = TextureAssets.Projectile[Type].Value;
-                Rectangle frame = texture.Frame(1, 2, 0, Projectile.frame);
-                SpriteEffects effects = Projectile.direction < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-
-                Rectangle chainFrame = chainTexture.Value.Frame();
-
-                Color glowColor = new GradientColor(SlimeUtils.GoozOilColors, 0.5f, 0.5f).ValueAt(Main.GlobalTimeWrappedHourly * 120);
-
-                for (int i = 0; i < points.Count - 1; i++) {
-                    float rotation = points[i].AngleTo(points[i + 1]);
-                    float thinning = 1f - MathF.Sin((float)i / points.Count * MathHelper.Pi) * 0.6f * Utils.GetLerpValue(0, 400, Projectile.Distance(player.MountedCenter) * 0.9f, true);
-                    Vector2 stretch = new Vector2(Projectile.scale * thinning, points[i].Distance(points[i + 1]) / (chainTexture.Height() - 4));
-                    Color chainGlowColor = new GradientColor(SlimeUtils.GoozOilColors, 0.5f, 0.5f).ValueAt((1f - (float)(i + 3) / points.Count) * 70 + Main.GlobalTimeWrappedHourly * 120);
-
-                    DrawData drawData = new DrawData(chainTexture.Value, points[i] - Main.screenPosition, chainFrame, chainGlowColor, rotation + MathHelper.PiOver2, chainFrame.Size() * new Vector2(0.5f, 1f), stretch, 0, 0);
-                    drawData.shader = player.cGrapple;
-                    Main.EntitySpriteDraw(drawData);
-                }
-
-                DrawData drawData2 = new DrawData(texture, Projectile.Center - Main.screenPosition, frame, glowColor, points[pointCount - 1].AngleTo(Projectile.Center) + MathHelper.PiOver2, frame.Size() * 0.5f, Projectile.scale, effects, 0);
-                drawData2.shader = player.cGrapple;
-
-                Main.EntitySpriteDraw(drawData2);
-            }
-
-            return false;
-        }
+        public override bool PreDraw(ref Color lightColor) => false;
     }
 }
