@@ -89,18 +89,21 @@ public class TileEdgeHighlight : ModSystem
         int Y1 = (int)(Main.screenPosition.Y / 16) - 2;
         int Y2 = (int)((Main.screenPosition.Y + Main.screenHeight) / 16) + 2;
 
+        int avgColor = (Main.tileColor.R + Main.tileColor.G + Main.tileColor.B) / 3;
+        float brightness = (float)(avgColor * 0.38) / 255f;
+ 
         for (int i = X1; i < X2; i++)
         {
             int rectHeight = 0;
             for (int j = Y1; j < Y2; j++)
             {
-                if (!WorldGen.InWorld(i, j))
+                if (!WorldGen.InWorld(i, j)) {
                     continue;
+                }
 
-                int avgColor = (Main.tileColor.R + Main.tileColor.G + Main.tileColor.B) / 3;
-                float brightness = (float)(avgColor * 0.38) / 255f;
-                if (Lighting.Brightness(i, j) < brightness && WorldGen.SolidTile(i, j) && Main.tileSolid[Main.tile[i, j].TileType] && j < Y2 - 1)
+                if (Main.tileSolid[Main.tile[i, j].TileType] && j < Y2 - 1 && Lighting.Brightness(i, j) < brightness && WorldGen.SolidTile(i, j)) {
                     rectHeight++;
+                }
                 else
                 {
                     Main.tileBatch.Draw(TextureAssets.BlackTile.Value, new Vector4(i * 16 - Main.screenPosition.X, (j - rectHeight) * 16 - Main.screenPosition.Y, 16, rectHeight * 16), new VertexColors(Color.White));
