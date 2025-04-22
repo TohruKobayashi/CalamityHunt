@@ -92,6 +92,8 @@ public class TileEdgeHighlight : ModSystem
         int avgColor = (Main.tileColor.R + Main.tileColor.G + Main.tileColor.B) / 3;
         float brightness = (float)(avgColor * 0.38) / 255f;
  
+        // TODO: If it's still a little laggy, we can try swapping the X and Y
+        //       loops for better cache locality.
         for (int i = X1; i < X2; i++)
         {
             int rectHeight = 0;
