@@ -11,14 +11,13 @@ namespace CalamityHunt.Common.Systems.Particles;
 
 public abstract class ParticleRenderer
 {
-    protected List<IGoozParticle> particles = [];
-    protected ParticleRendererSettings settings;
-
     public bool ShouldRestart { get; set; }
 
     public Effect Effect { get; set; }
-    
-    public IEnumerable<IGoozParticle> Particles => particles;
+
+    public abstract IEnumerable<IGoozParticle> Particles { get; }
+
+    protected ParticleRendererSettings Settings;
 
     public static ParticleRenderer MakeDefaultRenderer()
     {
@@ -30,45 +29,33 @@ public abstract class ParticleRenderer
         var particle = Particle<T>.RequestParticle();
         initializer(particle);
         particle.OnSpawn();
-        
+
         Add(particle);
         return particle;
     }
 
-    public virtual void Add(IGoozParticle particle)
-    {
-        particles.Add(particle);
-    }
+    protected abstract void Add(IGoozParticle particle);
 
-    public virtual void Clear()
-    {
-        particles.Clear();
-    }
+    protected abstract void Clear();
 
-    public virtual void Update()
-    {
-        for (var i = 0; i < particles.Count; i++) {
-            var particle = particles[i];
-
-            if (particle.ShouldBeRemovedFromRenderer) {
-                particle.RestInPool();
-                particles.RemoveAt(i);
-                i--;
-            }
-            else {
-                particle.Update(ref settings);
-            }
-        }
-    }
+    public abstract void Update();
 
     public abstract void Draw(SpriteBatch sb);
 }
 
 public sealed class NoOpParticleRenderer : ParticleRenderer
 {
-    public override void Add(IGoozParticle particle) { }
+    public override IEnumerable<IGoozParticle> Particles
+    {
+        get
+        {
+            yield break;
+        }
+    }
 
-    public override void Clear() { }
+    protected override void Add(IGoozParticle particle) { }
+
+    protected override void Clear() { }
 
     public override void Update() { }
 
@@ -77,28 +64,75 @@ public sealed class NoOpParticleRenderer : ParticleRenderer
 
 public sealed class DefaultParticleRenderer : ParticleRenderer
 {
+    private readonly List<IGoozParticle> deferredParticles = [];
+    private readonly List<IGoozParticle> immediateParticles = [];
+
+    public override IEnumerable<IGoozParticle> Particles =>
+        deferredParticles.Concat(immediateParticles);
+
+    protected override void Add(IGoozParticle particle)
+    {
+        if (particle.RequiresImmediateMode) {
+            immediateParticles.Add(particle);
+        }
+        else {
+            deferredParticles.Add(particle);
+        }
+    }
+
+    protected override void Clear()
+    {
+        deferredParticles.Clear();
+        immediateParticles.Clear();
+    }
+
+    public override void Update()
+    {
+        for (var i = 0; i < deferredParticles.Count; i++) {
+            var particle = deferredParticles[i];
+
+            if (particle.ShouldBeRemovedFromRenderer) {
+                particle.RestInPool();
+                deferredParticles.RemoveAt(i);
+                i--;
+            }
+            else {
+                particle.Update(ref Settings);
+            }
+        }
+
+        for (var i = 0; i < immediateParticles.Count; i++) {
+            var particle = immediateParticles[i];
+
+            if (particle.ShouldBeRemovedFromRenderer) {
+                particle.RestInPool();
+                immediateParticles.RemoveAt(i);
+                i--;
+            }
+            else {
+                particle.Update(ref Settings);
+            }
+        }
+    }
+
     public override void Draw(SpriteBatch sb)
     {
         if (ShouldRestart) {
             sb.End();
         }
 
-        var requiresImmediateMode = Effect is not null || particles.Any(x => x.RequiresImmediateMode);
-        sb.Begin(
-            requiresImmediateMode ? SpriteSortMode.Immediate : SpriteSortMode.Deferred,
-            BlendState.AlphaBlend,
-            Main.DefaultSamplerState,
-            DepthStencilState.None,
-            Main.Rasterizer,
-            Effect,
-            Main.Transform
-        );
-
-        foreach (var particle in particles) {
-            particle.Draw(ref settings, sb);
+        if (Effect is not null) {
+            DrawParticles(Particles, immediate: true);
         }
+        else {
+            if (deferredParticles.Count > 0) {
+                DrawParticles(deferredParticles, immediate: true);
+            }
 
-        sb.End();
+            if (immediateParticles.Count > 0) {
+                DrawParticles(immediateParticles, immediate: true);
+            }
+        }
 
         if (ShouldRestart) {
             sb.Begin(
@@ -110,6 +144,27 @@ public sealed class DefaultParticleRenderer : ParticleRenderer
                 null,
                 Main.Transform
             );
+        }
+
+        return;
+
+        void DrawParticles(IEnumerable<IGoozParticle> theParticles, bool immediate)
+        {
+            sb.Begin(
+                immediate ? SpriteSortMode.Immediate : SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                Main.DefaultSamplerState,
+                DepthStencilState.None,
+                Main.Rasterizer,
+                Effect,
+                Main.Transform
+            );
+
+            foreach (var particle in theParticles) {
+                particle.Draw(ref Settings, sb);
+            }
+
+            sb.End();
         }
     }
 }
