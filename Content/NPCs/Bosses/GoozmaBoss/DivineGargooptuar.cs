@@ -118,6 +118,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             }
 
             NPC.damage = 0;
+            NPC.HitSound = SoundID.NPCHit1;
 
             if (Time < 0) {
                 NPC.velocity *= 0.9f;
@@ -482,7 +483,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                     : Vector2.SmoothStep(new Vector2(1.5f, 0.8f), Vector2.One, (float)Math.Sqrt(Utils.GetLerpValue(50, 60, Time, true)));
             }
             else if (Time < attackLength - 100) {
-                squishFactor = Vector2.Lerp(squishFactor, new Vector2(1f + (float)Math.Cos(Time * 0.05f) * 0.2f, 1f + (float)Math.Cos(Time * 0.05f + MathHelper.Pi) * 0.2f), 0.3f);
+                NPC.HitSound = SoundID.Item27;
 
                 Vector2 targetPos = Target.Center;
                 if (Main.projectile.Any(n => n.active && n.type == ModContent.ProjectileType<PixieBall>()) && Target.Center.Distance(NPC.Center) > 1000) {
@@ -501,8 +502,12 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 NPC.velocity *= 0.9f;
             }
 
+            if (Time < attackLength && Time >= 60) {
+                squishFactor = Vector2.Lerp(squishFactor, new Vector2(1f + (float)Math.Cos(Time * 0.05f) * 0.2f, 1f + (float)Math.Cos(Time * 0.05f + MathHelper.Pi) * 0.2f), 0.3f);
+            }
+
             if (Time > 60) {
-                if (NPC.localAI[1] % 2 == 1) {
+                if (NPC.localAI[1] % 2 == 1 && shieldBreakPercent < 1) {
                     SoundEngine.PlaySound(SoundID.DeerclopsIceAttack.WithPitchOffset(0.5f).WithVolumeScale(1.5f), NPC.Center);
 
                     shieldBreakPercent += 0.5f;
@@ -696,6 +701,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                     if (Attack == (int)AttackList.BlowUp || Time > 20) {
                         float rainbowShine = (0.9f + (float)Math.Sin(NPC.localAI[0] * (0.1f + NPC.localAI[1] * 0.15f)) * 0.1f) * shineStrength;
+                        float shieldOpacity = Utils.GetLerpValue(20, 80, Time, true);
 
                         gelEffect.Parameters["uImageSize"].SetValue(dangerTexture.Size());
                         gelEffect.Parameters["uSourceRect"].SetValue(new Vector4(0, 0, dangerTexture.Width, dangerTexture.Height));
@@ -714,9 +720,9 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                             spriteBatch.Draw(dangerShineTexture, NPC.Center - screenPos, dangerShineTexture.Frame(), rainbowColor * rainbowShine, NPC.rotation, dangerTexture.Size() * 0.5f, NPC.scale * squishFactor, 0, 0);
                             spriteBatch.Draw(dangerTexture, NPC.Center - screenPos, dangerShineTexture.Frame(), rainbowColor * rainbowShine * 0.1f, NPC.rotation, dangerTexture.Size() * 0.5f, NPC.scale * squishFactor, 0, 0);
 
-                            spriteBatch.Draw(dangerShieldTexture, NPC.Center - screenPos, dangerShieldTexture.Frame(), new Color(150, 150, 150, 150), NPC.rotation, dangerShieldTexture.Size() * 0.5f, NPC.scale * 1f * (Vector2.One * 0.5f + squishFactor * 0.5f), 0, 0);
-                            spriteBatch.Draw(dangerShieldTexture, NPC.Center - screenPos, dangerShieldTexture.Frame(), rainbowColor * (0.7f + rainbowShine * 0.3f), NPC.rotation, dangerShieldTexture.Size() * 0.5f, NPC.scale * 1.01f * (Vector2.One * 0.5f + squishFactor * 0.5f), 0, 0);
-                            spriteBatch.Draw(dangerShieldTexture, NPC.Center - screenPos, dangerShieldTexture.Frame(), rainbowColor * rainbowShine * 0.8f, NPC.rotation, dangerShieldTexture.Size() * 0.5f, NPC.scale * (1.1f + shineStrength * 0.3f) * (Vector2.One * 0.5f + squishFactor * 0.5f), 0, 0);
+                            spriteBatch.Draw(dangerShieldTexture, NPC.Center - screenPos, dangerShieldTexture.Frame(), new Color(150, 150, 150, 150) * shieldOpacity, NPC.rotation, dangerShieldTexture.Size() * 0.5f, NPC.scale * 1f * (Vector2.One * 0.5f + squishFactor * 0.5f), 0, 0);
+                            spriteBatch.Draw(dangerShieldTexture, NPC.Center - screenPos, dangerShieldTexture.Frame(), rainbowColor * (0.7f + rainbowShine * 0.3f) * shieldOpacity, NPC.rotation, dangerShieldTexture.Size() * 0.5f, NPC.scale * 1.01f * (Vector2.One * 0.5f + squishFactor * 0.5f), 0, 0);
+                            spriteBatch.Draw(dangerShieldTexture, NPC.Center - screenPos, dangerShieldTexture.Frame(), rainbowColor * rainbowShine * 0.8f * shieldOpacity, NPC.rotation, dangerShieldTexture.Size() * 0.5f, NPC.scale * (1.1f + shineStrength * 0.3f) * (Vector2.One * 0.5f + squishFactor * 0.5f), 0, 0);
 
                             if (shieldBreakPercent > 0.13f) {
                                 int crackFrame = 0;
@@ -729,7 +735,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                                 }
 
                                 Rectangle crackSourceFrame = dangerShieldCrackTexture.Frame(1, 3, 0, crackFrame);
-                                Color crackColor = rainbowColor * 0.2f;
+                                Color crackColor = rainbowColor * 0.2f * shieldOpacity;
                                 crackColor.A = 233;
                                 spriteBatch.Draw(dangerShieldCrackTexture, NPC.Center - screenPos, crackSourceFrame, crackColor, NPC.rotation, crackSourceFrame.Size() * 0.5f, NPC.scale * 1f * (Vector2.One * 0.5f + squishFactor * 0.5f), 0, 0);
                                 spriteBatch.Draw(dangerShieldCrackTexture, NPC.Center - screenPos, crackSourceFrame, crackColor * 0.2f, NPC.rotation, crackSourceFrame.Size() * 0.5f, NPC.scale * (1.1f + shineStrength * 0.3f) * (Vector2.One * 0.5f + squishFactor * 0.5f), 0, 0);
