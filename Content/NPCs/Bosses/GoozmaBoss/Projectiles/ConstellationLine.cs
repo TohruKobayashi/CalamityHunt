@@ -49,12 +49,12 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             Projectile.velocity = Projectile.rotation.ToRotationVector2();
 
             if (Time > 95 && Time < 180 && Main.rand.NextBool(5)) {
-                CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
-                    particle.position = Vector2.Lerp(Main.projectile[(int)Start].Center, Main.projectile[(int)End].Center, Main.rand.NextFloat());
-                    particle.velocity = Main.rand.NextVector2Circular(1, 1);
-                    particle.scale = Main.rand.NextFloat(0.2f, 1.2f);
-                    particle.color = new Color(30, 15, 10, 0);
-                }));
+                CalamityHunt.Particles.SpawnParticle<PrettySparkle>(particle => {
+                    particle.Position = Vector2.Lerp(Main.projectile[(int)Start].Center, Main.projectile[(int)End].Center, Main.rand.NextFloat());
+                    particle.Velocity = Main.rand.NextVector2Circular(1, 1);
+                    particle.Scale = new Vector2(Main.rand.NextFloat(0.2f, 1.2f));
+                    particle.Color = new Color(30, 15, 10, 0);
+                });
             }
             if (Time > 180) {
                 Projectile.Kill();

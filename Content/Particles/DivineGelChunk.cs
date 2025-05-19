@@ -5,14 +5,16 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class DivineGelChunk : BaseGelChunk
+public sealed class DivineGelChunk : BaseGelChunk<DivineGelChunk>
 {
-    public override void Draw(SpriteBatch spriteBatch)
+    public override bool RequiresImmediateMode => true;
+    
+    protected override void Draw(SpriteBatch spriteBatch)
     {
-        Texture2D texture = AssetDirectory.Textures.Particle[Type].Value;
+        Texture2D texture = TextureAsset.Value;
         Rectangle frame = texture.Frame(4, 2, style, 0);
         Rectangle shineFrame = texture.Frame(4, 2, style, 1);
-        Vector2 squish = new Vector2(1f - velocity.Length() * 0.01f, 1f + velocity.Length() * 0.01f);
+        Vector2 squish = new Vector2(1f - Velocity.Length() * 0.01f, 1f + Velocity.Length() * 0.01f);
         float grow = (float)Math.Sqrt(Utils.GetLerpValue(-20, 40, time, true));
         if (sticking) {
             grow = 1f;
@@ -31,11 +33,16 @@ public class DivineGelChunk : BaseGelChunk
         gelEffect.Parameters["uFrequency"].SetValue(1.1f);
         gelEffect.CurrentTechnique.Passes[0].Apply();
 
-        spriteBatch.Draw(texture, position - Main.screenPosition, frame, color, rotation, frame.Size() * new Vector2(0.5f, 0.84f), scale * grow * squish, 0, 0);
+        spriteBatch.Draw(texture, Position - Main.screenPosition, frame, Color, Rotation, frame.Size() * new Vector2(0.5f, 0.84f), Scale * grow * squish, 0, 0);
 
         Main.pixelShader.CurrentTechnique.Passes[0].Apply();
 
-        spriteBatch.Draw(texture, position - Main.screenPosition, shineFrame, new Color(255, 255, 255, 0), rotation, frame.Size() * new Vector2(0.5f, 0.84f), scale * grow * squish, 0, 0);
+        spriteBatch.Draw(texture, Position - Main.screenPosition, shineFrame, new Color(255, 255, 255, 0), Rotation, frame.Size() * new Vector2(0.5f, 0.84f), Scale * grow * squish, 0, 0);
 
+    }
+    
+    protected override DivineGelChunk NewInstance()
+    {
+        return new DivineGelChunk();
     }
 }

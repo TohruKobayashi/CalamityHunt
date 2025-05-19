@@ -39,12 +39,12 @@ namespace CalamityHunt.Content.Projectiles
                 SoundEngine.PlaySound(SoundID.DD2_BetsysWrathImpact, Projectile.Center);
                 for (int i = 0; i < 5; i++) {
                     Vector2 gooVelocity = new Vector2(1, 0).RotatedBy(MathHelper.TwoPi / 5f * i).RotatedByRandom(0.2f);
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
-                        particle.position = Projectile.Center + gooVelocity * 2;
-                        particle.velocity = gooVelocity;
-                        particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
-                        particle.color = gooColor;
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<ChromaticGooBurst>(particle => {
+                        particle.Position = Projectile.Center + gooVelocity * 2;
+                        particle.Velocity = gooVelocity;
+                        particle.Scale = new Vector2(Main.rand.NextFloat(0.5f, 1.5f));
+                        particle.Color = gooColor;
+                    });
                 }
             }
             else if (Time == 1 && Stressed > 0) {
@@ -53,12 +53,12 @@ namespace CalamityHunt.Content.Projectiles
                 SoundEngine.PlaySound(SoundID.DD2_BetsysWrathImpact, Projectile.Center);
                 for (int i = 0; i < 5; i++) {
                     Vector2 gooVelocity = new Vector2(1, 0).RotatedBy(MathHelper.TwoPi / 5f * i).RotatedByRandom(0.2f);
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticGooBurst>(particle => {
-                        particle.position = Projectile.Center + gooVelocity * 2;
-                        particle.velocity = gooVelocity;
-                        particle.scale = Main.rand.NextFloat(1f, 1.5f);
-                        particle.color = gooColor;
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<ChromaticGooBurst>(particle => {
+                        particle.Position = Projectile.Center + gooVelocity * 2;
+                        particle.Velocity = gooVelocity;
+                        particle.Scale = new Vector2(Main.rand.NextFloat(1f, 1.5f));
+                        particle.Color = gooColor;
+                    });
                 }
             }
             if (Time > 20) {

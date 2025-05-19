@@ -62,13 +62,13 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             }
 
             if (Main.rand.NextBool(2)) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                    particle.position = Projectile.Center + Main.rand.NextVector2Circular(30, 30) + Projectile.velocity;
-                    particle.velocity = -Projectile.velocity * 0.5f;
-                    particle.scale = 2f * Projectile.scale;
-                    particle.color = Color.White;
+                CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                    particle.Position = Projectile.Center + Main.rand.NextVector2Circular(30, 30) + Projectile.velocity;
+                    particle.Velocity = -Projectile.velocity * 0.5f;
+                    particle.Scale = new Vector2(2f * Projectile.scale);
+                    particle.Color = Color.White;
                     particle.colorData = new ColorOffsetData(true, Projectile.localAI[0]);
-                }));
+                });
             }
 
             for (int i = ProjectileID.Sets.TrailCacheLength[Type] - 1; i > 0; i--) {
@@ -91,13 +91,13 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 20; i++) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                    particle.position = Projectile.Center;
-                    particle.velocity = -Projectile.velocity * 0.2f + Main.rand.NextVector2Circular(3, 3);
-                    particle.scale = 2f;
-                    particle.color = Color.White;
+                CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                    particle.Position = Projectile.Center;
+                    particle.Velocity = -Projectile.velocity * 0.2f + Main.rand.NextVector2Circular(3, 3);
+                    particle.Scale = new Vector2(2f);
+                    particle.Color = Color.White;
                     particle.colorData = new ColorOffsetData(true, Projectile.localAI[0]);
-                }));
+                });
             }
         }
 

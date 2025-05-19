@@ -109,12 +109,12 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                             Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(36, 36), DustID.AncientLight, Main.rand.NextVector2Circular(15, 15) + Projectile.velocity, 0, glowColor, 1f + Main.rand.NextFloat(2f)).noGravity = true;
 
                             if (Main.rand.NextBool(3)) {
-                                CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
-                                    particle.position = Projectile.Center + Main.rand.NextVector2Circular(54, 54);
-                                    particle.velocity = Main.rand.NextVector2Circular(10, 10) + Projectile.velocity * 0.1f;
-                                    particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
-                                    particle.color = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.7f, 0) * 0.5f;
-                                }));
+                                CalamityHunt.Particles.SpawnParticle<PrettySparkle>(particle => {
+                                    particle.Position = Projectile.Center + Main.rand.NextVector2Circular(54, 54);
+                                    particle.Velocity = Main.rand.NextVector2Circular(10, 10) + Projectile.velocity * 0.1f;
+                                    particle.Scale = new Vector2(Main.rand.NextFloat(0.5f, 1.5f));
+                                    particle.Color = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.7f, 0) * 0.5f;
+                                });
                             }
                         }
 
@@ -138,15 +138,15 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             if (Cooldown > 0) {
                 Cooldown--;
 
-                CalamityHunt.particles.Add(Particle.Create<FlameParticle>(particle => {
-                    particle.position = Projectile.Center;
-                    particle.velocity = Main.rand.NextVector2Circular(3, 3) + Projectile.velocity.RotatedByRandom(0.1f) * 0.1f;
-                    particle.scale = Main.rand.NextFloat(1f, 3f) + Projectile.scale;
-                    particle.color = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.8f, 0);
+                CalamityHunt.Particles.SpawnParticle<FlameParticle>(particle => {
+                    particle.Position = Projectile.Center;
+                    particle.Velocity = Main.rand.NextVector2Circular(3, 3) + Projectile.velocity.RotatedByRandom(0.1f) * 0.1f;
+                    particle.Scale = new Vector2(Main.rand.NextFloat(1f, 3f) + Projectile.scale);
+                    particle.Color = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.8f, 0);
                     particle.fadeColor = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.4f, 10);
                     particle.maxTime = Main.rand.Next(15, 40);
                     particle.anchor = () => Projectile.velocity * 0.8f;
-                }));
+                });
             }
 
             if (HitCount > 4) {
@@ -172,22 +172,22 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             }
 
             if (Main.rand.NextBool(2)) {
-                CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
-                    particle.position = Projectile.Center + Main.rand.NextVector2Circular(54, 54);
-                    particle.velocity = Main.rand.NextVector2Circular(7, 7);
-                    particle.scale = Main.rand.NextFloat(0.2f, 1.2f);
-                    particle.color = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.7f, 0);
-                }));
+                CalamityHunt.Particles.SpawnParticle<PrettySparkle>(particle => {
+                    particle.Position = Projectile.Center + Main.rand.NextVector2Circular(54, 54);
+                    particle.Velocity = Main.rand.NextVector2Circular(7, 7);
+                    particle.Scale = new Vector2(Main.rand.NextFloat(0.2f, 1.2f));
+                    particle.Color = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.7f, 0);
+                });
             }
 
-            CalamityHunt.particles.Add(Particle.Create<FlameParticle>(particle => {
-                particle.position = Projectile.Center;
-                particle.velocity = Projectile.velocity.RotatedByRandom(0.5f);
-                particle.scale = Projectile.scale + Main.rand.NextFloat(0.7f);
+            CalamityHunt.Particles.SpawnParticle<FlameParticle>(particle => {
+                particle.Position = Projectile.Center;
+                particle.Velocity = Projectile.velocity.RotatedByRandom(0.5f);
+                particle.Scale = new Vector2(Projectile.scale + Main.rand.NextFloat(0.7f));
                 particle.maxTime = Main.rand.Next(10, 40);
-                particle.color = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.7f, 0);
+                particle.Color = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.7f, 0);
                 particle.fadeColor = Main.hslToRgb(Projectile.localAI[0] * 0.01f % 1f, 1f, 0.7f, 0);
-            }));
+            });
 
             for (int i = ProjectileID.Sets.TrailCacheLength[Type] - 1; i > 0; i--) {
                 Projectile.oldPos[i] = Projectile.oldPos[i - 1];

@@ -163,18 +163,18 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             //    for (int i = 0; i < smokeCount; i++) {
             //        //Particle.NewParticle(ModContent.GetInstance<CosmicFlame>(), Projectile.Center + Projectile.rotation.ToRotationVector2() * 20, Projectile.rotation.ToRotationVector2().RotatedByRandom((float)Math.Sqrt(1f - smokePower * 0.5f)) * Main.rand.NextFloat(15f, 25f) * smokePower, smokeColor, 1f + Main.rand.NextFloat());
 
-            //        //CalamityHunt.particles.Add(Particle.Create<>(particle => 
+            //        //CalamityHunt.particles.SpawnParticle<>(particle => 
             //    }
             //}
 
             if (!Main.rand.NextBool((int)(Time * 0.5f + 15))) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                    particle.position = Projectile.Center;
-                    particle.velocity = Projectile.rotation.ToRotationVector2().RotatedByRandom(1f) * Main.rand.NextFloat(5f, 15f);
-                    particle.scale = 2f;
-                    particle.color = Color.White;
+                CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                    particle.Position = Projectile.Center;
+                    particle.Velocity = Projectile.rotation.ToRotationVector2().RotatedByRandom(1f) * Main.rand.NextFloat(5f, 15f);
+                    particle.Scale = new Vector2(2f);
+                    particle.Color = Color.White;
                     particle.colorData = new ColorOffsetData(true, Projectile.localAI[0]);
-                }));
+                });
             }
             if (Time > ChargeTime - 15 && Time < ChargeTime + LaserDuration + 60) {
                 for (int i = 0; i < 15; i++) {
@@ -184,13 +184,13 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                     color.A = 0;
                     Vector2 position = Projectile.Center + new Vector2(progress, Main.rand.NextFloat(-80f, 80f) * (progress / 3300f)).RotatedBy(Projectile.rotation);
                     if (Main.rand.NextBool(5)) {
-                        CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                            particle.position = position;
-                            particle.velocity = Projectile.velocity.RotatedByRandom(0.4f) * Main.rand.NextFloat(15f, 45f);
-                            particle.scale = 4f * grow;
-                            particle.color = Color.White;
+                        CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                            particle.Position = position;
+                            particle.Velocity = Projectile.velocity.RotatedByRandom(0.4f) * Main.rand.NextFloat(15f, 45f);
+                            particle.Scale = new Vector2(4f * grow);
+                            particle.Color = Color.White;
                             particle.colorData = new ColorOffsetData(true, Projectile.localAI[0] - progress / 3300f * 60);
-                        }));
+                        });
                     }
                 }
             }

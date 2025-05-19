@@ -126,14 +126,14 @@ public class AntiMassAccumulatorProj : ModProjectile
 
         for (int i = 0; i < 8; i++) {
             if (recoilFactor > 0.0005f && Main.rand.NextBool((int)(25 - recoilFactor * 24))) {
-                CalamityHunt.particles.Add(Particle.Create<LightningParticle>(particle => {
-                    particle.position = muzzlePosition + Main.rand.NextVector2Circular(27, 10).RotatedBy(Projectile.rotation);
-                    particle.rotation = Projectile.rotation + Main.rand.NextFloat(-1f, 1f);
-                    particle.velocity = particle.rotation.ToRotationVector2();
-                    particle.scale = Main.rand.NextFloat(0.1f, 0.7f);
-                    particle.color = Time < (int)(25 * Player.GetAttackSpeed(DamageClass.Ranged)) ? Color.MediumTurquoise with { A = 40 } : MainColor;
+                CalamityHunt.Particles.SpawnParticle<LightningParticle>(particle => {
+                    particle.Position = muzzlePosition + Main.rand.NextVector2Circular(27, 10).RotatedBy(Projectile.rotation);
+                    particle.Rotation = Projectile.rotation + Main.rand.NextFloat(-1f, 1f);
+                    particle.Velocity = particle.Rotation.ToRotationVector2();
+                    particle.Scale = new Vector2(Main.rand.NextFloat(0.1f, 0.7f));
+                    particle.Color = Time < (int)(25 * Player.GetAttackSpeed(DamageClass.Ranged)) ? Color.MediumTurquoise with { A = 40 } : MainColor;
                     particle.anchor = () => Player.velocity;
-                }));
+                });
             }
         }
 

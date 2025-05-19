@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Arch.Core.Extensions;
-using CalamityHunt.Common.Systems.Particles;
-using CalamityHunt.Common.Systems.ParticlesOld;
 using CalamityHunt.Common.Utilities;
-using CalamityHunt.Content.Particles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ModLoader;
 
@@ -63,8 +58,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
 
             if (Main.rand.NextBool(10))
             {
-                var hue = ParticleBehavior.NewParticle(ModContent.GetInstance<ChromaticEnergyDust2Behavior>(), Projectile.Center + Main.rand.NextVector2Circular(20, 20), Projectile.velocity * 0.4f, Color.White, 1f);
-                hue.Add(new ParticleData<float> { Value = Projectile.localAI[0] });
+                // var hue = ParticleBehavior.NewParticle(ModContent.GetInstance<ChromaticEnergyDust2Behavior>(), Projectile.Center + Main.rand.NextVector2Circular(20, 20), Projectile.velocity * 0.4f, Color.White, 1f);
+                // hue.Add(new ParticleData<float> { Value = Projectile.localAI[0] });
             }
 
             Projectile.frameCounter++;
@@ -82,8 +77,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         {
             for (int i = 0; i < 8; i++)
             {
-                var hue = ParticleBehavior.NewParticle(ModContent.GetInstance<ChromaticEnergyDust2Behavior>(), Projectile.Center, Main.rand.NextVector2Circular(6, 6), Color.White, 1f);
-                hue.Add(new ParticleData<float> { Value = Projectile.localAI[0] });
+                // var hue = ParticleBehavior.NewParticle(ModContent.GetInstance<ChromaticEnergyDust2Behavior>(), Projectile.Center, Main.rand.NextVector2Circular(6, 6), Color.White, 1f);
+                // hue.Add(new ParticleData<float> { Value = Projectile.localAI[0] });
 
                 if (!Main.rand.NextBool(2))
                 {

@@ -87,18 +87,18 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 Projectile.localAI[0] *= 0.9f;
 
                 if (Projectile.timeLeft == 10) {
-                    CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
-                        particle.position = Projectile.Center;
-                        particle.velocity = MathHelper.PiOver4.ToRotationVector2();
-                        particle.scale = 1f;
-                        particle.color = new Color(50, 180, 255, 0);
-                    }));
-                    CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
-                        particle.position = Projectile.Center;
-                        particle.velocity = Vector2.Zero;
-                        particle.scale = 0.5f;
-                        particle.color = new Color(50, 180, 255, 0);
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<CrossSparkle>(particle => {
+                        particle.Position = Projectile.Center;
+                        particle.Velocity = MathHelper.PiOver4.ToRotationVector2();
+                        particle.Scale = new Vector2(1f);
+                        particle.Color = new Color(50, 180, 255, 0);
+                    });
+                    CalamityHunt.Particles.SpawnParticle<CrossSparkle>(particle => {
+                        particle.Position = Projectile.Center;
+                        particle.Velocity = Vector2.Zero;
+                        particle.Scale = new Vector2(0.5f);
+                        particle.Color = new Color(50, 180, 255, 0);
+                    });
                 }
             }
         }

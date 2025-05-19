@@ -9,7 +9,7 @@ using Terraria.ID;
 
 namespace CalamityHunt.Content.Particles;
 
-public class GoozmaGelBit : Particle
+public sealed class GoozmaGelBit : Particle<GoozmaGelBit>
 {
     public int style;
 
@@ -22,12 +22,26 @@ public class GoozmaGelBit : Particle
     public Func<Vector2> anchor;
 
     public ColorOffsetData colorData;
+    
+    public override bool RequiresImmediateMode => true;
+ 
+    public override void FetchFromPool()
+    {
+        base.FetchFromPool();
+
+        style = 0;
+        direction = 0;
+        time = 0;
+        holdTime = 0;
+        anchor = null;
+        colorData = default(ColorOffsetData);
+    }
 
     public override void OnSpawn()
     {
         holdTime = Math.Max(20, holdTime);
 
-        scale *= Main.rand.NextFloat(1f, 1.1f);
+        Scale *= Main.rand.NextFloat(1f, 1.1f);
         style = Main.rand.Next(5); // first 5 gooballs
 
         if (Main.rand.NextBool(750)) {
@@ -38,66 +52,70 @@ public class GoozmaGelBit : Particle
         colorData = new ColorOffsetData(Main.rand.NextBool(2), Main.rand.NextFloat());
     }
 
-    public override void Update()
+    protected override void Update()
     {
+        base.Update();
+        
         Vector2 home = anchor.Invoke();
-        float distanceFromHome = position.Distance(home);
+        float distanceFromHome = Position.Distance(home);
 
         time++;
-        rotation += velocity.X * 0.02f;
+        Rotation += Velocity.X * 0.02f;
 
         if (time > 20 && time < holdTime) {
-            velocity *= 0.99f;
-            velocity = Vector2.Lerp(velocity, Main.rand.NextVector2Circular(78, 67), 0.025f);
+            Velocity *= 0.99f;
+            Velocity = Vector2.Lerp(Velocity, Main.rand.NextVector2Circular(78, 67), 0.025f);
         }
         else if (time > holdTime + 20) {
-            velocity = Vector2.Lerp(velocity, position.DirectionTo(home).SafeNormalize(Vector2.Zero) * (distanceFromHome + 10) * 0.02f, 0.1f * Utils.GetLerpValue(holdTime + 20, holdTime + 40, time, true));
-            velocity = velocity.RotatedBy(0.03f * direction);
+            Velocity = Vector2.Lerp(Velocity, Position.DirectionTo(home).SafeNormalize(Vector2.Zero) * (distanceFromHome + 10) * 0.02f, 0.1f * Utils.GetLerpValue(holdTime + 20, holdTime + 40, time, true));
+            Velocity = Velocity.RotatedBy(0.03f * direction);
             if (distanceFromHome < 28) {
-                scale *= 0.89f;
+                Scale *= 0.89f;
             }
 
         }
         else {
-            velocity *= 0.98f;
+            Velocity *= 0.98f;
         }
         if (Main.netMode != NetmodeID.Server) {
             if (Main.rand.NextBool(50)) {
-                CalamityHunt.particlesBehindEntities.Add(Create<ChromaticEnergyDust>(particle => {
-                    particle.position = position + Main.rand.NextVector2Circular(30, 30);
-                    particle.velocity = Main.rand.NextVector2Circular(2, 2) - Vector2.UnitY * 2f;
-                    particle.scale = Main.rand.NextFloat(0.1f, 1.6f);
-                    particle.color = Color.White;
-                    particle.colorData = new ColorOffsetData(true, time * 2f + colorData.offset);
-                }));
+                CalamityHunt.ParticlesBehindEntities.SpawnParticle<ChromaticEnergyDust>(
+                    particle => {
+                        particle.Position = Position + Main.rand.NextVector2Circular(30, 30);
+                        particle.Velocity = Main.rand.NextVector2Circular(2, 2) - Vector2.UnitY * 2f;
+                        particle.Scale = new Vector2(Main.rand.NextFloat(0.1f, 1.6f));
+                        particle.Color = Color.White;
+                        particle.colorData = new ColorOffsetData(true, time * 2f + colorData.offset);
+                    }
+                );
             }
 
             if (Main.rand.NextBool(120)) {
-                CalamityHunt.particlesBehindEntities.Add(Create<ChromaticGooBurst>(particle => {
-                    particle.position = position + Main.rand.NextVector2Circular(30, 30);
-                    particle.velocity = -velocity.SafeNormalize(Vector2.Zero).RotatedByRandom(0.2f) - Vector2.UnitY * Main.rand.NextFloat();
-                    particle.scale = Main.rand.NextFloat(0.1f, 1.6f);
-                    particle.color = Color.White;
+                CalamityHunt.ParticlesBehindEntities.SpawnParticle<ChromaticGooBurst>(particle => {
+                    particle.Position = Position + Main.rand.NextVector2Circular(30, 30);
+                    particle.Velocity = -Velocity.SafeNormalize(Vector2.Zero).RotatedByRandom(0.2f) - Vector2.UnitY * Main.rand.NextFloat();
+                    particle.Scale = new Vector2(Main.rand.NextFloat(0.1f, 1.6f));
+                    particle.Color = Color.White;
                     particle.colorData = new ColorOffsetData(true, time * 2f + colorData.offset);
-                }));
+                });
             }
 
             if (Main.rand.NextBool(70)) {
-                Dust.NewDustPerfect(position + Main.rand.NextVector2Circular(10, 10), DustID.TintableDust, Main.rand.NextVector2CircularEdge(3, 3), 100, Color.Black, Main.rand.NextFloat(2, 4)).noGravity = true;
+                Dust.NewDustPerfect(Position + Main.rand.NextVector2Circular(10, 10), DustID.TintableDust, Main.rand.NextVector2CircularEdge(3, 3), 100, Color.Black, Main.rand.NextFloat(2, 4)).noGravity = true;
             }
         }
 
-        if (scale < 0.5f) {
-            ShouldRemove = true;
+        if (Scale.X < 0.5f) {
+            ShouldBeRemovedFromRenderer = true;
         }
 
         
     }
 
 
-    public override void Draw(SpriteBatch spriteBatch)
+    protected override void Draw(SpriteBatch spriteBatch)
     {
-        Texture2D texture = AssetDirectory.Textures.Particle[Type].Value;
+        Texture2D texture = TextureAsset.Value;
         Texture2D glow = AssetDirectory.Textures.Glow[0].Value;
         Rectangle frame = texture.Frame(8, 1, style, 0);
 
@@ -105,8 +123,8 @@ public class GoozmaGelBit : Particle
         glowColor.A = 0;
 
         for (int i = 0; i < 4; i++) {
-            Vector2 off = new Vector2(2).RotatedBy(MathHelper.TwoPi / 4f * i + rotation);
-            spriteBatch.Draw(texture, position + off - Main.screenPosition, frame, glowColor, rotation, frame.Size() * 0.5f, scale, 0, 0);
+            Vector2 off = new Vector2(2).RotatedBy(MathHelper.TwoPi / 4f * i + Rotation);
+            spriteBatch.Draw(texture, Position + off - Main.screenPosition, frame, glowColor, Rotation, frame.Size() * 0.5f, Scale, 0, 0);
         }
 
         if (colorData.active) {
@@ -120,7 +138,7 @@ public class GoozmaGelBit : Particle
             effect.CurrentTechnique.Passes[0].Apply();
         }
 
-        spriteBatch.Draw(texture, position - Main.screenPosition, frame, Color.Lerp(color, Color.Black, 0.6f), rotation, frame.Size() * 0.5f, scale, 0, 0);
+        spriteBatch.Draw(texture, Position - Main.screenPosition, frame, Color.Lerp(Color, Color.Black, 0.6f), Rotation, frame.Size() * 0.5f, Scale, 0, 0);
 
         if (colorData.active) {
             Main.pixelShader.CurrentTechnique.Passes[0].Apply();
@@ -173,5 +191,10 @@ public class GoozmaGelBit : Particle
         //Make the color at index 0 be a mix between the first and last colors in the list, based on the distance between the 2.
         float interpolant = (1 - brightnesses[9]) / (brightnesses[1] + (1 - brightnesses[9]));
         colors[0] = Vector3.Lerp(colors[9], colors[0], interpolant);
+    }
+    
+    protected override GoozmaGelBit NewInstance()
+    {
+        return new GoozmaGelBit();
     }
 }
