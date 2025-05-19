@@ -16,7 +16,7 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
         {
             Item.width = 40;
             Item.height = 48;
-            Item.damage = 1750;
+            Item.damage = 1111;
             Item.DamageType = DamageClass.Magic;
             Item.rare = ModContent.RarityType<VioletRarity>();
             Item.useStyle = ItemUseStyleID.Thrust;
