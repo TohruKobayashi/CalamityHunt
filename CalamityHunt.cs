@@ -33,15 +33,13 @@ namespace CalamityHunt
     {
         public static Mod Instance;
 
-        public static ParticleSystem particles;
-        public static ParticleSystem particlesBehindEntities;
+        public static ParticleRenderer Particles { get; } = ParticleRenderer.MakeDefaultRenderer();
+
+        public static ParticleRenderer ParticlesBehindEntities { get; } = ParticleRenderer.MakeDefaultRenderer();
 
         public override void Load()
         {
             Instance = this;
-
-            particles = new ParticleSystem();
-            particlesBehindEntities = new ParticleSystem();
 
             On_Main.UpdateParticleSystems += UpdateParticleSystems;
             On_Main.DrawDust += DrawParticleSystems;
@@ -65,19 +63,19 @@ namespace CalamityHunt
         private void UpdateParticleSystems(On_Main.orig_UpdateParticleSystems orig, Main self)
         {
             orig(self);
-            particlesBehindEntities.Update();
-            particles.Update();
+            ParticlesBehindEntities.Update();
+            Particles.Update();
         }
 
         private void DrawParticleSystems(On_Main.orig_DrawDust orig, Main self)
         {
             orig(self);
-            particles.Draw(Main.spriteBatch);
+            Particles.Draw(Main.spriteBatch);
         }
 
         private void DrawParticleSystemBehindEntities(On_Main.orig_DoDraw_DrawNPCsOverTiles orig, Main self)
         {
-            particlesBehindEntities.Draw(Main.spriteBatch);
+            ParticlesBehindEntities.Draw(Main.spriteBatch);
             orig(self);
         }
 

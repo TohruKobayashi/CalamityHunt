@@ -1,67 +1,68 @@
 ﻿using CalamityHunt.Common.Systems.Particles;
+
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using Terraria;
-using Terraria.Audio;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
 
-namespace CalamityHunt.Content.Particles
+namespace CalamityHunt.Content.Particles;
+
+public sealed class DarkSludgeChunk : Particle<DarkSludgeChunk>
 {
-    public class DarkSludgeChunk : Particle
+    public int variant;
+    public int time;
+    public bool stuck;
+
+    public override void FetchFromPool()
     {
-        public int variant;
-        public int time;
-        public bool stuck;
+        base.FetchFromPool();
 
-        public override void OnSpawn()
-        {
-            scale *= Main.rand.NextFloat(0.7f, 0.9f);
-            variant = Main.rand.Next(2);
-        }
+        variant = 0;
+        time = 0;
+        stuck = false;
+    }
 
-        public override void Update()
-        {
-            time++;
+    public override void OnSpawn()
+    {
+        Scale *= Main.rand.NextFloat(0.7f, 0.9f);
+        variant = Main.rand.Next(2);
+    }
 
-            if (!stuck)
-            {
-                if (velocity.Y < 30)
-                    velocity.Y += 0.4f;
+    protected override void Update()
+    {
+        base.Update();
+        
+        time++;
 
-                rotation = velocity.ToRotation() - MathHelper.PiOver2;
+        if (!stuck) {
+            if (Velocity.Y < 30)
+                Velocity.Y += 0.4f;
 
-                if (Collision.IsWorldPointSolid(position + velocity) && time > 2)
-                {
-                    time = 0;
-                    stuck = true;
-                    position.Y = (int)(position.Y / 16f) * 16 + 16;
-                    for (int i = 0; i < 8; i++)
-                    {
-                        if (Collision.IsWorldPointSolid(position + velocity - new Vector2(0, 8 * i)))
-                            position.Y -= 8;                        
-                    }
-                    position.Y -= 3;
+            Rotation = Velocity.ToRotation() - MathHelper.PiOver2;
+
+            if (Collision.IsWorldPointSolid(Position + Velocity) && time > 2) {
+                time = 0;
+                stuck = true;
+                Position.Y = (int)(Position.Y / 16f) * 16 + 16;
+                for (int i = 0; i < 8; i++) {
+                    if (Collision.IsWorldPointSolid(Position + Velocity - new Vector2(0, 8 * i)))
+                        Position.Y -= 8;
                 }
+                Position.Y -= 3;
             }
-            else
-            {
-                rotation = 0;
-                velocity = Vector2.Zero;
-                if (time > 10)
-                    scale *= 0.95f;
-
-                if (scale < 0.1f)
-                    ShouldRemove = true; 
-            }
-
         }
+        else {
+            Rotation = 0;
+            Velocity = Vector2.Zero;
+            if (time > 10)
+                Scale *= 0.95f;
+
+            if (Scale.X < 0.1f)
+                ShouldBeRemovedFromRenderer = true;
+        }
+    }
+
+    protected override DarkSludgeChunk NewInstance()
+    {
+        return new DarkSludgeChunk();
     }
 }

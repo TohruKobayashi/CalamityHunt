@@ -27,14 +27,14 @@ public class DoomedNPC : GlobalNPC
                 sparks.noGravity = true;
             }
 
-            CalamityHunt.particles.Add(Particle.Create<LightningParticle>(particle => {
-                particle.position = Main.rand.NextVector2FromRectangle(npc.Hitbox);
-                particle.velocity = particle.position.DirectionFrom(npc.Bottom) * Main.rand.NextFloat(2f);
-                particle.rotation = particle.velocity.ToRotation() + Main.rand.NextFloat(-0.5f, 0.5f);
-                particle.scale = Main.rand.NextFloat(0.3f, 0.51f + MathF.Sqrt(npc.width / 150f + npc.height / 150f));
-                particle.color = Color.Turquoise with { A = 40 };
+            CalamityHunt.Particles.SpawnParticle<LightningParticle>(particle => {
+                particle.Position = Main.rand.NextVector2FromRectangle(npc.Hitbox);
+                particle.Velocity = particle.Position.DirectionFrom(npc.Bottom) * Main.rand.NextFloat(2f);
+                particle.Rotation = particle.Velocity.ToRotation() + Main.rand.NextFloat(-0.5f, 0.5f);
+                particle.Scale = new Vector2(Main.rand.NextFloat(0.3f, 0.51f + MathF.Sqrt(npc.width / 150f + npc.height / 150f)));
+                particle.Color = Color.Turquoise with { A = 40 };
                 particle.anchor = () => npc.velocity;
-            }));
+            });
         }
     }
 }

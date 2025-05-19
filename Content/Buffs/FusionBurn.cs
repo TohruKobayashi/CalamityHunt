@@ -49,22 +49,22 @@ namespace CalamityHunt.Content.Buffs
                 Color glowColor = new GradientColor(SlimeUtils.GoozColors, 0.2f, 0.2f).Value; //goozma's main color
 
                 if (Main.rand.NextBool(5)) {
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                        particle.position = Main.rand.NextVector2FromRectangle(box);
-                        particle.velocity = -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(3f);
-                        particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
-                        particle.color = glowColor;
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                        particle.Position = Main.rand.NextVector2FromRectangle(box);
+                        particle.Velocity = -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(3f);
+                        particle.Scale = new Vector2(Main.rand.NextFloat(0.5f, 1.5f));
+                        particle.Color = glowColor;
+                    });
                 }
 
-                CalamityHunt.particles.Add(Particle.Create<FusionFlameParticle>(particle => {
-                    particle.position = Main.rand.NextVector2FromRectangle(box);
-                    particle.velocity = -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(2f);
-                    particle.scale = Main.rand.NextFloat(1f, 3f);
+                CalamityHunt.Particles.SpawnParticle<FusionFlameParticle>(particle => {
+                    particle.Position = Main.rand.NextVector2FromRectangle(box);
+                    particle.Velocity = -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(2f);
+                    particle.Scale = new Vector2(Main.rand.NextFloat(1f, 3f));
                     particle.maxTime = Main.rand.Next(15, 20);
-                    particle.color = glowColor;
+                    particle.Color = glowColor;
                     particle.fadeColor = glowColor * 0.6f;
-                }));
+                });
             }
         }
 
@@ -95,23 +95,23 @@ namespace CalamityHunt.Content.Buffs
                 Color glowColor = new GradientColor(SlimeUtils.GoozOilColors, 0.2f, 0.2f).Value with { A = 0 }; //oil, bc not from goozma
 
                 if (Main.rand.NextBool(3)) {
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                        particle.position = Main.rand.NextVector2FromRectangle(npc.Hitbox);
-                        particle.velocity = -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(3f);
-                        particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
-                        particle.color = glowColor;
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                        particle.Position = Main.rand.NextVector2FromRectangle(npc.Hitbox);
+                        particle.Velocity = -Vector2.UnitY.RotatedByRandom(1f) * Main.rand.NextFloat(3f);
+                        particle.Scale = new Vector2(Main.rand.NextFloat(0.5f, 1.5f));
+                        particle.Color = glowColor;
+                    });
                 }
 
-                CalamityHunt.particles.Add(Particle.Create<FusionFlameParticle>(particle => {
-                    particle.position = Main.rand.NextVector2FromRectangle(npc.Hitbox);
-                    particle.velocity = -Vector2.UnitY.RotatedByRandom(0.5f) * Main.rand.NextFloat(1f, 5f);
-                    particle.rotation = particle.velocity.ToRotation();
-                    particle.scale = Main.rand.NextFloat(1f, 3f);
+                CalamityHunt.Particles.SpawnParticle<FusionFlameParticle>(particle => {
+                    particle.Position = Main.rand.NextVector2FromRectangle(npc.Hitbox);
+                    particle.Velocity = -Vector2.UnitY.RotatedByRandom(0.5f) * Main.rand.NextFloat(1f, 5f);
+                    particle.Rotation = particle.Velocity.ToRotation();
+                    particle.Scale = new Vector2(Main.rand.NextFloat(1f, 3f));
                     particle.maxTime = Main.rand.Next(15, 20);
-                    particle.color = glowColor * 2f;
+                    particle.Color = glowColor * 2f;
                     particle.fadeColor = glowColor * 0.4f;
-                }));
+                });
             }
         }
 

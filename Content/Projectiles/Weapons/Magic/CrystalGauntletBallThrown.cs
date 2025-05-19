@@ -36,12 +36,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
             int target = Projectile.FindTargetWithLineOfSight(1000);
             if (target >= 0) {
                 if (Time % 8 == 4 && Projectile.Distance(Main.npc[target].Center) < 400) {
-                    CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
-                        particle.position = Projectile.Center + Projectile.velocity * 5f + Main.rand.NextVector2Circular(16, 16);
-                        particle.velocity = Vector2.Zero;
-                        particle.scale = Main.rand.NextFloat(0.5f, 1.5f);
-                        particle.color = Main.hslToRgb(Time * 0.03f % 1f, 0.5f, 0.5f, 128);
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<CrossSparkle>(particle => {
+                        particle.Position = Projectile.Center + Projectile.velocity * 5f + Main.rand.NextVector2Circular(16, 16);
+                        particle.Velocity = Vector2.Zero;
+                        particle.Scale = new Vector2(Main.rand.NextFloat(0.5f, 1.5f));
+                        particle.Color = Main.hslToRgb(Time * 0.03f % 1f, 0.5f, 0.5f, 128);
+                    });
                     Projectile shock = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.velocity * 5f + Main.rand.NextVector2Circular(16, 16), Projectile.DirectionTo(Main.npc[target].Center).SafeNormalize(Vector2.Zero), ModContent.ProjectileType<CrystalLightning>(), Projectile.damage / 3, 1f, Owner.whoAmI, ai1: Projectile.whoAmI);
                     shock.ai[2] = Projectile.Distance(Main.npc[target].Center);
                 }

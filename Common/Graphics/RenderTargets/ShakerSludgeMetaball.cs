@@ -11,12 +11,15 @@ namespace CalamityHunt.Common.Graphics.RenderTargets;
 
 public class ShakerSludgeMetaball : MetaballDrawer
 {
-    public static ParticleSystem particles;
+    public static ParticleRenderer Particles { get; } = ParticleRenderer.MakeDefaultRenderer();
+
+    static ShakerSludgeMetaball()
+    {
+        Particles.ShouldRestart = true;
+    }
 
     public override void Initialize()
     {
-        particles = new ParticleSystem();
-
         content.width = Main.screenWidth;
         content.height = Main.screenHeight;
         content.draw = DrawShapes;
@@ -28,14 +31,14 @@ public class ShakerSludgeMetaball : MetaballDrawer
     private void UpdateCosmosParticleSystem(On_Main.orig_UpdateParticleSystems orig, Main self)
     {
         orig(self);
-        particles.Update();
+        Particles.Update();
     }
 
     private void DrawShapes(SpriteBatch spriteBatch)
     {
         spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.Transform);
 
-        particles.Draw(spriteBatch, false);
+        Particles.Draw(spriteBatch);
 
         foreach (Projectile projectile in Main.projectile.Where(n => n.active && n.type == ModContent.ProjectileType<DarkSludge>())) {
 

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Arch.Core.Extensions;
-using CalamityHunt.Common.Systems.Particles;
-using CalamityHunt.Common.Systems.ParticlesOld;
 using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Particles;
 using Microsoft.Xna.Framework;
@@ -59,8 +56,14 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             }
 
             if (Main.rand.NextBool(20)) {
-                var hue = ParticleBehavior.NewParticle(ModContent.GetInstance<ChromaticEnergyDust2Behavior>(), Projectile.Center + Main.rand.NextVector2Circular(20, 20), Projectile.velocity * 0.4f, Color.White, 1f);
-                hue.Add(new ParticleData<float> { Value = Projectile.localAI[0] });
+                CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                    particle.Position = Projectile.Center + Main.rand.NextVector2Circular(20, 20);
+                    particle.Velocity = Projectile.velocity * 0.4f;
+                    particle.Scale = new Vector2(1f);
+                    particle.Color = Color.White;
+                    particle.colorData = new ColorOffsetData(true, Projectile.localAI[0]);
+                });
+
             }
 
             Projectile.frameCounter++;
@@ -76,8 +79,13 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
         public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 3; i++) {
-                var hue = ParticleBehavior.NewParticle(ModContent.GetInstance<ChromaticEnergyDust2Behavior>(), Projectile.Center, Main.rand.NextVector2Circular(6, 6), Color.White, 1f);
-                hue.Add(new ParticleData<float> { Value = Projectile.localAI[0] });
+                CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                    particle.Position = Projectile.Center;
+                    particle.Velocity = Main.rand.NextVector2Circular(6, 6);
+                    particle.Scale = new Vector2(1f);
+                    particle.Color = Color.White;
+                    particle.colorData = new ColorOffsetData(true, Projectile.localAI[0]);
+                });
 
                 if (!Main.rand.NextBool(2)) {
                     Dust.NewDustPerfect(Projectile.Center, 4, Main.rand.NextVector2Circular(3, 3), 100, Color.Black, 1.5f).noGravity = true;

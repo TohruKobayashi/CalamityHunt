@@ -51,51 +51,51 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Lighting.AddLight(Projectile.Center, glowColor.ToVector3() * 0.5f);
 
             if (Time > 75) {
-                CalamityHunt.particles.Add(Particle.Create<FusionFlameParticle>(particle => {
-                    particle.position = Projectile.Center;
-                    particle.velocity = Projectile.velocity * Main.rand.NextFloat();
-                    particle.rotation = Projectile.velocity.ToRotation();
-                    particle.scale = MathF.Pow(Projectile.scale, 2.3f) + Main.rand.NextFloat(1f, 2f);
+                CalamityHunt.Particles.SpawnParticle<FusionFlameParticle>(particle => {
+                    particle.Position = Projectile.Center;
+                    particle.Velocity = Projectile.velocity * Main.rand.NextFloat();
+                    particle.Rotation = Projectile.velocity.ToRotation();
+                    particle.Scale = new Vector2(MathF.Pow(Projectile.scale, 2.3f) + Main.rand.NextFloat(1f, 2f));
                     particle.maxTime = Main.rand.Next(25, 40);
-                    particle.color = (glowColor * 0.8f);
+                    particle.Color = (glowColor * 0.8f);
                     particle.fadeColor = (glowColor * 0.4f);
                     particle.emitLight = true;
                     particle.dissolveSize = 0.5f;
                     particle.dissolvePower = -0.9f;
-                }));
+                });
             }
             else if (Time > 6) {
                 if (Main.rand.NextBool(10)) {
-                    CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                        particle.position = Projectile.Center + Main.rand.NextVector2Circular(100, 100) * expand;
-                        particle.velocity = Projectile.velocity * Main.rand.NextFloat(3f);
-                        particle.scale = Main.rand.NextFloat(1f, 2f);
-                        particle.color = glowColor;
+                    CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                        particle.Position = Projectile.Center + Main.rand.NextVector2Circular(100, 100) * expand;
+                        particle.Velocity = Projectile.velocity * Main.rand.NextFloat(3f);
+                        particle.Scale = new Vector2(Main.rand.NextFloat(1f, 2f));
+                        particle.Color = glowColor;
                         particle.colorData = new ColorOffsetData(true, Projectile.localAI[0]);
-                    }));
+                    });
                 }
 
                 if (Main.rand.NextBool(10)) {
-                    CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
-                        particle.position = Projectile.Center + Main.rand.NextVector2Circular(100, 100) * expand;
-                        particle.velocity = Vector2.Zero;
-                        particle.scale = Main.rand.NextFloat(1.5f);
-                        particle.color = glowColor;
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<CrossSparkle>(particle => {
+                        particle.Position = Projectile.Center + Main.rand.NextVector2Circular(100, 100) * expand;
+                        particle.Velocity = Vector2.Zero;
+                        particle.Scale = new Vector2(Main.rand.NextFloat(1.5f));
+                        particle.Color = glowColor;
+                    });
                 }
 
-                CalamityHunt.particles.Add(Particle.Create<FusionFlameParticle>(particle => {
-                    particle.position = Projectile.Center;
-                    particle.velocity = Projectile.velocity * Main.rand.NextFloat();
-                    particle.rotation = Projectile.velocity.ToRotation();
-                    particle.scale = MathF.Pow(Projectile.scale, 2.3f) + Main.rand.NextFloat(1f, 2f);
+                CalamityHunt.Particles.SpawnParticle<FusionFlameParticle>(particle => {
+                    particle.Position = Projectile.Center;
+                    particle.Velocity = Projectile.velocity * Main.rand.NextFloat();
+                    particle.Rotation = Projectile.velocity.ToRotation();
+                    particle.Scale = new Vector2(MathF.Pow(Projectile.scale, 2.3f) + Main.rand.NextFloat(1f, 2f));
                     particle.maxTime = Main.rand.Next(25, 40);
-                    particle.color = (glowColor * 0.8f) with { A = (byte)(50 + Time - 6) };
+                    particle.Color = (glowColor * 0.8f) with { A = (byte)(50 + Time - 6) };
                     particle.fadeColor = (glowColor * 0.4f) with { A = (byte)Math.Clamp(15 - Time, 0, 255)};
                     particle.emitLight = true;
                     particle.dissolveSize = 0.5f;
                     particle.dissolvePower = -0.9f;
-                }));
+                });
 
                 if (Main.rand.NextBool(5) && Projectile.velocity.LengthSquared() > 2f) {
                     Dust dust = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(180, 180) * expand, DustID.Sand, Projectile.velocity * Main.rand.NextFloat(3f), 0, Color.Black, 0.3f + Main.rand.NextFloat());

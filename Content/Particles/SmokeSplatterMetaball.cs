@@ -1,5 +1,5 @@
 ﻿using System;
-using CalamityHunt.Common.Graphics.RenderTargets;
+
 using CalamityHunt.Common.Systems.Particles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,7 +7,7 @@ using Terraria;
 
 namespace CalamityHunt.Content.Particles;
 
-public class SmokeSplatterMetaball : Particle
+public sealed class SmokeSplatterMetaball : Particle<SmokeSplatterMetaball>
 {
     private int time;
 
@@ -24,46 +24,67 @@ public class SmokeSplatterMetaball : Particle
     public Vector2 gravity;
 
     public Color fadeColor;
+    
+    public override void FetchFromPool()
+    {
+        base.FetchFromPool();
+
+        time = 0;
+        maxTime = 0;
+        style = 0;
+        direction = 0;
+        rotationalVelocity = 0f;
+        anchor = null;
+        gravity = Vector2.Zero;
+        fadeColor = default(Color);
+    }
 
     public override void OnSpawn()
     {
+        base.Update();
+        
         style = Main.rand.Next(5);
         direction = Main.rand.NextBool().ToDirectionInt();
-        scale *= Main.rand.NextFloat(0.9f, 1.1f);
+        Scale *= Main.rand.NextFloat(0.9f, 1.1f);
         rotationalVelocity = Main.rand.NextFloat(0.2f);
         maxTime = (int)(maxTime * 0.66f);
     }
 
-    public override void Update()
+    protected override void Update()
     {
         float progress = (float)time / maxTime;
 
-        velocity *= 0.97f;
-        velocity += gravity * (0.5f + progress);
+        Velocity *= 0.97f;
+        Velocity += gravity * (0.5f + progress);
 
         if (time++ > maxTime) {
-            ShouldRemove = true;
+            ShouldBeRemovedFromRenderer = true;
         }
 
         if (anchor != null) {
-            position += anchor.Invoke();
+            Position += anchor.Invoke();
         }
 
         rotationalVelocity *= 0.96f;
-        rotation += (1f - MathF.Cbrt(progress)) * rotationalVelocity * direction;
+        Rotation += (1f - MathF.Cbrt(progress)) * rotationalVelocity * direction;
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
+    protected override void Draw(SpriteBatch spriteBatch)
     {
         float progress = (float)time / maxTime;
 
-        Texture2D texture = AssetDirectory.Textures.Particle[Type].Value;
+        Texture2D texture = TextureAsset.Value;
         Rectangle frame = texture.Frame(1, 5, 0, style);
         SpriteEffects flip = direction > 0 ? SpriteEffects.None : SpriteEffects.FlipVertically;
-        Color scaleProgress = new Color(scale, progress, 0, 1);
-        float drawScale = scale * MathF.Sqrt(Utils.GetLerpValue(0f, 6f, time, true)) * (0.4f + progress * 0.5f);
+        Color scaleProgress = new Color(Scale.X, progress, 0, 1);
+        Vector2 drawScale = Scale * MathF.Sqrt(Utils.GetLerpValue(0f, 6f, time, true)) * (0.4f + progress * 0.5f);
 
         Vector2 squish = new Vector2(1f - progress * 0.1f, 1f + progress * 0.1f);
-        spriteBatch.Draw(texture, position - Main.screenPosition, frame, scaleProgress, rotation, frame.Size() * 0.5f, squish * drawScale * 0.5f, flip, 0);
+        spriteBatch.Draw(texture, Position - Main.screenPosition, frame, scaleProgress, Rotation, frame.Size() * 0.5f, squish * drawScale * 0.5f, flip, 0);
+    }
+    
+    protected override SmokeSplatterMetaball NewInstance()
+    {
+        return new SmokeSplatterMetaball();
     }
 }

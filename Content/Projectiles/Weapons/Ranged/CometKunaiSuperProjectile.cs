@@ -50,14 +50,14 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 }
 
                 if (Main.rand.NextBool(50)) {
-                    CalamityHunt.particles.Add(Particle.Create<SmokeSplatterParticle>(particle => {
-                        particle.position = Projectile.Center + Projectile.velocity + Main.rand.NextVector2Circular(20, 20);
-                        particle.velocity = Projectile.velocity * 0.5f;
-                        particle.scale = Main.rand.NextFloat(0.5f, 1f);
-                        particle.color = Color.Lerp(Color.Blue, Color.RoyalBlue, 0.3f) with { A = 20 };
+                    CalamityHunt.Particles.SpawnParticle<SmokeSplatterParticle>(particle => {
+                        particle.Position = Projectile.Center + Projectile.velocity + Main.rand.NextVector2Circular(20, 20);
+                        particle.Velocity = Projectile.velocity * 0.5f;
+                        particle.Scale = new Vector2(Main.rand.NextFloat(0.5f, 1f));
+                        particle.Color = Color.Lerp(Color.Blue, Color.RoyalBlue, 0.3f) with { A = 20 };
                         particle.maxTime = 90;
                         particle.fadeColor = Color.Blue with { A = 20 };
-                    }));
+                    });
                 }
             }
 
@@ -83,20 +83,20 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                     Projectile.timeLeft = 240;
                     MiscTime++;
                     if (MiscTime == 60) {
-                        CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
-                            particle.position = Projectile.Center;
-                            particle.velocity = MathHelper.PiOver4.ToRotationVector2();
-                            particle.scale = 3f;
-                            particle.color = new Color(50, 180, 255, 0);
+                        CalamityHunt.Particles.SpawnParticle<CrossSparkle>(particle => {
+                            particle.Position = Projectile.Center;
+                            particle.Velocity = MathHelper.PiOver4.ToRotationVector2();
+                            particle.Scale = new Vector2(3f);
+                            particle.Color = new Color(50, 180, 255, 0);
                             particle.anchor = () => Projectile.velocity * 0.2f;
-                        }));
-                        CalamityHunt.particles.Add(Particle.Create<CrossSparkle>(particle => {
-                            particle.position = Projectile.Center;
-                            particle.velocity = Vector2.Zero;
-                            particle.scale = 2f;
-                            particle.color = new Color(50, 180, 255, 0);
+                        });
+                        CalamityHunt.Particles.SpawnParticle<CrossSparkle>(particle => {
+                            particle.Position = Projectile.Center;
+                            particle.Velocity = Vector2.Zero;
+                            particle.Scale = new Vector2(2f);
+                            particle.Color = new Color(50, 180, 255, 0);
                             particle.anchor = () => Projectile.velocity * 0.2f;
-                        }));
+                        });
 
                         //sound
                     }
@@ -173,15 +173,15 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.timeLeft = stick ? 180 : 30;
 
             for (int i = 0; i < 3; i++) {
-                CalamityHunt.particles.Add(Particle.Create<SmokeSplatterParticle>(particle => {
-                    particle.position = Projectile.Center + Projectile.velocity + Main.rand.NextVector2Circular(20, 20);
-                    particle.velocity = Vector2.Zero;
-                    particle.scale = Main.rand.NextFloat(2f, 4f);
-                    particle.color = Color.Lerp(Color.Blue, Color.RoyalBlue, 0.3f) with { A = 20 };
+                CalamityHunt.Particles.SpawnParticle<SmokeSplatterParticle>(particle => {
+                    particle.Position = Projectile.Center + Projectile.velocity + Main.rand.NextVector2Circular(20, 20);
+                    particle.Velocity = Vector2.Zero;
+                    particle.Scale = new Vector2(Main.rand.NextFloat(2f, 4f));
+                    particle.Color = Color.Lerp(Color.Blue, Color.RoyalBlue, 0.3f) with { A = 20 };
                     particle.maxTime = 90;
                     particle.fadeColor = Color.Blue with { A = 20 };
                     particle.anchor = () => Projectile.velocity;
-                }));
+                });
             }
 
             if (stick && Main.myPlayer == Projectile.owner) {

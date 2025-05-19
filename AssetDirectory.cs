@@ -32,8 +32,6 @@ public static class AssetDirectory
         public static readonly Asset<Texture2D> AshenSoulEye = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/SoulEyes/AshenSoulEye");
         public static readonly Asset<Texture2D> RottenSoulEye = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/SoulEyes/RottenSoulEye");
 
-        public static Dictionary<int, Asset<Texture2D>> Particle = new Dictionary<int, Asset<Texture2D>>();
-        public static Dictionary<int, Asset<Texture2D>> Particle2 = new Dictionary<int, Asset<Texture2D>>();
         public static Dictionary<int, Asset<Texture2D>> Relic = new Dictionary<int, Asset<Texture2D>>();
         public static Dictionary<int, Asset<Texture2D>> FlyingSlime = new Dictionary<int, Asset<Texture2D>>();
 

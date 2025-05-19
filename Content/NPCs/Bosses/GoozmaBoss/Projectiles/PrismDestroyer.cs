@@ -75,12 +75,12 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
                 DelegateMethods.v3_1 = rayColor.ToVector3() * 0.4f * Projectile.scale;
 
                 if (Main.rand.NextBool(15)) {
-                    CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
-                        particle.position = Projectile.Center;
-                        particle.velocity = new Vector2(15 * Projectile.scale).RotatedBy(Projectile.rotation - MathHelper.PiOver4 + MathHelper.TwoPi / Rays * i).RotatedByRandom(0.3f);
-                        particle.scale = Main.rand.NextFloat(0.1f, 1.1f);
-                        particle.color = rayColor;
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<PrettySparkle>(particle => {
+                        particle.Position = Projectile.Center;
+                        particle.Velocity = new Vector2(15 * Projectile.scale).RotatedBy(Projectile.rotation - MathHelper.PiOver4 + MathHelper.TwoPi / Rays * i).RotatedByRandom(0.3f);
+                        particle.Scale = new Vector2(Main.rand.NextFloat(0.1f, 1.1f));
+                        particle.Color = rayColor;
+                    });
                 }
                 Utils.PlotTileLine(Projectile.Center, Projectile.Center + new Vector2(400 * Projectile.scale).RotatedBy(Projectile.rotation - MathHelper.PiOver4 + MathHelper.TwoPi / Rays * i), 1f, DelegateMethods.CastLight);
             }

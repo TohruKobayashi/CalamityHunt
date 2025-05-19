@@ -71,24 +71,24 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 Projectile.rotation = Projectile.velocity.ToRotation();
 
                 if (Main.rand.NextBool(50))
-                    CalamityHunt.particles.Add(Particle.Create<DarkSludgeChunk>(particle => {
-                        particle.position = Projectile.Top + Main.rand.NextVector2Circular(20, 10) * Projectile.scale;
-                        particle.velocity = (-Vector2.UnitY.RotatedByRandom(1f) * 3 + Projectile.velocity) * Main.rand.NextFloat(0.5f, 1f);
-                        particle.color = Color.White;
-                        particle.scale = 0.1f + Main.rand.NextFloat();
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<DarkSludgeChunk>(particle => {
+                        particle.Position = Projectile.Top + Main.rand.NextVector2Circular(20, 10) * Projectile.scale;
+                        particle.Velocity = (-Vector2.UnitY.RotatedByRandom(1f) * 3 + Projectile.velocity) * Main.rand.NextFloat(0.5f, 1f);
+                        particle.Color = Color.White;
+                        particle.Scale = new Vector2(0.1f + Main.rand.NextFloat());
+                    });
             }
             else
             {
                 Projectile.velocity *= 0.05f;
 
                 if (Main.rand.NextBool(150))
-                    CalamityHunt.particles.Add(Particle.Create<DarkSludgeChunk>(particle => {
-                        particle.position = Projectile.Top + Main.rand.NextVector2Circular(20, 10) * Projectile.scale;
-                        particle.velocity = (-Vector2.UnitY.RotatedByRandom(1f) * 6 + Projectile.velocity) * Main.rand.NextFloat(0.5f, 1f);
-                        particle.color = Color.White;
-                        particle.scale = 0.1f + Main.rand.NextFloat();
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<DarkSludgeChunk>(particle => {
+                        particle.Position = Projectile.Top + Main.rand.NextVector2Circular(20, 10) * Projectile.scale;
+                        particle.Velocity = (-Vector2.UnitY.RotatedByRandom(1f) * 6 + Projectile.velocity) * Main.rand.NextFloat(0.5f, 1f);
+                        particle.Color = Color.White;
+                        particle.Scale = new Vector2(0.1f + Main.rand.NextFloat());
+                    });
             }
 
             if (StickHost > -1)
@@ -193,12 +193,12 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                 SoundEngine.PlaySound(SoundID.NPCDeath9, Projectile.Center);
 
                 for (int i = 0; i < 2; i++)
-                    CalamityHunt.particles.Add(Particle.Create<DarkSludgeChunk>(particle => {
-                        particle.position = Projectile.Top + Main.rand.NextVector2Circular(20, 10) * Projectile.scale;
-                        particle.velocity = (-Vector2.UnitY.RotatedByRandom(1f) * 9 + Projectile.velocity) * Main.rand.NextFloat(0.5f, 1f);
-                        particle.color = Color.White;
-                        particle.scale = 0.2f + Main.rand.NextFloat();
-                    }));
+                    CalamityHunt.Particles.SpawnParticle<DarkSludgeChunk>(particle => {
+                        particle.Position = Projectile.Top + Main.rand.NextVector2Circular(20, 10) * Projectile.scale;
+                        particle.Velocity = (-Vector2.UnitY.RotatedByRandom(1f) * 9 + Projectile.velocity) * Main.rand.NextFloat(0.5f, 1f);
+                        particle.Color = Color.White;
+                        particle.Scale = new Vector2(0.2f + Main.rand.NextFloat());
+                    });
             }
 
             if (Grounded == 0 && MathF.Abs(Projectile.velocity.Y - oldVelocity.Y) > 0)

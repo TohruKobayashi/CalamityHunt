@@ -31,13 +31,13 @@ namespace CalamityHunt.Content.Projectiles
             Lighting.AddLight(Projectile.position, rainbowGlow.ToVector3());
 
             if (Main.rand.NextBool(5)) {
-                CalamityHunt.particles.Add(Particle.Create<ChromaticEnergyDust>(particle => {
-                    particle.position = Projectile.Center;
-                    particle.velocity = -Vector2.UnitY;
-                    particle.scale = 1f;
-                    particle.color = Color.White;
+                CalamityHunt.Particles.SpawnParticle<ChromaticEnergyDust>(particle => {
+                    particle.Position = Projectile.Center;
+                    particle.Velocity = -Vector2.UnitY;
+                    particle.Scale = new Vector2(1f);
+                    particle.Color = Color.White;
                     particle.colorData = new ColorOffsetData(true, Main.GlobalTimeWrappedHourly);
-                }));
+                });
             }
         }
 

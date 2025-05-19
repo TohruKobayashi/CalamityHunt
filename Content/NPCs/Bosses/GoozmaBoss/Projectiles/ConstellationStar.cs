@@ -71,22 +71,22 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             }
 
             if (Main.rand.NextBool(10)) {
-                CalamityHunt.particles.Add(Particle.Create<PrettySparkle>(particle => {
-                    particle.position = Projectile.Center;
-                    particle.velocity = Main.rand.NextVector2Circular(4, 4);
-                    particle.scale = Main.rand.NextFloat(0.15f, 1.15f) * Projectile.scale;
-                    particle.color = new Color(30, 15, 8, 0);
-                }));
+                CalamityHunt.Particles.SpawnParticle<PrettySparkle>(particle => {
+                    particle.Position = Projectile.Center;
+                    particle.Velocity = Main.rand.NextVector2Circular(4, 4);
+                    particle.Scale = new Vector2(Main.rand.NextFloat(0.15f, 1.15f) * Projectile.scale);
+                    particle.Color = new Color(30, 15, 8, 0);
+                });
             }
 
-            CosmosMetaball.particles.Add(Particle.Create<SmokeSplatterMetaball>(particle => {
-                particle.position = Projectile.Center;
-                particle.velocity = Main.rand.NextVector2Circular(4, 4);
-                particle.scale = Main.rand.NextFloat(1f, 2f) * Projectile.scale;
+            CosmosMetaball.Particles.SpawnParticle<SmokeSplatterMetaball>(particle => {
+                particle.Position = Projectile.Center;
+                particle.Velocity = Main.rand.NextVector2Circular(4, 4);
+                particle.Scale = new Vector2(Main.rand.NextFloat(1f, 2f) * Projectile.scale);
                 particle.maxTime = Main.rand.Next(10, 30);
-                particle.color = Color.White;
+                particle.Color = Color.White;
                 particle.fadeColor = Color.White;
-            }));
+            });
 
             if (Time + (int)(WhoAmI * 0.3f) > 640) {
                 Projectile.Kill();

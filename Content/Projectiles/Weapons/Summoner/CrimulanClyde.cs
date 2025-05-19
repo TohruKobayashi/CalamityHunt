@@ -256,14 +256,14 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
             if (air) {
                 Color color = new Color(255, 150, 150, 0);
 
-                CalamityHunt.particles.Add(Particle.Create<MicroShockwave>(particle => {
-                    particle.position = Projectile.Bottom;
-                    particle.velocity = Vector2.Zero;
-                    particle.scale = 1.5f;
-                    particle.color = color;
+                CalamityHunt.Particles.SpawnParticle<MicroShockwave>(particle => {
+                    particle.Position = Projectile.Bottom;
+                    particle.Velocity = Vector2.Zero;
+                    particle.Scale = new Vector2(1.5f);
+                    particle.Color = color;
                     particle.secondColor = new Color(255, 255, 168, 120);
                     particle.shader = GameShaders.Armor.GetSecondaryShader(Player.cMinion, Player);
-                }));
+                });
 
                 for (int i = 0; i < Main.rand.Next(3, 7); i++) {
                     Dust sparkle = Dust.NewDustPerfect(Projectile.Bottom + Main.rand.NextVector2Circular(9, 4), DustID.SparkForLightDisc, Main.rand.NextVector2Circular(3, 1) - Vector2.UnitY * (i + 1) * 0.7f, 0, color, 1f + Main.rand.NextFloat());
