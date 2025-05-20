@@ -14,6 +14,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
         {
             ProjectileID.Sets.TrailCacheLength[Type] = 20;
             ProjectileID.Sets.TrailingMode[Type] = 2;
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 
         public override void SetDefaults()

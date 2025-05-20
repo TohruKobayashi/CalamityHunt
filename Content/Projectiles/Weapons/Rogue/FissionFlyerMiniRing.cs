@@ -13,6 +13,10 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
 {
     public class FissionFlyerMiniRing : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.width = 32;

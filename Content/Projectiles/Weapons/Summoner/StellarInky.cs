@@ -22,6 +22,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
         {
             ProjectileID.Sets.MinionSacrificable[Type] = true;
             ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
             Main.projFrames[Type] = 11;
         }
 

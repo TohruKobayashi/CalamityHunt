@@ -14,6 +14,10 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Magic
 {
     public class CrystalGauntletBallThrown : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.width = 48;
