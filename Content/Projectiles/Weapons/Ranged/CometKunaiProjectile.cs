@@ -55,7 +55,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                     int t = Projectile.FindTargetWithLineOfSight(1000);
                     if (t > -1 && Main.myPlayer == Projectile.owner) {
                         if (Main.npc[t].Distance(Main.MouseWorld) < 1500) {
-                            Projectile.velocity += Projectile.DirectionTo(Main.npc[t].Center).SafeNormalize(Vector2.Zero);
+                            Projectile.velocity = (Projectile.velocity*0.97f) + (Projectile.DirectionTo(Main.npc[t].Center).SafeNormalize(Vector2.Zero)/0.97f) ;
                             Projectile.netUpdate = true;
                         }
                     }
@@ -84,7 +84,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                     }
                 }
 
-                Projectile.velocity *= 0.95f;
+                Projectile.velocity *= 0.97f;
                 Projectile.localAI[0] *= 0.9f;
 
                 if (Projectile.timeLeft == 10) {
@@ -121,7 +121,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.extraUpdates = 1;
             Projectile.ai[0] = stick ? -2 : -1;
             Projectile.localAI[1] = 1f;
-            Projectile.timeLeft = stick ? 80 : 5;
+            Projectile.timeLeft = stick ? 80 : 50;
             if (stick) {
                 Projectile.tileCollide = false;
                 SoundStyle attachSound = SoundID.Item108 with { MaxInstances = 0, Pitch = 1f, PitchVariance = 0.2f, Volume = 0.2f };
@@ -151,7 +151,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.player[Projectile.owner].Center, Main.rand.NextVector2CircularEdge(3, 3), ModContent.ProjectileType<CometKunaiGhostProjectile>(), Projectile.damage, Projectile.knockBack, Projectile.owner, target.whoAmI);
         }
 
-        public override bool? CanDamage() => Projectile.ai[0] == 0;
+        public override bool? CanDamage() => Projectile.ai[0] == 0 || Projectile.ai[0] == -1;
 
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {
