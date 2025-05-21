@@ -120,7 +120,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.extraUpdates = 1;
             Projectile.ai[0] = stick ? -2 : -1;
             Projectile.localAI[1] = 1f;
-            Projectile.timeLeft = stick ? 80 : 50;
+            Projectile.timeLeft = stick ? 80 : 5;
             if (stick) {
                 Projectile.tileCollide = false;
                 SoundStyle attachSound = SoundID.Item108 with { MaxInstances = 0, Pitch = 1f, PitchVariance = 0.2f, Volume = 0.2f };
