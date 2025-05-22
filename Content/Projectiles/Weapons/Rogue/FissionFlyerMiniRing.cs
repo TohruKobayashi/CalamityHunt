@@ -13,6 +13,10 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
 {
     public class FissionFlyerMiniRing : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.width = 32;
@@ -22,10 +26,10 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
             Projectile.penetrate = 3;
             Projectile.friendly = true;
             Projectile.hostile = false;
-            Projectile.timeLeft = 240;
+            Projectile.timeLeft = 480;
             Projectile.extraUpdates = 1;
-            Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 15;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 15;
             Projectile.DamageType = DamageClass.Throwing;
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 DamageClass d;
@@ -43,7 +47,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
 
             int target = Projectile.FindTargetWithLineOfSight();
             if (target > -1) {
-                Projectile.velocity += Projectile.DirectionTo(Main.npc[target].Center) * 2f;
+                Projectile.velocity += Projectile.DirectionTo(Main.npc[target].Center) * 3f;
                 Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * Projectile.oldVelocity.Length();
             }
 
@@ -57,8 +61,11 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
 
             if (Projectile.ai[1] == 1) {
                 Projectile.penetrate = -1;
-                Projectile.scale = Utils.GetLerpValue(240, 200, Projectile.timeLeft, true) * Utils.GetLerpValue(0, 120, Projectile.timeLeft, true) * 5;
+                Projectile.scale = Utils.GetLerpValue(480, 400, Projectile.timeLeft, true) * Utils.GetLerpValue(0, 240, Projectile.timeLeft, true) * 7.5f;
                 Projectile.Resize((int)(60 * Projectile.scale), (int)(60 * Projectile.scale));
+                if (target > -1) {
+                    Projectile.velocity += Projectile.DirectionTo(Main.npc[target].Center) * 0.02f;
+                }
             }
 
             Time++;
@@ -78,6 +85,13 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(ModContent.BuffType<FusionBurn>(), 180);
+            if (Projectile.ai[1] == 1) {
+                if (Projectile.numHits > 1) {
+                    Projectile.damage = (int)(Projectile.damage * 0.95f);
+                    if (Projectile.numHits > 13)
+                        Projectile.damage = Projectile.originalDamage / 2;
+                }
+            }
         }
 
         public override bool PreDraw(ref Color lightColor)

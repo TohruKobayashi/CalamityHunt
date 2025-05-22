@@ -27,7 +27,7 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
         {
             Item.width = 90;
             Item.height = 38;
-            Item.damage = 750;
+            Item.damage = 400;
             Item.noMelee = true;
             Item.useAnimation = 15;
             Item.useTime = 3;
@@ -41,7 +41,6 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
             Item.rare = ModContent.RarityType<VioletRarity>();
             Item.useAmmo = AmmoID.Gel;
             Item.value = Item.sellPrice(gold: 20);
-            Item.ArmorPenetration = 15;
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 ModRarity r;
                 Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
@@ -80,7 +79,7 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
                     .AddIngredient(calamity.Find<ModItem>("PristineFury").Type)
                     .AddIngredient(calamity.Find<ModItem>("OverloadedBlaster").Type)
                     .AddIngredient(calamity.Find<ModItem>("AuroraBlazer").Type)
-                    .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
+                    .AddTile(calamity.Find<ModTile>("CosmicAnvil").Type)
                     .AddCustomShimmerResult(calamityHunt.Find<ModItem>("TrailblazerGoggles").Type)
                     .AddCustomShimmerResult(calamityHunt.Find<ModItem>("TrailblazerBackpack").Type)
                     .Register();

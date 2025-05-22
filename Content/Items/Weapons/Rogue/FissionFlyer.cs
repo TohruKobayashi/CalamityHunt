@@ -17,7 +17,7 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
         {
             Item.width = 50;
             Item.height = 50;
-            Item.damage = 950;
+            Item.damage = 350;
             Item.noMelee = true;
             Item.noUseGraphic = true;
             Item.useAnimation = 30;
@@ -84,7 +84,7 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
                     .AddIngredient(calamity.Find<ModItem>("Valediction").Type)
                     .AddIngredient(calamity.Find<ModItem>("ToxicantTwister").Type)
                     .AddIngredient(calamity.Find<ModItem>("SludgeSplotch").Type, 100)
-                    .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
+                    .AddTile(calamity.Find<ModTile>("CosmicAnvil").Type)
                     .Register();
             }
             else {

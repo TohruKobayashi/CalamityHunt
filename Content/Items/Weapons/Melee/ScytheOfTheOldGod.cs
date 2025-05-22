@@ -26,7 +26,7 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
         {
             Item.width = 128;
             Item.height = 128;
-            Item.damage = 6200;
+            Item.damage = 3000;
             Item.DamageType = DamageClass.Melee;
             Item.rare = ModContent.RarityType<VioletRarity>();
             Item.useStyle = ItemUseStyleID.Swing;
@@ -101,7 +101,7 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
                     .AddIngredient(calamity.Find<ModItem>("LifefruitScythe").Type)
                     .AddIngredient(calamity.Find<ModItem>("EssenceFlayer").Type)
                     .AddIngredient(calamity.Find<ModItem>("AstralScythe").Type)
-                    .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
+                    .AddTile(calamity.Find<ModTile>("CosmicAnvil").Type)
                     .Register();
             }
             else {

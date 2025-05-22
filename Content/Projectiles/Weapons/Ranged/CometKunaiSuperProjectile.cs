@@ -18,8 +18,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
     {
         public override void SetDefaults()
         {
-            Projectile.width = 30;
-            Projectile.height = 30;
+            Projectile.width = 45;
+            Projectile.height = 45;
             Projectile.friendly = true;
             Projectile.tileCollide = true;
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
@@ -113,8 +113,9 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                     Projectile.netUpdate = true;
                 }
                 else if (Mode == 2) {
+                    Projectile.velocity = Vector2.Lerp(Projectile.velocity * 1.25f, Projectile.DirectionTo(Main.MouseWorld).SafeNormalize(Vector2.Zero), 0.1f);
                     Projectile.extraUpdates = 4;
-                    Projectile.velocity *= 1.12f;
+                    //Projectile.velocity *= 1.12f;
                     //Projectile.Center = Vector2.Lerp(Projectile.Center, player.MountedCenter + new Vector2(-1 * player.direction, -50), 0.5f);
 
                     player.ChangeDir(Projectile.velocity.X > 0 ? 1 : -1);
@@ -129,13 +130,6 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                     }
                 }
 
-                if (Mode == -1 && MiscTime++ % 4 == 0) {
-                    Vector2 position = Projectile.Center - new Vector2(0, 400) + Main.rand.NextVector2Circular(500, 300);
-                    Vector2 velocity = position.DirectionTo(Projectile.Center).RotatedByRandom(0.12f).SafeNormalize(Vector2.Zero) * position.Distance(Projectile.Center) * 0.024f;
-                    velocity.X *= 0.9f;
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), position, velocity, ModContent.ProjectileType<CometKunaiStarfall>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner);
-                }
-
                 if (Target > -1) {
                     NPC target = Main.npc[(int)Target];
                     {
@@ -147,6 +141,17 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
                             Projectile.Kill();
                         }
                     }
+                }
+                if (Mode == -1 && MiscTime++ % 4 == 0) {
+                    Vector2 aimAt = Projectile.Center;
+                    if (Target > -1) {
+                        NPC target = Main.npc[(int)Target];
+                        aimAt = target.Center;
+                    }
+                    Vector2 position = aimAt - new Vector2(0, 400) + Main.rand.NextVector2Circular(500, 300);
+                    Vector2 velocity = position.DirectionTo(aimAt).RotatedByRandom(0.12f).SafeNormalize(Vector2.Zero) * position.Distance(Projectile.Center) * 0.024f;
+                    velocity.X *= 0.9f;
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), position, velocity, ModContent.ProjectileType<CometKunaiStarfall>(), Projectile.damage / 2, Projectile.knockBack, Projectile.owner);
                 }
             }
 

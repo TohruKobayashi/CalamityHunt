@@ -13,7 +13,7 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
             Item.height = 18;
             Item.value = Item.sellPrice(gold: 10);
             Item.rare = ModContent.RarityType<VioletRarity>();
-            Item.defense = 46;
+            Item.defense = 30;
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 ModRarity r;
                 Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);

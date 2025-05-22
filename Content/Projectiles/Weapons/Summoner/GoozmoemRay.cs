@@ -20,6 +20,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.MinionShot[Type] = true;
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 
         public override void SetDefaults()

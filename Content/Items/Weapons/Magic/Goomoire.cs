@@ -16,7 +16,7 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
         {
             Item.width = 40;
             Item.height = 48;
-            Item.damage = 1750;
+            Item.damage = 1111;
             Item.DamageType = DamageClass.Magic;
             Item.rare = ModContent.RarityType<VioletRarity>();
             Item.useStyle = ItemUseStyleID.Thrust;
@@ -62,7 +62,7 @@ namespace CalamityHunt.Content.Items.Weapons.Magic
                     .AddIngredient(calamity.Find<ModItem>("Biofusillade").Type)
                     .AddIngredient(calamity.Find<ModItem>("AbyssalTome").Type)
                     .AddIngredient(calamity.Find<ModItem>("WintersFury").Type)
-                    .AddTile(calamity.Find<ModTile>("DraedonsForge").Type)
+                    .AddTile(calamity.Find<ModTile>("CosmicAnvil").Type)
                     .Register();
             }
             else {

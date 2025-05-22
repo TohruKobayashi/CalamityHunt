@@ -51,7 +51,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
             if (!Main.player[Projectile.owner].HasBuff<Absorption>()) {
                 Main.player[Projectile.owner].AddBuff(ModContent.BuffType<Absorption>(), 300);
             }
-
+            Projectile.damage = (int)(Projectile.damage * 0.95);
             Main.player[Projectile.owner].MinionAttackTargetNPC = target.whoAmI;
         }
 

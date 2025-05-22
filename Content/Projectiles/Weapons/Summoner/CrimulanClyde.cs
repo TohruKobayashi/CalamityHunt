@@ -20,6 +20,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
         {
             ProjectileID.Sets.MinionSacrificable[Type] = true;
             ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
             Main.projFrames[Type] = 1;
         }
 
@@ -65,7 +66,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
             iAmInAir = false;
 
             Projectile.rotation = 0f;
-            Projectile.damage = Player.GetModPlayer<SlimeCanePlayer>().highestOriginalDamage;
+            //Projectile.damage = Player.GetModPlayer<SlimeCanePlayer>().highestOriginalDamage;
             int target = -1;
             Projectile.Minion_FindTargetInRange(1200, ref target, false);
             bool hasTarget = false;
@@ -178,7 +179,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
                 }
             }
 
-            Projectile.velocity.X = MathHelper.Lerp(Projectile.velocity.X, State == (int)SlimeMinionState.Attacking ? 0f : (target.Center.X - Projectile.Center.X) * 0.03f, 0.1f);
+            Projectile.velocity.X = MathHelper.Lerp(Projectile.velocity.X, State == (int)SlimeMinionState.Attacking ? 0f : (target.Center.X - Projectile.Center.X) * 0.12f, 0.1f);
 
             if (State == (int)SlimeMinionState.Attacking) {
                 Time++;

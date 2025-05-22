@@ -360,7 +360,7 @@ Items: {
 		Tooltip:
 			'''
 			Uses gel for ammo
-			Ignores 15 points of enemy Defense
+			Ignores 30 points of enemy Defense
 			80% chance save ammo
 			'''
 	}
@@ -382,7 +382,7 @@ Items: {
 		Tooltip:
 			'''
 			Chucks a chakram that splits into a volley of 3 Razor Ringlets
-			Stealth strikes split into more Ringlets and leave behind a colossal blade 
+			Stealth strikes leave behind a colossal blade 
 			'''
 	}
 
@@ -956,7 +956,7 @@ Configs: {
 OrRev: " or Revengeance"
 SetBonuses.Shogun:
 	'''
-	17% increased damage and +5 max minions
+	+5 max minions
 	+100 maximum stealth while holding a Rogue weapon
 	{$CommonItemTooltip.FlightAndSlowfall}
 	Wearing any wings overrides this flight

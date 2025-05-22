@@ -16,6 +16,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.MinionShot[Type] = true;
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
         }
 
         public override void SetDefaults()
@@ -26,7 +27,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.localNPCHitCooldown = 16;
             Projectile.DamageType = DamageClass.Summon;
             Projectile.timeLeft = 80;
             Projectile.hide = true;

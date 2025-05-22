@@ -16,6 +16,10 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
 {
     public class FissionFlyerProj : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.CultistIsResistantTo[Projectile.type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.width = 36;
@@ -26,8 +30,8 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.timeLeft = 10000;
-            Projectile.usesIDStaticNPCImmunity = true;
-            Projectile.idStaticNPCHitCooldown = 15;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
             Projectile.DamageType = DamageClass.Throwing;
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 DamageClass d;
@@ -46,7 +50,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
                 Projectile.scale = 0.3f + Utils.GetLerpValue(0, 60, Time, true) * 0.7f;
                 if (Time == 105) {
                     SoundEngine.PlaySound(AssetDirectory.Sounds.Weapons.FissionFlyerExplode, Projectile.Center);
-                    int amt = Projectile.ai[2] == 1 ? 5 : 3;
+                    int amt = Projectile.ai[2] == 1 ? 0 : 3;
                     for (int i = 0; i < amt; i++) {
                         Vector2 velocity = new Vector2(0, 10).RotatedBy(MathHelper.TwoPi / amt * i);
                         Projectile ring = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, velocity, ModContent.ProjectileType<FissionFlyerMiniRing>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
@@ -54,7 +58,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Rogue
                     }
 
                     if (Projectile.ai[2] == 1) {
-                        Projectile ring = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FissionFlyerMiniRing>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                        Projectile ring = Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FissionFlyerMiniRing>(), (int)(Projectile.damage*2), Projectile.knockBack, Projectile.owner);
                         ring.ai[1] = 1;
                     }
                     for (int j = 0; j < 40; j++) {

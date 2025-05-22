@@ -204,12 +204,16 @@ namespace CalamityHunt.Common.Players
                     stress += 0.0005f + ((dis > 0 && dis <= 320) ? 0.0005f : 0.0005f - (dis / 320 * 0.0005f));
                     delay = 5;
                 }
+                int dam = hit.SourceDamage;
+                if (dam > 10000) {
+                    dam = 10000 + (hit.SourceDamage / 3);
+                }
                 if (Player.ownedProjectileCounts[ModContent.ProjectileType<StressExplosion>()] < 1 && wait == 0 && checkStress >= 0.25f && checkStress < 0.75) {
-                    Projectile.NewProjectile(proj.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<StressExplosion>(), (int)(damageDone * 0.2f), 0, Player.whoAmI, 0, 0);
+                    Projectile.NewProjectile(proj.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<StressExplosion>(), (int)(dam * 0.2f), 0, Player.whoAmI, 0, 0);
                     wait = 60;
                 }
                 else if (Player.ownedProjectileCounts[ModContent.ProjectileType<StressExplosion>()] < 1 && wait == 0 && stress >= 0.75f) {
-                    Projectile.NewProjectile(proj.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<StressExplosion>(), (int)(damageDone * 0.4f), 0, Player.whoAmI, 0, 1);
+                    Projectile.NewProjectile(proj.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<StressExplosion>(), (int)(dam * 0.4f), 0, Player.whoAmI, 0, 1);
                     wait = 60;
                 }
             }
@@ -287,12 +291,16 @@ namespace CalamityHunt.Common.Players
                     sp.stress += 0.0005f + ((dis > 0 && dis <= 320) ? 0.0005f : 0.0005f - (dis / 320 * 0.0005f));
                     sp.delay = 5;
                 }
+                int dam = hit.SourceDamage;
+                if (dam > 10000) {
+                    dam = 10000 + (hit.SourceDamage / 3);
+                }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<StressExplosion>()] < 1 && sp.wait == 0 && sp.checkStress >= 0.25f && sp.checkStress < 0.75) {
-                    Projectile.NewProjectile(player.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<StressExplosion>(), (int)(damageDone * 0.2f), 0, player.whoAmI, 0, 0);
+                    Projectile.NewProjectile(player.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<StressExplosion>(), (int)(dam * 0.2f), 0, player.whoAmI, 0, 0);
                     sp.wait = 60;
                 }
                 else if (player.ownedProjectileCounts[ModContent.ProjectileType<StressExplosion>()] < 1 && sp.wait == 0 && sp.checkStress >= 0.75f) {
-                    Projectile.NewProjectile(player.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<StressExplosion>(), (int)(damageDone * 0.4f), 0, player.whoAmI, 0, 1);
+                    Projectile.NewProjectile(player.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<StressExplosion>(), (int)(dam * 0.4f), 0, player.whoAmI, 0, 1);
                     sp.wait = 60;
                 }
             }

@@ -87,7 +87,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
                     }
 
                     if (Time > (int)(25 * speed) && Time < (int)(33 * speed)) {
-                        Vector2 stickyVelocity = (Projectile.velocity.ToRotation() + (rotation * 0.3f - 0.15f) * Projectile.direction).ToRotationVector2() * Main.rand.NextFloat(16f, 25f) * Utils.GetLerpValue(0, 35, Time, true);
+                        Vector2 stickyVelocity = (Projectile.velocity.ToRotation() + (rotation * 0.3f - 0.15f) * Projectile.direction).ToRotationVector2() * Main.rand.NextFloat(24f, 38f) * Utils.GetLerpValue(0, 35, Time, true);
                         Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.rotation.ToRotationVector2() * 60f, stickyVelocity + Player.velocity, ModContent.ProjectileType<ParasanguineBlood>(), Projectile.damage / 3, 0.5f, Player.whoAmI);
                     }
 
@@ -119,7 +119,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
                     rotation = 2f - SwingProgress(MathF.Pow(Utils.GetLerpValue(0, (int)(35 * speed), Time, true), 3f)) * 4f;
 
                     if (Time > (int)(20 * speed) && Time < (int)(32 * speed)) {
-                        Vector2 stickyVelocity = (Projectile.velocity.ToRotation() + (rotation * 0.3f - 0.77f) * Projectile.direction).ToRotationVector2() * Main.rand.NextFloat(17f, 27f) * Utils.GetLerpValue(0, (int)(35 * speed), Time, true) * Utils.GetLerpValue((int)(35 * speed), (int)(30 * speed), Time, true) * 1.1f;
+                        Vector2 stickyVelocity = (Projectile.velocity.ToRotation() + (rotation * 0.3f - 0.77f) * Projectile.direction).ToRotationVector2() * Main.rand.NextFloat(25f, 40f) * Utils.GetLerpValue(0, (int)(35 * speed), Time, true) * Utils.GetLerpValue((int)(35 * speed), (int)(30 * speed), Time, true) * 1.1f;
                         Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.rotation.ToRotationVector2() * 70f, stickyVelocity + Player.velocity, ModContent.ProjectileType<ParasanguineBlood>(), Projectile.damage / 3, 0.5f, Player.whoAmI);
                     }
 
@@ -184,7 +184,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
                         SoundEngine.PlaySound(SoundID.Item100, Projectile.Center);
                     }
                     if (Time > 25 && Time < 35) {
-                        for (int i = 0; i < 5; i++) {
+                        for (int i = 0; i < 3; i++) {
                             Vector2 stickyVelocity = Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedByRandom(1f) * Main.rand.NextFloat(18f, 32f) * Utils.GetLerpValue(0, 35, Time, true);
                             Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero) * 70f, stickyVelocity + Player.velocity, ModContent.ProjectileType<ParasanguineBlood>(), Player.GetWeaponDamage(Player.HeldItem) / 2, 0.5f, Player.whoAmI);
                         }
@@ -217,7 +217,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Melee
                     }
                     else {
                         Player.GetModPlayer<GoozmaWeaponsPlayer>().parasolBlood -= 100;
-                        Projectile.damage = Player.GetWeaponDamage(Player.HeldItem);
+                        Projectile.damage = (int)(Player.GetWeaponDamage(Player.HeldItem) * 1.4);
 
                         for (int i = 0; i < 10; i++) {
                             Vector2 pos = Projectile.Center + Projectile.rotation.ToRotationVector2() * 80f + Main.rand.NextVector2Circular(120, 40).RotatedBy(Projectile.rotation);
