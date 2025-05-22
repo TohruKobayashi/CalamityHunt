@@ -22,7 +22,7 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
             Item.height = 30;
             Item.value = Item.sellPrice(gold: 10);
             Item.rare = ModContent.RarityType<VioletRarity>();
-            Item.defense = 48;
+            Item.defense = 32;
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 ModRarity r;
                 Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
@@ -58,7 +58,7 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
             player.jumpSpeedBoost += 2f;
             player.noKnockback = true;
             player.GetModPlayer<ShogunArmorPlayer>().active = true;
-            player.GetDamage(DamageClass.Generic) += 0.18f;
+            //player.GetDamage(DamageClass.Generic) += 0.18f;
             player.maxMinions += 5;
 
             // if holding a rogue weapon, give the player stealth

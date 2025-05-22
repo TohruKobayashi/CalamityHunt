@@ -33,7 +33,7 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
             Item.height = 24;
             Item.value = Item.sellPrice(gold: 10);
             Item.rare = ModContent.RarityType<VioletRarity>();
-            Item.defense = 50;
+            Item.defense = 38;
             Item.lifeRegen = 3;
 
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
@@ -48,8 +48,8 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
         {
             player.GetDamage(DamageClass.Generic) += 0.20f;
             player.endurance += 0.09f;
-            player.statLifeMax2 += 150;
-            player.statManaMax2 += 150;
+            player.statLifeMax2 += 100;
+            player.statManaMax2 += 100;
         }
 
         public override bool WingUpdate(Player player, bool inUse)

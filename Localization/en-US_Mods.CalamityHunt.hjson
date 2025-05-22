@@ -956,7 +956,7 @@ Configs: {
 OrRev: " or Revengeance"
 SetBonuses.Shogun:
 	'''
-	17% increased damage and +5 max minions
+	+5 max minions
 	+100 maximum stealth while holding a Rogue weapon
 	{$CommonItemTooltip.FlightAndSlowfall}
 	Wearing any wings overrides this flight
