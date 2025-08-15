@@ -418,7 +418,7 @@ Items: {
 		Tooltip: 在史莱姆忍者雕像两侧摆放4个史莱姆雕像并对其使用，可以召唤一场史莱姆雨
 	}
 
-	SludgeFocus: {
+	PluripotentSpawnEgg: {
 		DisplayName: 多能刷怪蛋
 		Tooltip:
 			'''
@@ -556,6 +556,36 @@ Items: {
 		// DisplayName: 虹色篝火
 		// Tooltip: ""
 	}
+
+	AshenSoul: {
+		// DisplayName: Ashen Auric Soul
+		// Tooltip: Absorb to gain immense, magmatic powers
+	}
+
+	RottenSoul: {
+		// DisplayName: Rotten Auric Soul
+		// Tooltip: Absorb to gain immense, radioactive powers
+	}
+
+	GoozmaMusicBoxExiledP1: {
+		// DisplayName: Music Box (Exiled Goozma)
+		// Tooltip: ""
+	}
+
+	GoozmaMusicBoxExiledP2: {
+		// DisplayName: Music Box (Exiled Goozma Desperate)
+		// Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP1: {
+		// DisplayName: Music Box (Jteoh Goozma)
+		// Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP2: {
+		// DisplayName: Music Box (Jteoh Goozma Desperate)
+		// Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -567,6 +597,12 @@ NPCs: {
 			SpawnInfo: 击败血肉墙后，将[i:CalamityHunt/OverloadedSludge]在史莱姆雨期间扔到史莱姆王身上。
 			DespawnMessage: "[c/7a7a7a:{0} {1}分崩离析了……]"
 		}
+
+		/* InfernumTitle:
+			'''
+			Sludge Flashpoint 
+			Goozma
+			''' */
 	}
 
 	CrimulanGlopstrosity.DisplayName: 血污噬胶
@@ -736,6 +772,10 @@ Tiles: {
 	GoozmaSoulMusicBoxTile.MapEntry: 音乐盒
 	YharonSoulMusicBoxTile.MapEntry: 音乐盒
 	// ChromaticCampfirePlaced.MapEntry: 虹色篝火
+	// GoozmaMusicBoxExiledP1Tile.MapEntry: Goozma Music Box Exiled P1 Tile
+	// GoozmaMusicBoxExiledP2Tile.MapEntry: Goozma Music Box Exiled P2 Tile
+	// GoozmaMusicBoxJteohP1Tile.MapEntry: Goozma Music Box Jteoh P1 Tile
+	// GoozmaMusicBoxJteohP2Tile.MapEntry: Goozma Music Box Jteoh P2 Tile
 }
 
 Config: {
@@ -852,6 +892,11 @@ Configs: {
 				启用针对测试游戏机制的功能优化
 				不建议玩家启用
 				''' */
+		}
+
+		GoozmaMusicPreference: {
+			// Label: Goozma Music Preference
+			// Tooltip: ""
 		}
 	}
 }

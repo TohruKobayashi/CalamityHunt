@@ -110,7 +110,7 @@ Items: {
 
 	GoozmaSoul: {
 		DisplayName: Хроматическая ауритовая душа
-		Tooltip: Поглотите, чтобы обрести необъятные, скользкие силы
+		Tooltip: Поглотите, чтобы обрести необъятные скользкие силы
 	}
 
 	YharonSoulMusicBox: {
@@ -280,7 +280,7 @@ Items: {
 	}
 
 	CrystalGauntlets: {
-		DisplayName: Кристаллические Перчатки
+		DisplayName: Кристаллические перчатки
 		Tooltip:
 			'''
 			Удерживайте <left>, чтобы собирать энергию, формируя мощный шар из молний
@@ -291,7 +291,7 @@ Items: {
 	}
 
 	SplendorJam: {
-		DisplayName: Варенье Великолепия
+		DisplayName: Варенье великолепия
 		Tooltip:
 			'''
 			Активирует шкалу стресса
@@ -335,7 +335,7 @@ Items: {
 
 	SupremeRestorationPotion: {
 		RestoreLifeText: Mods.CalamityHunt.Items.SupremeRestorationPotion.RestoreLifeText
-		DisplayName: Омега Зелье Восстановления
+		DisplayName: Омега зелье восстановления
 		Tooltip: Снижено время перезарядки зелий
 	}
 
@@ -345,13 +345,13 @@ Items: {
 	}
 
 	StickyHand: {
-		DisplayName: Мерзкая рука
+		DisplayName: Липко-мерзкая рука
 		Tooltip:
 			'''
 			Автоматически отцепляется, когда вы достаточно близки к крюку
 			Зажмите клавишу крюка, чтобы прикрепиться к блоку
-			'It won't break, I promise'
-			//'Уверяю Вас — она не порвётся'
+			{$}
+			'Уверяю Вас — она не порвётся'
 			'''
 	}
 
@@ -420,7 +420,7 @@ Items: {
 		Tooltip: Используйте на статуе ниндзя слизней, находящейся возле 4 статуй слизня, чтобы вызвать дождь из слизней
 	}
 
-	SludgeFocus: {
+	PluripotentSpawnEgg: {
 		DisplayName: Плюрипотентное яйцо призыва
 		Tooltip:
 			'''
@@ -558,6 +558,36 @@ Items: {
 		DisplayName: Хроматический костёр
 		Tooltip: ""
 	}
+
+	AshenSoul: {
+		DisplayName: Пепельная ауритовая душа
+		Tooltip: Поглотите, чтобы обрести необъятные магматические силы
+	}
+
+	RottenSoul: {
+		DisplayName: Сгнившая ауритовая душа
+		Tooltip: Поглотите, чтобы получить необъятные радиоактивные силы
+	}
+
+	GoozmaMusicBoxExiledP1: {
+		DisplayName: Музыкальная шкатулка (Гузма: Изгнание)
+		Tooltip: ""
+	}
+
+	GoozmaMusicBoxExiledP2: {
+		DisplayName: Музыкальная шкатулка (Гузма: Изгнание, отчаяние)
+		Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP1: {
+		DisplayName: Музыкальная шкатулка (Гузма: Jteoh)
+		Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP2: {
+		DisplayName: Музыкальная шкатулка (Гузма: Jteoh, отчаяние)
+		Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -569,6 +599,12 @@ NPCs: {
 			SpawnInfo: Киньте [i:CalamityHunt/OverloadedSludge] в Короля слизней во время слизневого дождя после победы над Стеной плоти.
 			DespawnMessage: "[c/7a7a7a:{0} {1} дезинтегрируется...]"
 		}
+
+		InfernumTitle:
+			'''
+			Точка Возгорания Слизи 
+			Гузма
+			'''
 	}
 
 	CrimulanGlopstrosity.DisplayName: Багротановое каплище
@@ -576,7 +612,7 @@ NPCs: {
 	EbonianBehemuck.DisplayName: Эбонитовый гряземот
 	StellarGeliath.DisplayName: Звёздный гелиаф
 	Goozmite.DisplayName: Гузмит
-	// GelatinousSpawn.DisplayName: Gelatinous Spawn
+	GelatinousSpawn.DisplayName: Желатиновый отросток
 	PluripotentSpawn.DisplayName: Плюрипотентный отросток
 }
 
@@ -631,7 +667,7 @@ Projectiles: {
 	SludgeShakerHeld.DisplayName: Сотрясатель слякоти
 	DarkSludge.DisplayName: Тёмная слякоть
 	SludgeLighter.DisplayName: Зажигатель слякоти
-	StickyHandProj.DisplayName: Мерзкая рука
+	StickyHandProj.DisplayName: Липко-мерзкая рука
 	TrailblazerFlame.DisplayName: Пламя первопроходца
 	FissionFlyerProj.DisplayName: Расщепляющий резак
 	FissionFlyerMiniRing.DisplayName: Колкое кольцо
@@ -738,6 +774,10 @@ Tiles: {
 	GoozmaSoulMusicBoxTile.MapEntry: Музыкальная шкатулка
 	YharonSoulMusicBoxTile.MapEntry: Музыкальная шкатулка
 	ChromaticCampfirePlaced.MapEntry: Поставленный хроматический костёр
+	GoozmaMusicBoxExiledP1Tile.MapEntry: Музыкальная шкатулка Гузмы: Изгнанный, Фаза 1
+	GoozmaMusicBoxExiledP2Tile.MapEntry: Музыкальная шкатулка Гузмы: Изгнанный, Фаза 2
+	GoozmaMusicBoxJteohP1Tile.MapEntry: Музыкальная шкатулка Гузмы: Jteoh, Фаза 1
+	GoozmaMusicBoxJteohP2Tile.MapEntry: Музыкальная шкатулка Гузмы: Jteoh, Фаза 2
 }
 
 Config: {
@@ -786,7 +826,8 @@ LoreGoozma:
 	'''
 	Самое устрашающее разочарование в иерархическом владении всего живущего.
 	Только подумать, что кульминация нижайших существ смогла бы несмотря ни на что обладать Ауритовой душой, не имея при этом драконьего происхождения...
-	Оно стало чем-то великим, приблизилось к идеальной сущности, состоящей из ничего, кроме неидеальных частей... Возможно, истинный источник божественной силы навсегда останется загадкой.
+	Оно стало чем-то великим, приблизилось к идеальной сущности, состоящей из ничего, кроме неидеальных частей...
+	Возможно, истинный источник божественной силы навсегда останется загадкой.
 	В противовес моим опасениям насчёт твоей культивации этого гротескного чудища стоит интерес в его сторону.
 	Что могло бы привести его к такой форме? Его внешность разоблачает хитрость и изысканность манипуляции над его подчинёнными. 
 	Какая же жалость, что плоды усилий его по итогу ни к чему не привели. Неустанный узор цикличных анналов истории.
@@ -854,6 +895,11 @@ Configs: {
 				Включает некоторые фичи, оптимизированные для тестирования игровых механик
 				Не рекомендуется для использования игроками
 				'''
+		}
+
+		GoozmaMusicPreference: {
+			Label: Предпочтения темы Гузмы
+			Tooltip: ""
 		}
 	}
 }

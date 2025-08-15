@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using CalamityHunt.Common.DropRules;
 using CalamityHunt.Common.GlobalNPCs;
 using CalamityHunt.Common.Graphics;
@@ -47,7 +46,6 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 using static CalamityHunt.Common.Systems.ConditionalValue;
-using static tModPorter.ProgressUpdate;
 
 namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss;
 
@@ -107,8 +105,25 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
         if (!Main.dedServ) {
             Music = AssetDirectory.Music.GoozmaSoul;
-            Music1 = AssetDirectory.Music.GoozmaPhase1;
-            Music2 = AssetDirectory.Music.GoozmaPhase2;
+
+            switch (Config.Instance.GoozmaMusicPreference) {
+                case "Vanilla":
+                    Music1 = MusicID.QueenSlime;
+                    Music2 = MusicID.MartianMadness;
+                    break;
+                case "Exiled One":
+                    Music1 = AssetDirectory.Music.ExiledGoozma1;
+                    Music2 = AssetDirectory.Music.ExiledGoozma2;
+                    break;
+                case "Jteoh":
+                    Music1 = AssetDirectory.Music.JteohGoozma1;
+                    Music2 = AssetDirectory.Music.JteohGoozma2;
+                    break;
+                default:
+                    Music1 = AssetDirectory.Music.ExiledGoozma1;
+                    Music2 = AssetDirectory.Music.ExiledGoozma2;
+                    break;
+            }
         }
 
         if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
@@ -124,6 +139,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             if ((bool)calamity.Call("GetDifficultyActive", "revengeance")) {
                 NPC.lifeMax = 4225000;
             }
+
+            NPC.lifeMax += (int)(NPC.lifeMax * (float)calamity.Call("GetBossHealthBoost") * 0.01f);
         }
         else {
             NPC.lifeMax = 1787500;
@@ -168,7 +185,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
     public override void ModifyNPCLoot(NPCLoot npcLoot)
     {
         npcLoot.Add(ItemDropRule.ByCondition(new GoozmaSoulDropRule(), ModContent.ItemType<GoozmaSoul>()));
-        
+
         if (ModLoader.HasMod(HUtils.CalamityMod)) {
             npcLoot.Add(ItemDropRule.ByCondition(new GoozmaDownedDropRule(), ModContent.ItemType<GoozmaLore>()));
         }
@@ -398,11 +415,13 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
     private bool initializedDeathRoar = false;
 
+    private int drillDashDriftDirection;
     private int drillDashCounter13 = 0;
     private bool fusionRayFlag = false;
 
     public override void AI()
     {
+        extraTentacleSwerve *= 0.94f;
 
         if (Phase == -1 && Time <= 0) {
 
@@ -1090,6 +1109,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                                 if (Time % dashTime > 25 && Time % dashTime < 74) {
 
+                                    drillDashDriftDirection = Math.Sign(NPC.velocity.X);
 
                                     //if (Main.netMode != NetmodeID.MultiplayerClient) {
                                     rotate = true;
@@ -1130,6 +1150,16 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                                 else {
                                     //if (Main.netMode != NetmodeID.MultiplayerClient) {
                                     NPC.velocity *= 0.7f;
+
+                                    // Spin in the direction that Goozma was originally going during his dash until he loses his angular momentum.
+                                    float rotationHorizontality = MathF.Cos(NPC.rotation);
+                                    if (rotationHorizontality < 0.97f) {
+                                        float rotationSlowdown = Utils.GetLerpValue(0.97f, 0.45f, rotationHorizontality, true);
+                                        NPC.rotation += drillDashDriftDirection * rotationSlowdown * 0.22f;
+                                        extraTentacleSwerve = MathHelper.Lerp(extraTentacleSwerve, rotationSlowdown * -0.22f, 0.16f);
+                                        rotate = true;
+                                    }
+                                    NPC.direction = drillDashDriftDirection;
                                     //}
                                 }
 
@@ -1512,7 +1542,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             case -23:
                 // eat astrageldon
                 Mod catalyst = ModLoader.GetMod(HUtils.CatalystMod);
- 
+
                 Attack = (int)AttackList.DevouringTheInnocent;
 
                 NPC.dontTakeDamage = true;
@@ -1555,7 +1585,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         NPC.active = false;
                     }
                 }
-                
+
                 break;
             default:
 
@@ -2006,17 +2036,17 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                     float angle = MathHelper.SmoothStep(1.5f, 0.9f, Time / 350f);
                     if (Time % 6 == 0) {
-                         
+
                         if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(angle).RotatedByRandom(0.3f) * Main.rand.Next(4, 7), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                         if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(-angle).RotatedByRandom(0.3f) * Main.rand.Next(4, 7), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                     }
                     if ((Time + 6) % 6 == 0) {
-                         
+
                         if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(angle + 0.3f).RotatedByRandom(0.3f) * Main.rand.Next(2, 4), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                         if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, Vector2.UnitY.RotatedBy(-angle - 0.3f).RotatedByRandom(0.3f) * Main.rand.Next(2, 4), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                     }
                     if (Target.Center.Y < NPC.Top.Y - 300) {
-                         
+
                         if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero) * Main.rand.Next(2, 8), ModContent.ProjectileType<SlimeShot>(), GetDamage(1), 0);
                     }
                 }
@@ -2239,7 +2269,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                 if (Phase == -2) {
                     if (Time >= 2 && !fusionRayFlag) {
-                         
+
                         if (Main.netMode != NetmodeID.MultiplayerClient) {
                             Projectile fusionRay = Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(Target.Center).SafeNormalize(Vector2.Zero), ModContent.ProjectileType<FusionRay>(), GetDamage(7), 0,
                                                                          ai0: 200,
@@ -2297,7 +2327,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                     if (Time > 500) {
                         if (Time % 70 == 0) {
                             SoundEngine.PlaySound(bloatSound, NPC.Center);
-                             
+
                             if (Main.netMode != NetmodeID.MultiplayerClient) Projectile.NewProjectileDirect(NPC.GetSource_FromAI(), NPC.Center, NPC.DirectionTo(targetPos).SafeNormalize(Vector2.Zero) * 5, ModContent.ProjectileType<BloatedBlast>(), GetDamage(5), 0);
                         }
 
@@ -2351,11 +2381,12 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
     private float extraTilt;
     private Vector2 drawOffset;
     private float headScale;
+    private float extraTentacleSwerve;
     public Vector2 drawVelocity;
     private Vector2 tentacleVelocity;
     private Vector2 tentacleAcceleration;
     private Vector2[] oldVel;
-    public bool rotate;
+    public bool rotate; // TODO -- Really opaque name. Consider renaming to ManuallyRotating or something maybe?
 
     public override void FindFrame(int frameHeight)
     {

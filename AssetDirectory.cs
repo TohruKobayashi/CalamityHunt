@@ -29,6 +29,8 @@ public static class AssetDirectory
         public static readonly Asset<Texture2D> Balloons = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/Balloons");
 
         public static readonly Asset<Texture2D> ChromaticSoulEye = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/SoulEyes/ChromaticSoulEye");
+        public static readonly Asset<Texture2D> AshenSoulEye = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/SoulEyes/AshenSoulEye");
+        public static readonly Asset<Texture2D> RottenSoulEye = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/SoulEyes/RottenSoulEye");
 
         public static Dictionary<int, Asset<Texture2D>> Particle = new Dictionary<int, Asset<Texture2D>>();
         public static Dictionary<int, Asset<Texture2D>> Relic = new Dictionary<int, Asset<Texture2D>>();
@@ -107,14 +109,19 @@ public static class AssetDirectory
 
             // yharon soul
             public static readonly Asset<Texture2D> YharonSoulChain = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/AuricSouls/YharonSoulChain");
+
+            // old duke soul
+            public static readonly Asset<Texture2D> OldDukeSoulChain = AssetUtilities.RequestImmediate<Texture2D>(AssetPath + "Textures/Extra/AuricSouls/OldDukeSoulTrail");
         }
     }
 
     public static class Music
     {
         // goozma
-        public static readonly int GoozmaPhase1 = MusicLoader.GetMusicSlot(AssetPath + "Music/GlutinousArbitration");
-        public static readonly int GoozmaPhase2 = MusicLoader.GetMusicSlot(AssetPath + "Music/ViscousDesperation");
+        public static readonly int ExiledGoozma1 = MusicLoader.GetMusicSlot(AssetPath + "Music/Goozma/ExiledGoozma1");
+        public static readonly int ExiledGoozma2 = MusicLoader.GetMusicSlot(AssetPath + "Music/Goozma/ExiledGoozma2");
+        public static readonly int JteohGoozma1 = MusicLoader.GetMusicSlot(AssetPath + "Music/Goozma/JteohGoozma1");
+        public static readonly int JteohGoozma2 = MusicLoader.GetMusicSlot(AssetPath + "Music/Goozma/JteohGoozma2");
 
         // auric souls
         public static readonly int GoozmaSoul = MusicLoader.GetMusicSlot(AssetPath + "Music/Souls/GoozmaSoul");

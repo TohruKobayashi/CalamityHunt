@@ -419,7 +419,7 @@ Items: {
 		Tooltip: Utiliser cela sur une statue de ninja visqueux entourée de 4 statues de gelée pour amener une pluie de gelée
 	}
 
-	SludgeFocus: {
+	PluripotentSpawnEgg: {
 		DisplayName: Œuf pluripotent
 		Tooltip:
 			'''
@@ -557,6 +557,36 @@ Items: {
 		// DisplayName: Chromatic Campfire
 		// Tooltip: ""
 	}
+
+	AshenSoul: {
+		// DisplayName: Ashen Auric Soul
+		// Tooltip: Absorb to gain immense, magmatic powers
+	}
+
+	RottenSoul: {
+		// DisplayName: Rotten Auric Soul
+		// Tooltip: Absorb to gain immense, radioactive powers
+	}
+
+	GoozmaMusicBoxExiledP1: {
+		// DisplayName: Music Box (Exiled Goozma)
+		// Tooltip: ""
+	}
+
+	GoozmaMusicBoxExiledP2: {
+		// DisplayName: Music Box (Exiled Goozma Desperate)
+		// Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP1: {
+		// DisplayName: Music Box (Jteoh Goozma)
+		// Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP2: {
+		// DisplayName: Music Box (Jteoh Goozma Desperate)
+		// Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -568,6 +598,12 @@ NPCs: {
 			SpawnInfo: Lâchez un [i:CalamityHunt/OverloadedSludge] sur le Roi des gelées pendant une pluie de gelées aprés avoir battu le Mur de chair.
 			DespawnMessage: "[c/7a7a7a:{1} {0} se désintègre...]"
 		}
+
+		/* InfernumTitle:
+			'''
+			Sludge Flashpoint 
+			Goozma
+			''' */
 	}
 
 	CrimulanGlopstrosity.DisplayName: Monstrosité Sangluante
@@ -737,6 +773,10 @@ Tiles: {
 	GoozmaSoulMusicBoxTile.MapEntry: Boîte à musique
 	YharonSoulMusicBoxTile.MapEntry: Boîte à musique
 	// ChromaticCampfirePlaced.MapEntry: Chromatic Campfire Placed
+	// GoozmaMusicBoxExiledP1Tile.MapEntry: Goozma Music Box Exiled P1 Tile
+	// GoozmaMusicBoxExiledP2Tile.MapEntry: Goozma Music Box Exiled P2 Tile
+	// GoozmaMusicBoxJteohP1Tile.MapEntry: Goozma Music Box Jteoh P1 Tile
+	// GoozmaMusicBoxJteohP2Tile.MapEntry: Goozma Music Box Jteoh P2 Tile
 }
 
 Config: {
@@ -853,6 +893,11 @@ Configs: {
 				Enables features optimized for testing game mechanics
 				Not recommended for usage by players
 				''' */
+		}
+
+		GoozmaMusicPreference: {
+			// Label: Goozma Music Preference
+			// Tooltip: ""
 		}
 	}
 }
