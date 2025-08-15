@@ -109,8 +109,8 @@ Items: {
 	}
 
 	GoozmaSoul: {
-		// DisplayName: 虹色金源魄
-		// Tooltip: 吸收以获得无边粘稠之力
+		DisplayName: 虹色金源魄
+		Tooltip: 吸收以获得无边粘稠之力
 	}
 
 	YharonSoulMusicBox: {
@@ -119,8 +119,8 @@ Items: {
 	}
 
 	YharonSoul: {
-		// DisplayName: 重生金源魄
-		// Tooltip: 吸收以获得无边重生之力
+		DisplayName: 重生金源魄
+		Tooltip: 吸收以获得无边重生之力
 	}
 
 	SlimeMonsoonMonolith: {
@@ -218,8 +218,8 @@ Items: {
 	}
 
 	EbonianBehemuckTrophy: {
-		// DisplayName: 腐檀邪浆纪念章
-		// Tooltip: ""
+		DisplayName: 腐檀邪浆纪念章
+		Tooltip: ""
 	}
 
 	DivineGargooptuarTrophyItem: {
@@ -228,8 +228,8 @@ Items: {
 	}
 
 	DivineGargooptuarTrophy: {
-		// DisplayName: 圣洁凝魔纪念章
-		// Tooltip: ""
+		DisplayName: 圣洁凝魔纪念章
+		Tooltip: ""
 	}
 
 	CrimulanGlopstrosityTrophyItem: {
@@ -238,8 +238,8 @@ Items: {
 	}
 
 	CrimulanGlopstrosityTrophy: {
-		// DisplayName: 血污噬胶纪念章
-		// Tooltip: ""
+		DisplayName: 血污噬胶纪念章
+		Tooltip: ""
 	}
 
 	StellarGeliathTrophyItem: {
@@ -248,8 +248,8 @@ Items: {
 	}
 
 	StellarGeliathTrophy: {
-		// DisplayName: 星恒黏兽纪念章
-		// Tooltip: ""
+		DisplayName: 星恒黏兽纪念章
+		Tooltip: ""
 	}
 
 	PumpActionSwampgun: {
@@ -482,24 +482,24 @@ Items: {
 	}
 
 	AncientSlimeMonsoonMonolith: {
-		// DisplayName: 远古史莱姆季风天塔柱
-		// Tooltip: ""
+		DisplayName: 远古史莱姆季风天塔柱
+		Tooltip: ""
 	}
 
 	AntiMassAccumulator: {
-		// DisplayName: 反质量蓄能器
-		/* Tooltip:
+		DisplayName: 反质量蓄能器
+		Tooltip:
 			'''
 			交替射出质子球和充能电子束
 			质子球会对半径内的敌人造成伤害，并使被击中的敌人带电
 			电子束会对带电的敌人造成额外伤害
 			“请勿直视设备的操作终端”
-			''' */
+			'''
 	}
 
 	GoozmaBoulderItem: {
-		// DisplayName: 杂色巨石
-		// Tooltip: "“极度危险”"
+		DisplayName: 杂色巨石
+		Tooltip: "“极度危险”"
 	}
 
 	IOUASoul: {
@@ -508,18 +508,18 @@ Items: {
 	}
 
 	StrangeManPortrait: {
-		// DisplayName: Portrait of a Strange Man
-		// Tooltip: ""
+		DisplayName: 一个陌生人画像
+		Tooltip: ""
 	}
 
 	TendrilCursorAttachment: {
-		// DisplayName: 缠绕光标
-		/* Tooltip:
+		DisplayName: 缠绕光标
+		Tooltip:
 			'''
 			将悬挂的虹色卷须附着到光标上
 			卷须的数量取决于该物品放置的栏位
 			“不知为何，它们知道如何解开自己”
-			''' */
+			'''
 	}
 
 	FissionFlayer: {
@@ -528,33 +528,33 @@ Items: {
 	}
 
 	TrailblazerGoggles: {
-		// DisplayName: 焰径虹光护目镜
-		// Tooltip: "“想要引领前路，便需看清前方，而这对护目镜不让你看。”"
+		DisplayName: 焰径虹光护目镜
+		Tooltip: "“想要引领前路，便需看清前方，而这对护目镜不让你看。”"
 	}
 
 	TrailblazerBackpack: {
-		// DisplayName: 焰径虹光战术背包
-		// Tooltip: "“想要成为先驱者，便需做好准备。幸运的是，这个背包里除了燃料以外什么都没有。”"
+		DisplayName: 焰径虹光战术背包
+		Tooltip: "“想要成为先驱者，便需做好准备。幸运的是，这个背包里除了燃料以外什么都没有。”"
 	}
 
 	ShogunWings: {
-		// Tooltip: "“让你降温的最佳选择”"
-		// DisplayName: 千折纸扇
+		Tooltip: "“让你降温的最佳选择”"
+		DisplayName: 千折纸扇
 	}
 
 	NuclearLemonade: {
-		// DisplayName: 核子柠檬水
-		/* Tooltip:
+		DisplayName: 核子柠檬水
+		Tooltip:
 			'''
 			所有属性大幅提升
 			可能会杀死你
 			“像核冬天一样冷！”
-			''' */
+			'''
 	}
 
 	ChromaticCampfire: {
-		// DisplayName: 虹色篝火
-		// Tooltip: ""
+		DisplayName: 虹色篝火
+		Tooltip: ""
 	}
 
 	AshenSoul: {
@@ -568,22 +568,22 @@ Items: {
 	}
 
 	GoozmaMusicBoxExiledP1: {
-		// DisplayName: Music Box (Exiled Goozma)
+		DisplayName: 音乐盒（Exiled Goozma）
 		// Tooltip: ""
 	}
 
 	GoozmaMusicBoxExiledP2: {
-		// DisplayName: Music Box (Exiled Goozma Desperate)
+		DisplayName: 音乐盒（Exiled Goozma Desperate）
 		// Tooltip: ""
 	}
 
 	GoozmaMusicBoxJteohP1: {
-		// DisplayName: Music Box (Jteoh Goozma)
+		DisplayName: 音乐盒（Jteoh Goozma）
 		// Tooltip: ""
 	}
 
 	GoozmaMusicBoxJteohP2: {
-		// DisplayName: Music Box (Jteoh Goozma Desperate)
+		DisplayName: 音乐盒（Jteoh Goozma Desperate）
 		// Tooltip: ""
 	}
 }
@@ -598,11 +598,11 @@ NPCs: {
 			DespawnMessage: "[c/7a7a7a:{0} {1}分崩离析了……]"
 		}
 
-		/* InfernumTitle:
+		InfernumTitle:
 			'''
 			Sludge Flashpoint 
-			Goozma
-			''' */
+			古泽玛
+			'''
 	}
 
 	CrimulanGlopstrosity.DisplayName: 血污噬胶
@@ -610,8 +610,8 @@ NPCs: {
 	EbonianBehemuck.DisplayName: 腐檀邪浆
 	StellarGeliath.DisplayName: 星恒黏兽
 	Goozmite.DisplayName: 古泽蚂
-	// GelatinousSpawn.DisplayName: 凝胶之卵
-	// PluripotentSpawn.DisplayName: 多能之卵
+	GelatinousSpawn.DisplayName: 凝胶之卵
+	PluripotentSpawn.DisplayName: 多能之卵
 }
 
 Projectiles: {
@@ -690,18 +690,18 @@ Projectiles: {
 	BlinkySpikeBall.DisplayName: 小闪的刺球
 	PinkyLight.DisplayName: 小粉的闪光
 	GoozmoemRay.DisplayName: 熔融射线
-	// AntiMassBioBall.DisplayName: 反质量生物球
-	// AntiMassColliderProj.DisplayName: 反物质对撞器
-	// AntiMassMacroLaser.DisplayName: 反物质巨型激光
-	// AntiMassDeathLaser.DisplayName: 反物质死亡激光
-	// AntiMassBioStrike.DisplayName: 反物质生物火花
-	// AntiMassAccumulatorProj.DisplayName: 反物质蓄能器
-	// ShakerSludge.DisplayName: 混凝污泥
-	// GoozmaBoulderProjectile.DisplayName: 杂色巨石
-	// StellarBlackHole.DisplayName: 恒星黑洞
-	// FissionFlyerProjectile.DisplayName: 裂变飞刀
-	// CometKunaiSuperProjectile.DisplayName: 超级彗星苦无
-	// FissionFlayerProjectile.DisplayName: to be determined
+	AntiMassBioBall.DisplayName: 反质量生物球
+	AntiMassColliderProj.DisplayName: 反物质对撞器
+	AntiMassMacroLaser.DisplayName: 反物质巨型激光
+	AntiMassDeathLaser.DisplayName: 反物质死亡激光
+	AntiMassBioStrike.DisplayName: 反物质生物火花
+	AntiMassAccumulatorProj.DisplayName: 反物质蓄能器
+	ShakerSludge.DisplayName: 混凝污泥
+	GoozmaBoulderProjectile.DisplayName: 杂色巨石
+	StellarBlackHole.DisplayName: 恒星黑洞
+	FissionFlyerProjectile.DisplayName: 裂变飞刀
+	CometKunaiSuperProjectile.DisplayName: 超级彗星苦无
+	FissionFlayerProjectile.DisplayName: to be determined
 }
 
 Chat: {
@@ -761,8 +761,8 @@ Buffs: {
 	}
 
 	Doomed: {
-		// DisplayName: 末日
-		// Description: 一切都结束了
+		DisplayName: 末日
+		Description: 一切都结束了
 	}
 }
 
@@ -771,7 +771,7 @@ Tiles: {
 	GoozmaMusicBoxP2Tile.MapEntry: 音乐盒
 	GoozmaSoulMusicBoxTile.MapEntry: 音乐盒
 	YharonSoulMusicBoxTile.MapEntry: 音乐盒
-	// ChromaticCampfirePlaced.MapEntry: 虹色篝火
+	ChromaticCampfirePlaced.MapEntry: 虹色篝火
 	// GoozmaMusicBoxExiledP1Tile.MapEntry: Goozma Music Box Exiled P1 Tile
 	// GoozmaMusicBoxExiledP2Tile.MapEntry: Goozma Music Box Exiled P2 Tile
 	// GoozmaMusicBoxJteohP1Tile.MapEntry: Goozma Music Box Jteoh P1 Tile
@@ -812,7 +812,7 @@ Config: {
 		Tooltip: 启用或禁用史莱姆季风的雷暴视觉效果
 	}
 
-	// ContentHeader: 目录
+	ContentHeader: 目录
 }
 
 LoreGeneric:
@@ -866,32 +866,32 @@ Configs: {
 		}
 
 		shadowspecCurse: {
-			// Label: 魔影诅咒
-			// Tooltip: 诅咒所有魔影等级的物品，使它们在古泽玛被击败前无法使用
+			Label: 魔影诅咒
+			Tooltip: 诅咒所有魔影等级的物品，使它们在古泽玛被击败前无法使用
 		}
 
 		oldsky: {
-			// Label: 旧版天空
-			// Tooltip: ""
+			Label: 旧版天空
+			Tooltip: ""
 		}
 
 		overrideVanillaBalance: {
-			// Label: 覆盖原版平衡
-			// Tooltip: ""
+			Label: 覆盖原版平衡
+			Tooltip: ""
 		}
 
 		photosensitiveToggle: {
-			// Label: 切换光敏效果
-			// Tooltip: 禁用可能会引发光敏性疾病的一些效果
+			Label: 切换光敏效果
+			Tooltip: 禁用可能会引发光敏性疾病的一些效果
 		}
 
 		debugMode: {
-			// Label: Debug模式
-			/* Tooltip:
+			Label: Debug模式
+			Tooltip:
 				'''
 				启用针对测试游戏机制的功能优化
 				不建议玩家启用
-				''' */
+				'''
 		}
 
 		GoozmaMusicPreference: {
@@ -920,7 +920,7 @@ StickyHandStats:
 	回收速度: 10
 	牵引速度: 17
 	'''
-GoozmaShadowspecCurse: Mods.CalamityHunt.GoozmaShadowspecCurse
+GoozmaShadowspecCurse: "[c/462545:一块粘液的诅咒阻止了你使用此物品……]"
 AnyEvilBlock: 任意邪恶物块
 SludgeWarning: 不能用来召唤史莱姆之神
 
