@@ -540,8 +540,8 @@ Items: {
 	}
 
 	ShogunWings: {
-		Tooltip: "'They are best used to cool you off'"
 		DisplayName: Thousand-Fold Paper Fans
+		Tooltip: "'They are best used to cool you off'"
 	}
 
 	NuclearLemonade: {
@@ -570,8 +570,8 @@ Items: {
 	}
 
 	CancelSlimeRain: {
-		Tooltip: ""
 		DisplayName: Cancel Slime Rain
+		Tooltip: ""
 	}
 
 	GoozmaMusicBoxExiledP1: {
