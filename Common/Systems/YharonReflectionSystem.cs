@@ -20,8 +20,8 @@ public class YharonReflectionSystem : ModSystem
     public override void PostSetupContent()
     {
         if (ModLoader.HasMod(HUtils.CalamityMod)) {
-            // If the Nimble Bounder, an item added in the Sunken Sea update exists, then the Sunken Sea update did indeed happen
-            if (ModLoader.GetMod(HUtils.CalamityMod).TryFind("NimbleBounder", out ModItem nim)) {
+            // If the Zenith Throne, an item added in the Sunken Sea update exists, then the Sunken Sea update did indeed happen
+            if (ModLoader.GetMod(HUtils.CalamityMod).TryFind("ZenithThrone", out ModItem nim)) {
                 SSO = true;
             }
             // Grab Calamity's config

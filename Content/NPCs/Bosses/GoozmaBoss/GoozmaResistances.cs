@@ -104,8 +104,8 @@ public static class GoozmaResistances
             projectiles.Add((calamity.Find<ModProjectile>("MelterNote1").Type, 0.95f));
             projectiles.Add((calamity.Find<ModProjectile>("MelterNote2").Type, 0.95f));
             projectiles.Add((calamity.Find<ModProjectile>("SpiritCongregation").Type, 0.25f));*/
-            projectiles.Add((calamity.Find<ModProjectile>("FabBolt").Type, 0.022f));
-            projectiles.Add((calamity.Find<ModProjectile>("FabRay").Type, 0.022f));
+            projectiles.Add((calamity.Find<ModProjectile>("SylvBolt").Type, 1.01f));
+            projectiles.Add((calamity.Find<ModProjectile>("SylvRay").Type, 1.01f));
             /*projectiles.Add((calamity.Find<ModProjectile>("BlushieStaffProj").Type, 0.1f));
             projectiles.Add((calamity.Find<ModProjectile>("RainbowComet").Type, 0.05f));
             projectiles.Add((calamity.Find<ModProjectile>("RainbowRocket").Type, 0.05f));
