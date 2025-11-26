@@ -27,8 +27,8 @@ public class YharonAuricSoulScene : ModSceneEffect
         if (ModLoader.HasMod(HUtils.CalamityMod)) {
             if (active) {
                 // Disable the interlude 3 config
-                if ((bool)YharonReflectionSystem.interlude3Config.GetValue(YharonReflectionSystem.calamityConfig)) {
-                    YharonReflectionSystem.interlude3Config.SetValue(YharonReflectionSystem.calamityConfig, false);
+                if ((bool)YharonReflectionSystem.interludeConfig.GetValue(YharonReflectionSystem.calamityConfig)) {
+                    YharonReflectionSystem.interludeConfig.SetValue(YharonReflectionSystem.calamityConfig, false);
                     interludeConfigWasOn = true;
                 }
                 // Set the Yharon monolith to on
@@ -38,7 +38,7 @@ public class YharonAuricSoulScene : ModSceneEffect
             else {
                 // If the config was enabled and the scene is disabled, turn the config back on
                 if (interludeConfigWasOn) {
-                    YharonReflectionSystem.interlude3Config.SetValue(YharonReflectionSystem.calamityConfig, true);
+                    YharonReflectionSystem.interludeConfig.SetValue(YharonReflectionSystem.calamityConfig, true);
                 }
             }
         }

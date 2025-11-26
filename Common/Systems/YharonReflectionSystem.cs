@@ -12,7 +12,7 @@ namespace CalamityHunt.Common.Systems;
 public class YharonReflectionSystem : ModSystem
 {
     public static bool SSO = false;
-    public static PropertyInfo interlude3Config;
+    public static PropertyInfo interludeConfig;
     public static FieldInfo yharonolithField = null;
     public static ModConfig calamityConfig;
     public static ModPlayer calPlayer = null;
@@ -25,9 +25,9 @@ public class YharonReflectionSystem : ModSystem
                 SSO = true;
             }
             // Grab Calamity's config
-            string configName = !SSO ? "CalamityConfig" : "CalamityClientConfig";
+            string configName = "CalamityClientConfig";
             calamityConfig = ModLoader.GetMod(HUtils.CalamityMod).GetConfig(configName);
-            interlude3Config = calamityConfig.GetType().GetProperty("Interlude3", BindingFlags.Instance | BindingFlags.Public);
+            interludeConfig = calamityConfig.GetType().GetProperty("Interludes", BindingFlags.Instance | BindingFlags.Public);
         }
     }
 
