@@ -35,8 +35,8 @@ Items: {
 	}
 
 	GoozmaRelic: {
-		// DisplayName: Goozma Relic
-		// Tooltip: ""
+		DisplayName: 古泽玛圣物
+		Tooltip: ""
 	}
 
 	GoozmaLore: {
@@ -80,8 +80,8 @@ Items: {
 	}
 
 	GoozmaTrophy: {
-		// DisplayName: Goozma Trophy
-		// Tooltip: ""
+		DisplayName: 古泽玛纪念章
+		Tooltip: ""
 	}
 
 	ImperialGelato: {
@@ -109,8 +109,8 @@ Items: {
 	}
 
 	GoozmaSoul: {
-		// DisplayName: Chromatic Auric Soul
-		// Tooltip: Absorb to gain immense, slimy powers
+		DisplayName: 虹色金源魄
+		Tooltip: 吸收以获得无边粘稠之力
 	}
 
 	YharonSoulMusicBox: {
@@ -119,8 +119,8 @@ Items: {
 	}
 
 	YharonSoul: {
-		// DisplayName: Rebirth Auric Soul
-		// Tooltip: Absorb to gain immense, rebirth powers
+		DisplayName: 重生金源魄
+		Tooltip: 吸收以获得无边重生之力
 	}
 
 	SlimeMonsoonMonolith: {
@@ -218,8 +218,8 @@ Items: {
 	}
 
 	EbonianBehemuckTrophy: {
-		// DisplayName: Ebonian Behemuck Trophy
-		// Tooltip: ""
+		DisplayName: 腐檀邪浆纪念章
+		Tooltip: ""
 	}
 
 	DivineGargooptuarTrophyItem: {
@@ -228,8 +228,8 @@ Items: {
 	}
 
 	DivineGargooptuarTrophy: {
-		// DisplayName: Divine Gargooptuar Trophy
-		// Tooltip: ""
+		DisplayName: 圣洁凝魔纪念章
+		Tooltip: ""
 	}
 
 	CrimulanGlopstrosityTrophyItem: {
@@ -238,18 +238,18 @@ Items: {
 	}
 
 	CrimulanGlopstrosityTrophy: {
-		// DisplayName: Crimulan Glopstrosity Trophy
-		// Tooltip: ""
+		DisplayName: 血污噬胶纪念章
+		Tooltip: ""
 	}
 
 	StellarGeliathTrophyItem: {
-		DisplayName: 星恒粘兽纪念章
+		DisplayName: 星恒黏兽纪念章
 		Tooltip: ""
 	}
 
 	StellarGeliathTrophy: {
-		// DisplayName: Stellar Geliath Trophy
-		// Tooltip: ""
+		DisplayName: 星恒黏兽纪念章
+		Tooltip: ""
 	}
 
 	PumpActionSwampgun: {
@@ -258,7 +258,7 @@ Items: {
 	}
 
 	Parasanguine: {
-		DisplayName: 赤血阳伞
+		DisplayName: 赤血凝伞
 		Tooltip:
 			'''
 			按住<left>或攻击敌人会积攒额外的血液
@@ -482,24 +482,24 @@ Items: {
 	}
 
 	AncientSlimeMonsoonMonolith: {
-		// DisplayName: Ancient Slime Monsoon Monolith
-		// Tooltip: ""
+		DisplayName: 远古史莱姆季风天塔柱
+		Tooltip: ""
 	}
 
 	AntiMassAccumulator: {
-		// DisplayName: Anti-Mass Accumulator
-		/* Tooltip:
+		DisplayName: 反质量蓄能器
+		Tooltip:
 			'''
-			Blasts out balls of packed protons and bolts of energized electrons one after another
-			Proton balls charge anything they hit and can damage enemies in a radius
-			Electron bolts do extra damage to positively charged enemies
-			'Do not look directly at the operational end of the device.'
-			''' */
+			交替射出质子球和充能电子束
+			质子球会对半径内的敌人造成伤害，并使被击中的敌人带电
+			电子束会对带电的敌人造成额外伤害
+			“请勿直视设备的操作终端”
+			'''
 	}
 
 	GoozmaBoulderItem: {
-		// DisplayName: Motley Marble
-		// Tooltip: "'Highly dangerous'"
+		DisplayName: 杂色巨石
+		Tooltip: “极度危险”
 	}
 
 	IOUASoul: {
@@ -508,18 +508,18 @@ Items: {
 	}
 
 	StrangeManPortrait: {
-		// DisplayName: Portrait of a Strange Man
-		// Tooltip: ""
+		DisplayName: 一个陌生人画像
+		Tooltip: ""
 	}
 
 	TendrilCursorAttachment: {
-		// DisplayName: Cursor Mutagen
-		/* Tooltip:
+		DisplayName: 缠绕光标
+		Tooltip:
 			'''
-			Attaches hanging chromatic tendrils to your mouse cursor
-			The amount of tendrils depends on the slot this item is placed in
-			'They somehow know how to untangle themselves'
-			''' */
+			将悬挂的虹色卷须附着到光标上
+			卷须的数量取决于该物品放置的栏位
+			“不知为何，它们知道如何解开自己”
+			'''
 	}
 
 	FissionFlayer: {
@@ -528,33 +528,33 @@ Items: {
 	}
 
 	TrailblazerGoggles: {
-		// DisplayName: Trailblazed Goggles
-		// Tooltip: "'To lead the way, you must see it first. These do not let you see.'"
+		DisplayName: 焰径虹光护目镜
+		Tooltip: “想要引领前路，便需看清前方，而这对护目镜不让你看。”
 	}
 
 	TrailblazerBackpack: {
-		// DisplayName: Trailblazed Tactical Backpack
-		// Tooltip: "'To be a forerunner is to be prepared. Thankfully, this backpack is filled with nothing but fuel.'"
+		DisplayName: 焰径虹光战术背包
+		Tooltip: “想要成为先驱者，便需做好准备。幸运的是，这个背包里除了燃料以外什么都没有。”
 	}
 
 	ShogunWings: {
-		// Tooltip: "'They are best used to cool you off'"
-		// DisplayName: Thousand-Fold Paper Fans
+		Tooltip: “让你降温的最佳选择”
+		DisplayName: 千折纸扇
 	}
 
 	NuclearLemonade: {
-		// DisplayName: Nuclear Lemonade
-		/* Tooltip:
+		DisplayName: 核子柠檬水
+		Tooltip:
 			'''
-			Major improvements to all stats
-			May kill you
-			'As cold as the nuclear winter!'
-			''' */
+			所有属性大幅提升
+			可能会杀死你
+			“像核冬天一样冷！”
+			'''
 	}
 
 	ChromaticCampfire: {
-		// DisplayName: Chromatic Campfire
-		// Tooltip: ""
+		DisplayName: 虹色篝火
+		Tooltip: ""
 	}
 
 	AshenSoul: {
@@ -568,22 +568,22 @@ Items: {
 	}
 
 	GoozmaMusicBoxExiledP1: {
-		// DisplayName: Music Box (Exiled Goozma)
+		DisplayName: 音乐盒（Exiled Goozma）
 		// Tooltip: ""
 	}
 
 	GoozmaMusicBoxExiledP2: {
-		// DisplayName: Music Box (Exiled Goozma Desperate)
+		DisplayName: 音乐盒（Exiled Goozma Desperate）
 		// Tooltip: ""
 	}
 
 	GoozmaMusicBoxJteohP1: {
-		// DisplayName: Music Box (Jteoh Goozma)
+		DisplayName: 音乐盒（Jteoh Goozma）
 		// Tooltip: ""
 	}
 
 	GoozmaMusicBoxJteohP2: {
-		// DisplayName: Music Box (Jteoh Goozma Desperate)
+		DisplayName: 音乐盒（Jteoh Goozma Desperate）
 		// Tooltip: ""
 	}
 }
@@ -598,11 +598,11 @@ NPCs: {
 			DespawnMessage: "[c/7a7a7a:{0} {1}分崩离析了……]"
 		}
 
-		/* InfernumTitle:
+		InfernumTitle:
 			'''
-			Sludge Flashpoint 
-			Goozma
-			''' */
+			凝元烁点
+			古泽玛
+			'''
 	}
 
 	CrimulanGlopstrosity.DisplayName: 血污噬胶
@@ -610,8 +610,8 @@ NPCs: {
 	EbonianBehemuck.DisplayName: 腐檀邪浆
 	StellarGeliath.DisplayName: 星恒黏兽
 	Goozmite.DisplayName: 古泽蚂
-	// GelatinousSpawn.DisplayName: Gelatinous Spawn
-	// PluripotentSpawn.DisplayName: Pluripotent Spawn
+	GelatinousSpawn.DisplayName: 凝胶之卵
+	PluripotentSpawn.DisplayName: 多能之卵
 }
 
 Projectiles: {
@@ -635,10 +635,10 @@ Projectiles: {
 	CrimulanSmasher.DisplayName: 血污碾压
 	FusionRay.DisplayName: 聚能射线
 	GoozmaDeathGodrays.DisplayName: 旧神死光
-	BloatBabyProj.DisplayName: Bloat Baby
+	BloatBabyProj.DisplayName: 肿包泡泡宝宝
 	ShootingStar.DisplayName: 流星
-	GoozmagaBomb.DisplayName: Planetary Glob
-	GoozmagaShrapnel.DisplayName: Microplanetary Glob
+	GoozmagaBomb.DisplayName: 行星团
+	GoozmagaShrapnel.DisplayName: 微行星团
 	StellarGelatine.DisplayName: 恒星明胶
 	ConstellationStar.DisplayName: 星体
 	ConstellationLine.DisplayName: 星座线
@@ -690,18 +690,18 @@ Projectiles: {
 	BlinkySpikeBall.DisplayName: 小闪的刺球
 	PinkyLight.DisplayName: 小粉的闪光
 	GoozmoemRay.DisplayName: 熔融射线
-	// AntiMassBioBall.DisplayName: Anti-Mass Bio Ball
-	// AntiMassColliderProj.DisplayName: Anti-Mass Collider
-	// AntiMassMacroLaser.DisplayName: Anti Mass Macro Laser
-	// AntiMassDeathLaser.DisplayName: Anti Mass Death Laser
-	// AntiMassBioStrike.DisplayName: Anti Mass Bio Strike
-	// AntiMassAccumulatorProj.DisplayName: Anti Mass Accumulator Proj
-	// ShakerSludge.DisplayName: Shaker Sludge
-	// GoozmaBoulderProjectile.DisplayName: Motley Marble
-	// StellarBlackHole.DisplayName: Stellar Black Hole
-	// FissionFlyerProjectile.DisplayName: Fission Flyer
-	// CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
-	// FissionFlayerProjectile.DisplayName: to be determined
+	AntiMassBioBall.DisplayName: 反质量生物球
+	AntiMassColliderProj.DisplayName: 反物质对撞器
+	AntiMassMacroLaser.DisplayName: 反物质巨型激光
+	AntiMassDeathLaser.DisplayName: 反物质死亡激光
+	AntiMassBioStrike.DisplayName: 反物质生物火花
+	AntiMassAccumulatorProj.DisplayName: 反物质蓄能器
+	ShakerSludge.DisplayName: 混凝污泥
+	GoozmaBoulderProjectile.DisplayName: 杂色巨石
+	StellarBlackHole.DisplayName: 恒星黑洞
+	FissionFlyerProjectile.DisplayName: 裂变飞刀
+	CometKunaiSuperProjectile.DisplayName: 超级彗星苦无
+	FissionFlayerProjectile.DisplayName: to be determined
 }
 
 Chat: {
@@ -761,8 +761,8 @@ Buffs: {
 	}
 
 	Doomed: {
-		// DisplayName: Doomed
-		// Description: It's so over
+		DisplayName: 末日
+		Description: 一切都结束了
 	}
 }
 
@@ -771,7 +771,7 @@ Tiles: {
 	GoozmaMusicBoxP2Tile.MapEntry: 音乐盒
 	GoozmaSoulMusicBoxTile.MapEntry: 音乐盒
 	YharonSoulMusicBoxTile.MapEntry: 音乐盒
-	// ChromaticCampfirePlaced.MapEntry: Chromatic Campfire Placed
+	ChromaticCampfirePlaced.MapEntry: 虹色篝火
 	// GoozmaMusicBoxExiledP1Tile.MapEntry: Goozma Music Box Exiled P1 Tile
 	// GoozmaMusicBoxExiledP2Tile.MapEntry: Goozma Music Box Exiled P2 Tile
 	// GoozmaMusicBoxJteohP1Tile.MapEntry: Goozma Music Box Jteoh P1 Tile
@@ -812,7 +812,7 @@ Config: {
 		Tooltip: 启用或禁用史莱姆季风的雷暴视觉效果
 	}
 
-	// ContentHeader: Content
+	ContentHeader: 目录
 }
 
 LoreGeneric:
@@ -866,32 +866,32 @@ Configs: {
 		}
 
 		shadowspecCurse: {
-			// Label: Shadowspec Curse
-			// Tooltip: Curses all Shadowspec-tier items until Goozma is defeated, making them unusable
+			Label: 魔影诅咒
+			Tooltip: 诅咒所有魔影等级的物品，使它们在古泽玛被击败前无法使用
 		}
 
 		oldsky: {
-			// Label: oldsky
-			// Tooltip: ""
+			Label: 旧版天空
+			Tooltip: ""
 		}
 
 		overrideVanillaBalance: {
-			// Label: override Vanilla Balance
-			// Tooltip: ""
+			Label: 覆盖原版平衡
+			Tooltip: ""
 		}
 
 		photosensitiveToggle: {
-			// Label: Toggle Photosensitive Effects
-			// Tooltip: Disables certain effects which may trigger photosensitivity
+			Label: 切换光敏效果
+			Tooltip: 禁用可能会引发光敏性疾病的一些效果
 		}
 
 		debugMode: {
-			// Label: Debug Mode
-			/* Tooltip:
+			Label: Debug模式
+			Tooltip:
 				'''
-				Enables features optimized for testing game mechanics
-				Not recommended for usage by players
-				''' */
+				启用针对测试游戏机制的功能优化
+				不建议玩家启用
+				'''
 		}
 
 		GoozmaMusicPreference: {
@@ -901,7 +901,7 @@ Configs: {
 	}
 }
 
-// OrRev: " or Revengeance"
+OrRev: " 或复仇"
 SetBonuses.Shogun:
 	'''
 	增加17%伤害和5仆从栏
@@ -920,7 +920,7 @@ StickyHandStats:
 	回收速度: 10
 	牵引速度: 17
 	'''
-GoozmaShadowspecCurse: Mods.CalamityHunt.GoozmaShadowspecCurse
+GoozmaShadowspecCurse: "[c/462545:一块粘液的诅咒阻止了你使用此物品……]"
 AnyEvilBlock: 任意邪恶物块
 SludgeWarning: 不能用来召唤史莱姆之神
 
@@ -929,19 +929,18 @@ CalamityModName: {
 	Internal: CalamityMod
 }
 
-// Emotes.GoozmaEmote.Command: goozma
-/* Draeting.Goozma:
+Emotes.GoozmaEmote.Command: 古泽玛
+Draeting.Goozma:
 	'''
-	A living paradox, and a shock to everything I believed fact about the nature of the Auric soul. 
-	The Godseeker seemed so certain that the nature of the god was fundamentally tied to ritual. Though that is a thoroughly unscientific prospect, I had no choice but to accept it: he knew better than I, being linked to one of the few remaining auric dragons, and to invoke his wrath would put a quick end to my work.  It is not a surprise that I did not have the whole story, and even now, I am still missing many pieces. 
+	一个活着的悖论，颠覆了我对金源魄本质的一切认知。 
+	神明的本质与仪式不可分割，寻神者似乎对此深信不疑。虽然这是一个完全不科学的推测，但我别无选择，只能接受这一点——他和仅存的金源巨龙具有联系，知道的比我更多，如果引起了他的愤怒，他很快就会终止我的工作。这并不奇怪，我并不知道故事的全貌，直至现在，我仍然错过了许多细节。 
 
-	I have been tirelessly analyzing the replay of that battle since the moment it concluded. Though a natural phenomena has seemingly created a new Auric soul, I know very little about the nature of the process that occurred; just as quickly as it was created, it was returned to the primordial soup it was forged from. 
+	从战斗结束的那一刻起，我就在马不停蹄地分析它的回放。虽然一种自然现象似乎创造出了一个全新的金源魄，但我对于这一过程的本质知之甚少；正如它被创造出来一样，它又回到了诞生之初的摇篮之中。 
 
-	I have two prevailing theories, though my confidence in their accuracy is shaky at best. 
-	The first is related to the method in which it was born. The natural process of pressurization is not altogether difficult for even the most basic of scientists to grasp. For an easily understood example, however, consider carbon; its makeup will shift when compressed with extreme force, transforming it into diamond. Considering this fact, it may not be altogether unlikely that a spiritual equivalent to this phenomena exists; a mundane soul, forced into a single point by many other similarly basic souls, could very well shift in such a way that it grows exponentially in power.
+	对此，我有两种主流理论，尽管我对它们的准确性没有太大的信心。 
+	第一种与它诞生的方式有关。即使是最基本的科学家也不难掌握加压的自然过程。举个通俗易懂的例子，就拿碳来说，当受到极大的压力时，它的结构就会发生变化，变为钻石。基于这一事实，在灵魂层面或许也有与这类似的现象；一抹平平无奇的灵魂，作为基本单位，与其他相似的灵魂共压缩于一点，指数级爆炸增长的力量或将产生。
 
-	The other I am less certain of, but must still consider: It is possible the 'Slime God', as you called it, is but a splinter of a much older, more venerated deity, and the ritual you performed simply granted it its original form back. This would mean that its soul was not spontaneously created, as I currently believe, but was splintered instead- creating the illusion of mundanity from sparks of a greater power.
+	另一种我并不确定，但仍有考虑的余地：你所说的“史莱姆之神”可能是一个更古老、更受崇敬的一位神祇的碎片，而你的仪式只是让它恢复了最初的形态。这也就意味着，它的灵魂并非像我现在想的那样是自然产生的，而是分裂出来的——用强大力量的一小部分创造出的庸俗假象。
 
-	Either theory, should one be proven true, provides new, investing paths of study. 
-	Though your naming ability leaves much to be desired, I must commend your ability to leave nothing unstudied, no matter how well documented said creature may be- I never could have anticipated that such a massive scientific breakthrough could have been hiding in the most common pest of all. 
-	''' */
+	这两种理论，无论哪种被证明是正确的，都将会提供新的研究路径。尽管你的取名能力还有待提高，但我必须赞扬你竭尽全力进行研究的精神，无论被研究生物的资料有多么充足——而我也从未预想过如此巨大的科学突破会隐藏在最常见的有害生物当中。 
+	'''
