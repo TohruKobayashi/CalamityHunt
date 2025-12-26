@@ -44,7 +44,7 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
             //    ModRarity r;
             //    Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
             //    calamity.TryFind("RogueDamageClass", out d);
-            //    calamity.TryFind("Violet", out r);
+            //    calamity.TryFind("BurnishedAuric", out r);
             //    Item.DamageType = d;
             //    Item.rare = r.Type;
             //}

@@ -42,7 +42,7 @@ namespace CalamityHunt.Content.Items.Weapons.Melee
                 ModRarity r;
                 Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
                 calamity.TryFind("TrueMeleeDamageClass", out DamageClass d);
-                calamity.TryFind<ModRarity>("Violet", out r);
+                calamity.TryFind<ModRarity>("BurnishedAuric", out r);
                 Item.DamageType = d;
                 Item.rare = r.Type;
             }

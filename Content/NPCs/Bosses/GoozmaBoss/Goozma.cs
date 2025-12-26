@@ -192,7 +192,6 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
         LeadingConditionRule classic = new LeadingConditionRule(new Conditions.NotExpert());
 
-        npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<SplendorJam>()));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<ShogunHelm>(), 3));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<ShogunChestplate>(), 3));
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<ShogunPants>(), 3));
@@ -427,7 +426,6 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
         };
 
         ChangeWeather();
-        GoozmaResistances.DisablePointBlank();
 
         if (ModLoader.HasMod(HUtils.CalamityMod)) {
             Main.LocalPlayer.AddBuff(ModLoader.GetMod(HUtils.CalamityMod).Find<ModBuff>("BossEffects").Type, 2);
@@ -1056,8 +1054,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
                         NPC.dontTakeDamage = false;
 
-                        int dashCount = (int)DifficultyBasedValue(4, 5, 6, 7, master: 7, masterrev: 8, masterdeath: 9);
-                        int dashTime = (int)DifficultyBasedValue(110, 100, 90, 80, master: 90, masterrev: 80, masterdeath: 70);
+                        int dashCount = (int)DifficultyBasedValue(4, 5, 6, 9);
+                        int dashTime = (int)DifficultyBasedValue(110, 100, 90, 70);
 
                         if (Time >= 0) {
                             if (Time <= dashTime * dashCount) {
@@ -1163,8 +1161,8 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
                         int waitTimeMultiplier = 7;
                         int waitTime = goozmiteCount * waitTimeMultiplier;
 
-                        goozmiteCount += (int)DifficultyBasedValue(0, 3, 6, 9, master: 6, masterrev: 9, masterdeath: 12);
-                        killTime -= (int)DifficultyBasedValue(0, 50, 100, 150, master: 100, masterrev: 150, masterdeath: 180);
+                        goozmiteCount += (int)DifficultyBasedValue(0, 3, 6, 12);
+                        killTime -= (int)DifficultyBasedValue(0, 50, 100, 180);
 
                         if (Time < 10) {
                             NPC.velocity = Vector2.Lerp(NPC.velocity, NPC.DirectionTo(NPC.GetTargetData().Center) * Math.Max(NPC.Distance(NPC.GetTargetData().Center) - 150, 0) * 0.12f, 0.1f);
@@ -2156,7 +2154,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
             case SortedProjectileAttackTypes.BurstLightning:
 
                 if (Time % 170 > 130) {
-                    int freq = (int)DifficultyBasedValue(10, 9, 7, 6, master: 7, masterrev: 6, masterdeath: 5);
+                    int freq = (int)DifficultyBasedValue(10, 9, 7, 5);
                     if ((Time % 170) % freq == 0) {
                         SoundEngine.PlaySound(fireballSound, NPC.Center);
 
@@ -2192,7 +2190,7 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
             case SortedProjectileAttackTypes.DrillDash:
 
-                int dashTime = (int)DifficultyBasedValue(110, 100, 90, 80, master: 90, masterrev: 80, masterdeath: 70);
+                int dashTime = (int)DifficultyBasedValue(110, 100, 90, 70);
 
                 if (Time % dashTime > 24) {
                     if (Time % dashTime == 25) {
