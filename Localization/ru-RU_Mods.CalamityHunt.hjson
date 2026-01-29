@@ -780,6 +780,11 @@ Config: {
 		Tooltip: Включает эффект грозы во время муссона слизней
 	}
 
+	Infernum: {
+		// Label: Infernum AI
+		// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
+	}
+
 	ContentHeader: Контент
 }
 
@@ -798,6 +803,8 @@ LoreGoozma:
 	Какая же жалость, что плоды усилий его по итогу ни к чему не привели. Неустанный узор цикличных анналов истории.
 	Может быть, в перспективе мира Террарии, все наши достижения так же малозначимы, как и бессильные страдания слизней.
 	'''
+// InfernalRelicText: Imbued with the infernal flames of a defeated foe
+// InfernumOnly: Infernum Mode only
 
 Configs: {
 	Config: {
@@ -860,6 +867,11 @@ Configs: {
 				Включает некоторые фичи, оптимизированные для тестирования игровых механик
 				Не рекомендуется для использования игроками
 				'''
+		}
+
+		infernum: {
+			// Label: Infernum AI
+			// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
 		}
 	}
 }

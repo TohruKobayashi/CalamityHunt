@@ -778,6 +778,11 @@ Config: {
 		Tooltip: 启用或禁用史莱姆季风的雷暴视觉效果
 	}
 
+	Infernum: {
+		// Label: Infernum AI
+		// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
+	}
+
 	// ContentHeader: Content
 }
 
@@ -796,6 +801,8 @@ LoreGoozma:
 	可惜，其努力的成果最终却化为泡影。这是历史循环中的一个永恒的规律。
 	也许从泰拉瑞亚的角度来看，我们所做出的成就与只会无能蠕动的史莱姆相差不了多少。
 	'''
+// InfernalRelicText: Imbued with the infernal flames of a defeated foe
+// InfernumOnly: Infernum Mode only
 
 Configs: {
 	Config: {
@@ -858,6 +865,11 @@ Configs: {
 				Enables features optimized for testing game mechanics
 				Not recommended for usage by players
 				''' */
+		}
+
+		infernum: {
+			// Label: Infernum AI
+			// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
 		}
 	}
 }

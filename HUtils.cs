@@ -29,6 +29,15 @@ public static class HUtils
     public static string CalamityMod = "CalamityMod";
     public static string CatalystMod = "CatalystMod";
     public static string CommunityRemix = "CalRemix";
+    public static string InfernumMode = "CalamityHunt";
+
+    public static bool InfernumActive()
+    {
+        if (ModLoader.TryGetMod(InfernumMode, out Mod infernum)) {
+            return (bool)infernum.Call("GetInfernumActive");
+        }
+        return false;
+    }
 
     public static bool NonVanillaBalance => ModLoader.HasMod(CalamityMod);
 

@@ -190,6 +190,10 @@ public partial class Goozma : ModNPC, ISubjectOfNPC<Goozma>
 
         npcLoot.Add(ItemDropRule.ByCondition(new MasterRevDropRule(), ModContent.ItemType<ImperialGelato>(), 4));
 
+        if (ModLoader.HasMod(HUtils.InfernumMode)) {
+            npcLoot.Add(ItemDropRule.ByCondition(new InfernumDropRule(), CalamityHunt.Instance.Find<ModItem>("GoozmaInfernumRelic").Type));
+        }
+
         LeadingConditionRule classic = new LeadingConditionRule(new Conditions.NotExpert());
 
         npcLoot.Add(ItemDropRule.ByCondition(new Conditions.NotExpert(), ModContent.ItemType<ShogunHelm>(), 3));

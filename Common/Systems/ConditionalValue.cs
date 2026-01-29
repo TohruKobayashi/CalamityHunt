@@ -37,7 +37,7 @@ namespace CalamityHunt.Common.Systems
             else if (Main.getGoodWorld && ftw != null) {
                 return (float)ftw;
             }
-            else if (DeathMode && death != null) {
+            else if ((DeathMode || (HUtils.InfernumActive() && Config.Instance.infernum)) && death != null) {
                 return (float)death;
             }
             else if (RevengeanceMode && revengeance != null) {

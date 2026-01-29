@@ -780,6 +780,11 @@ Config: {
 		Tooltip: Enables or disables the Slime Monsoon's thunder visuals
 	}
 
+	Infernum: {
+		Label: Infernum AI
+		Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
+	}
+
 	ContentHeader: Content
 }
 
@@ -798,6 +803,8 @@ LoreGoozma:
 	What a pity it is that the fruits of its effort came to nothing in the end. An unremitting pattern in the cyclic annals of history.
 	Perhaps, from the perspective of Terraria, our own achievements amount to little more than the impotent writhing of slimes.
 	'''
+InfernalRelicText: Imbued with the infernal flames of a defeated foe
+InfernumOnly: Infernum Mode only
 
 Configs: {
 	Config: {
@@ -860,6 +867,11 @@ Configs: {
 				Enables features optimized for testing game mechanics
 				Not recommended for usage by players
 				'''
+		}
+
+		infernum: {
+			Label: Infernum AI
+			Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
 		}
 	}
 }
