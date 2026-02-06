@@ -29,7 +29,7 @@ public static class HUtils
     public static string CalamityMod = "CalamityMod";
     public static string CatalystMod = "CatalystMod";
     public static string CommunityRemix = "CalRemix";
-    public static string InfernumMode = "CalamityHunt";
+    public static string InfernumMode = "InfernumMode";
 
     public static bool InfernumActive()
     {
