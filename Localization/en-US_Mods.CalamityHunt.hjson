@@ -558,6 +558,11 @@ Items: {
 		DisplayName: Chromatic Campfire
 		Tooltip: ""
 	}
+
+	GoozmaInfernumRelic: {
+		DisplayName: Infernal Goozma Relic
+		Tooltip: ""
+	}
 }
 
 NPCs: {

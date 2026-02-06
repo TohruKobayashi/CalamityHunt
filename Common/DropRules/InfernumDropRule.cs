@@ -9,7 +9,7 @@ namespace CalamityHunt.Common.DropRules
     {
         private static bool CheckInfernum()
         {
-            return ModLoader.HasMod(HUtils.InfernumMode) && (bool)ModLoader.GetMod(HUtils.InfernumMode).Call("IsInfernumActive");
+            return ModLoader.HasMod(HUtils.InfernumMode) && (bool)ModLoader.GetMod(HUtils.InfernumMode).Call("GetInfernumActive");
         }
 
         bool IItemDropRuleCondition.CanDrop(DropAttemptInfo info) => CheckInfernum();

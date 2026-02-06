@@ -558,6 +558,11 @@ Items: {
 		DisplayName: Хроматический костёр
 		Tooltip: ""
 	}
+
+	GoozmaInfernumRelic: {
+		// DisplayName: Goozma Infernum Relic
+		// Tooltip: ""
+	}
 }
 
 NPCs: {

@@ -12,7 +12,6 @@ using Terraria.ObjectData;
 
 namespace CalamityHunt.Content.Tiles.Relics
 {
-    [ExtendsFromMod("InfernumMode")]
     public class GoozmaInfernumRelicTile : ModTile
     {
         public const int FrameWidth = 18 * 3;
@@ -25,7 +24,7 @@ namespace CalamityHunt.Content.Tiles.Relics
         public Asset<Texture2D> RelicBaseTexture;
         public Asset<Texture2D> RelicBaseGlowTexture;
 
-        public static string RelicTextureName => "CalamityHunt/Assets/Tiles/Relics/GoozmaInfernumRelicTile";
+        public static string RelicTextureName => "CalamityHunt/Assets/Textures/Tiles/Relics/GoozmaInfernumRelicTile";
 
         public static string RelicGlowTextureName => RelicTextureName + "Glow";
 
@@ -37,17 +36,11 @@ namespace CalamityHunt.Content.Tiles.Relics
 
         public static string RelicBaseGlowTextureName => "InfernumMode/Content/Tiles/Relics/PedestalGlow";
 
-        public override void Load()
+        public override bool IsLoadingEnabled(Mod mod)
         {
-            if (!Main.dedServ)
-            {
-                // Cache the extra texture displayed on the pedestal
-                RelicTexture = ModContent.Request<Texture2D>(RelicTextureName);
-                RelicGlowTexture = ModContent.Request<Texture2D>(RelicGlowTextureName);
-                RelicBaseTexture = ModContent.Request<Texture2D>(DrawTexture);
-                RelicBaseGlowTexture = ModContent.Request<Texture2D>(RelicBaseGlowTextureName);
-            }
+            return ModLoader.HasMod(HUtils.InfernumMode);
         }
+
         public override void Unload()
         {
             // Unload the extra texture displayed on the pedestal
@@ -81,6 +74,14 @@ namespace CalamityHunt.Content.Tiles.Relics
             // Register map name and color
             // "MapObject.Relic" refers to the translation key for the vanilla "Relic" text
             AddMapEntry(new Color(41, 32, 48), Language.GetText("MapObject.Relic"));
+
+            if (!Main.dedServ) {
+                // Cache the extra texture displayed on the pedestal
+                RelicTexture = ModContent.Request<Texture2D>(RelicTextureName);
+                RelicGlowTexture = ModContent.Request<Texture2D>(RelicGlowTextureName);
+                RelicBaseTexture = ModContent.Request<Texture2D>(DrawTexture);
+                RelicBaseGlowTexture = ModContent.Request<Texture2D>(RelicBaseGlowTextureName);
+            }
         }
 
         public override bool CreateDust(int i, int j, ref int type) => false;
