@@ -54,7 +54,7 @@ public class AntiMassAccumulator : ModItem
                     .AddIngredient(calamity.Find<ModItem>("ExodiumCluster").Type, 30)
                     .AddIngredient(calamity.Find<ModItem>("MysteriousCircuitry").Type, 18)
                     .AddIngredient(calamity.Find<ModItem>("SuspiciousScrap").Type, 3)
-                    .AddTile(TileID.LunarCraftingStation)
+                    .AddTile(TileID.MythrilAnvil)
                     .Register();
             }
             CreateRecipe() //calamity recipe for that tarragon swag
@@ -63,7 +63,7 @@ public class AntiMassAccumulator : ModItem
                     .AddIngredient(calamity.Find<ModItem>("ExodiumCluster").Type, 30)
                     .AddIngredient(calamity.Find<ModItem>("MysteriousCircuitry").Type, 18)
                     .AddIngredient(calamity.Find<ModItem>("SuspiciousScrap").Type, 3) //this is the illegal gun parts of calamity
-                    .AddTile(TileID.LunarCraftingStation)
+                    .AddTile(TileID.MythrilAnvil)
                     .Register();
         }
         else {
@@ -72,7 +72,7 @@ public class AntiMassAccumulator : ModItem
                 .AddIngredient(ItemID.SoulofFlight, 6)
                 .AddIngredient(ItemID.LunarBar, 90) //value of uelibloom bar and exodium cluster (108 gold) / value of liminite bar (1.2 gold) = 90 luminite bars
                 .AddIngredient(ItemID.IllegalGunParts, 3) //this is the illegal gun parts of vanilla
-                .AddTile(TileID.LunarCraftingStation)
+                .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
     }

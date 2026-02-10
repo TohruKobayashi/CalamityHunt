@@ -359,7 +359,7 @@ Items: {
 		Tooltip:
 			'''
 			用凝胶作为弹药
-			忽视30点敌人防御
+			忽视15点敌人防御
 			80%几率不消耗凝胶
 			'''
 	}
@@ -538,8 +538,8 @@ Items: {
 	}
 
 	ShogunWings: {
-		// DisplayName: Thousand-Fold Paper Fans
 		// Tooltip: "'They are best used to cool you off'"
+		// DisplayName: Thousand-Fold Paper Fans
 	}
 
 	NuclearLemonade: {
@@ -557,82 +557,8 @@ Items: {
 		// Tooltip: ""
 	}
 
-	AshenSoul: {
-		// DisplayName: Ashen Auric Soul
-		// Tooltip: Absorb to gain immense, magmatic powers
-	}
-
-	RottenSoul: {
-		// DisplayName: Rotten Auric Soul
-		// Tooltip: Absorb to gain immense, radioactive powers
-	}
-
-	CancelSlimeRain: {
-		// DisplayName: Cancel Slime Rain
-		// Tooltip: ""
-	}
-
-	GoozmaMusicBoxExiledP1: {
-		// DisplayName: Music Box (Exiled Goozma)
-		// Tooltip: ""
-	}
-
-	GoozmaMusicBoxExiledP2: {
-		// DisplayName: Music Box (Exiled Goozma Desperate)
-		// Tooltip: ""
-	}
-
-	GoozmaMusicBoxJteohP1: {
-		// DisplayName: Music Box (Jteoh Goozma)
-		// Tooltip: ""
-	}
-
-	GoozmaMusicBoxJteohP2: {
-		// DisplayName: Music Box (Jteoh Goozma Desperate)
-		// Tooltip: ""
-	}
-
-	SludgeSpongeEmpty: {
-		// DisplayName: Sludge Sponge
-		// Tooltip: Use on an empowered Slime Ninja Statue to end a Slime Rain
-	}
-
-	SludgeSpongeFull: {
-		// DisplayName: Engorged Sludge Sponge
-		/* Tooltip:
-			'''
-			Use on an empowered Slime Ninja Statue to start a Slime Rain
-			'Have fun wringing it out'
-			''' */
-	}
-
-	ReplicaGauntlets: {
-		// DisplayName: Replica Gauntlets
-		// Tooltip: "'All the glitz without the glamour'"
-	}
-
-	ChromaSphere: {
-		// DisplayName: Chroma Sphere
-		// Tooltip: Adds a bit of color to your afterimages
-	}
-
-	EbonianCystDye: {
-		// DisplayName: Ebonian Cyst Dye
-		// Tooltip: ""
-	}
-
-	CrimulanGougeDye: {
-		// DisplayName: Crimulan Gouge Dye
-		// Tooltip: ""
-	}
-
-	StellarHeavenDye: {
-		// DisplayName: Stellar Heaven Dye
-		// Tooltip: ""
-	}
-
-	DivineResplendanceDye: {
-		// DisplayName: Divine Resplendance Dye
+	GoozmaInfernumRelic: {
+		// DisplayName: Goozma Infernum Relic
 		// Tooltip: ""
 	}
 }
@@ -751,7 +677,6 @@ Projectiles: {
 	// FissionFlyerProjectile.DisplayName: Fission Flyer
 	// CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
 	// FissionFlayerProjectile.DisplayName: to be determined
-	// SlimeShotRedirecting.DisplayName: Slime Shot
 }
 
 Chat: {
@@ -822,10 +747,6 @@ Tiles: {
 	GoozmaSoulMusicBoxTile.MapEntry: 音乐盒
 	YharonSoulMusicBoxTile.MapEntry: 音乐盒
 	// ChromaticCampfirePlaced.MapEntry: Chromatic Campfire Placed
-	// GoozmaMusicBoxExiledP1Tile.MapEntry: Goozma Music Box Exiled P1 Tile
-	// GoozmaMusicBoxExiledP2Tile.MapEntry: Goozma Music Box Exiled P2 Tile
-	// GoozmaMusicBoxJteohP1Tile.MapEntry: Goozma Music Box Jteoh P1 Tile
-	// GoozmaMusicBoxJteohP2Tile.MapEntry: Goozma Music Box Jteoh P2 Tile
 }
 
 Config: {
@@ -862,6 +783,11 @@ Config: {
 		Tooltip: 启用或禁用史莱姆季风的雷暴视觉效果
 	}
 
+	Infernum: {
+		// Label: Infernum AI
+		// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
+	}
+
 	// ContentHeader: Content
 }
 
@@ -880,6 +806,8 @@ LoreGoozma:
 	可惜，其努力的成果最终却化为泡影。这是历史循环中的一个永恒的规律。
 	也许从泰拉瑞亚的角度来看，我们所做出的成就与只会无能蠕动的史莱姆相差不了多少。
 	'''
+// InfernalRelicText: Imbued with the infernal flames of a defeated foe
+// InfernumOnly: Infernum Mode only
 
 Configs: {
 	Config: {
@@ -944,9 +872,9 @@ Configs: {
 				''' */
 		}
 
-		GoozmaMusicPreference: {
-			// Label: Goozma Music Preference
-			// Tooltip: ""
+		infernum: {
+			// Label: Infernum AI
+			// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
 		}
 	}
 }

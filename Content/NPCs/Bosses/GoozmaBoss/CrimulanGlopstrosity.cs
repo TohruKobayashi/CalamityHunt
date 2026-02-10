@@ -286,7 +286,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
         private void SlamRain()
         {
             // the amount of times this attack is performed
-            int ceilingCount = (int)DifficultyBasedValue(2, 2, 3, 4, master: 3, masterrev: 4, masterdeath: 6);
+            int ceilingCount = (int)DifficultyBasedValue(2, 2, 3, 6);
             // how long a wave lasts
             int waveTime = 170;
             // set false to disable contact damage
@@ -355,7 +355,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                         // spawn clones
                         if (localTime == 100) {
                             // the amount of clones spawned 
-                            int extension = (int)DifficultyBasedValue(10, 12, 16, 18, 20, master: 16, masterrev: 18, masterdeath: 20);
+                            int extension = (int)DifficultyBasedValue(10, 12, 16, 18, 20);
                             int telegraphTime = 60;
 
                             if (Main.netMode != NetmodeID.MultiplayerClient) {
@@ -456,7 +456,6 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                         }
                     }
                 }
-
                 // SLAM !!
                 else if (localTime < Crim2SlamTimeMax) {
                     useNinjaSlamFrame = true;
@@ -549,8 +548,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
         // no.
         private void EndlessChase()
         {
-            int jumpCount = (int)DifficultyBasedValue(8, 9, 10, 11, 12, master: 10, masterrev: 11, masterdeath: 12);
-            int jumpTime = (int)DifficultyBasedValue(70, 65, 60, 55, master: 60, masterrev: 55, masterdeath: 50);
+            int jumpCount = (int)DifficultyBasedValue(8, 9, 10, 11, 12);
+            int jumpTime = (int)DifficultyBasedValue(70, 65, 60, 50);
             float jumpHeight = NPC.height * 6f;
 
             if (Time < 35) {

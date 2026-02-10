@@ -29,34 +29,19 @@ namespace CalamityHunt.Common.Systems
 
         public static int BalanceToggleValue(int vanilla, int? nonVanilla) => (int)BalanceToggleValue(vanilla, nonVanilla);
 
-        public static float DifficultyBasedValue(float? normal = null, float? expert = null, float? revengeance = null, float? death = null, float? bossrush = null, float? ftw = null, float? gfb = null, float? legendary = null, float? master = null, float? masterrev = null, float? masterdeath = null)
+        public static float DifficultyBasedValue(float? normal = null, float? expert = null, float? revengeance = null, float? death = null, float? ftw = null, float? gfb = null)
         {
-            if (Main.getGoodWorld && Main.masterMode && RevengeanceMode && legendary != null) {
-                return (float)legendary;
-            }
-            else if (Main.zenithWorld && gfb != null) {
+            if (Main.zenithWorld && gfb != null) {
                 return (float)gfb;
             }
             else if (Main.getGoodWorld && ftw != null) {
                 return (float)ftw;
             }
-            else if (BossRush && bossrush != null) {
-                return (float)bossrush;
-            }
-            else if (DeathMode && MasterMode && masterdeath != null) {
-                return (float)masterdeath;
-            }
-            else if (RevengeanceMode && MasterMode && masterrev != null) {
-                return (float)masterrev;
-            }
-            else if (DeathMode && death != null) {
+            else if ((DeathMode || (HUtils.InfernumActive() && Config.Instance.infernum)) && death != null) {
                 return (float)death;
             }
             else if (RevengeanceMode && revengeance != null) {
                 return (float)revengeance;
-            }
-            else if (MasterMode && master != null) {
-                return (float)master;
             }
             else if (ExpertMode && expert != null) {
                 return (float)expert;

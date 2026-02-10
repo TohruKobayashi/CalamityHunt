@@ -34,7 +34,7 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
 
             if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
                 calamity.TryFind("RogueDamageClass", out DamageClass d);
-                calamity.TryFind("Violet", out ModRarity r);
+                calamity.TryFind("BurnishedAuric", out ModRarity r);
                 Item.DamageType = d;
                 Item.rare = r.Type;
             }

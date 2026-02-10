@@ -12,10 +12,6 @@ public static class GoozmaResistances
             List<(int, float)> projectiles = new List<(int, float)> { };
             Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
             //projectiles.Add((calamity.Find<ModProjectile>("EssenceScythe").Type, 0.9f));
-            projectiles.Add((calamity.Find<ModProjectile>("ExcelsusMain").Type, 0.5f));
-            projectiles.Add((calamity.Find<ModProjectile>("ExcelsusPink").Type, 0.5f));
-            projectiles.Add((calamity.Find<ModProjectile>("ExcelsusBlue").Type, 0.5f));
-            projectiles.Add((calamity.Find<ModProjectile>("LaserFountain").Type, 0.5f));
             projectiles.Add((calamity.Find<ModProjectile>("TaintedBladeSlasher").Type, 0.5f));
             /*projectiles.Add((calamity.Find<ModProjectile>("GaelSkull").Type, 0.6f));*/
             projectiles.Add((calamity.Find<ModProjectile>("LaceratorYoyo").Type, 4f));
@@ -90,15 +86,15 @@ public static class GoozmaResistances
             projectiles.Add((calamity.Find<ModProjectile>("ClimaxBeam").Type, 0.95f));
             projectiles.Add((calamity.Find<ModProjectile>("VoidVortexProj").Type, 0.75f));*/
             projectiles.Add((calamity.Find<ModProjectile>("InfernadoFriendly").Type, 0.3f));
-            projectiles.Add((calamity.Find<ModProjectile>("Vehemence").Type, 0.85f));
+            projectiles.Add((calamity.Find<ModProjectile>("VehemenceBolt").Type, 0.85f));
             projectiles.Add((calamity.Find<ModProjectile>("VehemenceSkull").Type, 0.85f));
             /*projectiles.Add((calamity.Find<ModProjectile>("AetherBeam").Type, 0.85f));
             projectiles.Add((calamity.Find<ModProjectile>("TeslaCannonShot").Type, 0.9f));*/
             projectiles.Add((calamity.Find<ModProjectile>("RedirectingLostSoul").Type, 0.5f));
             projectiles.Add((calamity.Find<ModProjectile>("RedirectingVengefulSoul").Type, 0.5f));
             projectiles.Add((calamity.Find<ModProjectile>("RedirectingGildedSoul").Type, 0.5f));
-            projectiles.Add((calamity.Find<ModProjectile>("Ancient").Type, 0.75f));
-            projectiles.Add((calamity.Find<ModProjectile>("Ancient2").Type, 0.75f));
+            //projectiles.Add((calamity.Find<ModProjectile>("Ancient").Type, 0.75f));
+            //projectiles.Add((calamity.Find<ModProjectile>("Ancient2").Type, 0.75f));
             /*projectiles.Add((calamity.Find<ModProjectile>("EnormousConsumingVortex").Type, 0.75f));
             projectiles.Add((calamity.Find<ModProjectile>("ExoVortex").Type, 0.8f));
             projectiles.Add((calamity.Find<ModProjectile>("MelterNote1").Type, 0.95f));
@@ -210,18 +206,5 @@ public static class GoozmaResistances
     {
         // "give everything a resistance to true melee"
         modifiers.SourceDamage *= 0.7f;
-    }
-
-    public static void DisablePointBlank()
-    {
-        if (ModLoader.HasMod(HUtils.CalamityMod)) {
-            Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
-            for (int i = 0; i < Main.maxProjectiles; i++) {
-                Projectile proj = Main.projectile[i];
-                if (proj.active && (int)calamity.Call("GetPointBlankDuration", proj) > 0) {
-                    calamity.Call("SetPointBlankDuration", proj, 0);
-                }
-            }
-        }
     }
 }

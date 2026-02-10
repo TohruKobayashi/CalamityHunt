@@ -11,7 +11,6 @@ namespace CalamityHunt.Common.Systems;
 
 public class YharonReflectionSystem : ModSystem
 {
-    public static bool SSO = false;
     public static PropertyInfo interludeConfig;
     public static FieldInfo yharonolithField = null;
     public static ModConfig calamityConfig;
@@ -20,10 +19,6 @@ public class YharonReflectionSystem : ModSystem
     public override void PostSetupContent()
     {
         if (ModLoader.HasMod(HUtils.CalamityMod)) {
-            // If the Zenith Throne, an item added in the Sunken Sea update exists, then the Sunken Sea update did indeed happen
-            if (ModLoader.GetMod(HUtils.CalamityMod).TryFind("ZenithThrone", out ModItem nim)) {
-                SSO = true;
-            }
             // Grab Calamity's config
             string configName = "CalamityClientConfig";
             calamityConfig = ModLoader.GetMod(HUtils.CalamityMod).GetConfig(configName);

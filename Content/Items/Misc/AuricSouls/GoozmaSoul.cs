@@ -53,7 +53,7 @@ namespace CalamityHunt.Content.Items.Misc.AuricSouls
             if (ModLoader.HasMod("CalamityMod")) {
                 ModRarity r;
                 Mod calamity = ModLoader.GetMod("CalamityMod");
-                calamity.TryFind("Violet", out r);
+                calamity.TryFind("BurnishedAuric", out r);
                 Item.rare = r.Type;
             }
         }

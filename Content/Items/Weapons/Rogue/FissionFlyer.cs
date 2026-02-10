@@ -34,7 +34,7 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
                 ModRarity r;
                 Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
                 calamity.TryFind<DamageClass>("RogueDamageClass", out d);
-                calamity.TryFind<ModRarity>("Violet", out r);
+                calamity.TryFind<ModRarity>("BurnishedAuric", out r);
                 Item.DamageType = d;
                 Item.rare = r.Type;
             }

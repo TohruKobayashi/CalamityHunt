@@ -17,6 +17,9 @@ public class Config : ModConfig
     [DefaultValue("Exiled One")]
     public string GoozmaMusicPreference;
 
+    [DefaultValue(true)]
+    public bool infernum;
+
     /* DEBUG MODE DOCUMENTATION 
      * -trailblazer goggles provide debug info about particles, dust, and metaballs when worn
      * -bad apple gains the ability to do things while held! use this to test whatever you want!
