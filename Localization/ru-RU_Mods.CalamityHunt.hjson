@@ -110,7 +110,7 @@ Items: {
 
 	GoozmaSoul: {
 		DisplayName: Хроматическая ауритовая душа
-		Tooltip: Поглотите, чтобы обрести необъятные скользкие силы
+		Tooltip: Поглотите, чтобы обрести необъятные, скользкие силы
 	}
 
 	YharonSoulMusicBox: {
@@ -345,7 +345,7 @@ Items: {
 	}
 
 	StickyHand: {
-		DisplayName: Липко-мерзкая рука
+		DisplayName: Мерзкая рука
 		Tooltip:
 			'''
 			Автоматически отцепляется, когда вы достаточно близки к крюку
@@ -559,34 +559,9 @@ Items: {
 		Tooltip: ""
 	}
 
-	AshenSoul: {
-		DisplayName: Пепельная ауритовая душа
-		Tooltip: Поглотите, чтобы обрести необъятные магматические силы
-	}
-
-	RottenSoul: {
-		DisplayName: Сгнившая ауритовая душа
-		Tooltip: Поглотите, чтобы получить необъятные радиоактивные силы
-	}
-
-	GoozmaMusicBoxExiledP1: {
-		DisplayName: Музыкальная шкатулка (Гузма: Изгнание)
-		Tooltip: ""
-	}
-
-	GoozmaMusicBoxExiledP2: {
-		DisplayName: Музыкальная шкатулка (Гузма: Изгнание, отчаяние)
-		Tooltip: ""
-	}
-
-	GoozmaMusicBoxJteohP1: {
-		DisplayName: Музыкальная шкатулка (Гузма: Jteoh)
-		Tooltip: ""
-	}
-
-	GoozmaMusicBoxJteohP2: {
-		DisplayName: Музыкальная шкатулка (Гузма: Jteoh, отчаяние)
-		Tooltip: ""
+	GoozmaInfernumRelic: {
+		// DisplayName: Goozma Infernum Relic
+		// Tooltip: ""
 	}
 }
 
@@ -667,7 +642,7 @@ Projectiles: {
 	SludgeShakerHeld.DisplayName: Сотрясатель слякоти
 	DarkSludge.DisplayName: Тёмная слякоть
 	SludgeLighter.DisplayName: Зажигатель слякоти
-	StickyHandProj.DisplayName: Липко-мерзкая рука
+	StickyHandProj.DisplayName: Мерзкая рука
 	TrailblazerFlame.DisplayName: Пламя первопроходца
 	FissionFlyerProj.DisplayName: Расщепляющий резак
 	FissionFlyerMiniRing.DisplayName: Колкое кольцо
@@ -774,10 +749,6 @@ Tiles: {
 	GoozmaSoulMusicBoxTile.MapEntry: Музыкальная шкатулка
 	YharonSoulMusicBoxTile.MapEntry: Музыкальная шкатулка
 	ChromaticCampfirePlaced.MapEntry: Поставленный хроматический костёр
-	GoozmaMusicBoxExiledP1Tile.MapEntry: Музыкальная шкатулка Гузмы: Изгнанный, Фаза 1
-	GoozmaMusicBoxExiledP2Tile.MapEntry: Музыкальная шкатулка Гузмы: Изгнанный, Фаза 2
-	GoozmaMusicBoxJteohP1Tile.MapEntry: Музыкальная шкатулка Гузмы: Jteoh, Фаза 1
-	GoozmaMusicBoxJteohP2Tile.MapEntry: Музыкальная шкатулка Гузмы: Jteoh, Фаза 2
 }
 
 Config: {
@@ -814,6 +785,11 @@ Config: {
 		Tooltip: Включает эффект грозы во время муссона слизней
 	}
 
+	Infernum: {
+		// Label: Infernum AI
+		// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
+	}
+
 	ContentHeader: Контент
 }
 
@@ -826,13 +802,14 @@ LoreGoozma:
 	'''
 	Самое устрашающее разочарование в иерархическом владении всего живущего.
 	Только подумать, что кульминация нижайших существ смогла бы несмотря ни на что обладать Ауритовой душой, не имея при этом драконьего происхождения...
-	Оно стало чем-то великим, приблизилось к идеальной сущности, состоящей из ничего, кроме неидеальных частей...
-	Возможно, истинный источник божественной силы навсегда останется загадкой.
+	Оно стало чем-то великим, приблизилось к идеальной сущности, состоящей из ничего, кроме неидеальных частей... Возможно, истинный источник божественной силы навсегда останется загадкой.
 	В противовес моим опасениям насчёт твоей культивации этого гротескного чудища стоит интерес в его сторону.
 	Что могло бы привести его к такой форме? Его внешность разоблачает хитрость и изысканность манипуляции над его подчинёнными. 
 	Какая же жалость, что плоды усилий его по итогу ни к чему не привели. Неустанный узор цикличных анналов истории.
 	Может быть, в перспективе мира Террарии, все наши достижения так же малозначимы, как и бессильные страдания слизней.
 	'''
+// InfernalRelicText: Imbued with the infernal flames of a defeated foe
+// InfernumOnly: Infernum Mode only
 
 Configs: {
 	Config: {
@@ -897,9 +874,9 @@ Configs: {
 				'''
 		}
 
-		GoozmaMusicPreference: {
-			Label: Предпочтения темы Гузмы
-			Tooltip: ""
+		infernum: {
+			// Label: Infernum AI
+			// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
 		}
 	}
 }

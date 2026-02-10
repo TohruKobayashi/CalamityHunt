@@ -32,7 +32,7 @@ public class TrailblazerBackpack : ModItem
         if (ModLoader.HasMod(HUtils.CalamityMod)) {
             ModRarity r;
             Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
-            calamity.TryFind("Violet", out r);
+            calamity.TryFind("BurnishedAuric", out r);
             Item.rare = r.Type;
         }
     }
