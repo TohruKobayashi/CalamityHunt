@@ -83,7 +83,7 @@ namespace CalamityHunt.Content.Items.Weapons.Rogue
                     .AddIngredient(calamity.Find<ModItem>("MangroveChakram").Type)
                     .AddIngredient(calamity.Find<ModItem>("Valediction").Type)
                     .AddIngredient(calamity.Find<ModItem>("ToxicantTwister").Type)
-                    .AddIngredient(calamity.Find<ModItem>("SludgeSplotch").Type, 100)
+                    .AddIngredient(calamity.Find<ModItem>("SludgeSplotch").Type)
                     .AddTile(calamity.Find<ModTile>("CosmicAnvil").Type)
                     .Register();
             }
