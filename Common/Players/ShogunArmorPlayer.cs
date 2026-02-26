@@ -345,7 +345,6 @@ namespace CalamityHunt.Common.Players
                     Player.buffImmune[calamity.Find<ModBuff>("Warped").Type] = true;
                     Player.buffImmune[calamity.Find<ModBuff>("WeakPetrification").Type] = true;
                     Player.buffImmune[calamity.Find<ModBuff>("WhisperingDeath").Type] = true;
-                    Player.buffImmune[calamity.Find<ModBuff>("PurpleHazeBuff").Type] = true;
                     Player.buffImmune[calamity.Find<ModBuff>("FrozenLungs").Type] = true;
                     Player.buffImmune[calamity.Find<ModBuff>("PopoNoselessBuff").Type] = true;
                     Player.buffImmune[calamity.Find<ModBuff>("SearingLava").Type] = true;
