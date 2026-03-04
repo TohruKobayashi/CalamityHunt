@@ -618,8 +618,8 @@ Items: {
 		Tooltip: "'All the glitz without the glamour'"
 	}
 
-	ChromaSphere: {
-		DisplayName: Chroma Sphere
+	GunkHeart: {
+		DisplayName: Gunk Heart
 		Tooltip: Adds a bit of color to your afterimages
 	}
 
@@ -650,7 +650,7 @@ NPCs: {
 
 		BossChecklistIntegration: {
 			EntryName: Goozma
-			SpawnInfo: Use a [i:CalamityHunt/PluripotentSpawnEgg] on an empowered Slime Ninja Statue.
+			SpawnInfo: Throw a [i:CalamityMod/OverloadedSludge] onto King Slime during a Slime Rain or use a [i:CalamityHunt/PluripotentSpawnEgg] on an empowered Slime Ninja Statue.
 			DespawnMessage: "[c/7a7a7a:The {0} {1} disintegrates...]"
 		}
 

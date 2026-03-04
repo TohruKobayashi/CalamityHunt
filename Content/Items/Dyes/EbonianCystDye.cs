@@ -34,6 +34,10 @@ namespace CalamityHunt.Content.Items.Dyes
     }
     public class EbonianCystDye : ModItem
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;

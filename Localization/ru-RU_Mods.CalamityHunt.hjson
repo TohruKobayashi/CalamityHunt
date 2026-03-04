@@ -618,8 +618,8 @@ Items: {
 		// Tooltip: "'All the glitz without the glamour'"
 	}
 
-	ChromaSphere: {
-		// DisplayName: Chroma Sphere
+	GunkHeart: {
+		// DisplayName: Gunk Heart
 		// Tooltip: Adds a bit of color to your afterimages
 	}
 

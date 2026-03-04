@@ -34,6 +34,11 @@ namespace CalamityHunt.Content.Items.Dyes
     }
     public class CrimulanGougeDye : ModItem
     {
+        public override bool IsLoadingEnabled(Mod mod)
+        {
+            return false;
+        }
+
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;

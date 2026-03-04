@@ -20,7 +20,7 @@ using static log4net.Appender.ColoredConsoleAppender;
 
 namespace CalamityHunt.Content.Items.Misc
 {
-    public class ChromaSphere : ModItem
+    public class GunkHeart : ModItem
     {
         public override void SetDefaults()
         {
@@ -39,21 +39,21 @@ namespace CalamityHunt.Content.Items.Misc
 
         public override void UpdateVanity(Player player)
         {
-            player.GetModPlayer<ChromaSpherePlayer>().active = true;
+            player.GetModPlayer<GunkHeartPlayer>().active = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             if (!hideVisual) {
-                player.GetModPlayer<ChromaSpherePlayer>().active = true;
+                player.GetModPlayer<GunkHeartPlayer>().active = true;
             }
         }
         public override void UpdateEquip(Player player)
         {
-            player.GetModPlayer<ChromaSpherePlayer>().active = true;
+            player.GetModPlayer<GunkHeartPlayer>().active = true;
         }
     }
 
-    public class ChromaSpherePlayer : ModPlayer
+    public class GunkHeartPlayer : ModPlayer
     {
         public bool active;
         public override void ResetEffects()
@@ -70,11 +70,11 @@ namespace CalamityHunt.Content.Items.Misc
         }
     }
 
-    public class ChromaSphereAfterimage : PlayerDrawLayer
+    public class GunkHeartAfterimage : PlayerDrawLayer
     {
         public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.LastVanillaLayer);
 
-        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo) => drawInfo.drawPlayer.GetModPlayer<ChromaSpherePlayer>().active && drawInfo.shadow != 0;
+        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo) => drawInfo.drawPlayer.GetModPlayer<GunkHeartPlayer>().active && drawInfo.shadow != 0;
         
 
         protected override void Draw(ref PlayerDrawSet drawInfo)
@@ -101,11 +101,11 @@ namespace CalamityHunt.Content.Items.Misc
         }
     }
 
-    public class ChromaSphereOutline : PlayerDrawLayer
+    public class GunkHeartOutline : PlayerDrawLayer
     {
         public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.LastVanillaLayer);
 
-        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo) => drawInfo.drawPlayer.GetModPlayer<ChromaSpherePlayer>().active && drawInfo.shadow == 0;
+        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo) => drawInfo.drawPlayer.GetModPlayer<GunkHeartPlayer>().active && drawInfo.shadow == 0;
 
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {

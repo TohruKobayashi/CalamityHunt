@@ -32,22 +32,12 @@ namespace CalamityHunt.Content.Items.Misc
 
         public override void AddRecipes()
         {
-            if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) {
-                CreateRecipe()
-                .AddIngredient(calamity.Find<ModItem>("AscendantSpiritEssence").Type, 10)
-                .AddIngredient(ItemID.Gel, 250)
-                .AddIngredient<SludgeSpongeFull>()
+            CreateRecipe()
+                .AddIngredient<ChromaticMass>(5)
+                .AddIngredient(ItemID.Gel, 100)
+                .AddIngredient<GelatinousCatalyst>()
                 .AddTile<SlimeNinjaStatueTile>()
                 .Register();
-            }
-            else {
-                CreateRecipe()
-                .AddIngredient(ItemID.LunarBar, 5)
-                .AddIngredient(ItemID.Gel, 250)
-                .AddIngredient<SludgeSpongeFull>()
-                .AddTile<SlimeNinjaStatueTile>()
-                .Register();
-            }
         }
 
         public static Asset<Texture2D> glowTexture;
