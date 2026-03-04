@@ -226,7 +226,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         private void PrismDestroyer()
         {
-            int prismCount = (int)DifficultyBasedValue(3, 4, 5, 8);
+            int prismCount = (int)DifficultyBasedValue(3, 4, 5);
             int danceCount = (int)DifficultyBasedValue(3, death: 5);
 
             NPC.rotation = NPC.velocity.X * 0.02f;
