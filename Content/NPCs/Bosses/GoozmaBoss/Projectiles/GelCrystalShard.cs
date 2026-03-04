@@ -85,7 +85,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss.Projectiles
             effect.Parameters["uTime"].SetValue(-(Main.GlobalTimeWrappedHourly * 2f % 1f));
             effect.CurrentTechnique.Passes[0].Apply();
 
-            strip.DrawTrail();
+            // This doesn't look good yet im afraid
+            //strip.DrawTrail();
 
             Main.pixelShader.CurrentTechnique.Passes[0].Apply();
 

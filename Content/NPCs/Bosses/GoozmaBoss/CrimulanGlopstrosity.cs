@@ -446,7 +446,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
                 }
                 // save the target location
                 else if (localTime == Crim2JumpLength) {
-                    saveTarget = Target.Center + Vector2.UnitX * Main.rand.Next(minDist, maxDist) * Main.rand.NextBool().ToDirectionInt();
+                    saveTarget = Target.Center;
                     Point tileCords = saveTarget.ToTileCoordinates();
                     for (int i = 0; i < 200; i++) {
                         Tile t = Framing.GetTileSafely(tileCords.X, tileCords.Y + i);

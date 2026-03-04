@@ -539,8 +539,8 @@ Items: {
 	}
 
 	ShogunWings: {
-		// Tooltip: "'They are best used to cool you off'"
 		// DisplayName: Thousand-Fold Paper Fans
+		// Tooltip: "'They are best used to cool you off'"
 	}
 
 	NuclearLemonade: {
@@ -558,8 +558,87 @@ Items: {
 		// Tooltip: ""
 	}
 
+	AshenSoul: {
+		// DisplayName: Ashen Auric Soul
+		// Tooltip: Absorb to gain immense, magmatic powers
+	}
+
+	RottenSoul: {
+		// DisplayName: Rotten Auric Soul
+		// Tooltip: Absorb to gain immense, radioactive powers
+	}
+
+	CancelSlimeRain: {
+		// DisplayName: Cancel Slime Rain
+		// Tooltip: ""
+	}
+
+	GoozmaMusicBoxExiledP1: {
+		// DisplayName: Music Box (Exiled Goozma)
+		// Tooltip: ""
+	}
+
+	GoozmaMusicBoxExiledP2: {
+		// DisplayName: Music Box (Exiled Goozma Desperate)
+		// Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP1: {
+		// DisplayName: Music Box (Jteoh Goozma)
+		// Tooltip: ""
+	}
+
+	GoozmaMusicBoxJteohP2: {
+		// DisplayName: Music Box (Jteoh Goozma Desperate)
+		// Tooltip: ""
+	}
+
 	GoozmaInfernumRelic: {
 		// DisplayName: Infernal Goozma Relic
+		// Tooltip: ""
+	}
+
+	SludgeSpongeEmpty: {
+		// DisplayName: Sludge Sponge
+		// Tooltip: Use on an empowered Slime Ninja Statue to end a Slime Rain
+	}
+
+	SludgeSpongeFull: {
+		// DisplayName: Engorged Sludge Sponge
+		/* Tooltip:
+			'''
+			Use on an empowered Slime Ninja Statue to start a Slime Rain
+			'Have fun wringing it out'
+			''' */
+	}
+
+	ReplicaGauntlets: {
+		// DisplayName: Replica Gauntlets
+		// Tooltip: "'All the glitz without the glamour'"
+	}
+
+	ChromaSphere: {
+		// DisplayName: Chroma Sphere
+		// Tooltip: Adds a bit of color to your afterimages
+	}
+
+	EbonianCystDye: {
+		// DisplayName: Ebonian Cyst Dye
+		// Tooltip: ""
+	}
+
+	CrimulanGougeDye: {
+		// DisplayName: Crimulan Gouge Dye
+		// Tooltip: ""
+	}
+
+	StellarHeavenDye: {
+		// DisplayName: Stellar Heaven Dye
+		// Tooltip: ""
+	}
+
+	DivineResplendanceDye: {
+		// DisplayName: Divine Resplendance Dye
 		// Tooltip: ""
 	}
 }
@@ -678,6 +757,7 @@ Projectiles: {
 	// FissionFlyerProjectile.DisplayName: Fission Flyer
 	// CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
 	// FissionFlayerProjectile.DisplayName: to be determined
+	// SlimeShotRedirecting.DisplayName: Slime Shot
 }
 
 Chat: {
@@ -748,6 +828,10 @@ Tiles: {
 	GoozmaSoulMusicBoxTile.MapEntry: Boîte à musique
 	YharonSoulMusicBoxTile.MapEntry: Boîte à musique
 	// ChromaticCampfirePlaced.MapEntry: Chromatic Campfire Placed
+	// GoozmaMusicBoxExiledP1Tile.MapEntry: Goozma Music Box Exiled P1 Tile
+	// GoozmaMusicBoxExiledP2Tile.MapEntry: Goozma Music Box Exiled P2 Tile
+	// GoozmaMusicBoxJteohP1Tile.MapEntry: Goozma Music Box Jteoh P1 Tile
+	// GoozmaMusicBoxJteohP2Tile.MapEntry: Goozma Music Box Jteoh P2 Tile
 }
 
 Config: {
@@ -871,6 +955,11 @@ Configs: {
 				Enables features optimized for testing game mechanics
 				Not recommended for usage by players
 				''' */
+		}
+
+		GoozmaMusicPreference: {
+			// Label: Goozma Music Preference
+			// Tooltip: ""
 		}
 
 		infernum: {

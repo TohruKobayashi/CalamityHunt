@@ -591,6 +591,7 @@ Items: {
 
 	GoozmaMusicBoxJteohP2: {
 		DisplayName: Music Box (Jteoh Goozma Desperate)
+		Tooltip: ""
 	}
 
 	GoozmaInfernumRelic: {
