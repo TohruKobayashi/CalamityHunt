@@ -302,7 +302,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
         private void CrystalStorm()
         {
-            int crystalFrequency = (int)DifficultyBasedValue(2, 3, 4, 8);
+            int crystalFrequency = (int)DifficultyBasedValue(1, 2, 3, 4);
             int lengthOfAttack = (int)DifficultyBasedValue(240, 300, 360, 460);
 
             if (Time < 40) {
