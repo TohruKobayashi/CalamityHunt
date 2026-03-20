@@ -13,7 +13,7 @@ Music - The Exiled Fellow
 Testers - Shade, Purified, Myra, Angel, aboOod, DestructoGabe8
 Former programmer - Blockaroz
 Special color palettes - Split, Spoop, Delly, Triangle
-Multiplayer support - JesterRomut
+Extra code contributors - JesterRomut, Alino4kaHvoshch, babybluesheep
 
 Special thanks to XP-00 Hypnos
 
