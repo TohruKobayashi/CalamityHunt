@@ -102,7 +102,7 @@ public class SlimeMonsoonSky : CustomSky
         }
 
         for (int i = 0; i < thunder.Length; i++) {
-            if (_random.NextBool(Math.Clamp(120 + additionalLightningChance, 2, 1000)) && _strength > 0.65f && lightningEnabled && Config.Instance.monsoonLightning) {
+            if (_random.NextBool(Math.Clamp(120 + additionalLightningChance, 2, 1000)) && _strength > 0.65f && lightningEnabled && Config.Instance.MonsoonLightning) {
                 thunder[i].Add(new MonsoonStrike(Main.LocalPlayer.Center, _random.NextFloat(0.5f, 1.4f), _random.Next(50, 100), i));
             }
 

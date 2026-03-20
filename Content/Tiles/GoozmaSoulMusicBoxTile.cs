@@ -24,8 +24,7 @@ namespace CalamityHunt.Content.Tiles
             TileObjectData.addTile(Type);
 
             DustType = DustID.Platinum;
-            LocalizedText name = CreateMapEntryName();
-            AddMapEntry(new Color(200, 200, 200), name);
+            AddMapEntry(new Color(200, 200, 200), Language.GetText("ItemName.MusicBox"));
         }
 
         public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings) => true;

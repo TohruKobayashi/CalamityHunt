@@ -35,7 +35,7 @@ namespace CalamityHunt.Content.Items.Misc
             int check = tooltips.IndexOf(tooltips.Find(t => t.Text.Equals("{$}")));
             if (check != -1) {
                 if (ModLoader.HasMod(HUtils.CalamityMod)) {
-                    tooltips[check].Text = Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.StickyHandStats").Value;
+                    tooltips[check].Text = Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.Items.StickyHand.Stats").Value;
                 }
                 else {
                     tooltips.RemoveAt(check);
