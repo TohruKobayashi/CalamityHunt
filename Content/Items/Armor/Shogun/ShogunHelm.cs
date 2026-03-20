@@ -52,7 +52,7 @@ namespace CalamityHunt.Content.Items.Armor.Shogun
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = Language.GetOrRegister(Mod.GetLocalizationKey("SetBonuses.Shogun")).Value;
+            player.setBonus = Language.GetOrRegister(Mod.GetLocalizationKey("Items.ShogunHelm.SetBonus")).Value;
             player.jumpSpeedBoost += 2f;
             player.GetModPlayer<ShogunArmorPlayer>().active = true;
             player.GetDamage(DamageClass.Generic) += 0.18f;

@@ -31,7 +31,7 @@ namespace CalamityHunt.Content.Items.Placeable
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             TooltipLine obj = tooltips.FirstOrDefault((x) => x.Name == "Tooltip0" && x.Mod == "Terraria");
-            obj.Text = Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.InfernalRelicText").Value;
+            obj.Text = Language.GetOrRegister($"Mods.InfernumMode.Items.InfernalRelicText").Value;
             obj.OverrideColor = Color.DarkRed;
         }
     }

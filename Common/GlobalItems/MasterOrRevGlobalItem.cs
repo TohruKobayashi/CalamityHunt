@@ -24,7 +24,7 @@ public class MasterOrRevGlobalItem : GlobalItem
     {
         TooltipLine masterLine = tooltips.Find((t) => t.Name.Equals("Master"));
         if (masterLine != null) {
-            masterLine.Text += Language.GetTextValue("Mods.CalamityHunt.OrRev");
+            masterLine.Text = Language.GetTextValue("Mods.CalamityMod.Vanilla.EditedTooltip.MasterExclusive");
         }
     }
 }

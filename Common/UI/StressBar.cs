@@ -5,6 +5,7 @@ using CalamityHunt.Common.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 
@@ -58,7 +59,7 @@ namespace CalamityHunt.Common.UI
                             Texture2D barCharge = AssetDirectory.Textures.Bars.StressCharge.Value;
                             Texture2D barTop = AssetDirectory.Textures.Bars.StressTopped.Value;
 
-                            Vector2 vector = new Vector2(Config.Instance.stressX, Config.Instance.stressY);
+                            Vector2 vector = new Vector2(Config.Instance.StressX, Config.Instance.StressY);
                             if (vector.X < 0f || vector.X > 100f) {
                                 vector.X = 35.77406f;
                             }
@@ -76,7 +77,7 @@ namespace CalamityHunt.Common.UI
                             Rectangle mouse = new Rectangle((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y, 8, 8);
                             Rectangle value = new Rectangle((int)(pos.X + 21), (int)(pos.Y + 26), 92, 24);
                             if (mouse.Intersects(value)) {
-                                Main.instance.MouseText("Stress: " + StressString(fillPercent * 100, 100), 0, 0);
+                                Main.instance.MouseText(Language.GetTextValue($"Mods.{nameof(CalamityHunt)}.Items.SplendorJam.StressBar", StressString(fillPercent * 100, 100)), 0, 0);
                             }
 
                             Rectangle barFrame = new Rectangle(0, stressFrame * (bar.Height / 5), bar.Width, bar.Height / 5);
@@ -94,7 +95,7 @@ namespace CalamityHunt.Common.UI
         }
         private static Vector2 Shake()
         {
-            float shakeIntensity = Config.Instance.stressShake;
+            float shakeIntensity = Config.Instance.StressShake;
             return new Vector2(Main.rand.NextFloat(0f - shakeIntensity, shakeIntensity), Main.rand.NextFloat(0f - shakeIntensity, shakeIntensity));
         }
         private static string StressString(float val, float max)
