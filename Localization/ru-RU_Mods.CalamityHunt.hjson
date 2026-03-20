@@ -7,11 +7,7 @@ Items: {
 			Не расходуется
 			'Извивается, раздувшись гноем Богов давно мёртвых.'
 			'''
-	}
-
-	StormCatcher: {
-		// DisplayName: Storm Catcher
-		// Tooltip: ""
+		Warning: Не может быть использован для призыва Бога слизней
 	}
 
 	GoopDye: {
@@ -22,11 +18,6 @@ Items: {
 	ChromaticMass: {
 		DisplayName: Хроматическая масса
 		Tooltip: "'Ощущается как холодная плазма'"
-	}
-
-	ShatteredHeartOfDarkness: {
-		// DisplayName: Shattered Heart Of Darkness
-		// Tooltip: ""
 	}
 
 	GoozmaRelicItem: {
@@ -42,21 +33,21 @@ Items: {
 	GoozmaLore: {
 		DisplayName: Гузма
 		Tooltip: описание
-	}
-
-	Goozmolisher: {
-		// DisplayName: Goozmolisher
-		// Tooltip: ""
-	}
-
-	Goozmortar: {
-		// DisplayName: Goozmortar
-		// Tooltip: ""
-	}
-
-	GoozMonolith: {
-		// DisplayName: Monsoon Monolith
-		// Tooltip: ""
+		LoreGeneric:
+			'''
+			[c/E3AF40:До ваших ушей доносится далекий шёпот...]
+			[c/BEBEBE:Удерживайте "Левый Shift", чтобы прислушаться]
+			'''
+		LoreGoozma:
+			'''
+			Самое устрашающее разочарование в иерархическом владении всего живущего.
+			Только подумать, что кульминация нижайших существ смогла бы несмотря ни на что обладать Ауритовой душой, не имея при этом драконьего происхождения...
+			Оно стало чем-то великим, приблизилось к идеальной сущности, состоящей из ничего, кроме неидеальных частей... Возможно, истинный источник божественной силы навсегда останется загадкой.
+			В противовес моим опасениям насчёт твоей культивации этого гротескного чудища стоит интерес в его сторону.
+			Что могло бы привести его к такой форме? Его внешность разоблачает хитрость и изысканность манипуляции над его подчинёнными. 
+			Какая же жалость, что плоды усилий его по итогу ни к чему не привели. Неустанный узор цикличных анналов истории.
+			Может быть, в перспективе мира Террарии, все наши достижения так же малозначимы, как и бессильные страдания слизней.
+			'''
 	}
 
 	TreasureTrunk: {
@@ -72,11 +63,6 @@ Items: {
 	TreasureBucket: {
 		DisplayName: Ведро с сокровищами
 		Tooltip: <right> для открытия
-	}
-
-	GoozmaTrophyItem: {
-		DisplayName: Трофей Гузмы
-		Tooltip: ""
 	}
 
 	GoozmaTrophy: {
@@ -178,6 +164,17 @@ Items: {
 			Увеличивает шанс критического удара на 15%
 			Увеличивает скорость ближнего боя на 15%
 			'''
+		SetBonus:
+			'''
+			Увеличивает урон на 17% и максимальное количество прислужников на 5
+			{$CommonItemTooltip.FlightAndSlowfall}
+			Ношение других крыльев перекрывает данный полёт
+			{$CommonItemTooltip.PressDownToHover}
+			Позволяет делать рывок и совершенствует другие рывки
+			Зажмите ВНИЗ, чтобы падать быстрее
+			Увеличивает скорость прыжка 
+			Даёт иммунитет к большинству дебаффов конца игры и дебаффам, связанным с передвижением
+			'''
 	}
 
 	ShogunPants: {
@@ -212,18 +209,8 @@ Items: {
 			'''
 	}
 
-	EbonianBehemuckTrophyItem: {
-		DisplayName: Трофей Эбонитового гряземота
-		Tooltip: ""
-	}
-
 	EbonianBehemuckTrophy: {
 		DisplayName: Трофей Эбонитового гряземота
-		Tooltip: ""
-	}
-
-	DivineGargooptuarTrophyItem: {
-		DisplayName: Трофей Божественного бурдантюа
 		Tooltip: ""
 	}
 
@@ -232,18 +219,8 @@ Items: {
 		Tooltip: ""
 	}
 
-	CrimulanGlopstrosityTrophyItem: {
-		DisplayName: Трофей Багротанового каплища
-		Tooltip: ""
-	}
-
 	CrimulanGlopstrosityTrophy: {
 		DisplayName: Трофей Багротанового каплища
-		Tooltip: ""
-	}
-
-	StellarGeliathTrophyItem: {
-		DisplayName: Трофей Звёздного гелиафа
 		Tooltip: ""
 	}
 
@@ -305,6 +282,7 @@ Items: {
 			Бонусы и их длительность масштабируются с количеством вашего стресса
 			'Близится что-то ужасающее...'
 			'''
+		// StressBar: Stress: {0}
 	}
 
 	TheSlimer: {
@@ -318,11 +296,6 @@ Items: {
 			'''
 	}
 
-	PureAuricSoul: {
-		// DisplayName: Auric Soul
-		// Tooltip: Absorb to gain immense powers
-	}
-
 	SludgeShaker: {
 		DisplayName: Сотрясатель слякоти
 		Tooltip:
@@ -334,7 +307,6 @@ Items: {
 	}
 
 	SupremeRestorationPotion: {
-		RestoreLifeText: Mods.CalamityHunt.Items.SupremeRestorationPotion.RestoreLifeText
 		DisplayName: Омега зелье восстановления
 		Tooltip: Снижено время перезарядки зелий
 	}
@@ -352,6 +324,13 @@ Items: {
 			Зажмите клавишу крюка, чтобы прикрепиться к блоку
 			{$}
 			'Уверяю Вас — она не порвётся'
+			'''
+		Stats:
+			'''
+			Длина: 56
+			Скорость выпуска: 25
+			Скорость отброса: 10
+			Скорость притягивания: 17
 			'''
 	}
 
@@ -463,11 +442,6 @@ Items: {
 			'''
 	}
 
-	ThrowingStars: {
-		// DisplayName: Throwing Stars
-		// Tooltip: ""
-	}
-
 	CometKunai: {
 		DisplayName: Кометный кунай
 		Tooltip:
@@ -481,11 +455,6 @@ Items: {
 	GoopHairDye: {
 		DisplayName: Склизкая краска для волос
 		Tooltip: ""
-	}
-
-	AncientSlimeMonsoonMonolith: {
-		// DisplayName: Ancient Slime Monsoon Monolith
-		// Tooltip: ""
 	}
 
 	AntiMassAccumulator: {
@@ -540,8 +509,8 @@ Items: {
 	}
 
 	ShogunWings: {
-		DisplayName: Тысячекратно сложенные бумажные веера
 		Tooltip: "'Лучшее им применение — немного себя остудить'"
+		DisplayName: Тысячекратно сложенные бумажные веера
 	}
 
 	NuclearLemonade: {
@@ -569,11 +538,6 @@ Items: {
 		// Tooltip: Absorb to gain immense, radioactive powers
 	}
 
-	CancelSlimeRain: {
-		// DisplayName: Cancel Slime Rain
-		// Tooltip: ""
-	}
-
 	GoozmaMusicBoxExiledP1: {
 		// DisplayName: Music Box (Exiled Goozma)
 		// Tooltip: ""
@@ -596,50 +560,6 @@ Items: {
 
 	GoozmaInfernumRelic: {
 		// DisplayName: Infernal Goozma Relic
-		// Tooltip: ""
-	}
-
-	SludgeSpongeEmpty: {
-		// DisplayName: Sludge Sponge
-		// Tooltip: Use on an empowered Slime Ninja Statue to end a Slime Rain
-	}
-
-	SludgeSpongeFull: {
-		// DisplayName: Engorged Sludge Sponge
-		/* Tooltip:
-			'''
-			Use on an empowered Slime Ninja Statue to start a Slime Rain
-			'Have fun wringing it out'
-			''' */
-	}
-
-	ReplicaGauntlets: {
-		// DisplayName: Replica Gauntlets
-		// Tooltip: "'All the glitz without the glamour'"
-	}
-
-	GunkHeart: {
-		// DisplayName: Gunk Heart
-		// Tooltip: Adds a bit of color to your afterimages
-	}
-
-	EbonianCystDye: {
-		// DisplayName: Ebonian Cyst Dye
-		// Tooltip: ""
-	}
-
-	CrimulanGougeDye: {
-		// DisplayName: Crimulan Gouge Dye
-		// Tooltip: ""
-	}
-
-	StellarHeavenDye: {
-		// DisplayName: Stellar Heaven Dye
-		// Tooltip: ""
-	}
-
-	DivineResplendanceDye: {
-		// DisplayName: Divine Resplendance Dye
 		// Tooltip: ""
 	}
 }
@@ -674,12 +594,8 @@ Projectiles: {
 	EbonstonePillar.DisplayName: Эбонитовый столб
 	EbonstoneTooth.DisplayName: Эбонитовый зуб
 	FoulSlime.DisplayName: Скверный слизень
-	// PureSlimeball.DisplayName: Pure Slime
 	SlimeShot.DisplayName: Слизневый выстрел
 	ToxicSludge.DisplayName: Токсичный ил
-	// TrailingStar.DisplayName: Trailing Star
-	// Wormhole.DisplayName: Wormhole
-	// GoozmaSpawn.DisplayName: Slime Singularity
 	GooLightning.DisplayName: Молния слизи
 	RainbowBall.DisplayName: Радужный шар
 	PrismDestroyer.DisplayName: Разрушитель призмы
@@ -692,20 +608,15 @@ Projectiles: {
 	FusionRay.DisplayName: Термоядерный луч
 	GoozmaDeathGodrays.DisplayName: Боголучи
 	BloatBabyProj.DisplayName: Малыш-раздутыш
-	// ShootingStar.DisplayName: Shooting Star
 	GoozmagaBomb.DisplayName: Планетарная капля
 	GoozmagaShrapnel.DisplayName: Микропланетарная капля
 	StellarGelatine.DisplayName: Звёздный желатин
 	ConstellationStar.DisplayName: Звезда созвездия
 	ConstellationLine.DisplayName: Отрезок созвездия
 	SlimeBomb.DisplayName: Слизнебомба с часовым механизмом
-	// SpaceRock.DisplayName: Space Rock
 	StellarDebris.DisplayName: Звёздные обломки
-	// BlackHoleBlender.DisplayName: Black Hole Blender
-	// CosmicDust.DisplayName: Cosmic Dust
 	InterstellarFlame.DisplayName: Межзвёздное пламя
 	ThrowableChunk.DisplayName: Бросаемые куски
-	// MiniRainbowBall.DisplayName: Mini Rainbow Ball
 	RainbowLaser.DisplayName: Радужный лазер
 	PumpActionSwampgunHeld.DisplayName: Помповый болотовик
 	ParasanguineHeld.DisplayName: Парасангвинник
@@ -730,9 +641,7 @@ Projectiles: {
 	GoomoireSuck.DisplayName: Всасывание Гумуара
 	SplendorTentacle.DisplayName: Спецтакль
 	SlimeCaneGemCounter.DisplayName: Самоцветный счётчик трости слизней
-	// ChromaticBombProjectile.DisplayName: Chromatic Bomb
 	ChromaticGooztickProjectile.DisplayName: Хроматическая светящаяся липалка
-	// DynamoRodProjectile.DisplayName: Dynamo Dynamite
 	CrimulanClyde.DisplayName: Багротановый Клайд
 	DivinePinky.DisplayName: Божественная Пинки
 	EbonianBlinky.DisplayName: Эбонитовый Блинки
@@ -740,25 +649,19 @@ Projectiles: {
 	CometKunaiCritProjectile.DisplayName: Кометный кунай
 	CometKunaiGhostProjectile.DisplayName: Кометный кунай
 	CometKunaiProjectile.DisplayName: Кометный кунай
-	CometKunaiStealthProjectile.DisplayName: Кометный кунай
 	CometKunaiStarfall.DisplayName: Кометный кунай
 	Goozmoem.DisplayName: Гузмоэм
 	BlinkySpikeBall.DisplayName: Шипастый шар Блинки
 	PinkyLight.DisplayName: Свет Пинки
 	GoozmoemRay.DisplayName: Термоядерный луч
 	AntiMassBioBall.DisplayName: Биошар анти-массы
-	// AntiMassColliderProj.DisplayName: Anti-Mass Collider
-	// AntiMassMacroLaser.DisplayName: Anti Mass Macro Laser
 	AntiMassDeathLaser.DisplayName: Луч смерти анти-массы
 	AntiMassBioStrike.DisplayName: Био удар анти-массы
 	AntiMassAccumulatorProj.DisplayName: Аккумулятор анти-массы снар
-	// ShakerSludge.DisplayName: Shaker Sludge
 	GoozmaBoulderProjectile.DisplayName: Пёстрый шарик
 	StellarBlackHole.DisplayName: Звёздная чёрная дыра
-	FissionFlyerProjectile.DisplayName: Расщепляющий резак
 	CometKunaiSuperProjectile.DisplayName: Кометный кунай супер
 	FissionFlayerProjectile.DisplayName: требует определения
-	// SlimeShotRedirecting.DisplayName: Slime Shot
 }
 
 Chat: {
@@ -823,139 +726,19 @@ Buffs: {
 	}
 }
 
-Tiles: {
-	GoozmaMusicBoxP1Tile.MapEntry: Музыкальная шкатулка
-	GoozmaMusicBoxP2Tile.MapEntry: Музыкальная шкатулка
-	GoozmaSoulMusicBoxTile.MapEntry: Музыкальная шкатулка
-	YharonSoulMusicBoxTile.MapEntry: Музыкальная шкатулка
-	ChromaticCampfirePlaced.MapEntry: Поставленный хроматический костёр
-	// GoozmaMusicBoxExiledP1Tile.MapEntry: Goozma Music Box Exiled P1 Tile
-	// GoozmaMusicBoxExiledP2Tile.MapEntry: Goozma Music Box Exiled P2 Tile
-	// GoozmaMusicBoxJteohP1Tile.MapEntry: Goozma Music Box Jteoh P1 Tile
-	// GoozmaMusicBoxJteohP2Tile.MapEntry: Goozma Music Box Jteoh P2 Tile
-}
-
-Config: {
-	VisualHeader: Визуал
-	StressHeader: Шкала стресса
-
-	HolyExplosionToggle: {
-		Label: Тряска экрана от святого взрыва
-		Tooltip: Выключите, чтобы снизить визуальные эффекты святого взрыва Божественного бурдантюа
-	}
-
-	StressPosX: {
-		Label: Позиция шкалы стресса по X
-		Tooltip: Выставляет горизонтальную позицию шкалы стресса
-	}
-
-	StressPosY: {
-		Label: Позиция шкалы стресса по Y
-		Tooltip: Выставляет вертикальную позицию шкалы стресса
-	}
-
-	StressShake: {
-		Label: Тряска шкалы стресса
-		Tooltip: Регулирует силу эффекта тряски шкалы стресса
-	}
-
-	Distortion: {
-		Label: Сила искажения муссона
-		Tooltip: Регулирует силу эффекта искажения муссона слизней
-	}
-
-	LightningToggle: {
-		Label: Гроза муссона
-		Tooltip: Включает эффект грозы во время муссона слизней
-	}
-
-	Infernum: {
-		// Label: Infernum AI
-		// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
-	}
-
-	ContentHeader: Контент
-}
-
-LoreGeneric:
-	'''
-	[c/E3AF40:До ваших ушей доносится далекий шёпот...]
-	[c/BEBEBE:Удерживайте "Левый Shift", чтобы прислушаться]
-	'''
-LoreGoozma:
-	'''
-	Самое устрашающее разочарование в иерархическом владении всего живущего.
-	Только подумать, что кульминация нижайших существ смогла бы несмотря ни на что обладать Ауритовой душой, не имея при этом драконьего происхождения...
-	Оно стало чем-то великим, приблизилось к идеальной сущности, состоящей из ничего, кроме неидеальных частей... Возможно, истинный источник божественной силы навсегда останется загадкой.
-	В противовес моим опасениям насчёт твоей культивации этого гротескного чудища стоит интерес в его сторону.
-	Что могло бы привести его к такой форме? Его внешность разоблачает хитрость и изысканность манипуляции над его подчинёнными. 
-	Какая же жалость, что плоды усилий его по итогу ни к чему не привели. Неустанный узор цикличных анналов истории.
-	Может быть, в перспективе мира Террарии, все наши достижения так же малозначимы, как и бессильные страдания слизней.
-	'''
-// InfernalRelicText: Imbued with the infernal flames of a defeated foe
-// InfernumOnly: Infernum Mode only
-
 Configs: {
 	Config: {
 		DisplayName: Конфигурация
 
-		epilepsy: {
-			Label: "{$Mods.CalamityHunt.Config.HolyExplosionToggle.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.HolyExplosionToggle.Tooltip}"
-		}
-
-		stressX: {
-			Label: "{$Mods.CalamityHunt.Config.StressPosX.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.StressPosX.Tooltip}"
-		}
-
-		stressY: {
-			Label: "{$Mods.CalamityHunt.Config.StressPosY.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.StressPosY.Tooltip}"
-		}
-
-		stressShake: {
-			Label: "{$Mods.CalamityHunt.Config.StressShake.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.StressShake.Tooltip}"
-		}
-
-		monsoonDistortion: {
-			Label: "{$Mods.CalamityHunt.Config.Distortion.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.Distortion.Tooltip}"
-		}
-
-		monsoonLightning: {
-			Tooltip: "{$Mods.CalamityHunt.Config.LightningToggle.Tooltip}"
-			Label: "{$Mods.CalamityHunt.Config.LightningToggle.Label}"
+		Headers: {
+			VisualHeader: Визуал
+			StressHeader: Шкала стресса
+			ContentHeader: Контент
 		}
 
 		shadowspecCurse: {
 			Label: Проклятье тенефаза
 			Tooltip: Проклинает все предметы уровня тенефаза, из-за чего их невозможно использовать, пока Гузма не побеждён
-		}
-
-		oldsky: {
-			Label: oldsky
-			Tooltip: ""
-		}
-
-		overrideVanillaBalance: {
-			Label: override Vanilla Balance
-			Tooltip: ""
-		}
-
-		photosensitiveToggle: {
-			Label: Переключить светочувствительные эффекты
-			Tooltip: Выключает некоторые эффекты, которые могут вызвать эпилепсию
-		}
-
-		debugMode: {
-			Label: Режим дебага
-			Tooltip:
-				'''
-				Включает некоторые фичи, оптимизированные для тестирования игровых механик
-				Не рекомендуется для использования игроками
-				'''
 		}
 
 		GoozmaMusicPreference: {
@@ -967,31 +750,51 @@ Configs: {
 			// Label: Infernum AI
 			// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
 		}
+
+		debugMode: {
+			Label: Режим дебага
+			Tooltip:
+				'''
+				Включает некоторые фичи, оптимизированные для тестирования игровых механик
+				Не рекомендуется для использования игроками
+				'''
+		}
+
+		photosensitiveToggle: {
+			Label: Переключить светочувствительные эффекты
+			Tooltip: Выключает некоторые эффекты, которые могут вызвать эпилепсию
+		}
+
+		MonsoonDistortion: {
+			Label: Сила искажения муссона
+			Tooltip: Регулирует силу эффекта искажения муссона слизней
+		}
+
+		MonsoonLightning: {
+			Tooltip: Гроза муссона
+			Label: Включает эффект грозы во время муссона слизней
+		}
+
+		StressX: {
+			Label: Позиция шкалы стресса по X
+			Tooltip: Выставляет горизонтальную позицию шкалы стресса
+		}
+
+		StressY: {
+			Label: Позиция шкалы стресса по Y
+			Tooltip: Выставляет вертикальную позицию шкалы стресса
+		}
+
+		StressShake: {
+			Label: Тряска шкалы стресса
+			Tooltip: Регулирует силу эффекта тряски шкалы стресса
+		}
 	}
 }
 
-OrRev: " или Месть"
-SetBonuses.Shogun:
-	'''
-	Увеличивает урон на 17% и максимальное количество прислужников на 5
-	{$CommonItemTooltip.FlightAndSlowfall}
-	Ношение других крыльев перекрывает данный полёт
-	{$CommonItemTooltip.PressDownToHover}
-	Позволяет делать рывок и совершенствует другие рывки
-	Зажмите ВНИЗ, чтобы падать быстрее
-	Увеличивает скорость прыжка 
-	Даёт иммунитет к большинству дебаффов конца игры и дебаффам, связанным с передвижением
-	'''
-StickyHandStats:
-	'''
-	Длина: 56
-	Скорость выпуска: 25
-	Скорость отброса: 10
-	Скорость притягивания: 17
-	'''
+// InfernumOnly: Infernum Mode only
 GoozmaShadowspecCurse: "[c/462545:Желейное проклятье покрыло этот предмет и не даёт им воспользоваться...]"
 AnyEvilBlock: Любой блок зла
-SludgeWarning: Не может быть использован для призыва Бога слизней
 
 CalamityModName: {
 	Display: Calamity Mod

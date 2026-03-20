@@ -41,7 +41,7 @@ namespace CalamityHunt.Content.Tiles
             TileObjectData.addTile(Type);
 
             DustType = DustID.Stone;
-            AddMapEntry(new Color(128, 128, 128));
+            AddMapEntry(new Color(128, 128, 128), Language.GetText("Mods.CalamityHunt.Items.SlimeNinjaStatue.DisplayName"));
         }
 
         public override void MouseOver(int i, int j)

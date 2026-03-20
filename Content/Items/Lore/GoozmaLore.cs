@@ -37,14 +37,14 @@ namespace CalamityHunt.Content.Items.Lore
             TooltipLine line = tooltips.FirstOrDefault(x => x.Mod == "Terraria" && x.Name == "Tooltip0");
             if (!Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift)) {
                 if (line != null) {
-                    line.Text = Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.LoreGeneric").Value;
+                    line.Text = Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.Items.GoozmaLore.LoreGeneric").Value;
                 }
 
                 return;
             }
 
             //stuff is in HuntOfTheoldGodUtils
-            string tooltip = Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.LoreGoozma").Value;
+            string tooltip = Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.Items.GoozmaLore.LoreGoozma").Value;
 
             if (line != null) {
                 line.Text = tooltip;

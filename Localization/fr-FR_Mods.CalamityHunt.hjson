@@ -7,11 +7,7 @@ Items: {
 			Pas consumable
 			'Elle a un air corrompu'
 			'''
-	}
-
-	StormCatcher: {
-		DisplayName: Storm Catcher
-		Tooltip: ""
+		// Warning: Cannot be used to summon the Slime God
 	}
 
 	GoopDye: {
@@ -22,11 +18,6 @@ Items: {
 	ChromaticMass: {
 		DisplayName: Amas chromatique
 		Tooltip: "'Semblable a un plasme glacial'"
-	}
-
-	ShatteredHeartOfDarkness: {
-		DisplayName: Shattered Heart Of Darkness
-		Tooltip: ""
 	}
 
 	GoozmaRelicItem: {
@@ -42,21 +33,21 @@ Items: {
 	GoozmaLore: {
 		DisplayName: Goozma
 		Tooltip: tooltip
-	}
-
-	Goozmolisher: {
-		DisplayName: Goozmolisseur
-		Tooltip: ""
-	}
-
-	Goozmortar: {
-		DisplayName: Goozmortier
-		Tooltip: ""
-	}
-
-	GoozMonolith: {
-		DisplayName: Monolithe de la Mousson
-		Tooltip: ""
+		LoreGeneric:
+			'''
+			[c/E3AF40:Des murmurs de l'au-delà dancent dans vos oreilles...]
+			[c/BEBEBE:Appuyez sur "Shift Gauche" pour y prêter attention]
+			'''
+		LoreGoozma:
+			'''
+			Un bouleversement des plus effrayants, dans le domaine hiérarchique de toutes choses vivantes.
+			Se dire que l’aboutissement de l’échelon le plus bas des créatures pourrait néanmoins posséder une âme aurique, malgré l’absence de tout héritage draconique…
+			C'est devenu quelque chose de plus grand, proche d'un être parfait composé uniquement de parties imparfaites... peut-être que ce qui fait réellement un Dieu sera à jamais inconnu.
+			Mon appréhension à l’égard de votre catalyse de la culture de ce véritable signe avant-coureur de la destruction est contrebalancée par ma curiosité à son égard.
+			Qu’est-ce qui a pu influencer la forme qu’il a prise ? Son apparence cache la finesse et la sophistication de la manipulation de ses sujets.
+			Quel dommage que les fruits de ses efforts n’aient finalement abouti à rien. Un modèle incessant dans les annales cycliques de l’histoire.
+			Peut-être que, du point de vue de Terraria, nos propres réalisations ne se résument qu’à des contorsions impuissantes d'une gelée.
+			'''
 	}
 
 	TreasureTrunk: {
@@ -74,14 +65,9 @@ Items: {
 		Tooltip: <right> pour ouvrir
 	}
 
-	GoozmaTrophyItem: {
+	GoozmaTrophy: {
 		DisplayName: Trophée de Goozma
 		Tooltip: ""
-	}
-
-	GoozmaTrophy: {
-		// DisplayName: Goozma Trophy
-		// Tooltip: ""
 	}
 
 	ImperialGelato: {
@@ -178,6 +164,17 @@ Items: {
 			+15% de chances de coup critique
 			+15% de vitesse de mêlée
 			'''
+		SetBonus:
+			'''
+			+ 17% de dégats et +5 sbires maximum
+			{$CommonItemTooltip.FlightAndSlowfall}
+			{$CommonItemTooltip.PressDownToHover}
+			Avoir des ailes déjà équipées nullifie cet effet
+			   Vous permet de foncer dans les enemis, et améliore les autres charges
+			Maintenez BAS enfoncé pour augmenter votre vitesse de chute
+			Augmente la vitesse de saut
+			   Immunise contre la plupart des alterations de fin de jeu et celles liées au mouvement
+			'''
 	}
 
 	ShogunPants: {
@@ -213,44 +210,24 @@ Items: {
 			'''
 	}
 
-	EbonianBehemuckTrophyItem: {
+	EbonianBehemuckTrophy: {
 		DisplayName: Trophée du Mastodonte d'éboue
 		Tooltip: ""
 	}
 
-	EbonianBehemuckTrophy: {
-		// DisplayName: Ebonian Behemuck Trophy
-		// Tooltip: ""
-	}
-
-	DivineGargooptuarTrophyItem: {
+	DivineGargooptuarTrophy: {
 		DisplayName: Trophée de la Divinité Gargadouesque
 		Tooltip: ""
 	}
 
-	DivineGargooptuarTrophy: {
-		// DisplayName: Divine Gargooptuar Trophy
-		// Tooltip: ""
-	}
-
-	CrimulanGlopstrosityTrophyItem: {
+	CrimulanGlopstrosityTrophy: {
 		DisplayName: Trophée de la Monstrosité Sangluante
 		Tooltip: ""
 	}
 
-	CrimulanGlopstrosityTrophy: {
-		// DisplayName: Crimulan Glopstrosity Trophy
-		// Tooltip: ""
-	}
-
-	StellarGeliathTrophyItem: {
+	StellarGeliathTrophy: {
 		DisplayName: Trophée du Geliath Stellaire
 		Tooltip: ""
-	}
-
-	StellarGeliathTrophy: {
-		// DisplayName: Stellar Geliath Trophy
-		// Tooltip: ""
 	}
 
 	PumpActionSwampgun: {
@@ -306,6 +283,7 @@ Items: {
 			         Ces augmentations et leur duration dependent de votre quantité de stress
 			'Quelque chose d'horrible approche...'
 			'''
+		// StressBar: Stress: {0}
 	}
 
 	TheSlimer: {
@@ -319,11 +297,6 @@ Items: {
 			'''
 	}
 
-	PureAuricSoul: {
-		DisplayName: Âme aurique
-		Tooltip: Confére des pouvoirs immenses une fois aborbée
-	}
-
 	SludgeShaker: {
 		DisplayName: Mixeur de glue
 		Tooltip:
@@ -335,7 +308,6 @@ Items: {
 	}
 
 	SupremeRestorationPotion: {
-		RestoreLifeText: Mods.CalamityHunt.Items.SupremeRestorationPotion.RestoreLifeText
 		DisplayName: Omega potion de restauration
 		Tooltip: Temps de rafraîchissement réduit
 	}
@@ -352,6 +324,13 @@ Items: {
 			         Vous détache automatiquement quand le grappin est atteint
 			         Gardez le bouton appuyé pour garder le grappin attaché
 			'Ca se cassera pas, j'te JURE!'
+			'''
+		Stats:
+			'''
+			Portée: 56
+			Vitesse de lancer: 25
+			Vitesse de retraction: 10
+			Vitesse de traction: 17
 			'''
 	}
 
@@ -462,11 +441,6 @@ Items: {
 			'''
 	}
 
-	ThrowingStars: {
-		DisplayName: Etoile de lancer
-		Tooltip: ""
-	}
-
 	CometKunai: {
 		DisplayName: Kunai comète
 		Tooltip:
@@ -480,11 +454,6 @@ Items: {
 	GoopHairDye: {
 		DisplayName: Coloration visqueuse
 		Tooltip: ""
-	}
-
-	AncientSlimeMonsoonMonolith: {
-		// DisplayName: Ancient Slime Monsoon Monolith
-		// Tooltip: ""
 	}
 
 	AntiMassAccumulator: {
@@ -539,8 +508,8 @@ Items: {
 	}
 
 	ShogunWings: {
-		// DisplayName: Thousand-Fold Paper Fans
 		// Tooltip: "'They are best used to cool you off'"
+		// DisplayName: Thousand-Fold Paper Fans
 	}
 
 	NuclearLemonade: {
@@ -568,11 +537,6 @@ Items: {
 		// Tooltip: Absorb to gain immense, radioactive powers
 	}
 
-	CancelSlimeRain: {
-		// DisplayName: Cancel Slime Rain
-		// Tooltip: ""
-	}
-
 	GoozmaMusicBoxExiledP1: {
 		// DisplayName: Music Box (Exiled Goozma)
 		// Tooltip: ""
@@ -595,50 +559,6 @@ Items: {
 
 	GoozmaInfernumRelic: {
 		// DisplayName: Infernal Goozma Relic
-		// Tooltip: ""
-	}
-
-	SludgeSpongeEmpty: {
-		// DisplayName: Sludge Sponge
-		// Tooltip: Use on an empowered Slime Ninja Statue to end a Slime Rain
-	}
-
-	SludgeSpongeFull: {
-		// DisplayName: Engorged Sludge Sponge
-		/* Tooltip:
-			'''
-			Use on an empowered Slime Ninja Statue to start a Slime Rain
-			'Have fun wringing it out'
-			''' */
-	}
-
-	ReplicaGauntlets: {
-		// DisplayName: Replica Gauntlets
-		// Tooltip: "'All the glitz without the glamour'"
-	}
-
-	GunkHeart: {
-		// DisplayName: Gunk Heart
-		// Tooltip: Adds a bit of color to your afterimages
-	}
-
-	EbonianCystDye: {
-		// DisplayName: Ebonian Cyst Dye
-		// Tooltip: ""
-	}
-
-	CrimulanGougeDye: {
-		// DisplayName: Crimulan Gouge Dye
-		// Tooltip: ""
-	}
-
-	StellarHeavenDye: {
-		// DisplayName: Stellar Heaven Dye
-		// Tooltip: ""
-	}
-
-	DivineResplendanceDye: {
-		// DisplayName: Divine Resplendance Dye
 		// Tooltip: ""
 	}
 }
@@ -673,12 +593,8 @@ Projectiles: {
 	EbonstonePillar.DisplayName: Pillier de pierre d'ébène
 	EbonstoneTooth.DisplayName: Dent d'ébène
 	FoulSlime.DisplayName: Gelée putride
-	PureSlimeball.DisplayName: Gelée purifiée
 	SlimeShot.DisplayName: Tir visqueux
 	ToxicSludge.DisplayName: Vase toxique
-	TrailingStar.DisplayName: Étoile filante
-	Wormhole.DisplayName: Trou de ver
-	GoozmaSpawn.DisplayName: Singularité visqueuse
 	GooLightning.DisplayName: Foudre gluante
 	RainbowBall.DisplayName: Boule d'arc-en-ciel
 	PrismDestroyer.DisplayName: Déstruction prismatique
@@ -691,20 +607,15 @@ Projectiles: {
 	FusionRay.DisplayName: Laser à fusion
 	GoozmaDeathGodrays.DisplayName: Rayons divins
 	BloatBabyProj.DisplayName: Enfant de la gadoue
-	ShootingStar.DisplayName: Étoile filante
 	GoozmagaBomb.DisplayName: Blob planétaire
 	GoozmagaShrapnel.DisplayName: Blob micro-planétaire
 	StellarGelatine.DisplayName: Gélatine stellaire
 	ConstellationStar.DisplayName: Constallation
 	ConstellationLine.DisplayName: Constellation
 	SlimeBomb.DisplayName: une Bombe à retargluement
-	SpaceRock.DisplayName: Roche spatiale
 	StellarDebris.DisplayName: Débris stellaire
-	BlackHoleBlender.DisplayName: Puits gravitationel
-	CosmicDust.DisplayName: Poussière cosmique
 	InterstellarFlame.DisplayName: Flamme interstellaire
 	ThrowableChunk.DisplayName: Fragment lanceable
-	MiniRainbowBall.DisplayName: Petite balle arc-en-ciel
 	RainbowLaser.DisplayName: Laser arc-en-ciel
 	PumpActionSwampgunHeld.DisplayName: Fusil Pompe-Bourbe
 	ParasanguineHeld.DisplayName: Parasanguine
@@ -729,9 +640,7 @@ Projectiles: {
 	GoomoireSuck.DisplayName: Suction du Goomoire
 	SplendorTentacle.DisplayName: Spectacle
 	SlimeCaneGemCounter.DisplayName: Cane de gelée compte
-	ChromaticBombProjectile.DisplayName: Bombe chromatique
 	ChromaticGooztickProjectile.DisplayName: Dynamite chromatique
-	DynamoRodProjectile.DisplayName: Dynamite Dynamo
 	CrimulanClyde.DisplayName: Clyde Sangluant
 	DivinePinky.DisplayName: Pinky Divin
 	EbonianBlinky.DisplayName: Blinky Eboueux
@@ -739,25 +648,19 @@ Projectiles: {
 	CometKunaiCritProjectile.DisplayName: Kunai comète
 	CometKunaiGhostProjectile.DisplayName: Kunai comète
 	CometKunaiProjectile.DisplayName: Kunai comète
-	CometKunaiStealthProjectile.DisplayName: Kunai comète
 	CometKunaiStarfall.DisplayName: Kunai comète
 	Goozmoem.DisplayName: Goozmœuf
 	BlinkySpikeBall.DisplayName: La balle piquante de Blinky
 	PinkyLight.DisplayName: La lumière de Pinky
 	GoozmoemRay.DisplayName: Rayon à fusion
 	// AntiMassBioBall.DisplayName: Anti-Mass Bio Ball
-	// AntiMassColliderProj.DisplayName: Anti-Mass Collider
-	// AntiMassMacroLaser.DisplayName: Anti Mass Macro Laser
 	// AntiMassDeathLaser.DisplayName: Anti Mass Death Laser
 	// AntiMassBioStrike.DisplayName: Anti Mass Bio Strike
 	// AntiMassAccumulatorProj.DisplayName: Anti Mass Accumulator Proj
-	// ShakerSludge.DisplayName: Shaker Sludge
 	// GoozmaBoulderProjectile.DisplayName: Motley Marble
 	// StellarBlackHole.DisplayName: Stellar Black Hole
-	// FissionFlyerProjectile.DisplayName: Fission Flyer
 	// CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
 	// FissionFlayerProjectile.DisplayName: to be determined
-	// SlimeShotRedirecting.DisplayName: Slime Shot
 }
 
 Chat: {
@@ -822,139 +725,19 @@ Buffs: {
 	}
 }
 
-Tiles: {
-	GoozmaMusicBoxP1Tile.MapEntry: Boîte à musique
-	GoozmaMusicBoxP2Tile.MapEntry: Boîte à musique
-	GoozmaSoulMusicBoxTile.MapEntry: Boîte à musique
-	YharonSoulMusicBoxTile.MapEntry: Boîte à musique
-	// ChromaticCampfirePlaced.MapEntry: Chromatic Campfire Placed
-	// GoozmaMusicBoxExiledP1Tile.MapEntry: Goozma Music Box Exiled P1 Tile
-	// GoozmaMusicBoxExiledP2Tile.MapEntry: Goozma Music Box Exiled P2 Tile
-	// GoozmaMusicBoxJteohP1Tile.MapEntry: Goozma Music Box Jteoh P1 Tile
-	// GoozmaMusicBoxJteohP2Tile.MapEntry: Goozma Music Box Jteoh P2 Tile
-}
-
-Config: {
-	VisualHeader: Effets visuels
-	StressHeader: Barre de stress
-
-	HolyExplosionToggle: {
-		Label: Tremblement d'écran de l'explosion divine
-		Tooltip: Désactivez cette option pour réduire grandement les effets visuels de l'explosion divine de la Divinité Gargadouesque
-	}
-
-	StressPosX: {
-		Label: Position horizontale de la barre de stress
-		Tooltip: Ajuste la position horizontale de la barre de stress
-	}
-
-	StressPosY: {
-		Label: Position verticale de la barre de stress
-		Tooltip: Ajuste la position verticale de la barre de stress
-	}
-
-	StressShake: {
-		Label: Tremblement de la barre de stress
-		Tooltip: Active ou désactive le tremblement de la barre de stress
-	}
-
-	Distortion: {
-		Label: Intensité de la distortion de la Mousson
-		Tooltip: Ajuste l'intensité de la distortion visuelle de la Mousson gélatineuse
-	}
-
-	LightningToggle: {
-		Label: Tonnere de la Mousson gélatineuse
-		Tooltip: Active ou désactive les visuels du tonnere de la Mousson gélatineuse
-	}
-
-	Infernum: {
-		// Label: Infernum AI
-		// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
-	}
-
-	// ContentHeader: Content
-}
-
-LoreGeneric:
-	'''
-	[c/E3AF40:Des murmurs de l'au-delà dancent dans vos oreilles...]
-	[c/BEBEBE:Appuyez sur "Shift Gauche" pour y prêter attention]
-	'''
-LoreGoozma:
-	'''
-	Un bouleversement des plus effrayants, dans le domaine hiérarchique de toutes choses vivantes.
-	Se dire que l’aboutissement de l’échelon le plus bas des créatures pourrait néanmoins posséder une âme aurique, malgré l’absence de tout héritage draconique…
-	C'est devenu quelque chose de plus grand, proche d'un être parfait composé uniquement de parties imparfaites... peut-être que ce qui fait réellement un Dieu sera à jamais inconnu.
-	Mon appréhension à l’égard de votre catalyse de la culture de ce véritable signe avant-coureur de la destruction est contrebalancée par ma curiosité à son égard.
-	Qu’est-ce qui a pu influencer la forme qu’il a prise ? Son apparence cache la finesse et la sophistication de la manipulation de ses sujets.
-	Quel dommage que les fruits de ses efforts n’aient finalement abouti à rien. Un modèle incessant dans les annales cycliques de l’histoire.
-	Peut-être que, du point de vue de Terraria, nos propres réalisations ne se résument qu’à des contorsions impuissantes d'une gelée.
-	'''
-// InfernalRelicText: Imbued with the infernal flames of a defeated foe
-// InfernumOnly: Infernum Mode only
-
 Configs: {
 	Config: {
 		DisplayName: Config
 
-		epilepsy: {
-			Label: "{$Mods.CalamityHunt.Config.HolyExplosionToggle.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.HolyExplosionToggle.Tooltip}"
-		}
-
-		stressX: {
-			Label: "{$Mods.CalamityHunt.Config.StressPosX.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.StressPosX.Tooltip}"
-		}
-
-		stressY: {
-			Label: "{$Mods.CalamityHunt.Config.StressPosY.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.StressPosY.Tooltip}"
-		}
-
-		stressShake: {
-			Label: "{$Mods.CalamityHunt.Config.StressShake.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.StressShake.Tooltip}"
-		}
-
-		monsoonDistortion: {
-			Label: "{$Mods.CalamityHunt.Config.Distortion.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.Distortion.Tooltip}"
-		}
-
-		monsoonLightning: {
-			Tooltip: "{$Mods.CalamityHunt.Config.LightningToggle.Tooltip}"
-			Label: "{$Mods.CalamityHunt.Config.LightningToggle.Label}"
+		Headers: {
+			VisualHeader: Effets visuels
+			StressHeader: Barre de stress
+			// ContentHeader: Content
 		}
 
 		shadowspecCurse: {
 			Label: Shadowspec Maudit
 			Tooltip: ""
-		}
-
-		oldsky: {
-			// Label: oldsky
-			// Tooltip: ""
-		}
-
-		overrideVanillaBalance: {
-			// Label: override Vanilla Balance
-			// Tooltip: ""
-		}
-
-		photosensitiveToggle: {
-			// Label: Toggle Photosensitive Effects
-			// Tooltip: Disables certain effects which may trigger photosensitivity
-		}
-
-		debugMode: {
-			// Label: Debug Mode
-			/* Tooltip:
-				'''
-				Enables features optimized for testing game mechanics
-				Not recommended for usage by players
-				''' */
 		}
 
 		GoozmaMusicPreference: {
@@ -966,31 +749,51 @@ Configs: {
 			// Label: Infernum AI
 			// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
 		}
+
+		debugMode: {
+			// Label: Debug Mode
+			/* Tooltip:
+				'''
+				Enables features optimized for testing game mechanics
+				Not recommended for usage by players
+				''' */
+		}
+
+		photosensitiveToggle: {
+			// Label: Toggle Photosensitive Effects
+			// Tooltip: Disables certain effects which may trigger photosensitivity
+		}
+
+		MonsoonDistortion: {
+			Label: Intensité de la distortion de la Mousson
+			Tooltip: Ajuste l'intensité de la distortion visuelle de la Mousson gélatineuse
+		}
+
+		MonsoonLightning: {
+			Tooltip: Tonnere de la Mousson gélatineuse
+			Label: Active ou désactive les visuels du tonnere de la Mousson gélatineuse
+		}
+
+		StressX: {
+			Label: Position horizontale de la barre de stress
+			Tooltip: Ajuste la position horizontale de la barre de stress
+		}
+
+		StressY: {
+			Label: Position verticale de la barre de stress
+			Tooltip: Ajuste la position verticale de la barre de stress
+		}
+
+		StressShake: {
+			Label: Tremblement de la barre de stress
+			Tooltip: Active ou désactive le tremblement de la barre de stress
+		}
 	}
 }
 
-// OrRev: " or Revengeance"
-SetBonuses.Shogun:
-	'''
-	+ 17% de dégats et +5 sbires maximum
-	{$CommonItemTooltip.FlightAndSlowfall}
-	{$CommonItemTooltip.PressDownToHover}
-	Avoir des ailes déjà équipées nullifie cet effet
-	   Vous permet de foncer dans les enemis, et améliore les autres charges
-	Maintenez BAS enfoncé pour augmenter votre vitesse de chute
-	Augmente la vitesse de saut
-	   Immunise contre la plupart des alterations de fin de jeu et celles liées au mouvement
-	'''
-StickyHandStats:
-	'''
-	Portée: 56
-	Vitesse de lancer: 25
-	Vitesse de retraction: 10
-	Vitesse de traction: 17
-	'''
+// InfernumOnly: Infernum Mode only
 // GoozmaShadowspecCurse: "[c/462545:A mucilaginous curse prevents you from using this item...]"
 // AnyEvilBlock: Any Evil Block
-// SludgeWarning: Cannot be used to summon the Slime God
 
 CalamityModName: {
 	Display: Calamity Mod

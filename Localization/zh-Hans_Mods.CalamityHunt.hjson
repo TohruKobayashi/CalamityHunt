@@ -7,11 +7,7 @@ Items: {
 			不消耗
 			“它看起来有点被腐化了”
 			'''
-	}
-
-	StormCatcher: {
-		DisplayName: Storm Catcher
-		Tooltip: ""
+		Warning: 不能用来召唤史莱姆之神
 	}
 
 	GoopDye: {
@@ -24,39 +20,34 @@ Items: {
 		Tooltip: “感觉就像冰冷的等离子体”
 	}
 
-	ShatteredHeartOfDarkness: {
-		DisplayName: 幻灭之心
-		Tooltip: ""
-	}
-
 	GoozmaRelicItem: {
 		DisplayName: 古泽玛圣物
 		Tooltip: ""
 	}
 
 	GoozmaRelic: {
-		// DisplayName: Goozma Relic
-		// Tooltip: ""
+		DisplayName: 古泽玛圣物
+		Tooltip: ""
 	}
 
 	GoozmaLore: {
 		DisplayName: 古泽玛
 		Tooltip: tooltip
-	}
-
-	Goozmolisher: {
-		// DisplayName: Goozmolisher
-		// Tooltip: ""
-	}
-
-	Goozmortar: {
-		// DisplayName: Goozmortar
-		// Tooltip: ""
-	}
-
-	GoozMonolith: {
-		DisplayName: 季风信标
-		Tooltip: ""
+		LoreGeneric:
+			'''
+			[c/E3AF40:寄宿其上的低语流入你的耳中……]
+			[c/BEBEBE:长按 “左Shift”键以仔细聆听]
+			'''
+		LoreGoozma:
+			'''
+			在万物阶级中，一个最令人恐惧不安之物
+			想想，一个底层生物的顶点，尽管没有任何巨龙的血脉，却仍然能够拥有金源魄……
+			它变得更为强大，几乎成为了一个由残缺之物构成的完美存在……也许我们永远不会知晓是何物造就了一个真正的神明。
+			对于你将这种名副其实的毁灭存在催化出来的好奇心超过了我对它的恐惧。
+			是什么影响了它的形成？其外表掩盖了它那巧妙、复杂的操纵能力。
+			可惜，其努力的成果最终却化为泡影。这是历史循环中的一个永恒的规律。
+			也许从泰拉瑞亚的角度来看，我们所做出的成就与只会无能蠕动的史莱姆相差不了多少。
+			'''
 	}
 
 	TreasureTrunk: {
@@ -74,14 +65,9 @@ Items: {
 		Tooltip: <right>以开启
 	}
 
-	GoozmaTrophyItem: {
+	GoozmaTrophy: {
 		DisplayName: 古泽玛纪念章
 		Tooltip: ""
-	}
-
-	GoozmaTrophy: {
-		// DisplayName: Goozma Trophy
-		// Tooltip: ""
 	}
 
 	ImperialGelato: {
@@ -178,6 +164,17 @@ Items: {
 			增加15%暴击率
 			增加15%近战攻速
 			'''
+		SetBonus:
+			'''
+			增加17%伤害和5仆从栏
+			{$CommonItemTooltip.FlightAndSlowfall}
+			{$CommonItemTooltip.PressDownToHover}
+			穿戴任何翅膀都会覆盖这个飞行效果
+			允许冲刺并增强其他冲刺的能力
+			按住DOWN来加速下落
+			增加跳跃速度 
+			免疫许多游戏末期和影响移动的减益
+			'''
 	}
 
 	ShogunPants: {
@@ -212,44 +209,24 @@ Items: {
 			'''
 	}
 
-	EbonianBehemuckTrophyItem: {
+	EbonianBehemuckTrophy: {
 		DisplayName: 腐檀邪浆纪念章
 		Tooltip: ""
 	}
 
-	EbonianBehemuckTrophy: {
-		// DisplayName: Ebonian Behemuck Trophy
-		// Tooltip: ""
-	}
-
-	DivineGargooptuarTrophyItem: {
+	DivineGargooptuarTrophy: {
 		DisplayName: 圣洁凝魔纪念章
 		Tooltip: ""
 	}
 
-	DivineGargooptuarTrophy: {
-		// DisplayName: Divine Gargooptuar Trophy
-		// Tooltip: ""
-	}
-
-	CrimulanGlopstrosityTrophyItem: {
+	CrimulanGlopstrosityTrophy: {
 		DisplayName: 血污噬胶纪念章
 		Tooltip: ""
 	}
 
-	CrimulanGlopstrosityTrophy: {
-		// DisplayName: Crimulan Glopstrosity Trophy
-		// Tooltip: ""
-	}
-
-	StellarGeliathTrophyItem: {
+	StellarGeliathTrophy: {
 		DisplayName: 星恒粘兽纪念章
 		Tooltip: ""
-	}
-
-	StellarGeliathTrophy: {
-		// DisplayName: Stellar Geliath Trophy
-		// Tooltip: ""
 	}
 
 	PumpActionSwampgun: {
@@ -305,6 +282,7 @@ Items: {
 			加成效果与其持续时间取决于你当前剩余的压力值
 			“恐怖之物正在逼近……”
 			'''
+		// StressBar: Stress: {0}
 	}
 
 	TheSlimer: {
@@ -318,11 +296,6 @@ Items: {
 			'''
 	}
 
-	PureAuricSoul: {
-		DisplayName: 金源魄
-		Tooltip: 吸收以获得无边伟力
-	}
-
 	SludgeShaker: {
 		DisplayName: 污泥混凝器
 		Tooltip:
@@ -334,7 +307,6 @@ Items: {
 	}
 
 	SupremeRestorationPotion: {
-		RestoreLifeText: Mods.CalamityHunt.Items.SupremeRestorationPotion.RestoreLifeText
 		DisplayName: 终极恢复药水
 		Tooltip: 缩短药水疾病时间
 	}
@@ -351,6 +323,13 @@ Items: {
 			当你靠近钩爪末端时自动脱钩
 			按住钩爪键使钩爪固定在物块上
 			'It won't break, I promise'
+			'''
+		Stats:
+			'''
+			长度: 56
+			发射速度: 25
+			回收速度: 10
+			牵引速度: 17
 			'''
 	}
 
@@ -461,11 +440,6 @@ Items: {
 			'''
 	}
 
-	ThrowingStars: {
-		// DisplayName: Throwing Stars
-		// Tooltip: ""
-	}
-
 	CometKunai: {
 		DisplayName: 彗星苦无
 		Tooltip:
@@ -479,11 +453,6 @@ Items: {
 	GoopHairDye: {
 		DisplayName: 凝浆染发剂
 		Tooltip: ""
-	}
-
-	AncientSlimeMonsoonMonolith: {
-		// DisplayName: Ancient Slime Monsoon Monolith
-		// Tooltip: ""
 	}
 
 	AntiMassAccumulator: {
@@ -538,8 +507,8 @@ Items: {
 	}
 
 	ShogunWings: {
-		// DisplayName: Thousand-Fold Paper Fans
 		// Tooltip: "'They are best used to cool you off'"
+		// DisplayName: Thousand-Fold Paper Fans
 	}
 
 	NuclearLemonade: {
@@ -567,11 +536,6 @@ Items: {
 		// Tooltip: Absorb to gain immense, radioactive powers
 	}
 
-	CancelSlimeRain: {
-		// DisplayName: Cancel Slime Rain
-		// Tooltip: ""
-	}
-
 	GoozmaMusicBoxExiledP1: {
 		// DisplayName: Music Box (Exiled Goozma)
 		// Tooltip: ""
@@ -594,50 +558,6 @@ Items: {
 
 	GoozmaInfernumRelic: {
 		// DisplayName: Infernal Goozma Relic
-		// Tooltip: ""
-	}
-
-	SludgeSpongeEmpty: {
-		// DisplayName: Sludge Sponge
-		// Tooltip: Use on an empowered Slime Ninja Statue to end a Slime Rain
-	}
-
-	SludgeSpongeFull: {
-		// DisplayName: Engorged Sludge Sponge
-		/* Tooltip:
-			'''
-			Use on an empowered Slime Ninja Statue to start a Slime Rain
-			'Have fun wringing it out'
-			''' */
-	}
-
-	ReplicaGauntlets: {
-		// DisplayName: Replica Gauntlets
-		// Tooltip: "'All the glitz without the glamour'"
-	}
-
-	GunkHeart: {
-		// DisplayName: Gunk Heart
-		// Tooltip: Adds a bit of color to your afterimages
-	}
-
-	EbonianCystDye: {
-		// DisplayName: Ebonian Cyst Dye
-		// Tooltip: ""
-	}
-
-	CrimulanGougeDye: {
-		// DisplayName: Crimulan Gouge Dye
-		// Tooltip: ""
-	}
-
-	StellarHeavenDye: {
-		// DisplayName: Stellar Heaven Dye
-		// Tooltip: ""
-	}
-
-	DivineResplendanceDye: {
-		// DisplayName: Divine Resplendance Dye
 		// Tooltip: ""
 	}
 }
@@ -672,12 +592,8 @@ Projectiles: {
 	EbonstonePillar.DisplayName: 腐檀之柱
 	EbonstoneTooth.DisplayName: 腐檀之齿
 	FoulSlime.DisplayName: 污浊史莱姆
-	PureSlimeball.DisplayName: 纯净史莱姆
 	SlimeShot.DisplayName: 凝虹弹
 	ToxicSludge.DisplayName: 毒性污泥
-	TrailingStar.DisplayName: 星之曳光
-	Wormhole.DisplayName: 虫洞
-	GoozmaSpawn.DisplayName: 凝元奇点
 	GooLightning.DisplayName: 旧神之雷
 	RainbowBall.DisplayName: 虹球弹幕
 	PrismDestroyer.DisplayName: 毁灭光棱
@@ -690,20 +606,15 @@ Projectiles: {
 	FusionRay.DisplayName: 聚能射线
 	GoozmaDeathGodrays.DisplayName: 旧神死光
 	BloatBabyProj.DisplayName: Bloat Baby
-	ShootingStar.DisplayName: 流星
 	GoozmagaBomb.DisplayName: Planetary Glob
 	GoozmagaShrapnel.DisplayName: Microplanetary Glob
 	StellarGelatine.DisplayName: 恒星明胶
 	ConstellationStar.DisplayName: 星体
 	ConstellationLine.DisplayName: 星座线
 	SlimeBomb.DisplayName: 滴答史莱姆炸弹
-	SpaceRock.DisplayName: 星际陨石
 	StellarDebris.DisplayName: 恒星碎片
-	BlackHoleBlender.DisplayName: 黑洞旋涡
-	CosmicDust.DisplayName: 宇宙之尘
 	InterstellarFlame.DisplayName: 星际烈焰
 	ThrowableChunk.DisplayName: 浮空巨石
-	MiniRainbowBall.DisplayName: 小虹球弹幕
 	RainbowLaser.DisplayName: 彩虹激光
 	PumpActionSwampgunHeld.DisplayName: 泵动式凝沼枪
 	ParasanguineHeld.DisplayName: 赤血凝伞
@@ -728,9 +639,7 @@ Projectiles: {
 	GoomoireSuck.DisplayName: 蛊书旋风
 	SplendorTentacle.DisplayName: 奇观之触
 	SlimeCaneGemCounter.DisplayName: 史莱姆手杖辅助弹幕
-	ChromaticBombProjectile.DisplayName: 虹色炸弹
 	ChromaticGooztickProjectile.DisplayName: 虹色凝光棒
-	DynamoRodProjectile.DisplayName: 电流炸药
 	CrimulanClyde.DisplayName: 殷红小可
 	DivinePinky.DisplayName: 神圣小粉
 	EbonianBlinky.DisplayName: 腐檀小闪
@@ -738,25 +647,19 @@ Projectiles: {
 	CometKunaiCritProjectile.DisplayName: 彗星苦无
 	CometKunaiGhostProjectile.DisplayName: 彗星苦无
 	CometKunaiProjectile.DisplayName: 彗星苦无
-	CometKunaiStealthProjectile.DisplayName: 彗星苦无
 	CometKunaiStarfall.DisplayName: 彗星苦无
 	Goozmoem.DisplayName: 古泽莫姆
 	BlinkySpikeBall.DisplayName: 小闪的刺球
 	PinkyLight.DisplayName: 小粉的闪光
 	GoozmoemRay.DisplayName: 熔融射线
 	// AntiMassBioBall.DisplayName: Anti-Mass Bio Ball
-	// AntiMassColliderProj.DisplayName: Anti-Mass Collider
-	// AntiMassMacroLaser.DisplayName: Anti Mass Macro Laser
 	// AntiMassDeathLaser.DisplayName: Anti Mass Death Laser
 	// AntiMassBioStrike.DisplayName: Anti Mass Bio Strike
 	// AntiMassAccumulatorProj.DisplayName: Anti Mass Accumulator Proj
-	// ShakerSludge.DisplayName: Shaker Sludge
 	// GoozmaBoulderProjectile.DisplayName: Motley Marble
 	// StellarBlackHole.DisplayName: Stellar Black Hole
-	// FissionFlyerProjectile.DisplayName: Fission Flyer
 	// CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
 	// FissionFlayerProjectile.DisplayName: to be determined
-	// SlimeShotRedirecting.DisplayName: Slime Shot
 }
 
 Chat: {
@@ -821,139 +724,19 @@ Buffs: {
 	}
 }
 
-Tiles: {
-	GoozmaMusicBoxP1Tile.MapEntry: 音乐盒
-	GoozmaMusicBoxP2Tile.MapEntry: 音乐盒
-	GoozmaSoulMusicBoxTile.MapEntry: 音乐盒
-	YharonSoulMusicBoxTile.MapEntry: 音乐盒
-	// ChromaticCampfirePlaced.MapEntry: Chromatic Campfire Placed
-	// GoozmaMusicBoxExiledP1Tile.MapEntry: Goozma Music Box Exiled P1 Tile
-	// GoozmaMusicBoxExiledP2Tile.MapEntry: Goozma Music Box Exiled P2 Tile
-	// GoozmaMusicBoxJteohP1Tile.MapEntry: Goozma Music Box Jteoh P1 Tile
-	// GoozmaMusicBoxJteohP2Tile.MapEntry: Goozma Music Box Jteoh P2 Tile
-}
-
-Config: {
-	VisualHeader: 视觉效果
-	StressHeader: 压力条
-
-	HolyExplosionToggle: {
-		Label: 神圣爆炸屏幕震动切换
-		Tooltip: 禁用此功能可大幅降低圣洁凝魔的神圣爆炸视觉效果
-	}
-
-	StressPosX: {
-		Label: 压力条 X 坐标位置
-		Tooltip: 调整压力条的水平位置
-	}
-
-	StressPosY: {
-		Label: 压力条 Y 坐标位置
-		Tooltip: 调整压力条的垂直位置
-	}
-
-	StressShake: {
-		Label: 压力条震动切换
-		Tooltip: 切换压力条的震动效果
-	}
-
-	Distortion: {
-		Label: 季风扭曲效果
-		Tooltip: 调整史莱姆季风扭曲效果的强度
-	}
-
-	LightningToggle: {
-		Label: 季风雷暴切换
-		Tooltip: 启用或禁用史莱姆季风的雷暴视觉效果
-	}
-
-	Infernum: {
-		// Label: Infernum AI
-		// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
-	}
-
-	// ContentHeader: Content
-}
-
-LoreGeneric:
-	'''
-	[c/E3AF40:寄宿其上的低语流入你的耳中……]
-	[c/BEBEBE:长按 “左Shift”键以仔细聆听]
-	'''
-LoreGoozma:
-	'''
-	在万物阶级中，一个最令人恐惧不安之物
-	想想，一个底层生物的顶点，尽管没有任何巨龙的血脉，却仍然能够拥有金源魄……
-	它变得更为强大，几乎成为了一个由残缺之物构成的完美存在……也许我们永远不会知晓是何物造就了一个真正的神明。
-	对于你将这种名副其实的毁灭存在催化出来的好奇心超过了我对它的恐惧。
-	是什么影响了它的形成？其外表掩盖了它那巧妙、复杂的操纵能力。
-	可惜，其努力的成果最终却化为泡影。这是历史循环中的一个永恒的规律。
-	也许从泰拉瑞亚的角度来看，我们所做出的成就与只会无能蠕动的史莱姆相差不了多少。
-	'''
-// InfernalRelicText: Imbued with the infernal flames of a defeated foe
-// InfernumOnly: Infernum Mode only
-
 Configs: {
 	Config: {
 		DisplayName: 配置
 
-		epilepsy: {
-			Label: "{$Mods.CalamityHunt.Config.HolyExplosionToggle.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.HolyExplosionToggle.Tooltip}"
-		}
-
-		stressX: {
-			Label: "{$Mods.CalamityHunt.Config.StressPosX.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.StressPosX.Tooltip}"
-		}
-
-		stressY: {
-			Label: "{$Mods.CalamityHunt.Config.StressPosY.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.StressPosY.Tooltip}"
-		}
-
-		stressShake: {
-			Label: "{$Mods.CalamityHunt.Config.StressShake.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.StressShake.Tooltip}"
-		}
-
-		monsoonDistortion: {
-			Label: "{$Mods.CalamityHunt.Config.Distortion.Label}"
-			Tooltip: "{$Mods.CalamityHunt.Config.Distortion.Tooltip}"
-		}
-
-		monsoonLightning: {
-			Tooltip: "{$Mods.CalamityHunt.Config.LightningToggle.Tooltip}"
-			Label: "{$Mods.CalamityHunt.Config.LightningToggle.Label}"
+		Headers: {
+			VisualHeader: 视觉效果
+			StressHeader: 压力条
+			// ContentHeader: Content
 		}
 
 		shadowspecCurse: {
 			// Label: Shadowspec Curse
 			// Tooltip: Curses all Shadowspec-tier items until Goozma is defeated, making them unusable
-		}
-
-		oldsky: {
-			// Label: oldsky
-			// Tooltip: ""
-		}
-
-		overrideVanillaBalance: {
-			// Label: override Vanilla Balance
-			// Tooltip: ""
-		}
-
-		photosensitiveToggle: {
-			// Label: Toggle Photosensitive Effects
-			// Tooltip: Disables certain effects which may trigger photosensitivity
-		}
-
-		debugMode: {
-			// Label: Debug Mode
-			/* Tooltip:
-				'''
-				Enables features optimized for testing game mechanics
-				Not recommended for usage by players
-				''' */
 		}
 
 		GoozmaMusicPreference: {
@@ -965,31 +748,51 @@ Configs: {
 			// Label: Infernum AI
 			// Tooltip: Causes Goozma to use its Death Mode AI while the Infernum Mod's Infernum Mode is active
 		}
+
+		debugMode: {
+			// Label: Debug Mode
+			/* Tooltip:
+				'''
+				Enables features optimized for testing game mechanics
+				Not recommended for usage by players
+				''' */
+		}
+
+		photosensitiveToggle: {
+			// Label: Toggle Photosensitive Effects
+			// Tooltip: Disables certain effects which may trigger photosensitivity
+		}
+
+		MonsoonDistortion: {
+			Label: 季风扭曲效果
+			Tooltip: 调整史莱姆季风扭曲效果的强度
+		}
+
+		MonsoonLightning: {
+			Tooltip: 季风雷暴切换
+			Label: 启用或禁用史莱姆季风的雷暴视觉效果
+		}
+
+		StressX: {
+			Label: 压力条 X 坐标位置
+			Tooltip: 调整压力条的水平位置
+		}
+
+		StressY: {
+			Label: 压力条 Y 坐标位置
+			Tooltip: 调整压力条的垂直位置
+		}
+
+		StressShake: {
+			Label: 压力条震动切换
+			Tooltip: 切换压力条的震动效果
+		}
 	}
 }
 
-// OrRev: " or Revengeance"
-SetBonuses.Shogun:
-	'''
-	增加17%伤害和5仆从栏
-	{$CommonItemTooltip.FlightAndSlowfall}
-	{$CommonItemTooltip.PressDownToHover}
-	穿戴任何翅膀都会覆盖这个飞行效果
-	允许冲刺并增强其他冲刺的能力
-	按住DOWN来加速下落
-	增加跳跃速度 
-	免疫许多游戏末期和影响移动的减益
-	'''
-StickyHandStats:
-	'''
-	长度: 56
-	发射速度: 25
-	回收速度: 10
-	牵引速度: 17
-	'''
+// InfernumOnly: Infernum Mode only
 GoozmaShadowspecCurse: Mods.CalamityHunt.GoozmaShadowspecCurse
 AnyEvilBlock: 任意邪恶物块
-SludgeWarning: 不能用来召唤史莱姆之神
 
 CalamityModName: {
 	Display: Calamity Mod

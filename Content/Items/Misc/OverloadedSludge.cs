@@ -24,7 +24,7 @@ namespace CalamityHunt.Content.Items.Misc
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
-            TooltipLine tooltip = new(Mod, "CalamityHunt:SludgeWarning", Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.SludgeWarning").Value);
+            TooltipLine tooltip = new(Mod, "CalamityHunt:SludgeWarning", Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.Items.OverloadedSludge.Warning").Value);
             if (ModLoader.HasMod(HUtils.CalamityMod)) {
                 int check = tooltips.IndexOf(tooltips.Find(t => t.Text.Equals("Summons the Slime God")));
                 if (check == -1) {
