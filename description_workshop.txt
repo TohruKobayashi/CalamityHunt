@@ -1,4 +1,4 @@
-This mod adds something horrible.
+﻿This mod adds something horrible.
 Fight the one and only Goozma in this Calamity Mod addon.
 
 Main programmer - caligulasAquarium
@@ -12,6 +12,7 @@ Sound design - Moonburn
 Music - The Exiled Fellow
 Testers - Shade, Purified, Myra, Angel, aboOod, DestructoGabe8
 Former programmer - Blockaroz
+Translation - IbanPlay (French), Lastprismer (Chinese), Indeperevod Team (Russian)
 Special color palettes - Split, Spoop, Delly, Triangle
 Extra code contributors - JesterRomut, Alino4kaHvoshch, babybluesheep
 
