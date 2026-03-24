@@ -20,11 +20,6 @@ Items: {
 		Tooltip: “感觉就像冰冷的等离子体”
 	}
 
-	GoozmaRelicItem: {
-		DisplayName: 古泽玛圣物
-		Tooltip: ""
-	}
-
 	GoozmaRelic: {
 		DisplayName: 古泽玛圣物
 		Tooltip: ""
@@ -32,13 +27,7 @@ Items: {
 
 	GoozmaLore: {
 		DisplayName: 古泽玛
-		Tooltip: tooltip
-		LoreGeneric:
-			'''
-			[c/E3AF40:寄宿其上的低语流入你的耳中……]
-			[c/BEBEBE:长按 “左Shift”键以仔细聆听]
-			'''
-		LoreGoozma:
+		Lore:
 			'''
 			在万物阶级中，一个最令人恐惧不安之物
 			想想，一个底层生物的顶点，尽管没有任何巨龙的血脉，却仍然能够拥有金源魄……
@@ -48,16 +37,12 @@ Items: {
 			可惜，其努力的成果最终却化为泡影。这是历史循环中的一个永恒的规律。
 			也许从泰拉瑞亚的角度来看，我们所做出的成就与只会无能蠕动的史莱姆相差不了多少。
 			'''
+		Tooltip: ""
 	}
 
 	TreasureTrunk: {
 		DisplayName: 宝藏箱
 		Tooltip: <right>以开启
-	}
-
-	GoozmaMask: {
-		DisplayName: 古泽玛面具
-		Tooltip: ""
 	}
 
 	TreasureBucket: {
@@ -77,16 +62,6 @@ Items: {
 			召唤一个肿包泡泡宝宝
 			“适合皇家的甜点！”
 			'''
-	}
-
-	GoozmaMusicBoxP1: {
-		DisplayName: 音乐盒（古泽玛）
-		Tooltip: ""
-	}
-
-	GoozmaMusicBoxP2: {
-		DisplayName: 音乐盒(古泽玛绝望阶段)
-		Tooltip: ""
 	}
 
 	GoozmaSoulMusicBox: {
@@ -285,17 +260,6 @@ Items: {
 		// StressBar: Stress: {0}
 	}
 
-	TheSlimer: {
-		DisplayName: The Slimer
-		Tooltip:
-			'''
-			喷出大量粘稠的浆液
-			史莱姆喷出时会被卡住，形成堵塞
-			被阻挡时右键点击可发射胆汁炸弹
-			“不要与猩红史莱姆混淆”
-			'''
-	}
-
 	SludgeShaker: {
 		DisplayName: 污泥混凝器
 		Tooltip:
@@ -415,19 +379,9 @@ Items: {
 			'''
 	}
 
-	ChromaticBomb: {
-		DisplayName: 虹色炸弹
-		Tooltip: 掷出一个无视重力，并且能破坏物块的黑洞
-	}
-
 	ChromaticGooztick: {
 		DisplayName: 虹色凝光棒
 		Tooltip: 无视重力并可在物块上反弹
-	}
-
-	DynamoRod: {
-		DisplayName: Dynamo Dynamite
-		Tooltip: 在爆炸中生成一个庞大的、能破坏物块的黑洞
 	}
 
 	BadApple: {
@@ -471,11 +425,6 @@ Items: {
 		// Tooltip: "'Highly dangerous'"
 	}
 
-	IOUASoul: {
-		// DisplayName: I O U A Soul
-		// Tooltip: REMOVED content LOOOOOOL
-	}
-
 	StrangeManPortrait: {
 		// DisplayName: Portrait of a Strange Man
 		// Tooltip: ""
@@ -507,15 +456,15 @@ Items: {
 	}
 
 	ShogunWings: {
-		// Tooltip: "'They are best used to cool you off'"
 		// DisplayName: Thousand-Fold Paper Fans
+		// Tooltip: "'They are best used to cool you off'"
 	}
 
 	NuclearLemonade: {
 		// DisplayName: Nuclear Lemonade
 		/* Tooltip:
 			'''
-			Major improvements to all stats
+			{$CommonItemTooltip.MajorStats}
 			May kill you
 			'As cold as the nuclear winter!'
 			''' */
@@ -523,7 +472,7 @@ Items: {
 
 	ChromaticCampfire: {
 		// DisplayName: Chromatic Campfire
-		// Tooltip: ""
+		// Tooltip: "{$ItemTooltip.Campfire}"
 	}
 
 	AshenSoul: {
@@ -584,7 +533,6 @@ NPCs: {
 	EbonianBehemuck.DisplayName: 腐檀邪浆
 	StellarGeliath.DisplayName: 星恒黏兽
 	Goozmite.DisplayName: 古泽蚂
-	// GelatinousSpawn.DisplayName: Gelatinous Spawn
 	// PluripotentSpawn.DisplayName: Pluripotent Spawn
 }
 
@@ -664,8 +612,14 @@ Projectiles: {
 
 Chat: {
 	SlimeMonsoon: 史莱姆季风开始了……
-	NinjaShrineFailure: 如果附近没有足够的史莱姆雕像，神龛就不完整。
-	NinjaShrineFailureFunny: 你向神龛供奉，却一无所获。
+	// NinjaShrineFailure: You cannot make the offering because the Slime Rain has already started.
+	NinjaShrineFailure2: 如果附近没有足够的史莱姆雕像，神龛就不完整。
+
+	DeathReasons: {
+		// NuclearLemonade: "{0} must be drinking Lord Vertice Lemonade."
+		// StellarGeliath: "{0} was shredded by gravity."
+		// DivineGargooptuar: "{0} saw the light."
+	}
 }
 
 Bestiary: {
@@ -763,14 +717,9 @@ Configs: {
 			// Tooltip: Disables certain effects which may trigger photosensitivity
 		}
 
-		MonsoonDistortion: {
-			Label: 季风扭曲效果
-			Tooltip: 调整史莱姆季风扭曲效果的强度
-		}
-
 		MonsoonLightning: {
-			Tooltip: 季风雷暴切换
-			Label: 启用或禁用史莱姆季风的雷暴视觉效果
+			Label: 季风雷暴切换
+			Tooltip: 启用或禁用史莱姆季风的雷暴视觉效果
 		}
 
 		StressX: {
@@ -790,9 +739,10 @@ Configs: {
 	}
 }
 
-// InfernumOnly: Infernum Mode only
+// InfernumOnly: In Infernum Mode
 GoozmaShadowspecCurse: Mods.CalamityHunt.GoozmaShadowspecCurse
 AnyEvilBlock: 任意邪恶物块
+// DropRules.WhenAnyPlayerHasntEaten: Drops if any player hasn't absorbed
 
 CalamityModName: {
 	Display: Calamity Mod

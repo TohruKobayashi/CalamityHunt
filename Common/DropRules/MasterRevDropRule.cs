@@ -22,7 +22,8 @@ namespace CalamityHunt.Common.DropRules
             // The "Revengeance" drop line takes priority otherwise
             // (Unless calamity isn't enabled, then only use the Master drop line)
             return ModCompatibility.Calamity.IsLoaded && !Main.masterMode
-                ? Language.GetTextValue("Mods.CalamityMod.Condition.Drops.IsRev")
+                // Calamity's "Drops: In Revengeance Mode" variant is inconsistent with the vanilla "This is a Master Mode drop rate", which i'm thinking of reporting
+                ? Language.GetTextValue("Bestiary_ItemDropConditions.SimpleCondition", Language.GetTextValue("Mods.CalamityMod.Condition.InRev"))
                 : Language.GetTextValue("Bestiary_ItemDropConditions.IsMasterMode");
         }
     }

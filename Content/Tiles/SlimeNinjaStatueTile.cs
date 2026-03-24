@@ -59,10 +59,12 @@ namespace CalamityHunt.Content.Tiles
         public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings) => true;
 
         public static LocalizedText failText;
+        public static LocalizedText failText2;
 
         public override void Load()
         {
             failText = Language.GetOrRegister(Mod.GetLocalizationKey("Chat.NinjaShrineFailure"));
+            failText2 = Language.GetOrRegister(Mod.GetLocalizationKey("Chat.NinjaShrineFailure2"));
         }
 
         public override bool RightClick(int i, int j)
@@ -152,6 +154,12 @@ namespace CalamityHunt.Content.Tiles
                         if (Main.netMode != NetmodeID.Server) {
                             Main.NewText(failText.Value, color);
                         }
+                    }
+                }
+                else {
+                    Color color = new Color(255, 255, 0);
+                    if (Main.netMode != NetmodeID.Server) {
+                        Main.NewText(failText2.Value, color);
                     }
                 }
             }

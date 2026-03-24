@@ -20,11 +20,6 @@ Items: {
 		Tooltip: "'Feels like cold plasma'"
 	}
 
-	GoozmaRelicItem: {
-		DisplayName: Goozma Relic
-		Tooltip: ""
-	}
-
 	GoozmaRelic: {
 		DisplayName: Goozma Relic
 		Tooltip: ""
@@ -32,13 +27,7 @@ Items: {
 
 	GoozmaLore: {
 		DisplayName: Goozma
-		Tooltip: ""
-		LoreGeneric:
-			'''
-			[c/E3AF40:Whispers from on high dance in your ears...]
-			[c/BEBEBE:Press "Left Shift" to listen closer]
-			'''
-		LoreGoozma:
+		Lore:
 			'''
 			A most chilling upset, in the hierarchical dominion of all things living.
 			To think the culmination of the lowest echelon of creatures could nevertheless possess an Auric soul despite lacking any draconic heritage…
@@ -48,21 +37,17 @@ Items: {
 			What a pity it is that the fruits of its effort came to nothing in the end. An unremitting pattern in the cyclic annals of history.
 			Perhaps, from the perspective of Terraria, our own achievements amount to little more than the impotent writhing of slimes.
 			'''
+		Tooltip: ""
 	}
 
 	TreasureTrunk: {
 		DisplayName: Treasure Trunk
-		Tooltip: <right> to open
-	}
-
-	GoozmaMask: {
-		DisplayName: Goozma Mask
-		Tooltip: ""
+		Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
 	}
 
 	TreasureBucket: {
 		DisplayName: Treasure Bucket
-		Tooltip: <right> to open
+		Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
 	}
 
 	GoozmaTrophy: {
@@ -77,16 +62,6 @@ Items: {
 			Summons a baby bloat blob
 			'A dessert fit for an emperor!'
 			'''
-	}
-
-	GoozmaMusicBoxP1: {
-		DisplayName: Music Box (Goozma)
-		Tooltip: ""
-	}
-
-	GoozmaMusicBoxP2: {
-		DisplayName: Music Box (Desperate Goozma)
-		Tooltip: ""
 	}
 
 	GoozmaSoulMusicBox: {
@@ -285,17 +260,6 @@ Items: {
 		StressBar: Stress: {0}
 	}
 
-	TheSlimer: {
-		DisplayName: The Slimer
-		Tooltip:
-			'''
-			Sprays a sizable slurry of sticky slime
-			Slime gets stuck as it is spewed, building up a blockage
-			Right click when blocked to blast out a bile bomb
-			'Not to be confused with The Crimslime'
-			'''
-	}
-
 	SludgeShaker: {
 		DisplayName: Sludge Shaker
 		Tooltip:
@@ -308,7 +272,7 @@ Items: {
 
 	SupremeRestorationPotion: {
 		DisplayName: Omega Restoration Potion
-		Tooltip: Reduced potion cooldown
+		Tooltip: "{$ItemTooltip.RestorationPotion}"
 	}
 
 	ChromaticTorch: {
@@ -417,19 +381,9 @@ Items: {
 			'''
 	}
 
-	ChromaticBomb: {
-		DisplayName: Chromatic Bomb
-		Tooltip: Throws out a gravity-defying black hole that destroys tiles
-	}
-
 	ChromaticGooztick: {
 		DisplayName: Chromatic Gooztick
 		Tooltip: Ignores gravity and bounces off tiles
-	}
-
-	DynamoRod: {
-		DisplayName: Dynamo Dynamite
-		Tooltip: Explodes into a colossal tile-destroying black hole
 	}
 
 	BadApple: {
@@ -473,11 +427,6 @@ Items: {
 		Tooltip: "'Highly dangerous'"
 	}
 
-	IOUASoul: {
-		DisplayName: I O U A Soul
-		Tooltip: REMOVED content LOOOOOOL
-	}
-
 	StrangeManPortrait: {
 		DisplayName: Portrait of a Strange Man
 		Tooltip: ""
@@ -509,15 +458,15 @@ Items: {
 	}
 
 	ShogunWings: {
-		Tooltip: "'They are best used to cool you off'"
 		DisplayName: Thousand-Fold Paper Fans
+		Tooltip: "'They are best used to cool you off'"
 	}
 
 	NuclearLemonade: {
 		DisplayName: Nuclear Lemonade
 		Tooltip:
 			'''
-			Major improvements to all stats
+			{$CommonItemTooltip.MajorStats}
 			May kill you
 			'As cold as the nuclear winter!'
 			'''
@@ -525,7 +474,7 @@ Items: {
 
 	ChromaticCampfire: {
 		DisplayName: Chromatic Campfire
-		Tooltip: ""
+		Tooltip: "{$ItemTooltip.Campfire}"
 	}
 
 	AshenSoul: {
@@ -586,7 +535,6 @@ NPCs: {
 	EbonianBehemuck.DisplayName: Ebonian Behemuck
 	StellarGeliath.DisplayName: Stellar Geliath
 	Goozmite.DisplayName: Goozmite
-	GelatinousSpawn.DisplayName: Gelatinous Spawn
 	PluripotentSpawn.DisplayName: Pluripotent Spawn
 }
 
@@ -666,8 +614,14 @@ Projectiles: {
 
 Chat: {
 	SlimeMonsoon: The Slime Monsoon has begun...
-	NinjaShrineFailure: The shrine is incomplete without enough slime statues nearby.
-	NinjaShrineFailureFunny: You offer to the shrine, but gain nothing.
+	NinjaShrineFailure: You cannot make the offering because the Slime Rain has already started.
+	NinjaShrineFailure2: The shrine is incomplete without enough slime statues nearby.
+
+	DeathReasons: {
+		NuclearLemonade: "{0} must be drinking Lord Vertice Lemonade."
+		StellarGeliath: "{0} was shredded by gravity."
+		DivineGargooptuar: "{0} saw the light."
+	}
 }
 
 Bestiary: {
@@ -765,24 +719,19 @@ Configs: {
 			Tooltip: Disables certain effects which may trigger photosensitivity
 		}
 
-		MonsoonDistortion: {
-			Label: Monsoon Distortion Potency
-			Tooltip: Adjusts how strong the Slime Monsoon's distortion effect applies
-		}
-
 		MonsoonLightning: {
-			Tooltip: Monsoon Thunder
-			Label: Enables or disables the Slime Monsoon's thunder visuals
+			Label: Monsoon Thunder
+			Tooltip: Enables or disables the Slime Monsoon's thunder visuals
 		}
 
 		StressX: {
 			Label: Stress Meter X Position
-			Tooltip: Adjusts the Stress Meter's horizontal position
+			Tooltip: Adjusts the Stress Meter's horizontal position, measured as a % of your screen width
 		}
 
 		StressY: {
 			Label: Stress Meter Y Position
-			Tooltip: Adjusts the Stress Meter's vertical position
+			Tooltip: Adjusts the Stress Meter's vertical position, measured as a % of your screen height
 		}
 
 		StressShake: {
@@ -792,9 +741,10 @@ Configs: {
 	}
 }
 
-InfernumOnly: Infernum Mode only
+InfernumOnly: In Infernum Mode
 GoozmaShadowspecCurse: "[c/462545:A mucilaginous curse prevents you from using this item...]"
 AnyEvilBlock: Any Evil Block
+DropRules.WhenAnyPlayerHasntEaten: Drops if any player hasn't absorbed
 
 CalamityModName: {
 	Display: Calamity Mod

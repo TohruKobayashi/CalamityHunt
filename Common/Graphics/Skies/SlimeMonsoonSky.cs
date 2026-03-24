@@ -191,7 +191,7 @@ public class SlimeMonsoonSky : CustomSky
         //        .UseTargetPosition(radialDistortPos)
         //        .UseProgress(Main.GlobalTimeWrappedHourly * 0.005f % 5f)
         //        .UseIntensity(1f)
-        //        .UseOpacity(_strength * 0.1f * Config.Instance.monsoonDistortion);
+        //        .UseOpacity(_strength * 0.1f * Config.Instance.MonsoonDistortion);
         //    Filters.Scene["HuntOfTheOldGods:SlimeMonsoon"].GetShader().Shader.Parameters["distortionSample0"].SetValue(AssetDirectory.Textures.Noise[4].Value);
         //    Filters.Scene["HuntOfTheOldGods:SlimeMonsoon"].GetShader().Shader.Parameters["distortionSample1"].SetValue(AssetDirectory.Textures.Noise[5].Value);
         //    Filters.Scene["HuntOfTheOldGods:SlimeMonsoon"].GetShader().Shader.Parameters["distortSize"].SetValue(Vector2.One * 0.4f);
