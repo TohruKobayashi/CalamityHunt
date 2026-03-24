@@ -18,7 +18,9 @@ namespace CalamityHunt.Common.DropRules
 
         string IProvideItemConditionDescription.GetConditionDescription()
         {
-            return Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.InfernumOnly").Value;
+            // There is currently no text in Infernum about drop conditions for its mode
+            // I've reported this, and once it's implemented, the custom key should be replaced with Infernum's key
+            return Language.GetTextValue("Bestiary_ItemDropConditions.SimpleCondition", Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.InfernumOnly").Value);
         }
     }
 }
