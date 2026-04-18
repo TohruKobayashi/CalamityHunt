@@ -1,4 +1,5 @@
-﻿using CalamityHunt.Common.Utilities;
+﻿using CalamityHunt.Common.DropRules;
+using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Items.Accessories;
 using CalamityHunt.Content.Items.Armor.Shogun;
 using CalamityHunt.Content.Items.Masks;
@@ -38,20 +39,7 @@ namespace CalamityHunt.Content.Items.BossBags
             Item.consumable = true;
         }
 
-        public override void ModifyItemLoot(ItemLoot itemLoot)
-        {
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ChromaticMass>(), 1, 20, 30));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SplendorJam>()));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ShogunHelm>(), 3));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ShogunChestplate>(), 3));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ShogunPants>(), 3));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<StickyHand>(), 3));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<PaladinPalanquin>(), 2));
-            itemLoot.Add(ItemDropRule.FewFromOptions(1, 7, ModContent.ItemType<EbonianMask>(), ModContent.ItemType<DivineMask>(), ModContent.ItemType<CrimulanMask>(), ModContent.ItemType<StellarMask>()));
-            itemLoot.Add(ItemDropRule.FewFromOptions(2, 1, ModContent.ItemType<Parasanguine>(), ModContent.ItemType<SludgeShaker>(), ModContent.ItemType<CrystalGauntlets>(), ModContent.ItemType<SlimeCane>(), ModContent.ItemType<CometKunai>()));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TendrilCursorAttachment>(), 10));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GunkHeart>(), 10));
-        }
+        public override void ModifyItemLoot(ItemLoot itemLoot) => ItemLoader.GetItem(ModContent.ItemType<TreasureTrunk>()).ModifyItemLoot(itemLoot);
 
         public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {

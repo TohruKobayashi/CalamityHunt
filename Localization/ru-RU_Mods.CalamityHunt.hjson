@@ -20,11 +20,6 @@
 		Tooltip: «Ощущается как холодная плазма»
 	}
 
-	GoozmaRelicItem: {
-		DisplayName: Реликвия Гузмы
-		Tooltip: ""
-	}
-
 	GoozmaRelic: {
 		DisplayName: Реликвия Гузмы
 		Tooltip: ""
@@ -48,16 +43,12 @@
 			Какая же жалость, что плоды усилий его по итогу ни к чему не привели. Неустанный узор цикличных анналов истории.
 			Может быть, в перспективе мира Террарии, все наши достижения так же малозначимы, как и бессильные страдания слизней.
 			'''
+		Tooltip: ""
 	}
 
 	TreasureTrunk: {
 		DisplayName: Кофр с сокровищами
 		Tooltip: Нажмите <right>, чтобы открыть
-	}
-
-	GoozmaMask: {
-		DisplayName: Маска Гузмы
-		Tooltip: ""
 	}
 
 	TreasureBucket: {
@@ -77,16 +68,6 @@
 			Призывает раздутого малыша-каплю
 			«Десерт под стать императору!»
 			'''
-	}
-
-	GoozmaMusicBoxP1: {
-		DisplayName: Музыкальная шкатулка (Гузма)
-		Tooltip: ""
-	}
-
-	GoozmaMusicBoxP2: {
-		DisplayName: Музыкальная шкатулка (Отчаянный Гузма)
-		Tooltip: ""
 	}
 
 	GoozmaSoulMusicBox: {
@@ -417,19 +398,9 @@
 			'''
 	}
 
-	ChromaticBomb: {
-		DisplayName: Хроматическая бомба
-		Tooltip: Бросает игнорирующую гравитацию чёрную дыру, уничтожающую блоки
-	}
-
 	ChromaticGooztick: {
 		DisplayName: Хроматическая светящаяся липалка
 		Tooltip: Игнорирует гравитацию и отскакивает от блоков
-	}
-
-	DynamoRod: {
-		DisplayName: Динамо динамит
-		Tooltip: Взрывается в виде огромной, разрушающей блоки чёрной дыры
 	}
 
 	BadApple: {
@@ -473,11 +444,6 @@
 		Tooltip: «Чрезвычайно опасен»
 	}
 
-	IOUASoul: {
-		// DisplayName: I O U A Soul
-		// Tooltip: REMOVED content LOOOOOOL
-	}
-
 	StrangeManPortrait: {
 		DisplayName: Портрет странного мужчины
 		Tooltip: ""
@@ -510,7 +476,7 @@
 
 	ShogunWings: {
 		DisplayName: Тысячекратно сложенные бумажные веера
-		Tooltip: «Лучшее им применение — немного себя обдуть»
+		Tooltip: "'Лучшее им применение — немного себя остудить'"
 	}
 
 	NuclearLemonade: {
@@ -635,7 +601,6 @@ NPCs: {
 	EbonianBehemuck.DisplayName: Эбонитовый гряземот
 	StellarGeliath.DisplayName: Звёздный гелиаф
 	Goozmite.DisplayName: Гузмит
-	GelatinousSpawn.DisplayName: Желатиновый отросток
 	PluripotentSpawn.DisplayName: Плюрипотентный отросток
 }
 
@@ -716,8 +681,14 @@ Projectiles: {
 
 Chat: {
 	SlimeMonsoon: Слизневый муссон начался...
-	NinjaShrineFailure: Святилище не будет завершённым без нужного количества статуй слизня.
-	NinjaShrineFailureFunny: Вы возлагаете дары на святилище, но ничего не получаете.
+	// NinjaShrineFailure: You cannot make the offering because the Slime Rain has already started.
+	NinjaShrineFailure2: Святилище не будет завершённым без нужного количества статуй слизня.
+
+	DeathReasons: {
+		// NuclearLemonade: "{0} must be drinking Lord Vertice Lemonade."
+		// StellarGeliath: "{0} was shredded by gravity."
+		// DivineGargooptuar: "{0} saw the light."
+	}
 }
 
 Bestiary: {
@@ -815,14 +786,9 @@ Configs: {
 			Tooltip: Выключает некоторые эффекты, которые могут вызвать эпилепсию
 		}
 
-		MonsoonDistortion: {
-			Label: Сила искажения муссона
-			Tooltip: Регулирует силу эффекта искажения муссона слизней
-		}
-
 		MonsoonLightning: {
-			Tooltip: Гроза муссона
-			Label: Включает эффект грозы во время муссона слизней
+			Label: Гроза муссона
+			Tooltip: Включает эффект грозы во время муссона слизней
 		}
 
 		StressX: {
@@ -842,8 +808,10 @@ Configs: {
 	}
 }
 
+// InfernumOnly: In Infernum Mode
 GoozmaShadowspecCurse: "[c/462545:Желейное проклятье покрыло этот предмет и не даёт им воспользоваться...]"
 AnyEvilBlock: Любой блок зла
+// DropRules.WhenAnyPlayerHasntEaten: Drops if any player hasn't absorbed
 
 CalamityModName: {
 	Display: Calamity Mod

@@ -16,6 +16,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.Graphics;
 using Terraria.Graphics.CameraModifiers;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using static CalamityHunt.Common.Systems.ConditionalValue;
 
@@ -623,7 +624,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
 
                 foreach (Player player in Main.player.Where(n => n.active && !n.dead)) {
                     if (player.Distance(NPC.Center) < holeSize) {
-                        player.Hurt(PlayerDeathReason.ByCustomReason($"{player.name} was shredded by gravity."), 9999, -1, false, true, -1, false, 0, 0, 0);
+                        player.Hurt(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.{nameof(CalamityHunt)}.Chat.DeathReasons.StellarGeliath", player.name)), 9999, -1, false, true, -1, false, 0, 0, 0);
                     }
 
                     if (player.Distance(NPC.Center) > holeSize + 600) {

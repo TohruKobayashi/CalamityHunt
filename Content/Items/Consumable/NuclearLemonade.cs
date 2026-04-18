@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace CalamityHunt.Content.Items.Consumable
@@ -34,7 +35,7 @@ namespace CalamityHunt.Content.Items.Consumable
         {
             // killa you
             if (Main.rand.NextBool(500))
-                player.KillMe(PlayerDeathReason.ByCustomReason($"{player.name} must be drinking Lord Vertice Lemonade."), Main.rand.Next(220000000, 229999999), -1);
+                player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.{nameof(CalamityHunt)}.Chat.DeathReasons.NuclearLemonade", player.name)), Main.rand.Next(220000000, 229999999), -1);
         }
     }
 }

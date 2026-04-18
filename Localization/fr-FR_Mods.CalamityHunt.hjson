@@ -20,11 +20,6 @@ Items: {
 		Tooltip: "'Semblable a un plasme glacial'"
 	}
 
-	GoozmaRelicItem: {
-		DisplayName: Relique de Goozma
-		Tooltip: ""
-	}
-
 	GoozmaRelic: {
 		// DisplayName: Goozma Relic
 		// Tooltip: ""
@@ -32,13 +27,7 @@ Items: {
 
 	GoozmaLore: {
 		DisplayName: Goozma
-		Tooltip: tooltip
-		LoreGeneric:
-			'''
-			[c/E3AF40:Des murmurs de l'au-delà dancent dans vos oreilles...]
-			[c/BEBEBE:Appuyez sur "Shift Gauche" pour y prêter attention]
-			'''
-		LoreGoozma:
+		Lore:
 			'''
 			Un bouleversement des plus effrayants, dans le domaine hiérarchique de toutes choses vivantes.
 			Se dire que l’aboutissement de l’échelon le plus bas des créatures pourrait néanmoins posséder une âme aurique, malgré l’absence de tout héritage draconique…
@@ -48,16 +37,12 @@ Items: {
 			Quel dommage que les fruits de ses efforts n’aient finalement abouti à rien. Un modèle incessant dans les annales cycliques de l’histoire.
 			Peut-être que, du point de vue de Terraria, nos propres réalisations ne se résument qu’à des contorsions impuissantes d'une gelée.
 			'''
+		Tooltip: ""
 	}
 
 	TreasureTrunk: {
 		DisplayName: Cache à trésor
 		Tooltip: <right> pour ouvrir
-	}
-
-	GoozmaMask: {
-		DisplayName: Masque de Goozma
-		Tooltip: ""
 	}
 
 	TreasureBucket: {
@@ -77,16 +62,6 @@ Items: {
 			Invoque un bébé blob
 			'Un dessert digne d'un empereur !'
 			'''
-	}
-
-	GoozmaMusicBoxP1: {
-		DisplayName: Boîte à musique (Goozma)
-		Tooltip: ""
-	}
-
-	GoozmaMusicBoxP2: {
-		DisplayName: Boîte à musique (Goozma Désespéré)
-		Tooltip: ""
 	}
 
 	GoozmaSoulMusicBox: {
@@ -286,17 +261,6 @@ Items: {
 		// StressBar: Stress: {0}
 	}
 
-	TheSlimer: {
-		DisplayName: The Slimer
-		Tooltip:
-			'''
-			Sprays a sizable slurry of sticky slime
-			Slime gets stuck as it is spewed, building up a blockage
-			Right click when blocked to blast out a bile bomb
-			'Not to be confused with The Crimslime'
-			'''
-	}
-
 	SludgeShaker: {
 		DisplayName: Mixeur de glue
 		Tooltip:
@@ -416,19 +380,9 @@ Items: {
 			'''
 	}
 
-	ChromaticBomb: {
-		DisplayName: Bombe chromatique
-		Tooltip: Lance un trou noir qui défie la gravité et dévore les blocs
-	}
-
 	ChromaticGooztick: {
 		DisplayName: Dynamite chromatique
 		Tooltip: Ignore la gravité et rebondis contre les blocs
-	}
-
-	DynamoRod: {
-		DisplayName: Dynamite dynamo
-		Tooltip: S'effondre en un trou noir collosal qui dévore les blocs
 	}
 
 	BadApple: {
@@ -472,11 +426,6 @@ Items: {
 		// Tooltip: "'Highly dangerous'"
 	}
 
-	IOUASoul: {
-		// DisplayName: I O U A Soul
-		// Tooltip: REMOVED content LOOOOOOL
-	}
-
 	StrangeManPortrait: {
 		// DisplayName: Portrait of a Strange Man
 		// Tooltip: ""
@@ -516,7 +465,7 @@ Items: {
 		// DisplayName: Nuclear Lemonade
 		/* Tooltip:
 			'''
-			Major improvements to all stats
+			{$CommonItemTooltip.MajorStats}
 			May kill you
 			'As cold as the nuclear winter!'
 			''' */
@@ -524,7 +473,7 @@ Items: {
 
 	ChromaticCampfire: {
 		// DisplayName: Chromatic Campfire
-		// Tooltip: ""
+		// Tooltip: "{$ItemTooltip.Campfire}"
 	}
 
 	AshenSoul: {
@@ -634,7 +583,6 @@ NPCs: {
 	EbonianBehemuck.DisplayName: Mastodonte d'éboue
 	StellarGeliath.DisplayName: Geliath stellaire
 	Goozmite.DisplayName: Goozinou
-	// GelatinousSpawn.DisplayName: Gelatinous Spawn
 	// PluripotentSpawn.DisplayName: Pluripotent Spawn
 }
 
@@ -715,8 +663,14 @@ Projectiles: {
 
 Chat: {
 	SlimeMonsoon: La mousson gélatineuse commence...
-	NinjaShrineFailure: Le temple gélatineux est incomplet, il manque des statues de gelées aux alentours
-	NinjaShrineFailureFunny: Vous faites une offrande a la statue, mais ne recevez rien en retour...
+	// NinjaShrineFailure: You cannot make the offering because the Slime Rain has already started.
+	NinjaShrineFailure2: Le temple gélatineux est incomplet, il manque des statues de gelées aux alentours
+
+	DeathReasons: {
+		// NuclearLemonade: "{0} must be drinking Lord Vertice Lemonade."
+		// StellarGeliath: "{0} was shredded by gravity."
+		// DivineGargooptuar: "{0} saw the light."
+	}
 }
 
 Bestiary: {
@@ -814,14 +768,9 @@ Configs: {
 			// Tooltip: Disables certain effects which may trigger photosensitivity
 		}
 
-		MonsoonDistortion: {
-			Label: Intensité de la distortion de la Mousson
-			Tooltip: Ajuste l'intensité de la distortion visuelle de la Mousson gélatineuse
-		}
-
 		MonsoonLightning: {
-			Tooltip: Tonnere de la Mousson gélatineuse
-			Label: Active ou désactive les visuels du tonnere de la Mousson gélatineuse
+			Label: Tonnere de la Mousson gélatineuse
+			Tooltip: Active ou désactive les visuels du tonnere de la Mousson gélatineuse
 		}
 
 		StressX: {
@@ -841,8 +790,11 @@ Configs: {
 	}
 }
 
+
+// InfernumOnly: In Infernum Mode
 // GoozmaShadowspecCurse: "[c/462545:A mucilaginous curse prevents you from using this item...]"
 // AnyEvilBlock: Any Evil Block
+// DropRules.WhenAnyPlayerHasntEaten: Drops if any player hasn't absorbed
 
 CalamityModName: {
 	Display: Calamity Mod

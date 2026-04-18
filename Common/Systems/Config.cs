@@ -31,9 +31,12 @@ public class Config : ModConfig
     [DefaultValue(true)]
     public bool photosensitiveToggle { get; set; }
 
+    /*
+     * The section that uses this config is also commented out
     [Range(0f, 1f)]
     [DefaultValue(1)]
     public float MonsoonDistortion { get; set; }
+    */
 
     [DefaultValue(true)]
     public bool MonsoonLightning { get; set; }

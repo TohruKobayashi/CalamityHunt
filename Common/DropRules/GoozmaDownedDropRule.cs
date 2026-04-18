@@ -10,5 +10,5 @@ public class GoozmaDownedDropRule : IItemDropRuleCondition
 
     bool IItemDropRuleCondition.CanShowItemDropInUI() => true;
 
-    string IProvideItemConditionDescription.GetConditionDescription() => Language.GetOrRegister($"{nameof(CalamityHunt)}.Common.DropOnFirstKill").Value;
+    string IProvideItemConditionDescription.GetConditionDescription() => Language.GetOrRegister($"Mods.CalamityMod.Condition.Drops.FirstKill").Value;
 }

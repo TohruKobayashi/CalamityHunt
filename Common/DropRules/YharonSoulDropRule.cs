@@ -16,5 +16,5 @@ public class YharonSoulDropRule : IItemDropRuleCondition
 
     bool IItemDropRuleCondition.CanShowItemDropInUI() => true;
 
-    string IProvideItemConditionDescription.GetConditionDescription() => Language.GetOrRegister($"{nameof(CalamityHunt)}.Common.DropWhenAnyPlayerHasntEaten").Value;
+    string IProvideItemConditionDescription.GetConditionDescription() => Language.GetOrRegister($"Mods.{nameof(CalamityHunt)}.DropRules.WhenAnyPlayerHasntEaten").Value;
 }

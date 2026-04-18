@@ -15,6 +15,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.Graphics.CameraModifiers;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using static CalamityHunt.Common.Systems.ConditionalValue;
 
@@ -568,7 +569,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.GoozmaBoss
             if (Time > 40) {
                 foreach (Player player in Main.player.Where(n => n.active && !n.dead && n.Distance(NPC.Center) < 8000)) {
                     bool shouldDie = player.statLife < 5;
-                    player.Hurt(PlayerDeathReason.ByCustomReason($"{player.name} saw the light."), 9999, -1, false, true, 200, false, 0, 0, 0);
+                    player.Hurt(PlayerDeathReason.ByCustomReason(NetworkText.FromKey($"Mods.{nameof(CalamityHunt)}.Chat.DeathReasons.DivineGargooptuar", player.name)), 9999, -1, false, true, 200, false, 0, 0, 0);
                     if (!shouldDie) {
                         player.statLife = 5;
                     }
