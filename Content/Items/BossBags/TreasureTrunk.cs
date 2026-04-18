@@ -1,4 +1,5 @@
-﻿using CalamityHunt.Common.Utilities;
+﻿using CalamityHunt.Common.DropRules;
+using CalamityHunt.Common.Utilities;
 using CalamityHunt.Content.Items.Accessories;
 using CalamityHunt.Content.Items.Armor.Shogun;
 using CalamityHunt.Content.Items.Masks;
@@ -41,6 +42,7 @@ namespace CalamityHunt.Content.Items.BossBags
         public override void ModifyItemLoot(ItemLoot itemLoot)
         {
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ChromaticMass>(), 1, 20, 30));
+            itemLoot.Add(ItemDropRule.ByCondition(new InfernumDropRule(), ModContent.ItemType<ChromaticMass>(), 1, 40, 40));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SplendorJam>()));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ShogunHelm>(), 3));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ShogunChestplate>(), 3));
