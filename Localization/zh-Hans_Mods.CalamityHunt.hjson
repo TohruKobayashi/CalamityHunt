@@ -485,6 +485,11 @@ Items: {
 		// Tooltip: Absorb to gain immense, radioactive powers
 	}
 
+	CancelSlimeRain: {
+		// DisplayName: Cancel Slime Rain
+		// Tooltip: ""
+	}
+
 	GoozmaMusicBoxExiledP1: {
 		// DisplayName: Music Box (Exiled Goozma)
 		// Tooltip: ""
@@ -507,6 +512,50 @@ Items: {
 
 	GoozmaInfernumRelic: {
 		// DisplayName: Infernal Goozma Relic
+		// Tooltip: ""
+	}
+
+	SludgeSpongeEmpty: {
+		// DisplayName: Sludge Sponge
+		// Tooltip: Use on an empowered Slime Ninja Statue to end a Slime Rain
+	}
+
+	SludgeSpongeFull: {
+		// DisplayName: Engorged Sludge Sponge
+		/* Tooltip:
+			'''
+			Use on an empowered Slime Ninja Statue to start a Slime Rain
+			'Have fun wringing it out'
+			''' */
+	}
+
+	ReplicaGauntlets: {
+		// DisplayName: Replica Gauntlets
+		// Tooltip: "'All the glitz without the glamour'"
+	}
+
+	GunkHeart: {
+		// DisplayName: Gunk Heart
+		// Tooltip: Adds a bit of color to your afterimages
+	}
+
+	EbonianCystDye: {
+		// DisplayName: Ebonian Cyst Dye
+		// Tooltip: ""
+	}
+
+	CrimulanGougeDye: {
+		// DisplayName: Crimulan Gouge Dye
+		// Tooltip: ""
+	}
+
+	StellarHeavenDye: {
+		// DisplayName: Stellar Heaven Dye
+		// Tooltip: ""
+	}
+
+	DivineResplendanceDye: {
+		// DisplayName: Divine Resplendance Dye
 		// Tooltip: ""
 	}
 }
@@ -608,6 +657,7 @@ Projectiles: {
 	// StellarBlackHole.DisplayName: Stellar Black Hole
 	// CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
 	// FissionFlayerProjectile.DisplayName: to be determined
+	// SlimeShotRedirecting.DisplayName: Slime Shot
 }
 
 Chat: {

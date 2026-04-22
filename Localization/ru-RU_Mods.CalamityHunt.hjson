@@ -1,4 +1,4 @@
-﻿Items: {
+Items: {
 	OverloadedSludge: {
 		DisplayName: Перегруженная слякоть
 		Tooltip:
@@ -27,22 +27,16 @@
 
 	GoozmaLore: {
 		DisplayName: Гузма
-		Tooltip: описание
-		LoreGeneric:
+		/* Lore:
 			'''
-			[c/E3AF40:Отдалённый шёпот доносится до ваших ушей...]
-			[c/BEBEBE:Удерживайте Shift, чтобы прислушаться]
-			'''
-		LoreGoozma:
-			'''
-			Самое устрашающее разочарование в иерархии величия над всем живым.
-			Только подумать, что кульминация нижайших существ смогла бы несмотря ни на что обладать Ауритовой душой, не имея при этом драконьего происхождения...
-			Оно стало чем-то великим, приблизилось к идеальной сущности, состоящей из ничего, кроме неидеальных частей... Возможно, истинный источник божественной силы навсегда останется загадкой.
-			В противовес моим опасениям насчёт твоей культивации этого гротескного чудища стоит интерес в его сторону.
-			Что могло бы привести его к такой форме? Его внешность разоблачает хитрость и изысканность манипуляции над его подчинёнными.
-			Какая же жалость, что плоды усилий его по итогу ни к чему не привели. Неустанный узор цикличных анналов истории.
-			Может быть, в перспективе мира Террарии, все наши достижения так же малозначимы, как и бессильные страдания слизней.
-			'''
+			A most chilling upset, in the hierarchical dominion of all things living.
+			To think the culmination of the lowest echelon of creatures could nevertheless possess an Auric soul despite lacking any draconic heritage…
+			It became something greater, approaching a perfect being comprised of naught but imperfect parts...perhaps what truly makes a God will forever be unknown.
+			My apprehension towards your cultivation of this grotesque monstrosity is outweighed by my curiosity towards it.
+			What could have influenced the form that it took? Its appearance belies the finesse and sophistication of the manipulation of its subjects.
+			What a pity it is that the fruits of its effort came to nothing in the end. An unremitting pattern in the cyclic annals of history.
+			Perhaps, from the perspective of Terraria, our own achievements amount to little more than the impotent writhing of slimes.
+			''' */
 		Tooltip: ""
 	}
 
@@ -264,17 +258,6 @@
 			«Близится что-то ужасное...»
 			'''
 		StressBar: Стресс: {0}
-	}
-
-	TheSlimer: {
-		DisplayName: Слизневик
-		Tooltip:
-			'''
-			Стреляет существенной суспензией слипающейся слизи
-			Во время стрельбы слизь застревает, образуя пробку
-			Нажмите <right>, пока орудие забито, чтобы выпустить желчную бомбу
-			«Не путать со слизуном»
-			'''
 	}
 
 	SludgeShaker: {
