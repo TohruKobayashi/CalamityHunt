@@ -17,8 +17,6 @@ public class AuricSoulPlayer : ModPlayer
     public bool yharonSoul;
     public bool olddukeSoul;
     public bool pyrogenSoul;
-    public bool avatarSoul;
-    public bool namelessSoul;
 
     public override void PostUpdate()
     {
@@ -33,12 +31,6 @@ public class AuricSoulPlayer : ModPlayer
         }
         if (pyrogenSoul) {
             AllStatsUp(0.01f);
-        }
-        if (avatarSoul) {
-            AllStatsUp(-0.09f);
-        }
-        if (namelessSoul) {
-            AllStatsUp(0.091f);
         }
     }
 
@@ -71,14 +63,6 @@ public class AuricSoulPlayer : ModPlayer
             Player.statLifeMax2 += 3;
             Player.statManaMax2 += 9;
         }
-        if (avatarSoul) {
-            Player.statLifeMax2 -= 30;
-            Player.statManaMax2 -= 60;
-        }
-        if (namelessSoul) {
-            Player.statLifeMax2 += 31;
-            Player.statManaMax2 += 61;
-        }
     }
 
     public override void SaveData(TagCompound tag)
@@ -99,13 +83,6 @@ public class AuricSoulPlayer : ModPlayer
             tag["pyrogenSoul"] = true;
         }
 
-        if (avatarSoul) {
-            tag["avatarSoul"] = true;
-        }
-
-        if (namelessSoul) {
-            tag["deitySoul"] = true;
-        }
         base.SaveData(tag);
     }
 
@@ -123,12 +100,6 @@ public class AuricSoulPlayer : ModPlayer
         if (tag.ContainsKey("pyrogenSoul")) {
             pyrogenSoul = tag.GetBool("pyrogenSoul");
         }
-        if (tag.ContainsKey("avatarSoul")) {
-            avatarSoul = tag.GetBool("avatarSoul");
-        }
-        if (tag.ContainsKey("deitySoul")) {
-            namelessSoul = tag.GetBool("deitySoul");
-        }
         base.LoadData(tag);
     }
 
@@ -141,8 +112,6 @@ public class AuricSoulPlayer : ModPlayer
         packet.Write(yharonSoul);
         packet.Write(olddukeSoul);
         packet.Write(pyrogenSoul);
-        packet.Write(avatarSoul);
-        packet.Write(namelessSoul);
         packet.Send(toWho, fromWho);
     }
 
@@ -153,8 +122,6 @@ public class AuricSoulPlayer : ModPlayer
         yharonSoul = reader.ReadBoolean();
         olddukeSoul = reader.ReadBoolean();
         pyrogenSoul = reader.ReadBoolean();
-        avatarSoul = reader.ReadBoolean();
-        namelessSoul = reader.ReadBoolean();
     }
 
     public override void CopyClientState(ModPlayer targetCopy)
@@ -164,8 +131,6 @@ public class AuricSoulPlayer : ModPlayer
         clone.yharonSoul = yharonSoul;
         clone.olddukeSoul = yharonSoul;
         clone.pyrogenSoul = pyrogenSoul;
-        clone.avatarSoul = avatarSoul;
-        clone.namelessSoul = namelessSoul;
     }
 
     public override void SendClientChanges(ModPlayer clientPlayer)
@@ -175,8 +140,6 @@ public class AuricSoulPlayer : ModPlayer
         if (goozmaSoul != clone.goozmaSoul || 
             yharonSoul != clone.yharonSoul ||
             pyrogenSoul != clone.pyrogenSoul ||
-            avatarSoul != clone.avatarSoul ||
-            namelessSoul != clone.namelessSoul ||
             olddukeSoul != clone.olddukeSoul)
             SyncPlayer(toWho: -1, fromWho: Main.myPlayer, newPlayer: false);
     }

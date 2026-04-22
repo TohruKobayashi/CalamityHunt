@@ -35,6 +35,8 @@ public class DisgustingMeatGlobalItem : GlobalItem
                 if (player.altFunctionUse == 2) {
                     TryDropBoosterItem(player, ref soulPlayer.yharonSoul, ModContent.ItemType<YharonSoul>());
                     TryDropBoosterItem(player, ref soulPlayer.goozmaSoul, ModContent.ItemType<GoozmaSoul>());
+                    TryDropBoosterItem(player, ref soulPlayer.olddukeSoul, ModContent.ItemType<RottenSoul>());
+                    TryDropBoosterItem(player, ref soulPlayer.pyrogenSoul, ModContent.ItemType<AshenSoul>());
                 }
                 return true;
             }
