@@ -486,11 +486,6 @@ Items: {
 		// Tooltip: Absorb to gain immense, radioactive powers
 	}
 
-	CancelSlimeRain: {
-		// DisplayName: Cancel Slime Rain
-		// Tooltip: ""
-	}
-
 	GoozmaMusicBoxExiledP1: {
 		// DisplayName: Music Box (Exiled Goozma)
 		// Tooltip: ""
@@ -790,7 +785,6 @@ Configs: {
 	}
 }
 
-// InfernumOnly: In Infernum Mode
 // GoozmaShadowspecCurse: "[c/462545:A mucilaginous curse prevents you from using this item...]"
 // AnyEvilBlock: Any Evil Block
 // DropRules.WhenAnyPlayerHasntEaten: Drops if any player hasn't absorbed
