@@ -8,9 +8,8 @@ namespace CalamityHunt.Content.Items.Misc
 {
     public class OverloadedSludge : ModItem
     {
-        //public override bool IsLoadingEnabled(Mod mod) => !ModLoader.HasMod(HUtils.CalamityMod);
+        public override bool IsLoadingEnabled(Mod mod) => !ModLoader.HasMod(HUtils.CalamityMod);
         public override string Texture => "CalamityMod/Items/SummonItems/OverloadedSludge";
-        public override bool IsLoadingEnabled(Mod mod) => false;
 
         public override void SetDefaults()
         {
