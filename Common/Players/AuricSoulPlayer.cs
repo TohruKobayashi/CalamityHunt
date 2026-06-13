@@ -18,7 +18,7 @@ public class AuricSoulPlayer : ModPlayer
     public bool olddukeSoul;
     public bool pyrogenSoul;
 
-    public override void PostUpdate()
+    public override void PostUpdateMiscEffects()
     {
         if (goozmaSoul) {
             AllStatsUp(0.03f);
