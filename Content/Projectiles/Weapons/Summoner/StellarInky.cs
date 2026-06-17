@@ -333,7 +333,7 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Summoner
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
-            teleportTime = reader.Read();
+            teleportTime = reader.ReadInt32();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
