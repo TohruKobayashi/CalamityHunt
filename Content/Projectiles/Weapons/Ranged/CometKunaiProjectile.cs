@@ -28,9 +28,9 @@ namespace CalamityHunt.Content.Projectiles.Weapons.Ranged
             Projectile.height = 16;
             Projectile.friendly = true;
             Projectile.tileCollide = true;
-            if (ModLoader.HasMod(HUtils.CalamityMod)) {
+            if (ModLoader.TryGetMod(HUtils.CalamityMod, out Mod calamity)) 
+            {
                 DamageClass d;
-                Mod calamity = ModLoader.GetMod(HUtils.CalamityMod);
                 calamity.TryFind("RogueDamageClass", out d);
                 Projectile.DamageType = d;
             }
