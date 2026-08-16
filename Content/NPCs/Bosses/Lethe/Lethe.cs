@@ -58,6 +58,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
 
         public enum LetheAttacks
         {
+            IdleWhilePlayerIsDead = -3,
             Spawn = -2,
             Debug = -1,
             None = 0,
@@ -93,7 +94,12 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
             Left,
             Forward
         }
-        public FaceDirection SpriteDirection;
+        public FaceDirection Direction;
+
+        public float ArmLeftRotation = 0;
+        public float ArmRightRotation = 0;
+
+        public Entity Target;
 
         public override void AI()
         {
@@ -102,6 +108,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
                 NPC.active = false;
 
             NPC.target = Main.myPlayer;
+            NPC.targetRect = Main.LocalPlayer.Hitbox;
+            Target = Main.player[NPC.target];
             NPC.timeLeft = 9999999;
 
             CurrentAttack = LetheAttacks.Debug;
@@ -135,22 +143,21 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
 
         public void Attack_Debug()
         {
-            if (Timer > 300)
-            {
+            FaceTarget_AccountForForward();
+
+            //NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.5f;
+            Vector2 targetPos = Target.Center;
+            if (Timer > 600)
                 Timer = 0;
-            }
+            else if (Timer > 400)
+                targetPos += new Vector2(0, -150);
             else if (Timer > 200)
-            {
-                SpriteDirection = FaceDirection.Forward;
-            }
-            else if (Timer > 100)
-            {
-                SpriteDirection = FaceDirection.Right;
-            }
+                targetPos += new Vector2(-500, 0);
             else
-            {
-                SpriteDirection = FaceDirection.Left;
-            }
+                targetPos += new Vector2(500, 0);
+            MoveToPoint(targetPos, 20);
+
+            ArmRightRotation = NPC.Center.DirectionTo(Main.MouseWorld).ToRotation() + MathHelper.Pi * 1.5f;
         }
 
         public void Attack_None()
@@ -178,10 +185,36 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
 
             }
 
-            if (SpriteDirection == FaceDirection.Forward)
+            if (Direction == FaceDirection.Forward)
                 NPC.frame.Y = NPC.frame.Height;
             else
                 NPC.frame.Y = 0;
+        }
+
+        public void FaceTarget_AccountForForward()
+        {
+            int forwardsrange = 100;
+
+            NPC.FaceTarget();
+            if (NPC.Center.X - Target.Center.X < forwardsrange && NPC.Center.X - Target.Center.X > -forwardsrange)
+                NPC.direction = 0;
+
+            if (NPC.direction == 0)
+                Direction = FaceDirection.Forward;
+            if (NPC.direction > 0)
+                Direction = FaceDirection.Right;
+            else if (NPC.direction < 0)
+                Direction = FaceDirection.Left;
+            else
+                Direction = FaceDirection.Forward;
+        }
+
+        public void MoveToPoint(Vector2 point, float moveSpeed)
+        {
+            Vector2 dist = point - NPC.Center;
+            float length = dist == Vector2.Zero ? 0f : dist.Length();
+            NPC.velocity = Vector2.Normalize(dist);
+            NPC.velocity *= MathHelper.Lerp(0f, 1f, length / moveSpeed) * 2f;
         }
 
         public static Texture2D texArmTowardsCamera;
@@ -197,25 +230,30 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
         {
             Texture2D texBody = TextureAssets.Npc[Type].Value;
 
-            SpriteEffects flip = SpriteDirection == FaceDirection.Left ? SpriteEffects.None: SpriteEffects.FlipHorizontally;
-            int flipInt = SpriteDirection == FaceDirection.Left ? -1 : 1;
+            SpriteEffects flip = Direction == FaceDirection.Left ? SpriteEffects.None: SpriteEffects.FlipHorizontally;
+            int flipInt = Direction == FaceDirection.Left ? -1 : 1;
             int armOffset = 15;
-            if (SpriteDirection == FaceDirection.Forward)
+            if (Direction == FaceDirection.Forward)
                 armOffset += 5;
 
-            float tempRotationShit = -Timer * 2 * 0.01f;
+            float armRotFront = Direction == FaceDirection.Left ? ArmLeftRotation : ArmRightRotation;
+            float armRotBack = Direction == FaceDirection.Left ? ArmRightRotation : ArmLeftRotation;
 
-            if (SpriteDirection != FaceDirection.Forward)
-                spriteBatch.Draw(texArmAwayFromCamera, NPC.Center + new Vector2(armOffset * flipInt, 10 - texArmAwayFromCamera.Height / 2) - screenPos, texArmAwayFromCamera.Frame(), drawColor, NPC.rotation + tempRotationShit, texArmAwayFromCamera.Size() / 2 - new Vector2(0, texArmAwayFromCamera.Height / 2), NPC.scale, flip, 0);
+            // back arm, body, front arm
+            if (Direction != FaceDirection.Forward)
+                spriteBatch.Draw(texArmAwayFromCamera, NPC.Center + new Vector2(armOffset * flipInt, 10 - texArmAwayFromCamera.Height / 2) - screenPos, texArmAwayFromCamera.Frame(), drawColor, NPC.rotation + armRotBack, texArmAwayFromCamera.Size() / 2 - new Vector2(0, texArmAwayFromCamera.Height / 2), NPC.scale, flip, 0);
             spriteBatch.Draw(texBody, NPC.Center - screenPos, NPC.frame, drawColor, NPC.rotation, NPC.frame.Size() / 2, NPC.scale, flip, 0);
-            if (SpriteDirection != FaceDirection.Forward)
-                spriteBatch.Draw(texArmTowardsCamera, NPC.Center + new Vector2(-armOffset * flipInt, 10 - texArmTowardsCamera.Height / 2) - screenPos, texArmTowardsCamera.Frame(), drawColor, NPC.rotation + tempRotationShit, texArmTowardsCamera.Size() / 2 - new Vector2(0, texArmTowardsCamera.Height / 2), NPC.scale, flip, 0);
+            if (Direction != FaceDirection.Forward)
+                spriteBatch.Draw(texArmTowardsCamera, NPC.Center + new Vector2(-armOffset * flipInt, 10 - texArmTowardsCamera.Height / 2) - screenPos, texArmTowardsCamera.Frame(), drawColor, NPC.rotation + armRotFront, texArmTowardsCamera.Size() / 2 - new Vector2(0, texArmTowardsCamera.Height / 2), NPC.scale, flip, 0);
 
-            if (SpriteDirection == FaceDirection.Forward)
+            // front arms
+            if (Direction == FaceDirection.Forward)
             {
-                spriteBatch.Draw(texArmTowardsCamera, NPC.Center  + new Vector2(armOffset, 10 - texArmTowardsCamera.Height / 2) - screenPos, texArmTowardsCamera.Frame(), drawColor, NPC.rotation + tempRotationShit, texArmTowardsCamera.Size() / 2 - new Vector2(0, texArmTowardsCamera.Height / 2), NPC.scale, SpriteEffects.FlipHorizontally, 0);
-                spriteBatch.Draw(texArmTowardsCamera, NPC.Center + new Vector2(-armOffset, 10 - texArmTowardsCamera.Height / 2) - screenPos, texArmTowardsCamera.Frame(), drawColor, NPC.rotation + tempRotationShit, texArmTowardsCamera.Size() / 2 - new Vector2(0, texArmTowardsCamera.Height / 2), NPC.scale, 0, 0);
+                spriteBatch.Draw(texArmTowardsCamera, NPC.Center  + new Vector2(armOffset, 10 - texArmTowardsCamera.Height / 2) - screenPos, texArmTowardsCamera.Frame(), drawColor, NPC.rotation + ArmLeftRotation, texArmTowardsCamera.Size() / 2 - new Vector2(0, texArmTowardsCamera.Height / 2), NPC.scale, SpriteEffects.FlipHorizontally, 0);
+                spriteBatch.Draw(texArmTowardsCamera, NPC.Center + new Vector2(-armOffset, 10 - texArmTowardsCamera.Height / 2) - screenPos, texArmTowardsCamera.Frame(), drawColor, NPC.rotation + ArmRightRotation, texArmTowardsCamera.Size() / 2 - new Vector2(0, texArmTowardsCamera.Height / 2), NPC.scale, 0, 0);
             }
+
+            // reset arm rotations
 
             return false;
         }
