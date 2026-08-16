@@ -578,6 +578,7 @@ NPCs: {
 	StellarGeliath.DisplayName: 星恒黏兽
 	Goozmite.DisplayName: 古泽蚂
 	// PluripotentSpawn.DisplayName: Pluripotent Spawn
+	// Lethe.DisplayName: Lethe
 }
 
 Projectiles: {

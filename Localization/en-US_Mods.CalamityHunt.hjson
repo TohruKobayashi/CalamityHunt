@@ -581,6 +581,7 @@ NPCs: {
 	StellarGeliath.DisplayName: Stellar Geliath
 	Goozmite.DisplayName: Goozmite
 	PluripotentSpawn.DisplayName: Pluripotent Spawn
+	Lethe.DisplayName: Lethe
 }
 
 Projectiles: {

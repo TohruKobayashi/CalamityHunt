@@ -580,6 +580,7 @@ NPCs: {
 	StellarGeliath.DisplayName: Звёздный гелиаф
 	Goozmite.DisplayName: Гузмит
 	PluripotentSpawn.DisplayName: Плюрипотентный отросток
+	// Lethe.DisplayName: Lethe
 }
 
 Projectiles: {
