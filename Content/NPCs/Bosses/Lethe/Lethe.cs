@@ -62,6 +62,11 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
             Spawn = -2,
             Debug = -1,
             None = 0,
+            Attack1 = 1,
+            Attack2 = 2,
+            Attack3 = 3,
+            Attack4 = 4,
+            Attack5 = 5,
 
             Absolve = 255
         }
@@ -112,7 +117,7 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
             Target = Main.player[NPC.target];
             NPC.timeLeft = 9999999;
 
-            CurrentAttack = LetheAttacks.Debug;
+            CurrentAttack = LetheAttacks.Attack1;
             switch (CurrentAttack)
             {
                 case LetheAttacks.Spawn:
@@ -123,6 +128,21 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
                     break;
                 case LetheAttacks.None:
                     Attack_None();
+                    break;
+                case LetheAttacks.Attack1:
+                    Attack_Attack1();
+                    break;
+                case LetheAttacks.Attack2:
+                    Attack_Attack2();
+                    break;
+                case LetheAttacks.Attack3:
+                    Attack_Attack3();
+                    break;
+                case LetheAttacks.Attack4:
+                    Attack_Attack4();
+                    break;
+                case LetheAttacks.Attack5:
+                    Attack_Attack5();
                     break;
 
 
@@ -143,9 +163,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
 
         public void Attack_Debug()
         {
-            FaceTarget_AccountForForward();
+            FaceTarget_AccountForDirections();
 
-            //NPC.velocity += NPC.Center.DirectionTo(Target.Center) * 0.5f;
             Vector2 targetPos = Target.Center;
             if (Timer > 600)
                 Timer = 0;
@@ -165,11 +184,57 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
             
         }
 
+        public void Attack_Attack1()
+        {
+            FaceTarget_AccountForDirections(0);
+            Vector2 targetPos = Target.Center + new Vector2(500 * GetDirectionAsMultiplier(), 0);
+            MoveToPoint(targetPos, 20);
+
+            if (Timer > 30)
+            {
+
+            }
+        }
+
+        public void Attack_Attack2()
+        {
+
+        }
+
+        public void Attack_Attack3()
+        {
+
+        }
+
+        public void Attack_Attack4()
+        {
+
+        }
+
+        public void Attack_Attack5()
+        {
+
+        }
+
 
 
         public void Attack_Absolve()
         {
+            Direction = FaceDirection.Forward;
+            MoveToPoint(Target.Center + new Vector2(0, -150), 20);
 
+            float velRot = NPC.velocity.X * 0.025f;
+
+            if (Timer < 500)
+            {
+                ArmRightRotation = -3.6f + velRot;
+                ArmLeftRotation = 3.6f + velRot;
+            }
+            else
+            {
+                ArmRightRotation = -4.2f + velRot;
+                ArmLeftRotation = 4.2f + velRot;
+            }
         }
         #endregion
 
@@ -191,22 +256,32 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
                 NPC.frame.Y = 0;
         }
 
-        public void FaceTarget_AccountForForward()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="forwardsRange">range to use the forward direction. set to 0 to NEVER GET IT EVER</param>
+        public void FaceTarget_AccountForDirections(int forwardsRange = 100)
         {
-            int forwardsrange = 100;
+            int direction = !(Target.Center.X < NPC.Center.X) ? 1 : -1;
 
-            NPC.FaceTarget();
-            if (NPC.Center.X - Target.Center.X < forwardsrange && NPC.Center.X - Target.Center.X > -forwardsrange)
-                NPC.direction = 0;
+            if (forwardsRange > 0 && NPC.Center.X - Target.Center.X < forwardsRange && NPC.Center.X - Target.Center.X > -forwardsRange)
+                direction = 0;
 
-            if (NPC.direction == 0)
+            if (forwardsRange > 0 && direction == 0)
                 Direction = FaceDirection.Forward;
-            if (NPC.direction > 0)
+            if (direction > 0)
                 Direction = FaceDirection.Right;
-            else if (NPC.direction < 0)
+            else if (direction < 0)
                 Direction = FaceDirection.Left;
-            else
+            else if (forwardsRange > 0)
                 Direction = FaceDirection.Forward;
+        }
+
+        public int GetDirectionAsMultiplier()
+        {
+            if (Direction == FaceDirection.Forward)
+                return 0;
+            return Direction == FaceDirection.Right ? -1 : 1;
         }
 
         public void MoveToPoint(Vector2 point, float moveSpeed)
@@ -236,8 +311,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
             if (Direction == FaceDirection.Forward)
                 armOffset += 5;
 
-            float armRotFront = Direction == FaceDirection.Left ? ArmLeftRotation : ArmRightRotation;
-            float armRotBack = Direction == FaceDirection.Left ? ArmRightRotation : ArmLeftRotation;
+            float armRotFront = Direction == FaceDirection.Right ? ArmLeftRotation : ArmRightRotation;
+            float armRotBack = Direction == FaceDirection.Right ? ArmRightRotation : ArmLeftRotation;
 
             // back arm, body, front arm
             if (Direction != FaceDirection.Forward)
@@ -254,6 +329,8 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
             }
 
             // reset arm rotations
+            ArmLeftRotation = 0;
+            ArmRightRotation = 0;
 
             return false;
         }

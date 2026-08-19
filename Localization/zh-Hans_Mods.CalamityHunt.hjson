@@ -553,6 +553,11 @@ Items: {
 		// DisplayName: Divine Resplendance Dye
 		// Tooltip: ""
 	}
+
+	TheCommunity: {
+		// DisplayName: The Community
+		// Tooltip: ""
+	}
 }
 
 NPCs: {

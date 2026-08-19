@@ -145,4 +145,49 @@ public static class HUtils
 
         return calPlayer;
     }
+
+    /// <summary>
+    /// Gets the area of a triangle given 3 points
+    /// </summary>
+    /// <param name="point1">The first point</param>
+    /// <param name="point2">The second point</param>
+    /// <param name="point3">The third point</param>
+    /// <returns>the area of the triangle</returns>
+    public static float TriangleArea(Point point1, Point point2, Point point3)
+    {
+        return Math.Abs(point1.X * (point2.Y - point3.Y) + point2.X * (point3.Y - point1.Y) + point3.X * (point1.Y - point2.Y)) / 2f;
+    }
+
+    /// <summary>
+    /// Checks if a point is inside of a triangle with 3 given points
+    /// </summary>
+    /// <param name="point1">The first point</param>
+    /// <param name="point2">The second point</param>
+    /// <param name="point3">The third point</param>
+    /// <param name="toCheck">The point to check</param>
+    /// <returns>true if the point is inside</returns>
+    public static bool WithinTriangle(Point point1, Point point2, Point point3, Point toCheck)
+    {
+        float mainArea = TriangleArea(point1, point2, point3);
+
+        float areaOneTwo = TriangleArea(point1, point2, toCheck);
+        float areaTwoThree = TriangleArea(point2, point3, toCheck);
+        float areaOneThreeLikeTheUser = TriangleArea(point3, point1, toCheck);
+
+        return mainArea == areaOneTwo + areaTwoThree + areaOneThreeLikeTheUser;
+    }
+
+    /// <summary>
+    /// Checks if a point is inside of a quadrilateral with 4 given points. Points should be in a consistent clockwise or counter clockwise order
+    /// </summary>
+    /// <param name="point1">The first point</param>
+    /// <param name="point2">The second point</param>
+    /// <param name="point3">The third point</param>
+    /// <param name="point4">The fourth point</param>
+    /// <param name="toCheck">The point to check</param>
+    /// <returns>true if the point is inside</returns>
+    public static bool WithinQuad(Point point1, Point point2, Point point3, Point point4, Point toCheck)
+    {
+        return WithinTriangle(point1, point2, point3, toCheck) || WithinTriangle(point1, point3, point4, toCheck);
+    }
 }
