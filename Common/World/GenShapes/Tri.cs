@@ -23,6 +23,9 @@ public class Tri : GenShape
 
     public override bool Perform(Point origin, GenAction action)
     {
+        // all these if statements are an optimization
+        // instead of checking entire world, only check locations
+        // where tri could be present
         Point topLeft = pointA;
         if (topLeft.X > pointB.X)
             topLeft.X = pointB.X;
