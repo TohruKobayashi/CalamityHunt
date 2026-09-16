@@ -558,6 +558,16 @@ Items: {
 		// DisplayName: The Community
 		// Tooltip: ""
 	}
+
+	SuzumiStaff: {
+		// DisplayName: Suzumi Staff
+		// Tooltip: ""
+	}
+
+	BouncingEyeball: {
+		// DisplayName: Bouncing Eyeball
+		// Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -659,6 +669,9 @@ Projectiles: {
 	// CometKunaiSuperProjectile.DisplayName: Comet Kunai Super
 	// FissionFlayerProjectile.DisplayName: to be determined
 	// SlimeShotRedirecting.DisplayName: Slime Shot
+	// BouncingEyeball_Proj.DisplayName: Bouncing Eyeball_ Proj
+	// SuzumiStaff_Counter.DisplayName: Suzumi Staff_ Counter
+	// SuzumiStaff_Knife.DisplayName: Suzumi Staff_ Knife
 }
 
 Chat: {
@@ -726,6 +739,11 @@ Buffs: {
 	Doomed: {
 		// DisplayName: Doomed
 		// Description: It's so over
+	}
+
+	SuzumiStaff_Buff: {
+		// DisplayName: Suzumi Staff_ Buff
+		// Description: Mods.CalamityHunt.Buffs.SuzumiStaff_Buff.Description
 	}
 }
 

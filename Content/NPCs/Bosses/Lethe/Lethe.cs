@@ -23,39 +23,6 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
 {
     public class Lethe : ModNPC
     {
-        public override void SetStaticDefaults()
-        {
-            Main.npcFrameCount[NPC.type] = 2;
-        }
-
-        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
-        {
-            /*
-            database.FindEntryByNPCID(Type).UIInfoProvider = new HighestOfMultipleUICollectionInfoProvider(new CommonEnemyUICollectionInfoProvider(ContentSamples.NpcBestiaryCreditIdsByNpcNetIds[ModContent.NPCType<Goozma>()], true));
-            bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement> {
-                new FlavorTextBestiaryInfoElement($"Mods.{nameof(CalamityHunt)}.Bestiary.Goozmite"),
-                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Events.SlimeRain,
-                new SlimeMonsoonPortraitBackground()
-            });
-            */
-        }
-
-        public override void SetDefaults()
-        {
-            NPC.width = 39;
-            NPC.height = 76;
-            NPC.damage = 0;
-            NPC.lifeMax = 10000;
-            NPC.HitSound = SoundID.NPCDeath9;
-            NPC.DeathSound = SoundID.NPCDeath9;
-            NPC.knockBackResist = 0;
-            NPC.noGravity = true;
-            NPC.noTileCollide = true;
-            NPC.value = 0;
-            NPC.npcSlots = 255f;
-            NPC.aiStyle = -1;
-        }
-
         public enum LetheAttacks
         {
             IdleWhilePlayerIsDead = -3,
@@ -105,6 +72,39 @@ namespace CalamityHunt.Content.NPCs.Bosses.Lethe
         public float ArmRightRotation = 0;
 
         public Entity Target;
+
+        public override void SetStaticDefaults()
+        {
+            Main.npcFrameCount[NPC.type] = 2;
+        }
+
+        public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+        {
+            /*
+            database.FindEntryByNPCID(Type).UIInfoProvider = new HighestOfMultipleUICollectionInfoProvider(new CommonEnemyUICollectionInfoProvider(ContentSamples.NpcBestiaryCreditIdsByNpcNetIds[ModContent.NPCType<Goozma>()], true));
+            bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement> {
+                new FlavorTextBestiaryInfoElement($"Mods.{nameof(CalamityHunt)}.Bestiary.Goozmite"),
+                BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Events.SlimeRain,
+                new SlimeMonsoonPortraitBackground()
+            });
+            */
+        }
+
+        public override void SetDefaults()
+        {
+            NPC.width = 39;
+            NPC.height = 76;
+            NPC.damage = 0;
+            NPC.lifeMax = 10000;
+            NPC.HitSound = SoundID.NPCDeath9;
+            NPC.DeathSound = SoundID.NPCDeath9;
+            NPC.knockBackResist = 0;
+            NPC.noGravity = true;
+            NPC.noTileCollide = true;
+            NPC.value = 0;
+            NPC.npcSlots = 255f;
+            NPC.aiStyle = -1;
+        }
 
         public override void AI()
         {
