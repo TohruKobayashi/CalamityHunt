@@ -87,7 +87,9 @@ namespace CalamityHunt.Content.Items.Weapons.Ranged
                 Projectile proj = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, player.whoAmI);
                 proj.rotation = ai;
                 proj.ai[1] = ai;
-                ModLoader.GetMod(HUtils.CalamityMod).Call("ConsumeStealth", Main.LocalPlayer);
+                if (ModLoader.HasMod(HUtils.CalamityMod)) {
+                    ModLoader.GetMod(HUtils.CalamityMod).Call("ConsumeStealth", Main.LocalPlayer);
+                }
             }
 
             return false;
